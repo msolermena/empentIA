@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 218 91% 5%;     /* #020617 slate-950 */
+    --foreground: 210 40% 98%;    /* #F8FAFC slate-50 */
+    --card: 222 47% 11%;          /* #0F172A slate-900 */
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 221 83% 53%;       /* #3B82F6 blue-500 (logo) */
+    --primary-foreground: 210 40% 98%;
+    --secondary: 217 33% 17%;     /* #1E293B slate-800 */
+    --secondary-foreground: 210 40% 98%;
+    --muted: 215 28% 17%;
+    --muted-foreground: 217 11% 65%; /* #94A3B8 slate-400 */
+    --accent: 217 33% 17%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;     /* #EF4444 red-500 */
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 33% 17%;        /* rgba(59, 130, 246, 0.1) */
+    --input: 217 33% 17%;
+    --ring: 221 83% 53%;
+    --radius: 1rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  /* Glassmorphism */
+  .glass-card {
+    @apply bg-slate-900/60 backdrop-blur-xl border border-primary-500/10;
+  }
+  
+  .glass-card-hover {
+    @apply hover:border-primary-500/30 hover:shadow-2xl hover:shadow-primary-500/10 transition-all duration-300;
+  }
+  
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-slate-50 to-primary-500 bg-clip-text text-transparent;
+  }
+  
+  .gradient-text-blue-emerald {
+    @apply bg-gradient-to-r from-primary-500 to-emerald-500 bg-clip-text text-transparent;
+  }
+  
+  /* Animations */
+  .fade-in-up {
+    animation: fade-in-up 0.8s ease-out;
+  }
+  
+  .fade-in-up-delay-1 {
+    animation: fade-in-up 0.8s ease-out 0.2s both;
+  }
+  
+  .fade-in-up-delay-2 {
+    animation: fade-in-up 0.8s ease-out 0.4s both;
+  }
+  
+  .fade-in-up-delay-3 {
+    animation: fade-in-up 0.8s ease-out 0.6s both;
+  }
+}
