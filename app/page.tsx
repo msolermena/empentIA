@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle2, Globe, Lightbulb, BarChart3, ArrowRight, AlertCircle } from "lucide-react";
+import { CheckCircle2, Globe, Lightbulb, BarChart3, ArrowRight, AlertCircle, Bug } from "lucide-react";
 
 // Millora 5: Funció per normalitzar URLs
 function normalizeUrl(input: string): string {
@@ -36,8 +36,28 @@ function normalizeUrl(input: string): string {
 
 export default function Home() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [url, setUrl] = useState("");
   const [error, setError] = useState<string | null>(null);
+  
+  // Dev mode: mostra bypass per testing
+  const [showDevTools, setShowDevTools] = useState(false);
+  const [auditId, setAuditId] = useState("");
+
+  useEffect(() => {
+    // Activar dev tools amb ?dev=true o en localhost
+    const isDev = searchParams.get('dev') === 'true' || 
+                  window.location.hostname === 'localhost' ||
+                  window.location.hostname === '127.0.0.1';
+    setShowDevTools(isDev);
+  }, [searchParams]);
+
+  const handleBypass = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (auditId.trim()) {
+      router.push(`/audit/${auditId.trim()}/complete`);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -238,6 +258,38 @@ export default function Home() {
           <p className="text-sm text-muted-foreground">
             &copy; 2026 empentIA. Consultoria d&apos;automatització IA per pimes catalanes.
           </p>
+
+          {/* Dev Tools - Només visible amb ?dev=true o localhost */}
+          {showDevTools && (
+            <div className="mt-8 mx-auto max-w-md">
+              <div className="rounded-xl border-2 border-yellow-500/30 bg-yellow-500/5 p-4">
+                <div className="flex items-center gap-2 mb-3 text-yellow-400">
+                  <Bug className="h-4 w-4" />
+                  <span className="text-sm font-medium">Dev Tools</span>
+                </div>
+                <form onSubmit={handleBypass} className="flex gap-2">
+                  <Input
+                    type="text"
+                    placeholder="audit_id (UUID)"
+                    value={auditId}
+                    onChange={(e) => setAuditId(e.target.value)}
+                    className="flex-1 text-sm bg-slate-900/50 border-yellow-500/20"
+                  />
+                  <Button 
+                    type="submit" 
+                    size="sm" 
+                    variant="outline"
+                    className="border-yellow-500/30 text-yellow-400 hover:bg-yellow-500/10"
+                  >
+                    Anar a Informe
+                  </Button>
+                </form>
+                <p className="text-xs text-muted-foreground mt-2">
+                  Introdueix un audit_id per saltar directament a /complete
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </footer>
     </div>
