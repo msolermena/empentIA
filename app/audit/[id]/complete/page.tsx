@@ -5,127 +5,276 @@ import { useParams } from "next/navigation";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { 
-  CheckCircle2, 
-  Download, 
-  Mail, 
-  Calendar, 
-  ArrowRight, 
-  Loader2, 
+import {
+  CheckCircle2,
+  Download,
+  Calendar,
+  ArrowRight,
+  Loader2,
   AlertCircle,
-  AlertTriangle,
   Clock,
   Euro,
-  TrendingUp,
   Zap,
   Target,
+  Sparkles,
+  TrendingUp,
+  Wrench,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  ExternalLink,
+  Award,
 } from "lucide-react";
-import { getAudit, type GetAuditResponse } from "@/lib/api";
+import { getAudit } from "@/lib/api";
 
-// Component per mostrar severitat amb colors
-function SeverityBadge({ severity }: { severity: string }) {
-  const colors = {
-    high: "bg-red-500/20 text-red-400 border-red-500/30",
-    medium: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
-    low: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
-  };
-  const labels = {
-    high: "Alt",
-    medium: "Mitjà",
-    low: "Baix",
-  };
-  return (
-    <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium ${colors[severity as keyof typeof colors] || colors.medium}`}>
-      {labels[severity as keyof typeof labels] || severity}
-    </span>
-  );
-}
+// =============================================================================
+// COMPONENTS
+// =============================================================================
 
-// Component per mostrar dificultat
-function DifficultyBadge({ difficulty }: { difficulty: string }) {
-  const colors = {
-    easy: "bg-emerald-500/20 text-emerald-400",
-    medium: "bg-yellow-500/20 text-yellow-400",
-    hard: "bg-red-500/20 text-red-400",
+// Fit Score Visual Bar
+function FitScoreBar({ score }: { score: number }) {
+  const getColor = () => {
+    if (score >= 70) return "from-emerald-500 to-emerald-400";
+    if (score >= 50) return "from-yellow-500 to-yellow-400";
+    return "from-red-500 to-red-400";
   };
-  const labels = {
-    easy: "Fàcil",
-    medium: "Mitjana",
-    hard: "Complexa",
-  };
-  return (
-    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${colors[difficulty as keyof typeof colors] || colors.medium}`}>
-      {labels[difficulty as keyof typeof labels] || difficulty}
-    </span>
-  );
-}
 
-// Component expandible per Quick Wins
-function QuickWinCard({ win, index }: { win: any; index: number }) {
-  const [isExpanded, setIsExpanded] = useState(false);
-  
+  const getLabel = () => {
+    if (score >= 70) return "Excel·lent fit";
+    if (score >= 50) return "Bon fit";
+    return "Fit moderat";
+  };
+
   return (
-    <div className="rounded-xl border border-slate-700/50 bg-slate-800/30 overflow-hidden">
-      <button 
-        onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full p-5 text-left flex items-start gap-4 hover:bg-slate-800/50 transition-colors"
-      >
-        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 font-bold">
-          {index + 1}
-        </div>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1 flex-wrap">
-            <h4 className="font-semibold text-slate-200">{win.title}</h4>
-            <DifficultyBadge difficulty={win.difficulty} />
-          </div>
-          <p className="text-sm text-muted-foreground line-clamp-2">{win.description}</p>
-          <div className="flex flex-wrap gap-4 mt-2 text-sm">
-            <span className="flex items-center gap-1 text-emerald-400">
-              <Clock className="h-4 w-4" />
-              {win.hours_saved_weekly}h/setmana
-            </span>
-            <span className="flex items-center gap-1 text-primary-400">
-              <Euro className="h-4 w-4" />
-              {win.monthly_savings_eur}€/mes
-            </span>
-            <span className="text-muted-foreground">
-              ⏱️ {win.estimated_time}
-            </span>
-          </div>
-        </div>
-        {isExpanded ? (
-          <ChevronUp className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-        ) : (
-          <ChevronDown className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-        )}
-      </button>
-      
-      {isExpanded && (
-        <div className="px-5 pb-5 pt-2 border-t border-slate-700/50 bg-slate-900/30">
-          <h5 className="text-sm font-medium text-slate-300 mb-3">Passos d&apos;implementació:</h5>
-          <ol className="space-y-2">
-            {win.implementation_steps?.map((step: string, i: number) => (
-              <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
-                <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary-500/20 text-primary-400 text-xs font-medium">
-                  {i + 1}
-                </span>
-                {step}
-              </li>
-            ))}
-          </ol>
-        </div>
-      )}
+    <div className="space-y-1">
+      <div className="flex items-center justify-between text-xs">
+        <span className="text-slate-400">Fit Score</span>
+        <span className={`font-bold ${score >= 70 ? "text-emerald-400" : score >= 50 ? "text-yellow-400" : "text-red-400"}`}>
+          {score}%
+        </span>
+      </div>
+      <div className="h-2 rounded-full bg-slate-700/50 overflow-hidden">
+        <div
+          className={`h-full rounded-full bg-gradient-to-r ${getColor()} transition-all duration-700 ease-out`}
+          style={{ width: `${score}%` }}
+        />
+      </div>
+      <p className="text-xs text-slate-500">{getLabel()}</p>
     </div>
   );
 }
+
+// Solution Card Component
+function SolutionCard({ solution, isQuickWin = false }: { solution: any; isQuickWin?: boolean }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <div
+      className={`relative rounded-2xl border-2 overflow-hidden transition-all duration-300 ${
+        isQuickWin
+          ? "border-emerald-500/40 bg-gradient-to-br from-emerald-500/10 via-slate-900/50 to-slate-900/50"
+          : "border-slate-700/50 bg-slate-900/50 hover:border-slate-600"
+      }`}
+    >
+      {/* Quick Win Badge */}
+      {isQuickWin && (
+        <div className="absolute top-0 right-0">
+          <div className="bg-gradient-to-r from-emerald-600 to-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-bl-xl flex items-center gap-1">
+            <Award className="h-3 w-3" />
+            Quick Win Recomanat
+          </div>
+        </div>
+      )}
+
+      {/* Main Content */}
+      <div className="p-6">
+        {/* Header */}
+        <div className="flex items-start gap-4 mb-4">
+          <div
+            className={`flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl text-2xl font-bold ${
+              isQuickWin
+                ? "bg-gradient-to-br from-emerald-500/30 to-emerald-600/30 text-emerald-400"
+                : "bg-gradient-to-br from-blue-500/20 to-blue-600/20 text-blue-400"
+            }`}
+          >
+            #{solution.rank}
+          </div>
+          <div className="flex-1 min-w-0">
+            <h3 className="text-lg font-bold text-slate-100 mb-1">{solution.name}</h3>
+            <FitScoreBar score={solution.fit_score} />
+          </div>
+        </div>
+
+        {/* Why it fits */}
+        <div className="mb-4 p-4 rounded-xl bg-slate-800/50 border border-slate-700/50">
+          <p className="text-sm text-slate-300 leading-relaxed">
+            <span className="text-emerald-400 font-medium">Per què encaixa: </span>
+            {solution.why_fits}
+          </p>
+        </div>
+
+        {/* ROI Metrics */}
+        <div className="grid grid-cols-2 gap-3 mb-4">
+          <div className="p-3 rounded-xl bg-slate-800/30 border border-slate-700/30 text-center">
+            <div className="flex items-center justify-center gap-1 mb-1">
+              <Clock className="h-4 w-4 text-blue-400" />
+              <span className="text-xs text-slate-400">Estalvi temps</span>
+            </div>
+            <p className="text-lg font-bold text-blue-400">
+              {solution.roi_estimate?.primary_metric || "4h/setmana"}
+            </p>
+          </div>
+          <div className="p-3 rounded-xl bg-slate-800/30 border border-slate-700/30 text-center">
+            <div className="flex items-center justify-center gap-1 mb-1">
+              <Euro className="h-4 w-4 text-emerald-400" />
+              <span className="text-xs text-slate-400">Valor mensual</span>
+            </div>
+            <p className="text-lg font-bold text-emerald-400">
+              {solution.roi_estimate?.value_monthly_eur?.toLocaleString() || "400"}€
+            </p>
+          </div>
+        </div>
+
+        {/* Implementation Info */}
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="w-full flex items-center justify-between p-3 rounded-xl bg-slate-800/30 border border-slate-700/30 hover:bg-slate-800/50 transition-colors text-sm"
+        >
+          <span className="flex items-center gap-2 text-slate-400">
+            <Wrench className="h-4 w-4" />
+            Implementació: {solution.implementation?.hours || 6}h | {solution.implementation?.difficulty || "mitjana"}
+          </span>
+          {isExpanded ? (
+            <ChevronUp className="h-4 w-4 text-slate-400" />
+          ) : (
+            <ChevronDown className="h-4 w-4 text-slate-400" />
+          )}
+        </button>
+
+        {/* Expanded Details */}
+        {isExpanded && (
+          <div className="mt-3 p-4 rounded-xl bg-slate-900/50 border border-slate-700/30 space-y-3">
+            <div>
+              <h4 className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-2">
+                Què fem
+              </h4>
+              <p className="text-sm text-slate-300">
+                {solution.implementation?.what_we_do || "Configurem i implementem aquesta automatització personalitzada per al vostre negoci."}
+              </p>
+            </div>
+            {solution.fit_breakdown && (
+              <div>
+                <h4 className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-2">
+                  Desglossament del Fit Score
+                </h4>
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div className="flex justify-between">
+                    <span className="text-slate-500">Pain points:</span>
+                    <span className="text-slate-300">+{solution.fit_breakdown.pain_points}%</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-500">Tech compatible:</span>
+                    <span className="text-slate-300">+{solution.fit_breakdown.tech_compatible}%</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-500">Sector fit:</span>
+                    <span className="text-slate-300">+{solution.fit_breakdown.sector_fit}%</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-500">Volum ROI:</span>
+                    <span className="text-slate-300">+{solution.fit_breakdown.volume_roi}%</span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// Company Summary Header
+function CompanySummary({ summary }: { summary: any }) {
+  return (
+    <div className="relative overflow-hidden rounded-2xl border-2 border-blue-500/30 bg-gradient-to-br from-blue-500/10 via-slate-900/50 to-emerald-500/10 p-6 mb-8">
+      {/* Decorative gradient */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-blue-500/10 to-transparent rounded-full blur-3xl" />
+
+      <div className="relative">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/20">
+            <Sparkles className="h-6 w-6 text-blue-400" />
+          </div>
+          <div>
+            <h2 className="text-2xl font-bold text-slate-100">{summary?.name || "Empresa"}</h2>
+            <p className="text-sm text-blue-400">{summary?.sector_name || "Sector"}</p>
+          </div>
+        </div>
+
+        {summary?.wow_insight && (
+          <p className="text-slate-300 leading-relaxed mb-4">{summary.wow_insight}</p>
+        )}
+
+        {summary?.tech_detected && summary.tech_detected.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            <span className="text-xs text-slate-400">Eines detectades:</span>
+            {summary.tech_detected.map((tech: string, i: number) => (
+              <span
+                key={i}
+                className="px-2 py-1 rounded-full bg-slate-800/50 border border-slate-700/50 text-xs text-slate-300"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// Total Impact Summary
+function TotalImpact({ impact }: { impact: any }) {
+  return (
+    <div className="rounded-2xl border-2 border-emerald-500/30 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 p-6">
+      <div className="flex items-center gap-3 mb-4">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/20">
+          <TrendingUp className="h-5 w-5 text-emerald-400" />
+        </div>
+        <h3 className="text-lg font-bold text-slate-100">Impacte Potencial Total</h3>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div className="text-center p-4 rounded-xl bg-slate-900/50">
+          <p className="text-3xl font-bold text-emerald-400">
+            {impact?.hours_saved_weekly || 18}h
+          </p>
+          <p className="text-sm text-slate-400">estalviades/setmana</p>
+        </div>
+        <div className="text-center p-4 rounded-xl bg-slate-900/50">
+          <p className="text-3xl font-bold text-blue-400">
+            {(impact?.hours_saved_weekly * 4 * 25 || 1800).toLocaleString()}€
+          </p>
+          <p className="text-sm text-slate-400">valor mensual estimat</p>
+        </div>
+      </div>
+
+      <p className="mt-4 text-xs text-slate-500 text-center">
+        *Basat en 25€/hora de cost laboral mitjà i les top 3 solucions recomanades
+      </p>
+    </div>
+  );
+}
+
+// =============================================================================
+// MAIN PAGE
+// =============================================================================
 
 export default function CompletePage() {
   const params = useParams();
   const auditId = params.id as string;
 
-  const [auditData, setAuditData] = useState<GetAuditResponse | null>(null);
+  const [auditData, setAuditData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -147,30 +296,29 @@ export default function CompletePage() {
     fetchAudit();
   }, [auditId]);
 
+  // Loading state
   if (isLoading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-background">
-        <div className="text-center">
-          <Loader2 className="mx-auto mb-4 h-12 w-12 animate-spin text-primary-400" />
-          <p className="text-muted-foreground">Carregant auditoria...</p>
+      <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+        <div className="relative">
+          <div className="absolute -inset-8 rounded-full bg-gradient-to-r from-blue-500/20 to-emerald-500/20 blur-2xl animate-pulse" />
+          <Loader2 className="relative h-16 w-16 animate-spin text-blue-400" />
         </div>
+        <p className="mt-6 text-lg text-slate-400">Preparant la teva auditoria personalitzada...</p>
       </div>
     );
   }
 
+  // Error state
   if (error || !auditData?.success) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-background px-8">
-        <Card className="glass-card max-w-md border-2 border-red-500/20 p-8 text-center">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 px-6">
+        <Card className="max-w-md border-red-500/30 bg-slate-900/50 p-8 text-center">
           <AlertCircle className="mx-auto mb-4 h-12 w-12 text-red-400" />
           <h2 className="mb-2 text-xl font-bold text-slate-200">Error</h2>
-          <p className="text-red-400">{error || "No s'ha pogut carregar l'auditoria"}</p>
-          <Button 
-            variant="outline" 
-            className="mt-6"
-            onClick={() => window.location.href = "/"}
-          >
-            Tornar a l&apos;inici
+          <p className="text-red-400 mb-6">{error || "No s'ha pogut carregar l'auditoria"}</p>
+          <Button variant="outline" onClick={() => (window.location.href = "/")}>
+            Tornar a l'inici
           </Button>
         </Card>
       </div>
@@ -178,309 +326,162 @@ export default function CompletePage() {
   }
 
   const audit = auditData.audit;
-  const hasResults = audit.diagnosis && audit.quick_wins && audit.roi_estimation;
+  
+  // Check for v2 format (recommended_solutions) or v1 format (diagnosis, quick_wins)
+  const isV2Format = audit.recommended_solutions && audit.recommended_solutions.length > 0;
+  const hasResults = isV2Format || (audit.diagnosis && audit.quick_wins);
+
+  // Get quick win (first solution with highest fit or specifically marked)
+  const quickWin = audit.quick_win_highlighted || 
+    (audit.recommended_solutions && audit.recommended_solutions[0]);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+      {/* Decorative elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-1/4 h-96 w-96 rounded-full bg-blue-500/5 blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-emerald-500/5 blur-3xl" />
+      </div>
+
       {/* Header */}
-      <header className="fixed top-0 z-50 w-full border-b border-primary-500/10 bg-background/80 backdrop-blur-md">
-        <nav className="container mx-auto flex h-20 items-center px-8">
-          <Logo size="md" variant="image" />
+      <header className="fixed top-0 z-50 w-full border-b border-slate-800/50 bg-slate-950/80 backdrop-blur-xl">
+        <nav className="container mx-auto flex h-16 items-center justify-between px-6">
+          <Logo size="sm" variant="image" />
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="h-5 w-5 text-emerald-400" />
+            <span className="text-sm font-medium text-emerald-400">Auditoria Completada</span>
+          </div>
         </nav>
       </header>
 
       {/* Main Content */}
-      <div className="container mx-auto max-w-5xl px-8 pt-28 pb-16">
-        {/* Success Header */}
-        <div className="mb-12 text-center">
-          <div className="mb-6 flex justify-center">
-            <div className="relative">
-              <div className="absolute inset-0 animate-ping rounded-full bg-emerald-500/20" />
-              <div className="relative flex h-20 w-20 items-center justify-center rounded-full bg-emerald-500/15">
+      <div className="container mx-auto max-w-4xl px-6 pt-28 pb-16">
+        {hasResults ? (
+          <>
+            {/* Success Header */}
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-emerald-500/20 to-blue-500/20 mb-4">
                 <CheckCircle2 className="h-10 w-10 text-emerald-400" />
               </div>
-            </div>
-          </div>
-          <h1 className="mb-3 text-4xl font-extrabold md:text-5xl">
-            La Teva Auditoria Personalitzada
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            Hem analitzat la teva empresa i detectat oportunitats d&apos;automatització
-          </p>
-        </div>
-
-        {hasResults ? (
-          <div className="space-y-8">
-            {/* ROI Summary Cards */}
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <Card className="glass-card border-primary-500/20">
-                <CardContent className="p-5">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-red-500/15">
-                      <Clock className="h-5 w-5 text-red-400" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground">Hores perdudes</p>
-                      <p className="text-2xl font-bold text-slate-200">
-                        {audit.roi_estimation.total_hours_wasted_weekly}h
-                        <span className="text-sm font-normal text-muted-foreground">/set</span>
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="glass-card border-primary-500/20">
-                <CardContent className="p-5">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-yellow-500/15">
-                      <Euro className="h-5 w-5 text-yellow-400" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground">Cost mensual</p>
-                      <p className="text-2xl font-bold text-slate-200">
-                        {audit.roi_estimation.monthly_waste_eur.toLocaleString()}€
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="glass-card border-emerald-500/20">
-                <CardContent className="p-5">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/15">
-                      <TrendingUp className="h-5 w-5 text-emerald-400" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground">Estalvi possible</p>
-                      <p className="text-2xl font-bold text-emerald-400">
-                        {audit.roi_estimation.monthly_savings_eur.toLocaleString()}€
-                        <span className="text-sm font-normal text-muted-foreground">/mes</span>
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="glass-card border-primary-500/20">
-                <CardContent className="p-5">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-500/15">
-                      <Zap className="h-5 w-5 text-primary-400" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground">Potencial automatització</p>
-                      <p className="text-2xl font-bold text-primary-400">
-                        {audit.roi_estimation.automation_potential_percent}%
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <h1 className="text-3xl md:text-4xl font-bold text-slate-100 mb-2">
+                La Teva Auditoria Està Llesta
+              </h1>
+              <p className="text-slate-400 max-w-xl mx-auto">
+                Hem analitzat el teu negoci i identificat les millors oportunitats d'automatització del nostre catàleg.
+              </p>
             </div>
 
-            {/* Diagnosis Section */}
-            <Card className="glass-card border-2 border-primary-500/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-3 text-2xl">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-red-500/15">
-                    <AlertTriangle className="h-5 w-5 text-red-400" />
-                  </div>
-                  Diagnòstic: Problemes Detectats
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {audit.diagnosis.overall_assessment && (
-                  <p className="text-muted-foreground mb-6 p-4 rounded-lg bg-slate-800/30 border-l-4 border-primary-500">
-                    {audit.diagnosis.overall_assessment}
-                  </p>
-                )}
-                
-                <div className="space-y-4">
-                  {audit.diagnosis.main_problems?.map((problem: any, index: number) => (
-                    <div 
-                      key={index}
-                      className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-5"
-                    >
-                      <div className="flex items-start justify-between gap-4 mb-2">
-                        <h4 className="font-semibold text-slate-200 flex items-center gap-2">
-                          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-red-500/20 text-red-400 text-sm">
-                            {index + 1}
-                          </span>
-                          {problem.title}
-                        </h4>
-                        <SeverityBadge severity={problem.severity} />
-                      </div>
-                      <p className="text-sm text-muted-foreground mb-2">{problem.description}</p>
-                      {problem.impact && (
-                        <p className="text-sm text-yellow-400/80 flex items-center gap-2">
-                          <AlertCircle className="h-4 w-4" />
-                          <strong>Impacte:</strong> {problem.impact}
-                        </p>
-                      )}
-                    </div>
-                  ))}
+            {/* Company Summary */}
+            {audit.company_summary && <CompanySummary summary={audit.company_summary} />}
+
+            {/* Recommended Solutions */}
+            <div className="mb-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/20">
+                  <Target className="h-5 w-5 text-blue-400" />
                 </div>
-              </CardContent>
-            </Card>
-
-            {/* Quick Wins Section */}
-            <Card className="glass-card border-2 border-emerald-500/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-3 text-2xl">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/15">
-                    <Zap className="h-5 w-5 text-emerald-400" />
-                  </div>
-                  Quick Wins: Accions Recomanades
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-muted-foreground mb-4">
-                  Aquestes són les automatitzacions que et recomanem implementar primer, ordenades per impacte i facilitat:
-                </p>
-                
-                <div className="space-y-3">
-                  {audit.quick_wins?.map((win: any, index: number) => (
-                    <QuickWinCard key={index} win={win} index={index} />
-                  ))}
+                <div>
+                  <h2 className="text-xl font-bold text-slate-100">Solucions Recomanades</h2>
+                  <p className="text-sm text-slate-400">Ordenades per fit score i potencial d'impacte</p>
                 </div>
+              </div>
 
-                {/* Quick Wins Summary */}
-                <div className="mt-6 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
-                  <div className="flex flex-wrap justify-between gap-4 text-center">
-                    <div>
-                      <p className="text-2xl font-bold text-emerald-400">
-                        {audit.quick_wins?.reduce((sum: number, w: any) => sum + (w.hours_saved_weekly || 0), 0)}h
-                      </p>
-                      <p className="text-xs text-muted-foreground">hores/setmana estalviades</p>
-                    </div>
-                    <div>
-                      <p className="text-2xl font-bold text-emerald-400">
-                        {audit.quick_wins?.reduce((sum: number, w: any) => sum + (w.monthly_savings_eur || 0), 0).toLocaleString()}€
-                      </p>
-                      <p className="text-xs text-muted-foreground">estalvi mensual total</p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+              <div className="space-y-4">
+                {audit.recommended_solutions?.map((solution: any, index: number) => (
+                  <SolutionCard
+                    key={solution.solution_id || index}
+                    solution={solution}
+                    isQuickWin={index === 0 || solution.solution_id === quickWin?.solution_id}
+                  />
+                ))}
+              </div>
+            </div>
 
-            {/* Tier Recommendation */}
-            {audit.tier_recommendation && (
-              <Card className="glass-card border-2 border-primary-500/30 bg-gradient-to-br from-primary-500/5 to-emerald-500/5">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-2xl">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-500/15">
-                      <Target className="h-5 w-5 text-primary-400" />
-                    </div>
-                    Pla Recomanat per a Tu
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-col md:flex-row gap-6">
-                    <div className="flex-1">
-                      <div className="mb-4">
-                        <span className="text-sm text-muted-foreground">El teu pla ideal:</span>
-                        <h3 className="text-3xl font-bold text-slate-100">
-                          {audit.tier_recommendation.tier_name}
-                        </h3>
-                        <p className="text-2xl font-semibold text-primary-400">
-                          {audit.tier_recommendation.monthly_price_eur}€
-                          <span className="text-sm font-normal text-muted-foreground">/mes</span>
-                        </p>
-                      </div>
-                      
-                      <p className="text-muted-foreground mb-4">
-                        {audit.tier_recommendation.rationale}
-                      </p>
-
-                      {audit.tier_recommendation.included_automations?.length > 0 && (
-                        <div>
-                          <h4 className="text-sm font-medium text-slate-300 mb-2">Inclou:</h4>
-                          <ul className="space-y-1">
-                            {audit.tier_recommendation.included_automations.map((item: string, i: number) => (
-                              <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
-                                <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-                                {item}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="flex flex-col gap-3 md:w-64">
-                      <Button size="lg" className="gap-2">
-                        <Calendar className="h-5 w-5" />
-                        Reservar Demo Gratuïta
-                      </Button>
-                      <Button size="lg" variant="outline" className="gap-2" disabled>
-                        <Download className="h-5 w-5" />
-                        Descarregar PDF (Pròximament)
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-
-            {/* Next Steps */}
-            <Card className="glass-card border-2 border-primary-500/20">
-              <CardHeader>
-                <CardTitle className="text-xl">Propers Passos</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-start gap-4 rounded-xl bg-slate-800/30 p-4">
-                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-emerald-500/15">
-                    <Mail className="h-5 w-5 text-emerald-400" />
+            {/* Open Request Mapping (if user mentioned something specific) */}
+            {audit.open_request_mapping?.user_said && audit.open_request_mapping.maps_to_solution && (
+              <div className="mb-8 p-6 rounded-2xl border-2 border-blue-500/30 bg-blue-500/5">
+                <div className="flex items-start gap-4">
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-blue-500/20">
+                    <Sparkles className="h-5 w-5 text-blue-400" />
                   </div>
                   <div>
-                    <h3 className="mb-1 font-semibold text-slate-200">
-                      Revisa el Teu Email
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      T&apos;enviarem l&apos;auditoria completa en PDF. Revisa també la carpeta de spam.
+                    <h3 className="font-bold text-slate-100 mb-2">Sobre el que vas mencionar...</h3>
+                    <p className="text-sm text-slate-400 mb-2">
+                      "<em>{audit.open_request_mapping.user_said}</em>"
                     </p>
+                    <p className="text-sm text-blue-400">{audit.open_request_mapping.response}</p>
                   </div>
                 </div>
+              </div>
+            )}
 
-                <div className="flex items-start gap-4 rounded-xl bg-slate-800/30 p-4">
-                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-primary-500/15">
-                    <Calendar className="h-5 w-5 text-primary-400" />
+            {/* Blockers Addressed (if detected) */}
+            {audit.blockers_addressed?.detected_blockers?.length > 0 && (
+              <div className="mb-8 p-6 rounded-2xl border-2 border-yellow-500/30 bg-yellow-500/5">
+                <div className="flex items-start gap-4">
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-yellow-500/20">
+                    <Zap className="h-5 w-5 text-yellow-400" />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="mb-1 font-semibold text-slate-200">
-                      Reserva una Demo Gratuïta
-                    </h3>
-                    <p className="mb-3 text-sm text-muted-foreground">
-                      Parlem de com implementar aquestes millores a la teva empresa en 30 dies.
-                    </p>
-                    <Button variant="secondary" className="gap-2">
-                      <Calendar className="h-4 w-4" />
-                      Reservar Demo (15 min)
-                      <ArrowRight className="h-4 w-4" />
-                    </Button>
+                  <div>
+                    <h3 className="font-bold text-slate-100 mb-2">Per si et preocupa...</h3>
+                    <p className="text-sm text-slate-300">{audit.blockers_addressed.response}</p>
                   </div>
                 </div>
-              </CardContent>
+              </div>
+            )}
+
+            {/* Total Impact */}
+            <div className="mb-8">
+              <TotalImpact impact={audit.total_potential_impact} />
+            </div>
+
+            {/* CTAs */}
+            <Card className="border-2 border-slate-700/50 bg-slate-900/50 p-6">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                  <h3 className="text-lg font-bold text-slate-100 mb-1">
+                    {audit.next_steps?.cta_primary || "Vols veure com funciona?"}
+                  </h3>
+                  <p className="text-sm text-slate-400">
+                    Reserva una demo gratuïta de 15 minuts i t'ensenyem com implementar-ho.
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                  <Button
+                    size="lg"
+                    className="gap-2 bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-500 hover:to-emerald-500 text-white shadow-lg"
+                  >
+                    <Calendar className="h-5 w-5" />
+                    Reservar Demo
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                  <Button size="lg" variant="outline" className="gap-2" disabled>
+                    <Download className="h-5 w-5" />
+                    PDF (Pròximament)
+                  </Button>
+                </div>
+              </div>
             </Card>
-          </div>
+          </>
         ) : (
-          <Card className="glass-card border-2 border-yellow-500/20 p-8 text-center">
+          /* Processing State */
+          <div className="text-center py-16">
             <Loader2 className="mx-auto mb-4 h-12 w-12 animate-spin text-yellow-400" />
             <h2 className="mb-2 text-xl font-bold text-slate-200">Processant Auditoria</h2>
-            <p className="text-muted-foreground">
-              L&apos;auditoria s&apos;està generant. Això pot trigar uns segons...
+            <p className="text-slate-400">
+              L'auditoria s'està generant. Això pot trigar uns segons...
             </p>
-          </Card>
+          </div>
         )}
 
         {/* Footer */}
         <div className="mt-12 text-center">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-slate-500">
             Tens dubtes? Escriu-nos a{" "}
-            <a href="mailto:hola@empentia.cat" className="text-primary-400 underline hover:text-primary-300">
+            <a
+              href="mailto:hola@empentia.cat"
+              className="text-blue-400 underline hover:text-blue-300"
+            >
               hola@empentia.cat
             </a>
           </p>
