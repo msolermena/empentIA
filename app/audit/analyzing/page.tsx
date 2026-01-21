@@ -45,13 +45,14 @@ export default function AnalyzingPage() {
       return;
     }
 
-    // Animació de progrés
+    // Animació de progrés - MÉS LENTA (8 segons més per arribar al 95%)
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 95) return prev; // No arribem a 100% fins que API respongui
-        return prev + 1;
+        // Més lent: incrementem cada 200ms en lloc de 100ms
+        return prev + 0.5;
       });
-    }, 100);
+    }, 200);
 
     // Canviar missatges
     const stepInterval = setInterval(() => {
