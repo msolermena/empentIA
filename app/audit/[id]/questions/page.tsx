@@ -241,6 +241,7 @@ export default function QuestionsPage() {
                   return (
                     <label
                       key={index}
+                      onClick={() => handleCheckboxChange(option, !isChecked)}
                       className={`flex cursor-pointer items-center gap-3 rounded-lg border p-4 transition-all duration-200 ${
                         isChecked
                           ? "border-primary-500 bg-primary-500/10 shadow-lg shadow-primary-500/10"
@@ -269,7 +270,7 @@ export default function QuestionsPage() {
                   );
                 })}
                 <p className="text-xs text-muted-foreground pt-2">
-                  Pots seleccionar múltiples opcions
+                  💡 Pots seleccionar múltiples opcions
                 </p>
               </div>
             ) : !isLoading && question?.type === "radio" && question.options ? (
@@ -319,7 +320,7 @@ export default function QuestionsPage() {
                   placeholder="Escriu aquí... (opcional)"
                 />
                 <p className="text-xs text-muted-foreground">
-                  Opcional - qualsevol detall ens ajuda a personalitzar les recomanacions
+                  💡 Opcional - qualsevol detall ens ajuda a personalitzar les recomanacions
                 </p>
               </div>
             ) : !isLoading && (
