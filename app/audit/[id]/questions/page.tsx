@@ -211,9 +211,9 @@ export default function QuestionsPage() {
         <Card className="border border-slate-800 bg-slate-900/50 backdrop-blur-sm shadow-2xl">
           <CardHeader className="pb-4">
             <CardTitle className="text-xl md:text-2xl leading-relaxed text-slate-100">
-              {isLoading ? "Carregant..." : question?.question_text}
+              {question?.question_text || "Preparant pregunta..."}
             </CardTitle>
-            {question?.help_text && !isLoading && (
+            {question?.help_text && (
               <p className="text-sm text-muted-foreground mt-2">
                 {question.help_text}
               </p>
