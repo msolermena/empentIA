@@ -28,9 +28,12 @@ export interface StartAuditResponse {
 
 export interface Question {
   question_text: string;
-  type: "text" | "radio" | "textarea" | "checkbox"; // Afegit checkbox per multiselect
+  type: "text" | "radio" | "textarea" | "checkbox";
   options?: string[];
   context?: string;
+  help_text?: string;  // v2.0: text d'ajuda opcional
+  question_number?: number;
+  total_questions?: number;
 }
 
 export interface SaveAnswerResponse {
