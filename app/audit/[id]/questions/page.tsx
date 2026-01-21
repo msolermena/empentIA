@@ -280,6 +280,10 @@ export default function QuestionsPage() {
                   return (
                     <label
                       key={index}
+                      onClick={() => {
+                        setAnswer(option);
+                        setError(null);
+                      }}
                       className={`flex cursor-pointer items-center gap-3 rounded-lg border p-4 transition-all duration-200 ${
                         isSelected
                           ? "border-primary-500 bg-primary-500/10 shadow-lg shadow-primary-500/10"
@@ -377,6 +381,23 @@ export default function QuestionsPage() {
             </div>
           </CardContent>
         </Card>
+
+        {/* Question context hint */}
+        {currentQuestion <= 3 && (
+          <p className="text-center text-xs text-muted-foreground mt-6">
+            💡 Aquestes preguntes ens ajuden a identificar les millors solucions pel teu cas
+          </p>
+        )}
+        {currentQuestion >= 4 && currentQuestion <= 5 && (
+          <p className="text-center text-xs text-muted-foreground mt-6">
+            💡 Quantifiquem l'impacte per calcular el ROI de cada solució
+          </p>
+        )}
+        {currentQuestion === 6 && (
+          <p className="text-center text-xs text-muted-foreground mt-6">
+            💡 Última pregunta - qualsevol comentari és benvingut
+          </p>
+        )}
       </div>
     </div>
   );
