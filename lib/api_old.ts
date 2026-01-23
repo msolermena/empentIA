@@ -28,17 +28,12 @@ export interface StartAuditResponse {
 
 export interface Question {
   question_text: string;
-  type: "text" | "radio" | "textarea" | "checkbox" | "multi_quantify";  // v4.0: afegit multi_quantify
+  type: "text" | "radio" | "textarea" | "checkbox";
   options?: string[];
-  items?: {  // v4.0: per multi_quantify (P4)
-    pain_point: string;
-    options: string[];
-  }[];
   context?: string;
   help_text?: string;  // v2.0: text d'ajuda opcional
   question_number?: number;
   total_questions?: number;
-  options_metadata?: any[];  // v4.0: metadata interna
 }
 
 export interface SaveAnswerResponse {

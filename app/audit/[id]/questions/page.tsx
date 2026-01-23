@@ -19,23 +19,23 @@ export default function QuestionsPage() {
   const [question, setQuestion] = useState<Question | null>(null);
   const [answer, setAnswer] = useState("");
   const [multipleAnswers, setMultipleAnswers] = useState<string[]>([]);
+  const [quantifyAnswers, setQuantifyAnswers] = useState<Record<number, string>>({}); // v4.0: multi_quantify
   const [answers, setAnswers] = useState<Record<number, any>>({});
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // ✅ v2.0: 6 preguntes
-  const totalQuestions = 6;
+  // ✅ v4.0: 5 preguntes
+  const totalQuestions = 5;
   const progress = (displayedQuestion / totalQuestions) * 100;
 
   // Question type labels for UX
   const questionLabels: Record<number, string> = {
     1: "Validació",
-    2: "Reptes actuals",
-    3: "Eines",
-    4: "Detall",
-    5: "Detall",
-    6: "Obertura",
+    2: "Eines",
+    3: "Reptes",
+    4: "Quantificació",
+    5: "Obertura",
   };
 
   useEffect(() => {
@@ -63,13 +63,20 @@ export default function QuestionsPage() {
         if (data.type === "checkbox" && Array.isArray(savedAnswer)) {
           setMultipleAnswers(savedAnswer);
           setAnswer("");
+          setQuantifyAnswers({});
+        } else if (data.type === "multi_quantify" && typeof savedAnswer === "object") {
+          setQuantifyAnswers(savedAnswer);
+          setAnswer("");
+          setMultipleAnswers([]);
         } else {
           setAnswer(savedAnswer);
           setMultipleAnswers([]);
+          setQuantifyAnswers({});
         }
       } else {
         setAnswer("");
         setMultipleAnswers([]);
+        setQuantifyAnswers({});
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error desconegut");
@@ -79,7 +86,11 @@ export default function QuestionsPage() {
   };
 
   const saveAnswer = async () => {
-    const currentAnswer = question?.type === "checkbox" ? multipleAnswers : answer;
+    const currentAnswer = question?.type === "checkbox" 
+      ? multipleAnswers 
+      : question?.type === "multi_quantify"
+      ? quantifyAnswers
+      : answer;
 
     // Validació segons tipus
     if (question?.type === "checkbox") {
@@ -87,8 +98,16 @@ export default function QuestionsPage() {
         setError("Si us plau, selecciona almenys una opció");
         return;
       }
+    } else if (question?.type === "multi_quantify") {
+      // Validar que tots els ítems tenen resposta
+      const items = (question as any).items || [];
+      const answered = Object.keys(quantifyAnswers).length;
+      if (answered < items.length) {
+        setError("Si us plau, indica el temps per a cada tasca");
+        return;
+      }
     } else if (question?.type === "textarea") {
-      // Textarea és opcional (P6)
+      // Textarea és opcional (P5)
       // No validar si està buit
     } else {
       if (!answer.trim()) {
@@ -106,10 +125,19 @@ export default function QuestionsPage() {
     setError(null);
 
     try {
-      const answerToSave =
-        question.type === "checkbox"
-          ? multipleAnswers.join(", ")
-          : answer;
+      let answerToSave: string;
+      
+      if (question.type === "checkbox") {
+        answerToSave = multipleAnswers.join(", ");
+      } else if (question.type === "multi_quantify") {
+        // Format: "Pain point 1: 2-5h, Pain point 2: <2h"
+        const items = (question as any).items || [];
+        answerToSave = items
+          .map((item: any, idx: number) => `${item.pain_point}: ${quantifyAnswers[idx] || ""}`)
+          .join(", ");
+      } else {
+        answerToSave = answer;
+      }
 
       await saveAnswerAPI(auditId, currentQuestion, question, answerToSave);
 
@@ -307,8 +335,44 @@ export default function QuestionsPage() {
                   );
                 })}
               </div>
+            ) : !isLoading && question?.type === "multi_quantify" && (question as any).items ? (
+              /* MULTI_QUANTIFY - Quantificar múltiples ítems (P4 v4.0) */
+              <div className="space-y-4">
+                {(question as any).items.map((item: any, idx: number) => {
+                  const selectedOption = quantifyAnswers[idx];
+                  return (
+                    <div key={idx} className="p-4 rounded-lg border border-slate-700 bg-slate-800/30">
+                      <p className="text-slate-200 font-medium mb-3">{item.pain_point}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {item.options.map((opt: string, optIdx: number) => {
+                          const isSelected = selectedOption === opt;
+                          return (
+                            <label
+                              key={optIdx}
+                              onClick={() => {
+                                setQuantifyAnswers({ ...quantifyAnswers, [idx]: opt });
+                                setError(null);
+                              }}
+                              className={`cursor-pointer px-3 py-2 rounded-lg border text-sm transition-all duration-200 ${
+                                isSelected
+                                  ? "border-primary-500 bg-primary-500/20 text-primary-300"
+                                  : "border-slate-600 bg-slate-800/50 text-slate-300 hover:border-slate-500"
+                              }`}
+                            >
+                              {opt}
+                            </label>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+                <p className="text-xs text-muted-foreground pt-2">
+                  💡 Selecciona el temps aproximat per cada tasca
+                </p>
+              </div>
             ) : !isLoading && question?.type === "textarea" ? (
-              /* TEXTAREA - Text lliure (P6) */
+              /* TEXTAREA - Text lliure (P5) */
               <div className="space-y-3">
                 <textarea
                   value={answer}
@@ -389,12 +453,12 @@ export default function QuestionsPage() {
             💡 Aquestes preguntes ens ajuden a identificar les millors solucions pel teu cas
           </p>
         )}
-        {currentQuestion >= 4 && currentQuestion <= 5 && (
+        {currentQuestion === 4 && (
           <p className="text-center text-xs text-muted-foreground mt-6">
             💡 Quantifiquem l'impacte per calcular el ROI de cada solució
           </p>
         )}
-        {currentQuestion === 6 && (
+        {currentQuestion === 5 && (
           <p className="text-center text-xs text-muted-foreground mt-6">
             💡 Última pregunta - qualsevol comentari és benvingut
           </p>
