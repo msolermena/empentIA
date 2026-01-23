@@ -258,45 +258,79 @@ export default function QuestionsPage() {
 
             {/* CHECKBOX - Múltiples respostes */}
             {!isLoading && question?.type === "checkbox" && question.options ? (
-              <div className="space-y-2.5">
-                {question.options.map((option, index) => {
-                  const isChecked = multipleAnswers.includes(option);
-                  const isNoneOption =
-                    option.toLowerCase().includes("cap de les anteriors") ||
-                    option.toLowerCase().includes("cap d'") ||
-                    option.toLowerCase().includes("altres");
-
-                  return (
-                    <label
-                      key={index}
-                      onClick={() => handleCheckboxChange(option, !isChecked)}
-                      className={`flex cursor-pointer items-center gap-3 rounded-lg border p-4 transition-all duration-200 ${
-                        isChecked
-                          ? "border-primary-500 bg-primary-500/10 shadow-lg shadow-primary-500/10"
-                          : "border-slate-700/50 bg-slate-800/30 hover:border-slate-600 hover:bg-slate-800/50"
-                      } ${isNoneOption ? "opacity-70" : ""}`}
-                    >
-                      <div
-                        className={`flex h-5 w-5 items-center justify-center rounded border-2 transition-all ${
-                          isChecked
-                            ? "border-primary-500 bg-primary-500"
-                            : "border-slate-600"
-                        }`}
-                      >
-                        {isChecked && (
-                          <CheckCircle2 className="h-3.5 w-3.5 text-white" />
-                        )}
+              <div className="space-y-4">
+                {/* P2: Si té categories, mostrar agrupat */}
+                {(question as any).categories ? (
+                  // Mostrar agrupat per categories
+                  (question as any).categories.map((cat: any, catIdx: number) => (
+                    <div key={catIdx} className="space-y-2">
+                      <h4 className="text-sm font-medium text-slate-400 uppercase tracking-wide">
+                        {cat.category_name}
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {cat.tools.map((tool: string, toolIdx: number) => {
+                          const optionText = `${cat.category_name}: ${tool}`;
+                          const isChecked = multipleAnswers.includes(optionText);
+                          const isAltres = tool.toLowerCase() === "altres";
+                          
+                          return (
+                            <label
+                              key={toolIdx}
+                              onClick={() => handleCheckboxChange(optionText, !isChecked)}
+                              className={`cursor-pointer px-3 py-2 rounded-lg border text-sm transition-all duration-200 ${
+                                isChecked
+                                  ? "border-primary-500 bg-primary-500/20 text-primary-300"
+                                  : "border-slate-600 bg-slate-800/50 text-slate-300 hover:border-slate-500"
+                              } ${isAltres ? "italic" : ""}`}
+                            >
+                              {tool}
+                            </label>
+                          );
+                        })}
                       </div>
-                      <span
-                        className={`flex-1 ${
-                          isNoneOption ? "text-slate-400 italic" : "text-slate-200"
-                        }`}
+                    </div>
+                  ))
+                ) : (
+                  // Fallback: llista plana (P3 i altres)
+                  question.options.map((option, index) => {
+                    const isChecked = multipleAnswers.includes(option);
+                    const isNoneOption =
+                      option.toLowerCase().includes("cap de les anteriors") ||
+                      option.toLowerCase().includes("cap d'") ||
+                      option.toLowerCase().includes("altres");
+
+                    return (
+                      <label
+                        key={index}
+                        onClick={() => handleCheckboxChange(option, !isChecked)}
+                        className={`flex cursor-pointer items-center gap-3 rounded-lg border p-4 transition-all duration-200 ${
+                          isChecked
+                            ? "border-primary-500 bg-primary-500/10 shadow-lg shadow-primary-500/10"
+                            : "border-slate-700/50 bg-slate-800/30 hover:border-slate-600 hover:bg-slate-800/50"
+                        } ${isNoneOption ? "opacity-70" : ""}`}
                       >
-                        {option}
-                      </span>
-                    </label>
-                  );
-                })}
+                        <div
+                          className={`flex h-5 w-5 items-center justify-center rounded border-2 transition-all ${
+                            isChecked
+                              ? "border-primary-500 bg-primary-500"
+                              : "border-slate-600"
+                          }`}
+                        >
+                          {isChecked && (
+                            <CheckCircle2 className="h-3.5 w-3.5 text-white" />
+                          )}
+                        </div>
+                        <span
+                          className={`flex-1 ${
+                            isNoneOption ? "text-slate-400 italic" : "text-slate-200"
+                          }`}
+                        >
+                          {option}
+                        </span>
+                      </label>
+                    );
+                  })
+                )}
                 <p className="text-xs text-muted-foreground pt-2">
                   💡 Pots seleccionar múltiples opcions
                 </p>
