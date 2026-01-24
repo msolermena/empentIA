@@ -85,6 +85,7 @@ interface AuditResultV4 {
       name: string;
       icon: string;
       automations: number | string;
+      suite?: string;  // Opcional per compatibilitat
       ideal_for: string;
     }>;
   };
@@ -352,7 +353,7 @@ export default function CompletePage() {
         {/* ==================== SECCIÓ 7: PAQUETS ==================== */}
         {audit.packages && audit.packages.show_packages && (
           <div className="mb-8">
-            <PackageSelector options={audit.packages.options} />
+            <PackageSelector options={audit.packages.options as any} />
           </div>
         )}
 
