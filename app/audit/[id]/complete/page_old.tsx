@@ -24,13 +24,15 @@ interface CompanySummary {
   sector: string;
   sector_name: string;
   wow_insight: string;
+  tech_detected: string[];
   volume_metric: string;
 }
 
 interface ImpactSummary {
   total_hours_saved_weekly: number;
   total_monthly_savings_eur: number;
-  solutions_count: number;
+  detected_savings_eur: number;
+  bonus_savings_eur: number;
 }
 
 interface DetectedOpportunity {
@@ -38,42 +40,28 @@ interface DetectedOpportunity {
   solution_id: string;
   name: string;
   why_fits: string;
-  how_it_works?: string;  // v4.0: NOU
   hours_saved_weekly: number;
   monthly_savings_eur: number;
   integrates_with: string[];
   category: string;
 }
 
-// v4.0: NOU - Also Requested (P5)
-interface AlsoRequested {
-  show: boolean;
-  client_text: string;
-  solution: {
-    solution_id: string;
-    name: string;
-    how_it_works?: string;
-    monthly_savings_eur: number;
-  };
+interface BonusOpportunity {
+  solution_id: string;
+  name: string;
+  monthly_savings_eur: number;
+  popular_in_sector: boolean;
 }
 
-// v4.0: Bonus actualitzat
-interface BonusOpportunities {
-  show: boolean;
-  reason?: string;
-  solutions: Array<{
-    solution_id: string;
-    name: string;
-    monthly_savings_eur: number;
-  }>;
-}
-
-interface AuditResultV4 {
+interface AuditResultV2 {
   company_summary: CompanySummary;
   impact_summary: ImpactSummary;
   detected_opportunities: DetectedOpportunity[];
-  also_requested?: AlsoRequested;  // v4.0: NOU
-  bonus_opportunities?: BonusOpportunities;  // v4.0: Actualitzat
+  bonus_opportunities: BonusOpportunity[];
+  current_situation: {
+    summary: string;
+    areas: Array<{ title: string; description: string }>;
+  };
   justification: {
     text: string;
     reasons: string[];
@@ -85,6 +73,7 @@ interface AuditResultV4 {
       name: string;
       icon: string;
       automations: number | string;
+      suite: string;
       ideal_for: string;
     }>;
   };
@@ -96,8 +85,8 @@ interface AuditResultV4 {
   };
 }
 
-// Helper per detectar si és v4 (o v2 compatible)
-function isAuditV4(audit: any): audit is AuditResultV4 {
+// Helper per detectar si és v2
+function isAuditV2(audit: any): audit is AuditResultV2 {
   return !!(
     audit?.detected_opportunities && 
     audit?.impact_summary &&
@@ -159,15 +148,15 @@ export default function CompletePage() {
     );
   }
 
-  // Determinar si és v4 o legacy
-  const isV4 = isAuditV4(auditData);
+  // Determinar si és v2 o legacy
+  const isV2 = isAuditV2(auditData);
   
-  // Si no és v4, mostrar versió legacy simplificada
-  if (!isV4) {
+  // Si no és v2, mostrar versió legacy simplificada
+  if (!isV2) {
     return <LegacyAuditView audit={auditData} />;
   }
 
-  const audit = auditData as AuditResultV4;
+  const audit = auditData as AuditResultV2;
 
   return (
     <div className="min-h-screen bg-background">
@@ -199,6 +188,17 @@ export default function CompletePage() {
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             {audit.company_summary.wow_insight}
           </p>
+          
+          {/* Tech detectat */}
+          {audit.company_summary.tech_detected && audit.company_summary.tech_detected.length > 0 && (
+            <div className="flex justify-center gap-2 mt-4 flex-wrap">
+              {audit.company_summary.tech_detected.map((tech, i) => (
+                <span key={i} className="px-3 py-1 text-xs rounded-full bg-slate-800 text-slate-400 capitalize">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* ==================== SECCIÓ 2: IMPACTE GLOBAL ==================== */}
@@ -251,69 +251,29 @@ export default function CompletePage() {
             <div className="flex justify-between items-center">
               <span className="text-sm text-muted-foreground">Estalvi amb oportunitats detectades:</span>
               <span className="text-xl font-bold text-primary-400">
-                {audit.detected_opportunities.reduce((sum, o) => sum + (o.monthly_savings_eur || 0), 0).toLocaleString('ca-ES')}€/mes
+                {audit.impact_summary.detected_savings_eur.toLocaleString('ca-ES')}€/mes
               </span>
             </div>
           </div>
         </div>
 
-        {/* ==================== SECCIÓ 4: TAMBÉ ENS HAS DEMANAT (P5) ==================== */}
-        {audit.also_requested?.show && audit.also_requested.solution && (
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-500/15">
-                <Sparkles className="h-5 w-5 text-purple-400" />
-              </div>
-              <div>
-                <h2 className="text-xl font-bold text-slate-300">💡 També ens has demanat</h2>
-                <p className="text-sm text-muted-foreground italic">
-                  &quot;{audit.also_requested.client_text}&quot;
-                </p>
-              </div>
-            </div>
-            
-            <Card className="glass-card border-2 border-purple-500/20">
-              <CardContent className="p-6">
-                <div className="flex justify-between items-start">
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-slate-200 mb-2">
-                      {audit.also_requested.solution.name}
-                    </h3>
-                    {audit.also_requested.solution.how_it_works && (
-                      <p className="text-sm text-muted-foreground mb-3">
-                        {audit.also_requested.solution.how_it_works}
-                      </p>
-                    )}
-                  </div>
-                  <div className="text-right ml-4">
-                    <span className="text-2xl font-bold text-purple-400">
-                      {audit.also_requested.solution.monthly_savings_eur.toLocaleString('ca-ES')}€
-                    </span>
-                    <span className="text-sm text-muted-foreground">/mes</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        )}
-
-        {/* ==================== SECCIÓ 5: ALTRES OPORTUNITATS (Bonus condicional) ==================== */}
-        {audit.bonus_opportunities?.show && audit.bonus_opportunities.solutions?.length > 0 && (
+        {/* ==================== SECCIÓ 4: TAMBÉ ET PODRIEN INTERESSAR ==================== */}
+        {audit.bonus_opportunities && audit.bonus_opportunities.length > 0 && (
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-6">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-700/50">
                 <TrendingUp className="h-5 w-5 text-slate-400" />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-slate-300">💫 Altres oportunitats</h2>
+                <h2 className="text-xl font-bold text-slate-300">També et podrien interessar</h2>
                 <p className="text-sm text-muted-foreground">
-                  {audit.bonus_opportunities.reason || `Populars en empreses de ${audit.company_summary.sector_name}`}
+                  Populars en empreses de {audit.company_summary.sector_name}
                 </p>
               </div>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {audit.bonus_opportunities.solutions.map((bonus) => (
+              {audit.bonus_opportunities.map((bonus) => (
                 <Card key={bonus.solution_id} className="glass-card border border-slate-700/30 hover:border-slate-600/50 transition-colors">
                   <CardContent className="p-4">
                     <div className="flex justify-between items-center">
@@ -329,8 +289,48 @@ export default function CompletePage() {
                 </Card>
               ))}
             </div>
+            
+            {/* Potencial addicional */}
+            <div className="mt-4 p-3 rounded-lg bg-slate-800/30 text-center">
+              <span className="text-sm text-muted-foreground">
+                Potencial addicional:{' '}
+                <span className="text-emerald-400 font-semibold">
+                  +{audit.impact_summary.bonus_savings_eur.toLocaleString('ca-ES')}€/mes
+                </span>
+              </span>
+            </div>
           </div>
         )}
+
+        {/* ==================== SECCIÓ 5: LA TEVA SITUACIÓ ACTUAL ==================== */}
+        <Card className="glass-card border-2 border-slate-700/30 mb-8">
+          <CardHeader>
+            <CardTitle className="text-xl text-slate-300">
+              La teva situació actual
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground mb-4">
+              {audit.current_situation.summary}
+            </p>
+            
+            <div className="space-y-3">
+              {audit.current_situation.areas.map((area, index) => (
+                <div 
+                  key={index} 
+                  className="p-3 rounded-lg bg-slate-800/30 border-l-4 border-slate-600"
+                >
+                  <h4 className="font-medium text-slate-300 mb-1">
+                    📊 {area.title}
+                  </h4>
+                  <p className="text-sm text-muted-foreground">
+                    {area.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
 
         {/* ==================== SECCIÓ 6: JUSTIFICACIÓ ==================== */}
         <Card className="glass-card border border-emerald-500/20 mb-8">
