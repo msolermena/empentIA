@@ -1,20 +1,39 @@
-// API Client per empentIA Backend
+/**
+ * API Client per empentIA Backend v5.0
+ * =====================================
+ * 
+ * Nou flux:
+ * - P1: Mida + Volum + WOW
+ * - P2: Eines per àmbit
+ * - P3: Oportunitats + Estats
+ * - P4: Quantificació
+ * - P5: Text lliure (opcional)
+ */
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://empentia-backend-production.up.railway.app';
 
 // ========================================
-// TIPUS REAL DEL BACKEND
+// TIPUS v5.0
 // ========================================
 
 export interface ScrapeResponse {
   success: boolean;
   company_id: string;
   pre_research: {
-    name: string;
-    sector: string;
-    subsector?: string;
-    tech_stack?: string[];
-    estimated_size?: string;
-    insights?: string;
+    sector_id: string;
+    sector_name: string;
+    nom_empresa: string;
+    url: string;
+    insights: {
+      te_botiga_online: boolean;
+      te_formulari_contacte: boolean;
+      te_chat: boolean;
+      te_blog: boolean;
+      te_area_clients: boolean;
+      xarxes_socials: string[];
+      eines_detectades: string[];
+    };
+    observacions: string;
   };
   error?: string;
 }
@@ -23,69 +42,171 @@ export interface StartAuditResponse {
   success: boolean;
   audit_id: string;
   status: string;
+  total_questions: number;
   error?: string;
 }
 
-export interface Question {
-  question_text: string;
-  type: "text" | "radio" | "textarea" | "checkbox" | "multi_quantify";  // v4.0: afegit multi_quantify
-  options?: string[];
-  items?: {  // v4.0: per multi_quantify (P4)
-    pain_point: string;
-    options: string[];
-  }[];
-  context?: string;
-  help_text?: string;  // v2.0: text d'ajuda opcional
-  question_number?: number;
-  total_questions?: number;
-  options_metadata?: any[];  // v4.0: metadata interna
+// Opcions d'eines per un àmbit
+export interface AmbitEines {
+  id: string;
+  nom: string;
+  icona: string;
+  multi_select: boolean;
+  options: Array<{ id: string; label: string }>;
 }
+
+// Oportunitat mostrada a P3
+export interface Oportunitat {
+  id: string;
+  index: number;
+  text: string;
+  estimacio_hores: number;
+}
+
+// Estat d'una oportunitat
+export interface EstatOpcio {
+  id: string;
+  label: string;
+  icona: string;
+}
+
+// Question P1
+export interface QuestionP1 {
+  success: boolean;
+  number: 1;
+  type: 'p1_wow_mida_volum';
+  title: string;
+  wow_text: string;
+  mida: {
+    label: string;
+    type: 'radio';
+    options: Array<{ id: string; label: string }>;
+  };
+  volum: {
+    label: string;
+    type: 'number';
+    placeholder: string;
+    min: number;
+    max: number;
+  };
+  metadata: {
+    sector_id: string;
+    sector_name: string;
+    terme_volum: string;
+  };
+}
+
+// Question P2
+export interface QuestionP2 {
+  success: boolean;
+  number: 2;
+  type: 'p2_eines';
+  title: string;
+  subtitle: string;
+  ambits: AmbitEines[];
+  metadata: {
+    sector_id: string;
+    total_ambits: number;
+  };
+}
+
+// Question P3
+export interface QuestionP3 {
+  success: boolean;
+  number: 3;
+  type: 'p3_oportunitats';
+  title: string;
+  subtitle: string;
+  oportunitats: Oportunitat[];
+  estats: EstatOpcio[];
+  prioritat: {
+    label: string;
+    type: 'dropdown';
+    placeholder: string;
+  };
+  metadata: {
+    total_oportunitats: number;
+  };
+}
+
+// Question P4
+export interface QuestionP4 {
+  success: boolean;
+  number: 4;
+  type: 'p4_quantificacio';
+  title: string;
+  subtitle: string;
+  oportunitats: Array<{
+    id: string;
+    text: string;
+    estimacio_preseleccionada: string;
+    estat: string;
+  }>;
+  opcions_temps: Array<{ id: string; label: string }>;
+  metadata: {
+    total_a_quantificar: number;
+  };
+}
+
+// Question P5
+export interface QuestionP5 {
+  success: boolean;
+  number: 5;
+  type: 'p5_text_lliure';
+  title: string;
+  subtitle: string;
+  input: {
+    type: 'textarea';
+    placeholder: string;
+    maxLength: number;
+    optional: boolean;
+  };
+  skip_text: string;
+  metadata: {
+    is_optional: boolean;
+  };
+}
+
+export type QuestionV5 = QuestionP1 | QuestionP2 | QuestionP3 | QuestionP4 | QuestionP5;
 
 export interface SaveAnswerResponse {
   success: boolean;
   conversation_id: string;
+  is_last_question: boolean;
   error?: string;
+}
+
+// Informe v5.0
+export interface OportunitatInforme {
+  nom: string;
+  descripcio: string;
+  benefici: string;
+  hores_setmana: number;
+  euros_mes: number;
+  estat_actual: 'manual' | 'no_fem';
+  es_prioritaria: boolean;
+}
+
+export interface InformeV5 {
+  company_summary: string;
+  oportunitats: OportunitatInforme[];
+  impacte_total: {
+    hores_setmana: number;
+    euros_mes: number;
+    percentatge_temps: number;
+  };
+  recomanacio: string;
+  oportunitats_adicionals: Array<{
+    nom: string;
+    descripcio_breu: string;
+  }>;
+  nota_p5: string | null;
 }
 
 export interface GenerateAuditResponse {
   success: boolean;
   audit_id: string;
-  audit: {
-    diagnosis: {
-      main_problems: Array<{
-        title: string;
-        description: string;
-        impact: string;
-        severity: "high" | "medium" | "low";
-      }>;
-      overall_assessment: string;
-    };
-    quick_wins: Array<{
-      title: string;
-      description: string;
-      implementation_steps: string[];
-      estimated_time: string;
-      hours_saved_weekly: number;
-      monthly_savings_eur: number;
-      difficulty: "easy" | "medium" | "hard";
-    }>;
-    roi_estimation: {
-      total_hours_wasted_weekly: number;
-      hourly_cost_eur: number;
-      weekly_waste_eur: number;
-      monthly_waste_eur: number;
-      potential_hours_saved: number;
-      monthly_savings_eur: number;
-      automation_potential_percent: number;
-    };
-    tier_recommendation: {
-      tier_name: "Essencial" | "Professional" | "Enterprise";
-      monthly_price_eur: number;
-      rationale: string;
-      included_automations: string[];
-    };
-  };
-  pdf_url?: string;
+  audit: InformeV5;
   error?: string;
 }
 
@@ -96,10 +217,7 @@ export interface GetAuditResponse {
     company_id: string;
     status: string;
     email?: string;
-    diagnosis?: any;
-    quick_wins?: any;
-    roi_estimation?: any;
-    tier_recommendation?: any;
+    audit_result?: InformeV5;
     created_at: string;
     completed_at?: string;
   };
@@ -111,116 +229,74 @@ export interface GetAuditResponse {
 // ========================================
 
 /**
- * POST /scrape
- * Escaneja la web de l'empresa i crea company amb pre-research
+ * POST /scrape - Escaneja la web i crea company
  */
 export async function scrapeCompany(companyUrl: string): Promise<ScrapeResponse> {
   const response = await fetch(`${API_URL}/scrape`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      url: companyUrl,
-    }),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ url: companyUrl }),
   });
 
-  if (!response.ok) {
-    const error = await response.json().catch(() => ({ 
-      success: false,
-      error: 'Error de connexió amb el servidor' 
-    }));
-    throw new Error(error.error || `Error ${response.status}`);
-  }
-
   const data = await response.json();
-  
   if (!data.success) {
     throw new Error(data.error || 'Error fent scraping de la web');
   }
-
   return data;
 }
 
 /**
- * POST /audit/start
- * Inicia una nova auditoria amb el company_id
+ * POST /audit/start - Inicia auditoria
  */
 export async function startAudit(companyId: string): Promise<StartAuditResponse> {
   const response = await fetch(`${API_URL}/audit/start`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      company_id: companyId,
-    }),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ company_id: companyId }),
   });
 
-  if (!response.ok) {
-    const error = await response.json().catch(() => ({ 
-      success: false,
-      error: 'Error de connexió amb el servidor' 
-    }));
-    throw new Error(error.error || `Error ${response.status}`);
-  }
-
   const data = await response.json();
-  
   if (!data.success) {
     throw new Error(data.error || 'Error iniciant auditoria');
   }
-
   return data;
 }
 
 /**
- * POST /audit/next-question
- * Genera la següent pregunta dinàmica amb context
+ * POST /audit/next-question - Obté següent pregunta
  */
 export async function getNextQuestion(
   auditId: string,
   questionNumber: number
-): Promise<Question> {
+): Promise<QuestionV5> {
   const response = await fetch(`${API_URL}/audit/next-question`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       audit_id: auditId,
       question_number: questionNumber,
     }),
   });
 
-  if (!response.ok) {
-    throw new Error(`Error carregant pregunta ${questionNumber}`);
-  }
-
   const data = await response.json();
-  
-  if (data.error) {
-    throw new Error(data.error);
+  if (data.error || !data.success) {
+    throw new Error(data.error || `Error carregant pregunta ${questionNumber}`);
   }
-
   return data;
 }
 
 /**
- * POST /audit/answer
- * Guarda la resposta d'una pregunta
+ * POST /audit/answer - Guarda resposta
  */
 export async function saveAnswer(
   auditId: string,
   questionNumber: number,
-  questionData: Question,
+  questionData: any,
   answer: string
 ): Promise<SaveAnswerResponse> {
   const response = await fetch(`${API_URL}/audit/answer`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       audit_id: auditId,
       question_number: questionNumber,
@@ -229,98 +305,61 @@ export async function saveAnswer(
     }),
   });
 
-  if (!response.ok) {
-    const error = await response.json().catch(() => ({ 
-      success: false,
-      error: 'Error guardant resposta' 
-    }));
-    throw new Error(error.error || `Error ${response.status}`);
-  }
-
   const data = await response.json();
-  
   if (!data.success) {
     throw new Error(data.error || 'Error guardant resposta');
   }
-
   return data;
 }
 
 /**
- * POST /audit/generate
- * Genera l'audit final amb diagnosis, quick wins, ROI
+ * POST /audit/generate - Genera informe final
  */
 export async function generateAudit(
   auditId: string,
-  email: string
+  email?: string
 ): Promise<GenerateAuditResponse> {
   const response = await fetch(`${API_URL}/audit/generate`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       audit_id: auditId,
-      email: email,
+      email: email || null,
     }),
   });
 
-  if (!response.ok) {
-    const error = await response.json().catch(() => ({ 
-      success: false,
-      error: 'Error generant auditoria' 
-    }));
-    throw new Error(error.error || `Error ${response.status}`);
-  }
-
   const data = await response.json();
-  
   if (!data.success) {
     throw new Error(data.error || 'Error generant auditoria');
   }
-
   return data;
 }
 
 /**
- * GET /audit/{audit_id}
- * Obté l'auditoria completa (per pàgina /complete)
+ * GET /audit/{id} - Obté auditoria completa
  */
 export async function getAudit(auditId: string): Promise<GetAuditResponse> {
   const response = await fetch(`${API_URL}/audit/${auditId}`, {
     method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: { 'Content-Type': 'application/json' },
   });
 
-  if (!response.ok) {
-    const error = await response.json().catch(() => ({ 
-      success: false,
-      error: 'Error obtenint auditoria' 
-    }));
-    throw new Error(error.error || `Error ${response.status}`);
-  }
-
   const data = await response.json();
-  
   if (!data.success) {
     throw new Error(data.error || 'Auditoria no trobada');
   }
-
   return data;
 }
 
 /**
- * HELPER: Scrape + Start Audit en una sola funció
- * Simplifica el codi del frontend
+ * HELPER: Scrape + Start en una sola funció
  */
-export async function scrapeAndStartAudit(companyUrl: string): Promise<StartAuditResponse> {
-  // Pas 1: Scraping (crea company amb pre-research)
+export async function scrapeAndStartAudit(companyUrl: string): Promise<StartAuditResponse & { pre_research: ScrapeResponse['pre_research'] }> {
   const scrapeResult = await scrapeCompany(companyUrl);
-  
-  // Pas 2: Iniciar auditoria amb el company_id
   const auditResult = await startAudit(scrapeResult.company_id);
   
-  return auditResult;
+  return {
+    ...auditResult,
+    pre_research: scrapeResult.pre_research,
+  };
 }
