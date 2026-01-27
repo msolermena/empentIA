@@ -82,7 +82,7 @@ export default function QuestionsPage() {
       const data = await getNextQuestion(auditId, qNum);
       
       // 🆕 Si P4 ve amb skip: true, saltar directament a P5
-      if (qNum === 4 && data.skip) {
+      if (qNum === 4 && 'skip' in data && data.skip) {
         console.log("⏭️ P4 skip - no hi ha manuals, saltant a P5");
         setCurrentQuestion(5);
         return;
