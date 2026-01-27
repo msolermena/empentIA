@@ -45,12 +45,12 @@ export default function AnalyzingPage() {
       return;
     }
 
-    // Animació de progrés - MÉS LENTA (8 segons més per arribar al 95%)
+    // Animació de progrés - 30% MÉS RÀPID
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 95) return prev; // No arribem a 100% fins que API respongui
-        // Més lent: incrementem cada 200ms en lloc de 100ms
-        return prev + 0.5;
+        // 30% més ràpid: incrementem 0.7 cada 200ms (abans 0.5)
+        return prev + 0.7;
       });
     }, 200);
 
@@ -177,12 +177,13 @@ export default function AnalyzingPage() {
               ))}
             </div>
 
-            {/* Fun Fact */}
+            {/* Fun Fact - Font: Sage Research */}
             <div className="mt-8 rounded-xl bg-slate-800/30 p-4 text-center">
               <p className="text-sm text-slate-300">
-                💡 <strong>Sabies que</strong> les empreses catalanes perden una mitjana de{" "}
-                <strong className="text-primary-400">15 hores setmanals</strong> en tasques manuals que es podrien automatitzar?
+                💡 Les pimes dediquen de mitjana un{" "}
+                <strong className="text-primary-400">17% del temps</strong> a tasques administratives automatitzables.
               </p>
+              <p className="text-xs text-slate-500 mt-1">Font: Sage Research</p>
             </div>
           </div>
 

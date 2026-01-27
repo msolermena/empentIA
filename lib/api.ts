@@ -86,6 +86,7 @@ export interface QuestionP1 {
     label: string;
     type: 'number';
     placeholder: string;
+    hint?: string;  // 🆕 Clarificació del volum
     min: number;
     max: number;
   };
@@ -93,6 +94,7 @@ export interface QuestionP1 {
     sector_id: string;
     sector_name: string;
     terme_volum: string;
+    context_volum?: string;
   };
 }
 

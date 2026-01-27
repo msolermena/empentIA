@@ -232,6 +232,85 @@ export default function CompletePage() {
           </CardContent>
         </Card>
 
+        {/* ==================== PLANS ==================== */}
+        <div className="mb-10">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-500/15">
+              <Sparkles className="h-5 w-5 text-primary-400" />
+            </div>
+            <h2 className="text-2xl font-bold text-slate-200">
+              Tria el pla que s'adapti a tu
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            {/* Pla Arrencada */}
+            <Card className="glass-card border border-slate-700/50 hover:border-primary-500/30 transition-all">
+              <CardContent className="p-6 text-center">
+                <div className="text-3xl mb-2">🚀</div>
+                <h3 className="text-lg font-bold text-slate-200 mb-1">Arrencada</h3>
+                <p className="text-2xl font-bold text-primary-400 mb-2">1 procés</p>
+                <p className="text-sm text-slate-400 mb-3">empentIA Suite</p>
+                <p className="text-xs text-slate-500">Ideal per provar i veure resultats ràpids</p>
+              </CardContent>
+            </Card>
+
+            {/* Pla Acceleració - Destacat */}
+            <Card className="glass-card border-2 border-primary-500/50 relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                Recomanat
+              </div>
+              <CardContent className="p-6 text-center">
+                <div className="text-3xl mb-2">⚡</div>
+                <h3 className="text-lg font-bold text-slate-200 mb-1">Acceleració</h3>
+                <p className="text-2xl font-bold text-primary-400 mb-2">3 processos</p>
+                <p className="text-sm text-slate-400 mb-3">empentIA Suite Pro</p>
+                <p className="text-xs text-slate-500">Impacte real en operacions</p>
+              </CardContent>
+            </Card>
+
+            {/* Pla Transformació */}
+            <Card className="glass-card border border-slate-700/50 hover:border-primary-500/30 transition-all">
+              <CardContent className="p-6 text-center">
+                <div className="text-3xl mb-2">🏆</div>
+                <h3 className="text-lg font-bold text-slate-200 mb-1">Transformació</h3>
+                <p className="text-2xl font-bold text-primary-400 mb-2">5+ processos</p>
+                <p className="text-sm text-slate-400 mb-3">empentIA Suite Premium</p>
+                <p className="text-xs text-slate-500">Canvi complet de processos</p>
+              </CardContent>
+            </Card>
+          </div>
+
+          <p className="text-center text-sm text-slate-500">
+            Tots els plans inclouen: implementació, suport i manteniment
+          </p>
+        </div>
+
+        {/* ==================== EMPENTIA SUITE ==================== */}
+        <Card className="glass-card border border-purple-500/30 mb-10 overflow-hidden">
+          <div className="bg-gradient-to-r from-purple-500/10 to-primary-500/10 p-6">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-500/20">
+                <span className="text-xl">🤖</span>
+              </div>
+              <h3 className="text-xl font-bold text-slate-200">
+                Inclòs: empentIA Suite
+              </h3>
+            </div>
+            <p className="text-slate-300 mb-4">
+              El teu portal amb automatitzacions actives, mètriques en temps real i assistents IA disponibles 24/7.
+            </p>
+            <Button 
+              variant="outline" 
+              size="sm"
+              className="border-purple-500/50 text-purple-300 hover:bg-purple-500/10"
+              onClick={() => window.open('/suite', '_blank')}
+            >
+              Descobreix la Suite →
+            </Button>
+          </div>
+        </Card>
+
         {/* ==================== CTA ==================== */}
         <Card className="glass-card border-2 border-emerald-500/30">
           <CardContent className="p-8 text-center">
@@ -278,6 +357,11 @@ function OportunitatCard({
   const isManual = oportunitat.estat_actual === 'manual';
   const isNoFem = oportunitat.estat_actual === 'no_fem';
 
+  // Calendly amb context (de moment link genèric)
+  const handleSaberMes = () => {
+    window.open('https://calendly.com/empentia/15min', '_blank');
+  };
+
   return (
     <Card className={`glass-card border-2 ${oportunitat.es_prioritaria ? 'border-emerald-500/40' : 'border-slate-700/50'} overflow-hidden`}>
       {oportunitat.es_prioritaria && (
@@ -299,10 +383,18 @@ function OportunitatCard({
               {oportunitat.descripcio}
             </p>
             
-            <p className="text-emerald-400 text-sm flex items-center gap-1">
+            <p className="text-emerald-400 text-sm flex items-center gap-1 mb-3">
               <CheckCircle2 className="h-4 w-4" />
               {oportunitat.benefici}
             </p>
+
+            {/* Botó saber-ne més */}
+            <button
+              onClick={handleSaberMes}
+              className="text-sm text-primary-400 hover:text-primary-300 flex items-center gap-1 transition-colors"
+            >
+              Saber-ne més →
+            </button>
           </div>
 
           {/* Mètriques - diferent segons tipus */}
@@ -324,7 +416,7 @@ function OportunitatCard({
               </p>
             </div>
             
-            {/* 🆕 Badge d'estat a sota-dreta */}
+            {/* Badge d'estat a sota-dreta */}
             <div className="mt-2">
               <span className={`text-xs px-2 py-1 rounded-full ${
                 isManual 

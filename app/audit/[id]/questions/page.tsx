@@ -489,6 +489,11 @@ function RenderP1({
           />
           <span className="text-slate-400 text-sm">al mes</span>
         </div>
+        {question.volum.hint && (
+          <p className="mt-2 text-xs text-slate-500">
+            💡 {question.volum.hint}
+          </p>
+        )}
       </div>
     </div>
   );

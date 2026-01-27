@@ -92,9 +92,9 @@ export default function EmailPage() {
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-500/15">
                     <FileText className="h-6 w-6 text-primary-400" />
                   </div>
-                  <h3 className="font-semibold text-slate-200">PDF Complet</h3>
+                  <h3 className="font-semibold text-slate-200">Informe Complet</h3>
                   <p className="text-sm text-muted-foreground">
-                    4-5 pàgines amb diagnòstic detallat
+                    Oportunitats i recomanacions personalitzades
                   </p>
                 </div>
 
@@ -104,7 +104,7 @@ export default function EmailPage() {
                   </div>
                   <h3 className="font-semibold text-slate-200">ROI Calculat</h3>
                   <p className="text-sm text-muted-foreground">
-                    Estalvi estimat per a <strong className="text-slate-400">la teva empresa</strong> en hores i euros
+                    Estalvi estimat en hores i euros
                   </p>
                 </div>
 
@@ -112,9 +112,9 @@ export default function EmailPage() {
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-500/15">
                     <Zap className="h-6 w-6 text-primary-400" />
                   </div>
-                  <h3 className="font-semibold text-slate-200">Quick Wins</h3>
+                  <h3 className="font-semibold text-slate-200">Pla d&apos;Acció</h3>
                   <p className="text-sm text-muted-foreground">
-                    3 accions immediates per començar
+                    Passos concrets per començar
                   </p>
                 </div>
               </div>
