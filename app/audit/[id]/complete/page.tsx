@@ -106,43 +106,47 @@ export default function CompletePage() {
         {/* ==================== IMPACTE TOTAL ==================== */}
         <Card className="glass-card border-2 border-emerald-500/30 mb-10">
           <CardContent className="p-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-              {/* Hores */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
+              {/* Hores estalviades */}
               <div>
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <Clock className="h-5 w-5 text-emerald-400" />
-                  <span className="text-sm text-slate-400 uppercase tracking-wide">Hores/Setmana</span>
+                  <span className="text-sm text-slate-400 uppercase tracking-wide">Hores Estalviades</span>
                 </div>
                 <p className="text-4xl font-extrabold text-emerald-400">
                   {informe.impacte_total.hores_setmana}h
                 </p>
-                <p className="text-sm text-slate-500">que podries estalviar</p>
+                <p className="text-sm text-slate-500">per setmana</p>
               </div>
 
-              {/* Euros */}
-              <div className="md:border-x border-slate-700/50 md:px-6">
+              {/* Euros totals */}
+              <div className="md:border-l border-slate-700/50 md:pl-6">
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <Euro className="h-5 w-5 text-emerald-400" />
-                  <span className="text-sm text-slate-400 uppercase tracking-wide">Euros/Mes</span>
+                  <span className="text-sm text-slate-400 uppercase tracking-wide">Impacte Total</span>
                 </div>
                 <p className="text-4xl font-extrabold text-emerald-400">
                   {informe.impacte_total.euros_mes.toLocaleString('ca-ES')}€
                 </p>
-                <p className="text-sm text-slate-500">en temps recuperat</p>
-              </div>
-
-              {/* Percentatge */}
-              <div>
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <TrendingUp className="h-5 w-5 text-emerald-400" />
-                  <span className="text-sm text-slate-400 uppercase tracking-wide">Temps Alliberat</span>
-                </div>
-                <p className="text-4xl font-extrabold text-emerald-400">
-                  {informe.impacte_total.percentatge_temps}%
-                </p>
-                <p className="text-sm text-slate-500">de la vostra jornada</p>
+                <p className="text-sm text-slate-500">al mes</p>
               </div>
             </div>
+            
+            {/* 🆕 Desglossat si existeix */}
+            {informe.impacte_total.desglossat && (
+              <div className="mt-6 pt-4 border-t border-slate-700/50 flex flex-wrap justify-center gap-6 text-sm text-slate-400">
+                {informe.impacte_total.desglossat.estalvi_euros > 0 && (
+                  <span>
+                    💡 {informe.impacte_total.desglossat.estalvi_euros.toLocaleString('ca-ES')}€ en temps estalviat
+                  </span>
+                )}
+                {informe.impacte_total.desglossat.valor_nou_euros > 0 && (
+                  <span>
+                    🚀 {informe.impacte_total.desglossat.valor_nou_euros.toLocaleString('ca-ES')}€ en noves oportunitats
+                  </span>
+                )}
+              </div>
+            )}
           </CardContent>
         </Card>
 
@@ -271,12 +275,8 @@ function OportunitatCard({
   oportunitat: OportunitatInforme; 
   index: number;
 }) {
-  const estatColors = {
-    manual: { bg: 'bg-amber-500/10', border: 'border-amber-500/30', text: 'text-amber-400', label: '🟡 Manual' },
-    no_fem: { bg: 'bg-red-500/10', border: 'border-red-500/30', text: 'text-red-400', label: '🔴 No ho fem' }
-  };
-  
-  const colors = estatColors[oportunitat.estat_actual] || estatColors.manual;
+  const isManual = oportunitat.estat_actual === 'manual';
+  const isNoFem = oportunitat.estat_actual === 'no_fem';
 
   return (
     <Card className={`glass-card border-2 ${oportunitat.es_prioritaria ? 'border-emerald-500/40' : 'border-slate-700/50'} overflow-hidden`}>
@@ -291,12 +291,6 @@ function OportunitatCard({
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
           {/* Info principal */}
           <div className="flex-1">
-            <div className="flex items-center gap-2 mb-2">
-              <span className={`text-xs px-2 py-0.5 rounded-full ${colors.bg} ${colors.border} border ${colors.text}`}>
-                {colors.label}
-              </span>
-            </div>
-            
             <h3 className="text-lg font-semibold text-slate-200 mb-2">
               {oportunitat.nom}
             </h3>
@@ -311,19 +305,34 @@ function OportunitatCard({
             </p>
           </div>
 
-          {/* Mètriques */}
-          <div className="flex md:flex-col gap-4 md:gap-2 md:text-right md:min-w-[120px]">
-            <div>
-              <p className="text-2xl font-bold text-emerald-400">
-                {oportunitat.hores_setmana}h
-              </p>
-              <p className="text-xs text-slate-500">setmana</p>
-            </div>
+          {/* Mètriques - diferent segons tipus */}
+          <div className="flex md:flex-col gap-4 md:gap-2 md:text-right md:min-w-[140px]">
+            {isManual && oportunitat.hores_setmana > 0 && (
+              <div>
+                <p className="text-2xl font-bold text-emerald-400">
+                  {oportunitat.hores_setmana}h
+                </p>
+                <p className="text-xs text-slate-500">estalviades/set.</p>
+              </div>
+            )}
             <div>
               <p className="text-xl font-semibold text-slate-300">
                 {oportunitat.euros_mes.toLocaleString('ca-ES')}€
               </p>
-              <p className="text-xs text-slate-500">estalvi/mes</p>
+              <p className="text-xs text-slate-500">
+                {isManual ? 'estalvi/mes' : 'valor/mes'}
+              </p>
+            </div>
+            
+            {/* 🆕 Badge d'estat a sota-dreta */}
+            <div className="mt-2">
+              <span className={`text-xs px-2 py-1 rounded-full ${
+                isManual 
+                  ? 'bg-amber-500/10 border border-amber-500/30 text-amber-400' 
+                  : 'bg-red-500/10 border border-red-500/30 text-red-400'
+              }`}>
+                {isManual ? '🟡 Manual' : '🔴 Pendent'}
+              </span>
             </div>
           </div>
         </div>

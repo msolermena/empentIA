@@ -136,6 +136,7 @@ export interface QuestionP4 {
   type: 'p4_quantificacio';
   title: string;
   subtitle: string;
+  skip?: boolean;  // 🆕 Si true, saltar P4
   oportunitats: Array<{
     id: string;
     text: string;
@@ -145,6 +146,8 @@ export interface QuestionP4 {
   opcions_temps: Array<{ id: string; label: string }>;
   metadata: {
     total_a_quantificar: number;
+    total_no_fem?: number;
+    motiu_skip?: string;
   };
 }
 
@@ -176,7 +179,7 @@ export interface SaveAnswerResponse {
   error?: string;
 }
 
-// Informe v5.0
+// Informe v5.1
 export interface OportunitatInforme {
   nom: string;
   descripcio: string;
@@ -184,6 +187,7 @@ export interface OportunitatInforme {
   hores_setmana: number;
   euros_mes: number;
   estat_actual: 'manual' | 'no_fem';
+  tipus_roi?: 'estalvi' | 'valor_nou';  // 🆕
   es_prioritaria: boolean;
 }
 
@@ -193,7 +197,11 @@ export interface InformeV5 {
   impacte_total: {
     hores_setmana: number;
     euros_mes: number;
-    percentatge_temps: number;
+    desglossat?: {  // 🆕
+      estalvi_hores: number;
+      estalvi_euros: number;
+      valor_nou_euros: number;
+    };
   };
   recomanacio: string;
   oportunitats_adicionals: Array<{

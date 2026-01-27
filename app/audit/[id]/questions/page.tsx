@@ -80,6 +80,14 @@ export default function QuestionsPage() {
 
     try {
       const data = await getNextQuestion(auditId, qNum);
+      
+      // 🆕 Si P4 ve amb skip: true, saltar directament a P5
+      if (qNum === 4 && data.skip) {
+        console.log("⏭️ P4 skip - no hi ha manuals, saltant a P5");
+        setCurrentQuestion(5);
+        return;
+      }
+      
       setQuestion(data);
       
       // Restaurar respostes si existeixen
@@ -155,7 +163,17 @@ export default function QuestionsPage() {
       case 2:
         return einesSelected;
       case 3:
-        return { estats: estatsOportunitats, prioritat: prioritatSelected };
+        // 🆕 Completar estats amb no_aplica abans de retornar
+        const q3 = question as QuestionP3;
+        const completedEstats = { ...estatsOportunitats };
+        if (q3) {
+          q3.oportunitats.forEach(op => {
+            if (!completedEstats[op.id]) {
+              completedEstats[op.id] = "no_aplica";
+            }
+          });
+        }
+        return { estats: completedEstats, prioritat: prioritatSelected };
       case 4:
         return quantificacioSelected;
       case 5:
@@ -185,17 +203,28 @@ export default function QuestionsPage() {
         }
         return true;
       case 3:
-        // Tots els estats han d'estar marcats
+        // 🆕 Si no marca alguna oportunitat, assumim no_aplica
         const q3 = question as QuestionP3;
-        if (q3 && Object.keys(estatsOportunitats).length < q3.oportunitats.length) {
-          setError("Indica l'estat de totes les oportunitats");
-          return false;
+        if (q3) {
+          const completedEstats = { ...estatsOportunitats };
+          q3.oportunitats.forEach(op => {
+            if (!completedEstats[op.id]) {
+              completedEstats[op.id] = "no_aplica";
+            }
+          });
+          // Actualitzar estat amb els valors completats
+          setEstatsOportunitats(completedEstats);
         }
+        // Prioritat és opcional - sempre vàlid
         return true;
       case 4:
-        // Tots els temps han d'estar marcats
+        // 🆕 Si no hi ha oportunitats (cas edge), és vàlid
         const q4 = question as QuestionP4;
-        if (q4 && Object.keys(quantificacioSelected).length < q4.oportunitats.length) {
+        if (!q4 || q4.oportunitats.length === 0) {
+          return true;
+        }
+        // Tots els temps han d'estar marcats
+        if (Object.keys(quantificacioSelected).length < q4.oportunitats.length) {
           setError("Indica el temps per a cada oportunitat");
           return false;
         }
@@ -241,6 +270,18 @@ export default function QuestionsPage() {
     }
   };
 
+  // 🆕 Loading text segons pregunta
+  const getLoadingText = () => {
+    switch (currentQuestion) {
+      case 1: return "Analitzant el vostre negoci...";
+      case 2: return "Preparant eines...";
+      case 3: return "Personalitzant oportunitats...";
+      case 4: return "Generant quantificació...";
+      case 5: return "Preparant...";
+      default: return "Carregant...";
+    }
+  };
+
   // Loading inicial
   if (isLoading && !question) {
     return (
@@ -249,7 +290,7 @@ export default function QuestionsPage() {
           <div className="absolute inset-0 rounded-full bg-primary-500/20 blur-xl animate-pulse" />
           <Loader2 className="relative h-12 w-12 animate-spin text-primary-400" />
         </div>
-        <p className="text-muted-foreground animate-pulse">Preparant pregunta...</p>
+        <p className="text-muted-foreground animate-pulse">{getLoadingText()}</p>
       </div>
     );
   }
@@ -531,6 +572,15 @@ function RenderP2({
 // ============================================================
 // RENDER P3: Oportunitats + Estats + Prioritat
 // ============================================================
+
+// 🆕 Labels curts per als botons
+const estatLabelsShort: Record<string, string> = {
+  resolt: "Resolt",
+  manual: "Manual", 
+  no_fem: "Pendent",
+  no_aplica: "N/A"
+};
+
 function RenderP3({
   question,
   estatsOportunitats,
@@ -600,7 +650,7 @@ function RenderP3({
                     }`}
                   >
                     <span>{estat.icona}</span>
-                    <span>{estat.label.split(' ')[0]}</span>
+                    <span>{estatLabelsShort[estat.id] || estat.label.split(' ')[0]}</span>
                   </button>
                 );
               })}
@@ -609,11 +659,11 @@ function RenderP3({
         ))}
       </div>
 
-      {/* Prioritat dropdown */}
+      {/* Prioritat dropdown - ara opcional */}
       {oportuniatsPerPrioritat.length > 0 && (
         <div className="pt-4 border-t border-slate-800">
           <label className="block text-sm font-medium text-slate-300 mb-3">
-            {question.prioritat.label}
+            {question.prioritat.label} <span className="text-slate-500 font-normal">(opcional)</span>
           </label>
           <select
             value={prioritatSelected}
@@ -636,6 +686,16 @@ function RenderP3({
 // ============================================================
 // RENDER P4: Quantificació
 // ============================================================
+
+// 🆕 Labels curts per als temps
+const tempsLabelsShort: Record<string, string> = {
+  menys_5: "< 5 h/set.",
+  "5_10": "5-10 h/set.",
+  "10_20": "10-20 h/set.",
+  mes_20: "> 20 h/set.",
+  no_se: "No ho sé"
+};
+
 function RenderP4({
   question,
   quantificacioSelected,
@@ -682,7 +742,7 @@ function RenderP4({
                         : "border-slate-700 bg-slate-800/50 text-slate-400 hover:border-slate-600"
                     }`}
                   >
-                    {temps.label}
+                    {tempsLabelsShort[temps.id] || temps.label}
                   </button>
                 );
               })}
