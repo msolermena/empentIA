@@ -282,8 +282,8 @@ export default function QuestionsPage() {
     }
   };
 
-  // Loading inicial
-  if (isLoading && !question) {
+  // Loading inicial o durant transició
+  if (isLoading) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-background gap-4">
         <div className="relative">
