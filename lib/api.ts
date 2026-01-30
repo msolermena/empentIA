@@ -70,7 +70,14 @@ export interface EstatOpcio {
   icona: string;
 }
 
-// Question P1
+// 🆕 v6.0: Info detectada per P1
+export interface InfoDetectada {
+  tipus: string;
+  valor: string;
+  confianca: 'alta' | 'mitjana';
+}
+
+// Question P1 (v5 - fallback)
 export interface QuestionP1 {
   success: boolean;
   number: 1;
@@ -95,6 +102,27 @@ export interface QuestionP1 {
     sector_name: string;
     terme_volum: string;
     context_volum?: string;
+  };
+}
+
+// 🆕 v6.0: Question P1 Confirmació
+export interface QuestionP1Confirmacio {
+  success: boolean;
+  number: 1;
+  type: 'p1_confirmacio';
+  title: string;
+  subtitle: string;
+  info_detectada: InfoDetectada[];
+  correccions: {
+    label: string;
+    type: 'textarea';
+    placeholder: string;
+    required: boolean;
+  };
+  metadata: {
+    sector_id: string;
+    sector_name: string;
+    sistemes_detectats: string[];
   };
 }
 
@@ -172,7 +200,7 @@ export interface QuestionP5 {
   };
 }
 
-export type QuestionV5 = QuestionP1 | QuestionP2 | QuestionP3 | QuestionP4 | QuestionP5;
+export type QuestionV5 = QuestionP1 | QuestionP1Confirmacio | QuestionP2 | QuestionP3 | QuestionP4 | QuestionP5;
 
 export interface SaveAnswerResponse {
   success: boolean;

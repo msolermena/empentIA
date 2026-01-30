@@ -40,6 +40,9 @@ export default function AnalyzingPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    // 🆕 Scroll to top al carregar
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    
     if (!url) {
       router.push("/");
       return;

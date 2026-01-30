@@ -19,10 +19,12 @@ import {
   saveAnswer as saveAnswerAPI, 
   type QuestionV5,
   type QuestionP1,
+  type QuestionP1Confirmacio,
   type QuestionP2,
   type QuestionP3,
   type QuestionP4,
-  type QuestionP5
+  type QuestionP5,
+  type InfoDetectada
 } from "@/lib/api";
 
 const TOTAL_QUESTIONS = 5;
@@ -50,9 +52,12 @@ export default function QuestionsPage() {
   // Respostes guardades
   const [savedAnswers, setSavedAnswers] = useState<Record<number, any>>({});
 
-  // P1: Mida i volum
+  // P1: Mida i volum (v5 fallback)
   const [midaSelected, setMidaSelected] = useState<string>("");
   const [volumValue, setVolumValue] = useState<string>("");
+  
+  // P1: Confirmació (v6.0)
+  const [correccionsText, setCorreccionsText] = useState<string>("");
 
   // P2: Eines per àmbit
   const [einesSelected, setEinesSelected] = useState<Record<string, string | string[]>>({});
@@ -110,6 +115,7 @@ export default function QuestionsPage() {
       case 1:
         setMidaSelected("");
         setVolumValue("");
+        setCorreccionsText("");  // 🆕 v6.0
         break;
       case 2:
         setEinesSelected({});
@@ -137,8 +143,11 @@ export default function QuestionsPage() {
   const restoreAnswer = (qNum: number, answer: any) => {
     switch (qNum) {
       case 1:
+        // v5 fallback
         setMidaSelected(answer.mida || "");
         setVolumValue(answer.volum?.toString() || "");
+        // v6.0
+        setCorreccionsText(answer.correccions || "");
         break;
       case 2:
         setEinesSelected(answer || {});
@@ -159,6 +168,14 @@ export default function QuestionsPage() {
   const getCurrentAnswer = (): any => {
     switch (currentQuestion) {
       case 1:
+        // v6.0: Si és confirmació, retornar format diferent
+        if (question?.type === 'p1_confirmacio') {
+          return { 
+            confirmat: true, 
+            correccions: correccionsText || null 
+          };
+        }
+        // v5 fallback
         return { mida: midaSelected, volum: parseInt(volumValue) || 0 };
       case 2:
         return einesSelected;
@@ -186,6 +203,11 @@ export default function QuestionsPage() {
   const validateAnswer = (): boolean => {
     switch (currentQuestion) {
       case 1:
+        // v6.0: Confirmació sempre vàlida (correccions és opcional)
+        if (question?.type === 'p1_confirmacio') {
+          return true;
+        }
+        // v5 fallback
         if (!midaSelected) {
           setError("Selecciona la mida del vostre equip");
           return false;
@@ -338,6 +360,12 @@ export default function QuestionsPage() {
               <div className="flex items-center justify-center py-12">
                 <Loader2 className="h-8 w-8 animate-spin text-primary-400" />
               </div>
+            ) : question?.type === 'p1_confirmacio' ? (
+              <RenderP1Confirmacio
+                question={question as QuestionP1Confirmacio}
+                correccionsText={correccionsText}
+                setCorreccionsText={setCorreccionsText}
+              />
             ) : question?.type === 'p1_wow_mida_volum' ? (
               <RenderP1 
                 question={question as QuestionP1}
@@ -423,6 +451,117 @@ export default function QuestionsPage() {
 
 // ============================================================
 // RENDER P1: WOW + Mida + Volum
+// ============================================================
+// ============================================================
+// RENDER P1 CONFIRMACIÓ (v6.0): Info detectada amb Jina
+// ============================================================
+
+// Mapa d'icones per tipus d'info detectada
+const infoIcons: Record<string, string> = {
+  sector: "🏢",
+  model_negoci: "💼",
+  volum_explicit: "📊",
+  escala_geo: "📍",
+  especialitzacio: "🎯",
+  equip: "👥",
+  ecommerce: "🛒",
+  sistema_existent: "⚙️",
+};
+
+// Mapa de labels per tipus
+const infoLabels: Record<string, string> = {
+  sector: "Sector",
+  model_negoci: "Model de negoci",
+  volum_explicit: "Escala",
+  escala_geo: "Cobertura",
+  especialitzacio: "Especialització",
+  equip: "Equip",
+  ecommerce: "E-commerce",
+  sistema_existent: "Sistemes actius",
+};
+
+function RenderP1Confirmacio({
+  question,
+  correccionsText,
+  setCorreccionsText,
+}: {
+  question: QuestionP1Confirmacio;
+  correccionsText: string;
+  setCorreccionsText: (v: string) => void;
+}) {
+  return (
+    <div className="space-y-6">
+      {/* Títol i subtítol */}
+      <div>
+        <h2 className="text-xl font-semibold text-slate-200 mb-2 flex items-center gap-2">
+          <Sparkles className="h-5 w-5 text-primary-400" />
+          {question.title}
+        </h2>
+        <p className="text-sm text-muted-foreground">{question.subtitle}</p>
+      </div>
+
+      {/* Bullets d'info detectada */}
+      <div className="space-y-3">
+        {question.info_detectada.map((info, index) => (
+          <div
+            key={index}
+            className={`flex items-start gap-3 p-3 rounded-lg border ${
+              info.confianca === 'alta'
+                ? 'border-emerald-500/30 bg-emerald-500/5'
+                : 'border-slate-700/50 bg-slate-800/30'
+            }`}
+          >
+            <span className="text-lg flex-shrink-0">
+              {infoIcons[info.tipus] || "📌"}
+            </span>
+            <div className="flex-1 min-w-0">
+              <span className="text-xs text-slate-500 uppercase tracking-wide">
+                {infoLabels[info.tipus] || info.tipus}
+              </span>
+              <p className="text-slate-200 text-sm mt-0.5 leading-relaxed">
+                {info.valor}
+              </p>
+            </div>
+            {info.confianca === 'alta' && (
+              <CheckCircle2 className="h-4 w-4 text-emerald-500 flex-shrink-0 mt-1" />
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Si no hi ha info detectada */}
+      {question.info_detectada.length === 0 && (
+        <div className="p-4 rounded-lg border border-amber-500/30 bg-amber-500/5">
+          <p className="text-amber-300 text-sm">
+            No hem pogut detectar informació detallada de la vostra web. 
+            Podeu afegir-la al camp de correccions si voleu.
+          </p>
+        </div>
+      )}
+
+      {/* Separador */}
+      <div className="border-t border-slate-800 pt-4">
+        {/* Camp de correccions (opcional) */}
+        <label className="block text-sm font-medium text-slate-300 mb-2">
+          {question.correccions.label} <span className="text-slate-500 font-normal">(opcional)</span>
+        </label>
+        <textarea
+          value={correccionsText}
+          onChange={(e) => setCorreccionsText(e.target.value)}
+          placeholder={question.correccions.placeholder}
+          rows={3}
+          className="w-full rounded-lg border border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 resize-none text-sm"
+        />
+        <p className="mt-2 text-xs text-slate-500">
+          💡 Si tot és correcte, simplement continueu sense escriure res.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// RENDER P1 (v5 fallback): Mida + Volum
 // ============================================================
 function RenderP1({ 
   question, 
