@@ -528,47 +528,32 @@ function RenderP1Confirmacio({
       </div>
 
       {/* Bullets d'info detectada - Agrupats per categoria */}
-      <div className="space-y-4">
+      <div className="space-y-3">
         {Object.entries(groupedInfo).map(([tipus, items]) => (
-          <div key={tipus}>
-            {/* Si hi ha més d'un item del mateix tipus, mostrar capçalera */}
-            {items.length > 1 && (
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-lg">{infoIcons[tipus] || "📌"}</span>
-                <span className="text-xs text-slate-400 uppercase tracking-wide font-medium">
-                  {infoLabels[tipus] || tipus}
-                </span>
-              </div>
-            )}
-            <div className={`space-y-2 ${items.length > 1 ? 'ml-7' : ''}`}>
+          <div
+            key={tipus}
+            className={`p-3 rounded-lg border ${
+              items.some(i => i.confianca === 'alta')
+                ? 'border-emerald-500/30 bg-emerald-500/5'
+                : 'border-slate-700/50 bg-slate-800/30'
+            }`}
+          >
+            {/* Capçalera amb icona i label */}
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-lg">{infoIcons[tipus] || "📌"}</span>
+              <span className="text-xs text-slate-400 uppercase tracking-wide font-medium">
+                {infoLabels[tipus] || tipus}
+              </span>
+            </div>
+            {/* Items dins el requadre */}
+            <div className="space-y-1.5 ml-7">
               {items.map((info, index) => (
-                <div
-                  key={index}
-                  className={`flex items-start gap-3 p-3 rounded-lg border ${
-                    info.confianca === 'alta'
-                      ? 'border-emerald-500/30 bg-emerald-500/5'
-                      : 'border-slate-700/50 bg-slate-800/30'
-                  }`}
-                >
-                  {/* Icona només si no està agrupat */}
-                  {items.length === 1 && (
-                    <span className="text-lg flex-shrink-0">
-                      {infoIcons[info.tipus] || "📌"}
-                    </span>
-                  )}
-                  <div className="flex-1 min-w-0">
-                    {/* Label només si no està agrupat */}
-                    {items.length === 1 && (
-                      <span className="text-xs text-slate-500 uppercase tracking-wide">
-                        {infoLabels[info.tipus] || info.tipus}
-                      </span>
-                    )}
-                    <p className={`text-slate-200 text-sm leading-relaxed ${items.length === 1 ? 'mt-0.5' : ''}`}>
-                      {info.valor}
-                    </p>
-                  </div>
+                <div key={index} className="flex items-start gap-2">
+                  <p className="text-slate-200 text-sm leading-relaxed flex-1">
+                    {info.valor}
+                  </p>
                   {info.confianca === 'alta' && (
-                    <CheckCircle2 className="h-4 w-4 text-emerald-500 flex-shrink-0 mt-1" />
+                    <CheckCircle2 className="h-4 w-4 text-emerald-500 flex-shrink-0" />
                   )}
                 </div>
               ))}

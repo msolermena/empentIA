@@ -63,7 +63,7 @@ export default function EmailPage() {
       </header>
 
       {/* Main Content */}
-      <div className="flex min-h-screen items-center justify-center px-8 pt-20">
+      <div className="flex min-h-screen items-center justify-center px-8 pt-28">
         <div className="w-full max-w-2xl">
           {/* Animated Background Glow */}
           <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 animate-pulse-glow">
