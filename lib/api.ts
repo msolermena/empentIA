@@ -53,6 +53,7 @@ export interface AmbitEines {
   icona: string;
   multi_select: boolean;
   options: Array<{ id: string; label: string }>;
+  preselected?: string | string[];  // 🆕 v6.0: Eines detectades per Jina
 }
 
 // Oportunitat mostrada a P3

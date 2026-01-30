@@ -250,7 +250,7 @@ export default function CompletePage() {
                 <div className="text-3xl mb-2">🚀</div>
                 <h3 className="text-lg font-bold text-slate-200 mb-1">Arrencada</h3>
                 <p className="text-2xl font-bold text-primary-400 mb-2">1 procés</p>
-                <p className="text-sm text-slate-400 mb-3">empentIA Suite</p>
+                <p className="text-sm text-slate-400 mb-3">Plataforma empentIA</p>
                 <p className="text-xs text-slate-500">Ideal per provar i veure resultats ràpids</p>
               </CardContent>
             </Card>
@@ -264,7 +264,7 @@ export default function CompletePage() {
                 <div className="text-3xl mb-2">⚡</div>
                 <h3 className="text-lg font-bold text-slate-200 mb-1">Acceleració</h3>
                 <p className="text-2xl font-bold text-primary-400 mb-2">3 processos</p>
-                <p className="text-sm text-slate-400 mb-3">empentIA Suite Pro</p>
+                <p className="text-sm text-slate-400 mb-3">Plataforma empentIA Pro</p>
                 <p className="text-xs text-slate-500">Impacte real en operacions</p>
               </CardContent>
             </Card>
@@ -275,7 +275,7 @@ export default function CompletePage() {
                 <div className="text-3xl mb-2">🏆</div>
                 <h3 className="text-lg font-bold text-slate-200 mb-1">Transformació</h3>
                 <p className="text-2xl font-bold text-primary-400 mb-2">5+ processos</p>
-                <p className="text-sm text-slate-400 mb-3">empentIA Suite Premium</p>
+                <p className="text-sm text-slate-400 mb-3">Plataforma empentIA Premium</p>
                 <p className="text-xs text-slate-500">Canvi complet de processos</p>
               </CardContent>
             </Card>
@@ -286,7 +286,7 @@ export default function CompletePage() {
           </p>
         </div>
 
-        {/* ==================== EMPENTIA SUITE ==================== */}
+        {/* ==================== AGENTS IA (abans "EMPENTIA SUITE") ==================== */}
         <Card className="glass-card border border-purple-500/30 mb-10 overflow-hidden">
           <div className="bg-gradient-to-r from-purple-500/10 to-primary-500/10 p-6">
             <div className="flex items-center gap-3 mb-3">
@@ -294,19 +294,19 @@ export default function CompletePage() {
                 <span className="text-xl">🤖</span>
               </div>
               <h3 className="text-xl font-bold text-slate-200">
-                Inclòs: empentIA Suite
+                Inclòs: Agents IA personalitzats
               </h3>
             </div>
             <p className="text-slate-300 mb-4">
-              El teu portal amb automatitzacions actives, mètriques en temps real i assistents IA disponibles 24/7.
+              La plataforma empentIA amb les teves automatitzacions actives, mètriques en temps real i agents IA que coneixen el teu negoci, disponibles 24/7.
             </p>
             <Button 
               variant="outline" 
               size="sm"
               className="border-purple-500/50 text-purple-300 hover:bg-purple-500/10"
-              onClick={() => window.open('/suite', '_blank')}
+              onClick={() => window.open('/plataforma', '_blank')}
             >
-              Descobreix la Suite →
+              Descobreix la plataforma →
             </Button>
           </div>
         </Card>

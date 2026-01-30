@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
@@ -99,7 +99,23 @@ export default function QuestionsPage() {
       if (savedAnswers[qNum]) {
         restoreAnswer(qNum, savedAnswers[qNum]);
       } else {
-        resetCurrentAnswer(qNum);
+        // 🆕 v6.0: Per P2, aplicar preseleccions del backend
+        if (qNum === 2 && data.type === 'p2_eines') {
+          const preseleccions: Record<string, string | string[]> = {};
+          (data as QuestionP2).ambits.forEach((ambit: any) => {
+            if (ambit.preselected) {
+              preseleccions[ambit.id] = ambit.preselected;
+            }
+          });
+          if (Object.keys(preseleccions).length > 0) {
+            setEinesSelected(preseleccions);
+            console.log("🔧 P2 preseleccions aplicades:", preseleccions);
+          } else {
+            resetCurrentAnswer(qNum);
+          }
+        } else {
+          resetCurrentAnswer(qNum);
+        }
       }
       
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -489,6 +505,17 @@ function RenderP1Confirmacio({
   correccionsText: string;
   setCorreccionsText: (v: string) => void;
 }) {
+  // Agrupar info per tipus
+  const groupedInfo = React.useMemo(() => {
+    const groups: Record<string, typeof question.info_detectada> = {};
+    question.info_detectada.forEach(info => {
+      const key = info.tipus;
+      if (!groups[key]) groups[key] = [];
+      groups[key].push(info);
+    });
+    return groups;
+  }, [question.info_detectada]);
+
   return (
     <div className="space-y-6">
       {/* Títol i subtítol */}
@@ -500,31 +527,52 @@ function RenderP1Confirmacio({
         <p className="text-sm text-muted-foreground">{question.subtitle}</p>
       </div>
 
-      {/* Bullets d'info detectada */}
-      <div className="space-y-3">
-        {question.info_detectada.map((info, index) => (
-          <div
-            key={index}
-            className={`flex items-start gap-3 p-3 rounded-lg border ${
-              info.confianca === 'alta'
-                ? 'border-emerald-500/30 bg-emerald-500/5'
-                : 'border-slate-700/50 bg-slate-800/30'
-            }`}
-          >
-            <span className="text-lg flex-shrink-0">
-              {infoIcons[info.tipus] || "📌"}
-            </span>
-            <div className="flex-1 min-w-0">
-              <span className="text-xs text-slate-500 uppercase tracking-wide">
-                {infoLabels[info.tipus] || info.tipus}
-              </span>
-              <p className="text-slate-200 text-sm mt-0.5 leading-relaxed">
-                {info.valor}
-              </p>
-            </div>
-            {info.confianca === 'alta' && (
-              <CheckCircle2 className="h-4 w-4 text-emerald-500 flex-shrink-0 mt-1" />
+      {/* Bullets d'info detectada - Agrupats per categoria */}
+      <div className="space-y-4">
+        {Object.entries(groupedInfo).map(([tipus, items]) => (
+          <div key={tipus}>
+            {/* Si hi ha més d'un item del mateix tipus, mostrar capçalera */}
+            {items.length > 1 && (
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-lg">{infoIcons[tipus] || "📌"}</span>
+                <span className="text-xs text-slate-400 uppercase tracking-wide font-medium">
+                  {infoLabels[tipus] || tipus}
+                </span>
+              </div>
             )}
+            <div className={`space-y-2 ${items.length > 1 ? 'ml-7' : ''}`}>
+              {items.map((info, index) => (
+                <div
+                  key={index}
+                  className={`flex items-start gap-3 p-3 rounded-lg border ${
+                    info.confianca === 'alta'
+                      ? 'border-emerald-500/30 bg-emerald-500/5'
+                      : 'border-slate-700/50 bg-slate-800/30'
+                  }`}
+                >
+                  {/* Icona només si no està agrupat */}
+                  {items.length === 1 && (
+                    <span className="text-lg flex-shrink-0">
+                      {infoIcons[info.tipus] || "📌"}
+                    </span>
+                  )}
+                  <div className="flex-1 min-w-0">
+                    {/* Label només si no està agrupat */}
+                    {items.length === 1 && (
+                      <span className="text-xs text-slate-500 uppercase tracking-wide">
+                        {infoLabels[info.tipus] || info.tipus}
+                      </span>
+                    )}
+                    <p className={`text-slate-200 text-sm leading-relaxed ${items.length === 1 ? 'mt-0.5' : ''}`}>
+                      {info.valor}
+                    </p>
+                  </div>
+                  {info.confianca === 'alta' && (
+                    <CheckCircle2 className="h-4 w-4 text-emerald-500 flex-shrink-0 mt-1" />
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>
