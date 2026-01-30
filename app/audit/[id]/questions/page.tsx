@@ -346,14 +346,6 @@ export default function QuestionsPage() {
       <div className="container mx-auto max-w-2xl px-6 pt-24 pb-12">
         <Card className="glass-card border-2 border-primary-500/20">
           <CardContent className="p-8">
-            
-            {/* Error */}
-            {error && (
-              <div className="mb-6 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400 flex items-center gap-2">
-                <AlertCircle className="h-4 w-4" />
-                {error}
-              </div>
-            )}
 
             {/* Question Content */}
             {isLoading ? (
@@ -405,6 +397,14 @@ export default function QuestionsPage() {
                 setTextLliure={setTextLliure}
               />
             ) : null}
+
+            {/* Error - A SOTA per ser visible */}
+            {error && (
+              <div className="mt-4 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400 flex items-center gap-2">
+                <AlertCircle className="h-4 w-4 flex-shrink-0" />
+                {error}
+              </div>
+            )}
 
             {/* Navigation */}
             <div className="flex items-center justify-between gap-4 pt-6 mt-6 border-t border-slate-800">

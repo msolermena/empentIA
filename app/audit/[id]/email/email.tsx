@@ -146,7 +146,6 @@ export default function EmailPage() {
                     checked={consent}
                     onChange={(e) => setConsent(e.target.checked)}
                     className="mt-0.5 h-5 w-5 rounded border-slate-600 text-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-offset-0"
-                    required
                     disabled={isSubmitting}
                   />
                   <span className="text-sm text-slate-300">
