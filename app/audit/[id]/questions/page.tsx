@@ -99,23 +99,7 @@ export default function QuestionsPage() {
       if (savedAnswers[qNum]) {
         restoreAnswer(qNum, savedAnswers[qNum]);
       } else {
-        // 🆕 v6.0: Per P2, aplicar preseleccions del backend
-        if (qNum === 2 && data.type === 'p2_eines') {
-          const preseleccions: Record<string, string | string[]> = {};
-          (data as QuestionP2).ambits.forEach((ambit: any) => {
-            if (ambit.preselected) {
-              preseleccions[ambit.id] = ambit.preselected;
-            }
-          });
-          if (Object.keys(preseleccions).length > 0) {
-            setEinesSelected(preseleccions);
-            console.log("🔧 P2 preseleccions aplicades:", preseleccions);
-          } else {
-            resetCurrentAnswer(qNum);
-          }
-        } else {
-          resetCurrentAnswer(qNum);
-        }
+        resetCurrentAnswer(qNum);
       }
       
       window.scrollTo({ top: 0, behavior: 'smooth' });
