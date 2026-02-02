@@ -22,7 +22,12 @@ import {
   X,
   Phone,
   Mail,
-  MessageCircle
+  MessageCircle,
+  BarChart3,
+  Bot,
+  Activity,
+  TrendingUp,
+  Headphones
 } from "lucide-react";
 
 // Normalitzar URLs
@@ -79,7 +84,7 @@ function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
       />
       
       {/* Modal */}
-      <div className="relative w-full max-w-lg rounded-2xl border border-emerald-500/20 bg-slate-900 p-8 shadow-2xl shadow-emerald-500/10">
+      <div className="relative w-full max-w-lg rounded-2xl border border-emerald-500/20 bg-slate-900 p-8 pt-12 shadow-2xl shadow-emerald-500/10">
         <button
           onClick={onClose}
           className="absolute right-4 top-4 rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-800 hover:text-slate-200"
@@ -238,7 +243,7 @@ export default function Home() {
       }`}>
         <nav className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
           <Logo size="md" variant="image" />
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-6">
             <a 
               href="#com-funciona" 
               className="hidden text-sm font-medium text-slate-400 transition-colors hover:text-emerald-400 md:block"
@@ -247,10 +252,16 @@ export default function Home() {
             </a>
             <button
               onClick={() => setIsContactOpen(true)}
-              className="text-sm font-medium text-slate-400 transition-colors hover:text-emerald-400"
+              className="hidden text-sm font-medium text-slate-400 transition-colors hover:text-emerald-400 md:block"
             >
               Contacte
             </button>
+            <a 
+              href="https://app.empentia.cat" 
+              className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-sm font-medium text-emerald-400 transition-all hover:bg-emerald-500/20"
+            >
+              Accés clients
+            </a>
           </div>
         </nav>
       </header>
@@ -275,17 +286,17 @@ export default function Home() {
 
           {/* CTA Principal - Auditoria */}
           <form onSubmit={handleSubmit} className="fade-in-up-delay-2 mb-6">
-            <div className="mx-auto flex max-w-xl flex-col gap-3 rounded-2xl border-2 border-slate-800 bg-slate-900/60 p-2 backdrop-blur-sm transition-all focus-within:border-emerald-500/50 focus-within:shadow-lg focus-within:shadow-emerald-500/10 sm:flex-row sm:p-2">
+            <div className="mx-auto flex max-w-2xl flex-col gap-3 rounded-2xl border-2 border-slate-800 bg-slate-900/60 p-2 backdrop-blur-sm transition-all focus-within:border-emerald-500/50 focus-within:shadow-lg focus-within:shadow-emerald-500/10 sm:flex-row sm:p-2">
               <Input
                 type="text"
-                placeholder="Introdueix la web de la teva empresa"
+                placeholder="La web de la teva empresa"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 className="flex-1 border-0 bg-transparent px-4 text-base placeholder:text-slate-500 focus:ring-0"
                 required
               />
               <Button type="submit" size="lg" className="gap-2 whitespace-nowrap">
-                Fes l'auditoria gratuïta
+                Comença l'auditoria
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </div>
@@ -318,17 +329,6 @@ export default function Home() {
           <p className="fade-in-up-delay-3 mx-auto max-w-lg text-sm text-slate-500">
             Descobreix com pots recuperar hores cada setmana automatitzant processos repetitius
           </p>
-
-          {/* CTA Secundari */}
-          <div className="fade-in-up-delay-3 mt-8">
-            <button
-              onClick={() => setIsContactOpen(true)}
-              className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 transition-colors hover:text-emerald-400"
-            >
-              Ja saps què necessites? Parlem
-              <ArrowRight className="h-4 w-4" />
-            </button>
-          </div>
         </div>
       </section>
 
@@ -368,7 +368,7 @@ export default function Home() {
                   num: "4",
                   icon: LayoutDashboard,
                   title: "El teu portal",
-                  desc: "Gestiona les automatitzacions, monitoritza resultats i aprofita la IA connectada al teu negoci. Sempre actualitzat, amb suport inclòs.",
+                  desc: "Accedeix a la teva plataforma per gestionar-ho tot",
                   highlight: true
                 },
               ].map((step) => (
@@ -401,110 +401,123 @@ export default function Home() {
         </div>
       </section>
 
-      {/* El Teu Portal - Screenshots */}
-      <section className="relative py-24 px-6 overflow-hidden">
-        {/* Background decoration */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/50 to-slate-950" />
-        
-        <div className="relative mx-auto max-w-6xl">
+      {/* Plataforma empentIA */}
+      <section className="relative py-24 px-6">
+        <div className="mx-auto max-w-6xl">
           <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-slate-50 md:text-4xl">El teu portal</h2>
+            <h2 className="mb-4 text-3xl font-bold text-slate-50 md:text-4xl">Plataforma empentIA</h2>
             <p className="mx-auto max-w-2xl text-slate-400">
-              Visualitza l'impacte real: hores estalviades, valor generat i activitat 
-              de les teves automatitzacions i agents IA.
+              Tot el que necessites per gestionar les teves automatitzacions i agents IA en un sol lloc.
             </p>
           </div>
 
-          {/* Screenshots */}
-          <div className="grid gap-8 lg:grid-cols-2">
-            {/* Dashboard Screenshot */}
-            <div className="group relative">
-              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-emerald-500/20 to-emerald-500/0 opacity-0 blur transition-opacity group-hover:opacity-100" />
-              <div className="relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/50 shadow-2xl">
-                <div className="flex items-center gap-2 border-b border-slate-800 bg-slate-900/80 px-4 py-3">
-                  <div className="flex gap-1.5">
-                    <div className="h-3 w-3 rounded-full bg-slate-700" />
-                    <div className="h-3 w-3 rounded-full bg-slate-700" />
-                    <div className="h-3 w-3 rounded-full bg-slate-700" />
+          {/* Layout: Funcionalitats + Screenshot */}
+          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+            {/* Funcionalitats */}
+            <div className="space-y-6">
+              {[
+                {
+                  icon: BarChart3,
+                  title: "Dashboard amb KPIs",
+                  desc: "Visualitza hores estalviades, valor generat i ROI en temps real"
+                },
+                {
+                  icon: Bot,
+                  title: "Agents IA connectats",
+                  desc: "Assistents intel·ligents que coneixen el teu negoci i treballen per tu"
+                },
+                {
+                  icon: Activity,
+                  title: "Monitorització en temps real",
+                  desc: "Segueix l'activitat de les teves automatitzacions amb alertes i notificacions"
+                },
+                {
+                  icon: TrendingUp,
+                  title: "Històric i evolució",
+                  desc: "Analitza el rendiment mensual i descobreix noves oportunitats"
+                },
+                {
+                  icon: Headphones,
+                  title: "Suport i actualitzacions",
+                  desc: "Sempre actualitzat amb les últimes novetats, amb suport inclòs"
+                },
+              ].map((item) => (
+                <div key={item.title} className="flex gap-4">
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-emerald-500/10">
+                    <item.icon className="h-5 w-5 text-emerald-400" />
                   </div>
-                  <span className="ml-2 text-xs text-slate-500">Dashboard</span>
+                  <div>
+                    <h3 className="font-semibold text-slate-100">{item.title}</h3>
+                    <p className="text-sm text-slate-400">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Screenshot */}
+            <div className="relative">
+              <div className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-emerald-500/10 to-emerald-500/5 blur-2xl" />
+              <div className="relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/80 shadow-2xl">
+                <div className="flex items-center gap-2 border-b border-slate-800 bg-slate-900 px-4 py-3">
+                  <div className="flex gap-1.5">
+                    <div className="h-3 w-3 rounded-full bg-red-500/60" />
+                    <div className="h-3 w-3 rounded-full bg-yellow-500/60" />
+                    <div className="h-3 w-3 rounded-full bg-green-500/60" />
+                  </div>
+                  <span className="ml-2 text-xs text-slate-500">app.empentia.cat</span>
                 </div>
                 <img 
                   src="/images/screenshots/dashboard.png" 
-                  alt="Dashboard empentIA - Vista general amb KPIs" 
+                  alt="Plataforma empentIA - Dashboard" 
                   className="w-full"
                 />
               </div>
-              <p className="mt-4 text-center text-sm text-slate-500">
-                Vista general amb valor generat i hores estalviades
-              </p>
-            </div>
-
-            {/* Agents Screenshot */}
-            <div className="group relative">
-              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-emerald-500/0 to-emerald-500/20 opacity-0 blur transition-opacity group-hover:opacity-100" />
-              <div className="relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/50 shadow-2xl">
-                <div className="flex items-center gap-2 border-b border-slate-800 bg-slate-900/80 px-4 py-3">
-                  <div className="flex gap-1.5">
-                    <div className="h-3 w-3 rounded-full bg-slate-700" />
-                    <div className="h-3 w-3 rounded-full bg-slate-700" />
-                    <div className="h-3 w-3 rounded-full bg-slate-700" />
-                  </div>
-                  <span className="ml-2 text-xs text-slate-500">Agents IA</span>
-                </div>
-                <img 
-                  src="/images/screenshots/agents.png" 
-                  alt="Agents IA empentIA - Assistents intel·ligents" 
-                  className="w-full"
-                />
-              </div>
-              <p className="mt-4 text-center text-sm text-slate-500">
-                Agents IA que coneixen el teu negoci
-              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Per Què empentIA */}
-      <section className="relative py-24 px-6">
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-16 text-center">
+      <section className="relative py-20 px-6">
+        <div className="mx-auto max-w-4xl">
+          <div className="mb-10 text-center">
             <h2 className="mb-4 text-3xl font-bold text-slate-50 md:text-4xl">Per què empentIA</h2>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2">
             {[
               {
                 icon: Sparkles,
                 title: "Servei complet",
-                desc: "Ens expliques què necessites i ens n'ocupem de tot: disseny, implementació i manteniment."
+                desc: "Disseny, implementació i manteniment. Tu només expliques què necessites."
               },
               {
                 icon: Wrench,
                 title: "Fet a mida",
-                desc: "Analitzem com treballes i construïm solucions adaptades als teus processos reals."
+                desc: "Solucions adaptades als teus processos reals, no plantilles genèriques."
               },
               {
                 icon: CalendarX,
                 title: "Sense permanència",
-                desc: "Subscripció mensual flexible. Sense projectes de milers d'euros ni compromisos a llarg termini."
+                desc: "Subscripció mensual flexible. Sense projectes de milers d'euros."
               },
               {
                 icon: RefreshCw,
                 title: "Sempre actualitzat",
-                desc: "Integrem les últimes novetats en IA i automatització. La tecnologia avança, el teu negoci també."
+                desc: "Integrem les últimes novetats en IA. La tecnologia avança, tu també."
               },
             ].map((item) => (
               <div 
                 key={item.title}
-                className="group rounded-2xl border border-slate-800 bg-slate-900/30 p-6 transition-all hover:border-emerald-500/30 hover:bg-slate-900/50"
+                className="group flex gap-4 rounded-xl border border-slate-800/60 bg-slate-900/20 p-4 transition-all hover:border-emerald-500/20 hover:bg-slate-900/40"
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/10 transition-colors group-hover:bg-emerald-500/20">
-                  <item.icon className="h-6 w-6 text-emerald-400" />
+                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-emerald-500/10">
+                  <item.icon className="h-5 w-5 text-emerald-400" />
                 </div>
-                <h3 className="mb-2 text-lg font-semibold text-slate-100">{item.title}</h3>
-                <p className="text-sm leading-relaxed text-slate-400">{item.desc}</p>
+                <div>
+                  <h3 className="mb-1 font-semibold text-slate-100">{item.title}</h3>
+                  <p className="text-sm leading-relaxed text-slate-400">{item.desc}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -512,15 +525,13 @@ export default function Home() {
       </section>
 
       {/* Qui Hi Ha Al Darrere */}
-      <section className="relative py-24 px-6">
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/30 to-slate-950" />
-        
-        <div className="relative mx-auto max-w-3xl">
-          <div className="mb-12 text-center">
+      <section className="relative py-20 px-6">
+        <div className="mx-auto max-w-3xl">
+          <div className="mb-10 text-center">
             <h2 className="mb-4 text-3xl font-bold text-slate-50 md:text-4xl">Qui hi ha al darrere</h2>
           </div>
 
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-8 text-center md:p-12">
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/30 p-8 text-center md:p-12">
             {/* Avatar placeholder - sense foto per ara */}
             <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500/20 to-emerald-700/20 text-3xl font-bold text-emerald-400">
               AO
@@ -536,13 +547,13 @@ export default function Home() {
             </p>
 
             <a 
-              href="https://linkedin.com/in/arnauorriols" 
+              href="https://www.linkedin.com/in/arnau-orriols-9b31136/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 transition-colors hover:text-emerald-400"
             >
               <Linkedin className="h-4 w-4" />
-              linkedin.com/in/arnauorriols
+              LinkedIn
             </a>
           </div>
         </div>
@@ -551,27 +562,30 @@ export default function Home() {
       {/* CTA Final */}
       <section className="relative py-24 px-6">
         <div className="mx-auto max-w-3xl">
-          <div className="relative overflow-hidden rounded-3xl border border-emerald-500/20 bg-gradient-to-b from-slate-900 to-slate-900/50 p-8 text-center md:p-16">
+          <div className="relative overflow-hidden rounded-3xl border border-emerald-500/20 bg-slate-900/50 p-8 text-center md:p-16">
             {/* Decorative glow */}
-            <div className="absolute -top-24 left-1/2 h-48 w-96 -translate-x-1/2 rounded-full bg-emerald-500/20 blur-3xl" />
+            <div className="absolute -top-24 left-1/2 h-48 w-96 -translate-x-1/2 rounded-full bg-emerald-500/15 blur-3xl" />
             
             <div className="relative">
-              <p className="mb-8 text-lg text-slate-300 md:text-xl">
-                Descobreix com pots recuperar hores cada setmana automatitzant processos repetitius
+              <h3 className="mb-4 text-2xl font-bold text-slate-50 md:text-3xl">
+                Recupera hores cada setmana
+              </h3>
+              <p className="mb-8 text-slate-400">
+                Descobreix quins processos pots automatitzar al teu negoci
               </p>
 
               <form onSubmit={handleSubmit} className="mb-6">
-                <div className="mx-auto flex max-w-lg flex-col gap-3 rounded-2xl border-2 border-slate-800 bg-slate-950/50 p-2 transition-all focus-within:border-emerald-500/50 sm:flex-row">
+                <div className="mx-auto flex max-w-xl flex-col gap-3 rounded-2xl border-2 border-slate-700 bg-slate-900/80 p-2 transition-all focus-within:border-emerald-500/50 sm:flex-row">
                   <Input
                     type="text"
-                    placeholder="Introdueix la web de la teva empresa"
+                    placeholder="La web de la teva empresa"
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
                     className="flex-1 border-0 bg-transparent px-4 text-base placeholder:text-slate-500 focus:ring-0"
                     required
                   />
                   <Button type="submit" size="lg" className="gap-2 whitespace-nowrap">
-                    Fes l'auditoria gratuïta
+                    Comença l'auditoria
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </div>
