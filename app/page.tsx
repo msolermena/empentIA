@@ -5,27 +5,35 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle2, Globe, Lightbulb, BarChart3, ArrowRight, AlertCircle, Bug } from "lucide-react";
+import { 
+  ArrowRight, 
+  CheckCircle2, 
+  AlertCircle, 
+  Bug,
+  Search,
+  FileText,
+  Rocket,
+  LayoutDashboard,
+  Sparkles,
+  Wrench,
+  CalendarX,
+  RefreshCw,
+  Linkedin,
+  X,
+  Phone,
+  Mail,
+  MessageCircle
+} from "lucide-react";
 
-// Millora 5: Funció per normalitzar URLs
+// Normalitzar URLs
 function normalizeUrl(input: string): string {
-  let url = input.trim();
-  
-  // Eliminar espais
-  url = url.replace(/\s+/g, '');
-  
-  // Si no té protocol, afegir https://
+  let url = input.trim().replace(/\s+/g, '');
   if (!url.startsWith('http://') && !url.startsWith('https://')) {
     url = 'https://' + url;
   }
-  
-  // Validar que té almenys un punt (domini vàlid)
   if (!url.includes('.')) {
     throw new Error("Si us plau, introdueix una URL vàlida (exemple: exemple.cat)");
   }
-  
-  // Validar format mínim
   try {
     new URL(url);
     return url;
@@ -34,22 +42,166 @@ function normalizeUrl(input: string): string {
   }
 }
 
+// Component Modal Contacte
+function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    preferredContact: 'email',
+    description: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  if (!isOpen) return null;
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    // TODO: Integrar amb backend/Brevo
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setIsSubmitting(false);
+    setSubmitted(true);
+    setTimeout(() => {
+      onClose();
+      setSubmitted(false);
+      setFormData({ name: '', email: '', phone: '', preferredContact: 'email', description: '' });
+    }, 2000);
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      {/* Backdrop */}
+      <div 
+        className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm"
+        onClick={onClose}
+      />
+      
+      {/* Modal */}
+      <div className="relative w-full max-w-lg rounded-2xl border border-emerald-500/20 bg-slate-900 p-8 shadow-2xl shadow-emerald-500/10">
+        <button
+          onClick={onClose}
+          className="absolute right-4 top-4 rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-800 hover:text-slate-200"
+        >
+          <X className="h-5 w-5" />
+        </button>
+
+        {submitted ? (
+          <div className="py-8 text-center">
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/20">
+              <CheckCircle2 className="h-8 w-8 text-emerald-400" />
+            </div>
+            <h3 className="mb-2 text-xl font-bold text-slate-50">Missatge enviat!</h3>
+            <p className="text-slate-400">Et contactarem aviat.</p>
+          </div>
+        ) : (
+          <>
+            <h3 className="mb-2 text-2xl font-bold text-slate-50">Parlem</h3>
+            <p className="mb-6 text-slate-400">Explica'ns què necessites i et contactarem.</p>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="mb-1.5 block text-sm font-medium text-slate-300">Nom *</label>
+                <input
+                  type="text"
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="w-full rounded-xl border-2 border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder-slate-500 transition-colors focus:border-emerald-500 focus:outline-none"
+                  placeholder="El teu nom"
+                />
+              </div>
+
+              <div>
+                <label className="mb-1.5 block text-sm font-medium text-slate-300">Email *</label>
+                <input
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full rounded-xl border-2 border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder-slate-500 transition-colors focus:border-emerald-500 focus:outline-none"
+                  placeholder="email@exemple.cat"
+                />
+              </div>
+
+              <div>
+                <label className="mb-1.5 block text-sm font-medium text-slate-300">Telèfon <span className="text-slate-500">(opcional)</span></label>
+                <input
+                  type="tel"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="w-full rounded-xl border-2 border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder-slate-500 transition-colors focus:border-emerald-500 focus:outline-none"
+                  placeholder="+34 600 000 000"
+                />
+              </div>
+
+              <div>
+                <label className="mb-1.5 block text-sm font-medium text-slate-300">Com prefereixes que et contactem?</label>
+                <div className="flex gap-3">
+                  {[
+                    { value: 'email', icon: Mail, label: 'Email' },
+                    { value: 'phone', icon: Phone, label: 'Trucada' },
+                    { value: 'whatsapp', icon: MessageCircle, label: 'WhatsApp' },
+                  ].map((option) => (
+                    <button
+                      key={option.value}
+                      type="button"
+                      onClick={() => setFormData({ ...formData, preferredContact: option.value })}
+                      className={`flex flex-1 items-center justify-center gap-2 rounded-xl border-2 px-4 py-3 text-sm font-medium transition-all ${
+                        formData.preferredContact === option.value
+                          ? 'border-emerald-500 bg-emerald-500/10 text-emerald-400'
+                          : 'border-slate-700 text-slate-400 hover:border-slate-600'
+                      }`}
+                    >
+                      <option.icon className="h-4 w-4" />
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="mb-1.5 block text-sm font-medium text-slate-300">Què necessites? <span className="text-slate-500">(opcional)</span></label>
+                <textarea
+                  value={formData.description}
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                  rows={3}
+                  className="w-full rounded-xl border-2 border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder-slate-500 transition-colors focus:border-emerald-500 focus:outline-none"
+                  placeholder="Explica'ns breument..."
+                />
+              </div>
+
+              <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? 'Enviant...' : 'Enviar missatge'}
+              </Button>
+            </form>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [url, setUrl] = useState("");
   const [error, setError] = useState<string | null>(null);
-  
-  // Dev mode: mostra bypass per testing
+  const [isContactOpen, setIsContactOpen] = useState(false);
   const [showDevTools, setShowDevTools] = useState(false);
   const [auditId, setAuditId] = useState("");
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    // Activar dev tools amb ?dev=true o en localhost
     const isDev = searchParams.get('dev') === 'true' || 
                   window.location.hostname === 'localhost' ||
                   window.location.hostname === '127.0.0.1';
     setShowDevTools(isDev);
+
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [searchParams]);
 
   const handleBypass = (e: React.FormEvent) => {
@@ -62,78 +214,84 @@ export default function Home() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-
     try {
-      // Millora 5: Normalitzar URL (afegeix https:// si cal, valida format)
       const normalizedUrl = normalizeUrl(url);
-
-      // Redirigir a pàgina d'anàlisi (que farà scraping + start audit)
       router.push(`/audit/analyzing?url=${encodeURIComponent(normalizedUrl)}`);
-      
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error iniciant l'auditoria");
     }
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-slate-950">
+      {/* Gradient background decorations */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-[400px] -right-[400px] h-[800px] w-[800px] rounded-full bg-emerald-500/[0.07] blur-3xl" />
+        <div className="absolute -bottom-[400px] -left-[400px] h-[800px] w-[800px] rounded-full bg-emerald-500/[0.05] blur-3xl" />
+      </div>
+
       {/* Header */}
-      <header className="fixed top-0 z-50 w-full border-b border-emerald-500/10 bg-background/80 backdrop-blur-md">
-        <nav className="container mx-auto flex h-20 items-center justify-between px-8">
+      <header className={`fixed top-0 z-50 w-full transition-all duration-300 ${
+        isScrolled 
+          ? 'border-b border-slate-800 bg-slate-950/90 backdrop-blur-xl' 
+          : 'bg-transparent'
+      }`}>
+        <nav className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
           <Logo size="md" variant="image" />
-          <div className="hidden items-center gap-8 md:flex">
-            <a href="#features" className="text-sm font-medium text-muted-foreground transition-colors hover:text-emerald-400">
+          <div className="flex items-center gap-8">
+            <a 
+              href="#com-funciona" 
+              className="hidden text-sm font-medium text-slate-400 transition-colors hover:text-emerald-400 md:block"
+            >
               Com funciona
             </a>
-            <a href="#pricing" className="text-sm font-medium text-muted-foreground transition-colors hover:text-emerald-400">
-              Preus
-            </a>
-            <a href="#contact" className="text-sm font-medium text-muted-foreground transition-colors hover:text-emerald-400">
+            <button
+              onClick={() => setIsContactOpen(true)}
+              className="text-sm font-medium text-slate-400 transition-colors hover:text-emerald-400"
+            >
               Contacte
-            </a>
+            </button>
           </div>
         </nav>
       </header>
 
       {/* Hero Section */}
-      <section className="relative flex min-h-screen items-center justify-center px-8 pt-20">
-        {/* Animated background glow */}
-        <div className="absolute left-1/2 top-0 h-[800px] w-[800px] -translate-x-1/2 animate-pulse-glow">
-          <div className="h-full w-full rounded-full bg-emerald-500/15 blur-3xl" />
-        </div>
-
-        <div className="container relative z-10 mx-auto max-w-4xl text-center">
-          <h1 className="fade-in-up mb-6 text-5xl font-extrabold leading-tight md:text-6xl lg:text-7xl">
-            <span className="gradient-text">
-              Auditoria IA Gratuïta
-            </span>
+      <section className="relative flex min-h-screen items-center justify-center px-6 pt-20">
+        <div className="relative z-10 mx-auto max-w-4xl text-center">
+          {/* Main headline */}
+          <h1 className="fade-in-up mb-6 text-5xl font-extrabold leading-[1.1] tracking-tight text-slate-50 md:text-6xl lg:text-7xl">
+            Guanya temps.
             <br />
-            <span className="text-slate-50">per Pimes Catalanes</span>
+            <span className="bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent">
+              Decideix millor.
+            </span>
           </h1>
 
-          <p className="fade-in-up-delay-1 mb-12 text-lg text-muted-foreground md:text-xl">
-            Descobreix com <strong className="text-slate-200">la teva empresa</strong> pot estalviar 10-20 hores setmanals automatitzant processos repetitius
+          {/* Subtitle */}
+          <p className="fade-in-up-delay-1 mx-auto mb-10 max-w-2xl text-lg text-slate-400 md:text-xl">
+            Automatitzacions i agents IA a mida per impulsar l'eficiència 
+            i el creixement del teu negoci. <span className="text-slate-300">Sense complicacions tècniques.</span>
           </p>
 
-          {/* Input Group */}
-          <form onSubmit={handleSubmit} className="fade-in-up-delay-2 mb-8">
-            <div className="glass-card mx-auto flex max-w-3xl flex-col gap-3 rounded-2xl border-2 border-emerald-500/20 p-3 shadow-2xl transition-all focus-within:border-emerald-500 focus-within:shadow-emerald-500/20 sm:flex-row">
+          {/* CTA Principal - Auditoria */}
+          <form onSubmit={handleSubmit} className="fade-in-up-delay-2 mb-6">
+            <div className="mx-auto flex max-w-xl flex-col gap-3 rounded-2xl border-2 border-slate-800 bg-slate-900/60 p-2 backdrop-blur-sm transition-all focus-within:border-emerald-500/50 focus-within:shadow-lg focus-within:shadow-emerald-500/10 sm:flex-row sm:p-2">
               <Input
                 type="text"
-                placeholder="exemple.cat"
+                placeholder="Introdueix la web de la teva empresa"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
-                className="flex-1 border-0 bg-transparent focus:ring-0"
+                className="flex-1 border-0 bg-transparent px-4 text-base placeholder:text-slate-500 focus:ring-0"
                 required
               />
-              <Button type="submit" size="lg" className="gap-2">
-                Analitza la Teva Empresa
+              <Button type="submit" size="lg" className="gap-2 whitespace-nowrap">
+                Fes l'auditoria gratuïta
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </div>
             
             {error && (
-              <div className="mx-auto mt-4 flex max-w-3xl items-center gap-2 rounded-lg border border-red-500/30 bg-red-500/10 p-4 text-red-400">
+              <div className="mx-auto mt-4 flex max-w-xl items-center gap-2 rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-red-400">
                 <AlertCircle className="h-5 w-5 flex-shrink-0" />
                 <p className="text-sm">{error}</p>
               </div>
@@ -141,125 +299,345 @@ export default function Home() {
           </form>
 
           {/* Trust Badges */}
-          <div className="fade-in-up-delay-3 flex flex-wrap items-center justify-center gap-8 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="h-5 w-5 text-emerald-500" />
-              <span>Anàlisi en 60 segons</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="h-5 w-5 text-emerald-500" />
-              <span>100% Confidencial</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="h-5 w-5 text-emerald-500" />
-              <span>Sense compromís</span>
-            </div>
+          <div className="fade-in-up-delay-2 mb-8 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500">
+            <span className="flex items-center gap-1.5">
+              <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+              Gratuït
+            </span>
+            <span className="flex items-center gap-1.5">
+              <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+              3 minuts
+            </span>
+            <span className="flex items-center gap-1.5">
+              <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+              Sense compromís
+            </span>
+          </div>
+
+          {/* Descripció sota CTA */}
+          <p className="fade-in-up-delay-3 mx-auto max-w-lg text-sm text-slate-500">
+            Descobreix com pots recuperar hores cada setmana automatitzant processos repetitius
+          </p>
+
+          {/* CTA Secundari */}
+          <div className="fade-in-up-delay-3 mt-8">
+            <button
+              onClick={() => setIsContactOpen(true)}
+              className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 transition-colors hover:text-emerald-400"
+            >
+              Ja saps què necessites? Parlem
+              <ArrowRight className="h-4 w-4" />
+            </button>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section id="features" className="py-24 px-8">
-        <div className="container mx-auto max-w-6xl">
+      {/* Com Funciona - 4 Passos */}
+      <section id="com-funciona" className="relative py-24 px-6">
+        <div className="mx-auto max-w-5xl">
           <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-extrabold">Com Funciona l&apos;Auditoria</h2>
-            <p className="text-lg text-muted-foreground">Intel·ligència artificial que entén <strong className="text-slate-300">el teu negoci</strong></p>
+            <h2 className="mb-4 text-3xl font-bold text-slate-50 md:text-4xl">Com funciona</h2>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="group relative overflow-hidden">
-              <div className="absolute left-0 right-0 top-0 h-1 bg-gradient-to-r from-emerald-500 to-emerald-500 opacity-0 transition-opacity group-hover:opacity-100" />
-              <CardHeader>
-                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500/15">
-                  <Globe className="h-7 w-7 text-emerald-400" />
-                </div>
-                <CardTitle>1. Analitzem la Teva Web</CardTitle>
-                <CardDescription className="text-base">
-                  La nostra IA estudia <strong className="text-slate-300">el teu negoci</strong>, detecta el sector i identifica els processos principals abans de fer-te cap pregunta.
-                </CardDescription>
-              </CardHeader>
-            </Card>
+          {/* Timeline de 4 passos */}
+          <div className="relative">
+            {/* Línia connectora (només desktop) */}
+            <div className="absolute left-0 right-0 top-[60px] mx-auto hidden h-0.5 w-full bg-gradient-to-r from-emerald-500/0 via-emerald-500/30 to-emerald-500/0 md:block" />
 
-            <Card className="group relative overflow-hidden">
-              <div className="absolute left-0 right-0 top-0 h-1 bg-gradient-to-r from-emerald-500 to-emerald-500 opacity-0 transition-opacity group-hover:opacity-100" />
-              <CardHeader>
-                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500/15">
-                  <Lightbulb className="h-7 w-7 text-emerald-400" />
+            <div className="grid gap-8 md:grid-cols-4 md:gap-6">
+              {[
+                {
+                  num: "1",
+                  icon: Search,
+                  title: "Auditoria",
+                  desc: "Analitzem el teu negoci i detectem oportunitats d'automatització"
+                },
+                {
+                  num: "2",
+                  icon: FileText,
+                  title: "Proposta",
+                  desc: "Et presentem solucions a mida amb preu clar"
+                },
+                {
+                  num: "3",
+                  icon: Rocket,
+                  title: "Implementació",
+                  desc: "Ho construïm i configurem nosaltres"
+                },
+                {
+                  num: "4",
+                  icon: LayoutDashboard,
+                  title: "El teu portal",
+                  desc: "Gestiona les automatitzacions, monitoritza resultats i aprofita la IA connectada al teu negoci. Sempre actualitzat, amb suport inclòs.",
+                  highlight: true
+                },
+              ].map((step) => (
+                <div key={step.num} className="relative flex gap-4 md:flex-col md:items-center md:text-center">
+                  {/* Número/Icona */}
+                  <div className={`relative z-10 flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl ${
+                    step.highlight 
+                      ? 'bg-gradient-to-br from-emerald-500 to-emerald-700 shadow-lg shadow-emerald-500/30' 
+                      : 'border-2 border-slate-700 bg-slate-900'
+                  }`}>
+                    <step.icon className={`h-7 w-7 ${step.highlight ? 'text-white' : 'text-emerald-400'}`} />
+                  </div>
+                  
+                  {/* Contingut */}
+                  <div className="flex-1 pt-1 md:pt-6">
+                    <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-emerald-500">
+                      Pas {step.num}
+                    </div>
+                    <h3 className={`mb-2 text-lg font-bold ${step.highlight ? 'text-emerald-400' : 'text-slate-100'}`}>
+                      {step.title}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-slate-400">
+                      {step.desc}
+                    </p>
+                  </div>
                 </div>
-                <CardTitle>2. Detectem Oportunitats</CardTitle>
-                <CardDescription className="text-base">
-                  Identifiquem processos que es poden automatitzar i calculem l&apos;estalvi de temps i cost per a cada un.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="group relative overflow-hidden md:col-span-2 lg:col-span-1">
-              <div className="absolute left-0 right-0 top-0 h-1 bg-gradient-to-r from-emerald-500 to-emerald-500 opacity-0 transition-opacity group-hover:opacity-100" />
-              <CardHeader>
-                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500/15">
-                  <BarChart3 className="h-7 w-7 text-emerald-400" />
-                </div>
-                <CardTitle>3. Reps l&apos;Auditoria</CardTitle>
-                <CardDescription className="text-base">
-                  PDF complet amb diagnòstic, recomanacions prioritzades i ROI estimat. Tot en menys de 5 minuts.
-                </CardDescription>
-              </CardHeader>
-            </Card>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 px-8">
-        <div className="container mx-auto max-w-4xl">
-          <Card className="glass-card relative overflow-hidden border-2 border-emerald-500/20 p-16 text-center">
-            {/* Rotating background glow */}
-            <div className="absolute -left-1/2 -top-1/2 h-[200%] w-[200%] animate-pulse-glow">
-              <div className="h-full w-full rounded-full bg-emerald-500/10 blur-3xl" />
+      {/* El Teu Portal - Screenshots */}
+      <section className="relative py-24 px-6 overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/50 to-slate-950" />
+        
+        <div className="relative mx-auto max-w-6xl">
+          <div className="mb-12 text-center">
+            <h2 className="mb-4 text-3xl font-bold text-slate-50 md:text-4xl">El teu portal</h2>
+            <p className="mx-auto max-w-2xl text-slate-400">
+              Visualitza l'impacte real: hores estalviades, valor generat i activitat 
+              de les teves automatitzacions i agents IA.
+            </p>
+          </div>
+
+          {/* Screenshots */}
+          <div className="grid gap-8 lg:grid-cols-2">
+            {/* Dashboard Screenshot */}
+            <div className="group relative">
+              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-emerald-500/20 to-emerald-500/0 opacity-0 blur transition-opacity group-hover:opacity-100" />
+              <div className="relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/50 shadow-2xl">
+                <div className="flex items-center gap-2 border-b border-slate-800 bg-slate-900/80 px-4 py-3">
+                  <div className="flex gap-1.5">
+                    <div className="h-3 w-3 rounded-full bg-slate-700" />
+                    <div className="h-3 w-3 rounded-full bg-slate-700" />
+                    <div className="h-3 w-3 rounded-full bg-slate-700" />
+                  </div>
+                  <span className="ml-2 text-xs text-slate-500">Dashboard</span>
+                </div>
+                <img 
+                  src="/images/screenshots/dashboard.png" 
+                  alt="Dashboard empentIA - Vista general amb KPIs" 
+                  className="w-full"
+                />
+              </div>
+              <p className="mt-4 text-center text-sm text-slate-500">
+                Vista general amb valor generat i hores estalviades
+              </p>
             </div>
 
-            <div className="relative z-10">
-              <h2 className="mb-4 text-4xl font-extrabold">Comença Ara, És Gratuït</h2>
-              <p className="mb-8 text-lg text-muted-foreground">
-                Descobreix el potencial d&apos;automatització de <strong className="text-slate-300">la teva empresa</strong> en menys de 60 segons
+            {/* Agents Screenshot */}
+            <div className="group relative">
+              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-emerald-500/0 to-emerald-500/20 opacity-0 blur transition-opacity group-hover:opacity-100" />
+              <div className="relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/50 shadow-2xl">
+                <div className="flex items-center gap-2 border-b border-slate-800 bg-slate-900/80 px-4 py-3">
+                  <div className="flex gap-1.5">
+                    <div className="h-3 w-3 rounded-full bg-slate-700" />
+                    <div className="h-3 w-3 rounded-full bg-slate-700" />
+                    <div className="h-3 w-3 rounded-full bg-slate-700" />
+                  </div>
+                  <span className="ml-2 text-xs text-slate-500">Agents IA</span>
+                </div>
+                <img 
+                  src="/images/screenshots/agents.png" 
+                  alt="Agents IA empentIA - Assistents intel·ligents" 
+                  className="w-full"
+                />
+              </div>
+              <p className="mt-4 text-center text-sm text-slate-500">
+                Agents IA que coneixen el teu negoci
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Per Què empentIA */}
+      <section className="relative py-24 px-6">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-3xl font-bold text-slate-50 md:text-4xl">Per què empentIA</h2>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2">
+            {[
+              {
+                icon: Sparkles,
+                title: "Servei complet",
+                desc: "Ens expliques què necessites i ens n'ocupem de tot: disseny, implementació i manteniment."
+              },
+              {
+                icon: Wrench,
+                title: "Fet a mida",
+                desc: "Analitzem com treballes i construïm solucions adaptades als teus processos reals."
+              },
+              {
+                icon: CalendarX,
+                title: "Sense permanència",
+                desc: "Subscripció mensual flexible. Sense projectes de milers d'euros ni compromisos a llarg termini."
+              },
+              {
+                icon: RefreshCw,
+                title: "Sempre actualitzat",
+                desc: "Integrem les últimes novetats en IA i automatització. La tecnologia avança, el teu negoci també."
+              },
+            ].map((item) => (
+              <div 
+                key={item.title}
+                className="group rounded-2xl border border-slate-800 bg-slate-900/30 p-6 transition-all hover:border-emerald-500/30 hover:bg-slate-900/50"
+              >
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/10 transition-colors group-hover:bg-emerald-500/20">
+                  <item.icon className="h-6 w-6 text-emerald-400" />
+                </div>
+                <h3 className="mb-2 text-lg font-semibold text-slate-100">{item.title}</h3>
+                <p className="text-sm leading-relaxed text-slate-400">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Qui Hi Ha Al Darrere */}
+      <section className="relative py-24 px-6">
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/30 to-slate-950" />
+        
+        <div className="relative mx-auto max-w-3xl">
+          <div className="mb-12 text-center">
+            <h2 className="mb-4 text-3xl font-bold text-slate-50 md:text-4xl">Qui hi ha al darrere</h2>
+          </div>
+
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-8 text-center md:p-12">
+            {/* Avatar placeholder - sense foto per ara */}
+            <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500/20 to-emerald-700/20 text-3xl font-bold text-emerald-400">
+              AO
+            </div>
+            
+            <h3 className="mb-4 text-2xl font-bold text-slate-50">Arnau Orriols</h3>
+            
+            <p className="mx-auto mb-6 max-w-xl leading-relaxed text-slate-400">
+              Més de 15 anys d'experiència en direcció, emprenedoria i consultoria. 
+              Enginyer Industrial per la UPC, he creat i dirigit negocis (telecomunicacions 
+              i energia) i assessorat a grans i petites empreses. Ara ajudo pimes a créixer 
+              amb automatització i IA.
+            </p>
+
+            <a 
+              href="https://linkedin.com/in/arnauorriols" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 transition-colors hover:text-emerald-400"
+            >
+              <Linkedin className="h-4 w-4" />
+              linkedin.com/in/arnauorriols
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Final */}
+      <section className="relative py-24 px-6">
+        <div className="mx-auto max-w-3xl">
+          <div className="relative overflow-hidden rounded-3xl border border-emerald-500/20 bg-gradient-to-b from-slate-900 to-slate-900/50 p-8 text-center md:p-16">
+            {/* Decorative glow */}
+            <div className="absolute -top-24 left-1/2 h-48 w-96 -translate-x-1/2 rounded-full bg-emerald-500/20 blur-3xl" />
+            
+            <div className="relative">
+              <p className="mb-8 text-lg text-slate-300 md:text-xl">
+                Descobreix com pots recuperar hores cada setmana automatitzant processos repetitius
               </p>
 
-              <form onSubmit={handleSubmit}>
-                <div className="glass-card mx-auto flex max-w-2xl flex-col gap-3 rounded-2xl border-2 border-emerald-500/20 p-3 sm:flex-row">
+              <form onSubmit={handleSubmit} className="mb-6">
+                <div className="mx-auto flex max-w-lg flex-col gap-3 rounded-2xl border-2 border-slate-800 bg-slate-950/50 p-2 transition-all focus-within:border-emerald-500/50 sm:flex-row">
                   <Input
                     type="text"
-                    placeholder="exemple.cat"
+                    placeholder="Introdueix la web de la teva empresa"
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
-                    className="flex-1 border-0 bg-transparent focus:ring-0"
+                    className="flex-1 border-0 bg-transparent px-4 text-base placeholder:text-slate-500 focus:ring-0"
                     required
                   />
-                  <Button type="submit" size="lg" className="gap-2">
-                    Obtenir Auditoria
+                  <Button type="submit" size="lg" className="gap-2 whitespace-nowrap">
+                    Fes l'auditoria gratuïta
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </div>
                 
                 {error && (
-                  <div className="mx-auto mt-4 flex max-w-2xl items-center gap-2 rounded-lg border border-red-500/30 bg-red-500/10 p-4 text-red-400">
+                  <div className="mx-auto mt-4 flex max-w-lg items-center gap-2 rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-red-400">
                     <AlertCircle className="h-5 w-5 flex-shrink-0" />
                     <p className="text-sm">{error}</p>
                   </div>
                 )}
               </form>
+
+              {/* Trust Badges */}
+              <div className="mb-8 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500">
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                  Gratuït
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                  3 minuts
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                  Sense compromís
+                </span>
+              </div>
+
+              {/* CTA Secundari */}
+              <button
+                onClick={() => setIsContactOpen(true)}
+                className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 transition-colors hover:text-emerald-400"
+              >
+                Ja saps què necessites? Parlem
+                <ArrowRight className="h-4 w-4" />
+              </button>
             </div>
-          </Card>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-emerald-500/10 py-12 text-center">
-        <div className="container mx-auto px-8">
-          <p className="text-sm text-muted-foreground">
-            &copy; 2026 empentIA. Consultoria d&apos;automatització IA per pimes catalanes.
-          </p>
+      <footer className="border-t border-slate-800 py-12">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+            <p className="text-sm text-slate-500">
+              © 2026 empentIA
+            </p>
+            
+            <div className="flex items-center gap-6 text-sm">
+              <a href="/privacy" className="text-slate-500 transition-colors hover:text-slate-300">
+                Política de privacitat
+              </a>
+              <a href="/legal" className="text-slate-500 transition-colors hover:text-slate-300">
+                Avís legal
+              </a>
+              <button 
+                onClick={() => setIsContactOpen(true)}
+                className="text-slate-500 transition-colors hover:text-slate-300"
+              >
+                Contacte
+              </button>
+            </div>
+          </div>
 
-          {/* Dev Tools - Només visible amb ?dev=true o localhost */}
+          {/* Dev Tools */}
           {showDevTools && (
             <div className="mt-8 mx-auto max-w-md">
               <div className="rounded-xl border-2 border-yellow-500/30 bg-yellow-500/5 p-4">
@@ -284,7 +662,7 @@ export default function Home() {
                     Anar a Informe
                   </Button>
                 </form>
-                <p className="text-xs text-muted-foreground mt-2">
+                <p className="text-xs text-slate-500 mt-2">
                   Introdueix un audit_id per saltar directament a /complete
                 </p>
               </div>
@@ -292,6 +670,9 @@ export default function Home() {
           )}
         </div>
       </footer>
+
+      {/* Modal Contacte */}
+      <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
     </div>
   );
 }
