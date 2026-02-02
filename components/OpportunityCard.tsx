@@ -46,7 +46,7 @@ export function OpportunityCard({ opportunity, index, variant = "detected" }: Op
   return (
     <Card className={`glass-card border-2 transition-all hover:shadow-lg ${
       isDetected 
-        ? rankColors[index] || "border-primary-500/20" 
+        ? rankColors[index] || "border-emerald-500/20" 
         : "border-slate-700/30 hover:border-slate-600/50"
     }`}>
       <CardContent className="p-6">
@@ -79,9 +79,9 @@ export function OpportunityCard({ opportunity, index, variant = "detected" }: Op
         
         {/* Explicació personalitzada (només per detected) */}
         {isDetected && isDetectedOpportunity(opportunity) && opportunity.why_fits && (
-          <div className="mb-4 p-3 rounded-lg bg-slate-800/50 border-l-4 border-primary-500">
+          <div className="mb-4 p-3 rounded-lg bg-slate-800/50 border-l-4 border-emerald-500">
             <p className="text-sm text-slate-300">
-              <span className="font-medium text-primary-400">Què resol: </span>
+              <span className="font-medium text-emerald-400">Què resol: </span>
               {opportunity.why_fits}
             </p>
           </div>

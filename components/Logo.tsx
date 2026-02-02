@@ -33,7 +33,7 @@ export function Logo({ className, size = "md", variant = "image" }: LogoProps) {
     <Link 
       href="/" 
       className={cn(
-        "flex items-center gap-1.5 font-bold text-primary-500", 
+        "flex items-center gap-1.5 font-bold text-emerald-500", 
         config.text, 
         className
       )}

@@ -8,7 +8,7 @@ export default function NotFound() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       {/* Header */}
-      <header className="border-b border-primary-500/10 bg-background/80 backdrop-blur-md">
+      <header className="border-b border-emerald-500/10 bg-background/80 backdrop-blur-md">
         <nav className="container mx-auto flex h-20 items-center px-8">
           <Logo size="md" variant="image" />
         </nav>
@@ -16,7 +16,7 @@ export default function NotFound() {
 
       {/* Content */}
       <div className="flex flex-1 items-center justify-center px-8">
-        <Card className="glass-card max-w-lg border-2 border-primary-500/20 p-12 text-center">
+        <Card className="glass-card max-w-lg border-2 border-emerald-500/20 p-12 text-center">
           <div className="mb-6">
             <h1 className="mb-2 text-8xl font-extrabold gradient-text">404</h1>
             <h2 className="text-2xl font-bold text-slate-200">Pàgina No Trobada</h2>

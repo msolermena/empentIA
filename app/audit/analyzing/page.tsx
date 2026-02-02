@@ -121,7 +121,7 @@ export default function AnalyzingPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="fixed top-0 z-50 w-full border-b border-primary-500/10 bg-background/80 backdrop-blur-md">
+      <header className="fixed top-0 z-50 w-full border-b border-emerald-500/10 bg-background/80 backdrop-blur-md">
         <nav className="container mx-auto flex h-20 items-center px-8">
           <Logo size="md" variant="image" />
         </nav>
@@ -132,20 +132,20 @@ export default function AnalyzingPage() {
         <div className="w-full max-w-2xl">
           {/* Animated Background Glow */}
           <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 animate-pulse-glow">
-            <div className="h-full w-full rounded-full bg-primary-500/10 blur-3xl" />
+            <div className="h-full w-full rounded-full bg-emerald-500/10 blur-3xl" />
           </div>
 
           {/* Loading Card */}
-          <div className="glass-card relative z-10 rounded-2xl border-2 border-primary-500/20 p-8 md:p-12">
+          <div className="glass-card relative z-10 rounded-2xl border-2 border-emerald-500/20 p-8 md:p-12">
             {/* Icon */}
             <div className="mb-8 flex justify-center">
               <div className="relative">
                 {/* Spinning ring */}
-                <div className="absolute inset-0 animate-spin rounded-full border-4 border-transparent border-t-primary-400 opacity-50" />
+                <div className="absolute inset-0 animate-spin rounded-full border-4 border-transparent border-t-emerald-400 opacity-50" />
                 
                 {/* Center icon */}
-                <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-primary-500/15">
-                  <CurrentIcon className="h-12 w-12 text-primary-400 transition-all duration-300" />
+                <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-emerald-500/15">
+                  <CurrentIcon className="h-12 w-12 text-emerald-400 transition-all duration-300" />
                 </div>
               </div>
             </div>
@@ -173,7 +173,7 @@ export default function AnalyzingPage() {
                   key={index}
                   className={`h-2 w-2 rounded-full transition-all duration-300 ${
                     index <= currentStep
-                      ? "bg-primary-400 w-8"
+                      ? "bg-emerald-400 w-8"
                       : "bg-slate-700"
                   }`}
                 />
@@ -184,7 +184,7 @@ export default function AnalyzingPage() {
             <div className="mt-8 rounded-xl bg-slate-800/30 p-4 text-center">
               <p className="text-sm text-slate-300">
                 💡 Les pimes dediquen de mitjana un{" "}
-                <strong className="text-primary-400">17% del temps</strong> a tasques administratives automatitzables.
+                <strong className="text-emerald-400">17% del temps</strong> a tasques administratives automatitzables.
               </p>
               <p className="text-xs text-slate-500 mt-1">Font: Sage Research</p>
             </div>

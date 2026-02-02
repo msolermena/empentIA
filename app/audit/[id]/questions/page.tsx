@@ -325,8 +325,8 @@ export default function QuestionsPage() {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-background gap-4">
         <div className="relative">
-          <div className="absolute inset-0 rounded-full bg-primary-500/20 blur-xl animate-pulse" />
-          <Loader2 className="relative h-12 w-12 animate-spin text-primary-400" />
+          <div className="absolute inset-0 rounded-full bg-emerald-500/20 blur-xl animate-pulse" />
+          <Loader2 className="relative h-12 w-12 animate-spin text-emerald-400" />
         </div>
         <p className="text-muted-foreground animate-pulse">{getLoadingText()}</p>
       </div>
@@ -336,14 +336,14 @@ export default function QuestionsPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="fixed top-0 z-50 w-full border-b border-primary-500/10 bg-background/80 backdrop-blur-md">
+      <header className="fixed top-0 z-50 w-full border-b border-emerald-500/10 bg-background/80 backdrop-blur-md">
         <nav className="container mx-auto flex h-16 items-center justify-between px-6">
           <Logo size="sm" variant="image" />
           <div className="flex items-center gap-3">
             <span className="text-sm text-muted-foreground">
               {questionLabels[currentQuestion]}
             </span>
-            <span className="text-sm font-medium text-primary-400">
+            <span className="text-sm font-medium text-emerald-400">
               {currentQuestion}/{TOTAL_QUESTIONS}
             </span>
           </div>
@@ -353,20 +353,20 @@ export default function QuestionsPage() {
       {/* Progress bar */}
       <div className="fixed top-16 left-0 right-0 z-40 h-1 bg-slate-800">
         <div 
-          className="h-full bg-gradient-to-r from-primary-600 to-primary-400 transition-all duration-500"
+          className="h-full bg-gradient-to-r from-emerald-600 to-emerald-400 transition-all duration-500"
           style={{ width: `${progress}%` }}
         />
       </div>
 
       {/* Main Content */}
       <div className="container mx-auto max-w-2xl px-6 pt-24 pb-12">
-        <Card className="glass-card border-2 border-primary-500/20">
+        <Card className="glass-card border-2 border-emerald-500/20">
           <CardContent className="p-8">
 
             {/* Question Content */}
             {isLoading ? (
               <div className="flex items-center justify-center py-12">
-                <Loader2 className="h-8 w-8 animate-spin text-primary-400" />
+                <Loader2 className="h-8 w-8 animate-spin text-emerald-400" />
               </div>
             ) : question?.type === 'p1_confirmacio' ? (
               <RenderP1Confirmacio
@@ -438,7 +438,7 @@ export default function QuestionsPage() {
                 onClick={saveAnswer}
                 disabled={isSaving || isLoading}
                 size="lg"
-                className="gap-2 bg-primary-600 hover:bg-primary-500 text-white px-6"
+                className="gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-6"
               >
                 {isSaving ? (
                   <>
@@ -521,7 +521,7 @@ function RenderP1Confirmacio({
       {/* Títol i subtítol */}
       <div>
         <h2 className="text-xl font-semibold text-slate-200 mb-2 flex items-center gap-2">
-          <Sparkles className="h-5 w-5 text-primary-400" />
+          <Sparkles className="h-5 w-5 text-emerald-400" />
           {question.title}
         </h2>
         <p className="text-sm text-muted-foreground">{question.subtitle}</p>
@@ -583,7 +583,7 @@ function RenderP1Confirmacio({
           onChange={(e) => setCorreccionsText(e.target.value)}
           placeholder={question.correccions.placeholder}
           rows={3}
-          className="w-full rounded-lg border border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 resize-none text-sm"
+          className="w-full rounded-lg border border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 resize-none text-sm"
         />
         <p className="mt-2 text-xs text-slate-500">
           💡 Si tot és correcte, simplement continueu sense escriure res.
@@ -615,7 +615,7 @@ function RenderP1({
     <div className="space-y-6">
       {/* WOW Text */}
       {question.wow_text && (
-        <div className="p-4 rounded-lg bg-primary-500/10 border border-primary-500/20">
+        <div className="p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
           <p className="text-slate-200 leading-relaxed">
             {question.wow_text}
           </p>
@@ -634,7 +634,7 @@ function RenderP1({
               onClick={() => { setMidaSelected(opt.id); setError(null); }}
               className={`px-4 py-3 rounded-lg border text-sm transition-all ${
                 midaSelected === opt.id
-                  ? "border-primary-500 bg-primary-500/20 text-primary-300"
+                  ? "border-emerald-500 bg-emerald-500/20 text-emerald-300"
                   : "border-slate-700 bg-slate-800/50 text-slate-300 hover:border-slate-600"
               }`}
             >
@@ -657,7 +657,7 @@ function RenderP1({
             placeholder={question.volum.placeholder}
             min={question.volum.min}
             max={question.volum.max}
-            className="flex-1 rounded-lg border border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
+            className="flex-1 rounded-lg border border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
           />
           <span className="text-slate-400 text-sm">al mes</span>
         </div>
@@ -728,7 +728,7 @@ function RenderP2({
                   onClick={() => handleSelect(ambit.id, opt.id, ambit.multi_select)}
                   className={`px-3 py-2 rounded-lg border text-sm transition-all ${
                     isSelected
-                      ? "border-primary-500 bg-primary-500/20 text-primary-300"
+                      ? "border-emerald-500 bg-emerald-500/20 text-emerald-300"
                       : "border-slate-700 bg-slate-800/50 text-slate-400 hover:border-slate-600 hover:text-slate-300"
                   }`}
                 >
@@ -809,7 +809,7 @@ function RenderP3({
             className="p-4 rounded-lg border border-slate-700/50 bg-slate-800/30"
           >
             <p className="text-slate-200 mb-3 leading-relaxed">
-              <span className="text-primary-400 font-medium mr-2">{op.index}.</span>
+              <span className="text-emerald-400 font-medium mr-2">{op.index}.</span>
               {op.text}
             </p>
             
@@ -822,7 +822,7 @@ function RenderP3({
                     onClick={() => handleEstatChange(op.id, estat.id)}
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs transition-all ${
                       isSelected
-                        ? "border-primary-500 bg-primary-500/20 text-primary-300"
+                        ? "border-emerald-500 bg-emerald-500/20 text-emerald-300"
                         : "border-slate-700 bg-slate-800/50 text-slate-400 hover:border-slate-600"
                     }`}
                   >
@@ -845,7 +845,7 @@ function RenderP3({
           <select
             value={prioritatSelected}
             onChange={(e) => setPrioritatSelected(e.target.value)}
-            className="w-full rounded-lg border border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-200 focus:border-primary-500 focus:outline-none"
+            className="w-full rounded-lg border border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-200 focus:border-emerald-500 focus:outline-none"
           >
             <option value="">{question.prioritat.placeholder}</option>
             {oportuniatsPerPrioritat.map((op) => (
@@ -959,7 +959,7 @@ function RenderP5({
         onChange={(e) => setTextLliure(e.target.value)}
         placeholder={question.input.placeholder}
         maxLength={question.input.maxLength}
-        className="min-h-[140px] w-full rounded-lg border border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 resize-none"
+        className="min-h-[140px] w-full rounded-lg border border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 resize-none"
       />
 
       <p className="text-xs text-muted-foreground text-center">

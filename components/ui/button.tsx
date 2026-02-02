@@ -9,16 +9,16 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary-500 text-white hover:bg-primary-600 hover:-translate-y-0.5 shadow-lg shadow-primary-500/40 hover:shadow-xl hover:shadow-primary-500/50",
+        default: "bg-gradient-to-br from-emerald-500 to-emerald-700 text-white hover:from-emerald-600 hover:to-emerald-800 hover:-translate-y-0.5 shadow-lg shadow-emerald-500/40 hover:shadow-xl hover:shadow-emerald-500/50",
         success: "bg-emerald-500 text-white hover:bg-emerald-600 hover:-translate-y-0.5 shadow-lg shadow-emerald-500/40",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
-          "border-2 border-primary-500/20 bg-transparent hover:bg-primary-500/10 hover:border-primary-500/40",
+          "border-2 border-emerald-500/20 bg-transparent hover:bg-emerald-500/10 hover:border-emerald-500/40 text-emerald-400",
         secondary:
-          "bg-primary-500/15 text-primary-400 border border-primary-500/30 hover:bg-primary-500/25",
-        ghost: "hover:bg-primary-500/10 hover:text-primary-400",
-        link: "text-primary-400 underline-offset-4 hover:underline",
+          "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/25",
+        ghost: "hover:bg-emerald-500/10 hover:text-emerald-400",
+        link: "text-emerald-400 underline-offset-4 hover:underline",
       },
       size: {
         default: "h-12 px-6 py-3",

@@ -49,7 +49,7 @@ export default function CompletePage() {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background">
         <div className="text-center">
-          <Loader2 className="mx-auto mb-4 h-12 w-12 animate-spin text-primary-400" />
+          <Loader2 className="mx-auto mb-4 h-12 w-12 animate-spin text-emerald-400" />
           <p className="text-muted-foreground">Preparant el teu informe...</p>
         </div>
       </div>
@@ -74,7 +74,7 @@ export default function CompletePage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="fixed top-0 z-50 w-full border-b border-primary-500/10 bg-background/80 backdrop-blur-md">
+      <header className="fixed top-0 z-50 w-full border-b border-emerald-500/10 bg-background/80 backdrop-blur-md">
         <nav className="container mx-auto flex h-20 items-center px-8">
           <Logo size="md" variant="image" />
         </nav>
@@ -153,8 +153,8 @@ export default function CompletePage() {
         {/* ==================== OPORTUNITATS PRINCIPALS ==================== */}
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-6">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-500/15">
-              <Target className="h-5 w-5 text-primary-400" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/15">
+              <Target className="h-5 w-5 text-emerald-400" />
             </div>
             <h2 className="text-2xl font-bold text-slate-200">
               Oportunitats Detectades
@@ -216,12 +216,12 @@ export default function CompletePage() {
         )}
 
         {/* ==================== RECOMANACIÓ ==================== */}
-        <Card className="glass-card border-2 border-primary-500/20 mb-10">
+        <Card className="glass-card border-2 border-emerald-500/20 mb-10">
           <CardContent className="p-6">
             <div className="flex items-start gap-3">
-              <CheckCircle2 className="h-6 w-6 text-primary-400 mt-0.5 flex-shrink-0" />
+              <CheckCircle2 className="h-6 w-6 text-emerald-400 mt-0.5 flex-shrink-0" />
               <div>
-                <p className="text-sm font-medium text-primary-300 mb-2 uppercase tracking-wide">
+                <p className="text-sm font-medium text-emerald-300 mb-2 uppercase tracking-wide">
                   La nostra recomanació
                 </p>
                 <p className="text-slate-200 leading-relaxed">
@@ -235,8 +235,8 @@ export default function CompletePage() {
         {/* ==================== PLANS ==================== */}
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-6">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-500/15">
-              <Sparkles className="h-5 w-5 text-primary-400" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/15">
+              <Sparkles className="h-5 w-5 text-emerald-400" />
             </div>
             <h2 className="text-2xl font-bold text-slate-200">
               Tria el pla que s'adapti a tu
@@ -245,36 +245,36 @@ export default function CompletePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
             {/* Pla Arrencada */}
-            <Card className="glass-card border border-slate-700/50 hover:border-primary-500/30 transition-all">
+            <Card className="glass-card border border-slate-700/50 hover:border-emerald-500/30 transition-all">
               <CardContent className="p-6 text-center">
                 <div className="text-3xl mb-2">🚀</div>
                 <h3 className="text-lg font-bold text-slate-200 mb-1">Arrencada</h3>
-                <p className="text-2xl font-bold text-primary-400 mb-2">1 procés</p>
+                <p className="text-2xl font-bold text-emerald-400 mb-2">1 procés</p>
                 <p className="text-sm text-slate-400 mb-3">Plataforma empentIA</p>
                 <p className="text-xs text-slate-500">Ideal per provar i veure resultats ràpids</p>
               </CardContent>
             </Card>
 
             {/* Pla Acceleració - Destacat */}
-            <Card className="glass-card border-2 border-primary-500/50 relative">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+            <Card className="glass-card border-2 border-emerald-500/50 relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full">
                 Recomanat
               </div>
               <CardContent className="p-6 text-center">
                 <div className="text-3xl mb-2">⚡</div>
                 <h3 className="text-lg font-bold text-slate-200 mb-1">Acceleració</h3>
-                <p className="text-2xl font-bold text-primary-400 mb-2">3 processos</p>
+                <p className="text-2xl font-bold text-emerald-400 mb-2">3 processos</p>
                 <p className="text-sm text-slate-400 mb-3">Plataforma empentIA Pro</p>
                 <p className="text-xs text-slate-500">Impacte real en operacions</p>
               </CardContent>
             </Card>
 
             {/* Pla Transformació */}
-            <Card className="glass-card border border-slate-700/50 hover:border-primary-500/30 transition-all">
+            <Card className="glass-card border border-slate-700/50 hover:border-emerald-500/30 transition-all">
               <CardContent className="p-6 text-center">
                 <div className="text-3xl mb-2">🏆</div>
                 <h3 className="text-lg font-bold text-slate-200 mb-1">Transformació</h3>
-                <p className="text-2xl font-bold text-primary-400 mb-2">5+ processos</p>
+                <p className="text-2xl font-bold text-emerald-400 mb-2">5+ processos</p>
                 <p className="text-sm text-slate-400 mb-3">Plataforma empentIA Premium</p>
                 <p className="text-xs text-slate-500">Canvi complet de processos</p>
               </CardContent>
@@ -288,7 +288,7 @@ export default function CompletePage() {
 
         {/* ==================== AGENTS IA (abans "EMPENTIA SUITE") ==================== */}
         <Card className="glass-card border border-purple-500/30 mb-10 overflow-hidden">
-          <div className="bg-gradient-to-r from-purple-500/10 to-primary-500/10 p-6">
+          <div className="bg-gradient-to-r from-purple-500/10 to-emerald-500/10 p-6">
             <div className="flex items-center gap-3 mb-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-500/20">
                 <span className="text-xl">🤖</span>
@@ -391,7 +391,7 @@ function OportunitatCard({
             {/* Botó saber-ne més */}
             <button
               onClick={handleSaberMes}
-              className="text-sm text-primary-400 hover:text-primary-300 flex items-center gap-1 transition-colors"
+              className="text-sm text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition-colors"
             >
               Saber-ne més →
             </button>

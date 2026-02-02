@@ -27,11 +27,11 @@ const config = {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
-          300: "#93C5FD",
-          400: "#60A5FA",
-          500: "#3B82F6",
-          600: "#2563EB",
-          700: "#1D4ED8",
+          300: "#6EE7B7",  // emerald-300
+          400: "#34D399",  // emerald-400
+          500: "#10B981",  // emerald-500
+          600: "#059669",  // emerald-600
+          700: "#047857",  // emerald-700
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -48,9 +48,9 @@ const config = {
         accent: {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
-          300: "#7DD3FC",
-          400: "#38BDF8",
-          500: "#0EA5E9",
+          300: "#6EE7B7",
+          400: "#34D399",
+          500: "#10B981",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",
@@ -60,11 +60,13 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // empentIA custom colors
+        // empentIA brand colors
         emerald: {
+          300: "#6EE7B7",
           400: "#34D399",
           500: "#10B981",
           600: "#059669",
+          700: "#047857",
         },
       },
       borderRadius: {

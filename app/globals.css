@@ -10,7 +10,7 @@
     --card-foreground: 210 40% 98%;
     --popover: 222 47% 11%;
     --popover-foreground: 210 40% 98%;
-    --primary: 221 83% 53%;       /* #3B82F6 blue-500 (logo) */
+    --primary: 160 84% 39%;       /* #10B981 emerald-500 */
     --primary-foreground: 210 40% 98%;
     --secondary: 217 33% 17%;     /* #1E293B slate-800 */
     --secondary-foreground: 210 40% 98%;
@@ -20,9 +20,9 @@
     --accent-foreground: 210 40% 98%;
     --destructive: 0 84% 60%;     /* #EF4444 red-500 */
     --destructive-foreground: 210 40% 98%;
-    --border: 217 33% 17%;        /* rgba(59, 130, 246, 0.1) */
+    --border: 217 33% 17%;
     --input: 217 33% 17%;
-    --ring: 221 83% 53%;
+    --ring: 160 84% 39%;          /* emerald-500 */
     --radius: 1rem;
   }
 }
@@ -40,20 +40,29 @@
 @layer utilities {
   /* Glassmorphism */
   .glass-card {
-    @apply bg-slate-900/60 backdrop-blur-xl border border-primary-500/10;
+    @apply bg-slate-900/60 backdrop-blur-xl border border-emerald-500/10;
   }
   
   .glass-card-hover {
-    @apply hover:border-primary-500/30 hover:shadow-2xl hover:shadow-primary-500/10 transition-all duration-300;
+    @apply hover:border-emerald-500/30 hover:shadow-2xl hover:shadow-emerald-500/10 transition-all duration-300;
   }
   
   /* Gradient text */
   .gradient-text {
-    @apply bg-gradient-to-r from-slate-50 to-primary-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-slate-50 to-emerald-500 bg-clip-text text-transparent;
   }
   
-  .gradient-text-blue-emerald {
-    @apply bg-gradient-to-r from-primary-500 to-emerald-500 bg-clip-text text-transparent;
+  .gradient-text-emerald {
+    @apply bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent;
+  }
+  
+  /* Gradient button background */
+  .gradient-emerald {
+    background: linear-gradient(135deg, #10B981, #047857);
+  }
+  
+  .gradient-emerald-hover:hover {
+    background: linear-gradient(135deg, #059669, #065f46);
   }
   
   /* Animations */

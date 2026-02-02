@@ -11,7 +11,7 @@ export default function PrivacyPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-primary-500/10 bg-background/80 backdrop-blur-md">
+      <header className="border-b border-emerald-500/10 bg-background/80 backdrop-blur-md">
         <nav className="container mx-auto flex h-20 items-center px-8">
           <Logo size="md" variant="image" />
         </nav>
@@ -22,7 +22,7 @@ export default function PrivacyPage() {
         <h1 className="mb-8 text-4xl font-extrabold">Política de Privacitat</h1>
         
         <div className="prose prose-invert max-w-none space-y-8">
-          <Card className="glass-card border-primary-500/10">
+          <Card className="glass-card border-emerald-500/10">
             <CardHeader>
               <CardTitle>1. Informació General</CardTitle>
             </CardHeader>
@@ -42,7 +42,7 @@ export default function PrivacyPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass-card border-primary-500/10">
+          <Card className="glass-card border-emerald-500/10">
             <CardHeader>
               <CardTitle>2. Quines Dades Recollim</CardTitle>
             </CardHeader>
@@ -64,14 +64,14 @@ export default function PrivacyPage() {
                   (tecnologies, sector, mida estimada)
                 </li>
               </ul>
-              <p className="rounded-lg bg-primary-500/5 p-4 text-sm">
+              <p className="rounded-lg bg-emerald-500/5 p-4 text-sm">
                 <strong className="text-slate-200">Important:</strong> NO recollim dades financeres, 
                 contrasenyes, ni altra informació sensible de la teva empresa.
               </p>
             </CardContent>
           </Card>
 
-          <Card className="glass-card border-primary-500/10">
+          <Card className="glass-card border-emerald-500/10">
             <CardHeader>
               <CardTitle>3. Com Utilitzem les Teves Dades</CardTitle>
             </CardHeader>
@@ -89,7 +89,7 @@ export default function PrivacyPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass-card border-primary-500/10">
+          <Card className="glass-card border-emerald-500/10">
             <CardHeader>
               <CardTitle>4. Base Legal (GDPR)</CardTitle>
             </CardHeader>
@@ -108,7 +108,7 @@ export default function PrivacyPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass-card border-primary-500/10">
+          <Card className="glass-card border-emerald-500/10">
             <CardHeader>
               <CardTitle>5. On Guardem les Teves Dades</CardTitle>
             </CardHeader>
@@ -131,7 +131,7 @@ export default function PrivacyPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass-card border-primary-500/10">
+          <Card className="glass-card border-emerald-500/10">
             <CardHeader>
               <CardTitle>6. Quant Temps Guardem les Dades</CardTitle>
             </CardHeader>
@@ -153,7 +153,7 @@ export default function PrivacyPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass-card border-primary-500/10">
+          <Card className="glass-card border-emerald-500/10">
             <CardHeader>
               <CardTitle>7. Els Teus Drets</CardTitle>
             </CardHeader>
@@ -186,7 +186,7 @@ export default function PrivacyPage() {
                 <p className="text-sm">
                   <strong className="text-emerald-400">Per exercir aquests drets:</strong><br />
                   Envia un email a{" "}
-                  <a href="mailto:hola@empentia.cat" className="text-primary-400 underline">
+                  <a href="mailto:hola@empentia.cat" className="text-emerald-400 underline">
                     hola@empentia.cat
                   </a>{" "}
                   amb l&apos;assumpte &quot;Drets GDPR&quot; i respondrem en menys de 30 dies.
@@ -195,7 +195,7 @@ export default function PrivacyPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass-card border-primary-500/10">
+          <Card className="glass-card border-emerald-500/10">
             <CardHeader>
               <CardTitle>8. Cookies i Tecnologies Similars</CardTitle>
             </CardHeader>
@@ -213,7 +213,7 @@ export default function PrivacyPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass-card border-primary-500/10">
+          <Card className="glass-card border-emerald-500/10">
             <CardHeader>
               <CardTitle>9. Compartició amb Tercers</CardTitle>
             </CardHeader>
@@ -237,7 +237,7 @@ export default function PrivacyPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass-card border-primary-500/10">
+          <Card className="glass-card border-emerald-500/10">
             <CardHeader>
               <CardTitle>10. Seguretat</CardTitle>
             </CardHeader>
@@ -253,7 +253,7 @@ export default function PrivacyPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass-card border-primary-500/10">
+          <Card className="glass-card border-emerald-500/10">
             <CardHeader>
               <CardTitle>11. Canvis a Aquesta Política</CardTitle>
             </CardHeader>
@@ -268,7 +268,7 @@ export default function PrivacyPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass-card border-primary-500/10">
+          <Card className="glass-card border-emerald-500/10">
             <CardHeader>
               <CardTitle>12. Contacte i Reclamacions</CardTitle>
             </CardHeader>
@@ -277,7 +277,7 @@ export default function PrivacyPage() {
               <div className="rounded-lg bg-slate-800/30 p-4">
                 <p className="text-sm">
                   <strong className="text-slate-200">Email:</strong>{" "}
-                  <a href="mailto:hola@empentia.cat" className="text-primary-400 underline">
+                  <a href="mailto:hola@empentia.cat" className="text-emerald-400 underline">
                     hola@empentia.cat
                   </a>
                 </p>
@@ -294,7 +294,7 @@ export default function PrivacyPage() {
         <div className="mt-12 text-center">
           <Link 
             href="/" 
-            className="text-primary-400 underline hover:text-primary-300"
+            className="text-emerald-400 underline hover:text-emerald-300"
           >
             ← Tornar a l&apos;inici
           </Link>

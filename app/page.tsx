@@ -78,17 +78,17 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="fixed top-0 z-50 w-full border-b border-primary-500/10 bg-background/80 backdrop-blur-md">
+      <header className="fixed top-0 z-50 w-full border-b border-emerald-500/10 bg-background/80 backdrop-blur-md">
         <nav className="container mx-auto flex h-20 items-center justify-between px-8">
           <Logo size="md" variant="image" />
           <div className="hidden items-center gap-8 md:flex">
-            <a href="#features" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary-400">
+            <a href="#features" className="text-sm font-medium text-muted-foreground transition-colors hover:text-emerald-400">
               Com funciona
             </a>
-            <a href="#pricing" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary-400">
+            <a href="#pricing" className="text-sm font-medium text-muted-foreground transition-colors hover:text-emerald-400">
               Preus
             </a>
-            <a href="#contact" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary-400">
+            <a href="#contact" className="text-sm font-medium text-muted-foreground transition-colors hover:text-emerald-400">
               Contacte
             </a>
           </div>
@@ -99,7 +99,7 @@ export default function Home() {
       <section className="relative flex min-h-screen items-center justify-center px-8 pt-20">
         {/* Animated background glow */}
         <div className="absolute left-1/2 top-0 h-[800px] w-[800px] -translate-x-1/2 animate-pulse-glow">
-          <div className="h-full w-full rounded-full bg-primary-500/15 blur-3xl" />
+          <div className="h-full w-full rounded-full bg-emerald-500/15 blur-3xl" />
         </div>
 
         <div className="container relative z-10 mx-auto max-w-4xl text-center">
@@ -117,7 +117,7 @@ export default function Home() {
 
           {/* Input Group */}
           <form onSubmit={handleSubmit} className="fade-in-up-delay-2 mb-8">
-            <div className="glass-card mx-auto flex max-w-3xl flex-col gap-3 rounded-2xl border-2 border-primary-500/20 p-3 shadow-2xl transition-all focus-within:border-primary-500 focus-within:shadow-primary-500/20 sm:flex-row">
+            <div className="glass-card mx-auto flex max-w-3xl flex-col gap-3 rounded-2xl border-2 border-emerald-500/20 p-3 shadow-2xl transition-all focus-within:border-emerald-500 focus-within:shadow-emerald-500/20 sm:flex-row">
               <Input
                 type="text"
                 placeholder="exemple.cat"
@@ -168,10 +168,10 @@ export default function Home() {
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             <Card className="group relative overflow-hidden">
-              <div className="absolute left-0 right-0 top-0 h-1 bg-gradient-to-r from-primary-500 to-emerald-500 opacity-0 transition-opacity group-hover:opacity-100" />
+              <div className="absolute left-0 right-0 top-0 h-1 bg-gradient-to-r from-emerald-500 to-emerald-500 opacity-0 transition-opacity group-hover:opacity-100" />
               <CardHeader>
-                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-500/15">
-                  <Globe className="h-7 w-7 text-primary-400" />
+                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500/15">
+                  <Globe className="h-7 w-7 text-emerald-400" />
                 </div>
                 <CardTitle>1. Analitzem la Teva Web</CardTitle>
                 <CardDescription className="text-base">
@@ -181,10 +181,10 @@ export default function Home() {
             </Card>
 
             <Card className="group relative overflow-hidden">
-              <div className="absolute left-0 right-0 top-0 h-1 bg-gradient-to-r from-primary-500 to-emerald-500 opacity-0 transition-opacity group-hover:opacity-100" />
+              <div className="absolute left-0 right-0 top-0 h-1 bg-gradient-to-r from-emerald-500 to-emerald-500 opacity-0 transition-opacity group-hover:opacity-100" />
               <CardHeader>
-                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-500/15">
-                  <Lightbulb className="h-7 w-7 text-primary-400" />
+                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500/15">
+                  <Lightbulb className="h-7 w-7 text-emerald-400" />
                 </div>
                 <CardTitle>2. Detectem Oportunitats</CardTitle>
                 <CardDescription className="text-base">
@@ -194,10 +194,10 @@ export default function Home() {
             </Card>
 
             <Card className="group relative overflow-hidden md:col-span-2 lg:col-span-1">
-              <div className="absolute left-0 right-0 top-0 h-1 bg-gradient-to-r from-primary-500 to-emerald-500 opacity-0 transition-opacity group-hover:opacity-100" />
+              <div className="absolute left-0 right-0 top-0 h-1 bg-gradient-to-r from-emerald-500 to-emerald-500 opacity-0 transition-opacity group-hover:opacity-100" />
               <CardHeader>
-                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-500/15">
-                  <BarChart3 className="h-7 w-7 text-primary-400" />
+                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500/15">
+                  <BarChart3 className="h-7 w-7 text-emerald-400" />
                 </div>
                 <CardTitle>3. Reps l&apos;Auditoria</CardTitle>
                 <CardDescription className="text-base">
@@ -212,10 +212,10 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-24 px-8">
         <div className="container mx-auto max-w-4xl">
-          <Card className="glass-card relative overflow-hidden border-2 border-primary-500/20 p-16 text-center">
+          <Card className="glass-card relative overflow-hidden border-2 border-emerald-500/20 p-16 text-center">
             {/* Rotating background glow */}
             <div className="absolute -left-1/2 -top-1/2 h-[200%] w-[200%] animate-pulse-glow">
-              <div className="h-full w-full rounded-full bg-primary-500/10 blur-3xl" />
+              <div className="h-full w-full rounded-full bg-emerald-500/10 blur-3xl" />
             </div>
 
             <div className="relative z-10">
@@ -225,7 +225,7 @@ export default function Home() {
               </p>
 
               <form onSubmit={handleSubmit}>
-                <div className="glass-card mx-auto flex max-w-2xl flex-col gap-3 rounded-2xl border-2 border-primary-500/20 p-3 sm:flex-row">
+                <div className="glass-card mx-auto flex max-w-2xl flex-col gap-3 rounded-2xl border-2 border-emerald-500/20 p-3 sm:flex-row">
                   <Input
                     type="text"
                     placeholder="exemple.cat"
@@ -253,7 +253,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-primary-500/10 py-12 text-center">
+      <footer className="border-t border-emerald-500/10 py-12 text-center">
         <div className="container mx-auto px-8">
           <p className="text-sm text-muted-foreground">
             &copy; 2026 empentIA. Consultoria d&apos;automatització IA per pimes catalanes.
