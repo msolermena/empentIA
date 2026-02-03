@@ -387,48 +387,56 @@ function ExemplesCarousel() {
         <div
           ref={scrollRef}
           onScroll={checkScroll}
-          className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory"
+          className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {exemples.map((exemple) => (
-            <button
-              key={exemple.id}
-              onClick={() => setSelectedId(exemple.id)}
-              className={`group relative flex-shrink-0 snap-start rounded-xl border-2 p-4 text-left transition-all w-[160px] md:w-[180px] ${
-                selectedId === exemple.id
-                  ? 'border-emerald-500 bg-emerald-500/10'
-                  : 'border-slate-800 bg-slate-900/50 hover:border-slate-700'
-              }`}
-            >
-              {/* Tipus badge */}
-              <div className={`mb-3 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${
-                exemple.tipus === 'auto' 
-                  ? 'bg-amber-500/10 text-amber-400' 
-                  : 'bg-purple-500/10 text-purple-400'
-              }`}>
-                {exemple.tipus === 'auto' ? <Zap className="h-3 w-3" /> : <Bot className="h-3 w-3" />}
-                {exemple.tipus === 'auto' ? 'Auto' : 'Agent'}
-              </div>
+            <div key={exemple.id} className="relative flex-shrink-0 snap-start">
+              <button
+                onClick={() => setSelectedId(exemple.id)}
+                className={`relative rounded-xl border-2 p-3 text-left transition-all w-[140px] md:w-[150px] ${
+                  selectedId === exemple.id
+                    ? 'border-emerald-500 bg-emerald-500/10'
+                    : 'border-slate-800 bg-slate-900/50 hover:border-slate-700'
+                }`}
+              >
+                {/* Tipus badge - alineat a dalt */}
+                <div className={`mb-2 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium ${
+                  exemple.tipus === 'auto' 
+                    ? 'bg-amber-500/10 text-amber-400' 
+                    : 'bg-purple-500/10 text-purple-400'
+                }`}>
+                  {exemple.tipus === 'auto' ? <Zap className="h-2.5 w-2.5" /> : <Bot className="h-2.5 w-2.5" />}
+                  {exemple.tipus === 'auto' ? 'Automatització' : 'Agent IA'}
+                </div>
 
-              {/* Icona */}
-              <div className={`mb-3 flex h-10 w-10 items-center justify-center rounded-lg ${
-                selectedId === exemple.id ? 'bg-emerald-500/20' : 'bg-slate-800'
-              }`}>
-                <exemple.icon className={`h-5 w-5 ${
-                  selectedId === exemple.id ? 'text-emerald-400' : 'text-slate-400'
-                }`} />
-              </div>
+                {/* Icona */}
+                <div className={`mb-2 flex h-8 w-8 items-center justify-center rounded-lg ${
+                  selectedId === exemple.id ? 'bg-emerald-500/20' : 'bg-slate-800'
+                }`}>
+                  <exemple.icon className={`h-4 w-4 ${
+                    selectedId === exemple.id ? 'text-emerald-400' : 'text-slate-400'
+                  }`} />
+                </div>
 
-              {/* Nom */}
-              <h3 className={`mb-1 text-sm font-semibold leading-tight ${
-                selectedId === exemple.id ? 'text-emerald-400' : 'text-slate-200'
-              }`}>
-                {exemple.nom}
-              </h3>
+                {/* Nom */}
+                <h3 className={`mb-1 text-xs font-semibold leading-tight ${
+                  selectedId === exemple.id ? 'text-emerald-400' : 'text-slate-200'
+                }`}>
+                  {exemple.nom}
+                </h3>
 
-              {/* Hook */}
-              <p className="text-xs text-slate-500">"{exemple.hook}"</p>
-            </button>
+                {/* Hook */}
+                <p className="text-[10px] text-slate-500 leading-tight">"{exemple.hook}"</p>
+              </button>
+
+              {/* Fletxa indicadora sota la card seleccionada */}
+              {selectedId === exemple.id && (
+                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2">
+                  <div className="w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-emerald-500" />
+                </div>
+              )}
+            </div>
           ))}
         </div>
 
@@ -446,7 +454,7 @@ function ExemplesCarousel() {
       </div>
 
       {/* Detall expandit */}
-      <div className="mt-6 rounded-2xl border border-slate-800 bg-slate-900/30 p-6 md:p-8">
+      <div className="mt-6 rounded-2xl border-2 border-emerald-500/30 bg-slate-900/30 p-6 md:p-8">
         {/* Header detall */}
         <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
           <div className="flex items-center gap-3">
