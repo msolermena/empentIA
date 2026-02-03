@@ -9,10 +9,10 @@ export const metadata: Metadata = {
   description: "Automatitzacions i agents IA a mida per impulsar l'eficiència i el creixement del teu negoci. Sense complicacions tècniques.",
   icons: {
     icon: [
-      { url: '/favicon.png', type: 'image/png' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
     ],
     apple: [
-      { url: '/favicon.png', type: 'image/png' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
     ],
   },
   openGraph: {

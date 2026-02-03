@@ -289,7 +289,7 @@ export default function Home() {
             <div className="mx-auto flex max-w-2xl flex-col gap-3 rounded-2xl border-2 border-slate-800 bg-slate-900/60 p-2 backdrop-blur-sm transition-all focus-within:border-emerald-500/50 focus-within:shadow-lg focus-within:shadow-emerald-500/10 sm:flex-row sm:p-2">
               <Input
                 type="text"
-                placeholder="La web de la teva empresa"
+                placeholder="Introdueix la web de la teva empresa"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 className="flex-1 border-0 bg-transparent px-4 text-base placeholder:text-slate-500 focus:ring-0"
@@ -578,7 +578,7 @@ export default function Home() {
                 <div className="mx-auto flex max-w-xl flex-col gap-3 rounded-2xl border-2 border-slate-700 bg-slate-900/80 p-2 transition-all focus-within:border-emerald-500/50 sm:flex-row">
                   <Input
                     type="text"
-                    placeholder="La web de la teva empresa"
+                    placeholder="Introdueix la web de la teva empresa"
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
                     className="flex-1 border-0 bg-transparent px-4 text-base placeholder:text-slate-500 focus:ring-0"
