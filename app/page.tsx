@@ -31,7 +31,6 @@ import {
   ChevronRight,
   Zap,
   FileSpreadsheet,
-  Target,
   Wallet,
   Receipt,
   Car,
@@ -208,95 +207,101 @@ const exemples = [
     icon: FileSpreadsheet,
     nom: "Pressupostos automàtics",
     hook: "30 seg vs 15 min",
-    subtitol: "El client demana, el sistema respon. Tu només aprovas.",
+    titolDetall: "Pressupostos automàtics",
+    subtitol: "El client demana, el sistema respon. Tu només aproves.",
     flux: [
       { icon: MessageCircle, text: "Client escriu per WhatsApp o formulari" },
-      { icon: Bot, text: "IA extreu dades i aplica tarifes" },
+      { icon: Bot, text: "IA extreu dades i aplica les teves tarifes" },
       { icon: FileText, text: "PDF enviat en 30 segons" },
     ],
-    exemple: "\"Hola, voldria pressupost per instal·lar aire condicionat en un pis de 80m²\"",
+    keypoint: "Funciona 24/7. El client rep resposta immediata encara que sigui diumenge a les 11 de la nit.",
     abans: "15 minuts per pressupost (llegir, calcular, redactar, enviar)",
     ara: "Automàtic 24/7. El client rep resposta immediata, tu revises si cal.",
   },
   {
     id: 2,
     tipus: "agent",
-    icon: Target,
+    icon: Search,
     nom: "Prospector comercial",
     hook: "Leads nous cada dilluns",
+    titolDetall: "Prospector comercial IA",
     subtitol: "El teu comercial IA que mai dorm",
     flux: [
-      { icon: Search, text: "Detecta nous negocis al teu territori" },
-      { icon: BarChart3, text: "Analitza web i detecta si encaixen" },
-      { icon: Mail, text: "Email personalitzat llest per enviar" },
+      { icon: Search, text: "Detecta nous negocis oberts al teu territori" },
+      { icon: BarChart3, text: "Analitza la seva web i detecta si encaixen" },
+      { icon: Mail, text: "Prepara email personalitzat llest per enviar" },
     ],
-    exemple: "Cada dilluns reps: llista de 10-15 negocis nous, fitxa completa i email redactat per l'agent.",
-    abans: "4h/setmana buscant leads a Google, LinkedIn, registres",
-    ara: "0 minuts. Només decideixes a qui contactar.",
+    keypoint: "Cada dilluns reps 10-15 oportunitats noves amb fitxa completa i email ja redactat, llest per enviar amb un clic.",
+    abans: "4h/setmana buscant leads a Google, LinkedIn, registres mercantils",
+    ara: "0 minuts. Decideixes a qui contactar.",
   },
   {
     id: 3,
+    tipus: "agent",
+    icon: MessageCircle,
+    nom: "Assistent comercial IA",
+    hook: "Respon, qualifica i passa els bons",
+    titolDetall: "Assistent comercial IA",
+    subtitol: "Atén clients, resol dubtes i detecta oportunitats 24/7",
+    flux: [
+      { icon: MessageCircle, text: "Client contacta per web (chat/form) o WhatsApp" },
+      { icon: Bot, text: "Agent respon dubtes i detecta interès de compra" },
+      { icon: CheckCircle2, text: "Qualifica i passa leads calents amb fitxa completa" },
+    ],
+    keypoint: "Et passa els leads calents amb fitxa completa: què necessita, quan ho vol, pressupost estimat.",
+    abans: "Respondre tots els contactes igual + perdre temps amb curiosos",
+    ara: "L'agent filtra i qualifica 24/7. Tu parles amb qui realment vol comprar.",
+  },
+  {
+    id: 4,
     tipus: "auto",
     icon: Wallet,
     nom: "Cobrament intel·ligent",
     hook: "Cobra sense perseguir",
-    subtitol: "Recordatoris cordials que cobren per tu",
+    titolDetall: "Cobrament intel·ligent",
+    subtitol: "Gestió de cobraments que s'adapta a cada client",
     flux: [
-      { icon: Clock, text: "Factura venç en 3 dies" },
-      { icon: MessageCircle, text: "Recordatori cordial per WhatsApp/email" },
-      { icon: CheckCircle2, text: "Registre automàtic + escalat si cal" },
+      { icon: Clock, text: "Factura propera a vèncer" },
+      { icon: Bot, text: "IA analitza historial (bon pagador? reincident?)" },
+      { icon: MessageCircle, text: "Acció personalitzada + seguiment automàtic" },
     ],
-    exemple: "Seqüència: 3 dies abans → Dia D → +7 dies → +15 dies (alerta a tu)",
-    abans: "Revisar venciments + trucar un a un + apuntar qui ha pagat",
-    ara: "El sistema persegueix per tu amb to professional. Tu només intervens quan cal.",
+    keypoint: "Accions segons perfil: recordatori suau per bons pagadors, avís de tall de servei per reincidents, facilitats de pagament si detecta dificultats. Inclou enllaç de pagament directe.",
+    abans: "Revisar venciments + trucar un a un + decidir com actuar amb cada cas",
+    ara: "El sistema decideix el to i l'acció per cada client. Tu intervens quan cal.",
   },
   {
-    id: 4,
+    id: 5,
     tipus: "agent",
     icon: Receipt,
     nom: "Assistent comptable",
     hook: "Factures processades soles",
+    titolDetall: "Assistent comptable IA",
     subtitol: "Les factures s'ordenen soles mentre prens el cafè",
     flux: [
       { icon: Mail, text: "Factura arriba per email" },
-      { icon: Bot, text: "OCR + IA extreu proveïdor, import, IVA" },
-      { icon: Database, text: "Arxiu ordenat + Excel actualitzat" },
+      { icon: Bot, text: "OCR + IA extreu proveïdor, import, IVA, concepte" },
+      { icon: Database, text: "Arxiu ordenat + sistema comptable actualitzat" },
     ],
-    exemple: "Detecta factures → Extreu dades → Classifica per proveïdor/mes → Actualitza sistema → Genera resum mensual",
+    keypoint: "Detecta duplicats, alerta d'imports inusuals i genera el resum mensual per a la gestoria.",
     abans: "30 min/dia revisant correus, descarregant PDFs, picant dades",
-    ara: "Tot processat automàticament. Tu només valides el resum.",
-  },
-  {
-    id: 5,
-    tipus: "auto",
-    icon: Car,
-    nom: "ITV + Reserva",
-    hook: "Recorda i reserva sol",
-    subtitol: "El client recorda la ITV i reserva hora sense que facis res",
-    flux: [
-      { icon: Clock, text: "7 dies abans ITV venç" },
-      { icon: MessageCircle, text: "WhatsApp amb link per reservar" },
-      { icon: CheckCircle2, text: "Client tria hora → Cita al calendari" },
-    ],
-    exemple: "\"Hola Joan! 👋 La ITV del teu Seat Ibiza venç el 15/02. Reserva hora aquí: [link]\"",
-    abans: "Revisar Excel ITVs + trucar clients + quadrar agendes",
-    ara: "0 trucades. El client reserva sol, tu només fas la feina.",
+    ara: "Tot processat automàticament. Tu valides el resum.",
   },
   {
     id: 6,
-    tipus: "agent",
-    icon: UserCheck,
-    nom: "Qualificador de leads",
-    hook: "Filtra els bons",
-    subtitol: "Només parles amb clients que valen la pena",
+    tipus: "auto",
+    icon: Car,
+    nom: "Recordatoris vehicle",
+    hook: "Recorda i reserva sol",
+    titolDetall: "Recordatoris vehicle + Reserva automàtica",
+    subtitol: "ITV, revisions, canvis d'oli... el client recorda i reserva sense que facis res",
     flux: [
-      { icon: MessageCircle, text: "Lead entra per form/WhatsApp" },
-      { icon: Bot, text: "Agent fa preguntes clau (pressupost, urgència)" },
-      { icon: CheckCircle2, text: "Llista prioritzada pel comercial" },
+      { icon: Clock, text: "Servei proper (ITV, revisió, canvi d'oli...)" },
+      { icon: MessageCircle, text: "WhatsApp automàtic amb link per reservar" },
+      { icon: CheckCircle2, text: "Client tria hora → Cita confirmada al calendari" },
     ],
-    exemple: "Puntua urgència (1-5), pressupost (€), fit. Classifica: 🔥 Calent / 🟡 Tibio / 🔵 Fred",
-    abans: "Respondre tots els leads igual + perdre temps amb curiosos",
-    ara: "Només truques als que realment volen comprar.",
+    keypoint: "ITV, revisions, canvis d'oli, pneumàtics... Recupera clients inactius amb recordatoris automàtics del seu proper manteniment.",
+    abans: "Revisar Excel + trucar clients un a un + quadrar agendes",
+    ara: "0 trucades. El client reserva sol i tu recuperes clients que feia mesos que no venien.",
   },
   {
     id: 7,
@@ -304,29 +309,31 @@ const exemples = [
     icon: Heart,
     nom: "Benvinguda client",
     hook: "Primera impressió 10",
+    titolDetall: "Benvinguda automàtica",
     subtitol: "Primera impressió impecable, sense fer res",
     flux: [
       { icon: UserCheck, text: "Nou client donat d'alta" },
-      { icon: Mail, text: "Email benvinguda + docs personalitzats" },
-      { icon: Clock, text: "Tasca creada seguiment 7 dies" },
+      { icon: Mail, text: "Email benvinguda + documentació personalitzada" },
+      { icon: FileText, text: "Formulari per recollir documents del client" },
     ],
-    exemple: "\"Hola Maria! 🎉 Benvinguda a [Empresa]. Aquí tens tot per començar: [docs]\"",
-    abans: "Recordar enviar email + buscar docs + apuntar seguiment",
-    ara: "El client se sent atès des del minut 1. Tu no oblides mai res.",
+    keypoint: "Inclou recollida de documents: el client rep formulari per pujar DNI, contractes o el que necessitis. Tot arxivat automàticament a la seva fitxa.",
+    abans: "Recordar enviar email + buscar docs + demanar papers + apuntar seguiment",
+    ara: "El client se sent atès des del minut 1. Documentació recollida sense haver de perseguir.",
   },
   {
     id: 8,
     tipus: "agent",
     icon: TrendingUp,
     nom: "Analista competència",
-    hook: "Saps què fan abans que ells",
-    subtitol: "Monitoritza els teus competidors mentre tu treballes",
+    hook: "Competència sota control",
+    titolDetall: "Analista de competència IA",
+    subtitol: "Monitoritza la presència online dels competidors mentre tu treballes",
     flux: [
-      { icon: Search, text: "Agent revisa webs i xarxes competidors" },
-      { icon: Sparkle, text: "Detecta canvis: preus, productes, ofertes" },
-      { icon: BarChart3, text: "Resum setmanal amb alertes" },
+      { icon: Search, text: "Agent revisa webs i presència online dels competidors" },
+      { icon: Sparkle, text: "Detecta canvis: preus, productes, ofertes, novetats" },
+      { icon: BarChart3, text: "Resum setmanal amb alertes importants" },
     ],
-    exemple: "\"Aquesta setmana, Competidor X ha baixat un 10% el producte Y\"",
+    keypoint: "Cada setmana reps al correu: qui ha canviat preus, qui ha llançat ofertes, qui ha afegit productes. Alerta immediata si hi ha canvis crítics.",
     abans: "Entrar manualment a webs de competidors o no fer-ho mai",
     ara: "Tens un espia legal que t'informa de tot. Sempre un pas per davant.",
   },
@@ -387,52 +394,42 @@ function ExemplesCarousel() {
         <div
           ref={scrollRef}
           onScroll={checkScroll}
-          className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory"
+          className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {exemples.map((exemple) => (
             <div key={exemple.id} className="relative flex-shrink-0 snap-start">
               <button
                 onClick={() => setSelectedId(exemple.id)}
-                className={`relative rounded-xl border-2 p-3 text-left transition-all w-[140px] md:w-[150px] ${
+                className={`relative rounded-xl border-2 p-4 text-left transition-all w-[160px] md:w-[180px] h-[140px] flex flex-col ${
                   selectedId === exemple.id
                     ? 'border-emerald-500 bg-emerald-500/10'
                     : 'border-slate-800 bg-slate-900/50 hover:border-slate-700'
                 }`}
               >
-                {/* Tipus badge - alineat a dalt */}
-                <div className={`mb-2 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium ${
-                  exemple.tipus === 'auto' 
-                    ? 'bg-amber-500/10 text-amber-400' 
-                    : 'bg-purple-500/10 text-purple-400'
-                }`}>
-                  {exemple.tipus === 'auto' ? <Zap className="h-2.5 w-2.5" /> : <Bot className="h-2.5 w-2.5" />}
-                  {exemple.tipus === 'auto' ? 'Automatització' : 'Agent IA'}
-                </div>
-
                 {/* Icona */}
-                <div className={`mb-2 flex h-8 w-8 items-center justify-center rounded-lg ${
+                <div className={`mb-3 flex h-10 w-10 items-center justify-center rounded-lg ${
                   selectedId === exemple.id ? 'bg-emerald-500/20' : 'bg-slate-800'
                 }`}>
-                  <exemple.icon className={`h-4 w-4 ${
+                  <exemple.icon className={`h-5 w-5 ${
                     selectedId === exemple.id ? 'text-emerald-400' : 'text-slate-400'
                   }`} />
                 </div>
 
                 {/* Nom */}
-                <h3 className={`mb-1 text-xs font-semibold leading-tight ${
+                <h3 className={`mb-1 text-sm font-semibold leading-tight ${
                   selectedId === exemple.id ? 'text-emerald-400' : 'text-slate-200'
                 }`}>
                   {exemple.nom}
                 </h3>
 
                 {/* Hook */}
-                <p className="text-[10px] text-slate-500 leading-tight">"{exemple.hook}"</p>
+                <p className="text-xs text-slate-500 leading-tight mt-auto">"{exemple.hook}"</p>
               </button>
 
               {/* Fletxa indicadora sota la card seleccionada */}
               {selectedId === exemple.id && (
-                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2">
+                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2">
                   <div className="w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-emerald-500" />
                 </div>
               )}
@@ -462,7 +459,7 @@ function ExemplesCarousel() {
               <selectedExemple.icon className="h-6 w-6 text-emerald-400" />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-slate-50">{selectedExemple.nom}</h3>
+              <h3 className="text-xl font-bold text-slate-50">{selectedExemple.titolDetall || selectedExemple.nom}</h3>
               <p className="text-sm text-slate-400">{selectedExemple.subtitol}</p>
             </div>
           </div>
@@ -493,9 +490,9 @@ function ExemplesCarousel() {
           </div>
         </div>
 
-        {/* Exemple */}
+        {/* Keypoint */}
         <div className="mb-6 rounded-xl bg-slate-800/30 p-4">
-          <p className="text-sm italic text-slate-400">{selectedExemple.exemple}</p>
+          <p className="text-sm text-slate-300">{selectedExemple.keypoint}</p>
         </div>
 
         {/* Abans vs Ara */}
