@@ -26,8 +26,7 @@ import {
   BarChart3,
   Bot,
   Activity,
-  TrendingUp,
-  Headphones
+  Database
 } from "lucide-react";
 
 // Normalitzar URLs
@@ -284,6 +283,11 @@ export default function Home() {
             i el creixement del teu negoci. <span className="text-slate-300">Sense complicacions tècniques.</span>
           </p>
 
+          {/* Claim abans del CTA */}
+          <p className="fade-in-up-delay-2 mb-4 text-slate-300">
+            Descobreix com pots recuperar hores cada setmana →
+          </p>
+
           {/* CTA Principal - Auditoria */}
           <form onSubmit={handleSubmit} className="fade-in-up-delay-2 mb-6">
             <div className="mx-auto flex max-w-2xl flex-col gap-3 rounded-2xl border-2 border-slate-800 bg-slate-900/60 p-2 backdrop-blur-sm transition-all focus-within:border-emerald-500/50 focus-within:shadow-lg focus-within:shadow-emerald-500/10 sm:flex-row sm:p-2">
@@ -325,10 +329,16 @@ export default function Home() {
             </span>
           </div>
 
-          {/* Descripció sota CTA */}
-          <p className="fade-in-up-delay-3 mx-auto max-w-lg text-sm text-slate-500">
-            Descobreix com pots recuperar hores cada setmana automatitzant processos repetitius
-          </p>
+          {/* CTA Secundari */}
+          <div className="fade-in-up-delay-3">
+            <button
+              onClick={() => setIsContactOpen(true)}
+              className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 transition-colors hover:text-emerald-400"
+            >
+              Ja saps què vols automatitzar? Explica'ns-ho
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </div>
         </div>
       </section>
 
@@ -418,28 +428,28 @@ export default function Home() {
               {[
                 {
                   icon: BarChart3,
-                  title: "Dashboard amb KPIs",
-                  desc: "Visualitza hores estalviades, valor generat i ROI en temps real"
-                },
-                {
-                  icon: Bot,
-                  title: "Agents IA connectats",
-                  desc: "Assistents intel·ligents que coneixen el teu negoci i treballen per tu"
+                  title: "Impacte mesurable",
+                  desc: "Visualitza quantes hores estalvies i quin valor generen les teves automatitzacions"
                 },
                 {
                   icon: Activity,
-                  title: "Monitorització en temps real",
-                  desc: "Segueix l'activitat de les teves automatitzacions amb alertes i notificacions"
+                  title: "Automatitzacions actives",
+                  desc: "Monitoritza què s'ha executat: correus enviats, recordatoris, factures processades... Rep alertes quan cal la teva atenció"
                 },
                 {
-                  icon: TrendingUp,
-                  title: "Històric i evolució",
-                  desc: "Analitza el rendiment mensual i descobreix noves oportunitats"
+                  icon: Bot,
+                  title: "Agents IA al teu servei",
+                  desc: "Assistents que coneixen el teu negoci: responen consultes, classifiquen documents, analitzen dades i actuen per tu 24/7"
                 },
                 {
-                  icon: Headphones,
-                  title: "Suport i actualitzacions",
-                  desc: "Sempre actualitzat amb les últimes novetats, amb suport inclòs"
+                  icon: Database,
+                  title: "Les teves dades, organitzades",
+                  desc: "Centralitza la informació del teu negoci en un sol lloc. T'ajudem a estructurar-la perquè automatitzacions i agents la puguin usar"
+                },
+                {
+                  icon: RefreshCw,
+                  title: "Sempre al dia",
+                  desc: "Integrem les últimes novetats en IA. La tecnologia avança, el teu negoci també"
                 },
               ].map((item) => (
                 <div key={item.title} className="flex gap-4">
@@ -489,7 +499,7 @@ export default function Home() {
               {
                 icon: Sparkles,
                 title: "Servei complet",
-                desc: "Disseny, implementació i manteniment. Tu només expliques què necessites."
+                desc: "Disseny, implementació, manteniment i suport. Tu només expliques què necessites."
               },
               {
                 icon: Wrench,
@@ -619,7 +629,7 @@ export default function Home() {
                 onClick={() => setIsContactOpen(true)}
                 className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 transition-colors hover:text-emerald-400"
               >
-                Ja saps què necessites? Parlem
+                Ja saps què vols automatitzar? Explica'ns-ho
                 <ArrowRight className="h-4 w-4" />
               </button>
             </div>
