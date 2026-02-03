@@ -36,7 +36,7 @@ import {
   Receipt,
   Car,
   UserCheck,
-  HandHeart,
+  Heart,
   TrendingUp,
   Clock,
   Sparkle
@@ -301,7 +301,7 @@ const exemples = [
   {
     id: 7,
     tipus: "auto",
-    icon: HandHeart,
+    icon: Heart,
     nom: "Benvinguda client",
     hook: "Primera impressió 10",
     subtitol: "Primera impressió impecable, sense fer res",
@@ -714,8 +714,8 @@ export default function Home() {
                 {
                   num: "4",
                   icon: LayoutDashboard,
-                  title: "El teu portal",
-                  desc: "Accedeix a la teva plataforma per gestionar-ho tot",
+                  title: "Funciona!",
+                  desc: "Supervisa resultats des de la teva plataforma",
                   highlight: true
                 },
               ].map((step) => (
