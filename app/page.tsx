@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
@@ -26,7 +26,20 @@ import {
   BarChart3,
   Bot,
   Activity,
-  Database
+  Database,
+  ChevronLeft,
+  ChevronRight,
+  Zap,
+  FileSpreadsheet,
+  Target,
+  Wallet,
+  Receipt,
+  Car,
+  UserCheck,
+  HandHeart,
+  TrendingUp,
+  Clock,
+  Sparkle
 } from "lucide-react";
 
 // Normalitzar URLs
@@ -187,6 +200,318 @@ function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
   );
 }
 
+// Dades dels exemples
+const exemples = [
+  {
+    id: 1,
+    tipus: "auto",
+    icon: FileSpreadsheet,
+    nom: "Pressupostos automàtics",
+    hook: "30 seg vs 15 min",
+    subtitol: "El client demana, el sistema respon. Tu només aprovas.",
+    flux: [
+      { icon: MessageCircle, text: "Client escriu per WhatsApp o formulari" },
+      { icon: Bot, text: "IA extreu dades i aplica tarifes" },
+      { icon: FileText, text: "PDF enviat en 30 segons" },
+    ],
+    exemple: "\"Hola, voldria pressupost per instal·lar aire condicionat en un pis de 80m²\"",
+    abans: "15 minuts per pressupost (llegir, calcular, redactar, enviar)",
+    ara: "Automàtic 24/7. El client rep resposta immediata, tu revises si cal.",
+  },
+  {
+    id: 2,
+    tipus: "agent",
+    icon: Target,
+    nom: "Prospector comercial",
+    hook: "Leads nous cada dilluns",
+    subtitol: "El teu comercial IA que mai dorm",
+    flux: [
+      { icon: Search, text: "Detecta nous negocis al teu territori" },
+      { icon: BarChart3, text: "Analitza web i detecta si encaixen" },
+      { icon: Mail, text: "Email personalitzat llest per enviar" },
+    ],
+    exemple: "Cada dilluns reps: llista de 10-15 negocis nous, fitxa completa i email redactat per l'agent.",
+    abans: "4h/setmana buscant leads a Google, LinkedIn, registres",
+    ara: "0 minuts. Només decideixes a qui contactar.",
+  },
+  {
+    id: 3,
+    tipus: "auto",
+    icon: Wallet,
+    nom: "Cobrament intel·ligent",
+    hook: "Cobra sense perseguir",
+    subtitol: "Recordatoris cordials que cobren per tu",
+    flux: [
+      { icon: Clock, text: "Factura venç en 3 dies" },
+      { icon: MessageCircle, text: "Recordatori cordial per WhatsApp/email" },
+      { icon: CheckCircle2, text: "Registre automàtic + escalat si cal" },
+    ],
+    exemple: "Seqüència: 3 dies abans → Dia D → +7 dies → +15 dies (alerta a tu)",
+    abans: "Revisar venciments + trucar un a un + apuntar qui ha pagat",
+    ara: "El sistema persegueix per tu amb to professional. Tu només intervens quan cal.",
+  },
+  {
+    id: 4,
+    tipus: "agent",
+    icon: Receipt,
+    nom: "Assistent comptable",
+    hook: "Factures processades soles",
+    subtitol: "Les factures s'ordenen soles mentre prens el cafè",
+    flux: [
+      { icon: Mail, text: "Factura arriba per email" },
+      { icon: Bot, text: "OCR + IA extreu proveïdor, import, IVA" },
+      { icon: Database, text: "Arxiu ordenat + Excel actualitzat" },
+    ],
+    exemple: "Detecta factures → Extreu dades → Classifica per proveïdor/mes → Actualitza sistema → Genera resum mensual",
+    abans: "30 min/dia revisant correus, descarregant PDFs, picant dades",
+    ara: "Tot processat automàticament. Tu només valides el resum.",
+  },
+  {
+    id: 5,
+    tipus: "auto",
+    icon: Car,
+    nom: "ITV + Reserva",
+    hook: "Recorda i reserva sol",
+    subtitol: "El client recorda la ITV i reserva hora sense que facis res",
+    flux: [
+      { icon: Clock, text: "7 dies abans ITV venç" },
+      { icon: MessageCircle, text: "WhatsApp amb link per reservar" },
+      { icon: CheckCircle2, text: "Client tria hora → Cita al calendari" },
+    ],
+    exemple: "\"Hola Joan! 👋 La ITV del teu Seat Ibiza venç el 15/02. Reserva hora aquí: [link]\"",
+    abans: "Revisar Excel ITVs + trucar clients + quadrar agendes",
+    ara: "0 trucades. El client reserva sol, tu només fas la feina.",
+  },
+  {
+    id: 6,
+    tipus: "agent",
+    icon: UserCheck,
+    nom: "Qualificador de leads",
+    hook: "Filtra els bons",
+    subtitol: "Només parles amb clients que valen la pena",
+    flux: [
+      { icon: MessageCircle, text: "Lead entra per form/WhatsApp" },
+      { icon: Bot, text: "Agent fa preguntes clau (pressupost, urgència)" },
+      { icon: CheckCircle2, text: "Llista prioritzada pel comercial" },
+    ],
+    exemple: "Puntua urgència (1-5), pressupost (€), fit. Classifica: 🔥 Calent / 🟡 Tibio / 🔵 Fred",
+    abans: "Respondre tots els leads igual + perdre temps amb curiosos",
+    ara: "Només truques als que realment volen comprar.",
+  },
+  {
+    id: 7,
+    tipus: "auto",
+    icon: HandHeart,
+    nom: "Benvinguda client",
+    hook: "Primera impressió 10",
+    subtitol: "Primera impressió impecable, sense fer res",
+    flux: [
+      { icon: UserCheck, text: "Nou client donat d'alta" },
+      { icon: Mail, text: "Email benvinguda + docs personalitzats" },
+      { icon: Clock, text: "Tasca creada seguiment 7 dies" },
+    ],
+    exemple: "\"Hola Maria! 🎉 Benvinguda a [Empresa]. Aquí tens tot per començar: [docs]\"",
+    abans: "Recordar enviar email + buscar docs + apuntar seguiment",
+    ara: "El client se sent atès des del minut 1. Tu no oblides mai res.",
+  },
+  {
+    id: 8,
+    tipus: "agent",
+    icon: TrendingUp,
+    nom: "Analista competència",
+    hook: "Saps què fan abans que ells",
+    subtitol: "Monitoritza els teus competidors mentre tu treballes",
+    flux: [
+      { icon: Search, text: "Agent revisa webs i xarxes competidors" },
+      { icon: Sparkle, text: "Detecta canvis: preus, productes, ofertes" },
+      { icon: BarChart3, text: "Resum setmanal amb alertes" },
+    ],
+    exemple: "\"Aquesta setmana, Competidor X ha baixat un 10% el producte Y\"",
+    abans: "Entrar manualment a webs de competidors o no fer-ho mai",
+    ara: "Tens un espia legal que t'informa de tot. Sempre un pas per davant.",
+  },
+];
+
+// Component Carousel d'Exemples
+function ExemplesCarousel() {
+  const [selectedId, setSelectedId] = useState(1);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const selectedExemple = exemples.find(e => e.id === selectedId)!;
+
+  const checkScroll = () => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  };
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollAmount = 280;
+      scrollRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  return (
+    <div>
+      {/* Cards carousel */}
+      <div className="relative">
+        {/* Fletxa esquerra */}
+        {canScrollLeft && (
+          <button
+            onClick={() => scroll('left')}
+            className="absolute -left-4 top-1/2 z-10 -translate-y-1/2 rounded-full border border-slate-700 bg-slate-900/90 p-2 text-slate-400 shadow-lg backdrop-blur-sm transition-all hover:border-emerald-500/50 hover:text-emerald-400 md:-left-6"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+        )}
+
+        {/* Fletxa dreta */}
+        {canScrollRight && (
+          <button
+            onClick={() => scroll('right')}
+            className="absolute -right-4 top-1/2 z-10 -translate-y-1/2 rounded-full border border-slate-700 bg-slate-900/90 p-2 text-slate-400 shadow-lg backdrop-blur-sm transition-all hover:border-emerald-500/50 hover:text-emerald-400 md:-right-6"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        )}
+
+        {/* Cards container */}
+        <div
+          ref={scrollRef}
+          onScroll={checkScroll}
+          className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {exemples.map((exemple) => (
+            <button
+              key={exemple.id}
+              onClick={() => setSelectedId(exemple.id)}
+              className={`group relative flex-shrink-0 snap-start rounded-xl border-2 p-4 text-left transition-all w-[160px] md:w-[180px] ${
+                selectedId === exemple.id
+                  ? 'border-emerald-500 bg-emerald-500/10'
+                  : 'border-slate-800 bg-slate-900/50 hover:border-slate-700'
+              }`}
+            >
+              {/* Tipus badge */}
+              <div className={`mb-3 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${
+                exemple.tipus === 'auto' 
+                  ? 'bg-amber-500/10 text-amber-400' 
+                  : 'bg-purple-500/10 text-purple-400'
+              }`}>
+                {exemple.tipus === 'auto' ? <Zap className="h-3 w-3" /> : <Bot className="h-3 w-3" />}
+                {exemple.tipus === 'auto' ? 'Auto' : 'Agent'}
+              </div>
+
+              {/* Icona */}
+              <div className={`mb-3 flex h-10 w-10 items-center justify-center rounded-lg ${
+                selectedId === exemple.id ? 'bg-emerald-500/20' : 'bg-slate-800'
+              }`}>
+                <exemple.icon className={`h-5 w-5 ${
+                  selectedId === exemple.id ? 'text-emerald-400' : 'text-slate-400'
+                }`} />
+              </div>
+
+              {/* Nom */}
+              <h3 className={`mb-1 text-sm font-semibold leading-tight ${
+                selectedId === exemple.id ? 'text-emerald-400' : 'text-slate-200'
+              }`}>
+                {exemple.nom}
+              </h3>
+
+              {/* Hook */}
+              <p className="text-xs text-slate-500">"{exemple.hook}"</p>
+            </button>
+          ))}
+        </div>
+
+        {/* Indicador scroll (punts) */}
+        <div className="mt-4 flex justify-center gap-1.5 md:hidden">
+          {exemples.map((exemple) => (
+            <div
+              key={exemple.id}
+              className={`h-1.5 rounded-full transition-all ${
+                selectedId === exemple.id ? 'w-4 bg-emerald-500' : 'w-1.5 bg-slate-700'
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Detall expandit */}
+      <div className="mt-6 rounded-2xl border border-slate-800 bg-slate-900/30 p-6 md:p-8">
+        {/* Header detall */}
+        <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/10">
+              <selectedExemple.icon className="h-6 w-6 text-emerald-400" />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-slate-50">{selectedExemple.nom}</h3>
+              <p className="text-sm text-slate-400">{selectedExemple.subtitol}</p>
+            </div>
+          </div>
+          <div className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-medium ${
+            selectedExemple.tipus === 'auto' 
+              ? 'bg-amber-500/10 text-amber-400' 
+              : 'bg-purple-500/10 text-purple-400'
+          }`}>
+            {selectedExemple.tipus === 'auto' ? <Zap className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
+            {selectedExemple.tipus === 'auto' ? 'Automatització' : 'Agent IA'}
+          </div>
+        </div>
+
+        {/* Flux visual */}
+        <div className="mb-6">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-2">
+            {selectedExemple.flux.map((pas, index) => (
+              <div key={index} className="flex items-center gap-2 md:flex-1">
+                <div className="flex items-center gap-3 rounded-xl border border-slate-700/50 bg-slate-800/50 px-4 py-3 md:flex-1">
+                  <pas.icon className="h-5 w-5 flex-shrink-0 text-emerald-400" />
+                  <span className="text-sm text-slate-300">{pas.text}</span>
+                </div>
+                {index < selectedExemple.flux.length - 1 && (
+                  <ArrowRight className="hidden h-4 w-4 flex-shrink-0 text-slate-600 md:block" />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Exemple */}
+        <div className="mb-6 rounded-xl bg-slate-800/30 p-4">
+          <p className="text-sm italic text-slate-400">{selectedExemple.exemple}</p>
+        </div>
+
+        {/* Abans vs Ara */}
+        <div className="grid gap-4 md:grid-cols-2">
+          <div className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-4">
+            <div className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-500">
+              <Clock className="h-4 w-4" />
+              Abans
+            </div>
+            <p className="text-sm text-slate-400">{selectedExemple.abans}</p>
+          </div>
+          <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-4">
+            <div className="mb-2 flex items-center gap-2 text-sm font-medium text-emerald-400">
+              <Sparkles className="h-4 w-4" />
+              Ara amb empentIA
+            </div>
+            <p className="text-sm text-slate-300">{selectedExemple.ara}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -339,6 +664,18 @@ export default function Home() {
               <ArrowRight className="h-4 w-4" />
             </button>
           </div>
+        </div>
+      </section>
+
+      {/* Exemples del que podem fer */}
+      <section className="relative py-20 px-6 overflow-hidden">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-10 text-center">
+            <h2 className="mb-3 text-3xl font-bold text-slate-50 md:text-4xl">Exemples del que podem fer per tu</h2>
+            <p className="text-slate-400">Automatitzacions i agents IA reals, funcionant en negocis com el teu.</p>
+          </div>
+
+          <ExemplesCarousel />
         </div>
       </section>
 
