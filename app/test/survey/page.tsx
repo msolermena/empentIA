@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Logo } from "@/components/Logo";
 import { createValidationTest } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { 
