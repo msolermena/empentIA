@@ -239,8 +239,8 @@ const exemples = [
     id: 3,
     tipus: "agent",
     icon: MessageCircle,
-    nom: "Assistent comercial IA",
-    hook: "Respon, qualifica i passa els bons",
+    nom: "Assistent comercial",
+    hook: "Respon, registra i qualifica leads al moment",
     titolDetall: "Assistent comercial IA",
     subtitol: "Atén clients, resol dubtes i detecta oportunitats 24/7",
     flux: [
@@ -274,7 +274,7 @@ const exemples = [
     tipus: "agent",
     icon: Receipt,
     nom: "Assistent comptable",
-    hook: "Factures processades soles",
+    hook: "Factures que es processen soles",
     titolDetall: "Assistent comptable IA",
     subtitol: "Les factures s'ordenen soles mentre prens el cafè",
     flux: [
@@ -795,12 +795,12 @@ export default function Home() {
                 },
               ].map((item) => (
                 <div key={item.title} className="flex gap-4">
-                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-emerald-500/10">
+                  <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-lg bg-emerald-500/10">
                     <item.icon className="h-5 w-5 text-emerald-400" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-slate-100">{item.title}</h3>
-                    <p className="text-sm text-slate-400">{item.desc}</p>
+                    <h3 className="text-base font-semibold text-slate-100">{item.title}</h3>
+                    <p className="text-sm leading-relaxed text-slate-400">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -876,7 +876,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Qui Hi Ha Al Darrere */}
+      {/* Qui Hi Ha Al Darrere - AMAGAT TEMPORALMENT
       <section className="relative py-20 px-6">
         <div className="mx-auto max-w-3xl">
           <div className="mb-10 text-center">
@@ -884,7 +884,6 @@ export default function Home() {
           </div>
 
           <div className="rounded-2xl border border-slate-800 bg-slate-900/30 p-8 text-center md:p-12">
-            {/* Avatar placeholder - sense foto per ara */}
             <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500/20 to-emerald-700/20 text-3xl font-bold text-emerald-400">
               AO
             </div>
@@ -910,6 +909,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      */}
 
       {/* CTA Final */}
       <section className="relative py-24 px-6">
