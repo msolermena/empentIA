@@ -1,23 +1,43 @@
 "use client";
 
-import { useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle2, Mail, Lock, FileText, TrendingUp, Zap, Loader2 } from "lucide-react";
+import { CheckCircle2, Mail, Lock, FileText, TrendingUp, Zap, Loader2, ClipboardList, ArrowRight } from "lucide-react";
 import { generateAudit } from "@/lib/api";
 
 export default function EmailPage() {
   const params = useParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const auditId = params.id as string;
+  const source = searchParams.get("source"); // 🆕 Per test de validació
+  const isTestMode = source === "test";
 
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  // 🆕 En mode test, generar auditoria automàticament sense email
+  useEffect(() => {
+    if (isTestMode && !isGenerating) {
+      setIsGenerating(true);
+      generateAudit(auditId, "test@empentia.cat")
+        .then((data) => {
+          if (data.success) {
+            // No redirigim automàticament, deixem que l'usuari cliqui
+          }
+        })
+        .catch((err) => {
+          console.error("Error generant auditoria:", err);
+        });
+    }
+  }, [isTestMode, auditId, isGenerating]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,8 +77,14 @@ export default function EmailPage() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="fixed top-0 z-50 w-full border-b border-emerald-500/10 bg-background/80 backdrop-blur-md">
-        <nav className="container mx-auto flex h-20 items-center px-8">
+        <nav className="container mx-auto flex h-20 items-center justify-between px-8">
           <Logo size="md" variant="image" />
+          {isTestMode && (
+            <div className="flex items-center gap-2 rounded-lg bg-amber-500/10 px-3 py-1.5 text-sm text-amber-400">
+              <ClipboardList className="h-4 w-4" />
+              Mode test
+            </div>
+          )}
         </nav>
       </header>
 
@@ -70,7 +96,50 @@ export default function EmailPage() {
             <div className="h-full w-full rounded-full bg-emerald-500/10 blur-3xl" />
           </div>
 
-          <Card className="glass-card relative z-10 border-2 border-emerald-500/20">
+          {/* 🆕 MODE TEST: UI simplificada */}
+          {isTestMode ? (
+            <Card className="glass-card relative z-10 border-2 border-emerald-500/20">
+              <CardHeader className="text-center">
+                <div className="mb-4 flex justify-center">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/15">
+                    <CheckCircle2 className="h-8 w-8 text-emerald-400" />
+                  </div>
+                </div>
+                <CardTitle className="text-3xl font-extrabold">
+                  🎉 Auditoria Completada!
+                </CardTitle>
+                <p className="mt-3 text-lg text-muted-foreground">
+                  Per aquest test no cal email - ja et coneixem! 😉
+                </p>
+              </CardHeader>
+
+              <CardContent className="space-y-6">
+                {/* Info box */}
+                <div className="rounded-xl bg-slate-800/30 p-6 text-center">
+                  <p className="text-slate-300">
+                    Ara veuràs l'informe de resultats i després accediràs a l'enquesta de valoració.
+                  </p>
+                </div>
+
+                {/* Botó continuar */}
+                <Button
+                  size="lg"
+                  className="w-full gap-2 text-base"
+                  onClick={() => router.push(`/audit/${auditId}/complete?source=test`)}
+                >
+                  Veure informe
+                  <ArrowRight className="h-5 w-5" />
+                </Button>
+
+                {/* Nota */}
+                <p className="text-center text-xs text-muted-foreground">
+                  Recorda: després de l'informe hi ha l'enquesta (3-4 min)
+                </p>
+              </CardContent>
+            </Card>
+          ) : (
+            /* MODE NORMAL: UI amb formulari email */
+            <Card className="glass-card relative z-10 border-2 border-emerald-500/20">
             <CardHeader className="text-center">
               <div className="mb-4 flex justify-center">
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/15">
@@ -206,6 +275,7 @@ export default function EmailPage() {
               </p>
             </CardContent>
           </Card>
+          )}
         </div>
       </div>
     </div>

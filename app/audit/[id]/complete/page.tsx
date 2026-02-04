@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { 
@@ -14,14 +14,20 @@ import {
   TrendingUp,
   Sparkles,
   ChevronRight,
-  Target
+  Target,
+  ClipboardList,
+  ArrowRight
 } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { getAudit, type InformeV5, type OportunitatInforme } from "@/lib/api";
 
 export default function CompletePage() {
   const params = useParams();
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const auditId = params.id as string;
+  const source = searchParams.get("source"); // 🆕 Per test de validació
+  const isTestMode = source === "test";
   
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -312,32 +318,66 @@ export default function CompletePage() {
         </Card>
 
         {/* ==================== CTA ==================== */}
-        <Card className="glass-card border-2 border-emerald-500/30">
-          <CardContent className="p-8 text-center">
-            <h3 className="text-2xl font-bold text-slate-200 mb-3">
-              Vols que t'ajudem a implementar-ho?
-            </h3>
-            <p className="text-slate-400 mb-6 max-w-md mx-auto">
-              Parlem 15 minuts sense compromís per veure quines automatitzacions
-              tenen més sentit pel vostre cas.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        {isTestMode ? (
+          /* 🆕 MODE TEST: CTA cap a l'enquesta */
+          <Card className="glass-card border-2 border-amber-500/30">
+            <CardContent className="p-8 text-center">
+              <div className="mb-4 flex justify-center">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-amber-500/15">
+                  <ClipboardList className="h-7 w-7 text-amber-400" />
+                </div>
+              </div>
+              <h3 className="text-2xl font-bold text-slate-200 mb-3">
+                Ara toca la teva opinió! 📝
+              </h3>
+              <p className="text-slate-400 mb-6 max-w-md mx-auto">
+                Has vist l'informe. Ara ens ajudaries molt responent una enquesta ràpida 
+                (3-4 minuts) sobre la teva experiència.
+              </p>
+              
               <Button 
                 size="lg" 
-                className="gap-2 bg-emerald-600 hover:bg-emerald-500"
-                onClick={() => window.open('https://calendly.com/empentia/15min', '_blank')}
+                className="gap-2 bg-amber-600 hover:bg-amber-500"
+                onClick={() => router.push(`/test/survey?audit_id=${auditId}`)}
               >
-                <Calendar className="h-5 w-5" />
-                Reservar trucada gratuïta
+                <ArrowRight className="h-5 w-5" />
+                Començar enquesta
               </Button>
-            </div>
 
-            <p className="text-xs text-slate-500 mt-4">
-              Sense compromís • 15 minuts • Et mostrem exemples reals
-            </p>
-          </CardContent>
-        </Card>
+              <p className="text-xs text-slate-500 mt-4">
+                Gràcies per ajudar-nos a millorar empentIA! 🙏
+              </p>
+            </CardContent>
+          </Card>
+        ) : (
+          /* MODE NORMAL: CTA Calendly */
+          <Card className="glass-card border-2 border-emerald-500/30">
+            <CardContent className="p-8 text-center">
+              <h3 className="text-2xl font-bold text-slate-200 mb-3">
+                Vols que t'ajudem a implementar-ho?
+              </h3>
+              <p className="text-slate-400 mb-6 max-w-md mx-auto">
+                Parlem 15 minuts sense compromís per veure quines automatitzacions
+                tenen més sentit pel vostre cas.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button 
+                  size="lg" 
+                  className="gap-2 bg-emerald-600 hover:bg-emerald-500"
+                  onClick={() => window.open('https://calendly.com/empentia/15min', '_blank')}
+                >
+                  <Calendar className="h-5 w-5" />
+                  Reservar trucada gratuïta
+                </Button>
+              </div>
+
+              <p className="text-xs text-slate-500 mt-4">
+                Sense compromís • 15 minuts • Et mostrem exemples reals
+              </p>
+            </CardContent>
+          </Card>
+        )}
 
       </div>
     </div>

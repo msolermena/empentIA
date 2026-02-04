@@ -34,6 +34,7 @@ export default function AnalyzingPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const url = searchParams.get("url");
+  const source = searchParams.get("source"); // 🆕 Per test de validació
 
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -77,7 +78,11 @@ export default function AnalyzingPage() {
         
         // Petit delay per veure 100%
         setTimeout(() => {
-          router.push(`/audit/${response.audit_id}/questions`);
+          // 🆕 Propagar source si és test de validació
+          const nextUrl = source === "test"
+            ? `/audit/${response.audit_id}/questions?source=test`
+            : `/audit/${response.audit_id}/questions`;
+          router.push(nextUrl);
         }, 500);
       } catch (err) {
         clearInterval(progressInterval);
@@ -92,7 +97,7 @@ export default function AnalyzingPage() {
       clearInterval(progressInterval);
       clearInterval(stepInterval);
     };
-  }, [url, router]);
+  }, [url, router, source]);
 
   const CurrentIcon = LOADING_STEPS[currentStep].icon;
 

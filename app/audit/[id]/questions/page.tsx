@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useMemo } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -41,7 +41,9 @@ const questionLabels: Record<number, string> = {
 export default function QuestionsPage() {
   const params = useParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const auditId = params.id as string;
+  const source = searchParams.get("source"); // 🆕 Per test de validació
 
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [question, setQuestion] = useState<QuestionV5 | null>(null);
@@ -275,7 +277,11 @@ export default function QuestionsPage() {
       setSavedAnswers(prev => ({ ...prev, [currentQuestion]: answer }));
 
       if (currentQuestion === TOTAL_QUESTIONS) {
-        router.push(`/audit/${auditId}/email`);
+        // 🆕 Propagar source si és test de validació
+        const emailUrl = source === "test"
+          ? `/audit/${auditId}/email?source=test`
+          : `/audit/${auditId}/email`;
+        router.push(emailUrl);
       } else {
         setCurrentQuestion(currentQuestion + 1);
       }
