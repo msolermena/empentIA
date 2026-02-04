@@ -130,15 +130,17 @@ function CheckboxGroup({
   return (
     <div className="space-y-2">
       {options.map((option) => (
-        <label
+        <button
           key={option.value}
-          className={`flex cursor-pointer items-center gap-3 rounded-xl border-2 px-4 py-3 transition-all ${
+          type="button"
+          onClick={() => toggle(option.value)}
+          className={`flex w-full cursor-pointer items-center gap-3 rounded-xl border-2 px-4 py-3 text-left transition-all ${
             selected.includes(option.value)
               ? "border-emerald-500 bg-emerald-500/10"
               : "border-slate-700 hover:border-slate-600"
           }`}
         >
-          <div className={`flex h-5 w-5 items-center justify-center rounded border-2 ${
+          <div className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded border-2 ${
             selected.includes(option.value)
               ? "border-emerald-500 bg-emerald-500"
               : "border-slate-600"
@@ -150,7 +152,7 @@ function CheckboxGroup({
           <span className={selected.includes(option.value) ? "text-emerald-400" : "text-slate-300"}>
             {option.label}
           </span>
-        </label>
+        </button>
       ))}
     </div>
   );
@@ -158,12 +160,10 @@ function CheckboxGroup({
 
 // Component per radio buttons
 function RadioGroup({
-  name,
   options,
   selected,
   onChange,
 }: {
-  name: string;
   options: { value: string; label: string }[];
   selected: string;
   onChange: (value: string) => void;
@@ -171,23 +171,17 @@ function RadioGroup({
   return (
     <div className="space-y-2">
       {options.map((option) => (
-        <label
+        <button
           key={option.value}
-          className={`flex cursor-pointer items-center gap-3 rounded-xl border-2 px-4 py-3 transition-all ${
+          type="button"
+          onClick={() => onChange(option.value)}
+          className={`flex w-full cursor-pointer items-center gap-3 rounded-xl border-2 px-4 py-3 text-left transition-all ${
             selected === option.value
               ? "border-emerald-500 bg-emerald-500/10"
               : "border-slate-700 hover:border-slate-600"
           }`}
         >
-          <input
-            type="radio"
-            name={name}
-            value={option.value}
-            checked={selected === option.value}
-            onChange={(e) => onChange(e.target.value)}
-            className="sr-only"
-          />
-          <div className={`flex h-5 w-5 items-center justify-center rounded-full border-2 ${
+          <div className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border-2 ${
             selected === option.value
               ? "border-emerald-500 bg-emerald-500"
               : "border-slate-600"
@@ -199,7 +193,7 @@ function RadioGroup({
           <span className={selected === option.value ? "text-emerald-400" : "text-slate-300"}>
             {option.label}
           </span>
-        </label>
+        </button>
       ))}
     </div>
   );
@@ -214,6 +208,7 @@ export default function SurveyPage() {
   const [responses, setResponses] = useState<SurveyResponses>(initialResponses);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [testData, setTestData] = useState<any>(null);
+  const [validationError, setValidationError] = useState<string | null>(null);
 
   const totalSections = 6;
 
@@ -230,9 +225,85 @@ export default function SurveyPage() {
     value: SurveyResponses[K]
   ) => {
     setResponses((prev) => ({ ...prev, [key]: value }));
+    setValidationError(null);
+  };
+
+  // Validar camps obligatoris per secció
+  const validateSection = (): boolean => {
+    setValidationError(null);
+    
+    switch (currentSection) {
+      case 1:
+        if (responses.s1_problema_real === 0) {
+          setValidationError("Si us plau, valora el nivell de problema (1-5)");
+          return false;
+        }
+        if (responses.s1_que_fas_ara.length === 0) {
+          setValidationError("Si us plau, selecciona almenys una opció sobre què fas ara");
+          return false;
+        }
+        if (responses.s1_que_et_frena.length === 0) {
+          setValidationError("Si us plau, selecciona almenys una opció sobre què et frena");
+          return false;
+        }
+        return true;
+        
+      case 2:
+        if (responses.s2_punts_clars.length === 0) {
+          setValidationError("Si us plau, selecciona els punts que has entès");
+          return false;
+        }
+        return true;
+        
+      case 3:
+        if (responses.s3_encert === 0) {
+          setValidationError("Si us plau, valora l'encert de les oportunitats (1-5)");
+          return false;
+        }
+        if (responses.s3_wow_factor === 0) {
+          setValidationError("Si us plau, valora el wow factor (1-5)");
+          return false;
+        }
+        return true;
+        
+      case 4:
+        if (!responses.s4_subscripcio_vs_projecte) {
+          setValidationError("Si us plau, selecciona la teva preferència de model");
+          return false;
+        }
+        if (!responses.s4_delegar_vs_control) {
+          setValidationError("Si us plau, selecciona com et fa sentir delegar");
+          return false;
+        }
+        return true;
+        
+      case 5:
+        if (!responses.s5_contractaria) {
+          setValidationError("Si us plau, indica si contractaries empentIA");
+          return false;
+        }
+        if (!responses.s5_per_que.trim()) {
+          setValidationError("Si us plau, explica'ns per què");
+          return false;
+        }
+        return true;
+        
+      case 6:
+        if (!responses.s6_convençut_o_no.trim()) {
+          setValidationError("Si us plau, explica'ns què t'ha convençut o no");
+          return false;
+        }
+        return true;
+        
+      default:
+        return true;
+    }
   };
 
   const nextSection = () => {
+    if (!validateSection()) {
+      return;
+    }
     if (currentSection < totalSections) {
       setCurrentSection(currentSection + 1);
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -240,6 +311,7 @@ export default function SurveyPage() {
   };
 
   const prevSection = () => {
+    setValidationError(null);
     if (currentSection > 1) {
       setCurrentSection(currentSection - 1);
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -247,6 +319,10 @@ export default function SurveyPage() {
   };
 
   const handleSubmit = async () => {
+    if (!validateSection()) {
+      return;
+    }
+    
     setIsSubmitting(true);
     
     try {
@@ -292,7 +368,7 @@ export default function SurveyPage() {
             {/* 1.1 */}
             <div>
               <label className="mb-3 block text-sm font-medium text-slate-300">
-                Les tasques repetitives que fas manualment al negoci, són un problema real?
+                Les tasques repetitives que fas manualment al negoci, són un problema real? *
               </label>
               <RatingScale
                 value={responses.s1_problema_real}
@@ -305,7 +381,7 @@ export default function SurveyPage() {
             {/* 1.2 */}
             <div>
               <label className="mb-3 block text-sm font-medium text-slate-300">
-                Què fas ara per gestionar aquestes tasques?
+                Què fas ara per gestionar aquestes tasques? *
               </label>
               <CheckboxGroup
                 options={[
@@ -323,7 +399,7 @@ export default function SurveyPage() {
             {/* 1.3 */}
             <div>
               <label className="mb-3 block text-sm font-medium text-slate-300">
-                Què et frena més a l'hora d'automatitzar?
+                Què et frena més a l'hora d'automatitzar? *
               </label>
               <CheckboxGroup
                 options={[
@@ -359,7 +435,7 @@ export default function SurveyPage() {
             {/* 2.1 */}
             <div>
               <label className="mb-3 block text-sm font-medium text-slate-300">
-                Quin d'aquests punts has entès clarament?
+                Quin d'aquests punts has entès clarament? *
               </label>
               <CheckboxGroup
                 options={[
@@ -402,7 +478,7 @@ export default function SurveyPage() {
             {/* 3.1 */}
             <div>
               <label className="mb-3 block text-sm font-medium text-slate-300">
-                Les oportunitats que t'ha mostrat l'informe, encerten amb els problemes reals del negoci?
+                Les oportunitats que t'ha mostrat l'informe, encerten amb els problemes reals del negoci? *
               </label>
               <RatingScale
                 value={responses.s3_encert}
@@ -415,7 +491,7 @@ export default function SurveyPage() {
             {/* 3.2 */}
             <div>
               <label className="mb-3 block text-sm font-medium text-slate-300">
-                L'auditoria t'ha sorprès positivament? (el "wow factor")
+                L'auditoria t'ha sorprès positivament? (el "wow factor") *
               </label>
               <RatingScale
                 value={responses.s3_wow_factor}
@@ -453,10 +529,9 @@ export default function SurveyPage() {
             {/* 4.1 */}
             <div>
               <label className="mb-3 block text-sm font-medium text-slate-300">
-                El model de subscripció mensual (vs pagar un projecte tancat d'una vegada), et sembla:
+                El model de subscripció mensual (vs pagar un projecte tancat d'una vegada), et sembla: *
               </label>
               <RadioGroup
-                name="subscripcio"
                 options={[
                   { value: "subscripcio", label: "Prefereixo subscripció (actualitzacions, suport continu)" },
                   { value: "projecte", label: "Prefereixo pagar un cop i ja" },
@@ -471,10 +546,9 @@ export default function SurveyPage() {
             {/* 4.2 */}
             <div>
               <label className="mb-3 block text-sm font-medium text-slate-300">
-                Que empentIA s'encarregui de tot (configurar, mantenir, actualitzar) et genera:
+                Que empentIA s'encarregui de tot (configurar, mantenir, actualitzar) et genera: *
               </label>
               <RadioGroup
-                name="delegar"
                 options={[
                   { value: "tranquilitat", label: "Tranquil·litat (prefereixo delegar)" },
                   { value: "desconfiança", label: "Desconfiança (vull controlar-ho jo)" },
@@ -498,10 +572,9 @@ export default function SurveyPage() {
             {/* 5.1 */}
             <div>
               <label className="mb-3 block text-sm font-medium text-slate-300">
-                Si tinguessis aquest negoci, contractaries empentIA?
+                Si tinguessis aquest negoci, contractaries empentIA? *
               </label>
               <RadioGroup
-                name="contractaria"
                 options={[
                   { value: "si_segur", label: "Sí, segur" },
                   { value: "probablement_si", label: "Probablement sí" },
@@ -517,7 +590,7 @@ export default function SurveyPage() {
             {/* 5.1b - Per què */}
             <div>
               <label className="mb-3 block text-sm font-medium text-slate-300">
-                Per què?
+                Per què? *
               </label>
               <textarea
                 value={responses.s5_per_que}
@@ -531,7 +604,7 @@ export default function SurveyPage() {
             {/* 5.2 - Pricing */}
             <div>
               <label className="mb-4 block text-sm font-medium text-slate-300">
-                Quin preu mensual et semblaria raonable?
+                Quin preu mensual et semblaria raonable? <span className="text-slate-500">(opcional)</span>
               </label>
               
               <div className="space-y-4">
@@ -640,7 +713,7 @@ export default function SurveyPage() {
             {/* 6.1 */}
             <div>
               <label className="mb-3 block text-sm font-medium text-slate-300">
-                Què t'ha convençut més? I què et faria dir que no?
+                Què t'ha convençut més? I què et faria dir que no? *
               </label>
               <textarea
                 value={responses.s6_convençut_o_no}
@@ -687,7 +760,7 @@ export default function SurveyPage() {
           <Logo size="md" variant="image" />
           <div className="flex items-center gap-2 text-sm text-slate-400">
             <ClipboardList className="h-4 w-4" />
-            Enquesta de validació
+            Enquesta de valoració
           </div>
         </nav>
       </header>
@@ -713,8 +786,15 @@ export default function SurveyPage() {
         <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-8 backdrop-blur-sm">
           {renderSection()}
 
+          {/* Error de validació */}
+          {validationError && (
+            <div className="mt-6 rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-center text-sm text-red-400">
+              {validationError}
+            </div>
+          )}
+
           {/* Navigation buttons */}
-          <div className="mt-10 flex justify-between gap-4">
+          <div className="mt-6 flex justify-between gap-4">
             {currentSection > 1 ? (
               <Button 
                 variant="outline" 

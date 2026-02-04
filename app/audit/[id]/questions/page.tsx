@@ -16,7 +16,8 @@ import {
 } from "lucide-react";
 import { 
   getNextQuestion, 
-  saveAnswer as saveAnswerAPI, 
+  saveAnswer as saveAnswerAPI,
+  generateAudit,
   type QuestionV5,
   type QuestionP1,
   type QuestionP1Confirmacio,
@@ -43,7 +44,7 @@ export default function QuestionsPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const auditId = params.id as string;
-  const source = searchParams.get("source"); // 🆕 Per test de validació
+  const source = searchParams.get("source"); // Per test de validació
 
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [question, setQuestion] = useState<QuestionV5 | null>(null);
@@ -277,11 +278,17 @@ export default function QuestionsPage() {
       setSavedAnswers(prev => ({ ...prev, [currentQuestion]: answer }));
 
       if (currentQuestion === TOTAL_QUESTIONS) {
-        // 🆕 Propagar source si és test de validació
-        const emailUrl = source === "test"
-          ? `/audit/${auditId}/email?source=test`
-          : `/audit/${auditId}/email`;
-        router.push(emailUrl);
+        // En mode test, saltar email i anar directament a complete
+        if (source === "test") {
+          try {
+            await generateAudit(auditId, "test@empentia.cat");
+          } catch (err) {
+            console.error("Error generant auditoria:", err);
+          }
+          router.push(`/audit/${auditId}/complete?source=test`);
+        } else {
+          router.push(`/audit/${auditId}/email`);
+        }
       } else {
         setCurrentQuestion(currentQuestion + 1);
       }

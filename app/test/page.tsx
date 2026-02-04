@@ -150,22 +150,16 @@ export default function TestIntroPage() {
                     { value: "yes_no_web", label: "Sí, sense web" },
                     { value: "no", label: "No, però conec bé algun sector" },
                   ].map((option) => (
-                    <label
+                    <button
                       key={option.value}
-                      className={`flex cursor-pointer items-center gap-3 rounded-xl border-2 px-4 py-3 transition-all ${
+                      type="button"
+                      onClick={() => setFormData({ ...formData, hasBusiness: option.value })}
+                      className={`flex w-full cursor-pointer items-center gap-3 rounded-xl border-2 px-4 py-3 text-left transition-all ${
                         formData.hasBusiness === option.value
                           ? "border-emerald-500 bg-emerald-500/10"
                           : "border-slate-700 hover:border-slate-600"
                       }`}
                     >
-                      <input
-                        type="radio"
-                        name="hasBusiness"
-                        value={option.value}
-                        checked={formData.hasBusiness === option.value}
-                        onChange={(e) => setFormData({ ...formData, hasBusiness: e.target.value })}
-                        className="sr-only"
-                      />
                       <div className={`flex h-5 w-5 items-center justify-center rounded-full border-2 ${
                         formData.hasBusiness === option.value
                           ? "border-emerald-500 bg-emerald-500"
@@ -178,7 +172,7 @@ export default function TestIntroPage() {
                       <span className={formData.hasBusiness === option.value ? "text-emerald-400" : "text-slate-300"}>
                         {option.label}
                       </span>
-                    </label>
+                    </button>
                   ))}
                 </div>
               </div>

@@ -26,7 +26,7 @@ export default function CompletePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const auditId = params.id as string;
-  const source = searchParams.get("source"); // 🆕 Per test de validació
+  const source = searchParams.get("source");
   const isTestMode = source === "test";
   
   const [isLoading, setIsLoading] = useState(true);
@@ -319,7 +319,7 @@ export default function CompletePage() {
 
         {/* ==================== CTA ==================== */}
         {isTestMode ? (
-          /* 🆕 MODE TEST: CTA cap a l'enquesta */
+          /* MODE TEST: CTA cap a l'enquesta */
           <Card className="glass-card border-2 border-amber-500/30">
             <CardContent className="p-8 text-center">
               <div className="mb-4 flex justify-center">

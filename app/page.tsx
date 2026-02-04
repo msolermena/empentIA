@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
@@ -26,8 +26,19 @@ import {
   BarChart3,
   Bot,
   Activity,
+  Database,
+  ChevronLeft,
+  ChevronRight,
+  Zap,
+  FileSpreadsheet,
+  Wallet,
+  Receipt,
+  Car,
+  UserCheck,
+  Heart,
   TrendingUp,
-  Headphones
+  Clock,
+  Sparkle
 } from "lucide-react";
 
 // Normalitzar URLs
@@ -188,6 +199,324 @@ function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
   );
 }
 
+// Dades dels exemples
+const exemples = [
+  {
+    id: 1,
+    tipus: "auto",
+    icon: FileSpreadsheet,
+    nom: "Pressupostos automàtics",
+    hook: "30 seg vs 15 min",
+    titolDetall: "Pressupostos automàtics",
+    subtitol: "El client demana, el sistema respon. Tu només aproves.",
+    flux: [
+      { icon: MessageCircle, text: "Client escriu per WhatsApp o formulari" },
+      { icon: Bot, text: "IA extreu dades i aplica les teves tarifes" },
+      { icon: FileText, text: "PDF enviat en 30 segons" },
+    ],
+    keypoint: "Funciona 24/7. El client rep resposta immediata encara que sigui diumenge a les 11 de la nit.",
+    abans: "15 minuts per pressupost (llegir, calcular, redactar, enviar)",
+    ara: "Automàtic 24/7. El client rep resposta immediata, tu revises si cal.",
+  },
+  {
+    id: 2,
+    tipus: "agent",
+    icon: Search,
+    nom: "Prospector comercial",
+    hook: "Leads nous cada dilluns",
+    titolDetall: "Prospector comercial IA",
+    subtitol: "El teu comercial IA que mai dorm",
+    flux: [
+      { icon: Search, text: "Detecta nous negocis oberts al teu territori" },
+      { icon: BarChart3, text: "Analitza la seva web i detecta si encaixen" },
+      { icon: Mail, text: "Prepara email personalitzat llest per enviar" },
+    ],
+    keypoint: "Cada dilluns reps 10-15 oportunitats noves amb fitxa completa i email ja redactat, llest per enviar amb un clic.",
+    abans: "4h/setmana buscant leads a Google, LinkedIn, registres mercantils",
+    ara: "0 minuts. Decideixes a qui contactar.",
+  },
+  {
+    id: 3,
+    tipus: "agent",
+    icon: MessageCircle,
+    nom: "Assistent comercial",
+    hook: "Respon, registra i qualifica leads al moment",
+    titolDetall: "Assistent comercial IA",
+    subtitol: "Atén clients, resol dubtes i detecta oportunitats 24/7",
+    flux: [
+      { icon: MessageCircle, text: "Client contacta per web (chat/form) o WhatsApp" },
+      { icon: Bot, text: "Agent respon dubtes i detecta interès de compra" },
+      { icon: CheckCircle2, text: "Qualifica i passa leads calents amb fitxa completa" },
+    ],
+    keypoint: "Et passa els leads calents amb fitxa completa: què necessita, quan ho vol, pressupost estimat.",
+    abans: "Respondre tots els contactes igual + perdre temps amb curiosos",
+    ara: "L'agent filtra i qualifica 24/7. Tu parles amb qui realment vol comprar.",
+  },
+  {
+    id: 4,
+    tipus: "auto",
+    icon: Wallet,
+    nom: "Cobrament intel·ligent",
+    hook: "Cobra sense perseguir",
+    titolDetall: "Cobrament intel·ligent",
+    subtitol: "Gestió de cobraments que s'adapta a cada client",
+    flux: [
+      { icon: Clock, text: "Factura propera a vèncer" },
+      { icon: Bot, text: "IA analitza historial (bon pagador? reincident?)" },
+      { icon: MessageCircle, text: "Acció personalitzada + seguiment automàtic" },
+    ],
+    keypoint: "Accions segons perfil: recordatori suau per bons pagadors, avís de tall de servei per reincidents, facilitats de pagament si detecta dificultats. Inclou enllaç de pagament directe.",
+    abans: "Revisar venciments + trucar un a un + decidir com actuar amb cada cas",
+    ara: "El sistema decideix el to i l'acció per cada client. Tu intervens quan cal.",
+  },
+  {
+    id: 5,
+    tipus: "agent",
+    icon: Receipt,
+    nom: "Assistent comptable",
+    hook: "Factures que es processen soles",
+    titolDetall: "Assistent comptable IA",
+    subtitol: "Les factures s'ordenen soles mentre prens el cafè",
+    flux: [
+      { icon: Mail, text: "Factura arriba per email" },
+      { icon: Bot, text: "OCR + IA extreu proveïdor, import, IVA, concepte" },
+      { icon: Database, text: "Arxiu ordenat + sistema comptable actualitzat" },
+    ],
+    keypoint: "Detecta duplicats, alerta d'imports inusuals i genera el resum mensual per a la gestoria.",
+    abans: "30 min/dia revisant correus, descarregant PDFs, picant dades",
+    ara: "Tot processat automàticament. Tu valides el resum.",
+  },
+  {
+    id: 6,
+    tipus: "auto",
+    icon: Car,
+    nom: "Recordatoris vehicle",
+    hook: "Recorda i reserva sol",
+    titolDetall: "Recordatoris vehicle + Reserva automàtica",
+    subtitol: "ITV, revisions, canvis d'oli... el client recorda i reserva sense que facis res",
+    flux: [
+      { icon: Clock, text: "Servei proper (ITV, revisió, canvi d'oli...)" },
+      { icon: MessageCircle, text: "WhatsApp automàtic amb link per reservar" },
+      { icon: CheckCircle2, text: "Client tria hora → Cita confirmada al calendari" },
+    ],
+    keypoint: "ITV, revisions, canvis d'oli, pneumàtics... Recupera clients inactius amb recordatoris automàtics del seu proper manteniment.",
+    abans: "Revisar Excel + trucar clients un a un + quadrar agendes",
+    ara: "0 trucades. El client reserva sol i tu recuperes clients que feia mesos que no venien.",
+  },
+  {
+    id: 7,
+    tipus: "auto",
+    icon: Heart,
+    nom: "Benvinguda client",
+    hook: "Primera impressió 10",
+    titolDetall: "Benvinguda automàtica",
+    subtitol: "Primera impressió impecable, sense fer res",
+    flux: [
+      { icon: UserCheck, text: "Nou client donat d'alta" },
+      { icon: Mail, text: "Email benvinguda + documentació personalitzada" },
+      { icon: FileText, text: "Formulari per recollir documents del client" },
+    ],
+    keypoint: "Inclou recollida de documents: el client rep formulari per pujar DNI, contractes o el que necessitis. Tot arxivat automàticament a la seva fitxa.",
+    abans: "Recordar enviar email + buscar docs + demanar papers + apuntar seguiment",
+    ara: "El client se sent atès des del minut 1. Documentació recollida sense haver de perseguir.",
+  },
+  {
+    id: 8,
+    tipus: "agent",
+    icon: TrendingUp,
+    nom: "Analista competència",
+    hook: "Competència sota control",
+    titolDetall: "Analista de competència IA",
+    subtitol: "Monitoritza la presència online dels competidors mentre tu treballes",
+    flux: [
+      { icon: Search, text: "Agent revisa webs i presència online dels competidors" },
+      { icon: Sparkle, text: "Detecta canvis: preus, productes, ofertes, novetats" },
+      { icon: BarChart3, text: "Resum setmanal amb alertes importants" },
+    ],
+    keypoint: "Cada setmana reps al correu: qui ha canviat preus, qui ha llançat ofertes, qui ha afegit productes. Alerta immediata si hi ha canvis crítics.",
+    abans: "Entrar manualment a webs de competidors o no fer-ho mai",
+    ara: "Tens un espia legal que t'informa de tot. Sempre un pas per davant.",
+  },
+];
+
+// Component Carousel d'Exemples
+function ExemplesCarousel() {
+  const [selectedId, setSelectedId] = useState(1);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const selectedExemple = exemples.find(e => e.id === selectedId)!;
+
+  const checkScroll = () => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  };
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollAmount = 280;
+      scrollRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  return (
+    <div>
+      {/* Cards carousel */}
+      <div className="relative">
+        {/* Fletxa esquerra */}
+        {canScrollLeft && (
+          <button
+            onClick={() => scroll('left')}
+            className="absolute -left-4 top-1/2 z-10 -translate-y-1/2 rounded-full border border-slate-700 bg-slate-900/90 p-2 text-slate-400 shadow-lg backdrop-blur-sm transition-all hover:border-emerald-500/50 hover:text-emerald-400 md:-left-6"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+        )}
+
+        {/* Fletxa dreta */}
+        {canScrollRight && (
+          <button
+            onClick={() => scroll('right')}
+            className="absolute -right-4 top-1/2 z-10 -translate-y-1/2 rounded-full border border-slate-700 bg-slate-900/90 p-2 text-slate-400 shadow-lg backdrop-blur-sm transition-all hover:border-emerald-500/50 hover:text-emerald-400 md:-right-6"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        )}
+
+        {/* Cards container */}
+        <div
+          ref={scrollRef}
+          onScroll={checkScroll}
+          className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {exemples.map((exemple) => (
+            <div key={exemple.id} className="relative flex-shrink-0 snap-start">
+              <button
+                onClick={() => setSelectedId(exemple.id)}
+                className={`relative rounded-xl border-2 p-4 text-left transition-all w-[160px] md:w-[180px] h-[140px] flex flex-col ${
+                  selectedId === exemple.id
+                    ? 'border-emerald-500 bg-emerald-500/10'
+                    : 'border-slate-800 bg-slate-900/50 hover:border-slate-700'
+                }`}
+              >
+                {/* Icona */}
+                <div className={`mb-3 flex h-10 w-10 items-center justify-center rounded-lg ${
+                  selectedId === exemple.id ? 'bg-emerald-500/20' : 'bg-slate-800'
+                }`}>
+                  <exemple.icon className={`h-5 w-5 ${
+                    selectedId === exemple.id ? 'text-emerald-400' : 'text-slate-400'
+                  }`} />
+                </div>
+
+                {/* Nom */}
+                <h3 className={`mb-1 text-sm font-semibold leading-tight ${
+                  selectedId === exemple.id ? 'text-emerald-400' : 'text-slate-200'
+                }`}>
+                  {exemple.nom}
+                </h3>
+
+                {/* Hook */}
+                <p className="text-xs text-slate-500 leading-tight mt-auto">"{exemple.hook}"</p>
+              </button>
+
+              {/* Fletxa indicadora sota la card seleccionada */}
+              {selectedId === exemple.id && (
+                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2">
+                  <div className="w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-emerald-500" />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Indicador scroll (punts) */}
+        <div className="mt-4 flex justify-center gap-1.5 md:hidden">
+          {exemples.map((exemple) => (
+            <div
+              key={exemple.id}
+              className={`h-1.5 rounded-full transition-all ${
+                selectedId === exemple.id ? 'w-4 bg-emerald-500' : 'w-1.5 bg-slate-700'
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Detall expandit */}
+      <div className="mt-6 rounded-2xl border-2 border-emerald-500/30 bg-slate-900/30 p-6 md:p-8">
+        {/* Header detall */}
+        <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/10">
+              <selectedExemple.icon className="h-6 w-6 text-emerald-400" />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-slate-50">{selectedExemple.titolDetall || selectedExemple.nom}</h3>
+              <p className="text-sm text-slate-400">{selectedExemple.subtitol}</p>
+            </div>
+          </div>
+          <div className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-medium ${
+            selectedExemple.tipus === 'auto' 
+              ? 'bg-amber-500/10 text-amber-400' 
+              : 'bg-purple-500/10 text-purple-400'
+          }`}>
+            {selectedExemple.tipus === 'auto' ? <Zap className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
+            {selectedExemple.tipus === 'auto' ? 'Automatització' : 'Agent IA'}
+          </div>
+        </div>
+
+        {/* Flux visual */}
+        <div className="mb-6">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-2">
+            {selectedExemple.flux.map((pas, index) => (
+              <div key={index} className="flex items-center gap-2 md:flex-1">
+                <div className="flex items-center gap-3 rounded-xl border border-slate-700/50 bg-slate-800/50 px-4 py-3 md:flex-1">
+                  <pas.icon className="h-5 w-5 flex-shrink-0 text-emerald-400" />
+                  <span className="text-sm text-slate-300">{pas.text}</span>
+                </div>
+                {index < selectedExemple.flux.length - 1 && (
+                  <ArrowRight className="hidden h-4 w-4 flex-shrink-0 text-slate-600 md:block" />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Keypoint */}
+        <div className="mb-6 rounded-xl bg-slate-800/30 p-4">
+          <p className="text-sm text-slate-300">{selectedExemple.keypoint}</p>
+        </div>
+
+        {/* Abans vs Ara */}
+        <div className="grid gap-4 md:grid-cols-2">
+          <div className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-4">
+            <div className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-500">
+              <Clock className="h-4 w-4" />
+              Abans
+            </div>
+            <p className="text-sm text-slate-400">{selectedExemple.abans}</p>
+          </div>
+          <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-4">
+            <div className="mb-2 flex items-center gap-2 text-sm font-medium text-emerald-400">
+              <Sparkles className="h-4 w-4" />
+              Ara amb empentIA
+            </div>
+            <p className="text-sm text-slate-300">{selectedExemple.ara}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -290,6 +619,11 @@ export default function Home() {
             i el creixement del teu negoci. <span className="text-slate-300">Sense complicacions tècniques.</span>
           </p>
 
+          {/* Claim abans del CTA */}
+          <p className="fade-in-up-delay-2 mb-4 text-slate-300">
+            Descobreix com pots recuperar hores cada setmana →
+          </p>
+
           {/* CTA Principal - Auditoria */}
           <form onSubmit={handleSubmit} className="fade-in-up-delay-2 mb-6">
             <div className="mx-auto flex max-w-2xl flex-col gap-3 rounded-2xl border-2 border-slate-800 bg-slate-900/60 p-2 backdrop-blur-sm transition-all focus-within:border-emerald-500/50 focus-within:shadow-lg focus-within:shadow-emerald-500/10 sm:flex-row sm:p-2">
@@ -331,10 +665,28 @@ export default function Home() {
             </span>
           </div>
 
-          {/* Descripció sota CTA */}
-          <p className="fade-in-up-delay-3 mx-auto max-w-lg text-sm text-slate-500">
-            Descobreix com pots recuperar hores cada setmana automatitzant processos repetitius
-          </p>
+          {/* CTA Secundari */}
+          <div className="fade-in-up-delay-3">
+            <button
+              onClick={() => setIsContactOpen(true)}
+              className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 transition-colors hover:text-emerald-400"
+            >
+              Ja saps què vols automatitzar? Explica'ns-ho
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Exemples del que podem fer */}
+      <section className="relative py-20 px-6 overflow-hidden">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-10 text-center">
+            <h2 className="mb-3 text-3xl font-bold text-slate-50 md:text-4xl">Exemples del que podem fer per tu</h2>
+            <p className="text-slate-400">Automatitzacions i agents IA reals, funcionant en negocis com el teu.</p>
+          </div>
+
+          <ExemplesCarousel />
         </div>
       </section>
 
@@ -373,8 +725,8 @@ export default function Home() {
                 {
                   num: "4",
                   icon: LayoutDashboard,
-                  title: "El teu portal",
-                  desc: "Accedeix a la teva plataforma per gestionar-ho tot",
+                  title: "Funciona!",
+                  desc: "Supervisa resultats des de la teva plataforma",
                   highlight: true
                 },
               ].map((step) => (
@@ -424,37 +776,37 @@ export default function Home() {
               {[
                 {
                   icon: BarChart3,
-                  title: "Dashboard amb KPIs",
-                  desc: "Visualitza hores estalviades, valor generat i ROI en temps real"
-                },
-                {
-                  icon: Bot,
-                  title: "Agents IA connectats",
-                  desc: "Assistents intel·ligents que coneixen el teu negoci i treballen per tu"
+                  title: "Impacte mesurable",
+                  desc: "Visualitza quantes hores estalvies i quin valor generen les teves automatitzacions"
                 },
                 {
                   icon: Activity,
-                  title: "Monitorització en temps real",
-                  desc: "Segueix l'activitat de les teves automatitzacions amb alertes i notificacions"
+                  title: "Automatitzacions actives",
+                  desc: "Monitoritza què s'ha executat: correus enviats, recordatoris, factures processades... Rep alertes quan cal la teva atenció"
                 },
                 {
-                  icon: TrendingUp,
-                  title: "Històric i evolució",
-                  desc: "Analitza el rendiment mensual i descobreix noves oportunitats"
+                  icon: Bot,
+                  title: "Agents IA al teu servei",
+                  desc: "Assistents que coneixen el teu negoci: responen consultes, classifiquen documents, analitzen dades i actuen per tu 24/7"
                 },
                 {
-                  icon: Headphones,
-                  title: "Suport i actualitzacions",
-                  desc: "Sempre actualitzat amb les últimes novetats, amb suport inclòs"
+                  icon: Database,
+                  title: "Les teves dades, organitzades",
+                  desc: "Centralitza la informació del teu negoci en un sol lloc. T'ajudem a estructurar-la perquè automatitzacions i agents la puguin usar"
+                },
+                {
+                  icon: RefreshCw,
+                  title: "Sempre al dia",
+                  desc: "Integrem les últimes novetats en IA. La tecnologia avança, el teu negoci també"
                 },
               ].map((item) => (
                 <div key={item.title} className="flex gap-4">
-                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-emerald-500/10">
+                  <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-lg bg-emerald-500/10">
                     <item.icon className="h-5 w-5 text-emerald-400" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-slate-100">{item.title}</h3>
-                    <p className="text-sm text-slate-400">{item.desc}</p>
+                    <h3 className="text-base font-semibold text-slate-100">{item.title}</h3>
+                    <p className="text-sm leading-relaxed text-slate-400">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -495,7 +847,7 @@ export default function Home() {
               {
                 icon: Sparkles,
                 title: "Servei complet",
-                desc: "Disseny, implementació i manteniment. Tu només expliques què necessites."
+                desc: "Disseny, implementació, manteniment i suport. Tu només expliques què necessites."
               },
               {
                 icon: Wrench,
@@ -530,7 +882,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Qui Hi Ha Al Darrere */}
+      {/* Qui Hi Ha Al Darrere - AMAGAT TEMPORALMENT
       <section className="relative py-20 px-6">
         <div className="mx-auto max-w-3xl">
           <div className="mb-10 text-center">
@@ -538,7 +890,6 @@ export default function Home() {
           </div>
 
           <div className="rounded-2xl border border-slate-800 bg-slate-900/30 p-8 text-center md:p-12">
-            {/* Avatar placeholder - sense foto per ara */}
             <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500/20 to-emerald-700/20 text-3xl font-bold text-emerald-400">
               AO
             </div>
@@ -564,6 +915,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      */}
 
       {/* CTA Final */}
       <section className="relative py-24 px-6">
@@ -625,7 +977,7 @@ export default function Home() {
                 onClick={() => setIsContactOpen(true)}
                 className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 transition-colors hover:text-emerald-400"
               >
-                Ja saps què necessites? Parlem
+                Ja saps què vols automatitzar? Explica'ns-ho
                 <ArrowRight className="h-4 w-4" />
               </button>
             </div>
