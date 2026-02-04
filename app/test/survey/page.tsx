@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Logo } from "@/components/Logo";
-import { createValidationTest } from "@/lib/api";
+import { createValidationTest, updateValidationResponses } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { 
   ArrowRight,
@@ -210,16 +210,64 @@ export default function SurveyPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [testData, setTestData] = useState<any>(null);
   const [validationError, setValidationError] = useState<string | null>(null);
+  const [testId, setTestId] = useState<string | null>(null);  // 🆕 ID del registre creat
+  const [isInitializing, setIsInitializing] = useState(true);  // 🆕 Loading inicial
 
   const totalSections = 6;
 
+  // 🆕 Crear registre al carregar la pàgina
   useEffect(() => {
-    // Recuperar dades del test des de sessionStorage
-    const stored = sessionStorage.getItem("testValidation");
-    if (stored) {
-      setTestData(JSON.parse(stored));
+    const initializeSurvey = async () => {
+      // Recuperar dades del test des de sessionStorage
+      const stored = sessionStorage.getItem("testValidation");
+      const parsedData = stored ? JSON.parse(stored) : null;
+      setTestData(parsedData);
+      
+      // Comprovar si ja tenim un testId guardat (per si refresquen)
+      const existingTestId = sessionStorage.getItem("validationTestId");
+      if (existingTestId) {
+        setTestId(existingTestId);
+        setIsInitializing(false);
+        return;
+      }
+      
+      // Crear registre inicial a Supabase
+      try {
+        const result = await createValidationTest({
+          audit_id: auditId,
+          tester_name: parsedData?.name || null,
+          tester_role: parsedData?.role || null,
+          has_business: parsedData?.hasBusiness || null,
+          started_at: parsedData?.startedAt || new Date().toISOString(),
+          survey_responses: initialResponses,
+          current_section: 1,
+          completed_at: null,  // No completat encara
+        });
+        
+        if (result.test_id) {
+          setTestId(result.test_id);
+          sessionStorage.setItem("validationTestId", result.test_id);
+        }
+      } catch (error) {
+        console.error("Error creating initial survey record:", error);
+      }
+      
+      setIsInitializing(false);
+    };
+    
+    initializeSurvey();
+  }, [auditId]);
+
+  // 🆕 Auto-save quan canvien les respostes o la secció
+  const autoSave = async (newSection: number) => {
+    if (!testId) return;
+    
+    try {
+      await updateValidationResponses(testId, responses, newSection);
+    } catch (error) {
+      console.error("Auto-save failed:", error);
     }
-  }, []);
+  };
 
   const updateResponse = <K extends keyof SurveyResponses>(
     key: K,
@@ -294,13 +342,16 @@ export default function SurveyPage() {
     }
   };
 
-  const nextSection = () => {
+  const nextSection = async () => {
     if (!validateSection()) {
       return;
     }
     if (currentSection < totalSections) {
-      setCurrentSection(currentSection + 1);
+      const newSection = currentSection + 1;
+      setCurrentSection(newSection);
       window.scrollTo({ top: 0, behavior: "smooth" });
+      // 🆕 Auto-save al canviar de secció
+      await autoSave(newSection);
     }
   };
 
@@ -320,23 +371,32 @@ export default function SurveyPage() {
     setIsSubmitting(true);
     
     try {
-      // Preparar dades per enviar a Supabase via API
-      const payload = {
-        audit_id: auditId,
-        tester_name: testData?.name || null,
-        tester_role: testData?.role || null,
-        has_business: testData?.hasBusiness || null,
-        started_at: testData?.startedAt || null,
-        survey_responses: responses,
-        completed_at: new Date().toISOString(),
-      };
-
-      // Enviar a backend
-      const result = await createValidationTest(payload);
-      
-      // Guardar test_id per la pàgina thanks (per actualitzar email)
-      if (result.test_id) {
-        sessionStorage.setItem("validationTestId", result.test_id);
+      if (testId) {
+        // 🆕 Actualitzar registre existent amb completed_at
+        await updateValidationResponses(testId, responses, 6);
+        
+        // Marcar com completat (PATCH addicional per completed_at)
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://empentia-backend-production.up.railway.app';
+        await fetch(`${API_URL}/validation-test/${testId}/complete`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+        });
+      } else {
+        // Fallback: crear nou registre si no tenim testId
+        const payload = {
+          audit_id: auditId,
+          tester_name: testData?.name || null,
+          tester_role: testData?.role || null,
+          has_business: testData?.hasBusiness || null,
+          started_at: testData?.startedAt || null,
+          survey_responses: responses,
+          completed_at: new Date().toISOString(),
+          current_section: 6,
+        };
+        const result = await createValidationTest(payload);
+        if (result.test_id) {
+          sessionStorage.setItem("validationTestId", result.test_id);
+        }
       }
       
       // Redirigir a pàgina d'agraïment

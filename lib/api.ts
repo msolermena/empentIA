@@ -453,6 +453,7 @@ export interface ValidationTestRequest {
   started_at?: string | null;
   survey_responses: Record<string, any>;
   completed_at?: string | null;
+  current_section?: number;  // 🆕 Per tracking abandonaments
 }
 
 export interface ValidationTestResponse {
@@ -469,7 +470,7 @@ export interface ValidationTestEmailRequest {
 }
 
 /**
- * POST /validation-test - Guarda respostes del test de validació
+ * POST /validation-test - Crea nou test de validació
  */
 export async function createValidationTest(
   data: ValidationTestRequest
@@ -483,6 +484,30 @@ export async function createValidationTest(
   const result = await response.json();
   if (!result.success) {
     throw new Error(result.error || 'Error guardant test de validació');
+  }
+  return result;
+}
+
+/**
+ * PATCH /validation-test/{id}/responses - Actualitza respostes parcials (auto-save)
+ */
+export async function updateValidationResponses(
+  testId: string,
+  responses: Record<string, any>,
+  currentSection: number
+): Promise<{ success: boolean; error?: string }> {
+  const response = await fetch(`${API_URL}/validation-test/${testId}/responses`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ 
+      survey_responses: responses,
+      current_section: currentSection 
+    }),
+  });
+
+  const result = await response.json();
+  if (!result.success) {
+    console.error('Auto-save failed:', result.error);
   }
   return result;
 }
