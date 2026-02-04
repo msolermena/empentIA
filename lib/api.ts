@@ -97,6 +97,34 @@ export interface ContactData {
   consentiments: Consentiments;
 }
 
+// Question P1 (v5 - fallback per compatibilitat)
+export interface QuestionP1 {
+  success: boolean;
+  number: 1;
+  type: 'p1_wow_mida_volum';
+  title: string;
+  wow_text: string;
+  mida: {
+    label: string;
+    type: 'radio';
+    options: Array<{ id: string; label: string }>;
+  };
+  volum: {
+    label: string;
+    type: 'number';
+    placeholder: string;
+    hint?: string;
+    min: number;
+    max: number;
+  };
+  metadata: {
+    sector_id: string;
+    sector_name: string;
+    terme_volum: string;
+    context_volum?: string;
+  };
+}
+
 // Question P1 Confirmació
 export interface QuestionP1Confirmacio {
   success: boolean;
@@ -192,7 +220,7 @@ export interface QuestionP5 {
   };
 }
 
-export type QuestionV5 = QuestionP1Confirmacio | QuestionP2 | QuestionP3 | QuestionP4 | QuestionP5;
+export type QuestionV5 = QuestionP1 | QuestionP1Confirmacio | QuestionP2 | QuestionP3 | QuestionP4 | QuestionP5;
 
 export interface SaveAnswerResponse {
   success: boolean;
