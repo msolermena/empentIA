@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
+import { updateValidationTestEmail } from "@/lib/api";
 import { 
   CheckCircle2,
-  Heart,
   Mail,
   ExternalLink,
   Rocket
@@ -19,6 +19,15 @@ export default function ThanksPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [testId, setTestId] = useState<string | null>(null);
+
+  // Recuperar test_id de sessionStorage
+  useEffect(() => {
+    const storedTestId = sessionStorage.getItem("validationTestId");
+    if (storedTestId) {
+      setTestId(storedTestId);
+    }
+  }, []);
 
   const showEmailForm = wantsUpdates || wantsPilot;
 
@@ -35,25 +44,28 @@ export default function ThanksPage() {
       setError("Has d'acceptar la política de privacitat");
       return;
     }
+
+    if (!testId) {
+      setError("Error: no s'ha trobat el test. Refresca la pàgina.");
+      return;
+    }
     
     setIsSubmitting(true);
     
     try {
-      // TODO: Guardar a Supabase
-      const payload = {
+      await updateValidationTestEmail({
+        test_id: testId,
         email,
         wants_updates: wantsUpdates,
         wants_pilot: wantsPilot,
-        accepted_privacy: true,
-        created_at: new Date().toISOString(),
-      };
-      
-      console.log("Thanks form payload:", payload);
-      
-      // Simular delay
-      await new Promise(resolve => setTimeout(resolve, 500));
+      });
       
       setSubmitted(true);
+      
+      // Netejar sessionStorage
+      sessionStorage.removeItem("validationTestId");
+      sessionStorage.removeItem("testValidation");
+      
     } catch (err) {
       setError("Error guardant les dades. Torna-ho a provar.");
       console.error("Error:", err);
@@ -224,12 +236,6 @@ export default function ThanksPage() {
             </a>
           </div>
 
-          {/* Footer amb cor */}
-          <div className="mt-12 flex items-center justify-center gap-2 text-sm text-slate-600">
-            <span>Fet amb</span>
-            <Heart className="h-4 w-4 text-red-500" />
-            <span>a Catalunya</span>
-          </div>
         </div>
       </main>
     </div>

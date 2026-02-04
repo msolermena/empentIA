@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Logo } from "@/components/Logo";
+import { createValidationTest } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { 
   ArrowRight,
@@ -282,17 +282,10 @@ export default function SurveyPage() {
           setValidationError("Si us plau, indica si contractaries empentIA");
           return false;
         }
-        if (!responses.s5_per_que.trim()) {
-          setValidationError("Si us plau, explica'ns per què");
-          return false;
-        }
         return true;
         
       case 6:
-        if (!responses.s6_convençut_o_no.trim()) {
-          setValidationError("Si us plau, explica'ns què t'ha convençut o no");
-          return false;
-        }
+        // Tot opcional en aquesta secció
         return true;
         
       default:
@@ -326,7 +319,7 @@ export default function SurveyPage() {
     setIsSubmitting(true);
     
     try {
-      // Preparar dades per enviar a Supabase
+      // Preparar dades per enviar a Supabase via API
       const payload = {
         audit_id: auditId,
         tester_name: testData?.name || null,
@@ -337,19 +330,20 @@ export default function SurveyPage() {
         completed_at: new Date().toISOString(),
       };
 
-      // TODO: Enviar a Supabase
-      // const { error } = await supabase.from("validation_tests").insert(payload);
+      // Enviar a backend
+      const result = await createValidationTest(payload);
       
-      console.log("Survey payload:", payload);
-      
-      // Simular delay
-      await new Promise(resolve => setTimeout(resolve, 500));
+      // Guardar test_id per la pàgina thanks (per actualitzar email)
+      if (result.test_id) {
+        sessionStorage.setItem("validationTestId", result.test_id);
+      }
       
       // Redirigir a pàgina d'agraïment
       router.push("/test/thanks");
       
     } catch (error) {
       console.error("Error submitting survey:", error);
+      setValidationError("Error guardant l'enquesta. Torna-ho a provar.");
     } finally {
       setIsSubmitting(false);
     }
@@ -491,7 +485,7 @@ export default function SurveyPage() {
             {/* 3.2 */}
             <div>
               <label className="mb-3 block text-sm font-medium text-slate-300">
-                L'auditoria t'ha sorprès positivament? (el "wow factor") *
+                L'auditoria t'ha sorprès positivament? *
               </label>
               <RatingScale
                 value={responses.s3_wow_factor}
@@ -590,7 +584,7 @@ export default function SurveyPage() {
             {/* 5.1b - Per què */}
             <div>
               <label className="mb-3 block text-sm font-medium text-slate-300">
-                Per què? *
+                Per què? <span className="text-slate-500">(opcional)</span>
               </label>
               <textarea
                 value={responses.s5_per_que}
@@ -612,7 +606,7 @@ export default function SurveyPage() {
                 <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
                   <div className="mb-3">
                     <h4 className="font-semibold text-slate-200">Pla Arrencada</h4>
-                    <p className="text-sm text-slate-500">1-2 automatitzacions</p>
+                    <p className="text-sm text-slate-500">1-2 automatitzacions + plataforma amb agents IA bàsica</p>
                   </div>
                   <div className="flex gap-4">
                     <div className="flex-1">
@@ -642,7 +636,7 @@ export default function SurveyPage() {
                 <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
                   <div className="mb-3">
                     <h4 className="font-semibold text-slate-200">Pla Acceleració</h4>
-                    <p className="text-sm text-slate-500">3-5 automatitzacions</p>
+                    <p className="text-sm text-slate-500">3-5 automatitzacions + plataforma amb agents IA avançada</p>
                   </div>
                   <div className="flex gap-4">
                     <div className="flex-1">
@@ -672,7 +666,7 @@ export default function SurveyPage() {
                 <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
                   <div className="mb-3">
                     <h4 className="font-semibold text-slate-200">Pla Transformació</h4>
-                    <p className="text-sm text-slate-500">6+ automatitzacions</p>
+                    <p className="text-sm text-slate-500">6+ automatitzacions + plataforma amb agents IA completa</p>
                   </div>
                   <div className="flex gap-4">
                     <div className="flex-1">
@@ -713,7 +707,7 @@ export default function SurveyPage() {
             {/* 6.1 */}
             <div>
               <label className="mb-3 block text-sm font-medium text-slate-300">
-                Què t'ha convençut més? I què et faria dir que no? *
+                Què t'ha convençut més? I què et faria dir que no? <span className="text-slate-500">(opcional)</span>
               </label>
               <textarea
                 value={responses.s6_convençut_o_no}

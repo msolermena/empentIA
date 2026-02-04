@@ -186,9 +186,13 @@ export default function TestIntroPage() {
 
               {/* Botó */}
               <Button type="submit" size="lg" className="w-full gap-2">
-                Començar
+                Veure la web
                 <ArrowRight className="h-4 w-4" />
               </Button>
+              
+              <p className="text-center text-sm text-slate-500">
+                Fes-hi un cop d'ull i després fes l'auditoria
+              </p>
             </form>
           </div>
         </div>

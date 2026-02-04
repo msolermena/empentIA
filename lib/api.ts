@@ -1,19 +1,21 @@
 /**
- * API Client per empentIA Backend v5.0
+ * API Client per empentIA Backend v6.1
  * =====================================
  * 
  * Nou flux:
- * - P1: Mida + Volum + WOW
+ * - P1: Confirmació info detectada
  * - P2: Eines per àmbit
  * - P3: Oportunitats + Estats
  * - P4: Quantificació
  * - P5: Text lliure (opcional)
+ * 
+ * v6.1: Afegit suport per contacte complet (telèfon, preferència, consentiments)
  */
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://empentia-backend-production.up.railway.app';
 
 // ========================================
-// TIPUS v5.0
+// TIPUS v6.1
 // ========================================
 
 export interface ScrapeResponse {
@@ -34,6 +36,9 @@ export interface ScrapeResponse {
       eines_detectades: string[];
     };
     observacions: string;
+    // 🆕 v6.0
+    info_detectada: InfoDetectada[];
+    sistemes_detectats: string[];
   };
   error?: string;
 }
@@ -53,7 +58,6 @@ export interface AmbitEines {
   icona: string;
   multi_select: boolean;
   options: Array<{ id: string; label: string }>;
-  preselected?: string | string[];  // 🆕 v6.0: Eines detectades per Jina
 }
 
 // Oportunitat mostrada a P3
@@ -78,35 +82,22 @@ export interface InfoDetectada {
   confianca: 'alta' | 'mitjana';
 }
 
-// Question P1 (v5 - fallback)
-export interface QuestionP1 {
-  success: boolean;
-  number: 1;
-  type: 'p1_wow_mida_volum';
-  title: string;
-  wow_text: string;
-  mida: {
-    label: string;
-    type: 'radio';
-    options: Array<{ id: string; label: string }>;
-  };
-  volum: {
-    label: string;
-    type: 'number';
-    placeholder: string;
-    hint?: string;  // 🆕 Clarificació del volum
-    min: number;
-    max: number;
-  };
-  metadata: {
-    sector_id: string;
-    sector_name: string;
-    terme_volum: string;
-    context_volum?: string;
-  };
+// 🆕 v6.1: Consentiments GDPR
+export interface Consentiments {
+  privacitat: boolean;
+  comercial: boolean;
+  timestamp: string;
 }
 
-// 🆕 v6.0: Question P1 Confirmació
+// 🆕 v6.1: Dades contacte complet
+export interface ContactData {
+  email: string;
+  telefon?: string | null;
+  preferencia_contacte: 'email' | 'trucada' | 'whatsapp';
+  consentiments: Consentiments;
+}
+
+// Question P1 Confirmació
 export interface QuestionP1Confirmacio {
   success: boolean;
   number: 1;
@@ -167,7 +158,7 @@ export interface QuestionP4 {
   type: 'p4_quantificacio';
   title: string;
   subtitle: string;
-  skip?: boolean;  // 🆕 Si true, saltar P4
+  skip?: boolean;
   oportunitats: Array<{
     id: string;
     text: string;
@@ -201,7 +192,7 @@ export interface QuestionP5 {
   };
 }
 
-export type QuestionV5 = QuestionP1 | QuestionP1Confirmacio | QuestionP2 | QuestionP3 | QuestionP4 | QuestionP5;
+export type QuestionV5 = QuestionP1Confirmacio | QuestionP2 | QuestionP3 | QuestionP4 | QuestionP5;
 
 export interface SaveAnswerResponse {
   success: boolean;
@@ -218,7 +209,7 @@ export interface OportunitatInforme {
   hores_setmana: number;
   euros_mes: number;
   estat_actual: 'manual' | 'no_fem';
-  tipus_roi?: 'estalvi' | 'valor_nou';  // 🆕
+  tipus_roi?: 'estalvi' | 'valor_nou';
   es_prioritaria: boolean;
 }
 
@@ -228,7 +219,7 @@ export interface InformeV5 {
   impacte_total: {
     hores_setmana: number;
     euros_mes: number;
-    desglossat?: {  // 🆕
+    desglossat?: {
       estalvi_hores: number;
       estalvi_euros: number;
       valor_nou_euros: number;
@@ -256,6 +247,8 @@ export interface GetAuditResponse {
     company_id: string;
     status: string;
     email?: string;
+    telefon?: string;
+    preferencia_contacte?: string;
     audit_result?: InformeV5;
     created_at: string;
     completed_at?: string;
@@ -353,18 +346,34 @@ export async function saveAnswer(
 
 /**
  * POST /audit/generate - Genera informe final
+ * 
+ * 🆕 v6.1: Accepta contactData complet amb telèfon, preferència i consentiments
  */
 export async function generateAudit(
   auditId: string,
-  email?: string
+  email?: string,
+  contactData?: ContactData
 ): Promise<GenerateAuditResponse> {
+  // Construir body amb nous camps
+  const body: any = {
+    audit_id: auditId,
+  };
+
+  // Si tenim contactData complet (nova versió)
+  if (contactData) {
+    body.email = contactData.email;
+    body.telefon = contactData.telefon;
+    body.preferencia_contacte = contactData.preferencia_contacte;
+    body.consentiments = contactData.consentiments;
+  } else if (email) {
+    // Compatibilitat amb versió antiga (només email)
+    body.email = email;
+  }
+
   const response = await fetch(`${API_URL}/audit/generate`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      audit_id: auditId,
-      email: email || null,
-    }),
+    body: JSON.stringify(body),
   });
 
   const data = await response.json();
@@ -401,4 +410,70 @@ export async function scrapeAndStartAudit(companyUrl: string): Promise<StartAudi
     ...auditResult,
     pre_research: scrapeResult.pre_research,
   };
+}
+
+
+// ========================================
+// VALIDATION TEST API
+// ========================================
+
+export interface ValidationTestRequest {
+  audit_id?: string | null;
+  tester_name?: string | null;
+  tester_role?: string | null;
+  has_business?: string | null;
+  started_at?: string | null;
+  survey_responses: Record<string, any>;
+  completed_at?: string | null;
+}
+
+export interface ValidationTestResponse {
+  success: boolean;
+  test_id?: string;
+  error?: string;
+}
+
+export interface ValidationTestEmailRequest {
+  test_id: string;
+  email?: string | null;
+  wants_updates: boolean;
+  wants_pilot: boolean;
+}
+
+/**
+ * POST /validation-test - Guarda respostes del test de validació
+ */
+export async function createValidationTest(
+  data: ValidationTestRequest
+): Promise<ValidationTestResponse> {
+  const response = await fetch(`${API_URL}/validation-test`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+
+  const result = await response.json();
+  if (!result.success) {
+    throw new Error(result.error || 'Error guardant test de validació');
+  }
+  return result;
+}
+
+/**
+ * PATCH /validation-test/{id} - Actualitza email i preferències
+ */
+export async function updateValidationTestEmail(
+  data: ValidationTestEmailRequest
+): Promise<{ success: boolean; error?: string }> {
+  const response = await fetch(`${API_URL}/validation-test/${data.test_id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+
+  const result = await response.json();
+  if (!result.success) {
+    throw new Error(result.error || 'Error actualitzant test');
+  }
+  return result;
 }
