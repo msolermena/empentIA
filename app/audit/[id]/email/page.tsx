@@ -10,15 +10,10 @@ import {
   CheckCircle2, 
   Mail, 
   Lock, 
-  FileText, 
-  TrendingUp, 
-  Zap, 
   Loader2,
   Phone,
   MessageCircle,
-  LayoutDashboard,
-  ArrowRight,
-  Sparkles
+  ArrowRight
 } from "lucide-react";
 import { generateAudit, ContactData } from "@/lib/api";
 
@@ -106,7 +101,7 @@ export default function EmailPage() {
       </header>
 
       {/* Main Content */}
-      <div className="relative z-10 mx-auto max-w-2xl px-6 pt-32 pb-20">
+      <div className="relative z-10 mx-auto max-w-xl px-6 pt-32 pb-20">
         
         {/* Card Principal */}
         <Card className="border-2 border-emerald-500/20 bg-slate-900/60 backdrop-blur-sm">
@@ -120,11 +115,11 @@ export default function EmailPage() {
               🎉 L&apos;auditoria està llesta!
             </CardTitle>
             <p className="mt-3 text-slate-400">
-              On t&apos;enviem l&apos;informe amb les oportunitats detectades?
+              On t&apos;enviem l&apos;informe?
             </p>
           </CardHeader>
 
-          <CardContent className="space-y-6 pt-4">
+          <CardContent className="space-y-5 pt-4">
             <form onSubmit={handleSubmit} className="space-y-5">
               
               {/* Email */}
@@ -213,7 +208,7 @@ export default function EmailPage() {
                   >
                     política de privacitat
                   </a>{" "}
-                  i el tractament de les meves dades per rebre l&apos;informe d&apos;auditoria. *
+                  i el tractament de les meves dades per rebre l&apos;informe. *
                 </span>
               </label>
 
@@ -227,7 +222,7 @@ export default function EmailPage() {
                   disabled={isSubmitting}
                 />
                 <span className="text-sm text-slate-400">
-                  Vull rebre informació sobre automatitzacions, novetats i ofertes d&apos;empentIA (opcional)
+                  Vull rebre informació sobre automatitzacions i ofertes (opcional)
                 </span>
               </label>
 
@@ -260,98 +255,12 @@ export default function EmailPage() {
             </form>
 
             {/* Nota privacitat */}
-            <div className="flex items-start gap-3 rounded-xl bg-slate-800/30 p-4 text-sm">
-              <Lock className="mt-0.5 h-5 w-5 flex-shrink-0 text-emerald-500" />
-              <span className="text-slate-400">
-                <strong className="text-slate-300">100% confidencial.</strong>{" "}
-                No compartirem les teves dades amb tercers.
-              </span>
+            <div className="flex items-center justify-center gap-2 text-sm text-slate-500">
+              <Lock className="h-4 w-4" />
+              <span>100% confidencial</span>
             </div>
           </CardContent>
         </Card>
-
-        {/* Secció: Què inclou l'informe */}
-        <div className="mt-8 rounded-2xl border border-slate-800 bg-slate-900/40 p-6">
-          <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-200">
-            <Sparkles className="h-5 w-5 text-emerald-400" />
-            Què inclou l&apos;informe
-          </h3>
-          <div className="grid gap-3 sm:grid-cols-3">
-            <div className="flex items-start gap-3">
-              <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-emerald-500/10">
-                <FileText className="h-4 w-4 text-emerald-400" />
-              </div>
-              <div>
-                <p className="font-medium text-slate-300 text-sm">Oportunitats</p>
-                <p className="text-xs text-slate-500">Processos automatitzables</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-emerald-500/10">
-                <TrendingUp className="h-4 w-4 text-emerald-400" />
-              </div>
-              <div>
-                <p className="font-medium text-slate-300 text-sm">Estalvi estimat</p>
-                <p className="text-xs text-slate-500">Hores i euros/mes</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-emerald-500/10">
-                <Zap className="h-4 w-4 text-emerald-400" />
-              </div>
-              <div>
-                <p className="font-medium text-slate-300 text-sm">Recomanacions</p>
-                <p className="text-xs text-slate-500">Prioritzades per impacte</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Secció: Què passa després */}
-        <div className="mt-6 rounded-2xl border border-slate-800 bg-slate-900/40 p-6">
-          <h3 className="mb-4 text-lg font-semibold text-slate-200">
-            Què passa després?
-          </h3>
-          <div className="space-y-4">
-            <div className="flex items-start gap-4">
-              <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-sm font-bold text-emerald-400">
-                1
-              </div>
-              <div>
-                <p className="font-medium text-slate-300">Reps l&apos;informe</p>
-                <p className="text-sm text-slate-500">Veuràs les oportunitats detectades i l&apos;estalvi estimat</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-sm font-bold text-emerald-400">
-                2
-              </div>
-              <div>
-                <p className="font-medium text-slate-300">Si t&apos;interessa, parlem</p>
-                <p className="text-sm text-slate-500">Sense pressió. T&apos;expliquem com funciona i resolem dubtes</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-sm font-bold text-emerald-400">
-                3
-              </div>
-              <div>
-                <p className="font-medium text-slate-300">Implementem i funciona</p>
-                <p className="text-sm text-slate-500">Ho construïm nosaltres. Tu només supervises els resultats</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Menció plataforma */}
-          <div className="mt-6 flex items-center gap-3 rounded-xl border border-slate-700/50 bg-slate-800/30 p-4">
-            <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-emerald-500/10">
-              <LayoutDashboard className="h-5 w-5 text-emerald-400" />
-            </div>
-            <p className="text-sm text-slate-400">
-              Tot controlat des de la <strong className="text-slate-300">plataforma empentIA</strong>: veuràs què s&apos;executa, l&apos;impacte real i podràs parlar amb els teus agents IA.
-            </p>
-          </div>
-        </div>
 
       </div>
     </div>

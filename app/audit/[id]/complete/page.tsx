@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { 
@@ -14,20 +14,14 @@ import {
   TrendingUp,
   Sparkles,
   ChevronRight,
-  Target,
-  ClipboardList,
-  ArrowRight
+  Target
 } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { getAudit, type InformeV5, type OportunitatInforme } from "@/lib/api";
 
 export default function CompletePage() {
   const params = useParams();
-  const router = useRouter();
-  const searchParams = useSearchParams();
   const auditId = params.id as string;
-  const source = searchParams.get("source");
-  const isTestMode = source === "test";
   
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -292,92 +286,83 @@ export default function CompletePage() {
           </p>
         </div>
 
-        {/* ==================== AGENTS IA (abans "EMPENTIA SUITE") ==================== */}
-        <Card className="glass-card border border-purple-500/30 mb-10 overflow-hidden">
-          <div className="bg-gradient-to-r from-purple-500/10 to-emerald-500/10 p-6">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-500/20">
-                <span className="text-xl">🤖</span>
+        {/* ==================== QUÈ PASSA DESPRÉS + PLATAFORMA ==================== */}
+        <Card className="glass-card border border-emerald-500/20 mb-10 overflow-hidden">
+          <CardContent className="p-6">
+            <h3 className="text-xl font-bold text-slate-200 mb-6">
+              Què passa després?
+            </h3>
+            
+            <div className="space-y-4 mb-6">
+              <div className="flex items-start gap-4">
+                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-sm font-bold text-emerald-400">
+                  1
+                </div>
+                <div>
+                  <p className="font-medium text-slate-300">Parlem sense compromís</p>
+                  <p className="text-sm text-slate-500">15 minuts per entendre les teves prioritats i resoldre dubtes</p>
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-slate-200">
-                Inclòs: Agents IA personalitzats
-              </h3>
+              <div className="flex items-start gap-4">
+                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-sm font-bold text-emerald-400">
+                  2
+                </div>
+                <div>
+                  <p className="font-medium text-slate-300">Implementem nosaltres</p>
+                  <p className="text-sm text-slate-500">Tu no has de tocar res tècnic. Ho construïm i configurem tot</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-sm font-bold text-emerald-400">
+                  3
+                </div>
+                <div>
+                  <p className="font-medium text-slate-300">Funciona i ho controles</p>
+                  <p className="text-sm text-slate-500">Des de la plataforma empentIA veuràs què s&apos;executa i l&apos;impacte real</p>
+                </div>
+              </div>
             </div>
-            <p className="text-slate-300 mb-4">
-              La plataforma empentIA amb les teves automatitzacions actives, mètriques en temps real i agents IA que coneixen el teu negoci, disponibles 24/7.
-            </p>
-            <Button 
-              variant="outline" 
-              size="sm"
-              className="border-purple-500/50 text-purple-300 hover:bg-purple-500/10"
-              onClick={() => window.open('/plataforma', '_blank')}
-            >
-              Descobreix la plataforma →
-            </Button>
-          </div>
+
+            {/* Info plataforma */}
+            <div className="rounded-xl border border-purple-500/20 bg-purple-500/5 p-4">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-xl">🤖</span>
+                <p className="font-medium text-slate-300">Inclòs: Plataforma empentIA</p>
+              </div>
+              <p className="text-sm text-slate-400">
+                Automatitzacions actives, mètriques en temps real i agents IA que coneixen el teu negoci, disponibles 24/7.
+              </p>
+            </div>
+          </CardContent>
         </Card>
 
         {/* ==================== CTA ==================== */}
-        {isTestMode ? (
-          /* MODE TEST: CTA cap a l'enquesta */
-          <Card className="glass-card border-2 border-amber-500/30">
-            <CardContent className="p-8 text-center">
-              <div className="mb-4 flex justify-center">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-amber-500/15">
-                  <ClipboardList className="h-7 w-7 text-amber-400" />
-                </div>
-              </div>
-              <h3 className="text-2xl font-bold text-slate-200 mb-3">
-                Ara toca la teva opinió! 📝
-              </h3>
-              <p className="text-slate-400 mb-6 max-w-md mx-auto">
-                Has vist l'informe. Ara ens ajudaries molt responent una enquesta ràpida 
-                (3-4 minuts) sobre la teva experiència.
-              </p>
-              
+        <Card className="glass-card border-2 border-emerald-500/30">
+          <CardContent className="p-8 text-center">
+            <h3 className="text-2xl font-bold text-slate-200 mb-3">
+              Vols que t'ajudem a implementar-ho?
+            </h3>
+            <p className="text-slate-400 mb-6 max-w-md mx-auto">
+              Parlem 15 minuts sense compromís per veure quines automatitzacions
+              tenen més sentit pel vostre cas.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 size="lg" 
-                className="gap-2 bg-amber-600 hover:bg-amber-500"
-                onClick={() => router.push(`/test/survey?audit_id=${auditId}`)}
+                className="gap-2 bg-emerald-600 hover:bg-emerald-500"
+                onClick={() => window.open('https://calendly.com/empentia/15min', '_blank')}
               >
-                <ArrowRight className="h-5 w-5" />
-                Començar enquesta
+                <Calendar className="h-5 w-5" />
+                Reservar trucada gratuïta
               </Button>
+            </div>
 
-              <p className="text-xs text-slate-500 mt-4">
-                Gràcies per ajudar-nos a millorar empentIA! 🙏
-              </p>
-            </CardContent>
-          </Card>
-        ) : (
-          /* MODE NORMAL: CTA Calendly */
-          <Card className="glass-card border-2 border-emerald-500/30">
-            <CardContent className="p-8 text-center">
-              <h3 className="text-2xl font-bold text-slate-200 mb-3">
-                Vols que t'ajudem a implementar-ho?
-              </h3>
-              <p className="text-slate-400 mb-6 max-w-md mx-auto">
-                Parlem 15 minuts sense compromís per veure quines automatitzacions
-                tenen més sentit pel vostre cas.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  size="lg" 
-                  className="gap-2 bg-emerald-600 hover:bg-emerald-500"
-                  onClick={() => window.open('https://calendly.com/empentia/15min', '_blank')}
-                >
-                  <Calendar className="h-5 w-5" />
-                  Reservar trucada gratuïta
-                </Button>
-              </div>
-
-              <p className="text-xs text-slate-500 mt-4">
-                Sense compromís • 15 minuts • Et mostrem exemples reals
-              </p>
-            </CardContent>
-          </Card>
-        )}
+            <p className="text-xs text-slate-500 mt-4">
+              Sense compromís • 15 minuts • Et mostrem exemples reals
+            </p>
+          </CardContent>
+        </Card>
 
       </div>
     </div>
