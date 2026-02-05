@@ -20,7 +20,7 @@ import {
   Phone
 } from "lucide-react";
 import { Logo } from "@/components/Logo";
-import { getAudit, type InformeV5, type OportunitatInforme } from "@/lib/api";
+import { getAudit, updateAuditContact, type InformeV5, type OportunitatInforme } from "@/lib/api";
 
 export default function CompletePage() {
   const params = useParams();
@@ -29,6 +29,9 @@ export default function CompletePage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [informe, setInforme] = useState<InformeV5 | null>(null);
+  // 🆕 v6.3: Propagar dades del lead
+  const [leadNom, setLeadNom] = useState<string>("");
+  const [leadEmail, setLeadEmail] = useState<string>("");
 
   useEffect(() => {
     const fetchAudit = async () => {
@@ -36,6 +39,9 @@ export default function CompletePage() {
         const response = await getAudit(auditId);
         if (response.success && response.audit.audit_result) {
           setInforme(response.audit.audit_result);
+          // Propagar nom i email del lead
+          if (response.audit.nom) setLeadNom(response.audit.nom);
+          if (response.audit.email) setLeadEmail(response.audit.email);
         } else {
           setError("No s'ha pogut carregar l'informe");
         }
@@ -98,7 +104,10 @@ export default function CompletePage() {
           </div>
           
           <h1 className="mb-4 text-3xl font-extrabold md:text-4xl text-slate-100">
-            El teu Informe d'Automatització
+            {leadNom 
+              ? `${leadNom}, aquí tens el teu Informe` 
+              : "El teu Informe d'Automatització"
+            }
           </h1>
           
           <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
@@ -340,7 +349,7 @@ export default function CompletePage() {
         </Card>
 
         {/* ==================== CTA AMB FORMULARI CONTACTE ==================== */}
-        <ContactForm auditId={auditId} />
+        <ContactForm auditId={auditId} leadNom={leadNom} leadEmail={leadEmail} />
 
       </div>
     </div>
@@ -350,28 +359,43 @@ export default function CompletePage() {
 // ==========================================
 // COMPONENT: Contact Form (CTA final informe)
 // ==========================================
-function ContactForm({ auditId }: { auditId: string }) {
+function ContactForm({ auditId, leadNom, leadEmail }: { auditId: string; leadNom: string; leadEmail: string }) {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
+    name: leadNom || "",
+    email: leadEmail || "",
     phone: "",
     preferredContact: "email" as "email" | "trucada" | "whatsapp",
     description: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // Actualitzar si les props arriben després (async)
+  useEffect(() => {
+    if (leadNom && !formData.name) setFormData(prev => ({ ...prev, name: leadNom }));
+    if (leadEmail && !formData.email) setFormData(prev => ({ ...prev, email: leadEmail }));
+  }, [leadNom, leadEmail]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null);
     
-    // TODO: Integrar amb backend/Brevo
-    console.log("Contact form submitted:", { ...formData, auditId });
-    
-    // Simular enviament
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setIsSubmitted(true);
-    setIsSubmitting(false);
+    try {
+      await updateAuditContact(auditId, {
+        nom: formData.name,
+        email: formData.email,
+        telefon: formData.phone || undefined,
+        preferencia_contacte: formData.preferredContact,
+        missatge: formData.description || undefined,
+      });
+      setIsSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Error enviant el formulari. Torna-ho a provar.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSubmitted) {
@@ -483,6 +507,12 @@ function ContactForm({ auditId }: { auditId: string }) {
           <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
             {isSubmitting ? 'Enviant...' : 'Enviar missatge'}
           </Button>
+
+          {error && (
+            <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-400">
+              {error}
+            </div>
+          )}
         </form>
       </CardContent>
     </Card>

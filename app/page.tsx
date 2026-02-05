@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { createLead } from "@/lib/api";
 import { 
   ArrowRight, 
   CheckCircle2, 
@@ -64,26 +65,40 @@ function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
     name: '',
     email: '',
     phone: '',
-    preferredContact: 'email',
+    preferredContact: 'email' as 'email' | 'trucada' | 'whatsapp',
     description: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   if (!isOpen) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // TODO: Integrar amb backend/Brevo
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setIsSubmitting(false);
-    setSubmitted(true);
-    setTimeout(() => {
-      onClose();
-      setSubmitted(false);
-      setFormData({ name: '', email: '', phone: '', preferredContact: 'email', description: '' });
-    }, 2000);
+    setError(null);
+    
+    try {
+      await createLead({
+        nom: formData.name,
+        email: formData.email,
+        telefon: formData.phone || undefined,
+        preferencia_contacte: formData.preferredContact,
+        missatge: formData.description || undefined,
+      });
+      setIsSubmitting(false);
+      setSubmitted(true);
+      setTimeout(() => {
+        onClose();
+        setSubmitted(false);
+        setError(null);
+        setFormData({ name: '', email: '', phone: '', preferredContact: 'email', description: '' });
+      }, 2000);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Error enviant el formulari. Torna-ho a provar.");
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -156,9 +171,9 @@ function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                 <label className="mb-1.5 block text-sm font-medium text-slate-300">Com prefereixes que et contactem?</label>
                 <div className="flex gap-3">
                   {[
-                    { value: 'email', icon: Mail, label: 'Email' },
-                    { value: 'phone', icon: Phone, label: 'Trucada' },
-                    { value: 'whatsapp', icon: MessageCircle, label: 'WhatsApp' },
+                    { value: 'email' as const, icon: Mail, label: 'Email' },
+                    { value: 'trucada' as const, icon: Phone, label: 'Trucada' },
+                    { value: 'whatsapp' as const, icon: MessageCircle, label: 'WhatsApp' },
                   ].map((option) => (
                     <button
                       key={option.value}
@@ -191,6 +206,12 @@ function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
               <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
                 {isSubmitting ? 'Enviant...' : 'Enviar missatge'}
               </Button>
+
+              {error && (
+                <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-400">
+                  {error}
+                </div>
+              )}
             </form>
           </>
         )}
@@ -879,6 +900,36 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Et Sona Alguna d'Aquestes? */}
+      <section className="relative py-20 px-6">
+        <div className="mx-auto max-w-3xl">
+          <div className="mb-10 text-center">
+            <h2 className="mb-4 text-3xl font-bold text-slate-50 md:text-4xl">Et sona alguna d&apos;aquestes?</h2>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              "Dediques hores a tasques que saps que es podrien automatitzar",
+              "Tens un equip petit que fa massa coses manualment",
+              "Vols aprofitar la IA però no saps per on començar",
+              "No tens departament de tecnologia ni vols tenir-lo",
+            ].map((text) => (
+              <div
+                key={text}
+                className="flex items-start gap-4 rounded-xl border border-slate-800/60 bg-slate-900/20 p-4 transition-all hover:border-emerald-500/20 hover:bg-slate-900/40"
+              >
+                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-emerald-400" />
+                <p className="text-base leading-relaxed text-slate-200">{text}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-10 text-center text-lg text-slate-400">
+            Si t&apos;hi veus reflectit, <span className="font-semibold text-emerald-400">empentIA és per a tu.</span>
+          </p>
         </div>
       </section>
 

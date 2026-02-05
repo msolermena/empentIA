@@ -277,6 +277,8 @@ export interface GetAuditResponse {
     id: string;
     company_id: string;
     status: string;
+    nom?: string;
+    carrec?: string;
     email?: string;
     telefon?: string;
     preferencia_contacte?: string;
@@ -533,6 +535,58 @@ export async function updateValidationTestEmail(
   const result = await response.json();
   if (!result.success) {
     throw new Error(result.error || 'Error actualitzant test');
+  }
+  return result;
+}
+
+
+// ========================================
+// LEAD & CONTACT API (v6.3)
+// ========================================
+
+export interface LeadData {
+  nom: string;
+  email: string;
+  telefon?: string;
+  preferencia_contacte?: 'email' | 'trucada' | 'whatsapp';
+  missatge?: string;
+}
+
+/**
+ * POST /lead - Crea lead de contacte directe (landing, sense audit)
+ */
+export async function createLead(
+  data: LeadData
+): Promise<{ success: boolean; lead_id?: string; error?: string }> {
+  const response = await fetch(`${API_URL}/lead`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+
+  const result = await response.json();
+  if (!result.success) {
+    throw new Error(result.error || 'Error enviant formulari de contacte');
+  }
+  return result;
+}
+
+/**
+ * PATCH /audit/{id}/contact - Actualitza contacte d'una auditoria (complete)
+ */
+export async function updateAuditContact(
+  auditId: string,
+  data: Partial<LeadData>
+): Promise<{ success: boolean; error?: string }> {
+  const response = await fetch(`${API_URL}/audit/${auditId}/contact`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+
+  const result = await response.json();
+  if (!result.success) {
+    throw new Error(result.error || 'Error actualitzant dades de contacte');
   }
   return result;
 }
