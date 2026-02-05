@@ -11,9 +11,9 @@ import {
   Mail, 
   Lock, 
   Loader2,
-  Phone,
-  MessageCircle,
-  ArrowRight
+  ArrowRight,
+  User,
+  Briefcase
 } from "lucide-react";
 import { generateAudit, ContactData } from "@/lib/api";
 
@@ -24,15 +24,12 @@ export default function EmailPage() {
 
   // Form state
   const [email, setEmail] = useState("");
-  const [telefon, setTelefon] = useState("");
-  const [preferenciaContacte, setPreferenciaContacte] = useState<"email" | "trucada" | "whatsapp">("email");
+  const [nom, setNom] = useState("");
+  const [carrec, setCarrec] = useState("");
   const [consentPrivacitat, setConsentPrivacitat] = useState(false);
-  const [consentComercial, setConsentComercial] = useState(false);
+  const [consentComercial, setConsentComercial] = useState(true);  // Marcat per defecte
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  // Mostrar camp telèfon si preferència és trucada o whatsapp
-  const mostrarTelefon = preferenciaContacte === "trucada" || preferenciaContacte === "whatsapp";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,34 +42,36 @@ export default function EmailPage() {
       return;
     }
 
+    // Validació nom
+    if (!nom.trim()) {
+      setError("Si us plau, introdueix el teu nom");
+      return;
+    }
+
     // Validació consentiment obligatori
     if (!consentPrivacitat) {
       setError("Has d'acceptar la política de privacitat per continuar");
       return;
     }
 
-    // Validació telèfon si és necessari
-    if (mostrarTelefon && !telefon.trim()) {
-      setError("Si us plau, introdueix el teu telèfon per poder contactar-te");
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
-      // Preparar contactData complet
+      // Preparar contactData
       const contactData: ContactData = {
         email,
-        telefon: mostrarTelefon ? telefon : null,
-        preferencia_contacte: preferenciaContacte,
+        telefon: null,
+        preferencia_contacte: "email",  // Per defecte, encara no han triat
         consentiments: {
           privacitat: consentPrivacitat,
           comercial: consentComercial,
           timestamp: new Date().toISOString()
-        }
+        },
+        // 🆕 v6.2: Nom i càrrec
+        nom: nom.trim(),
+        carrec: carrec.trim() || undefined
       };
-
-      // Generar auditoria amb contactData complet
+      
       const data = await generateAudit(auditId, undefined, contactData);
 
       if (data.success) {
@@ -101,7 +100,7 @@ export default function EmailPage() {
       </header>
 
       {/* Main Content */}
-      <div className="relative z-10 mx-auto max-w-xl px-6 pt-32 pb-20">
+      <div className="relative z-10 mx-auto max-w-md px-6 pt-32 pb-20">
         
         {/* Card Principal */}
         <Card className="border-2 border-emerald-500/20 bg-slate-900/60 backdrop-blur-sm">
@@ -111,7 +110,7 @@ export default function EmailPage() {
                 <CheckCircle2 className="h-8 w-8 text-emerald-400" />
               </div>
             </div>
-            <CardTitle className="text-2xl font-bold text-slate-50 md:text-3xl">
+            <CardTitle className="text-2xl font-bold text-slate-50">
               🎉 L&apos;auditoria està llesta!
             </CardTitle>
             <p className="mt-3 text-slate-400">
@@ -120,8 +119,27 @@ export default function EmailPage() {
           </CardHeader>
 
           <CardContent className="space-y-5 pt-4">
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-4">
               
+              {/* Nom */}
+              <div>
+                <label className="mb-2 block text-sm font-medium text-slate-300">
+                  Nom *
+                </label>
+                <div className="relative">
+                  <User className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" />
+                  <Input
+                    type="text"
+                    value={nom}
+                    onChange={(e) => setNom(e.target.value)}
+                    placeholder="El teu nom"
+                    className="pl-12 h-12 bg-slate-800/50 border-slate-700 text-slate-100 placeholder:text-slate-500 focus:border-emerald-500"
+                    required
+                    disabled={isSubmitting}
+                  />
+                </div>
+              </div>
+
               {/* Email */}
               <div>
                 <label className="mb-2 block text-sm font-medium text-slate-300">
@@ -141,54 +159,23 @@ export default function EmailPage() {
                 </div>
               </div>
 
-              {/* Preferència de contacte */}
+              {/* Càrrec (opcional) */}
               <div>
                 <label className="mb-2 block text-sm font-medium text-slate-300">
-                  Com prefereixes que et contactem?
+                  Càrrec <span className="text-slate-500">(opcional)</span>
                 </label>
-                <div className="grid grid-cols-3 gap-3">
-                  {[
-                    { value: "email" as const, icon: Mail, label: "Email" },
-                    { value: "trucada" as const, icon: Phone, label: "Trucada" },
-                    { value: "whatsapp" as const, icon: MessageCircle, label: "WhatsApp" },
-                  ].map((option) => (
-                    <button
-                      key={option.value}
-                      type="button"
-                      onClick={() => setPreferenciaContacte(option.value)}
-                      disabled={isSubmitting}
-                      className={`flex items-center justify-center gap-2 rounded-xl border-2 px-3 py-3 text-sm font-medium transition-all ${
-                        preferenciaContacte === option.value
-                          ? "border-emerald-500 bg-emerald-500/10 text-emerald-400"
-                          : "border-slate-700 text-slate-400 hover:border-slate-600"
-                      }`}
-                    >
-                      <option.icon className="h-4 w-4" />
-                      {option.label}
-                    </button>
-                  ))}
+                <div className="relative">
+                  <Briefcase className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" />
+                  <Input
+                    type="text"
+                    value={carrec}
+                    onChange={(e) => setCarrec(e.target.value)}
+                    placeholder="Gerent, CEO, Administració..."
+                    className="pl-12 h-12 bg-slate-800/50 border-slate-700 text-slate-100 placeholder:text-slate-500 focus:border-emerald-500"
+                    disabled={isSubmitting}
+                  />
                 </div>
               </div>
-
-              {/* Telèfon (condicional) */}
-              {mostrarTelefon && (
-                <div className="animate-in slide-in-from-top-2 duration-200">
-                  <label className="mb-2 block text-sm font-medium text-slate-300">
-                    Telèfon *
-                  </label>
-                  <div className="relative">
-                    <Phone className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" />
-                    <Input
-                      type="tel"
-                      value={telefon}
-                      onChange={(e) => setTelefon(e.target.value)}
-                      placeholder="+34 600 000 000"
-                      className="pl-12 h-12 bg-slate-800/50 border-slate-700 text-slate-100 placeholder:text-slate-500 focus:border-emerald-500"
-                      disabled={isSubmitting}
-                    />
-                  </div>
-                </div>
-              )}
 
               {/* Consentiment Privacitat (obligatori) */}
               <label className="flex cursor-pointer items-start gap-3 rounded-xl border-2 border-slate-700 bg-slate-800/30 p-4 transition-all hover:border-emerald-500/50">
@@ -208,11 +195,11 @@ export default function EmailPage() {
                   >
                     política de privacitat
                   </a>{" "}
-                  i el tractament de les meves dades per rebre l&apos;informe. *
+                  *
                 </span>
               </label>
 
-              {/* Consentiment Comercial (opcional) */}
+              {/* Consentiment Comercial (opcional, marcat per defecte) */}
               <label className="flex cursor-pointer items-start gap-3 rounded-xl border-2 border-slate-700/50 bg-slate-800/20 p-4 transition-all hover:border-slate-600">
                 <input
                   type="checkbox"
@@ -222,7 +209,7 @@ export default function EmailPage() {
                   disabled={isSubmitting}
                 />
                 <span className="text-sm text-slate-400">
-                  Vull rebre informació sobre automatitzacions i ofertes (opcional)
+                  Vull rebre informació sobre automatitzacions i ofertes
                 </span>
               </label>
 

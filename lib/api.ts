@@ -95,6 +95,9 @@ export interface ContactData {
   telefon?: string | null;
   preferencia_contacte: 'email' | 'trucada' | 'whatsapp';
   consentiments: Consentiments;
+  // 🆕 v6.2: Nom i càrrec
+  nom?: string;
+  carrec?: string;
 }
 
 // Question P1 (v5 - fallback per compatibilitat)
@@ -393,6 +396,9 @@ export async function generateAudit(
     body.telefon = contactData.telefon;
     body.preferencia_contacte = contactData.preferencia_contacte;
     body.consentiments = contactData.consentiments;
+    // 🆕 v6.2: Nom i càrrec
+    body.nom = contactData.nom;
+    body.carrec = contactData.carrec;
   } else if (email) {
     // Compatibilitat amb versió antiga (només email)
     body.email = email;

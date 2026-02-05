@@ -14,7 +14,10 @@ import {
   TrendingUp,
   Sparkles,
   ChevronRight,
-  Target
+  Target,
+  Mail,
+  MessageCircle,
+  Phone
 } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { getAudit, type InformeV5, type OportunitatInforme } from "@/lib/api";
@@ -336,33 +339,8 @@ export default function CompletePage() {
           </CardContent>
         </Card>
 
-        {/* ==================== CTA ==================== */}
-        <Card className="glass-card border-2 border-emerald-500/30">
-          <CardContent className="p-8 text-center">
-            <h3 className="text-2xl font-bold text-slate-200 mb-3">
-              Vols que t'ajudem a implementar-ho?
-            </h3>
-            <p className="text-slate-400 mb-6 max-w-md mx-auto">
-              Parlem 15 minuts sense compromís per veure quines automatitzacions
-              tenen més sentit pel vostre cas.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                className="gap-2 bg-emerald-600 hover:bg-emerald-500"
-                onClick={() => window.open('https://calendly.com/empentia/15min', '_blank')}
-              >
-                <Calendar className="h-5 w-5" />
-                Reservar trucada gratuïta
-              </Button>
-            </div>
-
-            <p className="text-xs text-slate-500 mt-4">
-              Sense compromís • 15 minuts • Et mostrem exemples reals
-            </p>
-          </CardContent>
-        </Card>
+        {/* ==================== CTA AMB FORMULARI CONTACTE ==================== */}
+        <ContactForm auditId={auditId} />
 
       </div>
     </div>
