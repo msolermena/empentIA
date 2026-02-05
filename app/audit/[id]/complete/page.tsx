@@ -348,8 +348,146 @@ export default function CompletePage() {
 }
 
 // ==========================================
-// COMPONENT: Oportunitat Card
+// COMPONENT: Contact Form (CTA final informe)
 // ==========================================
+function ContactForm({ auditId }: { auditId: string }) {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    preferredContact: "email" as "email" | "trucada" | "whatsapp",
+    description: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // TODO: Integrar amb backend/Brevo
+    console.log("Contact form submitted:", { ...formData, auditId });
+    
+    // Simular enviament
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setIsSubmitted(true);
+    setIsSubmitting(false);
+  };
+
+  if (isSubmitted) {
+    return (
+      <Card className="glass-card border-2 border-emerald-500/30">
+        <CardContent className="p-8 text-center">
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/15">
+            <CheckCircle2 className="h-8 w-8 text-emerald-400" />
+          </div>
+          <h3 className="mb-2 text-xl font-bold text-slate-100">Missatge enviat!</h3>
+          <p className="text-slate-400">
+            Ens posarem en contacte amb tu aviat. Gràcies per confiar en empentIA.
+          </p>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  const contactOptions = [
+    { value: "email" as const, label: "Email", icon: Mail },
+    { value: "trucada" as const, label: "Trucada", icon: Phone },
+    { value: "whatsapp" as const, label: "WhatsApp", icon: MessageCircle },
+  ];
+
+  return (
+    <Card className="glass-card border-2 border-emerald-500/30">
+      <CardContent className="p-8">
+        <div className="text-center mb-6">
+          <h3 className="text-2xl font-bold text-slate-100 mb-2">
+            Parlem?
+          </h3>
+          <p className="text-slate-400">
+            Explica'ns les teves prioritats i t'assessorem sense compromís.
+          </p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-4 max-w-lg mx-auto">
+          <div>
+            <label className="mb-1.5 block text-sm font-medium text-slate-300">Nom *</label>
+            <input
+              type="text"
+              required
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              className="w-full rounded-xl border-2 border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder-slate-500 transition-colors focus:border-emerald-500 focus:outline-none"
+              placeholder="El teu nom"
+            />
+          </div>
+
+          <div>
+            <label className="mb-1.5 block text-sm font-medium text-slate-300">Email *</label>
+            <input
+              type="email"
+              required
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              className="w-full rounded-xl border-2 border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder-slate-500 transition-colors focus:border-emerald-500 focus:outline-none"
+              placeholder="email@empresa.cat"
+            />
+          </div>
+
+          <div>
+            <label className="mb-1.5 block text-sm font-medium text-slate-300">
+              Telèfon <span className="text-slate-500">(opcional)</span>
+            </label>
+            <input
+              type="tel"
+              value={formData.phone}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              className="w-full rounded-xl border-2 border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder-slate-500 transition-colors focus:border-emerald-500 focus:outline-none"
+              placeholder="600 000 000"
+            />
+          </div>
+
+          <div>
+            <label className="mb-1.5 block text-sm font-medium text-slate-300">Com prefereixes que et contactem?</label>
+            <div className="flex gap-2">
+              {contactOptions.map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  onClick={() => setFormData({ ...formData, preferredContact: option.value })}
+                  className={`flex flex-1 items-center justify-center gap-2 rounded-xl border-2 px-4 py-3 text-sm font-medium transition-all ${
+                    formData.preferredContact === option.value
+                      ? 'border-emerald-500 bg-emerald-500/10 text-emerald-400'
+                      : 'border-slate-700 text-slate-400 hover:border-slate-600'
+                  }`}
+                >
+                  <option.icon className="h-4 w-4" />
+                  {option.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <label className="mb-1.5 block text-sm font-medium text-slate-300">
+              Què t'interessa més? <span className="text-slate-500">(opcional)</span>
+            </label>
+            <textarea
+              value={formData.description}
+              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+              rows={3}
+              className="w-full rounded-xl border-2 border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder-slate-500 transition-colors focus:border-emerald-500 focus:outline-none"
+              placeholder="Explica'ns breument les teves prioritats..."
+            />
+          </div>
+
+          <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+            {isSubmitting ? 'Enviant...' : 'Enviar missatge'}
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
+  );
+}
 function OportunitatCard({ 
   oportunitat, 
   index 
