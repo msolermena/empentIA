@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams, useRouter } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { 
@@ -17,14 +17,21 @@ import {
   Target,
   Mail,
   MessageCircle,
-  Phone
+  Phone,
+  ClipboardList,
+  ArrowRight
 } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { getAudit, updateAuditContact, type InformeV5, type OportunitatInforme } from "@/lib/api";
 
 export default function CompletePage() {
   const params = useParams();
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const auditId = params.id as string;
+  
+  // 🆕 Detectar si ve del test de validació
+  const isTestMode = searchParams.get("source") === "test";
   
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -348,8 +355,41 @@ export default function CompletePage() {
           </CardContent>
         </Card>
 
-        {/* ==================== CTA AMB FORMULARI CONTACTE ==================== */}
-        <ContactForm auditId={auditId} leadNom={leadNom} leadEmail={leadEmail} />
+        {/* ==================== CTA AMB FORMULARI CONTACTE O ENQUESTA ==================== */}
+        {isTestMode ? (
+          /* MODE TEST: CTA cap a l'enquesta */
+          <Card className="glass-card border-2 border-amber-500/30">
+            <CardContent className="p-8 text-center">
+              <div className="mb-4 flex justify-center">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-amber-500/15">
+                  <ClipboardList className="h-7 w-7 text-amber-400" />
+                </div>
+              </div>
+              <h3 className="text-2xl font-bold text-slate-200 mb-3">
+                Ara toca la teva opinió! 📝
+              </h3>
+              <p className="text-slate-400 mb-6 max-w-md mx-auto">
+                Has vist l&apos;informe. Ara ens ajudaries molt responent una enquesta ràpida 
+                (3-4 minuts) sobre la teva experiència.
+              </p>
+              
+              <Button 
+                size="lg" 
+                className="gap-2 bg-amber-600 hover:bg-amber-500"
+                onClick={() => router.push(`/test/survey?audit_id=${auditId}`)}
+              >
+                <ArrowRight className="h-5 w-5" />
+                Començar enquesta
+              </Button>
+
+              <p className="text-xs text-slate-500 mt-4">
+                Gràcies per ajudar-nos a millorar empentIA! 🙏
+              </p>
+            </CardContent>
+          </Card>
+        ) : (
+          <ContactForm auditId={auditId} leadNom={leadNom} leadEmail={leadEmail} />
+        )}
 
       </div>
     </div>
@@ -518,6 +558,7 @@ function ContactForm({ auditId, leadNom, leadEmail }: { auditId: string; leadNom
     </Card>
   );
 }
+
 function OportunitatCard({ 
   oportunitat, 
   index 
