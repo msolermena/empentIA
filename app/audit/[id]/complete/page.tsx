@@ -528,11 +528,6 @@ function OportunitatCard({
   const isManual = oportunitat.estat_actual === 'manual';
   const isNoFem = oportunitat.estat_actual === 'no_fem';
 
-  // Calendly amb context (de moment link genèric)
-  const handleSaberMes = () => {
-    window.open('https://calendly.com/empentia/15min', '_blank');
-  };
-
   return (
     <Card className={`glass-card border-2 ${oportunitat.es_prioritaria ? 'border-emerald-500/40' : 'border-slate-700/50'} overflow-hidden`}>
       {oportunitat.es_prioritaria && (
@@ -554,18 +549,10 @@ function OportunitatCard({
               {oportunitat.descripcio}
             </p>
             
-            <p className="text-emerald-400 text-sm flex items-center gap-1 mb-3">
+            <p className="text-emerald-400 text-sm flex items-center gap-1">
               <CheckCircle2 className="h-4 w-4" />
               {oportunitat.benefici}
             </p>
-
-            {/* Botó saber-ne més */}
-            <button
-              onClick={handleSaberMes}
-              className="text-sm text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition-colors"
-            >
-              Saber-ne més →
-            </button>
           </div>
 
           {/* Mètriques - diferent segons tipus */}

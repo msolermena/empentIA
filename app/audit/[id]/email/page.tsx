@@ -200,7 +200,7 @@ export default function EmailPage() {
               </label>
 
               {/* Consentiment Comercial (opcional, marcat per defecte) */}
-              <label className="flex cursor-pointer items-start gap-3 rounded-xl border-2 border-slate-700/50 bg-slate-800/20 p-4 transition-all hover:border-slate-600">
+              <label className="flex cursor-pointer items-start gap-3 rounded-xl border-2 border-slate-700 bg-slate-800/30 p-4 transition-all hover:border-emerald-500/50">
                 <input
                   type="checkbox"
                   checked={consentComercial}
@@ -208,8 +208,8 @@ export default function EmailPage() {
                   className="mt-0.5 h-5 w-5 rounded border-slate-600 text-emerald-500 focus:ring-2 focus:ring-emerald-500 focus:ring-offset-0 bg-slate-800"
                   disabled={isSubmitting}
                 />
-                <span className="text-sm text-slate-400">
-                  Vull rebre informació sobre automatitzacions i ofertes
+                <span className="text-sm text-slate-300">
+                  Vull rebre informació sobre novetats i ofertes
                 </span>
               </label>
 

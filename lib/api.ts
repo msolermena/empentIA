@@ -313,11 +313,14 @@ export async function scrapeCompany(companyUrl: string): Promise<ScrapeResponse>
 /**
  * POST /audit/start - Inicia auditoria
  */
-export async function startAudit(companyId: string): Promise<StartAuditResponse> {
+export async function startAudit(companyId: string, origen?: string): Promise<StartAuditResponse> {
   const response = await fetch(`${API_URL}/audit/start`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ company_id: companyId }),
+    body: JSON.stringify({ 
+      company_id: companyId,
+      origen: origen || 'auditoria'  // Default a 'auditoria' si no s'especifica
+    }),
   });
 
   const data = await response.json();
@@ -438,9 +441,11 @@ export async function getAudit(auditId: string): Promise<GetAuditResponse> {
 /**
  * HELPER: Scrape + Start en una sola funció
  */
-export async function scrapeAndStartAudit(companyUrl: string): Promise<StartAuditResponse & { pre_research: ScrapeResponse['pre_research'] }> {
+export async function scrapeAndStartAudit(companyUrl: string, ctaOrigin?: string): Promise<StartAuditResponse & { pre_research: ScrapeResponse['pre_research'] }> {
   const scrapeResult = await scrapeCompany(companyUrl);
-  const auditResult = await startAudit(scrapeResult.company_id);
+  // Convertir cta_origin a valor per camp 'origen': hero -> auditoria, footer -> auditoria_2
+  const origen = ctaOrigin === 'footer' ? 'auditoria_2' : 'auditoria';
+  const auditResult = await startAudit(scrapeResult.company_id, origen);
   
   return {
     ...auditResult,

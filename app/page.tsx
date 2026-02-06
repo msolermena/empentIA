@@ -566,7 +566,7 @@ export default function Home() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent, ctaOrigin: 'hero' | 'footer' = 'hero') => {
     e.preventDefault();
     setError(null);
     try {
@@ -577,6 +577,8 @@ export default function Home() {
       if (source === "test") {
         queryParams.set("source", "test");
       }
+      // Propagar origen del CTA
+      queryParams.set("cta_origin", ctaOrigin);
       router.push(`/audit/analyzing?${queryParams.toString()}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error iniciant l'auditoria");
@@ -646,14 +648,14 @@ export default function Home() {
           </p>
 
           {/* CTA Principal - Auditoria */}
-          <form onSubmit={handleSubmit} className="fade-in-up-delay-2 mb-6">
-            <div className="mx-auto flex max-w-2xl flex-col gap-3 rounded-2xl border-2 border-slate-800 bg-slate-900/60 p-2 backdrop-blur-sm transition-all focus-within:border-emerald-500/50 focus-within:shadow-lg focus-within:shadow-emerald-500/10 sm:flex-row sm:p-2">
+          <form onSubmit={(e) => handleSubmit(e, 'hero')} className="fade-in-up-delay-2 mb-6">
+            <div className="mx-auto flex max-w-2xl flex-col items-center gap-3 rounded-2xl border-2 border-slate-800 bg-slate-900/60 p-2 backdrop-blur-sm transition-all focus-within:border-emerald-500/50 focus-within:shadow-lg focus-within:shadow-emerald-500/10 sm:flex-row sm:p-2">
               <Input
                 type="text"
                 placeholder="Introdueix la web de la teva empresa"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
-                className="flex-1 border-0 bg-transparent px-4 text-base placeholder:text-slate-500 focus:ring-0"
+                className="flex-1 border-0 bg-transparent px-4 h-14 text-base placeholder:text-slate-500 focus:ring-0"
                 required
               />
               <Button type="submit" size="lg" className="gap-2 whitespace-nowrap">
@@ -700,7 +702,7 @@ export default function Home() {
       </section>
 
       {/* Exemples del que podem fer */}
-      <section className="relative py-20 px-6 overflow-hidden">
+      <section className="relative py-14 px-6 overflow-hidden">
         <div className="mx-auto max-w-6xl">
           <div className="mb-10 text-center">
             <h2 className="mb-3 text-3xl font-bold text-slate-50 md:text-4xl">Exemples del que podem fer per tu</h2>
@@ -712,7 +714,7 @@ export default function Home() {
       </section>
 
       {/* Com Funciona - 4 Passos */}
-      <section id="com-funciona" className="relative py-24 px-6">
+      <section id="com-funciona" className="relative py-16 px-6">
         <div className="mx-auto max-w-5xl">
           <div className="mb-16 text-center">
             <h2 className="mb-4 text-3xl font-bold text-slate-50 md:text-4xl">Com funciona</h2>
@@ -781,7 +783,7 @@ export default function Home() {
       </section>
 
       {/* Plataforma empentIA */}
-      <section className="relative py-24 px-6">
+      <section className="relative py-16 px-6">
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 text-center">
             <h2 className="mb-4 text-3xl font-bold text-slate-50 md:text-4xl">Plataforma empentIA</h2>
@@ -857,7 +859,7 @@ export default function Home() {
       </section>
 
       {/* Per Què empentIA */}
-      <section className="relative py-20 px-6">
+      <section className="relative py-14 px-6">
         <div className="mx-auto max-w-4xl">
           <div className="mb-10 text-center">
             <h2 className="mb-4 text-3xl font-bold text-slate-50 md:text-4xl">Per què empentIA</h2>
@@ -904,7 +906,7 @@ export default function Home() {
       </section>
 
       {/* Et Sona Alguna d'Aquestes? */}
-      <section className="relative py-20 px-6">
+      <section className="relative py-14 px-6">
         <div className="mx-auto max-w-3xl">
           <div className="mb-10 text-center">
             <h2 className="mb-4 text-3xl font-bold text-slate-50 md:text-4xl">Et sona alguna d&apos;aquestes?</h2>
@@ -969,7 +971,7 @@ export default function Home() {
       */}
 
       {/* CTA Final */}
-      <section className="relative py-24 px-6">
+      <section className="relative py-16 px-6">
         <div className="mx-auto max-w-3xl">
           <div className="relative overflow-hidden rounded-3xl border border-emerald-500/20 bg-slate-900/50 p-8 text-center md:p-16">
             {/* Decorative glow */}
@@ -983,14 +985,14 @@ export default function Home() {
                 Descobreix quins processos pots automatitzar al teu negoci
               </p>
 
-              <form onSubmit={handleSubmit} className="mb-6">
-                <div className="mx-auto flex max-w-xl flex-col gap-3 rounded-2xl border-2 border-slate-700 bg-slate-900/80 p-2 transition-all focus-within:border-emerald-500/50 sm:flex-row">
+              <form onSubmit={(e) => handleSubmit(e, 'footer')} className="mb-6">
+                <div className="mx-auto flex max-w-xl flex-col items-center gap-3 rounded-2xl border-2 border-slate-700 bg-slate-900/80 p-2 transition-all focus-within:border-emerald-500/50 sm:flex-row">
                   <Input
                     type="text"
                     placeholder="Introdueix la web de la teva empresa"
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
-                    className="flex-1 border-0 bg-transparent px-4 text-base placeholder:text-slate-500 focus:ring-0"
+                    className="flex-1 border-0 bg-transparent px-4 h-14 text-base placeholder:text-slate-500 focus:ring-0"
                     required
                   />
                   <Button type="submit" size="lg" className="gap-2 whitespace-nowrap">

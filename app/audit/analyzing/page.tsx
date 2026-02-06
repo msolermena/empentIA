@@ -35,6 +35,7 @@ export default function AnalyzingPage() {
   const searchParams = useSearchParams();
   const url = searchParams.get("url");
   const source = searchParams.get("source"); // Per test de validació
+  const ctaOrigin = searchParams.get("cta_origin"); // Per tracking origen CTA
 
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -71,7 +72,7 @@ export default function AnalyzingPage() {
     // Cridar API
     const startAudit = async () => {
       try {
-        const response = await scrapeAndStartAudit(url);
+        const response = await scrapeAndStartAudit(url, ctaOrigin || undefined);
         
         // Completar progrés
         setProgress(100);
@@ -97,7 +98,7 @@ export default function AnalyzingPage() {
       clearInterval(progressInterval);
       clearInterval(stepInterval);
     };
-  }, [url, router, source]);
+  }, [url, router, source, ctaOrigin]);
 
   const CurrentIcon = LOADING_STEPS[currentStep].icon;
 
