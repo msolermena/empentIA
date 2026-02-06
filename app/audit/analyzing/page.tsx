@@ -72,7 +72,7 @@ export default function AnalyzingPage() {
     // Cridar API
     const startAudit = async () => {
       try {
-        const response = await scrapeAndStartAudit(url, ctaOrigin || undefined);
+        const response = await scrapeAndStartAudit(url, ctaOrigin || undefined, source || undefined);
         
         // Completar progrés
         setProgress(100);

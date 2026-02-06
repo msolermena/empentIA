@@ -441,10 +441,16 @@ export async function getAudit(auditId: string): Promise<GetAuditResponse> {
 /**
  * HELPER: Scrape + Start en una sola funció
  */
-export async function scrapeAndStartAudit(companyUrl: string, ctaOrigin?: string): Promise<StartAuditResponse & { pre_research: ScrapeResponse['pre_research'] }> {
+export async function scrapeAndStartAudit(
+  companyUrl: string, 
+  ctaOrigin?: string,
+  source?: string  // 'test' si ve del test de validació
+): Promise<StartAuditResponse & { pre_research: ScrapeResponse['pre_research'] }> {
   const scrapeResult = await scrapeCompany(companyUrl);
-  // Convertir cta_origin a valor per camp 'origen': hero -> auditoria, footer -> auditoria_2
-  const origen = ctaOrigin === 'footer' ? 'auditoria_2' : 'auditoria';
+  // Si source=test, origen = "test", sinó convertir cta_origin
+  const origen = source === 'test' 
+    ? 'test' 
+    : (ctaOrigin === 'footer' ? 'auditoria_2' : 'auditoria');
   const auditResult = await startAudit(scrapeResult.company_id, origen);
   
   return {
