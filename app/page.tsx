@@ -649,16 +649,16 @@ export default function Home() {
 
           {/* CTA Principal - Auditoria */}
           <form onSubmit={(e) => handleSubmit(e, 'hero')} className="fade-in-up-delay-2 mb-6">
-            <div className="mx-auto flex max-w-2xl flex-col items-center gap-3 rounded-2xl border-2 border-slate-800 bg-slate-900/60 p-2 backdrop-blur-sm transition-all focus-within:border-emerald-500/50 focus-within:shadow-lg focus-within:shadow-emerald-500/10 sm:flex-row sm:p-2">
+            <div className="mx-auto flex max-w-2xl flex-col items-center gap-3 rounded-2xl border-2 border-slate-700 bg-slate-900/80 p-3 backdrop-blur-sm transition-all focus-within:border-emerald-500/50 focus-within:shadow-lg focus-within:shadow-emerald-500/10 sm:flex-row sm:p-2">
               <Input
                 type="text"
-                placeholder="Introdueix la web de la teva empresa"
+                placeholder="La teva web (ex: empresa.cat)"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
-                className="flex-1 border-0 bg-transparent px-4 h-14 text-base placeholder:text-slate-500 focus:ring-0"
+                className="flex-1 border-2 border-slate-600 bg-slate-800/80 rounded-xl px-4 h-14 text-base placeholder:text-slate-400 focus:border-emerald-500 focus:ring-0"
                 required
               />
-              <Button type="submit" size="lg" className="gap-2 whitespace-nowrap">
+              <Button type="submit" size="lg" className="gap-2 whitespace-nowrap w-full sm:w-auto">
                 Comença l'auditoria
                 <ArrowRight className="h-4 w-4" />
               </Button>
@@ -986,16 +986,16 @@ export default function Home() {
               </p>
 
               <form onSubmit={(e) => handleSubmit(e, 'footer')} className="mb-6">
-                <div className="mx-auto flex max-w-xl flex-col items-center gap-3 rounded-2xl border-2 border-slate-700 bg-slate-900/80 p-2 transition-all focus-within:border-emerald-500/50 sm:flex-row">
+                <div className="mx-auto flex max-w-xl flex-col items-center gap-3 rounded-2xl border-2 border-slate-700 bg-slate-900/80 p-3 transition-all focus-within:border-emerald-500/50 sm:flex-row sm:p-2">
                   <Input
                     type="text"
-                    placeholder="Introdueix la web de la teva empresa"
+                    placeholder="La teva web (ex: empresa.cat)"
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
-                    className="flex-1 border-0 bg-transparent px-4 h-14 text-base placeholder:text-slate-500 focus:ring-0"
+                    className="flex-1 border-2 border-slate-600 bg-slate-800/80 rounded-xl px-4 h-14 text-base placeholder:text-slate-400 focus:border-emerald-500 focus:ring-0"
                     required
                   />
-                  <Button type="submit" size="lg" className="gap-2 whitespace-nowrap">
+                  <Button type="submit" size="lg" className="gap-2 whitespace-nowrap w-full sm:w-auto">
                     Comença l'auditoria
                     <ArrowRight className="h-4 w-4" />
                   </Button>

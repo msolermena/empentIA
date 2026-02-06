@@ -578,7 +578,7 @@ function RenderP1Confirmacio({
         <textarea
           value={correccionsText}
           onChange={(e) => setCorreccionsText(e.target.value)}
-          placeholder=""
+          placeholder="Ex: El meu sector real és..., també fem..., som X persones..."
           rows={3}
           className="w-full rounded-lg border border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 resize-none text-sm"
         />
