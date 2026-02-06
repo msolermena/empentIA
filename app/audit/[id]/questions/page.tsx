@@ -357,7 +357,7 @@ export default function QuestionsPage() {
 
       {/* Main Content */}
       <div className="container mx-auto max-w-2xl px-6 pt-24 pb-12">
-        <Card className="glass-card border-2 border-emerald-500/20">
+        <Card className="bg-slate-900/90 border-2 border-emerald-500/20">
           <CardContent className="p-8">
 
             {/* Question Content */}
