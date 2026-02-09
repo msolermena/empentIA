@@ -117,7 +117,7 @@ export default function ThanksPage() {
                   <Mail className="h-6 w-6 text-emerald-400" />
                 </div>
                 <p className="text-emerald-400 font-medium">
-                  {wantsPilot ? "T'avisarem per la prova pilot! 🚀" : "T'avisarem quan llancemos! 🚀"}
+                  {wantsPilot ? "T'avisarem per la prova pilot! 🚀" : "T'avisarem quan llancem! 🚀"}
                 </p>
               </div>
             ) : (
