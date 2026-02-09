@@ -722,6 +722,7 @@ function RenderP2({
               return (
                 <button
                   key={opt.id}
+                  type="button"
                   onClick={() => handleSelect(ambit.id, opt.id, ambit.multi_select)}
                   className={`px-3 py-2 rounded-lg border text-sm transition-all ${
                     isSelected
@@ -816,6 +817,7 @@ function RenderP3({
                 return (
                   <button
                     key={estat.id}
+                    type="button"
                     onClick={() => handleEstatChange(op.id, estat.id)}
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs transition-all ${
                       isSelected
@@ -909,6 +911,7 @@ function RenderP4({
                 return (
                   <button
                     key={temps.id}
+                    type="button"
                     onClick={() => handleSelect(op.id, temps.id)}
                     className={`px-3 py-2 rounded-lg border text-xs transition-all ${
                       isSelected
