@@ -1046,12 +1046,15 @@ export default function Home() {
               © 2026 empentIA
             </p>
             
-            <div className="flex items-center gap-6 text-sm">
+            <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
               <a href="/privacy" className="text-slate-500 transition-colors hover:text-slate-300">
                 Política de privacitat
               </a>
               <a href="/legal" className="text-slate-500 transition-colors hover:text-slate-300">
                 Avís legal
+              </a>
+              <a href="/cookies" className="text-slate-500 transition-colors hover:text-slate-300">
+                Cookies
               </a>
               <button 
                 onClick={() => setIsContactOpen(true)}

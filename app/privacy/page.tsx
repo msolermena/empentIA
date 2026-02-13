@@ -19,24 +19,29 @@ export default function PrivacyPage() {
 
       {/* Content */}
       <div className="container mx-auto max-w-4xl px-8 py-16">
-        <h1 className="mb-8 text-4xl font-extrabold">Política de Privacitat</h1>
+        <h1 className="mb-2 text-4xl font-extrabold">Política de Privacitat</h1>
+        <p className="mb-8 text-sm text-slate-400">Darrera actualització: 11 de febrer de 2026</p>
         
         <div className="prose prose-invert max-w-none space-y-8">
           <Card className="glass-card border-emerald-500/10">
             <CardHeader>
-              <CardTitle>1. Informació General</CardTitle>
+              <CardTitle>1. Responsable del tractament</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-slate-300">
               <p>
-                A <strong className="text-slate-200">empentIA</strong>, respectem la teva privacitat i ens comprometem 
-                a protegir les teves dades personals. Aquesta política de privacitat t&apos;informa sobre 
-                com recollim, utilitzem i protegim la teva informació.
+                El responsable del tractament de les dades personals recollides a través
+                d&apos;aquest lloc web és:
               </p>
               <div className="rounded-lg bg-slate-800/30 p-4">
                 <p className="text-sm">
-                  <strong className="text-slate-200">Responsable:</strong> empentIA<br />
-                  <strong className="text-slate-200">Email:</strong> hola@empentia.cat<br />
-                  <strong className="text-slate-200">Ubicació:</strong> Barcelona, Catalunya
+                  <strong className="text-slate-200">Denominació social:</strong> ADVANCED ENERGY CONSULTING SL<br />
+                  <strong className="text-slate-200">CIF:</strong> B65598641<br />
+                  <strong className="text-slate-200">Domicili:</strong> c/ Martí i Julià 9, 08242 Manresa (Barcelona)<br />
+                  <strong className="text-slate-200">Contacte:</strong>{" "}
+                  <a href="mailto:hola@empentia.cat" className="text-emerald-400 underline">
+                    hola@empentia.cat
+                  </a><br />
+                  <strong className="text-slate-200">Telèfon:</strong> 685 615 150
                 </p>
               </div>
             </CardContent>
@@ -44,65 +49,125 @@ export default function PrivacyPage() {
 
           <Card className="glass-card border-emerald-500/10">
             <CardHeader>
-              <CardTitle>2. Quines Dades Recollim</CardTitle>
+              <CardTitle>2. Finalitats del tractament</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6 text-slate-300">
+              <div>
+                <h4 className="mb-2 font-semibold text-slate-200">2.1. Auditoria d&apos;automatització (empentia.cat)</h4>
+                <ul className="list-disc space-y-2 pl-6">
+                  <li>
+                    <strong className="text-slate-200">Dades recollides:</strong> URL de l&apos;empresa, sector d&apos;activitat,
+                    mida de l&apos;empresa, eines de programari utilitzades, processos empresarials, nom,
+                    correu electrònic, telèfon, càrrec, preferència de contacte.
+                  </li>
+                  <li>
+                    <strong className="text-slate-200">Finalitat:</strong> Realitzar una auditoria automatitzada per
+                    identificar oportunitats d&apos;automatització i millorar la productivitat de
+                    l&apos;empresa auditada. Contactar el sol·licitant per fer-li arribar els resultats i,
+                    si ho consent, informació comercial relacionada.
+                  </li>
+                  <li>
+                    <strong className="text-slate-200">Base legal:</strong> Consentiment de l&apos;interessat (art. 6.1.a RGPD)
+                    i interès legítim per a la prestació del servei sol·licitat (art. 6.1.f RGPD).
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="mb-2 font-semibold text-slate-200">2.2. Portal de client (app.empentia.cat)</h4>
+                <ul className="list-disc space-y-2 pl-6">
+                  <li>
+                    <strong className="text-slate-200">Dades recollides:</strong> Correu electrònic, nom, dades de
+                    l&apos;empresa, informació de negoci proporcionada voluntàriament (clients, productes, factures).
+                  </li>
+                  <li>
+                    <strong className="text-slate-200">Finalitat:</strong> Gestió de la relació contractual, prestació dels
+                    serveis d&apos;automatització i eines d&apos;IA contractats, i comunicació relacionada amb el servei.
+                  </li>
+                  <li>
+                    <strong className="text-slate-200">Base legal:</strong> Execució d&apos;un contracte (art. 6.1.b RGPD).
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="mb-2 font-semibold text-slate-200">2.3. Comunicacions comercials</h4>
+                <ul className="list-disc space-y-2 pl-6">
+                  <li>
+                    <strong className="text-slate-200">Finalitat:</strong> Enviament d&apos;informació sobre serveis, novetats
+                    i contingut d&apos;interès relacionat amb l&apos;automatització i la intel·ligència artificial per a empreses.
+                  </li>
+                  <li>
+                    <strong className="text-slate-200">Base legal:</strong> Consentiment explícit de l&apos;interessat (art. 6.1.a RGPD).
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="mb-2 font-semibold text-slate-200">2.4. Scraping públic</h4>
+                <p>
+                  Com a part del servei d&apos;auditoria, empentIA accedeix a informació públicament
+                  disponible a la pàgina web de l&apos;empresa auditada (textos, metadades, tecnologies
+                  detectades). Aquesta informació s&apos;utilitza exclusivament per personalitzar
+                  l&apos;auditoria i no inclou dades de caràcter personal més enllà de les ja públiques.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="glass-card border-emerald-500/10">
+            <CardHeader>
+              <CardTitle>3. Destinataris de les dades</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-slate-300">
-              <p>Quan utilitzes el nostre servei d&apos;auditoria gratuïta, recollim:</p>
+              <p>
+                Les dades personals podran ser comunicades als següents destinataris, únicament
+                quan sigui necessari per a la prestació del servei:
+              </p>
               <ul className="list-disc space-y-2 pl-6">
                 <li>
-                  <strong className="text-slate-200">Email:</strong> Per enviar-te l&apos;auditoria personalitzada
+                  <strong className="text-slate-200">Supabase Inc.</strong> — Proveïdor de base de dades i autenticació (servidors a la UE).
                 </li>
                 <li>
-                  <strong className="text-slate-200">URL de l&apos;empresa:</strong> Per analitzar la teva web
+                  <strong className="text-slate-200">Vercel Inc.</strong> — Proveïdor d&apos;allotjament web del frontend.
                 </li>
                 <li>
-                  <strong className="text-slate-200">Respostes al qüestionari:</strong> 8 preguntes sobre els processos 
-                  de la teva empresa
+                  <strong className="text-slate-200">Railway Corp.</strong> — Proveïdor d&apos;allotjament del backend.
                 </li>
                 <li>
-                  <strong className="text-slate-200">Dades tècniques:</strong> Informació pública de la teva web 
-                  (tecnologies, sector, mida estimada)
+                  <strong className="text-slate-200">Anthropic PBC</strong> — Proveïdor d&apos;intel·ligència artificial per a anàlisi i generació de contingut.
+                </li>
+                <li>
+                  <strong className="text-slate-200">Brevo (Sendinblue)</strong> — Proveïdor d&apos;enviament de correus electrònics.
                 </li>
               </ul>
-              <p className="rounded-lg bg-emerald-500/5 p-4 text-sm">
-                <strong className="text-slate-200">Important:</strong> NO recollim dades financeres, 
-                contrasenyes, ni altra informació sensible de la teva empresa.
+              <p className="text-sm">
+                No es realitzaran transferències internacionals de dades fora de l&apos;Espai Econòmic
+                Europeu sense les garanties adequades. En el cas de proveïdors amb seus als EUA,
+                ens assegurem que comptin amb les certificacions o mecanismes de transferència adequats.
               </p>
             </CardContent>
           </Card>
 
           <Card className="glass-card border-emerald-500/10">
             <CardHeader>
-              <CardTitle>3. Com Utilitzem les Teves Dades</CardTitle>
+              <CardTitle>4. Termini de conservació</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-slate-300">
-              <p>Utilitzem les teves dades exclusivament per:</p>
-              <ul className="list-disc space-y-2 pl-6">
-                <li>Generar la teva auditoria personalitzada d&apos;automatització</li>
-                <li>Enviar-te el PDF de l&apos;auditoria per email</li>
-                <li>Contactar-te si sol·licites una demo o més informació</li>
-                <li>Millorar el nostre servei (anàlisi agregada i anònima)</li>
-              </ul>
-              <p className="font-semibold text-slate-200">
-                NO vendem, lloguem ni compartim les teves dades amb tercers amb fins comercials.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="glass-card border-emerald-500/10">
-            <CardHeader>
-              <CardTitle>4. Base Legal (GDPR)</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 text-slate-300">
-              <p>Processem les teves dades basant-nos en:</p>
               <ul className="list-disc space-y-2 pl-6">
                 <li>
-                  <strong className="text-slate-200">Consentiment explícit:</strong> Marques la casella 
-                  acceptant aquesta política abans de rebre l&apos;auditoria
+                  <strong className="text-slate-200">Dades d&apos;auditoria:</strong> Es conservaran durant un termini
+                  màxim de 12 mesos des de la seva recollida, tret que l&apos;interessat sol·liciti la
+                  seva supressió abans.
                 </li>
                 <li>
-                  <strong className="text-slate-200">Interès legítim:</strong> Proporcionar-te el servei 
-                  sol·licitat (auditoria gratuïta)
+                  <strong className="text-slate-200">Dades de clients:</strong> Es conservaran durant la vigència de
+                  la relació contractual i, posteriorment, durant els terminis legalment establerts
+                  per atendre possibles responsabilitats (5 anys).
+                </li>
+                <li>
+                  <strong className="text-slate-200">Comunicacions comercials:</strong> Fins que l&apos;interessat revoqui
+                  el seu consentiment.
                 </li>
               </ul>
             </CardContent>
@@ -110,76 +175,28 @@ export default function PrivacyPage() {
 
           <Card className="glass-card border-emerald-500/10">
             <CardHeader>
-              <CardTitle>5. On Guardem les Teves Dades</CardTitle>
+              <CardTitle>5. Drets dels interessats</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-slate-300">
-              <p>Les teves dades s&apos;emmagatzemen de forma segura a:</p>
+              <p>Tota persona té dret a obtenir confirmació sobre si estem tractant les seves dades personals. En particular, pot exercir els següents drets:</p>
               <ul className="list-disc space-y-2 pl-6">
                 <li>
-                  <strong className="text-slate-200">Servidors a la UE:</strong> Utilitzem Supabase amb 
-                  servidors ubicats a Europa
+                  <strong className="text-slate-200">Accés:</strong> Dret a obtenir informació sobre les seves dades personals objecte de tractament.
                 </li>
                 <li>
-                  <strong className="text-slate-200">Encriptació:</strong> Totes les dades estan encriptades 
-                  en trànsit (HTTPS) i en repòs
+                  <strong className="text-slate-200">Rectificació:</strong> Dret a sol·licitar la modificació de dades inexactes o incompletes.
                 </li>
                 <li>
-                  <strong className="text-slate-200">Accés restringit:</strong> Només personal autoritzat té 
-                  accés a les dades
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card className="glass-card border-emerald-500/10">
-            <CardHeader>
-              <CardTitle>6. Quant Temps Guardem les Dades</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 text-slate-300">
-              <ul className="list-disc space-y-2 pl-6">
-                <li>
-                  <strong className="text-slate-200">Auditories no clients:</strong> 12 mesos després de 
-                  la generació
+                  <strong className="text-slate-200">Supressió:</strong> Dret a sol·licitar l&apos;eliminació de les seves dades (&quot;dret a l&apos;oblit&quot;).
                 </li>
                 <li>
-                  <strong className="text-slate-200">Clients actius:</strong> Mentre duri la relació comercial 
-                  + 5 anys (obligació legal)
+                  <strong className="text-slate-200">Limitació:</strong> Dret a sol·licitar la limitació del tractament en determinats supòsits.
                 </li>
                 <li>
-                  <strong className="text-slate-200">Després d&apos;aquest període:</strong> Les dades 
-                  s&apos;anonimitzen o s&apos;eliminen
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card className="glass-card border-emerald-500/10">
-            <CardHeader>
-              <CardTitle>7. Els Teus Drets</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 text-slate-300">
-              <p>Tens dret a:</p>
-              <ul className="list-disc space-y-2 pl-6">
-                <li>
-                  <strong className="text-slate-200">Accés:</strong> Sol·licitar una còpia de les teves dades
+                  <strong className="text-slate-200">Portabilitat:</strong> Dret a rebre les dades en un format estructurat i d&apos;ús comú.
                 </li>
                 <li>
-                  <strong className="text-slate-200">Rectificació:</strong> Corregir dades inexactes
-                </li>
-                <li>
-                  <strong className="text-slate-200">Supressió:</strong> Eliminar les teves dades 
-                  (&quot;dret a l&apos;oblit&quot;)
-                </li>
-                <li>
-                  <strong className="text-slate-200">Portabilitat:</strong> Rebre les teves dades en format 
-                  estructurat
-                </li>
-                <li>
-                  <strong className="text-slate-200">Oposició:</strong> Oposar-te al processament de les 
-                  teves dades
-                </li>
-                <li>
-                  <strong className="text-slate-200">Retirada del consentiment:</strong> En qualsevol moment
+                  <strong className="text-slate-200">Oposició:</strong> Dret a oposar-se al tractament de les seves dades.
                 </li>
               </ul>
               <div className="rounded-lg bg-emerald-500/10 p-4">
@@ -189,113 +206,64 @@ export default function PrivacyPage() {
                   <a href="mailto:hola@empentia.cat" className="text-emerald-400 underline">
                     hola@empentia.cat
                   </a>{" "}
-                  amb l&apos;assumpte &quot;Drets GDPR&quot; i respondrem en menys de 30 dies.
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="glass-card border-emerald-500/10">
-            <CardHeader>
-              <CardTitle>8. Cookies i Tecnologies Similars</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 text-slate-300">
-              <p>Utilitzem cookies essencials per:</p>
-              <ul className="list-disc space-y-2 pl-6">
-                <li>Mantenir la sessió durant el procés d&apos;auditoria</li>
-                <li>Recordar les teves preferències de privacitat</li>
-                <li>Analytics anònims (Plausible, GDPR compliant)</li>
-              </ul>
-              <p>
-                <strong className="text-slate-200">NO utilitzem</strong> cookies de tercers, publicitat 
-                ni tracking invasiu.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="glass-card border-emerald-500/10">
-            <CardHeader>
-              <CardTitle>9. Compartició amb Tercers</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 text-slate-300">
-              <p>Només compartim dades amb proveïdors essencials per al servei:</p>
-              <ul className="list-disc space-y-2 pl-6">
-                <li>
-                  <strong className="text-slate-200">Anthropic (Claude API):</strong> Per generar l&apos;auditoria. 
-                  Les dades s&apos;anonimitzen i NO s&apos;emmagatzemen pel seu entrenament.
-                </li>
-                <li>
-                  <strong className="text-slate-200">Supabase:</strong> Base de dades (UE, GDPR compliant)
-                </li>
-                <li>
-                  <strong className="text-slate-200">Resend:</strong> Enviament d&apos;emails (UE)
-                </li>
-              </ul>
-              <p className="text-sm">
-                Tots aquests proveïdors tenen acords de processament de dades (DPA) i compleixen el GDPR.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="glass-card border-emerald-500/10">
-            <CardHeader>
-              <CardTitle>10. Seguretat</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 text-slate-300">
-              <p>Mesures de seguretat implementades:</p>
-              <ul className="list-disc space-y-2 pl-6">
-                <li>Encriptació HTTPS/SSL en totes les comunicacions</li>
-                <li>Encriptació de dades en repòs a la base de dades</li>
-                <li>Autenticació de dos factors per accés administratiu</li>
-                <li>Backups diaris encriptats</li>
-                <li>Auditories de seguretat periòdiques</li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card className="glass-card border-emerald-500/10">
-            <CardHeader>
-              <CardTitle>11. Canvis a Aquesta Política</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 text-slate-300">
-              <p>
-                Podem actualitzar aquesta política ocasionalment. Si hi ha canvis significatius, 
-                t&apos;ho notificarem per email. La versió més recent sempre estarà disponible en aquesta pàgina.
-              </p>
-              <p className="text-sm text-slate-400">
-                Última actualització: 16 de gener de 2026
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="glass-card border-emerald-500/10">
-            <CardHeader>
-              <CardTitle>12. Contacte i Reclamacions</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 text-slate-300">
-              <p>Per qualsevol dubte sobre privacitat:</p>
-              <div className="rounded-lg bg-slate-800/30 p-4">
-                <p className="text-sm">
-                  <strong className="text-slate-200">Email:</strong>{" "}
-                  <a href="mailto:hola@empentia.cat" className="text-emerald-400 underline">
-                    hola@empentia.cat
-                  </a>
+                  indicant el dret que vols exercir i adjuntant una còpia del document d&apos;identitat.
+                  Respondrem en un termini màxim de 30 dies.
                 </p>
               </div>
               <p className="text-sm">
-                Si no estàs satisfet amb la nostra resposta, tens dret a presentar una reclamació davant 
-                l&apos;<strong className="text-slate-200">Agència Espanyola de Protecció de Dades (AEPD)</strong>.
+                Així mateix, tens dret a presentar una reclamació davant
+                l&apos;<strong className="text-slate-200">Autoritat Catalana de Protecció de Dades</strong>{" "}
+                (<a href="https://apdcat.gencat.cat" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline">apdcat.gencat.cat</a>)
+                o l&apos;<strong className="text-slate-200">Agència Espanyola de Protecció de Dades</strong>{" "}
+                (<a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline">aepd.es</a>).
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="glass-card border-emerald-500/10">
+            <CardHeader>
+              <CardTitle>6. Mesures de seguretat</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4 text-slate-300">
+              <p>
+                ADVANCED ENERGY CONSULTING SL ha adoptat les mesures tècniques i organitzatives
+                necessàries per garantir la seguretat de les dades personals:
+              </p>
+              <ul className="list-disc space-y-2 pl-6">
+                <li>Xifratge de les comunicacions (HTTPS/TLS)</li>
+                <li>Autenticació segura mitjançant magic link (sense emmagatzematge de contrasenyes)</li>
+                <li>Aïllament de dades per client (arquitectura multi-tenant)</li>
+                <li>Accés restringit a les dades només al personal autoritzat</li>
+                <li>Còpies de seguretat periòdiques</li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <Card className="glass-card border-emerald-500/10">
+            <CardHeader>
+              <CardTitle>7. Actualització</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4 text-slate-300">
+              <p>
+                Aquesta Política de Privacitat pot ser modificada per adaptar-la a novetats
+                legislatives o canvis en els nostres serveis. Qualsevol canvi serà publicat en
+                aquesta pàgina. Recomanem revisar-la periòdicament.
               </p>
             </CardContent>
           </Card>
         </div>
 
-        {/* Back to Home */}
-        <div className="mt-12 text-center">
-          <Link 
-            href="/" 
-            className="text-emerald-400 underline hover:text-emerald-300"
-          >
+        {/* Navigation */}
+        <div className="mt-12 flex flex-col items-center gap-3 text-sm">
+          <div className="flex items-center gap-6">
+            <Link href="/legal" className="text-emerald-400 underline hover:text-emerald-300">
+              Avís legal
+            </Link>
+            <Link href="/cookies" className="text-emerald-400 underline hover:text-emerald-300">
+              Política de cookies
+            </Link>
+          </div>
+          <Link href="/" className="text-slate-500 hover:text-slate-300">
             ← Tornar a l&apos;inici
           </Link>
         </div>
