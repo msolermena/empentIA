@@ -709,7 +709,7 @@ function RenderP2({
             <span>{ambit.icona}</span>
             <span>{ambit.nom}</span>
             {ambit.multi_select && (
-              <span className="text-xs text-slate-500">(pots seleccionar vàries)</span>
+              <span className="text-xs text-slate-500">(en pots seleccionar més d'una)</span>
             )}
           </label>
           
