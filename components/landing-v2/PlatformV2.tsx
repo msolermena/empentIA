@@ -47,7 +47,7 @@ export function PlatformV2() {
           <p className="mx-auto max-w-2xl text-slate-400">
             empentIA connecta el que ja tens i ho centralitza.
             Les teves dades, els teus clients, les teves automatitzacions
-            — visibles i accionables des d&apos;un sol portal.
+            Visibles i accionables des d&apos;un sol portal.
           </p>
         </div>
 

@@ -3,11 +3,11 @@
 import { CheckCircle2 } from "lucide-react";
 
 const items = [
-  "Perds hores en tasques que podrien fer-se soles.",
-  "Copies dades d'una eina a l'altra manualment.",
-  "No saps com va el negoci fins que és massa tard.",
-  "Clients importants que es perden perquè no fas seguiment.",
-  "Vols que el teu negoci funcioni millor sense haver d'entendre de tecnologia.",
+  "Tens feines que fas cada setmana que saps perfectament que podrien fer-se soles",
+  "El teu equip perd temps picant dades, enviant recordatoris o buscant documents",
+  "Has provat ChatGPT però no saps com connectar-ho al teu negoci real",
+  "Saps que la IA avança però no tens temps d'aprendre a implementar-la",
+  "Vols que el teu negoci funcioni millor sense haver d'entendre de tecnologia",
 ];
 
 export function PainPointsV2() {
@@ -33,7 +33,8 @@ export function PainPointsV2() {
         </div>
 
         <p className="mt-10 text-center text-lg text-slate-400">
-          Aquí tens exemples reals de com ho resolem.
+          Si t&apos;hi veus reflectit,{" "}
+          <span className="font-semibold text-emerald-400">empentIA és per a tu.</span>
         </p>
       </div>
     </section>

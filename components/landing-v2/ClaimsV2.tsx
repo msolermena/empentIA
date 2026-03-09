@@ -9,7 +9,7 @@ const approvedClaims = [
 
 const pendingClaims = [
   {
-    label: "Claim #5 — Cascada de resultats",
+    label: "Claim #5:Cascada de resultats",
     options: [
       {
         id: "A",
@@ -22,7 +22,7 @@ const pendingClaims = [
     ],
   },
   {
-    label: "Claim #6 — Una sola plataforma",
+    label: "Claim #6:Una sola plataforma",
     options: [
       {
         id: "A",
@@ -46,7 +46,7 @@ export function ClaimsV2() {
         </p>
 
         <div className="grid gap-8 lg:grid-cols-2">
-          {/* Bloc A — Claims aprovats */}
+          {/* Bloc A:Claims aprovats */}
           <div>
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-emerald-500">
               Claims tancats
@@ -65,7 +65,7 @@ export function ClaimsV2() {
             </div>
           </div>
 
-          {/* Bloc B — Claims en revisió */}
+          {/* Bloc B:Claims en revisió */}
           <div>
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-amber-500">
               En revisió

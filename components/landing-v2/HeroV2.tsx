@@ -19,9 +19,14 @@ export function HeroV2() {
 
         {/* Subtitle */}
         <p className="fade-in-up-delay-1 mx-auto mb-10 max-w-2xl text-lg text-slate-400 md:text-xl">
-          empentIA automatitza els processos que et fan perdre temps
-          i posa la IA a treballar amb les teves dades reals.{" "}
-          <span className="text-slate-300">[FINAL_SUBTEXT]</span>
+          Automatitzacions i agents IA a mida per impulsar l&apos;eficiència
+          i el creixement del teu negoci.{" "}
+          <span className="text-slate-300">Sense complicacions tècniques.</span>
+        </p>
+
+        {/* Claim abans del CTA */}
+        <p className="fade-in-up-delay-2 mb-4 text-slate-300">
+          Descobreix com pots recuperar hores cada setmana →
         </p>
 
         {/* CTA Principal */}
@@ -44,7 +49,7 @@ export function HeroV2() {
         <div className="fade-in-up-delay-2 mb-8 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500">
           <span className="flex items-center gap-1.5">
             <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-            Gratuït
+            Auditoria gratuïta
           </span>
           <span className="flex items-center gap-1.5">
             <CheckCircle2 className="h-4 w-4 text-emerald-500" />

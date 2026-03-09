@@ -41,7 +41,7 @@ export function FinalCTAV2() {
             <div className="mb-8 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500">
               <span className="flex items-center gap-1.5">
                 <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-                Gratuït
+                Auditoria gratuïta
               </span>
               <span className="flex items-center gap-1.5">
                 <CheckCircle2 className="h-4 w-4 text-emerald-500" />
