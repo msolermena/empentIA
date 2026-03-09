@@ -21,12 +21,12 @@ const features = [
   },
   {
     icon: Bot,
-    title: "Agents IA al teu servei",
-    desc: "Assistents que coneixen el teu negoci: responen consultes, classifiquen documents, analitzen dades i actuen per tu 24/7",
+    title: "Agents IA que coneixen el teu negoci",
+    desc: "Assistents que coneixen el teu negoci: responen consultes, classifiquen documents, analitzen dades i actuen per tu 24/7 (no ChatGPT genèric)",
   },
   {
     icon: Database,
-    title: "Les teves dades, organitzades",
+    title: "Una sola font de veritat",
     desc: "Centralitza la informació del teu negoci en un sol lloc. T'ajudem a estructurar-la perquè automatitzacions i agents la puguin usar",
   },
   {
@@ -42,11 +42,12 @@ export function PlatformV2() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 text-center">
           <h2 className="mb-4 text-3xl font-bold text-slate-50 md:text-4xl">
-            Plataforma empentIA
+            Tot en un sol lloc. Totes les teves eines, una sola memòria.
           </h2>
           <p className="mx-auto max-w-2xl text-slate-400">
-            Tot el que necessites per gestionar les teves automatitzacions i
-            agents IA en un sol lloc.
+            empentIA connecta el que ja tens i ho centralitza.
+            Les teves dades, els teus clients, les teves automatitzacions
+            — visibles i accionables des d&apos;un sol portal.
           </p>
         </div>
 

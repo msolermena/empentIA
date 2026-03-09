@@ -10,10 +10,10 @@ export function HeroV2() {
       <div className="relative z-10 mx-auto max-w-4xl text-center">
         {/* Main headline */}
         <h1 className="fade-in-up mb-6 text-5xl font-extrabold leading-[1.1] tracking-tight text-slate-50 md:text-6xl lg:text-7xl">
-          El teu negoci,
+          Guanya temps.
           <br />
           <span className="bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent">
-            en pilot automàtic.
+            Decideix millor.
           </span>
         </h1>
 
@@ -21,7 +21,7 @@ export function HeroV2() {
         <p className="fade-in-up-delay-1 mx-auto mb-10 max-w-2xl text-lg text-slate-400 md:text-xl">
           empentIA automatitza els processos que et fan perdre temps
           i posa la IA a treballar amb les teves dades reals.{" "}
-          <span className="text-slate-300">Tu supervises. El negoci avança.</span>
+          <span className="text-slate-300">[FINAL_SUBTEXT]</span>
         </p>
 
         {/* CTA Principal */}
@@ -34,7 +34,7 @@ export function HeroV2() {
               readOnly
             />
             <Button size="lg" className="gap-2 whitespace-nowrap w-full sm:w-auto">
-              Comença l&apos;auditoria
+              Fes la teva auditoria gratuïta
               <ArrowRight className="h-4 w-4" />
             </Button>
           </div>

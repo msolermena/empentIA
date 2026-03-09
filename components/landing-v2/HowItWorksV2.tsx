@@ -11,8 +11,8 @@ const steps = [
   {
     num: "1",
     icon: Search,
-    title: "Auditoria intel·ligent",
-    desc: "Abans de fer-te cap pregunta, analitzem la teva web i el teu sector. Arribes a la conversa i ja sabem de quin sector ets, quines eines probablement fas servir i on tens més marge de millora.",
+    title: "Auditoria",
+    desc: "Analitzem el teu negoci i detectem oportunitats d'automatització",
   },
   {
     num: "2",

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { ArrowRight, CheckCircle2, ChevronLeft, ChevronRight, Clock, Sparkles, Zap, Bot, MessageCircle, FileText, Search, BarChart3, Mail, Database, FileSpreadsheet, Wallet, Receipt, Car, UserCheck, Heart, TrendingUp, Sparkle } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronLeft, ChevronRight, Clock, Sparkles, Zap, Bot, MessageCircle, FileText, Search, BarChart3, Mail, Database, FileSpreadsheet, Wallet, Receipt, CalendarCheck, UserCheck, Heart, Target, PenTool } from "lucide-react";
 
 const exemples = [
   {
@@ -24,26 +24,9 @@ const exemples = [
   {
     id: 2,
     tipus: "agent",
-    icon: Search,
-    nom: "Prospector comercial",
-    hook: "Leads nous cada dilluns",
-    titolDetall: "Prospector comercial IA",
-    subtitol: "El teu comercial IA que mai dorm",
-    flux: [
-      { icon: Search, text: "Detecta nous negocis oberts al teu territori" },
-      { icon: BarChart3, text: "Analitza la seva web i detecta si encaixen" },
-      { icon: Mail, text: "Prepara email personalitzat llest per enviar" },
-    ],
-    keypoint: "Cada dilluns reps 10-15 oportunitats noves amb fitxa completa i email ja redactat, llest per enviar amb un clic.",
-    abans: "4h/setmana buscant leads a Google, LinkedIn, registres mercantils",
-    ara: "0 minuts. Decideixes a qui contactar.",
-  },
-  {
-    id: 3,
-    tipus: "agent",
     icon: MessageCircle,
     nom: "Assistent comercial",
-    hook: "Respon, registra i qualifica leads al moment",
+    hook: "Obté, respon, registra i qualifica leads",
     titolDetall: "Assistent comercial IA",
     subtitol: "Atén clients, resol dubtes i detecta oportunitats 24/7",
     flux: [
@@ -56,7 +39,7 @@ const exemples = [
     ara: "L'agent filtra i qualifica 24/7. Tu parles amb qui realment vol comprar.",
   },
   {
-    id: 4,
+    id: 3,
     tipus: "auto",
     icon: Wallet,
     nom: "Cobrament intel·ligent",
@@ -73,7 +56,7 @@ const exemples = [
     ara: "El sistema decideix el to i l'acció per cada client. Tu intervens quan cal.",
   },
   {
-    id: 5,
+    id: 4,
     tipus: "agent",
     icon: Receipt,
     nom: "Assistent comptable",
@@ -90,24 +73,24 @@ const exemples = [
     ara: "Tot processat automàticament. Tu valides el resum.",
   },
   {
-    id: 6,
+    id: 5,
     tipus: "auto",
-    icon: Car,
-    nom: "Recordatoris vehicle",
+    icon: CalendarCheck,
+    nom: "Recordatoris de cita",
     hook: "Recorda i reserva sol",
-    titolDetall: "Recordatoris vehicle + Reserva automàtica",
-    subtitol: "ITV, revisions, canvis d'oli... el client recorda i reserva sense que facis res",
+    titolDetall: "Recordatoris de cita + Reserva automàtica",
+    subtitol: "Revisions, serveis pendents... el client recorda i reserva sense que facis res",
     flux: [
-      { icon: Clock, text: "Servei proper (ITV, revisió, canvi d'oli...)" },
+      { icon: Clock, text: "Servei proper (revisió, renovació, cita periòdica...)" },
       { icon: MessageCircle, text: "WhatsApp automàtic amb link per reservar" },
       { icon: CheckCircle2, text: "Client tria hora → Cita confirmada al calendari" },
     ],
-    keypoint: "ITV, revisions, canvis d'oli, pneumàtics... Recupera clients inactius amb recordatoris automàtics del seu proper manteniment.",
+    keypoint: "Recupera clients inactius amb recordatoris automàtics del seu proper servei o revisió.",
     abans: "Revisar Excel + trucar clients un a un + quadrar agendes",
     ara: "0 trucades. El client reserva sol i tu recuperes clients que feia mesos que no venien.",
   },
   {
-    id: 7,
+    id: 6,
     tipus: "auto",
     icon: Heart,
     nom: "Benvinguda client",
@@ -124,21 +107,21 @@ const exemples = [
     ara: "El client se sent atès des del minut 1. Documentació recollida sense haver de perseguir.",
   },
   {
-    id: 8,
+    id: 7,
     tipus: "agent",
-    icon: TrendingUp,
-    nom: "Analista competència",
-    hook: "Competència sota control",
-    titolDetall: "Analista de competència IA",
-    subtitol: "Monitoritza la presència online dels competidors mentre tu treballes",
+    icon: Target,
+    nom: "Campanyes intel·ligents",
+    hook: "Cap client important que se t'escapi",
+    titolDetall: "Campanyes intel·ligents",
+    subtitol: "200 clients analitzats. Els que toca contactar, detectats. Els emails, escrits. Tu només aproves i envies.",
     flux: [
-      { icon: Search, text: "Agent revisa webs i presència online dels competidors" },
-      { icon: Sparkle, text: "Detecta canvis: preus, productes, ofertes, novetats" },
-      { icon: BarChart3, text: "Resum setmanal amb alertes importants" },
+      { icon: BarChart3, text: "IA analitza clients per patrons" },
+      { icon: PenTool, text: "Genera emails únics personalitzats" },
+      { icon: CheckCircle2, text: "Tu aproves i envies amb un sol clic" },
     ],
-    keypoint: "Cada setmana reps al correu: qui ha canviat preus, qui ha llançat ofertes, qui ha afegit productes. Alerta immediata si hi ha canvis crítics.",
-    abans: "Entrar manualment a webs de competidors o no fer-ho mai",
-    ara: "Tens un espia legal que t'informa de tot. Sempre un pas per davant.",
+    keypoint: "Cap client important que se t'escapi.",
+    abans: "Revisar clients un per un per saber a qui escriure. Hores de feina comercial.",
+    ara: "El sistema detecta qui necessita atenció i redacta l'email sol. Tu revises i aproves en minuts.",
   },
 ];
 
@@ -320,27 +303,26 @@ function ExemplesCarousel() {
   );
 }
 
-// Cercle virtuós
-function CercleVirtuos() {
-  const steps = [
-    {
-      num: "1",
-      title: "1 automatització activa",
-      desc: "El teu equip guanya 5h setmanals.",
-    },
-    {
-      num: "3",
-      title: "3 automatitzacions connectades",
-      desc: "empentIA comença a conèixer el teu negoci. Les accions es coordinen soles.",
-    },
-    {
-      num: "∞",
-      title: "El negoci en pilot automàtic",
-      desc: "Clients atesos, factures cobrades, oportunitats detectades.",
-      highlight: true,
-    },
-  ];
+// Cercle virtuós — gràfic de nodes
+const nodeLabels = ["Cobraments", "Clients", "Comunicació", "Vendes", "Documents", "Facturació"];
 
+const states = [
+  {
+    activeCount: 1,
+    message: "Guanyes temps i reduceixes feina manual.",
+  },
+  {
+    activeCount: 3,
+    message: "Comences a veure patrons: qui paga tard, qui compra més.",
+  },
+  {
+    activeCount: 6,
+    message: "El teu negoci treballa amb una visió que abans no existia.",
+    highlight: true,
+  },
+];
+
+function CercleVirtuos() {
   return (
     <div className="mt-16">
       {/* Separador */}
@@ -348,37 +330,52 @@ function CercleVirtuos() {
 
       <div className="text-center mb-10">
         <h3 className="text-2xl font-bold text-slate-50 md:text-3xl mb-3">
-          Com més àrees automatitzes, més intel·ligent es torna tot.
+          Del &lsquo;guanya temps&rsquo; al &lsquo;decideix millor&rsquo;.
         </h3>
         <p className="text-slate-400 max-w-2xl mx-auto">
-          Cada procés que automatitzes alimenta el coneixement d&apos;empentIA
-          sobre el teu negoci. El resultat s&apos;accelera sol.
+          Cada procés que automatitzes alimenta empentIA amb dades reals.
+          Amb el temps, no només fas menys feina manual — tens una visió
+          del teu negoci que abans no existia.
         </p>
       </div>
 
-      {/* 3 cards */}
+      {/* 3 estats amb nodes */}
       <div className="grid gap-6 md:grid-cols-3 md:gap-4">
-        {steps.map((step, index) => (
-          <div key={step.num} className="flex items-center gap-4 md:gap-2">
+        {states.map((state, stateIndex) => (
+          <div key={stateIndex} className="flex items-center gap-4 md:gap-2">
             <div
               className={`flex-1 rounded-xl border p-6 ${
-                step.highlight
+                state.highlight
                   ? "border-emerald-500/30 bg-slate-900"
                   : "border-slate-700/50 bg-slate-900"
               }`}
             >
-              <div className="mb-3 text-3xl font-bold text-emerald-500">
-                {step.num}
+              {/* Nodes grid */}
+              <div className="mb-4 flex flex-wrap gap-2">
+                {nodeLabels.map((label, i) => {
+                  const isActive = i < state.activeCount;
+                  return (
+                    <span
+                      key={label}
+                      className={`rounded-full px-3 py-1 text-xs font-medium transition-all ${
+                        isActive
+                          ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+                          : "bg-slate-800/50 text-slate-600 border border-slate-700/30"
+                      }`}
+                    >
+                      {label}
+                    </span>
+                  );
+                })}
               </div>
-              <h4 className="mb-2 text-base font-semibold text-slate-200">
-                {step.title}
-              </h4>
-              <p className="text-sm leading-relaxed text-slate-400">
-                {step.desc}
+
+              {/* Missatge */}
+              <p className="text-sm leading-relaxed text-slate-300">
+                {state.message}
               </p>
             </div>
             {/* Connector arrow (desktop only, not after last) */}
-            {index < steps.length - 1 && (
+            {stateIndex < states.length - 1 && (
               <ArrowRight className="hidden h-5 w-5 flex-shrink-0 text-emerald-500/40 md:block" />
             )}
           </div>
@@ -389,7 +386,7 @@ function CercleVirtuos() {
       <p className="mt-8 text-center text-slate-400">
         Comencem per una. La resta ve sola.{" "}
         <span className="inline-flex items-center gap-1 font-medium text-emerald-400 cursor-pointer hover:text-emerald-300 transition-colors">
-          Comença l&apos;auditoria
+          Fes la teva auditoria gratuïta
           <ArrowRight className="h-4 w-4" />
         </span>
       </p>
