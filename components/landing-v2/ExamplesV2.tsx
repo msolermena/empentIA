@@ -305,29 +305,28 @@ function ExemplesCarousel() {
 
 // Cercle virtuós
 const areas = [
-  { label: "Cobraments", angle: 0 },
-  { label: "Clients", angle: 60 },
-  { label: "Comunicació", angle: 120 },
-  { label: "Vendes", angle: 180 },
-  { label: "Documents", angle: 240 },
-  { label: "Facturació", angle: 300 },
+  { label: "Vendes", angle: 270 },
+  { label: "Cobraments", angle: 342 },
+  { label: "Comunicació", angle: 54 },
+  { label: "Operacions", angle: 126 },
+  { label: "Finances", angle: 198 },
 ];
 
 const stageData = [
   {
-    activeCount: 1,
+    activeIndices: [0],
     title: "1 automatització",
-    message: "Guanyes temps i reduceixes feina manual.",
+    message: "Guanyes temps. empentIA comença a conèixer el teu negoci.",
   },
   {
-    activeCount: 3,
+    activeIndices: [0, 1, 2],
     title: "3 connectades",
-    message: "Comences a veure patrons: qui paga tard, qui compra més.",
+    message: "Els agents de cada àmbit es parlen. El que veu un, ho saben tots.",
   },
   {
-    activeCount: 6,
+    activeIndices: [0, 1, 2, 3, 4],
     title: "Visió completa",
-    message: "El teu negoci treballa amb una visió que abans no existia.",
+    message: "Menys feina. Més criteri. Millors decisions.",
   },
 ];
 
@@ -346,7 +345,7 @@ function CercleVirtuos() {
         </h3>
         <p className="text-slate-400 max-w-2xl mx-auto">
           Cada procés que automatitzes alimenta empentIA amb dades reals.
-          Amb el temps, no només fas menys feina manual. Tens una visió
+          Amb el temps, no només fas menys feina manual, tens una visió
           del teu negoci que abans no existia.
         </p>
       </div>
@@ -371,37 +370,67 @@ function CercleVirtuos() {
             }}
           />
 
+          {/* SVG per línies i connexions */}
+          <svg className="absolute inset-0 z-0" viewBox="-190 -190 380 380">
+            {/* Línies de cada node al centre */}
+            {areas.map((area, i) => {
+              const isActive = stage.activeIndices.includes(i);
+              const radius = 130;
+              const angleRad = ((area.angle - 90) * Math.PI) / 180;
+              const x = Math.cos(angleRad) * radius;
+              const y = Math.sin(angleRad) * radius;
+              return (
+                <line
+                  key={`line-${i}`}
+                  x1="0" y1="0"
+                  x2={x} y2={y}
+                  stroke={isActive ? "rgba(16,185,129,0.4)" : "rgba(51,65,85,0.3)"}
+                  strokeWidth={isActive ? "2" : "1"}
+                  strokeDasharray={isActive ? "none" : "4 4"}
+                  className="transition-all duration-500"
+                />
+              );
+            })}
+
+            {/* Connexions entre nodes actius */}
+            {stage.activeIndices.length > 1 && stage.activeIndices.map((ai, idx) => {
+              const nextIdx = (idx + 1) % stage.activeIndices.length;
+              const nextAi = stage.activeIndices[nextIdx];
+              const r = 130;
+              const a1 = ((areas[ai].angle - 90) * Math.PI) / 180;
+              const a2 = ((areas[nextAi].angle - 90) * Math.PI) / 180;
+              return (
+                <line
+                  key={`conn-${idx}`}
+                  x1={Math.cos(a1) * r} y1={Math.sin(a1) * r}
+                  x2={Math.cos(a2) * r} y2={Math.sin(a2) * r}
+                  stroke="rgba(16,185,129,0.15)"
+                  strokeWidth="1"
+                  className="transition-all duration-500"
+                />
+              );
+            })}
+          </svg>
+
           {/* Nodes d'àrees */}
           {areas.map((area, i) => {
-            const isActive = i < stage.activeCount;
+            const isActive = stage.activeIndices.includes(i);
             const radius = 130;
             const angleRad = ((area.angle - 90) * Math.PI) / 180;
             const x = Math.cos(angleRad) * radius;
             const y = Math.sin(angleRad) * radius;
 
             return (
-              <div key={area.label} className="absolute left-1/2 top-1/2 z-10" style={{ transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))` }}>
-                {/* Línia de connexió al centre */}
-                <svg
-                  className="absolute left-1/2 top-1/2 -z-10 overflow-visible"
-                  width="1" height="1"
-                >
-                  <line
-                    x1="0" y1="0"
-                    x2={-x} y2={-y}
-                    stroke={isActive ? "rgba(16,185,129,0.4)" : "rgba(51,65,85,0.3)"}
-                    strokeWidth={isActive ? "2" : "1"}
-                    strokeDasharray={isActive ? "none" : "4 4"}
-                    className="transition-all duration-500"
-                  />
-                </svg>
-
-                {/* Node */}
+              <div
+                key={area.label}
+                className="absolute left-1/2 top-1/2 z-10"
+                style={{ transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))` }}
+              >
                 <div
                   className={`flex items-center justify-center rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-500 ${
                     isActive
-                      ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-md shadow-emerald-500/10 scale-105"
-                      : "bg-slate-800/60 text-slate-500 border border-slate-700/40 scale-95 opacity-50"
+                      ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-md shadow-emerald-500/10"
+                      : "bg-slate-800/40 text-slate-500 border border-slate-700/50"
                   }`}
                 >
                   {area.label}
@@ -409,29 +438,6 @@ function CercleVirtuos() {
               </div>
             );
           })}
-
-          {/* Connexions entre nodes actius (arcs) */}
-          {activeStage >= 1 && (
-            <svg className="absolute inset-0 z-0 overflow-visible" viewBox="-190 -190 380 380">
-              {areas.slice(0, stage.activeCount).map((area, i) => {
-                const next = areas[(i + 1) % stage.activeCount];
-                if (!next || i + 1 >= stage.activeCount) return null;
-                const r = 130;
-                const a1 = ((area.angle - 90) * Math.PI) / 180;
-                const a2 = ((next.angle - 90) * Math.PI) / 180;
-                return (
-                  <line
-                    key={`conn-${i}`}
-                    x1={Math.cos(a1) * r} y1={Math.sin(a1) * r}
-                    x2={Math.cos(a2) * r} y2={Math.sin(a2) * r}
-                    stroke="rgba(16,185,129,0.15)"
-                    strokeWidth="1"
-                    className="transition-all duration-500"
-                  />
-                );
-              })}
-            </svg>
-          )}
         </div>
 
         {/* Selector d'estat (3 botons) */}
@@ -461,7 +467,7 @@ function CercleVirtuos() {
       <p className="mt-8 text-center text-slate-400">
         Comencem per una. La resta ve sola.{" "}
         <span className="inline-flex items-center gap-1 font-medium text-emerald-400 cursor-pointer hover:text-emerald-300 transition-colors">
-          Fes la teva auditoria gratuïta
+          Comença l&apos;auditoria
           <ArrowRight className="h-4 w-4" />
         </span>
       </p>

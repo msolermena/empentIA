@@ -31,7 +31,7 @@ export function FinalCTAV2() {
                   readOnly
                 />
                 <Button size="lg" className="gap-2 whitespace-nowrap w-full sm:w-auto">
-                  Fes la teva auditoria gratuïta
+                  Comença l&apos;auditoria
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </div>

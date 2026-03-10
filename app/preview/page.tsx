@@ -7,7 +7,6 @@ import { ExamplesV2 } from "@/components/landing-v2/ExamplesV2";
 import { HowItWorksV2 } from "@/components/landing-v2/HowItWorksV2";
 import { PlatformV2 } from "@/components/landing-v2/PlatformV2";
 import { WhyEmpentiaV2 } from "@/components/landing-v2/WhyEmpentiaV2";
-import { ClaimsV2 } from "@/components/landing-v2/ClaimsV2";
 import { FinalCTAV2 } from "@/components/landing-v2/FinalCTAV2";
 
 export default function PreviewPage() {
@@ -26,7 +25,6 @@ export default function PreviewPage() {
       <HowItWorksV2 />
       <PlatformV2 />
       <WhyEmpentiaV2 />
-      <ClaimsV2 />
       <FinalCTAV2 />
 
       {/* Footer simple */}
