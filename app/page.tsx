@@ -6,10 +6,10 @@ import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { createLead } from "@/lib/api";
-import { 
-  ArrowRight, 
-  CheckCircle2, 
-  AlertCircle, 
+import {
+  ArrowRight,
+  CheckCircle2,
+  AlertCircle,
   Bug,
   Search,
   FileText,
@@ -34,12 +34,12 @@ import {
   FileSpreadsheet,
   Wallet,
   Receipt,
-  Car,
+  CalendarCheck,
   UserCheck,
   Heart,
-  TrendingUp,
+  Target,
+  PenTool,
   Clock,
-  Sparkle
 } from "lucide-react";
 
 // Normalitzar URLs
@@ -242,26 +242,9 @@ const exemples = [
   {
     id: 2,
     tipus: "agent",
-    icon: Search,
-    nom: "Prospector comercial",
-    hook: "Leads nous cada dilluns",
-    titolDetall: "Prospector comercial IA",
-    subtitol: "El teu comercial IA que mai dorm",
-    flux: [
-      { icon: Search, text: "Detecta nous negocis oberts al teu territori" },
-      { icon: BarChart3, text: "Analitza la seva web i detecta si encaixen" },
-      { icon: Mail, text: "Prepara email personalitzat llest per enviar" },
-    ],
-    keypoint: "Cada dilluns reps 10-15 oportunitats noves amb fitxa completa i email ja redactat, llest per enviar amb un clic.",
-    abans: "4h/setmana buscant leads a Google, LinkedIn, registres mercantils",
-    ara: "0 minuts. Decideixes a qui contactar.",
-  },
-  {
-    id: 3,
-    tipus: "agent",
     icon: MessageCircle,
     nom: "Assistent comercial",
-    hook: "Respon, registra i qualifica leads al moment",
+    hook: "Obté, respon, registra i qualifica leads",
     titolDetall: "Assistent comercial IA",
     subtitol: "Atén clients, resol dubtes i detecta oportunitats 24/7",
     flux: [
@@ -274,24 +257,24 @@ const exemples = [
     ara: "L'agent filtra i qualifica 24/7. Tu parles amb qui realment vol comprar.",
   },
   {
-    id: 4,
-    tipus: "auto",
-    icon: Wallet,
-    nom: "Cobrament intel·ligent",
-    hook: "Cobra sense perseguir",
-    titolDetall: "Cobrament intel·ligent",
-    subtitol: "Gestió de cobraments que s'adapta a cada client",
+    id: 3,
+    tipus: "agent",
+    icon: Target,
+    nom: "Campanyes intel·ligents",
+    hook: "Cap client important que se t'escapi",
+    titolDetall: "Campanyes intel·ligents",
+    subtitol: "200 clients analitzats. Els que toca contactar, detectats. Els emails, escrits. Tu només aproves i envies.",
     flux: [
-      { icon: Clock, text: "Factura propera a vèncer" },
-      { icon: Bot, text: "IA analitza historial (bon pagador? reincident?)" },
-      { icon: MessageCircle, text: "Acció personalitzada + seguiment automàtic" },
+      { icon: BarChart3, text: "IA analitza clients per patrons" },
+      { icon: PenTool, text: "Genera emails únics personalitzats" },
+      { icon: CheckCircle2, text: "Tu aproves i envies amb un sol clic" },
     ],
-    keypoint: "Accions segons perfil: recordatori suau per bons pagadors, avís de tall de servei per reincidents, facilitats de pagament si detecta dificultats. Inclou enllaç de pagament directe.",
-    abans: "Revisar venciments + trucar un a un + decidir com actuar amb cada cas",
-    ara: "El sistema decideix el to i l'acció per cada client. Tu intervens quan cal.",
+    keypoint: "Cap client important que se t'escapi.",
+    abans: "Revisar clients un per un per saber a qui escriure. Hores de feina comercial.",
+    ara: "El sistema detecta qui necessita atenció i redacta l'email sol. Tu revises i aproves en minuts.",
   },
   {
-    id: 5,
+    id: 4,
     tipus: "agent",
     icon: Receipt,
     nom: "Assistent comptable",
@@ -308,24 +291,24 @@ const exemples = [
     ara: "Tot processat automàticament. Tu valides el resum.",
   },
   {
-    id: 6,
+    id: 5,
     tipus: "auto",
-    icon: Car,
-    nom: "Recordatoris vehicle",
+    icon: CalendarCheck,
+    nom: "Recordatoris de cita",
     hook: "Recorda i reserva sol",
-    titolDetall: "Recordatoris vehicle + Reserva automàtica",
-    subtitol: "ITV, revisions, canvis d'oli... el client recorda i reserva sense que facis res",
+    titolDetall: "Recordatoris de cita + Reserva automàtica",
+    subtitol: "Revisions, serveis pendents... el client recorda i reserva sense que facis res",
     flux: [
-      { icon: Clock, text: "Servei proper (ITV, revisió, canvi d'oli...)" },
+      { icon: Clock, text: "Servei proper (revisió, renovació, cita periòdica...)" },
       { icon: MessageCircle, text: "WhatsApp automàtic amb link per reservar" },
       { icon: CheckCircle2, text: "Client tria hora → Cita confirmada al calendari" },
     ],
-    keypoint: "ITV, revisions, canvis d'oli, pneumàtics... Recupera clients inactius amb recordatoris automàtics del seu proper manteniment.",
+    keypoint: "Recupera clients inactius amb recordatoris automàtics del seu proper servei o revisió.",
     abans: "Revisar Excel + trucar clients un a un + quadrar agendes",
     ara: "0 trucades. El client reserva sol i tu recuperes clients que feia mesos que no venien.",
   },
   {
-    id: 7,
+    id: 6,
     tipus: "auto",
     icon: Heart,
     nom: "Benvinguda client",
@@ -342,21 +325,21 @@ const exemples = [
     ara: "El client se sent atès des del minut 1. Documentació recollida sense haver de perseguir.",
   },
   {
-    id: 8,
-    tipus: "agent",
-    icon: TrendingUp,
-    nom: "Analista competència",
-    hook: "Competència sota control",
-    titolDetall: "Analista de competència IA",
-    subtitol: "Monitoritza la presència online dels competidors mentre tu treballes",
+    id: 7,
+    tipus: "auto",
+    icon: Wallet,
+    nom: "Cobrament intel·ligent",
+    hook: "Cobra sense perseguir",
+    titolDetall: "Cobrament intel·ligent",
+    subtitol: "Gestió de cobraments que s'adapta a cada client",
     flux: [
-      { icon: Search, text: "Agent revisa webs i presència online dels competidors" },
-      { icon: Sparkle, text: "Detecta canvis: preus, productes, ofertes, novetats" },
-      { icon: BarChart3, text: "Resum setmanal amb alertes importants" },
+      { icon: Clock, text: "Factura propera a vèncer" },
+      { icon: Bot, text: "IA analitza historial (bon pagador? reincident?)" },
+      { icon: MessageCircle, text: "Acció personalitzada + seguiment automàtic" },
     ],
-    keypoint: "Cada setmana reps al correu: qui ha canviat preus, qui ha llançat ofertes, qui ha afegit productes. Alerta immediata si hi ha canvis crítics.",
-    abans: "Entrar manualment a webs de competidors o no fer-ho mai",
-    ara: "Tens un espia legal que t'informa de tot. Sempre un pas per davant.",
+    keypoint: "Accions segons perfil: recordatori suau per bons pagadors, avís de tall de servei per reincidents, facilitats de pagament si detecta dificultats. Inclou enllaç de pagament directe.",
+    abans: "Revisar venciments + trucar un a un + decidir com actuar amb cada cas",
+    ara: "El sistema decideix el to i l'acció per cada client. Tu intervens quan cal.",
   },
 ];
 
@@ -415,7 +398,7 @@ function ExemplesCarousel() {
         <div
           ref={scrollRef}
           onScroll={checkScroll}
-          className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory"
+          className="flex gap-4 overflow-x-auto pb-4 pr-4 scrollbar-hide snap-x snap-mandatory"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {exemples.map((exemple) => (
@@ -534,6 +517,164 @@ function ExemplesCarousel() {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+// Cercle Virtuós
+const cvAreas = [
+  { label: "Vendes", angle: 270 },
+  { label: "Cobraments", angle: 342 },
+  { label: "Comunicació", angle: 54 },
+  { label: "Operacions", angle: 126 },
+  { label: "Finances", angle: 198 },
+];
+
+const cvStages = [
+  {
+    activeIndices: [0],
+    title: "1 automatització",
+    message: "Guanyes temps. empentIA comença a conèixer el teu negoci.",
+  },
+  {
+    activeIndices: [0, 1, 2],
+    title: "3 connectades",
+    message: "Els agents de cada àmbit es parlen. El que veu un, ho saben tots.",
+  },
+  {
+    activeIndices: [0, 1, 2, 3, 4],
+    title: "Visió completa",
+    message: "Menys feina. Més criteri. Millors decisions.",
+  },
+];
+
+function CercleVirtuos() {
+  const [activeStage, setActiveStage] = useState(0);
+  const stage = cvStages[activeStage];
+
+  return (
+    <div className="mt-16">
+      <div className="mx-auto mb-12 h-px w-32 bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent" />
+
+      <div className="text-center mb-10">
+        <h3 className="text-2xl font-bold text-slate-50 md:text-3xl mb-3">
+          Del &lsquo;guanya temps&rsquo; al &lsquo;decideix millor&rsquo;.
+        </h3>
+        <p className="text-slate-400 max-w-2xl mx-auto">
+          Cada procés que automatitzes alimenta empentIA amb dades reals.
+          Amb el temps, no només fas menys feina manual, tens una visió
+          del teu negoci que abans no existia.
+        </p>
+      </div>
+
+      <div className="mx-auto max-w-2xl">
+        <div className="relative mx-auto mb-8 h-[320px] w-[320px] sm:h-[380px] sm:w-[380px]">
+          <div className="absolute left-1/2 top-1/2 z-20 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-emerald-500/50 bg-slate-900 shadow-lg shadow-emerald-500/20">
+            <span className="text-xs font-bold text-emerald-400">empentIA</span>
+          </div>
+
+          <div
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border transition-all duration-700"
+            style={{
+              width: activeStage === 0 ? 140 : activeStage === 1 ? 180 : 220,
+              height: activeStage === 0 ? 140 : activeStage === 1 ? 180 : 220,
+              borderColor: activeStage === 2 ? "rgba(16,185,129,0.3)" : "rgba(16,185,129,0.1)",
+              boxShadow: activeStage === 2 ? "0 0 40px rgba(16,185,129,0.15)" : "none",
+            }}
+          />
+
+          <svg className="absolute inset-0 z-0" viewBox="-190 -190 380 380">
+            {cvAreas.map((area, i) => {
+              const isActive = stage.activeIndices.includes(i);
+              const radius = 130;
+              const angleRad = ((area.angle - 90) * Math.PI) / 180;
+              const x = Math.cos(angleRad) * radius;
+              const y = Math.sin(angleRad) * radius;
+              return (
+                <line
+                  key={`line-${i}`}
+                  x1="0" y1="0"
+                  x2={x} y2={y}
+                  stroke={isActive ? "rgba(16,185,129,0.4)" : "rgba(51,65,85,0.3)"}
+                  strokeWidth={isActive ? "2" : "1"}
+                  strokeDasharray={isActive ? "none" : "4 4"}
+                  className="transition-all duration-500"
+                />
+              );
+            })}
+            {stage.activeIndices.length > 1 && stage.activeIndices.map((ai, idx) => {
+              const nextIdx = (idx + 1) % stage.activeIndices.length;
+              const nextAi = stage.activeIndices[nextIdx];
+              const r = 130;
+              const a1 = ((cvAreas[ai].angle - 90) * Math.PI) / 180;
+              const a2 = ((cvAreas[nextAi].angle - 90) * Math.PI) / 180;
+              return (
+                <line
+                  key={`conn-${idx}`}
+                  x1={Math.cos(a1) * r} y1={Math.sin(a1) * r}
+                  x2={Math.cos(a2) * r} y2={Math.sin(a2) * r}
+                  stroke="rgba(16,185,129,0.15)"
+                  strokeWidth="1"
+                  className="transition-all duration-500"
+                />
+              );
+            })}
+          </svg>
+
+          {cvAreas.map((area, i) => {
+            const isActive = stage.activeIndices.includes(i);
+            const radius = 130;
+            const angleRad = ((area.angle - 90) * Math.PI) / 180;
+            const x = Math.cos(angleRad) * radius;
+            const y = Math.sin(angleRad) * radius;
+            return (
+              <div
+                key={area.label}
+                className="absolute left-1/2 top-1/2 z-10"
+                style={{ transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))` }}
+              >
+                <div
+                  className={`flex items-center justify-center rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-500 ${
+                    isActive
+                      ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-md shadow-emerald-500/10"
+                      : "bg-slate-800/40 text-slate-500 border border-slate-700/50"
+                  }`}
+                >
+                  {area.label}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mb-6 flex justify-center gap-2">
+          {cvStages.map((s, i) => (
+            <button
+              key={i}
+              onClick={() => setActiveStage(i)}
+              className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
+                activeStage === i
+                  ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+                  : "bg-slate-800/50 text-slate-500 border border-slate-700/30 hover:text-slate-300"
+              }`}
+            >
+              {s.title}
+            </button>
+          ))}
+        </div>
+
+        <p className="text-center text-slate-300 transition-all duration-300">
+          {stage.message}
+        </p>
+      </div>
+
+      <p className="mt-8 text-center text-slate-400">
+        Comencem per una. La resta ve sola.{" "}
+        <span className="inline-flex items-center gap-1 font-medium text-emerald-400 cursor-pointer hover:text-emerald-300 transition-colors">
+          Comença l&apos;auditoria
+          <ArrowRight className="h-4 w-4" />
+        </span>
+      </p>
     </div>
   );
 }
@@ -676,7 +817,7 @@ export default function Home() {
           <div className="fade-in-up-delay-2 mb-8 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500">
             <span className="flex items-center gap-1.5">
               <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-              Gratuït
+              Auditoria gratuïta
             </span>
             <span className="flex items-center gap-1.5">
               <CheckCircle2 className="h-4 w-4 text-emerald-500" />
@@ -701,15 +842,49 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Exemples del que podem fer */}
+      {/* Pain Points */}
+      <section className="relative py-14 px-6">
+        <div className="mx-auto max-w-3xl">
+          <div className="mb-10 text-center">
+            <h2 className="mb-4 text-3xl font-bold text-slate-50 md:text-4xl">Si et passa alguna d&apos;aquestes coses, empentIA és per a tu.</h2>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              "Tens feines que fas cada setmana que saps perfectament que podrien fer-se soles",
+              "El teu equip perd temps picant dades, enviant recordatoris o buscant documents",
+              "Has provat ChatGPT però no saps com connectar-ho al teu negoci real",
+              "Saps que la IA avança però no tens temps d'aprendre a implementar-la",
+              "Vols que el teu negoci funcioni millor sense haver d'entendre de tecnologia",
+            ].map((text) => (
+              <div
+                key={text}
+                className="flex items-start gap-4 rounded-xl border border-slate-800/60 bg-slate-900/20 p-4 transition-all hover:border-emerald-500/20 hover:bg-slate-900/40"
+              >
+                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-emerald-400" />
+                <p className="text-base leading-relaxed text-slate-200">{text}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-10 text-center text-lg text-slate-400">
+            Si t&apos;hi veus reflectit, <span className="font-semibold text-emerald-400">empentIA és per a tu.</span>
+          </p>
+        </div>
+      </section>
+
+      {/* Exemples */}
       <section className="relative py-14 px-6 overflow-hidden">
         <div className="mx-auto max-w-6xl">
           <div className="mb-10 text-center">
-            <h2 className="mb-3 text-3xl font-bold text-slate-50 md:text-4xl">Exemples del que podem fer per tu</h2>
+            <h2 className="mb-3 text-3xl font-bold text-slate-50 md:text-4xl">Processos reals que ja funcionen sols</h2>
             <p className="text-slate-400">Automatitzacions i agents IA reals, funcionant en negocis com el teu.</p>
           </div>
 
           <ExemplesCarousel />
+
+          {/* Cercle Virtuós */}
+          <CercleVirtuos />
         </div>
       </section>
 
@@ -786,9 +961,9 @@ export default function Home() {
       <section className="relative py-16 px-6">
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-slate-50 md:text-4xl">Plataforma empentIA</h2>
+            <h2 className="mb-4 text-3xl font-bold text-slate-50 md:text-4xl">Tot en un sol lloc. Totes les teves eines, una sola memòria.</h2>
             <p className="mx-auto max-w-2xl text-slate-400">
-              Tot el que necessites per gestionar les teves automatitzacions i agents IA en un sol lloc.
+              empentIA connecta el que ja tens i ho centralitza. Les teves dades, els teus clients, les teves automatitzacions. Visibles i accionables des d&apos;un sol portal.
             </p>
           </div>
 
@@ -809,12 +984,12 @@ export default function Home() {
                 },
                 {
                   icon: Bot,
-                  title: "Agents IA al teu servei",
-                  desc: "Assistents que coneixen el teu negoci: responen consultes, classifiquen documents, analitzen dades i actuen per tu 24/7"
+                  title: "Agents IA que coneixen el teu negoci",
+                  desc: "Assistents que coneixen el teu negoci: responen consultes, classifiquen documents, analitzen dades i actuen per tu 24/7 (no ChatGPT genèric)"
                 },
                 {
                   icon: Database,
-                  title: "Les teves dades, organitzades",
+                  title: "Una sola font de veritat",
                   desc: "Centralitza la informació del teu negoci en un sol lloc. T'ajudem a estructurar-la perquè automatitzacions i agents la puguin usar"
                 },
                 {
@@ -905,35 +1080,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Et Sona Alguna d'Aquestes? */}
-      <section className="relative py-14 px-6">
-        <div className="mx-auto max-w-3xl">
-          <div className="mb-10 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-slate-50 md:text-4xl">Et sona alguna d&apos;aquestes?</h2>
-          </div>
-
-          <div className="space-y-4">
-            {[
-              "Dediques hores a tasques que saps que es podrien automatitzar",
-              "Tens un equip petit que fa massa coses manualment",
-              "Vols aprofitar la IA però no saps per on començar",
-              "No tens departament de tecnologia ni vols tenir-lo",
-            ].map((text) => (
-              <div
-                key={text}
-                className="flex items-start gap-4 rounded-xl border border-slate-800/60 bg-slate-900/20 p-4 transition-all hover:border-emerald-500/20 hover:bg-slate-900/40"
-              >
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-emerald-400" />
-                <p className="text-base leading-relaxed text-slate-200">{text}</p>
-              </div>
-            ))}
-          </div>
-
-          <p className="mt-10 text-center text-lg text-slate-400">
-            Si t&apos;hi veus reflectit, <span className="font-semibold text-emerald-400">empentIA és per a tu.</span>
-          </p>
-        </div>
-      </section>
 
       {/* Qui Hi Ha Al Darrere - AMAGAT TEMPORALMENT
       <section className="relative py-20 px-6">
@@ -979,10 +1125,10 @@ export default function Home() {
             
             <div className="relative">
               <h3 className="mb-4 text-2xl font-bold text-slate-50 md:text-3xl">
-                Recupera hores cada setmana
+                Descobreix en 3 minuts quant temps perd el teu negoci.
               </h3>
               <p className="mb-8 text-slate-400">
-                Descobreix quins processos pots automatitzar al teu negoci
+                L&apos;auditoria és gratuïta, sense compromís, i et mostra oportunitats concretes per al teu sector.
               </p>
 
               <form onSubmit={(e) => handleSubmit(e, 'footer')} className="mb-6">
@@ -1013,7 +1159,7 @@ export default function Home() {
               <div className="mb-8 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500">
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-                  Gratuït
+                  Auditoria gratuïta
                 </span>
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 className="h-4 w-4 text-emerald-500" />
