@@ -219,13 +219,13 @@ export default function CompletePage() {
 
         {/* ==================== NOTA P5 ==================== */}
         {informe.nota_p5 && (
-          <Card className="glass-card border border-purple-500/20 mb-10">
+          <Card className="glass-card border border-amber-500/20 bg-slate-800 mb-10">
             <CardContent className="p-6">
               <div className="flex items-start gap-3">
-                <Sparkles className="h-5 w-5 text-purple-400 mt-0.5" />
+                <Sparkles className="h-5 w-5 text-amber-400 mt-0.5" />
                 <div>
-                  <p className="text-sm font-medium text-purple-300 mb-1">
-                    Nota sobre el que ens has demanat
+                  <p className="text-sm font-medium text-amber-300 mb-1">
+                    En revisió
                   </p>
                   <p className="text-slate-400">{informe.nota_p5}</p>
                 </div>
