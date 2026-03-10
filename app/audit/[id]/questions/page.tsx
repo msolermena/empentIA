@@ -950,20 +950,22 @@ function RenderP5({
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-xl font-semibold text-slate-200 mb-2">{question.title}</h2>
-        <p className="text-sm text-muted-foreground">{question.subtitle}</p>
+        <p className="text-sm text-slate-400 mb-2">Tu coneixes el teu negoci millor que ningú.</p>
+        <h2 className="text-xl font-semibold text-slate-200">
+          Més enllà del que hem identificat fins ara, quina és la feina que més t&apos;agradaria que es fés automàticament?
+        </h2>
       </div>
 
       <textarea
         value={textLliure}
         onChange={(e) => setTextLliure(e.target.value)}
-        placeholder={question.input.placeholder}
+        placeholder={'Ex: "Fer el resum setmanal de vendes", "Enviar recordatoris de pagament", "Preparar pressupostos des de zero cada vegada"'}
         maxLength={question.input.maxLength}
-        className="min-h-[140px] w-full rounded-lg border border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 resize-none"
+        className="min-h-[140px] w-full rounded-lg border border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder:text-slate-500 placeholder:italic placeholder:text-sm focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 resize-none"
       />
 
       <p className="text-xs text-muted-foreground text-center">
-        💡 Aquesta pregunta és opcional - pots deixar-la en blanc si no se t'acut res més
+        Aquesta pregunta és opcional, pots deixar-la en blanc si no se t&apos;acut res més
       </p>
     </div>
   );
