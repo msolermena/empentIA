@@ -25,6 +25,7 @@ const content = {
     send: "Enviar",
     sending: "Enviant...",
     sent: "Missatge enviat! Et contactem aviat.",
+    error: "Error en enviar. Torna-ho a provar o escriu-nos a hola@empentia.cat",
   },
   es: {
     eyebrow: "Empieza hoy",
@@ -40,6 +41,7 @@ const content = {
     send: "Enviar",
     sending: "Enviando...",
     sent: "¡Mensaje enviado! Te contactamos pronto.",
+    error: "Error al enviar. Inténtalo de nuevo o escríbenos a hola@empentia.cat",
   },
 };
 
@@ -52,11 +54,13 @@ export function CtaFinalSection({ lang, onContractar }: CtaFinalSectionProps) {
   const [email, setEmail] = useState("");
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
+  const [sendError, setSendError] = useState(false);
 
   const handleQuickLead = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim()) return;
     setSending(true);
+    setSendError(false);
     try {
       await createLandingLead({
         email,
@@ -65,8 +69,7 @@ export function CtaFinalSection({ lang, onContractar }: CtaFinalSectionProps) {
       });
       setSent(true);
     } catch {
-      // Falla silenciosament, el missatge d'error no és crític aquí
-      setSent(true);
+      setSendError(true);
     } finally {
       setSending(false);
     }
@@ -121,6 +124,10 @@ export function CtaFinalSection({ lang, onContractar }: CtaFinalSectionProps) {
             {sent ? (
               <p className="text-sm text-emerald-400">{t.sent}</p>
             ) : (
+              <>
+              {sendError && (
+                <p className="mb-3 text-sm text-red-400">{t.error}</p>
+              )}
               <form onSubmit={handleQuickLead} className="flex flex-col gap-3 sm:flex-row">
                 <input
                   type="text"
@@ -145,6 +152,7 @@ export function CtaFinalSection({ lang, onContractar }: CtaFinalSectionProps) {
                   {sending ? t.sending : t.send}
                 </Button>
               </form>
+              </>
             )}
           </div>
         </div>
