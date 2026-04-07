@@ -1,4 +1,4 @@
-import { MessageSquareOff, Clock3, UserX } from "lucide-react";
+import { MessageSquare, Clock3, UserX } from "lucide-react";
 
 interface ProblemaSectionProps {
   lang: "ca" | "es";
@@ -17,7 +17,7 @@ const content = {
         desc: "dels visitants marxen si no troben resposta ràpida a un dubte. Cada pregunta no resposta és una venda perduda.",
       },
       {
-        icon: MessageSquareOff,
+        icon: MessageSquare,
         stat: "€0",
         title: "facturats fora d'horari",
         desc: "El teu negoci tanca. Les preguntes dels clients no. Cada nit i cap de setmana és una oportunitat perduda.",
@@ -42,7 +42,7 @@ const content = {
         desc: "de los visitantes se van si no encuentran respuesta rápida a una duda. Cada pregunta sin respuesta es una venta perdida.",
       },
       {
-        icon: MessageSquareOff,
+        icon: MessageSquare,
         stat: "€0",
         title: "facturados fuera de horario",
         desc: "Tu negocio cierra. Las preguntas de tus clientes no. Cada noche y fin de semana es una oportunidad perdida.",
