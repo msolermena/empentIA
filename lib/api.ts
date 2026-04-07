@@ -582,6 +582,53 @@ export async function createLead(
   return result;
 }
 
+// ========================================
+// LEADS LANDING WEBCHAT
+// ========================================
+
+const PORTAL_URL = 'https://app.empentia.cat';
+
+export type LandingLeadOrigen =
+  | 'landing-webchat-hero'
+  | 'landing-webchat-pricing-starter'
+  | 'landing-webchat-pricing-pro'
+  | 'landing-webchat-pricing-business'
+  | `landing-webchat-contractar-${'starter' | 'pro' | 'business'}`
+  | 'landing-webchat-cta-final'
+  | 'landing-webchat-calendly';
+
+export interface LandingLeadData {
+  email: string;
+  origen: LandingLeadOrigen;
+  nom_empresa?: string;
+  url_web?: string;
+  nom_contacte?: string;
+  telefon?: string;
+  plataforma?: 'WooCommerce' | 'PrestaShop' | 'Shopify' | 'Web custom' | 'Altra';
+  pla?: 'Starter' | 'Pro' | 'Business';
+  consentiment_rgpd?: boolean;
+}
+
+/**
+ * POST /api/leads/landing - Crea lead des de la landing de webchat
+ * Tots els camps opcionals excepte email i origen.
+ */
+export async function createLandingLead(
+  data: LandingLeadData
+): Promise<{ success: boolean; error?: string }> {
+  const response = await fetch(`${PORTAL_URL}/api/leads/landing`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+
+  const result = await response.json();
+  if (!result.success) {
+    throw new Error(result.error || 'Error enviant formulari');
+  }
+  return result;
+}
+
 /**
  * PATCH /audit/{id}/contact - Actualitza contacte d'una auditoria (complete)
  */

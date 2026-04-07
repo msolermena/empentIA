@@ -4,22 +4,22 @@ import { useState } from "react";
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
 
-import { HeroSection } from "./_components/HeroSection";
-import { SocialProofBar } from "./_components/SocialProofBar";
-import { ProblemaSection } from "./_components/ProblemaSection";
-import { DemoSection } from "./_components/DemoSection";
-import { FuncionalitatsSection } from "./_components/FuncionalitatsSection";
-import { PricingSection } from "./_components/PricingSection";
-import { CasosUsSection } from "./_components/CasosUsSection";
-import { RoiSection } from "./_components/RoiSection";
-import { ComSActivaSection } from "./_components/ComSActivaSection";
-import { FaqSection } from "./_components/FaqSection";
-import { CtaFinalSection } from "./_components/CtaFinalSection";
-import { ContractacioModal } from "./_components/ContractacioModal";
+import { HeroSection } from "@/app/webchat/_components/HeroSection";
+import { SocialProofBar } from "@/app/webchat/_components/SocialProofBar";
+import { ProblemaSection } from "@/app/webchat/_components/ProblemaSection";
+import { DemoSection } from "@/app/webchat/_components/DemoSection";
+import { FuncionalitatsSection } from "@/app/webchat/_components/FuncionalitatsSection";
+import { PricingSection } from "@/app/webchat/_components/PricingSection";
+import { CasosUsSection } from "@/app/webchat/_components/CasosUsSection";
+import { RoiSection } from "@/app/webchat/_components/RoiSection";
+import { ComSActivaSection } from "@/app/webchat/_components/ComSActivaSection";
+import { FaqSection } from "@/app/webchat/_components/FaqSection";
+import { CtaFinalSection } from "@/app/webchat/_components/CtaFinalSection";
+import { ContractacioModal } from "@/app/webchat/_components/ContractacioModal";
 
-const LANG = "ca" as const;
+const LANG = "es" as const;
 
-export default function WebchatLandingCA() {
+export default function WebchatLandingES() {
   const [modalOpen, setModalOpen] = useState(false);
   const [plaModal, setPlaModal] = useState<"Starter" | "Pro" | "Business">("Pro");
 
@@ -48,29 +48,29 @@ export default function WebchatLandingCA() {
               onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}
               className="hover:text-white"
             >
-              Preus
+              Precios
             </button>
             <button
               type="button"
               onClick={() => document.getElementById("cta-final")?.scrollIntoView({ behavior: "smooth" })}
               className="hover:text-white"
             >
-              Contacte
+              Contacto
             </button>
           </nav>
 
           <div className="flex items-center gap-3">
             {/* Selector idioma */}
             <div className="flex items-center rounded-lg border border-slate-700 text-xs">
-              <span className="rounded-l-lg bg-slate-800 px-2.5 py-1.5 font-semibold text-white">
-                CA
-              </span>
               <Link
-                href="/es/webchat"
-                className="rounded-r-lg px-2.5 py-1.5 text-slate-500 hover:text-white"
+                href="/webchat"
+                className="rounded-l-lg px-2.5 py-1.5 text-slate-500 hover:text-white"
               >
-                ES
+                CA
               </Link>
+              <span className="rounded-r-lg bg-slate-800 px-2.5 py-1.5 font-semibold text-white">
+                ES
+              </span>
             </div>
 
             <button
@@ -78,7 +78,7 @@ export default function WebchatLandingCA() {
               onClick={() => openModal()}
               className="hidden rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-500 md:block"
             >
-              Activa ara
+              Actívalo ahora
             </button>
           </div>
         </div>
@@ -103,13 +103,13 @@ export default function WebchatLandingCA() {
       <footer className="border-t border-slate-800 px-6 py-10">
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 text-center text-sm text-slate-600 md:flex-row md:justify-between md:text-left">
           <Logo size="sm" className="opacity-40" />
-          <p>© {new Date().getFullYear()} empentIA. Tots els drets reservats.</p>
+          <p>© {new Date().getFullYear()} empentIA. Todos los derechos reservados.</p>
           <div className="flex gap-4">
             <Link href="/legal" className="hover:text-slate-400">
-              Avís legal
+              Aviso legal
             </Link>
             <Link href="/privacy" className="hover:text-slate-400">
-              Privacitat
+              Privacidad
             </Link>
             <Link href="/cookies" className="hover:text-slate-400">
               Cookies
