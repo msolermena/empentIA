@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { createLead } from "@/lib/api";
+import { createLandingLead } from "@/lib/api";
 import {
   ArrowRight,
   CheckCircle2,
@@ -80,12 +80,11 @@ function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
     setError(null);
     
     try {
-      await createLead({
-        nom: formData.name,
+      await createLandingLead({
         email: formData.email,
+        origen: "landing-home-contacte",
+        nom_contacte: formData.name || undefined,
         telefon: formData.phone || undefined,
-        preferencia_contacte: formData.preferredContact,
-        missatge: formData.description || undefined,
       });
       setIsSubmitting(false);
       setSubmitted(true);

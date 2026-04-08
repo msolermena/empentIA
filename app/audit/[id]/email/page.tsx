@@ -15,7 +15,7 @@ import {
   User,
   Briefcase
 } from "lucide-react";
-import { generateAudit, ContactData } from "@/lib/api";
+import { generateAudit, ContactData, createLandingLead } from "@/lib/api";
 
 export default function EmailPage() {
   const params = useParams();
@@ -73,6 +73,13 @@ export default function EmailPage() {
       };
       
       const data = await generateAudit(auditId, undefined, contactData);
+
+      // Registra lead al portal (fire-and-forget, no bloqueja el flux d'audit)
+      createLandingLead({
+        email,
+        origen: "landing-auditoria-email",
+        nom_contacte: nom.trim() || undefined,
+      }).catch(() => {/* no crític */});
 
       if (data.success) {
         router.push(`/audit/${auditId}/complete`);

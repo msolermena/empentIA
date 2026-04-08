@@ -589,13 +589,19 @@ export async function createLead(
 const PORTAL_URL = 'https://app.empentia.cat';
 
 export type LandingLeadOrigen =
+  // Landing webchat
   | 'landing-webchat-hero'
   | 'landing-webchat-pricing-starter'
   | 'landing-webchat-pricing-pro'
   | 'landing-webchat-pricing-business'
   | `landing-webchat-contractar-${'starter' | 'pro' | 'business'}`
   | 'landing-webchat-cta-final'
-  | 'landing-webchat-calendly';
+  | 'landing-webchat-calendly'
+  // Home
+  | 'landing-home-contacte'
+  // Audit
+  | 'landing-auditoria-email'
+  | 'landing-auditoria-contacte';
 
 export interface LandingLeadData {
   email: string;

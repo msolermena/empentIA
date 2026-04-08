@@ -22,7 +22,7 @@ import {
   ArrowRight
 } from "lucide-react";
 import { Logo } from "@/components/Logo";
-import { getAudit, updateAuditContact, type InformeV5, type OportunitatInforme } from "@/lib/api";
+import { getAudit, updateAuditContact, createLandingLead, type InformeV5, type OportunitatInforme } from "@/lib/api";
 
 export default function CompletePage() {
   const params = useParams();
@@ -430,6 +430,15 @@ function ContactForm({ auditId, leadNom, leadEmail }: { auditId: string; leadNom
         preferencia_contacte: formData.preferredContact,
         missatge: formData.description || undefined,
       });
+
+      // Registra lead al portal (fire-and-forget, no bloqueja el flux d'audit)
+      createLandingLead({
+        email: formData.email,
+        origen: "landing-auditoria-contacte",
+        nom_contacte: formData.name || undefined,
+        telefon: formData.phone || undefined,
+      }).catch(() => {/* no crític */});
+
       setIsSubmitted(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error enviant el formulari. Torna-ho a provar.");
