@@ -606,6 +606,7 @@ export type LandingLeadOrigen =
 export interface LandingLeadData {
   email: string;
   origen: LandingLeadOrigen;
+  audit_id?: string;        // si present, el portal fa upsert en lloc de crear nou lead
   nom_empresa?: string;
   url_web?: string;
   nom_contacte?: string;

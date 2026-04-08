@@ -431,10 +431,12 @@ function ContactForm({ auditId, leadNom, leadEmail }: { auditId: string; leadNom
         missatge: formData.description || undefined,
       });
 
-      // Registra lead al portal (fire-and-forget, no bloqueja el flux d'audit)
+      // Actualitza lead al portal via audit_id (upsert, no crea lead nou)
+      // Si l'email ha canviat respecte al pas anterior, el portal rep ambdós
       createLandingLead({
         email: formData.email,
         origen: "landing-auditoria-contacte",
+        audit_id: auditId,
         nom_contacte: formData.name || undefined,
         telefon: formData.phone || undefined,
       }).catch(() => {/* no crític */});

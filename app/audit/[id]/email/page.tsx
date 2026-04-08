@@ -74,10 +74,12 @@ export default function EmailPage() {
       
       const data = await generateAudit(auditId, undefined, contactData);
 
-      // Registra lead al portal (fire-and-forget, no bloqueja el flux d'audit)
+      // Registra/actualitza lead al portal (fire-and-forget, no bloqueja el flux d'audit)
+      // audit_id permet al portal fer upsert en lloc de crear un lead nou
       createLandingLead({
         email,
         origen: "landing-auditoria-email",
+        audit_id: auditId,
         nom_contacte: nom.trim() || undefined,
       }).catch(() => {/* no crític */});
 
