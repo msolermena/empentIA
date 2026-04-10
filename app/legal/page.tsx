@@ -44,7 +44,7 @@ export default function LegalPage() {
                     hola@empentia.cat
                   </a><br />
                   <strong className="text-slate-200">Telèfon:</strong> 685 615 150<br />
-                  <strong className="text-slate-200">Dominis web:</strong> empentia.cat / app.empentia.cat<br />
+                  <strong className="text-slate-200">Dominis web:</strong> empentia.cat / app.empentia.com<br />
                   <strong className="text-slate-200">Registre Mercantil:</strong> Inscrita al Registre Mercantil de Barcelona,
                   Tom 42643, Foli 64, Secció 8, Full Registral 412814, Inscripció 1
                 </p>
@@ -59,7 +59,7 @@ export default function LegalPage() {
             <CardContent className="space-y-4 text-slate-300">
               <p>
                 El present avís legal regula l&apos;ús i les condicions d&apos;accés als llocs web
-                empentia.cat i app.empentia.cat (d&apos;ara endavant, conjuntament, &quot;el Lloc
+                empentia.cat i app.empentia.com (d&apos;ara endavant, conjuntament, &quot;el Lloc
                 Web&quot;), propietat d&apos;ADVANCED ENERGY CONSULTING SL (d&apos;ara endavant,
                 &quot;empentIA&quot; o &quot;el Titular&quot;).
               </p>

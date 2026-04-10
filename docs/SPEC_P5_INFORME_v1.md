@@ -12,7 +12,7 @@ Dos canvis independents però relacionats:
 1. **C-03 — P5 reformulació completa:** Millorar la pregunta i el placeholder de P5 per activar la reflexió del visitant i capturar necessitats no previstes al catàleg de processos.
 2. **C-04 + C-08 — Informe:** Afegir bloc de resposta quan P5 té contingut no matchejat, i corregir el prompt de la secció `recomanacio`.
 
-Aquests canvis **no afecten P1, P2, P3 ni P4**. No afecten el portal (app.empentia.cat).
+Aquests canvis **no afecten P1, P2, P3 ni P4**. No afecten el portal (app.empentia.com).
 
 ---
 
@@ -148,7 +148,7 @@ com si parléssim amb el gerent cara a cara.
 ## El que NO fa aquesta spec
 
 - Cap canvi a P1, P2, P3 ni P4
-- Cap canvi al portal (app.empentia.cat)
+- Cap canvi al portal (app.empentia.com)
 - Cap canvi a la landing (empentia.cat) — cobert per SPEC_LANDING_PREVIEW_v2.md
 - Cap canvi a la lògica de match de P5 (algorisme) — només robustesa i gestió del cas feble
 - Cap canvi als plans/pricing

@@ -52,7 +52,7 @@ export default function CookiesPage() {
                   <ul className="list-disc space-y-2 pl-6 text-sm">
                     <li>
                       <strong className="text-slate-200">Sessió d&apos;autenticació:</strong> Mantenir la sessió
-                      de l&apos;usuari al portal (app.empentia.cat). Proveïdor: Supabase. Durada: sessió.
+                      de l&apos;usuari al portal (app.empentia.com). Proveïdor: Supabase. Durada: sessió.
                     </li>
                     <li>
                       <strong className="text-slate-200">Preferències:</strong> Recordar les preferències

@@ -5,7 +5,16 @@
       "Bash(npx tsc:*)",
       "Bash(npx:*)",
       "Bash(npm run:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(./node_modules/.bin/tsc --noEmit)",
+      "Bash(node_modules/.bin/next build:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git config:*)",
+      "Bash(gh run:*)",
+      "Bash(git push:*)",
+      "Bash(xargs grep:*)",
+      "Bash(curl:*)"
     ]
   }
 }

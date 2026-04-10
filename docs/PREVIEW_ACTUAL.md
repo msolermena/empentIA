@@ -212,7 +212,7 @@
 │     automatitzacions i agents IA en un sol lloc.                     │
 │                                                                      │
 │  ┌───────────────────────┐    ┌──────────────────────────────┐      │
-│  │                       │    │ ● ● ●  app.empentia.cat      │      │
+│  │                       │    │ ● ● ●  app.empentia.com      │      │
 │  │ 📊 Impacte mesurable  │    │ ┌──────────────────────────┐ │      │
 │  │    Visualitza quantes │    │ │                          │ │      │
 │  │    hores estalvies... │    │ │   [screenshot dashboard] │ │      │

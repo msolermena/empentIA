@@ -586,7 +586,7 @@ export async function createLead(
 // LEADS LANDING WEBCHAT
 // ========================================
 
-const PORTAL_URL = 'https://app.empentia.cat';
+const PORTAL_URL = 'https://app.empentia.com';
 
 export type LandingLeadOrigen =
   // Landing webchat

@@ -369,7 +369,7 @@ Estil dels claims en revisió: card slate-800, border amber-700 subtil (per dife
 
 - Cap canvi a l'auditoria (P1-P5)
 - Cap canvi a l'informe
-- Cap canvi al portal (app.empentia.cat)
+- Cap canvi al portal (app.empentia.com)
 - Cap canvi als plans/pricing (pendent de decisions finals)
 - Cap canvi al navbar ni footer
 

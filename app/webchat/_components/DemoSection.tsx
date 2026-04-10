@@ -48,7 +48,7 @@ export function DemoSection({ lang }: DemoSectionProps) {
 
     const script = document.createElement("script");
     script.id = "empentia-widget-script";
-    script.src = "https://app.empentia.cat/widget.js";
+    script.src = "https://app.empentia.com/widget.js";
     script.setAttribute("data-instance-key", INSTANCE_KEY);
     script.setAttribute("data-mode", "inline");
     script.setAttribute("data-container", "empentia-demo-container");

@@ -74,7 +74,7 @@ export default function PrivacyPage() {
               </div>
 
               <div>
-                <h4 className="mb-2 font-semibold text-slate-200">2.2. Portal de client (app.empentia.cat)</h4>
+                <h4 className="mb-2 font-semibold text-slate-200">2.2. Portal de client (app.empentia.com)</h4>
                 <ul className="list-disc space-y-2 pl-6">
                   <li>
                     <strong className="text-slate-200">Dades recollides:</strong> Correu electrònic, nom, dades de

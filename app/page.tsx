@@ -755,7 +755,7 @@ export default function Home() {
               Contacte
             </button>
             <a 
-              href="https://app.empentia.cat" 
+              href="https://app.empentia.com"
               className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-sm font-medium text-emerald-400 transition-all hover:bg-emerald-500/20"
             >
               Accés clients
@@ -1019,7 +1019,7 @@ export default function Home() {
                     <div className="h-3 w-3 rounded-full bg-yellow-500/60" />
                     <div className="h-3 w-3 rounded-full bg-green-500/60" />
                   </div>
-                  <span className="ml-2 text-xs text-slate-500">app.empentia.cat</span>
+                  <span className="ml-2 text-xs text-slate-500">app.empentia.com</span>
                 </div>
                 <img 
                   src="/images/screenshots/dashboard.png" 
