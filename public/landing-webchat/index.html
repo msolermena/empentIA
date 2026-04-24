@@ -71,29 +71,17 @@ nav {
   margin: 0 auto;
 }
 .logo {
-  font-family: 'Fraunces', serif;
-  font-weight: 600;
-  font-size: 22px;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-  text-decoration: none;
   display: flex;
   align-items: center;
-  gap: 8px;
+  text-decoration: none;
 }
-.logo-mark {
-  width: 28px;
-  height: 28px;
-  background: var(--ink);
-  border-radius: 50%;
-  position: relative;
+.logo img {
+  height: 32px;
+  width: auto;
+  display: block;
 }
-.logo-mark::after {
-  content: '';
-  position: absolute;
-  inset: 6px;
-  border-radius: 50%;
-  border: 2px solid var(--bg);
+footer .logo img {
+  height: 36px;
 }
 .nav-links {
   display: flex;
@@ -1770,8 +1758,7 @@ footer {
 <nav>
   <div class="nav-inner">
     <a href="#" class="logo">
-      <span class="logo-mark"></span>
-      empentIA
+      <img src="/images/logo/logo-horizontal.svg" alt="empentIA">
     </a>
     <div class="nav-links">
       <a href="#demo">Demo</a>
@@ -2771,8 +2758,7 @@ footer {
     <div class="footer-inner">
       <div>
         <a href="#" class="logo">
-          <span class="logo-mark"></span>
-          empentIA
+          <img src="/images/logo/logo-horizontal.svg" alt="empentIA">
         </a>
         <p class="footer-tag">Agents d'intel·ligència artificial per a botigues online que volen vendre més sense contractar més.</p>
       </div>
