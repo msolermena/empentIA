@@ -1927,7 +1927,13 @@ footer {
 .plan-card.featured .plan-price { color: var(--bg); }
 .plan-card .plan-price-period { margin-bottom: 20px; }
 .plan-card.featured .plan-price-period { color: rgba(255,255,255,0.6); }
-.plan-card .plan-badge { margin-bottom: 0; }
+.plan-card .plan-badge {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
 .plan-card-features {
   list-style: none;
   padding: 0;
@@ -2430,7 +2436,7 @@ footer {
 
       <!-- Pro (featured) -->
       <div class="plan-card featured">
-        <span class="plan-badge" style="margin-bottom: 8px;">Més popular</span>
+        <span class="plan-badge">Més popular</span>
         <span class="plan-name">Pro</span>
         <span class="plan-price">79€</span>
         <span class="plan-price-period">/mes · sense IVA</span>
