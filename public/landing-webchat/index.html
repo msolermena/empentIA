@@ -1918,6 +1918,9 @@ footer {
   border: 2px solid #8fbf9f;
   box-shadow: 0 4px 24px rgba(143, 191, 159, 0.18);
 }
+.plan-card.featured .plan-name { color: var(--ink); }
+.plan-card.featured .plan-price { color: var(--ink); }
+.plan-card.featured .plan-price-period { color: var(--ink-mute); }
 .plan-card .plan-name {
   font-size: 20px;
   margin-bottom: 4px;
@@ -1925,6 +1928,15 @@ footer {
 .plan-card .plan-price { font-size: 32px; }
 .plan-card .plan-price-period { margin-bottom: 20px; }
 .plan-card .plan-badge { display: none; }
+.plan-card-popular-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #2d5a3d;
+  margin-bottom: 8px;
+  display: block;
+}
 .plan-card-features {
   list-style: none;
   padding: 0;
@@ -2424,7 +2436,7 @@ footer {
 
       <!-- Pro (featured) -->
       <div class="plan-card featured">
-        <span class="plan-badge">Més popular</span>
+        <span class="plan-card-popular-label">Més popular</span>
         <span class="plan-name">Pro</span>
         <span class="plan-price">79€</span>
         <span class="plan-price-period">/mes · sense IVA</span>
