@@ -1895,6 +1895,122 @@ footer {
   .problem-num .small { font-size: 24px; }
   .footer-inner { grid-template-columns: 1fr; }
 }
+
+/* ===== PLAN CARDS ===== */
+.plan-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.plan-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+.plan-card.featured {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+}
+.plan-card .plan-name {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+.plan-card.featured .plan-name { color: var(--bg); }
+.plan-card .plan-price { font-size: 32px; }
+.plan-card.featured .plan-price { color: var(--bg); }
+.plan-card .plan-price-period { margin-bottom: 20px; }
+.plan-card.featured .plan-price-period { color: rgba(255,255,255,0.6); }
+.plan-card .plan-badge { margin-bottom: 0; }
+.plan-card-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+.plan-card-features li {
+  font-size: 14px;
+  color: var(--ink-soft);
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  line-height: 1.4;
+}
+.plan-card.featured .plan-card-features li { color: rgba(255,255,255,0.75); }
+.plan-card-features li::before {
+  content: "✓";
+  color: var(--positive);
+  font-size: 13px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.plan-card.featured .plan-card-features li::before { color: #8fbf9f; }
+.plan-card .plan-cta { width: 100%; text-align: center; box-sizing: border-box; }
+.plan-card.featured .plan-cta {
+  background: var(--bg);
+  color: var(--ink);
+  border-color: transparent;
+}
+.plan-card.featured .plan-cta:hover { background: rgba(255,255,255,0.85); }
+.plan-card-divider {
+  border: none;
+  border-top: 1px solid var(--line-soft);
+  margin: 0 0 20px;
+}
+.plan-card.featured .plan-card-divider { border-color: rgba(255,255,255,0.15); }
+
+/* Compare toggle */
+.compare-toggle-wrap {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.compare-toggle {
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: 10px 20px;
+  font-size: 14px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.compare-toggle:hover { border-color: var(--ink); color: var(--ink); }
+.compare-toggle .toggle-arrow {
+  display: inline-block;
+  transition: transform 0.3s;
+  font-size: 12px;
+}
+.compare-toggle.open .toggle-arrow { transform: rotate(180deg); }
+
+/* Collapsible compare table */
+.plans-compare {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s ease;
+  margin-bottom: 0;
+}
+.plans-compare.open { grid-template-rows: 1fr; }
+.plans-compare-inner { overflow: hidden; }
+
+@media (max-width: 900px) {
+  .plan-cards { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .plan-cards { grid-template-columns: 1fr; }
+  .plan-card { padding: 22px 18px; }
+}
 </style>
 </head>
 <body>
@@ -2293,220 +2409,303 @@ footer {
     <h2>Transparent des del <em>primer dia.</em></h2>
     <p class="section-intro">Tots els plans inclouen configuració, entrenament i suport. Sense permanència, sense lletra petita.</p>
 
-    <div class="plans-table-wrap">
-      <table class="plans-table">
-        <thead>
-          <tr>
-            <th style="width: 28%;">
-              <span style="font-size: 13px; color: var(--ink-mute);">Escull el teu pla</span>
-            </th>
-            <th>
-              <span class="plan-name">Starter</span>
-              <span class="plan-price">49€</span>
-              <span class="plan-price-period">/mes · sense IVA</span>
-            </th>
-            <th class="featured">
-              <span class="plan-name">Pro</span>
-              <span class="plan-price">79€</span>
-              <span class="plan-price-period">/mes · sense IVA</span>
-              <span class="plan-badge">Més popular</span>
-            </th>
-            <th>
-              <span class="plan-name">Business</span>
-              <span class="plan-price">149€</span>
-              <span class="plan-price-period">/mes · sense IVA</span>
-            </th>
-            <th>
-              <span class="plan-name">Personalitzat</span>
-              <span class="plan-price" style="font-size: 22px;">A mida</span>
-              <span class="plan-price-period">Parlem-ne</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
+    <!-- PLAN CARDS -->
+    <div class="plan-cards">
 
-          <tr class="group-row">
-            <td colspan="5" class="group-label">Converses i ús</td>
-          </tr>
-          <tr>
-            <td><div class="feature-name">Converses incloses/mes</div></td>
-            <td class="cell-val">50</td>
-            <td class="cell-val highlight">100</td>
-            <td class="cell-val highlight">200</td>
-            <td class="cell-val muted">—</td>
-          </tr>
-          <tr>
-            <td><div class="feature-name">Extra per conversa addicional</div></td>
-            <td class="cell-val">0,25€</td>
-            <td class="cell-val">0,25€</td>
-            <td class="cell-val">0,25€</td>
-            <td class="cell-val muted">—</td>
-          </tr>
-          <tr>
-            <td><div class="feature-name">Usuaris del panell</div></td>
-            <td class="cell-val">1</td>
-            <td class="cell-val highlight">3</td>
-            <td class="cell-val highlight">5</td>
-            <td class="cell-val muted">—</td>
-          </tr>
+      <!-- Starter -->
+      <div class="plan-card">
+        <span class="plan-name">Starter</span>
+        <span class="plan-price">49€</span>
+        <span class="plan-price-period">/mes · sense IVA</span>
+        <hr class="plan-card-divider">
+        <ul class="plan-card-features">
+          <li>50 converses incloses/mes</li>
+          <li>1 usuari del panell</li>
+          <li>2 idiomes actius</li>
+          <li>Gestió del coneixement manual + web</li>
+          <li>Suport per ticket · resposta 48h</li>
+        </ul>
+        <a href="#" class="plan-cta outline">Activa Starter</a>
+      </div>
 
-          <tr class="group-row">
-            <td colspan="5" class="group-label">Catàleg i coneixement</td>
-          </tr>
-          <tr>
-            <td><div class="feature-name">Gestió del coneixement</div></td>
-            <td class="cell-val">Manual</td>
-            <td class="cell-val highlight">Automàtic</td>
-            <td class="cell-val highlight">Automàtic</td>
-            <td class="cell-val muted">—</td>
-          </tr>
-          <tr>
-            <td><div class="feature-name">Font d'informació</div></td>
-            <td class="cell-val">Manual + Web</td>
-            <td class="cell-val highlight">+ API eCommerce</td>
-            <td class="cell-val highlight">+ API eCommerce</td>
-            <td class="cell-val muted">—</td>
-          </tr>
+      <!-- Pro (featured) -->
+      <div class="plan-card featured">
+        <span class="plan-badge" style="margin-bottom: 8px;">Més popular</span>
+        <span class="plan-name">Pro</span>
+        <span class="plan-price">79€</span>
+        <span class="plan-price-period">/mes · sense IVA</span>
+        <hr class="plan-card-divider">
+        <ul class="plan-card-features">
+          <li>100 converses incloses/mes</li>
+          <li>3 usuaris del panell</li>
+          <li>4 idiomes · 1 agent extra</li>
+          <li>Pressupostos automàtics i integració carret</li>
+          <li>Implementació assistida · resposta 24h</li>
+        </ul>
+        <a href="#" class="plan-cta">Activa Pro</a>
+      </div>
 
-          <tr class="group-row">
-            <td colspan="5" class="group-label">Agent i personalització</td>
-          </tr>
-          <tr>
-            <td><div class="feature-name">Personalització visual</div></td>
-            <td class="cell-val">Bàsica (colors)</td>
-            <td class="cell-val highlight">Estàndard</td>
-            <td class="cell-val highlight">Completa (CSS custom)</td>
-            <td class="cell-val muted">—</td>
-          </tr>
-          <tr>
-            <td><div class="feature-name">Multi-agent</div></td>
-            <td class="cross">—</td>
-            <td class="cell-val highlight">1 agent extra</td>
-            <td class="cell-val highlight">Fins a 3 agents</td>
-            <td class="cell-val muted">—</td>
-          </tr>
-          <tr>
-            <td><div class="feature-name">Idiomes actius</div></td>
-            <td class="cell-val">2</td>
-            <td class="cell-val highlight">4</td>
-            <td class="cell-val highlight">Il·limitats</td>
-            <td class="cell-val muted">—</td>
-          </tr>
-          <tr>
-            <td><div class="feature-name">Respostes ràpides</div></td>
-            <td class="cell-val">3 fixes</td>
-            <td class="cell-val highlight">Il·limitades</td>
-            <td class="cell-val highlight">
-              Il·limitades + dinàmiques
-              <span class="soon-badge">Properament</span>
-            </td>
-            <td class="cell-val muted">—</td>
-          </tr>
+      <!-- Business -->
+      <div class="plan-card">
+        <span class="plan-name">Business</span>
+        <span class="plan-price">149€</span>
+        <span class="plan-price-period">/mes · sense IVA</span>
+        <hr class="plan-card-divider">
+        <ul class="plan-card-features">
+          <li>200 converses incloses/mes</li>
+          <li>5 usuaris · fins a 3 agents</li>
+          <li>Idiomes il·limitats</li>
+          <li>Personalització completa (CSS custom)</li>
+          <li>Implementació dedicada · resposta 4h</li>
+        </ul>
+        <a href="#" class="plan-cta outline">Activa Business</a>
+      </div>
 
-          <tr class="group-row">
-            <td colspan="5" class="group-label">Accions comercials</td>
-          </tr>
-          <tr>
-            <td><div class="feature-name">Alertes per lead rebut</div></td>
-            <td class="cell-val">Email</td>
-            <td class="cell-val highlight">Email + panell</td>
-            <td class="cell-val highlight">
-              Email + panell + webhook
-              <span class="soon-badge">Properament</span>
-            </td>
-            <td class="cell-val muted">—</td>
-          </tr>
-          <tr>
-            <td><div class="feature-name">Pressupostos automàtics</div></td>
-            <td class="cross">—</td>
-            <td class="check">✓</td>
-            <td class="check">✓</td>
-            <td class="cell-val muted">—</td>
-          </tr>
-          <tr>
-            <td><div class="feature-name">Integració carret</div></td>
-            <td class="cross">—</td>
-            <td class="check">✓</td>
-            <td class="check">✓</td>
-            <td class="cell-val muted">—</td>
-          </tr>
+      <!-- Personalitzat -->
+      <div class="plan-card">
+        <span class="plan-name">Personalitzat</span>
+        <span class="plan-price" style="font-size: 24px; margin-top: 4px;">A mida</span>
+        <span class="plan-price-period">Parlem-ne</span>
+        <hr class="plan-card-divider">
+        <ul class="plan-card-features">
+          <li>Converses i usuaris sense límit</li>
+          <li>Per a cadenes i franquícies</li>
+          <li>Integracions específiques</li>
+          <li>SLA i suport dedicat</li>
+          <li>Facturació personalitzada</li>
+        </ul>
+        <a href="#cta" class="plan-cta outline">Parlem</a>
+      </div>
 
-          <tr class="group-row">
-            <td colspan="5" class="group-label">Dades i historial</td>
-          </tr>
-          <tr>
-            <td><div class="feature-name">Historial de converses</div></td>
-            <td class="cell-val">60 dies</td>
-            <td class="cell-val highlight">180 dies</td>
-            <td class="cell-val highlight">Complet</td>
-            <td class="cell-val muted">—</td>
-          </tr>
-          <tr>
-            <td><div class="feature-name">Mètriques i analytics</div></td>
-            <td class="cell-val">Bàsiques</td>
-            <td class="cell-val highlight">Completes</td>
-            <td class="cell-val highlight">Completes + exportació</td>
-            <td class="cell-val muted">—</td>
-          </tr>
-          <tr>
-            <td><div class="feature-name">Exportació de leads</div></td>
-            <td class="cell-val">CSV</td>
-            <td class="cell-val highlight">
-              CSV + Webhook
-              <span class="soon-badge">Properament</span>
-            </td>
-            <td class="cell-val highlight">
-              CSV + Webhook + CRM
-              <span class="soon-badge">Properament</span>
-            </td>
-            <td class="cell-val muted">—</td>
-          </tr>
-          <tr>
-            <td><div class="feature-name">Informe mensual</div></td>
-            <td class="cross">—</td>
-            <td class="cell-val highlight">
-              PDF automàtic
-              <span class="soon-badge">Properament</span>
-            </td>
-            <td class="cell-val highlight">
-              PDF + reunió trimestral
-              <span class="soon-badge">Properament</span>
-            </td>
-            <td class="cell-val muted">—</td>
-          </tr>
-
-          <tr class="group-row">
-            <td colspan="5" class="group-label">Suport</td>
-          </tr>
-          <tr>
-            <td><div class="feature-name">Suport implementació</div></td>
-            <td class="cell-val">Documentació + ticket</td>
-            <td class="cell-val highlight">Implementació assistida</td>
-            <td class="cell-val highlight">Implementació dedicada</td>
-            <td class="cell-val muted">—</td>
-          </tr>
-          <tr>
-            <td><div class="feature-name">SLA resposta suport</div></td>
-            <td class="cell-val">48h</td>
-            <td class="cell-val highlight">24h</td>
-            <td class="cell-val highlight">4h</td>
-            <td class="cell-val muted">—</td>
-          </tr>
-
-        </tbody>
-        <tfoot>
-          <tr>
-            <td></td>
-            <td><a href="#" class="plan-cta outline">Activa Starter</a></td>
-            <td><a href="#" class="plan-cta">Activa Pro</a></td>
-            <td><a href="#" class="plan-cta outline">Activa Business</a></td>
-            <td><a href="#cta" class="plan-cta outline">Parlem</a></td>
-          </tr>
-        </tfoot>
-      </table>
     </div>
 
-    <div class="guarantee-strip">
+    <!-- TOGGLE COMPARACIÓ -->
+    <div class="compare-toggle-wrap">
+      <button class="compare-toggle" id="compareToggle" aria-expanded="false">
+        Veure comparació completa
+        <span class="toggle-arrow">▾</span>
+      </button>
+    </div>
+
+    <!-- TAULA COMPARATIVA (desplegable) -->
+    <div class="plans-compare" id="plansCompare" aria-hidden="true">
+      <div class="plans-compare-inner">
+        <div class="plans-table-wrap" style="margin-bottom: 0;">
+          <table class="plans-table">
+            <thead>
+              <tr>
+                <th style="width: 28%;">
+                  <span style="font-size: 13px; color: var(--ink-mute);">Escull el teu pla</span>
+                </th>
+                <th>
+                  <span class="plan-name">Starter</span>
+                  <span class="plan-price">49€</span>
+                  <span class="plan-price-period">/mes · sense IVA</span>
+                </th>
+                <th class="featured">
+                  <span class="plan-name">Pro</span>
+                  <span class="plan-price">79€</span>
+                  <span class="plan-price-period">/mes · sense IVA</span>
+                  <span class="plan-badge">Més popular</span>
+                </th>
+                <th>
+                  <span class="plan-name">Business</span>
+                  <span class="plan-price">149€</span>
+                  <span class="plan-price-period">/mes · sense IVA</span>
+                </th>
+                <th>
+                  <span class="plan-name">Personalitzat</span>
+                  <span class="plan-price" style="font-size: 22px;">A mida</span>
+                  <span class="plan-price-period">Parlem-ne</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr class="group-row">
+                <td colspan="5" class="group-label">Converses i ús</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Converses incloses/mes</div></td>
+                <td class="cell-val">50</td>
+                <td class="cell-val highlight">100</td>
+                <td class="cell-val highlight">200</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Extra per conversa addicional</div></td>
+                <td class="cell-val">0,25€</td>
+                <td class="cell-val">0,25€</td>
+                <td class="cell-val">0,25€</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Usuaris del panell</div></td>
+                <td class="cell-val">1</td>
+                <td class="cell-val highlight">3</td>
+                <td class="cell-val highlight">5</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+
+              <tr class="group-row">
+                <td colspan="5" class="group-label">Catàleg i coneixement</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Gestió del coneixement</div></td>
+                <td class="cell-val">Manual</td>
+                <td class="cell-val highlight">Automàtic</td>
+                <td class="cell-val highlight">Automàtic</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Font d'informació</div></td>
+                <td class="cell-val">Manual + Web</td>
+                <td class="cell-val highlight">+ API eCommerce</td>
+                <td class="cell-val highlight">+ API eCommerce</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+
+              <tr class="group-row">
+                <td colspan="5" class="group-label">Agent i personalització</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Personalització visual</div></td>
+                <td class="cell-val">Bàsica (colors)</td>
+                <td class="cell-val highlight">Estàndard</td>
+                <td class="cell-val highlight">Completa (CSS custom)</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Multi-agent</div></td>
+                <td class="cross">—</td>
+                <td class="cell-val highlight">1 agent extra</td>
+                <td class="cell-val highlight">Fins a 3 agents</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Idiomes actius</div></td>
+                <td class="cell-val">2</td>
+                <td class="cell-val highlight">4</td>
+                <td class="cell-val highlight">Il·limitats</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Respostes ràpides</div></td>
+                <td class="cell-val">3 fixes</td>
+                <td class="cell-val highlight">Il·limitades</td>
+                <td class="cell-val highlight">
+                  Il·limitades + dinàmiques
+                  <span class="soon-badge">Properament</span>
+                </td>
+                <td class="cell-val muted">—</td>
+              </tr>
+
+              <tr class="group-row">
+                <td colspan="5" class="group-label">Accions comercials</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Alertes per lead rebut</div></td>
+                <td class="cell-val">Email</td>
+                <td class="cell-val highlight">Email + panell</td>
+                <td class="cell-val highlight">
+                  Email + panell + webhook
+                  <span class="soon-badge">Properament</span>
+                </td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Pressupostos automàtics</div></td>
+                <td class="cross">—</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Integració carret</div></td>
+                <td class="cross">—</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+
+              <tr class="group-row">
+                <td colspan="5" class="group-label">Dades i historial</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Historial de converses</div></td>
+                <td class="cell-val">60 dies</td>
+                <td class="cell-val highlight">180 dies</td>
+                <td class="cell-val highlight">Complet</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Mètriques i analytics</div></td>
+                <td class="cell-val">Bàsiques</td>
+                <td class="cell-val highlight">Completes</td>
+                <td class="cell-val highlight">Completes + exportació</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Exportació de leads</div></td>
+                <td class="cell-val">CSV</td>
+                <td class="cell-val highlight">
+                  CSV + Webhook
+                  <span class="soon-badge">Properament</span>
+                </td>
+                <td class="cell-val highlight">
+                  CSV + Webhook + CRM
+                  <span class="soon-badge">Properament</span>
+                </td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Informe mensual</div></td>
+                <td class="cross">—</td>
+                <td class="cell-val highlight">
+                  PDF automàtic
+                  <span class="soon-badge">Properament</span>
+                </td>
+                <td class="cell-val highlight">
+                  PDF + reunió trimestral
+                  <span class="soon-badge">Properament</span>
+                </td>
+                <td class="cell-val muted">—</td>
+              </tr>
+
+              <tr class="group-row">
+                <td colspan="5" class="group-label">Suport</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Suport implementació</div></td>
+                <td class="cell-val">Documentació + ticket</td>
+                <td class="cell-val highlight">Implementació assistida</td>
+                <td class="cell-val highlight">Implementació dedicada</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">SLA resposta suport</div></td>
+                <td class="cell-val">48h</td>
+                <td class="cell-val highlight">24h</td>
+                <td class="cell-val highlight">4h</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+
+            </tbody>
+            <tfoot>
+              <tr>
+                <td></td>
+                <td><a href="#" class="plan-cta outline">Activa Starter</a></td>
+                <td><a href="#" class="plan-cta">Activa Pro</a></td>
+                <td><a href="#" class="plan-cta outline">Activa Business</a></td>
+                <td><a href="#cta" class="plan-cta outline">Parlem</a></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="guarantee-strip" style="margin-top: 40px;">
       <span class="guarantee-item">Sense permanència</span>
       <span class="guarantee-item">Cancel·lació immediata</span>
       <span class="guarantee-item">Operatiu en 48h o no pagues</span>
@@ -2947,6 +3146,20 @@ document.querySelectorAll('.faq-item').forEach(item => {
     item.classList.toggle('open');
   });
 });
+
+const compareToggle = document.getElementById('compareToggle');
+const plansCompare = document.getElementById('plansCompare');
+if (compareToggle && plansCompare) {
+  compareToggle.addEventListener('click', () => {
+    const isOpen = plansCompare.classList.toggle('open');
+    compareToggle.classList.toggle('open', isOpen);
+    compareToggle.setAttribute('aria-expanded', isOpen);
+    plansCompare.setAttribute('aria-hidden', !isOpen);
+    compareToggle.childNodes[0].textContent = isOpen
+      ? 'Amagar comparació '
+      : 'Veure comparació completa ';
+  });
+}
 </script>
 
 <script src="/landing-webchat/cookie-consent.js" defer></script>
