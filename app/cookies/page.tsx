@@ -1,5 +1,9 @@
 import { Logo } from "@/components/Logo";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  CookiePreferencesButton,
+  CookieResetButton,
+} from "@/components/CookiePreferencesButton";
 import Link from "next/link";
 
 export const metadata = {
@@ -81,13 +85,44 @@ export default function CookiesPage() {
 
           <Card className="glass-card border-emerald-500/10">
             <CardHeader>
-              <CardTitle>3. Com gestionar les cookies</CardTitle>
+              <CardTitle>3. Mecanisme de consentiment</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-slate-300">
               <p>
-                L&apos;usuari pot configurar el seu navegador per bloquejar o eliminar les cookies
-                en qualsevol moment. A continuació, s&apos;indiquen els enllaços de configuració
-                dels navegadors més habituals:
+                En la primera visita al Lloc Web es mostra un avís de cookies amb tres
+                opcions amb la mateixa rellevància visual: <strong className="text-slate-200">Acceptar
+                totes</strong>, <strong className="text-slate-200">Rebutjar totes</strong> i{" "}
+                <strong className="text-slate-200">Configurar</strong>. Les cookies no tècniques
+                no s&apos;activen fins que l&apos;usuari n&apos;atorga consentiment explícit.
+              </p>
+              <p>
+                El consentiment es desa al dispositiu de l&apos;usuari (localStorage i una
+                cookie pròpia anomenada <code className="rounded bg-slate-800 px-1.5 py-0.5 text-sm text-emerald-400">empentia_cc</code>{" "}
+                de durada 12 mesos) i inclou la versió de la política acceptada, la
+                marca de temps i les categories activades. Transcorreguts 12 mesos, o
+                si la versió de la política canvia, es torna a sol·licitar consentiment.
+              </p>
+              <p>
+                L&apos;usuari pot <strong className="text-slate-200">modificar o revocar</strong>{" "}
+                el seu consentiment en qualsevol moment des d&apos;aquesta mateixa pàgina,
+                sense que això afecti la licitud del tractament anterior.
+              </p>
+              <div className="flex flex-wrap gap-3 rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-4">
+                <CookiePreferencesButton />
+                <CookieResetButton />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="glass-card border-emerald-500/10">
+            <CardHeader>
+              <CardTitle>4. Configuració del navegador</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4 text-slate-300">
+              <p>
+                Addicionalment, l&apos;usuari pot configurar el seu navegador per bloquejar o
+                eliminar les cookies. A continuació, s&apos;indiquen els enllaços de
+                configuració dels navegadors més habituals:
               </p>
               <ul className="list-disc space-y-2 pl-6">
                 <li>
@@ -116,7 +151,7 @@ export default function CookiesPage() {
 
           <Card className="glass-card border-emerald-500/10">
             <CardHeader>
-              <CardTitle>4. Actualització</CardTitle>
+              <CardTitle>5. Actualització</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-slate-300">
               <p>
