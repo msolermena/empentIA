@@ -1750,6 +1750,151 @@ footer {
 .fade-up-2 { animation-delay: 0.25s; }
 .fade-up-3 { animation-delay: 0.4s; }
 .fade-up-4 { animation-delay: 0.55s; }
+
+/* ===== MOBILE (≤640px) ===== */
+@media (max-width: 640px) {
+  .container { padding: 0 20px; }
+
+  /* NAV */
+  .nav-inner { padding: 14px 20px; }
+  .nav-links { gap: 14px; }
+  .logo img { height: 26px; }
+  .nav-links .nav-client,
+  .nav-links .nav-lang { display: none; }
+  .nav-cta { padding: 8px 14px; font-size: 13px !important; }
+
+  /* SECTION spacing */
+  section,
+  .plans-section,
+  .modules-section,
+  .services-section,
+  .dashboard-section,
+  .testimonials,
+  .not-for,
+  .founder,
+  .faq-section,
+  .client-access { padding: 64px 0; }
+  .final-cta { padding: 80px 0; }
+  .logos-strip { padding: 44px 0; }
+
+  /* TYPO for section intros */
+  .section-intro { font-size: 16px; margin-bottom: 40px; }
+
+  /* HERO */
+  .hero { padding: 56px 0 48px; }
+  .hero-grid { gap: 40px; }
+  .hero-sub { font-size: 17px; margin-bottom: 28px; }
+  .hero-ctas { gap: 10px; margin-bottom: 32px; }
+  .btn { padding: 14px 22px; font-size: 14px; }
+  .hero-stats { gap: 20px 28px; padding-top: 24px; }
+  .stat-num { font-size: 26px; }
+  .hero-visual { padding: 0; }
+  .browser-content { padding: 20px 16px 16px; min-height: 340px; }
+  .chat-widget {
+    width: calc(100% - 32px);
+    max-width: 280px;
+    right: 16px;
+    bottom: 16px;
+  }
+
+  /* LOGOS */
+  .logos-row { gap: 28px 36px; }
+  .logo-item { font-size: 16px; }
+  .logo-item.alt { font-size: 12px; }
+
+  /* PROBLEM */
+  .problem-card { padding: 28px 24px; }
+  .problem-num { font-size: 54px; }
+  .problem-num .small { font-size: 28px; }
+
+  /* DEMO */
+  .demo-inner { gap: 48px; }
+  .demo-box { padding: 28px 24px; min-height: 380px; }
+  .demo-box > .chat-header { margin: -28px -24px 16px !important; }
+  .demo-inner h2[style] { font-size: 32px !important; }
+
+  /* FEATURES */
+  .feature-card { padding: 28px 22px; }
+
+  /* DASHBOARD */
+  .dashboard-grid { gap: 40px; }
+  .dash-header { padding: 14px 18px; }
+  .dash-stat { padding: 14px 12px; }
+  .dash-stat-label { font-size: 10px; letter-spacing: 0.06em; }
+  .dash-stat-val { font-size: 20px; }
+  .dash-chart { padding: 18px; height: 140px; gap: 4px; }
+
+  /* PLANS TABLE — keep horizontal scroll; reduce internal padding */
+  .plans-table th, .plans-table td { padding: 16px 18px; }
+  .plans-table { min-width: 720px; }
+  .guarantee-strip {
+    border-radius: 20px;
+    padding: 20px 22px;
+    gap: 12px 22px;
+    font-size: 13px;
+  }
+
+  /* MODULES */
+  .modules-header { margin-bottom: 40px; gap: 20px; }
+  .module-card { padding: 28px 24px; }
+  .module-title { font-size: 20px; }
+  .bundle-example { padding: 24px; margin-top: 44px; }
+  .bundle-total-val { font-size: 34px; }
+
+  /* SERVICES */
+  .service-card { padding: 32px 24px; }
+  .service-title { font-size: 26px; }
+  .service-price-val { font-size: 34px; }
+
+  /* PROCESS */
+  .step-num { width: 52px; height: 52px; font-size: 18px; margin-bottom: 18px; }
+  .step-title { font-size: 22px; }
+
+  /* TESTIMONIALS */
+  .testi-card { padding: 26px 22px; }
+  .testi-quote { font-size: 17px; margin-bottom: 22px; }
+
+  /* NOT FOR */
+  .nf-card { padding: 28px 24px; }
+
+  /* FOUNDER */
+  .founder-inner { gap: 28px; }
+  .founder-photo { max-width: 160px; }
+  .founder-quote { font-size: 20px; }
+
+  /* FAQ */
+  .faq-grid { gap: 32px; }
+  .faq-q { font-size: 16px; }
+  .faq-a { font-size: 14.5px; }
+
+  /* CLIENT ACCESS */
+  .ca-box { padding: 36px 24px; gap: 32px; border-radius: 16px; }
+  .ca-title { font-size: 28px; }
+  .ca-mock { padding: 20px; }
+
+  /* FINAL CTA */
+  .final-cta p { font-size: 17px; margin-bottom: 32px; }
+  .final-ctas { flex-direction: column; gap: 10px; width: 100%; }
+  .final-ctas .btn { width: 100%; justify-content: center; }
+
+  /* FOOTER */
+  .footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 32px; }
+  footer .logo img { height: 30px; }
+  .footer-tag { margin-top: 12px; }
+}
+
+/* ===== VERY SMALL (≤400px) ===== */
+@media (max-width: 400px) {
+  .container { padding: 0 16px; }
+  .nav-inner { padding: 12px 16px; }
+  .hero-stats { gap: 16px 20px; }
+  .stat-num { font-size: 22px; }
+  .stat-label { font-size: 11px; }
+  .btn { padding: 13px 18px; font-size: 13.5px; }
+  .problem-num { font-size: 46px; }
+  .problem-num .small { font-size: 24px; }
+  .footer-inner { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
