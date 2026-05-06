@@ -30,7 +30,15 @@ nav { position: sticky; top: 0; z-index: 100; background: rgba(250,250,247,0.88)
 .nav-back { font-size: 13.5px !important; color: var(--ink-mute) !important; }
 .nav-cta { background: var(--ch); color: white !important; padding: 9px 20px; border-radius: 100px; font-size: 14px !important; font-weight: 500; }
 .nav-cta:hover { opacity: .88; }
-@media (max-width: 900px) { .nav-links a:not(.nav-cta):not(.nav-back) { display: none; } }
+.nav-dropdown { position: relative; }
+.dropdown-btn { background: none; border: none; color: var(--ink-soft); font-size: 14.5px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 4px; padding: 0; font-family: 'Instrument Sans', sans-serif; transition: color .2s; }
+.dropdown-btn:hover { color: var(--ink); }
+.dropdown-menu { position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%); background: var(--bg-card); border: 1px solid var(--line); border-radius: 16px; padding: 8px; min-width: 210px; box-shadow: 0 8px 32px rgba(0,0,0,.08); opacity: 0; visibility: hidden; transition: all .18s; z-index: 200; }
+.nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; }
+.dropdown-menu a { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; font-size: 14px; font-weight: 500; color: var(--ink); text-decoration: none; transition: background .15s; }
+.dropdown-menu a:hover { background: var(--bg-alt); }
+.dropdown-icon { font-size: 18px; width: 28px; text-align: center; }
+@media (max-width: 900px) { .nav-links a:not(.nav-cta):not(.nav-back) { display: none; } .nav-dropdown { display: none; } }
 
 .hero { padding: 100px 0 90px; position: relative; overflow: hidden; }
 .hero::before { content: ''; position: absolute; top: -180px; right: -180px; width: 560px; height: 560px; background: radial-gradient(circle, rgba(154,122,26,0.05) 0%, transparent 70%); pointer-events: none; }
@@ -136,9 +144,18 @@ footer { border-top: 1px solid var(--line); padding: 48px 32px; }
   <div class="nav-inner">
     <a href="/" class="logo"><img src="/images/logo/logo-horizontal.svg" alt="empentIA"></a>
     <div class="nav-links">
-      <a href="/agentes-ia-atencion-cliente/" class="nav-back">← Todos los servicios</a>
-      <a href="#funcionalidades">Funcionalidades</a>
-      <a href="#pricing">Precios</a>
+      <div class="nav-dropdown">
+        <button class="dropdown-btn">Servicios <span style="font-size:10px;margin-left:2px">▾</span></button>
+        <div class="dropdown-menu">
+          <a href="/agentes-ia-atencion-cliente/webchat/"><span class="dropdown-icon">💬</span> Webchat</a>
+          <a href="/agentes-ia-atencion-cliente/whatsapp/"><span class="dropdown-icon">📱</span> WhatsApp</a>
+          <a href="/agentes-ia-atencion-cliente/email/"><span class="dropdown-icon">📧</span> Email</a>
+          <a href="/agentes-ia-atencion-cliente/llamadas/"><span class="dropdown-icon">📞</span> Llamadas</a>
+          <a href="/agentes-ia-atencion-cliente/resenas/"><span class="dropdown-icon">⭐</span> Reseñas</a>
+        </div>
+      </div>
+      <a href="/agentes-ia-atencion-cliente/#por-que">Quiénes somos</a>
+      <a href="#como-funciona">Cómo funciona</a>
       <a href="#pricing" class="nav-cta">Contratar</a>
     </div>
   </div>

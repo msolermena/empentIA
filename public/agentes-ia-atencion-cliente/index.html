@@ -61,8 +61,20 @@ nav {
   font-size: 14px !important; font-weight: 500;
 }
 .nav-cta:hover { background: #2a2a2a !important; }
+
+/* DROPDOWN */
+.nav-dropdown { position: relative; }
+.dropdown-btn { background: none; border: none; color: var(--ink-soft); font-size: 14.5px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 4px; padding: 0; font-family: 'Instrument Sans', sans-serif; transition: color .2s; }
+.dropdown-btn:hover { color: var(--ink); }
+.dropdown-menu { position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%); background: var(--bg-card); border: 1px solid var(--line); border-radius: 16px; padding: 8px; min-width: 210px; box-shadow: 0 8px 32px rgba(0,0,0,.08); opacity: 0; visibility: hidden; transition: all .18s; z-index: 200; }
+.nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; }
+.dropdown-menu a { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; font-size: 14px; font-weight: 500; color: var(--ink); text-decoration: none; transition: background .15s; }
+.dropdown-menu a:hover { background: var(--bg-alt); }
+.dropdown-icon { font-size: 18px; width: 28px; text-align: center; }
+
 @media (max-width: 900px) {
   .nav-links a:not(.nav-cta) { display: none; }
+  .nav-dropdown { display: none; }
 }
 
 /* HERO */
@@ -358,9 +370,18 @@ footer {
       <img src="/images/logo/logo-horizontal.svg" alt="empentIA">
     </a>
     <div class="nav-links">
-      <a href="#canales">Servicios</a>
+      <div class="nav-dropdown">
+        <button class="dropdown-btn">Servicios <span style="font-size:10px;margin-left:2px">▾</span></button>
+        <div class="dropdown-menu">
+          <a href="webchat/"><span class="dropdown-icon">💬</span> Webchat</a>
+          <a href="whatsapp/"><span class="dropdown-icon">📱</span> WhatsApp</a>
+          <a href="email/"><span class="dropdown-icon">📧</span> Email</a>
+          <a href="llamadas/"><span class="dropdown-icon">📞</span> Llamadas</a>
+          <a href="resenas/"><span class="dropdown-icon">⭐</span> Reseñas</a>
+        </div>
+      </div>
+      <a href="#por-que">Quiénes somos</a>
       <a href="#como-funciona">Cómo funciona</a>
-      <a href="#por-que">Por qué empentIA</a>
       <a href="#canales" class="nav-cta">Empezar ahora</a>
     </div>
   </div>
