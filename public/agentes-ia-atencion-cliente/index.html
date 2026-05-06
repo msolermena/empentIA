@@ -374,6 +374,12 @@ footer {
 .mobile-divider { height: 1px; background: var(--line); margin: 16px 0 4px; }
 .mobile-cta-btn { display: flex !important; justify-content: center; background: var(--ink); color: white !important; padding: 15px 24px !important; border-radius: 100px; font-size: 16px; font-weight: 600; margin-top: 20px; border-bottom: none !important; }
 
+/* SOON / PRÓXIMAMENTE */
+.channel-chip.soon, .canal-card.soon { cursor: default; opacity: .6; }
+.channel-chip.soon:hover, .canal-card.soon:hover { transform: none; box-shadow: none; border-color: var(--line); }
+.canal-soon-badge { position: absolute; top: 14px; right: 14px; background: var(--ink); color: white; font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 100px; letter-spacing: 0.04em; text-transform: uppercase; z-index: 5; }
+.canal-card.soon .canal-soon-badge { background: var(--ink-mute); }
+
 /* LOGOS STRIP */
 .logos-strip { padding: 56px 0; border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); background: var(--bg-card); }
 .logos-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); text-align: center; margin-bottom: 32px; }
@@ -406,10 +412,6 @@ footer {
         <button class="dropdown-btn">Servicios <span style="font-size:10px;margin-left:2px">▾</span></button>
         <div class="dropdown-menu">
           <a href="webchat/"><span class="dropdown-icon">💬</span> Webchat</a>
-          <a href="whatsapp/"><span class="dropdown-icon">📱</span> WhatsApp</a>
-          <a href="email/"><span class="dropdown-icon">📧</span> Email</a>
-          <a href="llamadas/"><span class="dropdown-icon">📞</span> Llamadas</a>
-          <a href="resenas/"><span class="dropdown-icon">⭐</span> Reseñas</a>
         </div>
       </div>
       <a href="#quienes-somos">Quiénes somos</a>
@@ -426,10 +428,6 @@ footer {
   <div class="mobile-menu-inner">
     <div class="mobile-section-label">Servicios</div>
     <a href="webchat/" onclick="closeMenu()"><span style="font-size:20px">💬</span> Webchat</a>
-    <a href="whatsapp/" onclick="closeMenu()"><span style="font-size:20px">📱</span> WhatsApp</a>
-    <a href="email/" onclick="closeMenu()"><span style="font-size:20px">📧</span> Email</a>
-    <a href="llamadas/" onclick="closeMenu()"><span style="font-size:20px">📞</span> Llamadas</a>
-    <a href="resenas/" onclick="closeMenu()"><span style="font-size:20px">⭐</span> Reseñas</a>
     <div class="mobile-divider"></div>
     <a href="#quienes-somos" onclick="closeMenu()">Quiénes somos</a>
     <a href="#como-funciona" onclick="closeMenu()">Cómo funciona</a>
@@ -460,24 +458,24 @@ footer {
           <div class="ch-desc">Responde en tu web, capta leads y cierra ventas</div>
           <div class="ch-arrow">Ver servicio →</div>
         </a>
-        <a href="whatsapp/" class="channel-chip" style="--ch-color: #25a244;">
+        <div class="channel-chip soon" style="--ch-color: #25a244;">
           <div class="ch-icon">📱</div>
           <div class="ch-name">WhatsApp</div>
           <div class="ch-desc">Atiende donde ya están tus clientes</div>
-          <div class="ch-arrow">Ver servicio →</div>
-        </a>
-        <a href="email/" class="channel-chip" style="--ch-color: #9a5a1a;">
+          <div class="ch-arrow">Próximamente</div>
+        </div>
+        <div class="channel-chip soon" style="--ch-color: #9a5a1a;">
           <div class="ch-icon">📧</div>
           <div class="ch-name">Email</div>
           <div class="ch-desc">Clasifica y responde tickets automáticamente</div>
-          <div class="ch-arrow">Ver servicio →</div>
-        </a>
-        <a href="llamadas/" class="channel-chip" style="--ch-color: #5a3d7a;">
+          <div class="ch-arrow">Próximamente</div>
+        </div>
+        <div class="channel-chip soon" style="--ch-color: #5a3d7a;">
           <div class="ch-icon">📞</div>
           <div class="ch-name">Llamadas</div>
           <div class="ch-desc">Agente de voz que recibe y gestiona llamadas</div>
-          <div class="ch-arrow">Ver servicio →</div>
-        </a>
+          <div class="ch-arrow">Próximamente</div>
+        </div>
       </div>
     </div>
   </div>
@@ -538,34 +536,38 @@ footer {
         <div class="canal-price">Desde 49€/mes</div>
         <div class="canal-cta">Ver planes →</div>
       </a>
-      <a href="whatsapp/" class="canal-card" style="--ch-color: #25a244;">
+      <div class="canal-card soon" style="--ch-color: #25a244;">
+        <div class="canal-soon-badge">Próximamente</div>
         <div class="canal-icon">📱</div>
         <div class="canal-name">WhatsApp</div>
         <div class="canal-tagline">Atiende a tus clientes en el canal que más usan, con respuestas instantáneas las 24 horas.</div>
-        <div class="canal-price">Desde 59€/mes</div>
-        <div class="canal-cta">Ver planes →</div>
-      </a>
-      <a href="email/" class="canal-card" style="--ch-color: #9a5a1a;">
+        <div class="canal-price">En desarrollo</div>
+        <div class="canal-cta" style="opacity:.5">Avísame →</div>
+      </div>
+      <div class="canal-card soon" style="--ch-color: #9a5a1a;">
+        <div class="canal-soon-badge">Próximamente</div>
         <div class="canal-icon">📧</div>
         <div class="canal-name">Email</div>
         <div class="canal-tagline">Clasifica, prioriza y responde tickets automáticamente. Tu bandeja de entrada, bajo control.</div>
-        <div class="canal-price">Desde 39€/mes</div>
-        <div class="canal-cta">Ver planes →</div>
-      </a>
-      <a href="llamadas/" class="canal-card" style="--ch-color: #5a3d7a;">
+        <div class="canal-price">En desarrollo</div>
+        <div class="canal-cta" style="opacity:.5">Avísame →</div>
+      </div>
+      <div class="canal-card soon" style="--ch-color: #5a3d7a;">
+        <div class="canal-soon-badge">Próximamente</div>
         <div class="canal-icon">📞</div>
         <div class="canal-name">Llamadas</div>
         <div class="canal-tagline">Un agente de voz que recibe llamadas, responde dudas y gestiona citas en tu nombre.</div>
-        <div class="canal-price">Desde 79€/mes</div>
-        <div class="canal-cta">Ver planes →</div>
-      </a>
-      <a href="resenas/" class="canal-card" style="--ch-color: #9a7a1a;">
+        <div class="canal-price">En desarrollo</div>
+        <div class="canal-cta" style="opacity:.5">Avísame →</div>
+      </div>
+      <div class="canal-card soon" style="--ch-color: #9a7a1a;">
+        <div class="canal-soon-badge">Próximamente</div>
         <div class="canal-icon">⭐</div>
         <div class="canal-name">Reseñas</div>
         <div class="canal-tagline">Detecta y responde reseñas de Google y Trustpilot con respuestas personalizadas y coherentes.</div>
-        <div class="canal-price">Desde 29€/mes</div>
-        <div class="canal-cta">Ver planes →</div>
-      </a>
+        <div class="canal-price">En desarrollo</div>
+        <div class="canal-cta" style="opacity:.5">Avísame →</div>
+      </div>
     </div>
   </div>
 </section>
@@ -724,15 +726,11 @@ footer {
 <section>
   <div class="cta-final">
     <div class="section-label">Empieza hoy</div>
-    <h2 class="serif">Elige el canal<br><em>que más te duele.</em></h2>
-    <p>Empieza por donde más impacto tengas. Escala el resto cuando quieras.</p>
-    <a href="#canales" class="btn btn-primary" style="margin: 0 auto;">Ver todos los servicios →</a>
+    <h2 class="serif">Empieza con<br><em>nuestro Webchat.</em></h2>
+    <p>El primer servicio operativo. El resto de canales — WhatsApp, Email, Llamadas, Reseñas — los iremos lanzando próximamente.</p>
+    <a href="webchat/" class="btn btn-primary" style="margin: 0 auto;">Ver Webchat →</a>
     <div class="cta-canales">
       <a href="webchat/" class="cta-canal-btn">💬 Webchat</a>
-      <a href="whatsapp/" class="cta-canal-btn">📱 WhatsApp</a>
-      <a href="email/" class="cta-canal-btn">📧 Email</a>
-      <a href="llamadas/" class="cta-canal-btn">📞 Llamadas</a>
-      <a href="resenas/" class="cta-canal-btn">⭐ Reseñas</a>
     </div>
   </div>
 </section>
