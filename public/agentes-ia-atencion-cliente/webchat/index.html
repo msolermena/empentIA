@@ -2091,14 +2091,14 @@ footer {
 
 /* Cart */
 .viz-cart-wrap { position: relative; display: inline-flex; }
-.viz-cart { font-size: 40px; }
+.viz-cart { color: var(--ink); display: block; }
 .viz-cart-badge { position: absolute; top: -3px; right: -10px; background: var(--positive); color: white; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 600; padding: 3px 7px; border-radius: 100px; animation: bounce 2s ease-in-out infinite; }
 @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
 
 /* Email */
 .viz-email { width: 100%; background: var(--bg-card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); }
 .viz-email-header { display: flex; align-items: center; gap: 7px; padding-bottom: 6px; border-bottom: 1px solid var(--line-soft); }
-.viz-email-icon { font-size: 12px; }
+.viz-email-icon { color: var(--ink-soft); display: inline-flex; align-items: center; }
 .viz-email-from { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--ink-mute); }
 .viz-email-subject { font-size: 12px; font-weight: 600; color: var(--ink); }
 .viz-email-line { background: var(--line-soft); height: 5px; border-radius: 3px; }
@@ -2404,7 +2404,7 @@ footer {
       <div class="bento-card">
         <div class="bento-visual">
           <div class="viz-cart-wrap">
-            <div class="viz-cart">🛒</div>
+            <svg class="viz-cart" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
             <span class="viz-cart-badge">+1</span>
           </div>
         </div>
@@ -2419,7 +2419,7 @@ footer {
         <div class="bento-visual">
           <div class="viz-email">
             <div class="viz-email-header">
-              <span class="viz-email-icon">📧</span>
+              <span class="viz-email-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></span>
               <span class="viz-email-from">hola@tutienda.com</span>
             </div>
             <div class="viz-email-subject">Tu presupuesto · 3 productos · 1.547€</div>
@@ -2777,56 +2777,56 @@ footer {
                 <td colspan="5" class="group-label">Funcionalidades incluidas</td>
               </tr>
               <tr>
-                <td><div class="feature-name">🔍 Búsqueda inteligente del catálogo</div></td>
+                <td><div class="feature-name">Búsqueda inteligente del catálogo</div></td>
                 <td class="check">✓</td>
                 <td class="check">✓</td>
                 <td class="check">✓</td>
                 <td class="check">✓</td>
               </tr>
               <tr>
-                <td><div class="feature-name">🌐 Multiidioma automático</div></td>
+                <td><div class="feature-name">Multiidioma automático</div></td>
                 <td class="cell-val">2 idiomas</td>
                 <td class="cell-val highlight">3 idiomas</td>
                 <td class="cell-val highlight">Ilimitados</td>
                 <td class="cell-val highlight">Ilimitados</td>
               </tr>
               <tr>
-                <td><div class="feature-name">🛒 Añade al carrito real</div></td>
+                <td><div class="feature-name">Añade al carrito real</div></td>
                 <td class="cross">—</td>
                 <td class="check">✓</td>
                 <td class="check">✓</td>
                 <td class="check">✓</td>
               </tr>
               <tr>
-                <td><div class="feature-name">📧 Presupuestos automáticos por email</div></td>
+                <td><div class="feature-name">Presupuestos automáticos por email</div></td>
                 <td class="cross">—</td>
                 <td class="check">✓</td>
                 <td class="check">✓</td>
                 <td class="check">✓</td>
               </tr>
               <tr>
-                <td><div class="feature-name">🎯 Captación de leads</div></td>
+                <td><div class="feature-name">Captación de leads</div></td>
                 <td class="check">✓</td>
                 <td class="check">✓</td>
                 <td class="check">✓</td>
                 <td class="check">✓</td>
               </tr>
               <tr>
-                <td><div class="feature-name">⚡ Integración en 1 línea (en el &lt;header&gt;)</div></td>
+                <td><div class="feature-name">Integración en 1 línea (en el &lt;header&gt;)</div></td>
                 <td class="check">✓</td>
                 <td class="check">✓</td>
                 <td class="check">✓</td>
                 <td class="check">✓</td>
               </tr>
               <tr>
-                <td><div class="feature-name">🎨 Personalización del widget</div></td>
+                <td><div class="feature-name">Personalización del widget</div></td>
                 <td class="cell-val">Básica</td>
                 <td class="cell-val highlight">Estándar</td>
                 <td class="cell-val highlight">Completa (CSS)</td>
                 <td class="cell-val highlight">A medida</td>
               </tr>
               <tr>
-                <td><div class="feature-name">📊 Analytics en tiempo real</div></td>
+                <td><div class="feature-name">Analytics en tiempo real</div></td>
                 <td class="check">✓</td>
                 <td class="check">✓</td>
                 <td class="check">✓</td>
