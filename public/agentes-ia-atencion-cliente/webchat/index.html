@@ -107,6 +107,18 @@ footer .logo img {
   transition: background 0.2s;
 }
 .nav-cta:hover { background: var(--accent-hover); }
+.nav-access {
+  font-size: 13px !important;
+  color: var(--ink-soft) !important;
+  border: 1px solid var(--line);
+  padding: 8px 16px;
+  border-radius: 100px;
+  transition: all .2s;
+}
+.nav-access:hover {
+  border-color: var(--ink);
+  color: var(--ink) !important;
+}
 .nav-lang {
   font-size: 13px !important;
   color: var(--ink-mute) !important;
@@ -2193,6 +2205,7 @@ footer {
       <a href="#quienes-somos">Quiénes somos</a>
       <a href="#como-funciona">Cómo funciona</a>
       <a href="#cta" class="nav-cta">Contratar</a>
+      <a href="#" class="nav-access">Acceso clientes →</a>
       <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú">
         <span></span><span></span><span></span>
       </button>
@@ -2208,6 +2221,7 @@ footer {
     <div class="mobile-divider"></div>
     <a href="#quienes-somos" onclick="closeMenu()">Quiénes somos</a>
     <a href="#como-funciona" onclick="closeMenu()">Cómo funciona</a>
+    <a href="#" onclick="closeMenu()">Acceso clientes →</a>
     <a href="#cta" class="mobile-cta-btn" onclick="closeMenu()">Contratar →</a>
   </div>
 </div>
@@ -3324,37 +3338,6 @@ footer {
 </section>
 
 <!-- ====== CLIENT ACCESS ====== -->
-<section class="client-access">
-  <div class="container">
-    <div class="ca-box">
-      <div>
-        <div class="ca-label">¿Ya eres cliente?</div>
-        <h3 class="ca-title">Accede a tu <em>espacio privado.</em></h3>
-        <p class="ca-desc">Gestiona tu agente, consulta las conversaciones, descarga tus leads y ajusta la configuración desde tu panel.</p>
-        <a href="#" class="ca-btn">Entra al panel de cliente <span>→</span></a>
-      </div>
-      <div class="ca-mock">
-        <div class="ca-mock-row">
-          <span class="ca-mock-label">Plan activo</span>
-          <span class="ca-mock-val">Pro</span>
-        </div>
-        <div class="ca-mock-row">
-          <span class="ca-mock-label">Converses avui</span>
-          <span class="ca-mock-val">47</span>
-        </div>
-        <div class="ca-mock-row">
-          <span class="ca-mock-label">Leads pendents</span>
-          <span class="ca-mock-val">3</span>
-        </div>
-        <div class="ca-mock-row">
-          <span class="ca-mock-label">Estat agent</span>
-          <span class="ca-mock-val" style="color: #8fbf9f;">● Actiu</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ====== FAQ ====== -->
 <section class="faq-section" id="faq">
   <div class="container">
