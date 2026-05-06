@@ -1529,6 +1529,8 @@ h2 em {
   overflow: hidden;
   border: 1px solid var(--line);
 }
+.founder-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.founder-photo:has(img)::after { content: none; }
 .founder-photo::after {
   content: '';
   position: absolute;
@@ -3324,7 +3326,7 @@ footer {
 <section class="founder" id="quienes-somos">
   <div class="container">
     <div class="founder-inner">
-      <div class="founder-photo"></div>
+      <div class="founder-photo"><img src="/images/team/arnau-orriols.jpg" alt="Arnau Orriols"></div>
       <div>
         <div class="section-label">Quiénes somos</div>
         <div class="founder-quote">
