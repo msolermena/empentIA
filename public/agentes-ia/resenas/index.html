@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agente IA Reseñas | empentIA</title>
+<meta name="description" content="Detecta y responde reseñas de Google y Trustpilot automáticamente con IA. Cuida tu reputación online sin esfuerzo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafaf7; --bg-alt: #f4f3ee; --bg-card: #ffffff;
+  --ink: #1a1a1a; --ink-soft: #4a4a4a; --ink-mute: #8a8a85;
+  --line: #e8e6df; --line-soft: #efede6;
+  --ch: #9a7a1a; --max: 1240px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Instrument Sans', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.5; font-size: 16px; -webkit-font-smoothing: antialiased; }
+.serif { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
+.container { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+nav { position: sticky; top: 0; z-index: 100; background: rgba(250,250,247,0.88); backdrop-filter: blur(20px); border-bottom: 1px solid var(--line-soft); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 18px 32px; max-width: var(--max); margin: 0 auto; }
+.logo { display: flex; align-items: center; text-decoration: none; }
+.logo img { height: 30px; }
+.nav-links { display: flex; align-items: center; gap: 28px; }
+.nav-links a { color: var(--ink-soft); text-decoration: none; font-size: 14.5px; font-weight: 500; transition: color .2s; }
+.nav-links a:hover { color: var(--ink); }
+.nav-back { font-size: 13.5px !important; color: var(--ink-mute) !important; }
+.nav-cta { background: var(--ch); color: white !important; padding: 9px 20px; border-radius: 100px; font-size: 14px !important; font-weight: 500; }
+.nav-cta:hover { opacity: .88; }
+@media (max-width: 900px) { .nav-links a:not(.nav-cta):not(.nav-back) { display: none; } }
+
+.hero { padding: 100px 0 90px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -180px; right: -180px; width: 560px; height: 560px; background: radial-gradient(circle, rgba(154,122,26,0.05) 0%, transparent 70%); pointer-events: none; }
+.hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: center; }
+.channel-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 8px; background: rgba(154,122,26,0.08); border: 1px solid rgba(154,122,26,0.2); border-radius: 100px; font-size: 13px; color: var(--ch); margin-bottom: 28px; font-weight: 500; }
+h1 { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(44px, 5.5vw, 72px); line-height: 1.02; letter-spacing: -0.035em; margin-bottom: 28px; }
+h1 em { font-style: italic; font-weight: 300; color: var(--ink-soft); }
+.hero-sub { font-size: 19px; color: var(--ink-soft); line-height: 1.65; margin-bottom: 40px; max-width: 480px; }
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; border-radius: 100px; font-size: 15px; font-weight: 500; text-decoration: none; transition: all .2s; cursor: pointer; border: none; }
+.btn-primary { background: var(--ch); color: white; } .btn-primary:hover { opacity: .88; }
+.btn-secondary { background: transparent; color: var(--ink); border: 1px solid var(--line); } .btn-secondary:hover { border-color: var(--ink-mute); }
+
+/* Reviews mockup */
+.reviews-mockup { display: flex; flex-direction: column; gap: 12px; }
+.review-card { background: var(--bg-card); border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
+.review-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.review-author { font-size: 13.5px; font-weight: 600; }
+.review-stars { color: #f4a636; font-size: 13px; }
+.review-platform { font-size: 11px; color: var(--ink-mute); background: var(--bg-alt); padding: 2px 8px; border-radius: 100px; }
+.review-text { font-size: 13px; color: var(--ink-soft); line-height: 1.55; margin-bottom: 12px; }
+.review-reply { background: rgba(154,122,26,0.06); border-left: 3px solid var(--ch); border-radius: 0 8px 8px 0; padding: 10px 14px; }
+.review-reply-label { font-size: 11px; font-weight: 600; color: var(--ch); margin-bottom: 4px; display: flex; align-items: center; gap: 4px; }
+.review-reply-text { font-size: 12.5px; color: var(--ink-soft); line-height: 1.55; }
+.review-negative .review-stars { color: #e53e3e; }
+.review-alert { font-size: 11px; font-weight: 600; color: #e53e3e; background: rgba(229,62,62,0.08); padding: 3px 8px; border-radius: 100px; }
+
+section { padding: 110px 0; }
+.section-alt { background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.section-label { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 20px; }
+.section-intro { font-size: 18px; color: var(--ink-soft); line-height: 1.65; max-width: 580px; margin-bottom: 60px; }
+h2 { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(32px, 4vw, 52px); line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 24px; }
+h2 em { font-style: italic; font-weight: 300; color: var(--ink-soft); }
+
+.features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+.feature { background: var(--bg-card); border: 1px solid var(--line); padding: 36px 32px; }
+.feature:nth-child(1) { border-radius: 16px 0 0 0; } .feature:nth-child(2) { border-radius: 0 16px 0 0; }
+.feature:nth-child(3) { border-radius: 0 0 0 16px; } .feature:nth-child(4) { border-radius: 0 0 16px 0; }
+.feature-icon { font-size: 28px; margin-bottom: 16px; }
+.feature-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+.feature-desc { font-size: 14px; color: var(--ink-soft); line-height: 1.65; }
+
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.step { background: var(--bg-card); border: 1px solid var(--line); padding: 40px 32px; }
+.step:first-child { border-radius: 16px 0 0 16px; } .step:last-child { border-radius: 0 16px 16px 0; }
+.step-num { font-family: 'Fraunces', serif; font-size: 52px; font-weight: 400; color: var(--line); line-height: 1; margin-bottom: 20px; }
+.step-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+.step-desc { font-size: 14px; color: var(--ink-soft); line-height: 1.65; }
+
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 60px; }
+.plan { background: var(--bg-card); border: 1px solid var(--line); border-radius: 20px; padding: 36px 30px; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+.plan.featured { border-color: var(--ch); border-width: 2px; }
+.plan-badge { position: absolute; top: 20px; right: 20px; background: var(--ch); color: white; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 100px; }
+.plan-name { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-mute); margin-bottom: 20px; }
+.plan-price { font-family: 'Fraunces', serif; font-size: 52px; font-weight: 400; line-height: 1; color: var(--ink); }
+.plan-price span { font-family: 'Instrument Sans', sans-serif; font-size: 16px; color: var(--ink-mute); font-weight: 400; }
+.plan-tagline { font-size: 13.5px; color: var(--ink-soft); margin: 12px 0 28px; line-height: 1.5; }
+.plan-divider { height: 1px; background: var(--line-soft); margin-bottom: 24px; }
+.plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.plan-features li { font-size: 14px; color: var(--ink-soft); display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
+.plan-features li::before { content: '✓'; color: var(--ch); font-weight: 600; flex-shrink: 0; }
+.plan-cta { margin-top: 28px; display: block; text-align: center; padding: 13px; border-radius: 100px; font-size: 14.5px; font-weight: 500; text-decoration: none; transition: all .2s; }
+.plan-cta-outline { border: 1px solid var(--line); color: var(--ink); } .plan-cta-outline:hover { border-color: var(--ink-mute); }
+.plan-cta-filled { background: var(--ch); color: white; } .plan-cta-filled:hover { opacity: .88; }
+
+.faq-list { max-width: 720px; margin-top: 60px; }
+.faq-item { border-bottom: 1px solid var(--line); padding: 28px 0; }
+.faq-item:first-child { border-top: 1px solid var(--line); }
+.faq-q { font-size: 16px; font-weight: 500; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 20px; background: none; border: none; text-align: left; color: var(--ink); width: 100%; padding: 0; }
+.faq-icon { font-size: 20px; color: var(--ink-mute); flex-shrink: 0; transition: transform .2s; }
+.faq-a { font-size: 14.5px; color: var(--ink-soft); line-height: 1.7; max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s ease; }
+.faq-item.open .faq-a { max-height: 300px; padding-top: 14px; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+
+.cta-box { background: var(--ch); border-radius: 24px; padding: 72px 60px; text-align: center; color: white; }
+.cta-box h2 { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(32px, 4vw, 52px); line-height: 1.08; letter-spacing: -0.025em; color: white; margin-bottom: 16px; }
+.cta-box h2 em { font-style: italic; font-weight: 300; opacity: .75; }
+.cta-box p { font-size: 17px; opacity: .8; margin-bottom: 36px; }
+.btn-white { background: white; color: var(--ch); font-weight: 600; }
+.btn-white:hover { opacity: .92; }
+.cta-note { font-size: 13px; opacity: .6; margin-top: 16px; }
+
+footer { border-top: 1px solid var(--line); padding: 48px 32px; }
+.footer-inner { max-width: var(--max); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+.footer-logo img { height: 28px; opacity: .4; }
+.footer-copy { font-size: 13.5px; color: var(--ink-mute); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 13.5px; color: var(--ink-mute); text-decoration: none; }
+.footer-links a:hover { color: var(--ink-soft); }
+
+@media (max-width: 768px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+  .features-grid, .steps, .pricing-grid { grid-template-columns: 1fr; gap: 12px; }
+  .feature, .step { border-radius: 16px !important; }
+  h1 { font-size: 42px; } h2 { font-size: 32px; }
+  section { padding: 72px 0; } .cta-box { padding: 48px 28px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo"><img src="/images/logo/logo-horizontal.svg" alt="empentIA"></a>
+    <div class="nav-links">
+      <a href="/agentes-ia/" class="nav-back">← Todos los servicios</a>
+      <a href="#funcionalidades">Funcionalidades</a>
+      <a href="#pricing">Precios</a>
+      <a href="#pricing" class="nav-cta">Contratar</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="channel-badge">⭐ Agente IA · Reseñas</div>
+        <h1 class="serif">Tu reputación,<br><em>cuidada.</em></h1>
+        <p class="hero-sub">Un agente de IA que detecta y responde reseñas de Google y Trustpilot. Respuestas personalizadas, coherentes con tu marca, sin que tengas que hacer nada.</p>
+        <div class="hero-ctas">
+          <a href="#pricing" class="btn btn-primary">Ver planes →</a>
+          <a href="#funcionalidades" class="btn btn-secondary">Qué incluye</a>
+        </div>
+      </div>
+      <div>
+        <div class="reviews-mockup">
+          <div class="review-card">
+            <div class="review-header">
+              <div>
+                <div class="review-author">Laura M.</div>
+                <div class="review-stars">★★★★★</div>
+              </div>
+              <div class="review-platform">Google</div>
+            </div>
+            <div class="review-text">Atención excelente y envío rapidísimo. Repetiré sin duda.</div>
+            <div class="review-reply">
+              <div class="review-reply-label">🤖 Respuesta del negocio</div>
+              <div class="review-reply-text">¡Gracias Laura! Nos alegra mucho que todo haya llegado a tiempo. Te esperamos en la próxima compra 😊</div>
+            </div>
+          </div>
+          <div class="review-card review-negative">
+            <div class="review-header">
+              <div>
+                <div class="review-author">Jordi P.</div>
+                <div class="review-stars">★★☆☆☆</div>
+              </div>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <div class="review-platform">Trustpilot</div>
+                <div class="review-alert">⚠ Alerta</div>
+              </div>
+            </div>
+            <div class="review-text">El pedido tardó más de lo previsto. Nadie me avisó del retraso.</div>
+            <div class="review-reply">
+              <div class="review-reply-label">🤖 Respuesta del negocio</div>
+              <div class="review-reply-text">Hola Jordi, sentimos mucho tu experiencia. Hemos detectado un retraso en tu zona ese día. Te hemos enviado un email con una compensación. Gracias por tu feedback.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt" id="funcionalidades">
+  <div class="container">
+    <div class="section-label">Funcionalidades</div>
+    <h2>Tu marca siempre<br><em>presente.</em></h2>
+    <p class="section-intro">Cada reseña merece una respuesta. El agente se asegura de que ninguna quede sin atender, ni las buenas ni las malas.</p>
+    <div class="features-grid">
+      <div class="feature">
+        <div class="feature-icon">🔔</div>
+        <div class="feature-title">Detección en tiempo real</div>
+        <div class="feature-desc">Monitoriza tus perfiles de Google Business y Trustpilot. En cuanto llega una reseña nueva, el agente la detecta y actúa.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">✍️</div>
+        <div class="feature-title">Respuestas personalizadas</div>
+        <div class="feature-desc">Cada respuesta es única y adaptada al contenido de la reseña. Nunca dos respuestas iguales. Siempre en el tono de tu marca.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🚨</div>
+        <div class="feature-title">Alertas de reseñas negativas</div>
+        <div class="feature-desc">Las reseñas de 1 o 2 estrellas te llegan en tiempo real por email o WhatsApp para que puedas intervenir si lo necesitas.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📊</div>
+        <div class="feature-title">Análisis de sentimiento</div>
+        <div class="feature-desc">Identifica tendencias: qué aspectos elogian más tus clientes y qué puntos de mejora aparecen con más frecuencia.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">El proceso</div>
+    <h2>Activo en tus perfiles<br><em>en 24 horas.</em></h2>
+    <p class="section-intro">Sin acceso a contraseñas. Conectamos mediante las APIs oficiales de Google y Trustpilot.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title">Conectamos tus perfiles</div>
+        <div class="step-desc">Vinculamos tu Google Business Profile y/o Trustpilot mediante OAuth. Seguro, sin compartir contraseñas.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title">Defines el tono y las reglas</div>
+        <div class="step-desc">Nos dices cómo quieres que suene tu marca: formal, cercano, con humor... y qué reseñas quieres revisar antes de publicar.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title">Responde y tú supervisas</div>
+        <div class="step-desc">El agente responde automáticamente. Tú ves todas las respuestas en tu panel y puedes editarlas o aprobarlas antes de publicar.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt" id="pricing">
+  <div class="container">
+    <div class="section-label">Membresía Reseñas</div>
+    <h2>Planes claros,<br><em>sin sorpresas.</em></h2>
+    <p class="section-intro">Sin permanencia. Cancela cuando quieras. Cambia de plan en cualquier momento.</p>
+    <div class="pricing-grid">
+      <div class="plan">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">29<span>€/mes</span></div>
+        <div class="plan-tagline">Para negocios con pocos perfiles que quieren responder a sus reseñas sin esfuerzo.</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Google Business Profile</li>
+          <li>Hasta 50 respuestas/mes</li>
+          <li>Respuestas personalizadas</li>
+          <li>Alertas de reseñas negativas</li>
+          <li>Panel de reseñas</li>
+          <li>Soporte por email</li>
+        </ul>
+        <a href="#contacto" class="plan-cta plan-cta-outline">Contratar Starter</a>
+      </div>
+      <div class="plan featured">
+        <div class="plan-badge">Más popular</div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">59<span>€/mes</span></div>
+        <div class="plan-tagline">Para negocios activos en varias plataformas con volumen de reseñas regular.</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Google + Trustpilot</li>
+          <li>Hasta 200 respuestas/mes</li>
+          <li>Análisis de sentimiento</li>
+          <li>Alertas en tiempo real (email + WhatsApp)</li>
+          <li>Informe mensual de reputación</li>
+          <li>Soporte prioritario</li>
+        </ul>
+        <a href="#contacto" class="plan-cta plan-cta-filled">Contratar Pro</a>
+      </div>
+      <div class="plan">
+        <div class="plan-name">Business</div>
+        <div class="plan-price">119<span>€/mes</span></div>
+        <div class="plan-tagline">Para cadenas, franquicias o marcas con múltiples ubicaciones y plataformas.</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Todas las plataformas disponibles</li>
+          <li>Respuestas ilimitadas</li>
+          <li>Múltiples ubicaciones / perfiles</li>
+          <li>Acceso a API</li>
+          <li>Dashboard de reputación multi-sede</li>
+          <li>Gestor de cuenta dedicado</li>
+        </ul>
+        <a href="#contacto" class="plan-cta plan-cta-outline">Contratar Business</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">FAQ</div>
+    <h2>Preguntas <em>frecuentes.</em></h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿El agente publica las respuestas directamente? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Tú decides. Puedes configurarlo en modo automático (publica sin revisión) o en modo supervisado (te muestra el borrador y tú apruebas). Recomendamos empezar en supervisado.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Funciona con Google Maps / Google Business? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Sí. Usamos la API oficial de Google Business Profile. Solo necesitas darle acceso a tu cuenta de Google Business, sin compartir contraseñas.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Puedo tener múltiples ubicaciones? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Sí, en el plan Business puedes gestionar múltiples ubicaciones desde un único panel. Ideal para cadenas, franquicias o grupos de restaurantes.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Las respuestas suenan naturales? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Sí. Cada respuesta es generada específicamente para esa reseña. Nunca son plantillas genéricas. En los primeros días las revisamos juntos para ajustar el tono exacto de tu marca.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="container">
+    <div class="cta-box">
+      <h2 class="serif">Tu reputación online,<br><em>bajo control.</em></h2>
+      <p>Ninguna reseña sin respuesta. Ninguna crítica ignorada.</p>
+      <a href="mailto:hola@empentia.ai?subject=Quiero activar el Agente de Reseñas" class="btn btn-white">Activar ahora →</a>
+      <div class="cta-note">Sin compromiso · Cancela cuando quieras</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <a href="/" class="logo footer-logo"><img src="/images/logo/logo-horizontal.svg" alt="empentIA"></a>
+    <p class="footer-copy">© 2025 empentIA. Todos los derechos reservados.</p>
+    <div class="footer-links">
+      <a href="/agentes-ia/">← Todos los servicios</a>
+      <a href="/legal">Aviso legal</a>
+      <a href="/privacy">Privacidad</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>
