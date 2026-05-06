@@ -2132,6 +2132,12 @@ footer {
 .viz-color:hover { transform: scale(1.1); }
 .viz-color.active { box-shadow: 0 0 0 2px var(--positive); }
 
+/* FAQ / Consultas operativas */
+.viz-faq { width: 100%; display: flex; flex-direction: column; gap: 4px; }
+.viz-faq-item { display: flex; justify-content: space-between; align-items: center; padding: 7px 11px; background: var(--bg-card); border: 1px solid var(--line-soft); border-radius: 6px; font-size: 11.5px; gap: 8px; }
+.viz-faq-q { color: var(--ink-mute); font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+.viz-faq-a { color: var(--positive); font-weight: 500; }
+
 /* Chart */
 .viz-chart { width: 100%; display: flex; align-items: flex-end; gap: 4px; height: 80px; }
 .viz-chart-bar { flex: 1; background: var(--line); border-radius: 3px 3px 0 0; transition: background .3s; min-height: 6px; }
@@ -2485,8 +2491,32 @@ footer {
         </div>
       </div>
 
-      <!-- 8: ANALYTICS — featured full row -->
-      <div class="bento-card span-3 featured">
+      <!-- 8: CONSULTAS OPERATIVAS -->
+      <div class="bento-card">
+        <div class="bento-visual">
+          <div class="viz-faq">
+            <div class="viz-faq-item">
+              <span class="viz-faq-q">¿Horario?</span>
+              <span class="viz-faq-a">L-S 9-21h</span>
+            </div>
+            <div class="viz-faq-item">
+              <span class="viz-faq-q">¿Mi pedido?</span>
+              <span class="viz-faq-a">Llega mañana</span>
+            </div>
+            <div class="viz-faq-item">
+              <span class="viz-faq-q">¿Devoluciones?</span>
+              <span class="viz-faq-a">30 días gratis</span>
+            </div>
+          </div>
+        </div>
+        <div class="bento-content">
+          <div class="bento-title">Consultas operativas</div>
+          <div class="bento-desc">Horarios, estado de pedidos, devoluciones, envíos, datos de contacto. El agente las responde al instante.</div>
+        </div>
+      </div>
+
+      <!-- 9: ANALYTICS — featured 2 cols -->
+      <div class="bento-card span-2 featured">
         <div class="bento-flex">
           <div class="bento-content">
             <div class="bento-title">Analytics en tiempo real</div>
@@ -2783,6 +2813,13 @@ footer {
               </tr>
               <tr>
                 <td><div class="feature-name">Búsqueda inteligente del catálogo</div></td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Consultas operativas (horarios, pedidos, devoluciones, contacto)</div></td>
                 <td class="check">✓</td>
                 <td class="check">✓</td>
                 <td class="check">✓</td>
