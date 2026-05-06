@@ -2054,6 +2054,93 @@ footer {
 .mobile-menu-inner a { display: flex; align-items: center; gap: 14px; padding: 14px 0; font-size: 17px; font-weight: 500; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line-soft); }
 .mobile-divider { height: 1px; background: var(--line); margin: 16px 0 4px; }
 .mobile-cta-btn { display: flex !important; justify-content: center; background: var(--ink); color: white !important; padding: 15px 24px !important; border-radius: 100px; font-size: 16px; font-weight: 600; margin-top: 20px; border-bottom: none !important; }
+/* ===== BENTO GRID FUNCIONALIDADES ===== */
+.bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 56px; }
+.bento-card { background: var(--bg-card); border: 1px solid var(--line); border-radius: 20px; padding: 28px; transition: all .3s cubic-bezier(.4,0,.2,1); position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 18px; min-height: 280px; }
+.bento-card:hover { border-color: var(--ink); transform: translateY(-3px); box-shadow: 0 16px 48px rgba(0,0,0,0.08); }
+.bento-card.span-2 { grid-column: span 2; }
+.bento-card.span-3 { grid-column: span 3; min-height: 220px; }
+.bento-card.featured { background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-alt) 100%); }
+.bento-flex { display: grid; grid-template-columns: 1fr 1.3fr; gap: 32px; align-items: center; height: 100%; }
+.bento-content { margin-top: auto; }
+.bento-title { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 400; letter-spacing: -0.015em; line-height: 1.18; margin-bottom: 8px; }
+.bento-card.span-2 .bento-title, .bento-card.span-3 .bento-title { font-size: 28px; }
+.bento-desc { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+.bento-visual { flex: 1; display: flex; align-items: center; justify-content: center; padding: 12px 0; min-height: 140px; }
+.bento-visual-chart { padding: 0; }
+.bento-stats { display: flex; gap: 32px; margin-top: 24px; flex-wrap: wrap; }
+.bento-stat { display: flex; flex-direction: column; gap: 2px; }
+.bento-stat-num { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 500; color: var(--positive); }
+.bento-stat-label { font-size: 11.5px; color: var(--ink-mute); text-transform: uppercase; letter-spacing: .06em; }
+
+/* Search visual */
+.viz-search { width: 100%; display: flex; flex-direction: column; gap: 6px; }
+.viz-search-bar { background: var(--bg-card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; font-size: 12.5px; color: var(--ink); font-family: 'JetBrains Mono', monospace; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
+.viz-search-icon { color: var(--ink-mute); margin-right: 6px; }
+.viz-product-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+.viz-product { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--line-soft); border-radius: 8px; font-size: 12.5px; }
+.viz-product-img { width: 28px; height: 28px; background: linear-gradient(135deg, #d4d1c7, #b5b09e); border-radius: 5px; flex-shrink: 0; }
+.viz-product-name { flex: 1; color: var(--ink); }
+.viz-product-price { font-family: 'JetBrains Mono', monospace; color: var(--positive); font-weight: 500; }
+
+/* Lang flags */
+.viz-lang { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.viz-lang-flag { width: 38px; height: 38px; background: var(--bg-card); border: 1px solid var(--line); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
+.viz-lang-more { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--ink-mute); }
+
+/* Cart */
+.viz-cart-wrap { position: relative; display: inline-flex; }
+.viz-cart { font-size: 56px; }
+.viz-cart-badge { position: absolute; top: -6px; right: -14px; background: var(--positive); color: white; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; padding: 4px 9px; border-radius: 100px; animation: bounce 2s ease-in-out infinite; }
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+/* Email */
+.viz-email { width: 100%; background: var(--bg-card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
+.viz-email-header { display: flex; align-items: center; gap: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--line-soft); }
+.viz-email-icon { font-size: 14px; }
+.viz-email-from { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--ink-mute); }
+.viz-email-subject { font-size: 13px; font-weight: 600; color: var(--ink); }
+.viz-email-line { background: var(--line-soft); height: 7px; border-radius: 4px; }
+.viz-email-line.short { width: 65%; }
+.viz-email-attachment { background: var(--bg-alt); padding: 7px 12px; border-radius: 8px; font-size: 12px; color: var(--ink-soft); margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
+
+/* Form */
+.viz-form { width: 100%; display: flex; flex-direction: column; gap: 6px; }
+.viz-input { background: var(--bg-card); border: 1px solid var(--line); border-radius: 8px; padding: 9px 14px; font-size: 12px; font-family: 'JetBrains Mono', monospace; color: var(--ink-mute); }
+.viz-input.filled { color: var(--ink); }
+.viz-input.typing { position: relative; }
+.viz-cursor { display: inline-block; width: 1px; height: 12px; background: var(--positive); animation: blink 1s steps(1) infinite; vertical-align: middle; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Code */
+.viz-code { width: 100%; background: #1a1a1a; color: #e8e6df; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; padding: 14px 16px; border-radius: 10px; line-height: 1.7; }
+.viz-code-line { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.viz-com { color: #6a6a65; }
+.viz-tag { color: #f4a636; }
+.viz-attr { color: #a9d4b9; }
+.viz-str { color: #e8b75c; }
+
+/* Theme */
+.viz-theme { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.viz-color { width: 36px; height: 36px; border-radius: 50%; border: 3px solid var(--bg-card); box-shadow: 0 0 0 1px var(--line); transition: transform .2s; cursor: pointer; }
+.viz-color:hover { transform: scale(1.1); }
+.viz-color.active { box-shadow: 0 0 0 2px var(--positive); }
+
+/* Chart */
+.viz-chart { width: 100%; display: flex; align-items: flex-end; gap: 6px; height: 110px; }
+.viz-chart-bar { flex: 1; background: var(--line); border-radius: 4px 4px 0 0; transition: background .3s; min-height: 8px; }
+.viz-chart-bar.active { background: var(--positive); }
+
+@media (max-width: 1024px) {
+  .bento-grid { grid-template-columns: repeat(2, 1fr); }
+  .bento-card.span-2, .bento-card.span-3 { grid-column: span 2; }
+  .bento-flex { grid-template-columns: 1fr; gap: 24px; }
+}
+@media (max-width: 600px) {
+  .bento-grid { grid-template-columns: 1fr; }
+  .bento-card, .bento-card.span-2, .bento-card.span-3 { grid-column: span 1; min-height: 240px; }
+  .bento-stats { gap: 20px; }
+}
 </style>
 </head>
 <body>
@@ -2276,47 +2363,151 @@ footer {
     <h2>Todo lo que necesita un <em>comercial digital.</em></h2>
     <p class="section-intro">No es un chatbot de FAQs. Es un agente que vende, asesora y actúa sobre tu eCommerce en tiempo real.</p>
 
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">⌕</div>
-        <div class="feature-title">Cerca intel·ligent</div>
-        <div class="feature-desc">Encuentra productos por nombre, categoría, precio o características. Catálogos estáticos o sincronización via API.</div>
+    <div class="bento-grid">
+
+      <!-- 1: BÚSQUEDA — featured 2 cols -->
+      <div class="bento-card span-2 featured">
+        <div class="bento-visual">
+          <div class="viz-search">
+            <div class="viz-search-bar"><span class="viz-search-icon">⌕</span> bici de montaña talla M</div>
+            <div class="viz-product-list">
+              <div class="viz-product"><div class="viz-product-img"></div><span class="viz-product-name">Trail 29" — Talla M</span><span class="viz-product-price">1.299€</span></div>
+              <div class="viz-product"><div class="viz-product-img"></div><span class="viz-product-name">Mountain Pro</span><span class="viz-product-price">1.099€</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="bento-content">
+          <div class="bento-title">Búsqueda inteligente del catálogo</div>
+          <div class="bento-desc">Encuentra productos por nombre, categoría, precio, talla o cualquier característica. Funciona con catálogos estáticos o sincronización vía API.</div>
+        </div>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">+</div>
-        <div class="feature-title">Afegeix al carret</div>
-        <div class="feature-desc">El agente añade productos al carrito real. Compatible con Gmail, Outlook y Zendesk.</div>
+
+      <!-- 2: MULTIIDIOMA -->
+      <div class="bento-card">
+        <div class="bento-visual">
+          <div class="viz-lang">
+            <div class="viz-lang-flag">🇪🇸</div>
+            <div class="viz-lang-flag">🇬🇧</div>
+            <div class="viz-lang-flag">🇫🇷</div>
+            <div class="viz-lang-flag">🇩🇪</div>
+            <div class="viz-lang-flag viz-lang-more">+30</div>
+          </div>
+        </div>
+        <div class="bento-content">
+          <div class="bento-title">Multiidioma automático</div>
+          <div class="bento-desc">Detecta el idioma del visitante y responde en consecuencia. Sin configuración.</div>
+        </div>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">€</div>
-        <div class="feature-title">Pressupostos auto</div>
-        <div class="feature-desc">Genera y envía presupuestos por email con productos, precios, IVA y total. Sin intervención manual.</div>
+
+      <!-- 3: CARRITO -->
+      <div class="bento-card">
+        <div class="bento-visual">
+          <div class="viz-cart-wrap">
+            <div class="viz-cart">🛒</div>
+            <span class="viz-cart-badge">+1</span>
+          </div>
+        </div>
+        <div class="bento-content">
+          <div class="bento-title">Añade al carrito real</div>
+          <div class="bento-desc">Compatible con WooCommerce y PrestaShop. El cliente no sale de la conversación.</div>
+        </div>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">↗</div>
-        <div class="feature-title">Captació i escalada</div>
-        <div class="feature-desc">Recoge datos de contacto cuando el cliente muestra interés y escala a humano cuando es necesario.</div>
+
+      <!-- 4: PRESUPUESTOS — featured 2 cols -->
+      <div class="bento-card span-2 featured">
+        <div class="bento-visual">
+          <div class="viz-email">
+            <div class="viz-email-header">
+              <span class="viz-email-icon">📧</span>
+              <span class="viz-email-from">hola@tutienda.com</span>
+            </div>
+            <div class="viz-email-subject">Tu presupuesto · 3 productos · 1.547€</div>
+            <div class="viz-email-line"></div>
+            <div class="viz-email-line short"></div>
+            <div class="viz-email-attachment">📎 presupuesto-2841.pdf</div>
+          </div>
+        </div>
+        <div class="bento-content">
+          <div class="bento-title">Presupuestos automáticos por email</div>
+          <div class="bento-desc">Genera y envía PDFs con productos, precios, IVA y total. En menos de 30 segundos. Sin intervención humana.</div>
+        </div>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">&lt;/&gt;</div>
-        <div class="feature-title">Widget lleuger</div>
-        <div class="feature-desc">Instalación con un solo script. Sin plugins, sin dependencias. Funciona en cualquier web.</div>
+
+      <!-- 5: LEADS -->
+      <div class="bento-card">
+        <div class="bento-visual">
+          <div class="viz-form">
+            <div class="viz-input filled">marc@empresa.com</div>
+            <div class="viz-input filled">+34 612 345 678</div>
+            <div class="viz-input typing"><span class="viz-cursor"></span></div>
+          </div>
+        </div>
+        <div class="bento-content">
+          <div class="bento-title">Captación de leads</div>
+          <div class="bento-desc">Recoge datos cuando hay interés real y exporta a CSV o tu CRM.</div>
+        </div>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">◐</div>
-        <div class="feature-title">Personalització total</div>
-        <div class="feature-desc">Colores, avatar, posición y CSS custom. Se integra en el diseño de tu web como si fuera nativo.</div>
+
+      <!-- 6: WIDGET CODE -->
+      <div class="bento-card">
+        <div class="bento-visual">
+          <div class="viz-code">
+            <div class="viz-code-line"><span class="viz-com">// 1 línea en tu web</span></div>
+            <div class="viz-code-line"><span class="viz-tag">&lt;script</span> <span class="viz-attr">src</span>=<span class="viz-str">"empentia.js"</span><span class="viz-tag">&gt;&lt;/script&gt;</span></div>
+          </div>
+        </div>
+        <div class="bento-content">
+          <div class="bento-title">Widget ligero</div>
+          <div class="bento-desc">Una línea de código y listo. Sin plugins, sin dependencias.</div>
+        </div>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">Aa</div>
-        <div class="feature-title">Multiidioma auto</div>
-        <div class="feature-desc">Detecta el idioma del visitante y responde en español, catalán, inglés o cualquier otro. Sin configuración.</div>
+
+      <!-- 7: PERSONALIZACIÓN -->
+      <div class="bento-card">
+        <div class="bento-visual">
+          <div class="viz-theme">
+            <div class="viz-color" style="background:#1a1a1a"></div>
+            <div class="viz-color active" style="background:var(--positive)"></div>
+            <div class="viz-color" style="background:#9a5a1a"></div>
+            <div class="viz-color" style="background:#5a3d7a"></div>
+            <div class="viz-color" style="background:#9a7a1a"></div>
+          </div>
+        </div>
+        <div class="bento-content">
+          <div class="bento-title">Personalización total</div>
+          <div class="bento-desc">Colores, avatar, posición y CSS custom. Como si fuera nativo de tu web.</div>
+        </div>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">◧</div>
-        <div class="feature-title">Analytics en tiempo real</div>
-        <div class="feature-desc">Conversaciones, leads, productos más consultados i rendiment. Todo visible en tu panel privado.</div>
+
+      <!-- 8: ANALYTICS — featured full row -->
+      <div class="bento-card span-3 featured">
+        <div class="bento-flex">
+          <div class="bento-content">
+            <div class="bento-title">Analytics en tiempo real</div>
+            <div class="bento-desc">Conversaciones, leads captados, productos más consultados, dudas recurrentes y tasa de conversión. Todo en tu panel privado.</div>
+            <div class="bento-stats">
+              <div class="bento-stat"><span class="bento-stat-num">1.247</span><span class="bento-stat-label">Conversaciones</span></div>
+              <div class="bento-stat"><span class="bento-stat-num">89</span><span class="bento-stat-label">Leads</span></div>
+              <div class="bento-stat"><span class="bento-stat-num">↑23%</span><span class="bento-stat-label">vs mes anterior</span></div>
+            </div>
+          </div>
+          <div class="bento-visual bento-visual-chart">
+            <div class="viz-chart">
+              <div class="viz-chart-bar" style="height:30%"></div>
+              <div class="viz-chart-bar" style="height:45%"></div>
+              <div class="viz-chart-bar" style="height:38%"></div>
+              <div class="viz-chart-bar" style="height:62%"></div>
+              <div class="viz-chart-bar active" style="height:78%"></div>
+              <div class="viz-chart-bar" style="height:55%"></div>
+              <div class="viz-chart-bar active" style="height:88%"></div>
+              <div class="viz-chart-bar" style="height:72%"></div>
+              <div class="viz-chart-bar active" style="height:95%"></div>
+              <div class="viz-chart-bar active" style="height:100%"></div>
+            </div>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
