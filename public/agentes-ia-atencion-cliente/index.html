@@ -373,6 +373,24 @@ footer {
 .mobile-menu-inner a { display: flex; align-items: center; gap: 14px; padding: 14px 0; font-size: 17px; font-weight: 500; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line-soft); }
 .mobile-divider { height: 1px; background: var(--line); margin: 16px 0 4px; }
 .mobile-cta-btn { display: flex !important; justify-content: center; background: var(--ink); color: white !important; padding: 15px 24px !important; border-radius: 100px; font-size: 16px; font-weight: 600; margin-top: 20px; border-bottom: none !important; }
+
+/* LOGOS STRIP */
+.logos-strip { padding: 56px 0; border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); background: var(--bg-card); }
+.logos-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); text-align: center; margin-bottom: 32px; }
+.logos-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 32px 56px; align-items: center; }
+.logo-item { font-family: 'Fraunces', serif; font-size: 22px; font-style: italic; font-weight: 400; color: var(--ink-soft); letter-spacing: -0.01em; opacity: .65; transition: opacity .2s; }
+.logo-item:hover { opacity: 1; }
+.logo-item.alt { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-style: normal; font-weight: 600; letter-spacing: 0.06em; }
+
+/* FOUNDER */
+.founder { padding: 110px 0; background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.founder-inner { display: grid; grid-template-columns: 1fr 1.6fr; gap: 64px; align-items: center; max-width: 980px; margin: 0 auto; }
+.founder-photo { aspect-ratio: 1; background: linear-gradient(135deg, #d8d4c5 0%, #b5b09e 100%); border-radius: 24px; position: relative; overflow: hidden; max-width: 280px; }
+.founder-photo::after { content: '👤'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 56px; opacity: .4; }
+.founder-quote { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 400; line-height: 1.35; letter-spacing: -0.015em; color: var(--ink); margin: 16px 0 28px; }
+.founder-name { font-weight: 600; font-size: 15px; }
+.founder-role { font-size: 14px; color: var(--ink-mute); margin-top: 2px; }
+@media (max-width: 768px) { .founder-inner { grid-template-columns: 1fr; gap: 32px; text-align: center; } .founder-photo { max-width: 200px; margin: 0 auto; } .founder-quote { font-size: 22px; } }
 </style>
 </head>
 <body>
@@ -394,7 +412,7 @@ footer {
           <a href="resenas/"><span class="dropdown-icon">⭐</span> Reseñas</a>
         </div>
       </div>
-      <a href="#por-que">Quiénes somos</a>
+      <a href="#quienes-somos">Quiénes somos</a>
       <a href="#como-funciona">Cómo funciona</a>
       <a href="#canales" class="nav-cta">Empezar ahora</a>
       <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú">
@@ -413,7 +431,7 @@ footer {
     <a href="llamadas/" onclick="closeMenu()"><span style="font-size:20px">📞</span> Llamadas</a>
     <a href="resenas/" onclick="closeMenu()"><span style="font-size:20px">⭐</span> Reseñas</a>
     <div class="mobile-divider"></div>
-    <a href="#por-que" onclick="closeMenu()">Quiénes somos</a>
+    <a href="#quienes-somos" onclick="closeMenu()">Quiénes somos</a>
     <a href="#como-funciona" onclick="closeMenu()">Cómo funciona</a>
     <a href="#canales" class="mobile-cta-btn" onclick="closeMenu()">Empezar ahora →</a>
   </div>
@@ -464,6 +482,21 @@ footer {
     </div>
   </div>
 </section>
+
+<!-- LOGOS STRIP -->
+<div class="logos-strip">
+  <div class="container">
+    <div class="logos-label">Confían en empentIA</div>
+    <div class="logos-row">
+      <div class="logo-item">Ciclos Martí</div>
+      <div class="logo-item alt">SECURITY+</div>
+      <div class="logo-item">Distribuciones B2B</div>
+      <div class="logo-item alt">Clinic Health</div>
+      <div class="logo-item">TechStore</div>
+      <div class="logo-item alt">FoodPlus</div>
+    </div>
+  </div>
+</div>
 
 <!-- EL PROBLEMA -->
 <section>
@@ -564,7 +597,7 @@ footer {
 </section>
 
 <!-- POR QUÉ EMPENTIA -->
-<section id="por-que">
+<section id="por-que" data-quienes>
   <div class="container">
     <div class="why-grid">
       <div>
@@ -620,6 +653,23 @@ footer {
           <div class="stat-label">Satisfacción media del cliente</div>
           <div class="stat-value">4.7★</div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUIÉNES SOMOS -->
+<section class="founder" id="quienes-somos">
+  <div class="container">
+    <div class="founder-inner">
+      <div class="founder-photo"></div>
+      <div>
+        <div class="section-label">Quiénes somos</div>
+        <div class="founder-quote">
+          "Creamos empentIA porque ningún negocio debería resignarse a perder oportunidades por no poder responder a tiempo. La IA puede atender, asesorar y vender. Y nosotros nos encargamos de que funcione bien."
+        </div>
+        <div class="founder-name">Marc Soler</div>
+        <div class="founder-role">Fundador · empentIA · Igualada</div>
       </div>
     </div>
   </div>
