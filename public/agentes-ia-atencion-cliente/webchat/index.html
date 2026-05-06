@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agente IA Llamadas | empentIA</title>
-<meta name="description" content="Un agente de voz IA que recibe llamadas, responde consultas y gestiona citas. Sin perder ninguna llamada.">
+<title>Agente IA Webchat | empentIA</title>
+<meta name="description" content="Un agente IA en tu web que responde preguntas, califica leads y cierra ventas las 24 horas. Sin intervención humana.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -13,7 +13,8 @@
   --bg: #fafaf7; --bg-alt: #f4f3ee; --bg-card: #ffffff;
   --ink: #1a1a1a; --ink-soft: #4a4a4a; --ink-mute: #8a8a85;
   --line: #e8e6df; --line-soft: #efede6;
-  --ch: #5a3d7a; --max: 1240px;
+  --accent: #1a1a1a; --positive: #2d5a3d;
+  --ch: #2d5a3d; --max: 1240px;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -32,49 +33,39 @@ nav { position: sticky; top: 0; z-index: 100; background: rgba(250,250,247,0.88)
 .nav-cta:hover { opacity: .88; }
 @media (max-width: 900px) { .nav-links a:not(.nav-cta):not(.nav-back) { display: none; } }
 
+/* HERO */
 .hero { padding: 100px 0 90px; position: relative; overflow: hidden; }
-.hero::before { content: ''; position: absolute; top: -180px; right: -180px; width: 560px; height: 560px; background: radial-gradient(circle, rgba(90,61,122,0.05) 0%, transparent 70%); pointer-events: none; }
+.hero::before { content: ''; position: absolute; top: -180px; right: -180px; width: 560px; height: 560px; background: radial-gradient(circle, rgba(45,90,61,0.06) 0%, transparent 70%); pointer-events: none; }
 .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: center; }
-.channel-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 8px; background: rgba(90,61,122,0.08); border: 1px solid rgba(90,61,122,0.18); border-radius: 100px; font-size: 13px; color: var(--ch); margin-bottom: 28px; font-weight: 500; }
+.channel-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 8px; background: rgba(45,90,61,0.08); border: 1px solid rgba(45,90,61,0.18); border-radius: 100px; font-size: 13px; color: var(--ch); margin-bottom: 28px; font-weight: 500; }
 h1 { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(44px, 5.5vw, 72px); line-height: 1.02; letter-spacing: -0.035em; margin-bottom: 28px; }
 h1 em { font-style: italic; font-weight: 300; color: var(--ink-soft); }
 .hero-sub { font-size: 19px; color: var(--ink-soft); line-height: 1.65; margin-bottom: 40px; max-width: 480px; }
 .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
 .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; border-radius: 100px; font-size: 15px; font-weight: 500; text-decoration: none; transition: all .2s; cursor: pointer; border: none; }
-.btn-primary { background: var(--ch); color: white; } .btn-primary:hover { opacity: .88; }
-.btn-secondary { background: transparent; color: var(--ink); border: 1px solid var(--line); } .btn-secondary:hover { border-color: var(--ink-mute); }
+.btn-primary { background: var(--ch); color: white; }
+.btn-primary:hover { opacity: .88; }
+.btn-secondary { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.btn-secondary:hover { border-color: var(--ink-mute); }
 
-/* Call mockup */
-.call-mockup { background: #1a1a2e; border-radius: 40px; padding: 40px 32px; box-shadow: 0 20px 60px rgba(0,0,0,0.12); max-width: 320px; margin: 0 auto; }
-.call-status { text-align: center; margin-bottom: 32px; }
-.call-icon { font-size: 56px; margin-bottom: 12px; }
-.call-name { font-size: 22px; font-weight: 600; color: white; margin-bottom: 4px; }
-.call-label { font-size: 13px; color: rgba(255,255,255,0.45); }
-.call-wave { display: flex; align-items: center; justify-content: center; gap: 4px; height: 40px; margin: 24px 0; }
-.call-wave span { display: inline-block; width: 4px; background: var(--ch); border-radius: 4px; animation: wave 1.2s ease-in-out infinite; }
-.call-wave span:nth-child(2) { animation-delay: .15s; }
-.call-wave span:nth-child(3) { animation-delay: .3s; }
-.call-wave span:nth-child(4) { animation-delay: .45s; }
-.call-wave span:nth-child(5) { animation-delay: .6s; }
-.call-wave span:nth-child(6) { animation-delay: .45s; }
-.call-wave span:nth-child(7) { animation-delay: .3s; }
-.call-wave span:nth-child(8) { animation-delay: .15s; }
-@keyframes wave {
-  0%, 100% { height: 8px; }
-  50% { height: 36px; }
-}
-.call-transcript { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 16px; margin-bottom: 28px; }
-.call-line { font-size: 12.5px; line-height: 1.6; margin-bottom: 8px; }
-.call-line:last-child { margin-bottom: 0; }
-.call-line.agent { color: rgba(255,255,255,0.6); }
-.call-line.agent::before { content: '🤖 '; }
-.call-line.user { color: rgba(255,255,255,0.9); }
-.call-line.user::before { content: '👤 '; }
-.call-actions { display: flex; justify-content: center; gap: 20px; }
-.call-btn { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-.call-btn-end { background: #e53e3e; }
-.call-btn-mute { background: rgba(255,255,255,0.1); }
+/* Hero chat mockup */
+.chat-mockup { background: var(--bg-card); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.07); }
+.chat-header { background: var(--ch); padding: 16px 20px; display: flex; align-items: center; gap: 12px; }
+.chat-avatar { width: 36px; height: 36px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.chat-header-info { color: white; }
+.chat-header-name { font-size: 14px; font-weight: 600; }
+.chat-header-status { font-size: 11px; opacity: .75; }
+.chat-body { padding: 20px; display: flex; flex-direction: column; gap: 12px; min-height: 280px; }
+.msg { max-width: 80%; padding: 11px 14px; border-radius: 14px; font-size: 13.5px; line-height: 1.5; }
+.msg-bot { background: var(--bg-alt); border-bottom-left-radius: 4px; align-self: flex-start; }
+.msg-user { background: var(--ch); color: white; border-bottom-right-radius: 4px; align-self: flex-end; }
+.msg-time { font-size: 10.5px; color: var(--ink-mute); margin-top: 2px; }
+.msg-time.right { text-align: right; }
+.chat-input { padding: 16px 20px; border-top: 1px solid var(--line-soft); display: flex; gap: 10px; }
+.chat-input-field { flex: 1; background: var(--bg-alt); border: 1px solid var(--line); border-radius: 100px; padding: 10px 16px; font-size: 13.5px; color: var(--ink-mute); }
+.chat-send { width: 36px; height: 36px; background: var(--ch); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; }
 
+/* SECTIONS */
 section { padding: 110px 0; }
 .section-alt { background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .section-label { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 20px; }
@@ -82,23 +73,29 @@ section { padding: 110px 0; }
 h2 { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(32px, 4vw, 52px); line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 24px; }
 h2 em { font-style: italic; font-weight: 300; color: var(--ink-soft); }
 
+/* FEATURES */
 .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
 .feature { background: var(--bg-card); border: 1px solid var(--line); padding: 36px 32px; }
-.feature:nth-child(1) { border-radius: 16px 0 0 0; } .feature:nth-child(2) { border-radius: 0 16px 0 0; }
-.feature:nth-child(3) { border-radius: 0 0 0 16px; } .feature:nth-child(4) { border-radius: 0 0 16px 0; }
+.feature:nth-child(1) { border-radius: 16px 0 0 0; }
+.feature:nth-child(2) { border-radius: 0 16px 0 0; }
+.feature:nth-child(3) { border-radius: 0 0 0 16px; }
+.feature:nth-child(4) { border-radius: 0 0 16px 0; }
 .feature-icon { font-size: 28px; margin-bottom: 16px; }
 .feature-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
 .feature-desc { font-size: 14px; color: var(--ink-soft); line-height: 1.65; }
 
+/* STEPS */
 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
 .step { background: var(--bg-card); border: 1px solid var(--line); padding: 40px 32px; }
-.step:first-child { border-radius: 16px 0 0 16px; } .step:last-child { border-radius: 0 16px 16px 0; }
+.step:first-child { border-radius: 16px 0 0 16px; }
+.step:last-child { border-radius: 0 16px 16px 0; }
 .step-num { font-family: 'Fraunces', serif; font-size: 52px; font-weight: 400; color: var(--line); line-height: 1; margin-bottom: 20px; }
 .step-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
 .step-desc { font-size: 14px; color: var(--ink-soft); line-height: 1.65; }
 
+/* PRICING */
 .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 60px; }
-.plan { background: var(--bg-card); border: 1px solid var(--line); border-radius: 20px; padding: 36px 30px; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+.plan { background: var(--bg-card); border: 1px solid var(--line); border-radius: 20px; padding: 36px 30px; display: flex; flex-direction: column; gap: 0; position: relative; overflow: hidden; }
 .plan.featured { border-color: var(--ch); border-width: 2px; }
 .plan-badge { position: absolute; top: 20px; right: 20px; background: var(--ch); color: white; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 100px; }
 .plan-name { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-mute); margin-bottom: 20px; }
@@ -108,11 +105,14 @@ h2 em { font-style: italic; font-weight: 300; color: var(--ink-soft); }
 .plan-divider { height: 1px; background: var(--line-soft); margin-bottom: 24px; }
 .plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; flex: 1; }
 .plan-features li { font-size: 14px; color: var(--ink-soft); display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
-.plan-features li::before { content: '✓'; color: var(--ch); font-weight: 600; flex-shrink: 0; }
+.plan-features li::before { content: '✓'; color: var(--ch); font-weight: 600; flex-shrink: 0; margin-top: 1px; }
 .plan-cta { margin-top: 28px; display: block; text-align: center; padding: 13px; border-radius: 100px; font-size: 14.5px; font-weight: 500; text-decoration: none; transition: all .2s; }
-.plan-cta-outline { border: 1px solid var(--line); color: var(--ink); } .plan-cta-outline:hover { border-color: var(--ink-mute); }
-.plan-cta-filled { background: var(--ch); color: white; } .plan-cta-filled:hover { opacity: .88; }
+.plan-cta-outline { border: 1px solid var(--line); color: var(--ink); }
+.plan-cta-outline:hover { border-color: var(--ink-mute); }
+.plan-cta-filled { background: var(--ch); color: white; }
+.plan-cta-filled:hover { opacity: .88; }
 
+/* FAQ */
 .faq-list { max-width: 720px; margin-top: 60px; }
 .faq-item { border-bottom: 1px solid var(--line); padding: 28px 0; }
 .faq-item:first-child { border-top: 1px solid var(--line); }
@@ -122,6 +122,7 @@ h2 em { font-style: italic; font-weight: 300; color: var(--ink-soft); }
 .faq-item.open .faq-a { max-height: 300px; padding-top: 14px; }
 .faq-item.open .faq-icon { transform: rotate(45deg); }
 
+/* CTA FINAL */
 .cta-box { background: var(--ch); border-radius: 24px; padding: 72px 60px; text-align: center; color: white; }
 .cta-box h2 { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(32px, 4vw, 52px); line-height: 1.08; letter-spacing: -0.025em; color: white; margin-bottom: 16px; }
 .cta-box h2 em { font-style: italic; font-weight: 300; opacity: .75; }
@@ -130,6 +131,7 @@ h2 em { font-style: italic; font-weight: 300; color: var(--ink-soft); }
 .btn-white:hover { opacity: .92; }
 .cta-note { font-size: 13px; opacity: .6; margin-top: 16px; }
 
+/* FOOTER */
 footer { border-top: 1px solid var(--line); padding: 48px 32px; }
 .footer-inner { max-width: var(--max); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
 .footer-logo img { height: 28px; opacity: .4; }
@@ -143,7 +145,8 @@ footer { border-top: 1px solid var(--line); padding: 48px 32px; }
   .features-grid, .steps, .pricing-grid { grid-template-columns: 1fr; gap: 12px; }
   .feature, .step { border-radius: 16px !important; }
   h1 { font-size: 42px; } h2 { font-size: 32px; }
-  section { padding: 72px 0; } .cta-box { padding: 48px 28px; }
+  section { padding: 72px 0; }
+  .cta-box { padding: 48px 28px; }
 }
 </style>
 </head>
@@ -153,7 +156,7 @@ footer { border-top: 1px solid var(--line); padding: 48px 32px; }
   <div class="nav-inner">
     <a href="/" class="logo"><img src="/images/logo/logo-horizontal.svg" alt="empentIA"></a>
     <div class="nav-links">
-      <a href="/agentes-ia/" class="nav-back">← Todos los servicios</a>
+      <a href="/agentes-ia-atencion-cliente/" class="nav-back">← Todos los servicios</a>
       <a href="#funcionalidades">Funcionalidades</a>
       <a href="#pricing">Precios</a>
       <a href="#pricing" class="nav-cta">Contratar</a>
@@ -161,43 +164,45 @@ footer { border-top: 1px solid var(--line); padding: 48px 32px; }
   </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
   <div class="container">
     <div class="hero-grid">
       <div>
-        <div class="channel-badge">📞 Agente IA · Llamadas</div>
-        <h1 class="serif">Ninguna llamada<br>sin<br><em>respuesta.</em></h1>
-        <p class="hero-sub">Un agente de voz con IA que coge el teléfono, responde consultas y gestiona citas. Como tener una recepcionista, sin el coste fijo.</p>
+        <div class="channel-badge">💬 Agente IA · Webchat</div>
+        <h1 class="serif">Tu web vende<br>mientras<br><em>duermes.</em></h1>
+        <p class="hero-sub">Un agente de IA que responde preguntas, califica leads y genera presupuestos en tu web. 24 horas. Sin que tú intervengas.</p>
         <div class="hero-ctas">
           <a href="#pricing" class="btn btn-primary">Ver planes →</a>
           <a href="#funcionalidades" class="btn btn-secondary">Qué incluye</a>
         </div>
       </div>
       <div>
-        <div class="call-mockup">
-          <div class="call-status">
-            <div class="call-icon">📞</div>
-            <div class="call-name">Asistente empentIA</div>
-            <div class="call-label">Llamada en curso · 01:24</div>
+        <div class="chat-mockup">
+          <div class="chat-header">
+            <div class="chat-avatar">🤖</div>
+            <div class="chat-header-info">
+              <div class="chat-header-name">Asistente empentIA</div>
+              <div class="chat-header-status">● En línea ahora</div>
+            </div>
           </div>
-          <div class="call-wave">
-            <span style="height:12px"></span>
-            <span style="height:24px"></span>
-            <span style="height:36px"></span>
-            <span style="height:28px"></span>
-            <span style="height:16px"></span>
-            <span style="height:28px"></span>
-            <span style="height:36px"></span>
-            <span style="height:20px"></span>
+          <div class="chat-body">
+            <div>
+              <div class="msg msg-bot">¡Hola! Soy el asistente virtual de TuTienda. ¿En qué puedo ayudarte hoy?</div>
+              <div class="msg-time">10:42</div>
+            </div>
+            <div>
+              <div class="msg msg-user">¿Tenéis el modelo X en talla M?</div>
+              <div class="msg-time right">10:42</div>
+            </div>
+            <div>
+              <div class="msg msg-bot">¡Sí! El modelo X está disponible en talla M en azul marino y negro. ¿Quieres que te envíe el enlace directo o te genero un presupuesto?</div>
+              <div class="msg-time">10:42</div>
+            </div>
           </div>
-          <div class="call-transcript">
-            <div class="call-line agent">Buenos días, gracias por llamar a TuClínica. ¿En qué puedo ayudarle?</div>
-            <div class="call-line user">Quería pedir cita con el Dr. García para esta semana.</div>
-            <div class="call-line agent">Claro. Tengo disponible el miércoles a las 10:30h o el jueves a las 17:00h. ¿Cuál le va mejor?</div>
-          </div>
-          <div class="call-actions">
-            <div class="call-btn call-btn-mute">🔇</div>
-            <div class="call-btn call-btn-end">📵</div>
+          <div class="chat-input">
+            <div class="chat-input-field">Escribe tu pregunta...</div>
+            <div class="chat-send">→</div>
           </div>
         </div>
       </div>
@@ -205,78 +210,81 @@ footer { border-top: 1px solid var(--line); padding: 48px 32px; }
   </div>
 </section>
 
+<!-- FUNCIONALIDADES -->
 <section class="section-alt" id="funcionalidades">
   <div class="container">
     <div class="section-label">Funcionalidades</div>
-    <h2>Una voz para<br><em>tu negocio.</em></h2>
-    <p class="section-intro">El agente habla de forma natural, entiende el contexto y actúa: reserva citas, da información y transfiere cuando hace falta.</p>
+    <h2>No es un chatbot de<br><em>respuestas enlatadas.</em></h2>
+    <p class="section-intro">Entiende el contexto, recuerda la conversación y actúa sobre tu negocio en tiempo real.</p>
     <div class="features-grid">
       <div class="feature">
-        <div class="feature-icon">📅</div>
-        <div class="feature-title">Gestión de citas por voz</div>
-        <div class="feature-desc">Reserva, modifica y cancela citas hablando. Sincronizado con tu calendario (Google Calendar, Calendly u otros).</div>
+        <div class="feature-icon">🔍</div>
+        <div class="feature-title">Búsqueda de productos</div>
+        <div class="feature-desc">Encuentra artículos por nombre, categoría, precio o características. Compatible con catálogos estáticos o sincronización via API.</div>
       </div>
       <div class="feature">
-        <div class="feature-icon">🗣️</div>
-        <div class="feature-title">Respuesta a consultas frecuentes</div>
-        <div class="feature-desc">Horarios, ubicación, precios, disponibilidad. El agente responde al instante sin que tengas que coger el teléfono.</div>
+        <div class="feature-icon">📋</div>
+        <div class="feature-title">Generación de presupuestos</div>
+        <div class="feature-desc">Genera y envía presupuestos por email con productos, precios e IVA desglosado. Sin intervención manual.</div>
       </div>
       <div class="feature">
-        <div class="feature-icon">🔀</div>
-        <div class="feature-title">Transferencia inteligente</div>
-        <div class="feature-desc">Cuando la consulta requiere atención humana, transfiere la llamada a la persona correcta con contexto previo.</div>
+        <div class="feature-icon">🎯</div>
+        <div class="feature-title">Captación de leads</div>
+        <div class="feature-desc">Identifica y captura el contacto de los visitantes con interés real. Los exportas desde tu panel cuando quieras.</div>
       </div>
       <div class="feature">
-        <div class="feature-icon">📝</div>
-        <div class="feature-title">Transcripción y resumen</div>
-        <div class="feature-desc">Cada llamada queda grabada y transcrita en tu panel. Resumen automático de lo hablado y las acciones tomadas.</div>
+        <div class="feature-icon">📊</div>
+        <div class="feature-title">Panel de control</div>
+        <div class="feature-desc">Ve todas las conversaciones, leads captados y métricas de rendimiento en tiempo real desde tu dashboard privado.</div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- COMO FUNCIONA -->
 <section>
   <div class="container">
     <div class="section-label">El proceso</div>
-    <h2>Tu agente de voz,<br><em>activo en 48 horas.</em></h2>
-    <p class="section-intro">Te damos un número de teléfono o redirigimos el tuyo. Tú eliges.</p>
+    <h2>Activo en tu web<br><em>en menos de 24h.</em></h2>
+    <p class="section-intro">Sin tocar código. Sin configuraciones complicadas. Lo hacemos nosotros.</p>
     <div class="steps">
       <div class="step">
         <div class="step-num">01</div>
-        <div class="step-title">Número y configuración</div>
-        <div class="step-desc">Te damos un número nuevo o configuramos la redirección de tu número actual. Defines horarios, idioma y voz del agente.</div>
+        <div class="step-title">Nos das la info de tu negocio</div>
+        <div class="step-desc">Productos, servicios, preguntas frecuentes y tono de comunicación. Con un formulario guiado de 15 minutos.</div>
       </div>
       <div class="step">
         <div class="step-num">02</div>
-        <div class="step-title">El agente aprende tu negocio</div>
-        <div class="step-desc">Le damos información de tu negocio, servicios y cómo gestionar las situaciones más habituales. Lo probamos juntos antes de activarlo.</div>
+        <div class="step-title">Configuramos el agente</div>
+        <div class="step-desc">Entrenamos el agente con tu información y lo ajustamos para que hable como parte de tu equipo.</div>
       </div>
       <div class="step">
         <div class="step-num">03</div>
-        <div class="step-title">Activo y supervisado</div>
-        <div class="step-desc">El agente empieza a coger llamadas. Ves todas las transcripciones en tu panel y puedes ajustar en cualquier momento.</div>
+        <div class="step-title">Pones el snippet en tu web</div>
+        <div class="step-desc">Un fragmento de código de una línea en tu web (como Google Analytics). El agente aparece y empieza a atender.</div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- PRICING -->
 <section class="section-alt" id="pricing">
   <div class="container">
-    <div class="section-label">Membresía Llamadas</div>
+    <div class="section-label">Membresía Webchat</div>
     <h2>Planes claros,<br><em>sin sorpresas.</em></h2>
     <p class="section-intro">Sin permanencia. Cancela cuando quieras. Cambia de plan en cualquier momento.</p>
     <div class="pricing-grid">
       <div class="plan">
         <div class="plan-name">Starter</div>
-        <div class="plan-price">79<span>€/mes</span></div>
-        <div class="plan-tagline">Para negocios que reciben llamadas frecuentes con consultas repetitivas.</div>
+        <div class="plan-price">49<span>€/mes</span></div>
+        <div class="plan-tagline">Para empezar a automatizar las consultas más frecuentes.</div>
         <div class="plan-divider"></div>
         <ul class="plan-features">
-          <li>Hasta 100 minutos/mes</li>
-          <li>1 agente de voz</li>
-          <li>Respuesta a FAQs por voz</li>
-          <li>Transcripción de llamadas</li>
-          <li>Panel de llamadas</li>
+          <li>Hasta 500 conversaciones/mes</li>
+          <li>1 agente en 1 web</li>
+          <li>Respuestas a FAQs y catálogo</li>
+          <li>Captación de leads</li>
+          <li>Panel de conversaciones</li>
           <li>Soporte por email</li>
         </ul>
         <a href="#contacto" class="plan-cta plan-cta-outline">Contratar Starter</a>
@@ -284,31 +292,33 @@ footer { border-top: 1px solid var(--line); padding: 48px 32px; }
       <div class="plan featured">
         <div class="plan-badge">Más popular</div>
         <div class="plan-name">Pro</div>
-        <div class="plan-price">149<span>€/mes</span></div>
-        <div class="plan-tagline">Para negocios con volumen de llamadas y gestión de citas.</div>
+        <div class="plan-price">99<span>€/mes</span></div>
+        <div class="plan-tagline">Para negocios con volumen medio que quieren resultados reales.</div>
         <div class="plan-divider"></div>
         <ul class="plan-features">
-          <li>Hasta 500 minutos/mes</li>
-          <li>Gestión de citas integrada</li>
-          <li>Transferencia de llamadas</li>
-          <li>Grabación y transcripción</li>
-          <li>Resumen automático por llamada</li>
+          <li>Hasta 2.000 conversaciones/mes</li>
+          <li>1 agente en hasta 3 webs</li>
+          <li>Generación de presupuestos por email</li>
+          <li>Multiidioma (ES, CA, EN)</li>
+          <li>Exportación de leads en CSV</li>
+          <li>Integración con tu CRM</li>
           <li>Soporte prioritario</li>
         </ul>
         <a href="#contacto" class="plan-cta plan-cta-filled">Contratar Pro</a>
       </div>
       <div class="plan">
         <div class="plan-name">Business</div>
-        <div class="plan-price">299<span>€/mes</span></div>
-        <div class="plan-tagline">Para empresas con alto volumen de llamadas o múltiples líneas.</div>
+        <div class="plan-price">199<span>€/mes</span></div>
+        <div class="plan-tagline">Para eCommerce y empresas con alto volumen y necesidades avanzadas.</div>
         <div class="plan-divider"></div>
         <ul class="plan-features">
-          <li>Minutos ilimitados</li>
-          <li>Múltiples agentes y colas</li>
-          <li>Integración con tu CRM</li>
-          <li>Análisis avanzado de llamadas</li>
+          <li>Conversaciones ilimitadas</li>
+          <li>Webs ilimitadas</li>
           <li>Acceso a API</li>
+          <li>Personalización avanzada del agente</li>
+          <li>Informes mensuales de rendimiento</li>
           <li>Gestor de cuenta dedicado</li>
+          <li>SLA garantizado</li>
         </ul>
         <a href="#contacto" class="plan-cta plan-cta-outline">Contratar Business</a>
       </div>
@@ -316,37 +326,43 @@ footer { border-top: 1px solid var(--line); padding: 48px 32px; }
   </div>
 </section>
 
+<!-- FAQ -->
 <section>
   <div class="container">
     <div class="section-label">FAQ</div>
     <h2>Preguntas <em>frecuentes.</em></h2>
     <div class="faq-list">
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">¿Suena como un robot? <span class="faq-icon">+</span></button>
-        <div class="faq-a">No. Usamos síntesis de voz de última generación con entonación natural. La mayoría de usuarios no lo distinguen de una persona. Puedes elegir entre diferentes voces y acentos.</div>
+        <button class="faq-q" onclick="toggleFaq(this)">¿Funciona con cualquier web? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Sí. Funciona con WordPress, Shopify, Prestashop, webs custom o cualquier plataforma que permita insertar código HTML. Solo necesitas pegar un snippet de una línea.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">¿Puedo mantener mi número actual? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Sí. Configuramos una redirección de llamadas desde tu número actual al agente. También podemos darte un número nuevo si lo prefieres.</div>
+        <button class="faq-q" onclick="toggleFaq(this)">¿Cuánto tarda en estar configurado? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Menos de 24 horas desde que nos envías la información de tu negocio. El proceso de onboarding está guiado y tarda unos 15 minutos.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">¿Funciona fuera del horario de atención? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Sí. Puedes configurarlo para que atienda 24/7 o solo fuera de tu horario habitual (cuando tú no puedes coger el teléfono). Durante tu horario puedes tener redirección a tu equipo primero.</div>
+        <button class="faq-q" onclick="toggleFaq(this)">¿Qué pasa si el agente no sabe responder? <span class="faq-icon">+</span></button>
+        <div class="faq-a">El agente lo detecta y ofrece al cliente dejar sus datos de contacto para que tú le respondas. También puedes configurar un escalado automático por email.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">¿Qué idiomas habla? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Principalmente español y catalán. En el plan Business también inglés, francés y portugués. El agente detecta el idioma del llamante y responde en consecuencia.</div>
+        <button class="faq-q" onclick="toggleFaq(this)">¿Puedo personalizar el aspecto del chat? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Sí. Colores, nombre del asistente, avatar y saludo inicial son personalizables en todos los planes. En Business tienes opciones avanzadas de estilo.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Puedo cancelar cuando quiera? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Sí. Sin permanencia ni penalizaciones. Cancelas desde tu panel y el servicio se mantiene activo hasta el final del período facturado.</div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- CTA FINAL -->
 <section id="contacto">
   <div class="container">
     <div class="cta-box">
-      <h2 class="serif">Nunca más una llamada<br><em>sin respuesta.</em></h2>
-      <p>Activa el agente de voz y atiende a tus clientes aunque estés ocupado.</p>
-      <a href="mailto:hola@empentia.ai?subject=Quiero activar el Agente de Llamadas" class="btn btn-white">Activar ahora →</a>
+      <h2 class="serif">Tu web, atendiendo<br><em>desde mañana.</em></h2>
+      <p>Activa el agente webchat y empieza a captar leads mientras duermes.</p>
+      <a href="mailto:hola@empentia.ai?subject=Quiero activar el Webchat IA" class="btn btn-white">Activar ahora →</a>
       <div class="cta-note">Sin compromiso · Cancela cuando quieras</div>
     </div>
   </div>
@@ -357,7 +373,7 @@ footer { border-top: 1px solid var(--line); padding: 48px 32px; }
     <a href="/" class="logo footer-logo"><img src="/images/logo/logo-horizontal.svg" alt="empentIA"></a>
     <p class="footer-copy">© 2025 empentIA. Todos los derechos reservados.</p>
     <div class="footer-links">
-      <a href="/agentes-ia/">← Todos los servicios</a>
+      <a href="/agentes-ia-atencion-cliente/">← Todos los servicios</a>
       <a href="/legal">Aviso legal</a>
       <a href="/privacy">Privacidad</a>
     </div>
