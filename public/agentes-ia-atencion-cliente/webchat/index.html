@@ -1529,8 +1529,8 @@ h2 em {
   overflow: hidden;
   border: 1px solid var(--line);
 }
-.founder-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.founder-photo:has(img)::after { content: none; }
+.founder-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; z-index: 2; }
+.founder-photo:has(img)::after { content: none !important; display: none !important; }
 .founder-photo::after {
   content: '';
   position: absolute;
