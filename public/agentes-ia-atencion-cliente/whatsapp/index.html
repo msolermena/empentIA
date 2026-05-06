@@ -4,167 +4,2065 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agente IA WhatsApp | empentIA</title>
-<meta name="description" content="Atiende a tus clientes en WhatsApp con un agente de IA. Respuestas instantáneas, 24 horas, sin operadores adicionales.">
+<meta name="description" content="Atiende a tus clientes en WhatsApp con un agente IA. Respuestas instantáneas, 24h, sin operadores adicionales.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #fafaf7; --bg-alt: #f4f3ee; --bg-card: #ffffff;
-  --ink: #1a1a1a; --ink-soft: #4a4a4a; --ink-mute: #8a8a85;
-  --line: #e8e6df; --line-soft: #efede6;
-  --ch: #1a7a3a; --max: 1240px;
+  --bg: #fafaf7;
+  --bg-alt: #f4f3ee;
+  --bg-card: #ffffff;
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --ink-mute: #8a8a85;
+  --line: #e8e6df;
+  --line-soft: #efede6;
+  --accent: #1a1a1a;
+  --accent-hover: #2a2a2a;
+  --positive: #1a7a3a;
+  --warning: #9a5a1a;
+  --max: 1240px;
 }
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
+
 html { scroll-behavior: smooth; }
-body { font-family: 'Instrument Sans', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.5; font-size: 16px; -webkit-font-smoothing: antialiased; }
-.serif { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
-.container { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
-nav { position: sticky; top: 0; z-index: 100; background: rgba(250,250,247,0.88); backdrop-filter: blur(20px); border-bottom: 1px solid var(--line-soft); }
-.nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 18px 32px; max-width: var(--max); margin: 0 auto; }
-.logo { display: flex; align-items: center; text-decoration: none; }
-.logo img { height: 30px; }
-.nav-links { display: flex; align-items: center; gap: 28px; }
-.nav-links a { color: var(--ink-soft); text-decoration: none; font-size: 14.5px; font-weight: 500; transition: color .2s; }
+
+body {
+  font-family: 'Instrument Sans', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.5;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.serif {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
+}
+
+.mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.container {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ===== NAV ===== */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 250, 247, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line-soft);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.logo img {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+footer .logo img {
+  height: 36px;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+.nav-links a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-size: 14.5px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
 .nav-links a:hover { color: var(--ink); }
-.nav-back { font-size: 13.5px !important; color: var(--ink-mute) !important; }
-.nav-cta { background: var(--ch); color: white !important; padding: 9px 20px; border-radius: 100px; font-size: 14px !important; font-weight: 500; }
-.nav-cta:hover { opacity: .88; }
+.nav-cta {
+  background: var(--ink);
+  color: var(--bg) !important;
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-size: 14px !important;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--accent-hover); }
+.nav-lang {
+  font-size: 13px !important;
+  color: var(--ink-mute) !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .nav-links a:not(.nav-cta):not(.nav-client) { display: none; }
+}
+
+/* ===== HERO ===== */
+.hero {
+  padding: 100px 0 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(26, 122, 58, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px 6px 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 32px;
+  font-weight: 500;
+}
+.pulse-dot {
+  width: 16px;
+  height: 16px;
+  background: #1a7a3a;
+  border-radius: 50%;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.pulse-dot::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  background: var(--bg-card);
+  border-radius: 50%;
+}
+.pulse-dot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #1a7a3a;
+  border-radius: 50%;
+  animation: pulse 2s ease-out infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(44px, 6vw, 78px);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  margin-bottom: 28px;
+  color: var(--ink);
+}
+h1 em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--ink-soft);
+}
+.hero-sub {
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin-bottom: 40px;
+  max-width: 540px;
+}
+.hero-ctas {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 28px;
+  border-radius: 100px;
+  font-weight: 500;
+  font-size: 15px;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+.btn-primary {
+  background: var(--ink);
+  color: var(--bg);
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line);
+}
+.btn-secondary:hover {
+  background: var(--bg-card);
+  border-color: var(--ink);
+}
+.btn-arrow { transition: transform 0.2s; }
+.btn:hover .btn-arrow { transform: translateX(3px); }
+
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+.stat-num {
+  font-family: 'Fraunces', serif;
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-label {
+  font-size: 13px;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ===== HERO VISUAL (CHAT MOCKUP) ===== */
+.hero-visual {
+  position: relative;
+  padding: 20px;
+}
+.browser-mock {
+  background: var(--bg-card);
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  box-shadow: 0 40px 80px -20px rgba(0,0,0,0.08), 0 20px 40px -20px rgba(0,0,0,0.04);
+  overflow: hidden;
+  position: relative;
+}
+.browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line-soft);
+  background: var(--bg-alt);
+}
+.browser-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--line);
+}
+.browser-url {
+  margin-left: 12px;
+  padding: 4px 14px;
+  background: var(--bg-card);
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--ink-mute);
+  font-family: 'JetBrains Mono', monospace;
+  flex: 1;
+}
+.browser-content {
+  padding: 28px 24px 24px;
+  min-height: 380px;
+  position: relative;
+  background:
+    linear-gradient(to bottom, var(--bg-card) 0%, var(--bg-alt) 100%);
+}
+.fake-product {
+  display: flex;
+  gap: 14px;
+  padding: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--line-soft);
+  border-radius: 10px;
+  margin-bottom: 14px;
+}
+.fake-img {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, #e8e6df, #d4d1c7);
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+.fake-product-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.fake-product-meta {
+  font-size: 11px;
+  color: var(--ink-mute);
+}
+.fake-price {
+  margin-left: auto;
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* Chat widget floating */
+.chat-widget {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  background: var(--bg-card);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px -10px rgba(0,0,0,0.15), 0 10px 20px -10px rgba(0,0,0,0.08);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  animation: floatIn 1s ease-out;
+}
+@keyframes floatIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.chat-header {
+  padding: 14px 16px;
+  background: var(--ink);
+  color: var(--bg);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.chat-avatar {
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, #fafaf7, #d4d1c7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', serif;
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 13px;
+}
+.chat-title {
+  font-size: 13px;
+  font-weight: 500;
+}
+.chat-status {
+  font-size: 11px;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.chat-status::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: #8fbf9f;
+  border-radius: 50%;
+}
+.chat-body {
+  padding: 16px;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.msg {
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 13px;
+  line-height: 1.4;
+  max-width: 85%;
+  animation: msgIn 0.5s ease-out both;
+}
+.msg-user {
+  background: var(--bg-alt);
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+  animation-delay: 0.2s;
+}
+.msg-bot {
+  background: var(--ink);
+  color: var(--bg);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+  animation-delay: 0.6s;
+}
+.msg-bot.second { animation-delay: 1.2s; }
+@keyframes msgIn {
+  from { transform: translateY(8px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.chat-input {
+  padding: 12px 16px;
+  border-top: 1px solid var(--line-soft);
+  font-size: 12px;
+  color: var(--ink-mute);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.chat-input::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--ink);
+  border-radius: 50%;
+  animation: blink 1s infinite;
+}
+@keyframes blink { 50% { opacity: 0.2; } }
+
+/* ===== LOGOS STRIP ===== */
+.logos-strip {
+  padding: 60px 0;
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+}
+.logos-label {
+  text-align: center;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-mute);
+  margin-bottom: 28px;
+}
+.logos-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+  opacity: 0.55;
+}
+.logo-item {
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.logo-item.alt {
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 14px;
+}
+
+/* ===== SECTIONS ===== */
+section { padding: 110px 0; }
+.section-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-mute);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(34px, 4.5vw, 54px);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  max-width: 800px;
+}
+h2 em {
+  font-style: italic;
+  font-weight: 300;
+}
+.section-intro {
+  font-size: 18px;
+  color: var(--ink-soft);
+  max-width: 600px;
+  margin-bottom: 60px;
+  line-height: 1.6;
+}
+
+/* ===== PROBLEM ===== */
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.problem-card {
+  padding: 36px 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.problem-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -20px rgba(0,0,0,0.08);
+}
+.problem-num {
+  font-family: 'Fraunces', serif;
+  font-size: 68px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.problem-num .small { font-size: 34px; vertical-align: top; margin-left: 2px; }
+.problem-headline {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+.problem-desc {
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+@media (max-width: 860px) {
+  .problem-grid { grid-template-columns: 1fr; }
+  .hero-grid { grid-template-columns: 1fr; gap: 60px; }
+  .hero-stats { flex-wrap: wrap; gap: 28px; }
+}
+
+/* ===== DEMO ===== */
+.demo-section {
+  background: var(--bg-alt);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.demo-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.demo-box {
+  background: var(--bg-card);
+  border-radius: 20px;
+  padding: 40px;
+  border: 1px solid var(--line);
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,0.08);
+  min-height: 480px;
+  position: relative;
+}
+.demo-prompts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+.demo-prompt {
+  padding: 8px 14px;
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.demo-prompt:hover {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+
+@media (max-width: 860px) {
+  .demo-inner { grid-template-columns: 1fr; gap: 40px; }
+}
+
+/* ===== VIDEO PLACEHOLDER ===== */
+.video-wrap {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: var(--bg-card);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.video-wrap:hover { transform: scale(1.01); }
+.video-inner {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(26,122,58,0.08) 0%, transparent 50%),
+    linear-gradient(135deg, var(--bg-alt) 0%, var(--bg-card) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.play-btn {
+  width: 80px;
+  height: 80px;
+  background: var(--ink);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 20px 40px -10px rgba(0,0,0,0.3);
+  transition: transform 0.2s;
+}
+.video-wrap:hover .play-btn { transform: scale(1.08); }
+.play-btn::after {
+  content: '';
+  border-left: 18px solid var(--bg);
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  margin-left: 5px;
+}
+.video-caption {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(26,26,26,0.85);
+  color: var(--bg);
+  padding: 8px 14px;
+  border-radius: 100px;
+  font-size: 12px;
+  backdrop-filter: blur(10px);
+}
+
+/* ===== FEATURES ===== */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.feature-card {
+  background: var(--bg);
+  padding: 36px 28px;
+  transition: background 0.2s;
+}
+.feature-card:hover { background: var(--bg-card); }
+.feature-icon {
+  width: 44px;
+  height: 44px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-alt);
+  border-radius: 10px;
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+}
+.feature-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+.feature-desc {
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+@media (max-width: 1000px) {
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .features-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== DASHBOARD PREVIEW ===== */
+.dashboard-section {
+  padding: 110px 0;
+  background: var(--bg-alt);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 80px;
+  align-items: center;
+}
+.dashboard-mock {
+  background: var(--bg-card);
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  box-shadow: 0 40px 80px -20px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+.dash-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--line-soft);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dash-title { font-size: 14px; font-weight: 600; }
+.dash-period {
+  font-size: 12px;
+  color: var(--ink-mute);
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+}
+.dash-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid var(--line-soft);
+}
+.dash-stat {
+  padding: 20px;
+  border-right: 1px solid var(--line-soft);
+}
+.dash-stat:last-child { border-right: none; }
+.dash-stat-label {
+  font-size: 11px;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+.dash-stat-val {
+  font-family: 'Fraunces', serif;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+.dash-stat-trend {
+  font-size: 11px;
+  color: var(--positive);
+  margin-top: 4px;
+}
+.dash-chart {
+  padding: 24px;
+  height: 180px;
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+}
+.bar {
+  flex: 1;
+  background: var(--line);
+  border-radius: 3px 3px 0 0;
+  position: relative;
+}
+.bar.active { background: var(--ink); }
+@media (max-width: 860px) {
+  .dashboard-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+
+/* ===== COMPARATIVE TABLE ===== */
+.plans-section { padding: 110px 0; }
+.plans-table-wrap {
+  overflow-x: auto;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+}
+.plans-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  min-width: 820px;
+}
+.plans-table th, .plans-table td {
+  padding: 20px 24px;
+  text-align: left;
+  border-bottom: 1px solid var(--line-soft);
+  vertical-align: top;
+}
+.plans-table thead th {
+  background: var(--bg-alt);
+  font-weight: 500;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-mute);
+}
+.plans-table thead th.featured {
+  background: var(--ink);
+  color: var(--bg);
+}
+.plan-name {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: var(--ink);
+  margin-bottom: 8px;
+  display: block;
+}
+.featured .plan-name { color: var(--bg); }
+.plan-price {
+  font-family: 'Fraunces', serif;
+  font-size: 30px;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  display: block;
+}
+.featured .plan-price { color: var(--bg); }
+.plan-price-period {
+  font-size: 13px;
+  color: var(--ink-mute);
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+  display: block;
+  margin-top: 4px;
+}
+.featured .plan-price-period { color: rgba(255,255,255,0.7); }
+.plan-badge {
+  display: inline-block;
+  background: #8fbf9f;
+  color: var(--ink);
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 8px;
+  letter-spacing: 0.02em;
+}
+.feature-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+}
+.feature-sub {
+  font-size: 12px;
+  color: var(--ink-mute);
+  margin-top: 3px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.cell-val {
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+.cell-val.highlight { color: var(--ink); font-weight: 500; }
+.check { color: var(--positive); font-size: 16px; }
+.cross { color: var(--ink-mute); font-size: 16px; }
+.plans-table tfoot td {
+  padding: 24px;
+  background: var(--bg-alt);
+}
+.plan-cta {
+  display: inline-block;
+  padding: 10px 18px;
+  background: var(--ink);
+  color: var(--bg);
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.plan-cta:hover { background: var(--accent-hover); }
+.plan-cta.outline {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+}
+.plan-cta.outline:hover { background: var(--ink); color: var(--bg); }
+
+/* Group rows (section separators inside the plans table) */
+.plans-table .group-row td.group-label {
+  background: var(--bg-alt);
+  padding: 14px 24px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-mute);
+  font-weight: 600;
+  border-bottom: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+}
+
+/* "Próximamente" badge inline in table cells */
+.soon-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 8px;
+  background: rgba(26, 122, 58, 0.08);
+  color: var(--positive);
+  border-radius: 100px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* Muted cells for "Personalizado" column */
+.cell-val.muted { color: var(--ink-mute); }
+
+/* ===== MODULES SECTION ===== */
+.modules-section {
+  padding: 110px 0;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+}
+.modules-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+  align-items: end;
+}
+.modules-header h2 { margin-bottom: 0; }
+.modules-header p {
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.6;
+}
+@media (max-width: 860px) {
+  .modules-header { grid-template-columns: 1fr; gap: 24px; }
+}
+
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.module-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+.module-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px -20px rgba(0,0,0,0.08);
+  border-color: var(--ink);
+}
+.module-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--positive);
+  background: rgba(26, 122, 58, 0.08);
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-weight: 600;
+}
+.module-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--bg-alt);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 500;
+}
+.module-title {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+  color: var(--ink);
+}
+.module-desc {
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  margin-bottom: 24px;
+  flex: 1;
+}
+.module-highlights {
+  list-style: none;
+  margin-bottom: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line-soft);
+}
+.module-highlights li {
+  font-size: 13px;
+  color: var(--ink-soft);
+  padding: 6px 0;
+  display: flex;
+  gap: 10px;
+}
+.module-highlights li::before {
+  content: '—';
+  color: var(--ink-mute);
+}
+.module-price {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-top: 20px;
+  border-top: 1px solid var(--line-soft);
+}
+.module-price-val {
+  font-family: 'Fraunces', serif;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.module-price-period {
+  font-size: 13px;
+  color: var(--ink-mute);
+  margin-left: 4px;
+}
+.module-link {
+  font-size: 13px;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 2px;
+  transition: opacity 0.2s;
+}
+.module-link:hover { opacity: 0.6; }
+@media (max-width: 900px) {
+  .modules-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .modules-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== SERVICES (one-time + recurring services) ===== */
+.services-section {
+  padding: 110px 0;
+  background: var(--bg-alt);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.service-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 44px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: start;
+}
+.service-tag {
+  display: inline-block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-mute);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+.service-title {
+  font-family: 'Fraunces', serif;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.service-title em { font-style: italic; font-weight: 300; }
+.service-desc {
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+.service-includes {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.service-includes li {
+  font-size: 14px;
+  color: var(--ink-soft);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.service-includes li::before {
+  content: '';
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid var(--ink);
+  flex-shrink: 0;
+  margin-top: 3px;
+  background:
+    radial-gradient(circle, var(--ink) 3px, transparent 4px);
+}
+.service-pricebox {
+  text-align: right;
+  padding-left: 24px;
+  border-left: 1px solid var(--line);
+  min-width: 160px;
+}
+.service-price-val {
+  font-family: 'Fraunces', serif;
+  font-size: 40px;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  display: block;
+}
+.service-price-note {
+  font-size: 12px;
+  color: var(--ink-mute);
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.service-cta {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 10px 16px;
+  background: var(--ink);
+  color: var(--bg);
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.service-cta:hover { background: var(--accent-hover); }
+@media (max-width: 900px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .service-card { grid-template-columns: 1fr; gap: 28px; padding: 36px 28px; }
+  .service-pricebox { border-left: none; border-top: 1px solid var(--line); padding-left: 0; padding-top: 24px; text-align: left; }
+}
+
+/* Builder/bundle example */
+.bundle-example {
+  margin-top: 60px;
+  padding: 36px;
+  background: var(--bg-card);
+  border: 1px dashed var(--line);
+  border-radius: 20px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: center;
+}
+.bundle-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-mute);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+.bundle-title {
+  font-family: 'Fraunces', serif;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.bundle-title em { font-style: italic; font-weight: 300; }
+.bundle-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.bundle-chip {
+  padding: 6px 12px;
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.bundle-chip strong { color: var(--ink); font-weight: 500; }
+.bundle-total {
+  text-align: right;
+  padding-left: 40px;
+  border-left: 1px solid var(--line);
+}
+.bundle-total-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-mute);
+  margin-bottom: 8px;
+}
+.bundle-total-val {
+  font-family: 'Fraunces', serif;
+  font-size: 40px;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.bundle-total-period {
+  font-size: 13px;
+  color: var(--ink-mute);
+  margin-top: 6px;
+}
+@media (max-width: 860px) {
+  .bundle-example { grid-template-columns: 1fr; gap: 24px; padding: 28px; }
+  .bundle-total { border-left: none; border-top: 1px solid var(--line); padding-left: 0; padding-top: 20px; text-align: left; }
+}
+
+.guarantee-strip {
+  margin-top: 40px;
+  padding: 24px 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+.guarantee-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.guarantee-item::before {
+  content: '✓';
+  color: var(--positive);
+  font-weight: 700;
+}
+
+/* ===== TESTIMONIALS ===== */
+.testimonials {
+  padding: 110px 0;
+  background: var(--bg-alt);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.testi-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+}
+.testi-quote {
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  line-height: 1.45;
+  color: var(--ink);
+  margin-bottom: 28px;
+  flex: 1;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.testi-quote::before {
+  content: '"';
+  font-size: 48px;
+  line-height: 0.5;
+  color: var(--ink-mute);
+  display: block;
+  margin-bottom: 16px;
+  font-weight: 300;
+}
+.testi-author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line-soft);
+}
+.testi-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #d4d1c7, #a8a49a);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  color: var(--bg);
+  font-size: 16px;
+}
+.testi-name { font-weight: 600; font-size: 14px; }
+.testi-role { font-size: 13px; color: var(--ink-mute); margin-top: 2px; }
+.testi-metric {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: var(--bg-alt);
+  border-radius: 10px;
+  font-size: 13px;
+}
+.testi-metric strong {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  display: block;
+  margin-bottom: 2px;
+  color: var(--positive);
+  letter-spacing: -0.02em;
+}
+@media (max-width: 860px) {
+  .testi-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== PROCESS ===== */
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  position: relative;
+}
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 32px;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: var(--line);
+  z-index: 0;
+}
+.step {
+  position: relative;
+  z-index: 1;
+}
+.step-num {
+  width: 64px;
+  height: 64px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+.step-time {
+  display: inline-block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-mute);
+  margin-bottom: 8px;
+}
+.step-title {
+  font-family: 'Fraunces', serif;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.step-desc {
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+@media (max-width: 860px) {
+  .process-steps { grid-template-columns: 1fr; gap: 30px; }
+  .process-steps::before { display: none; }
+}
+
+/* ===== NOT FOR YOU ===== */
+.not-for {
+  background: var(--bg-alt);
+  padding: 110px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.not-for-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+.nf-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 40px;
+}
+.nf-title {
+  font-family: 'Fraunces', serif;
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+.nf-subtitle {
+  font-size: 14px;
+  color: var(--ink-mute);
+  margin-bottom: 24px;
+}
+.nf-list { list-style: none; }
+.nf-list li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line-soft);
+  font-size: 14.5px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  color: var(--ink-soft);
+}
+.nf-list li:last-child { border-bottom: none; }
+.nf-list.positive li::before {
+  content: '✓';
+  color: var(--positive);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.nf-list.negative li::before {
+  content: '×';
+  color: var(--ink-mute);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+@media (max-width: 860px) {
+  .not-for-grid { grid-template-columns: 1fr; gap: 20px; }
+}
+
+/* ===== FOUNDER ===== */
+.founder {
+  padding: 110px 0;
+}
+.founder-inner {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 60px;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.founder-photo {
+  aspect-ratio: 1;
+  background:
+    radial-gradient(circle at 30% 30%, #e8e6df 0%, #a8a49a 100%);
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.founder-photo::after {
+  content: '';
+  position: absolute;
+  inset: 20%;
+  background: radial-gradient(circle, rgba(255,255,255,0.4), transparent);
+  border-radius: 50%;
+}
+.founder-quote {
+  font-family: 'Fraunces', serif;
+  font-size: 26px;
+  line-height: 1.35;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+.founder-name { font-weight: 600; font-size: 15px; }
+.founder-role { font-size: 14px; color: var(--ink-mute); margin-top: 2px; }
+@media (max-width: 860px) {
+  .founder-inner { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+  .founder-photo { max-width: 200px; margin: 0 auto; }
+}
+
+/* ===== FAQ ===== */
+.faq-section { padding: 110px 0; background: var(--bg-alt); border-top: 1px solid var(--line); }
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 80px;
+  align-items: flex-start;
+}
+.faq-items { display: flex; flex-direction: column; }
+.faq-item {
+  border-bottom: 1px solid var(--line);
+  padding: 24px 0;
+}
+.faq-item:first-child { padding-top: 0; }
+.faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--ink);
+}
+.faq-q::after {
+  content: '+';
+  font-family: 'Fraunces', serif;
+  font-size: 24px;
+  font-weight: 300;
+  transition: transform 0.3s;
+  color: var(--ink-mute);
+}
+.faq-item.open .faq-q::after { transform: rotate(45deg); }
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+.faq-item.open .faq-a {
+  max-height: 300px;
+  padding-top: 16px;
+}
+@media (max-width: 860px) {
+  .faq-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+
+/* ===== CLIENT ACCESS ===== */
+.client-access {
+  padding: 110px 0;
+}
+.ca-box {
+  background: var(--ink);
+  color: var(--bg);
+  border-radius: 20px;
+  padding: 60px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.ca-box::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+  pointer-events: none;
+}
+.ca-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.6;
+  margin-bottom: 16px;
+}
+.ca-title {
+  font-family: 'Fraunces', serif;
+  font-size: 40px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+.ca-title em { font-style: italic; font-weight: 300; opacity: 0.7; }
+.ca-desc {
+  opacity: 0.75;
+  margin-bottom: 32px;
+  line-height: 1.6;
+  font-size: 16px;
+}
+.ca-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  background: var(--bg);
+  color: var(--ink);
+  border-radius: 100px;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 15px;
+  transition: transform 0.2s;
+}
+.ca-btn:hover { transform: translateY(-2px); }
+.ca-mock {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
+}
+.ca-mock-row {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+.ca-mock-row:last-child { border-bottom: none; }
+.ca-mock-label { opacity: 0.6; }
+.ca-mock-val { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 500; }
+@media (max-width: 860px) {
+  .ca-box { grid-template-columns: 1fr; padding: 40px 28px; gap: 40px; }
+}
+
+/* ===== FINAL CTA ===== */
+.final-cta {
+  padding: 140px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.final-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 100%, rgba(26,122,58,0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+.final-cta h2 {
+  margin: 0 auto 24px;
+  text-align: center;
+  max-width: 800px;
+}
+.final-cta p {
+  font-size: 19px;
+  color: var(--ink-soft);
+  max-width: 500px;
+  margin: 0 auto 40px;
+}
+.final-ctas {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  padding: 60px 0 40px;
+  border-top: 1px solid var(--line);
+  background: var(--bg-alt);
+}
+.footer-inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+.footer-tag {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-top: 16px;
+  max-width: 280px;
+  line-height: 1.5;
+}
+.footer-col h4 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-mute);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+.footer-col a {
+  display: block;
+  color: var(--ink-soft);
+  text-decoration: none;
+  padding: 6px 0;
+  font-size: 14px;
+}
+.footer-col a:hover { color: var(--ink); }
+.footer-bottom {
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--ink-mute);
+}
+.footer-bottom a { color: inherit; text-decoration: none; margin-left: 24px; }
+.footer-bottom a:hover { color: var(--ink); }
+@media (max-width: 860px) {
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .footer-bottom { flex-direction: column; gap: 12px; }
+  .footer-bottom a { margin-left: 0; margin-right: 16px; }
+}
+
+/* Fade-in on load */
+.fade-up {
+  animation: fadeUp 0.8s ease-out both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up-1 { animation-delay: 0.1s; }
+.fade-up-2 { animation-delay: 0.25s; }
+.fade-up-3 { animation-delay: 0.4s; }
+.fade-up-4 { animation-delay: 0.55s; }
+
+/* ===== MOBILE (≤640px) ===== */
+@media (max-width: 640px) {
+  .container { padding: 0 20px; }
+
+  /* NAV */
+  .nav-inner { padding: 14px 20px; }
+  .nav-links { gap: 14px; }
+  .logo img { height: 26px; }
+  .nav-links .nav-client,
+  .nav-links .nav-lang { display: none; }
+  .nav-cta { padding: 8px 14px; font-size: 13px !important; }
+
+  /* SECTION spacing */
+  section,
+  .plans-section,
+  .modules-section,
+  .services-section,
+  .dashboard-section,
+  .testimonials,
+  .not-for,
+  .founder,
+  .faq-section,
+  .client-access { padding: 64px 0; }
+  .final-cta { padding: 80px 0; }
+  .logos-strip { padding: 44px 0; }
+
+  /* TYPO for section intros */
+  .section-intro { font-size: 16px; margin-bottom: 40px; }
+
+  /* HERO */
+  .hero { padding: 56px 0 48px; }
+  .hero-grid { gap: 40px; }
+  .hero-sub { font-size: 17px; margin-bottom: 28px; }
+  .hero-ctas { gap: 10px; margin-bottom: 32px; }
+  .btn { padding: 14px 22px; font-size: 14px; }
+  .hero-stats { gap: 20px 28px; padding-top: 24px; }
+  .stat-num { font-size: 26px; }
+  .hero-visual { padding: 0; }
+  .browser-content { padding: 20px 16px 16px; min-height: 340px; }
+  .chat-widget {
+    width: calc(100% - 32px);
+    max-width: 280px;
+    right: 16px;
+    bottom: 16px;
+  }
+
+  /* LOGOS */
+  .logos-row { gap: 28px 36px; }
+  .logo-item { font-size: 16px; }
+  .logo-item.alt { font-size: 12px; }
+
+  /* PROBLEM */
+  .problem-card { padding: 28px 24px; }
+  .problem-num { font-size: 54px; }
+  .problem-num .small { font-size: 28px; }
+
+  /* DEMO */
+  .demo-inner { gap: 48px; }
+  .demo-box { padding: 28px 24px; min-height: 380px; }
+  .demo-box > .chat-header { margin: -28px -24px 16px !important; }
+  .demo-inner h2[style] { font-size: 32px !important; }
+
+  /* FEATURES */
+  .feature-card { padding: 28px 22px; }
+
+  /* DASHBOARD */
+  .dashboard-grid { gap: 40px; }
+  .dash-header { padding: 14px 18px; }
+  .dash-stat { padding: 14px 12px; }
+  .dash-stat-label { font-size: 10px; letter-spacing: 0.06em; }
+  .dash-stat-val { font-size: 20px; }
+  .dash-chart { padding: 18px; height: 140px; gap: 4px; }
+
+  /* PLANS TABLE — keep horizontal scroll; reduce internal padding */
+  .plans-table th, .plans-table td { padding: 16px 18px; }
+  .plans-table { min-width: 720px; }
+  .guarantee-strip {
+    border-radius: 20px;
+    padding: 20px 22px;
+    gap: 12px 22px;
+    font-size: 13px;
+  }
+
+  /* MODULES */
+  .modules-header { margin-bottom: 40px; gap: 20px; }
+  .module-card { padding: 28px 24px; }
+  .module-title { font-size: 20px; }
+  .bundle-example { padding: 24px; margin-top: 44px; }
+  .bundle-total-val { font-size: 34px; }
+
+  /* SERVICES */
+  .service-card { padding: 32px 24px; }
+  .service-title { font-size: 26px; }
+  .service-price-val { font-size: 34px; }
+
+  /* PROCESS */
+  .step-num { width: 52px; height: 52px; font-size: 18px; margin-bottom: 18px; }
+  .step-title { font-size: 22px; }
+
+  /* TESTIMONIALS */
+  .testi-card { padding: 26px 22px; }
+  .testi-quote { font-size: 17px; margin-bottom: 22px; }
+
+  /* NOT FOR */
+  .nf-card { padding: 28px 24px; }
+
+  /* FOUNDER */
+  .founder-inner { gap: 28px; }
+  .founder-photo { max-width: 160px; }
+  .founder-quote { font-size: 20px; }
+
+  /* FAQ */
+  .faq-grid { gap: 32px; }
+  .faq-q { font-size: 16px; }
+  .faq-a { font-size: 14.5px; }
+
+  /* CLIENT ACCESS */
+  .ca-box { padding: 36px 24px; gap: 32px; border-radius: 16px; }
+  .ca-title { font-size: 28px; }
+  .ca-mock { padding: 20px; }
+
+  /* FINAL CTA */
+  .final-cta p { font-size: 17px; margin-bottom: 32px; }
+  .final-ctas { flex-direction: column; gap: 10px; width: 100%; }
+  .final-ctas .btn { width: 100%; justify-content: center; }
+
+  /* FOOTER */
+  .footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 32px; }
+  footer .logo img { height: 30px; }
+  .footer-tag { margin-top: 12px; }
+}
+
+/* ===== VERY SMALL (≤400px) ===== */
+@media (max-width: 400px) {
+  .container { padding: 0 16px; }
+  .nav-inner { padding: 12px 16px; }
+  .hero-stats { gap: 16px 20px; }
+  .stat-num { font-size: 22px; }
+  .stat-label { font-size: 11px; }
+  .btn { padding: 13px 18px; font-size: 13.5px; }
+  .problem-num { font-size: 46px; }
+  .problem-num .small { font-size: 24px; }
+  .footer-inner { grid-template-columns: 1fr; }
+}
+
+/* ===== PLAN CARDS ===== */
+.plan-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.plan-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+.plan-card.featured {
+  background: var(--bg-card);
+  border: 2px solid #8fbf9f;
+  box-shadow: 0 4px 24px rgba(143, 191, 159, 0.18);
+}
+.plan-card.featured .plan-name { color: var(--ink); }
+.plan-card.featured .plan-price { color: var(--ink); }
+.plan-card.featured .plan-price-period { color: var(--ink-mute); }
+.plan-card .plan-name {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+.plan-card .plan-price { font-size: 32px; }
+.plan-card .plan-price-period { margin-bottom: 20px; }
+.plan-card .plan-badge { display: none; }
+.plan-card-popular-label {
+  display: block;
+  background: #1a7a3a;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 8px 24px;
+  margin: -28px -24px 20px;
+  border-radius: 14px 14px 0 0;
+}
+@media (max-width: 640px) {
+  .plan-card-popular-label { margin: -22px -18px 18px; border-radius: 14px 14px 0 0; }
+}
+.plan-card-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+.plan-card-features li {
+  font-size: 14px;
+  color: var(--ink-soft);
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  line-height: 1.4;
+}
+.plan-card-features li::before {
+  content: "✓";
+  color: var(--positive);
+  font-size: 13px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.plan-card .plan-cta { width: 100%; text-align: center; box-sizing: border-box; }
+.plan-card.featured .plan-cta {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+.plan-card.featured .plan-cta:hover { background: var(--accent-hover); }
+.plan-card-divider {
+  border: none;
+  border-top: 1px solid var(--line-soft);
+  margin: 0 0 20px;
+}
+
+/* Compare toggle */
+.compare-toggle-wrap {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.compare-toggle {
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: 10px 20px;
+  font-size: 14px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.compare-toggle:hover { border-color: var(--ink); color: var(--ink); }
+.compare-toggle .toggle-arrow {
+  display: inline-block;
+  transition: transform 0.3s;
+  font-size: 12px;
+}
+.compare-toggle.open .toggle-arrow { transform: rotate(180deg); }
+
+/* Collapsible compare table */
+.plans-compare {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s ease;
+  margin-bottom: 0;
+}
+.plans-compare.open { grid-template-rows: 1fr; }
+.plans-compare-inner { overflow: hidden; }
+
+@media (max-width: 900px) {
+  .plan-cards { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .plan-cards { grid-template-columns: 1fr; }
+  .plan-card { padding: 22px 18px; }
+}
+
+/* ===== DROPDOWN ===== */
 .nav-dropdown { position: relative; }
 .dropdown-btn { background: none; border: none; color: var(--ink-soft); font-size: 14.5px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 4px; padding: 0; font-family: 'Instrument Sans', sans-serif; transition: color .2s; }
 .dropdown-btn:hover { color: var(--ink); }
 .dropdown-menu { position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%); background: var(--bg-card); border: 1px solid var(--line); border-radius: 16px; padding: 8px; min-width: 210px; box-shadow: 0 8px 32px rgba(0,0,0,.08); opacity: 0; visibility: hidden; transition: all .18s; z-index: 200; }
 .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; }
-.dropdown-menu a { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; font-size: 14px; font-weight: 500; color: var(--ink); text-decoration: none; transition: background .15s; }
+.dropdown-menu a { display: flex !important; align-items: center; gap: 10px; padding: 10px 12px !important; border-radius: 10px; font-size: 14px; font-weight: 500; color: var(--ink) !important; text-decoration: none; transition: background .15s; }
 .dropdown-menu a:hover { background: var(--bg-alt); }
 .dropdown-icon { font-size: 18px; width: 28px; text-align: center; }
-@media (max-width: 900px) { .nav-links a:not(.nav-cta):not(.nav-back) { display: none; } .nav-dropdown { display: none; } }
 
-.hero { padding: 100px 0 90px; position: relative; overflow: hidden; }
-.hero::before { content: ''; position: absolute; top: -180px; right: -180px; width: 560px; height: 560px; background: radial-gradient(circle, rgba(26,122,58,0.06) 0%, transparent 70%); pointer-events: none; }
-.hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: center; }
-.channel-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 8px; background: rgba(26,122,58,0.08); border: 1px solid rgba(26,122,58,0.18); border-radius: 100px; font-size: 13px; color: var(--ch); margin-bottom: 28px; font-weight: 500; }
-h1 { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(44px, 5.5vw, 72px); line-height: 1.02; letter-spacing: -0.035em; margin-bottom: 28px; }
-h1 em { font-style: italic; font-weight: 300; color: var(--ink-soft); }
-.hero-sub { font-size: 19px; color: var(--ink-soft); line-height: 1.65; margin-bottom: 40px; max-width: 480px; }
-.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
-.btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; border-radius: 100px; font-size: 15px; font-weight: 500; text-decoration: none; transition: all .2s; cursor: pointer; border: none; }
-.btn-primary { background: var(--ch); color: white; }
-.btn-primary:hover { opacity: .88; }
-.btn-secondary { background: transparent; color: var(--ink); border: 1px solid var(--line); }
-.btn-secondary:hover { border-color: var(--ink-mute); }
-
-/* WA mockup */
-.wa-mockup { background: #e5ddd5; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.08); }
-.wa-header { background: var(--ch); padding: 14px 18px; display: flex; align-items: center; gap: 12px; }
-.wa-avatar { width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-.wa-header-info { color: white; }
-.wa-name { font-size: 15px; font-weight: 600; }
-.wa-status { font-size: 12px; opacity: .8; }
-.wa-body { padding: 20px 16px; display: flex; flex-direction: column; gap: 10px; min-height: 280px; }
-.wa-msg { max-width: 78%; padding: 8px 12px; border-radius: 8px; font-size: 13.5px; line-height: 1.5; position: relative; }
-.wa-msg-bot { background: white; border-bottom-left-radius: 2px; align-self: flex-start; box-shadow: 0 1px 2px rgba(0,0,0,.08); }
-.wa-msg-user { background: #dcf8c6; border-bottom-right-radius: 2px; align-self: flex-end; box-shadow: 0 1px 2px rgba(0,0,0,.08); }
-.wa-time { font-size: 10.5px; color: var(--ink-mute); margin-top: 2px; }
-.wa-time.right { text-align: right; }
-
-section { padding: 110px 0; }
-.section-alt { background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.section-label { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 20px; }
-.section-intro { font-size: 18px; color: var(--ink-soft); line-height: 1.65; max-width: 580px; margin-bottom: 60px; }
-h2 { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(32px, 4vw, 52px); line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 24px; }
-h2 em { font-style: italic; font-weight: 300; color: var(--ink-soft); }
-
-.features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
-.feature { background: var(--bg-card); border: 1px solid var(--line); padding: 36px 32px; }
-.feature:nth-child(1) { border-radius: 16px 0 0 0; }
-.feature:nth-child(2) { border-radius: 0 16px 0 0; }
-.feature:nth-child(3) { border-radius: 0 0 0 16px; }
-.feature:nth-child(4) { border-radius: 0 0 16px 0; }
-.feature-icon { font-size: 28px; margin-bottom: 16px; }
-.feature-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
-.feature-desc { font-size: 14px; color: var(--ink-soft); line-height: 1.65; }
-
-.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-.step { background: var(--bg-card); border: 1px solid var(--line); padding: 40px 32px; }
-.step:first-child { border-radius: 16px 0 0 16px; }
-.step:last-child { border-radius: 0 16px 16px 0; }
-.step-num { font-family: 'Fraunces', serif; font-size: 52px; font-weight: 400; color: var(--line); line-height: 1; margin-bottom: 20px; }
-.step-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
-.step-desc { font-size: 14px; color: var(--ink-soft); line-height: 1.65; }
-
-.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 60px; }
-.plan { background: var(--bg-card); border: 1px solid var(--line); border-radius: 20px; padding: 36px 30px; display: flex; flex-direction: column; position: relative; overflow: hidden; }
-.plan.featured { border-color: var(--ch); border-width: 2px; }
-.plan-badge { position: absolute; top: 20px; right: 20px; background: var(--ch); color: white; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 100px; }
-.plan-name { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-mute); margin-bottom: 20px; }
-.plan-price { font-family: 'Fraunces', serif; font-size: 52px; font-weight: 400; line-height: 1; color: var(--ink); }
-.plan-price span { font-family: 'Instrument Sans', sans-serif; font-size: 16px; color: var(--ink-mute); font-weight: 400; }
-.plan-tagline { font-size: 13.5px; color: var(--ink-soft); margin: 12px 0 28px; line-height: 1.5; }
-.plan-divider { height: 1px; background: var(--line-soft); margin-bottom: 24px; }
-.plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-.plan-features li { font-size: 14px; color: var(--ink-soft); display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
-.plan-features li::before { content: '✓'; color: var(--ch); font-weight: 600; flex-shrink: 0; }
-.plan-cta { margin-top: 28px; display: block; text-align: center; padding: 13px; border-radius: 100px; font-size: 14.5px; font-weight: 500; text-decoration: none; transition: all .2s; }
-.plan-cta-outline { border: 1px solid var(--line); color: var(--ink); }
-.plan-cta-outline:hover { border-color: var(--ink-mute); }
-.plan-cta-filled { background: var(--ch); color: white; }
-.plan-cta-filled:hover { opacity: .88; }
-
-.faq-list { max-width: 720px; margin-top: 60px; }
-.faq-item { border-bottom: 1px solid var(--line); padding: 28px 0; }
-.faq-item:first-child { border-top: 1px solid var(--line); }
-.faq-q { font-size: 16px; font-weight: 500; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 20px; background: none; border: none; text-align: left; color: var(--ink); width: 100%; padding: 0; }
-.faq-icon { font-size: 20px; color: var(--ink-mute); flex-shrink: 0; transition: transform .2s; }
-.faq-a { font-size: 14.5px; color: var(--ink-soft); line-height: 1.7; max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s ease; }
-.faq-item.open .faq-a { max-height: 300px; padding-top: 14px; }
-.faq-item.open .faq-icon { transform: rotate(45deg); }
-
-.cta-box { background: var(--ch); border-radius: 24px; padding: 72px 60px; text-align: center; color: white; }
-.cta-box h2 { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(32px, 4vw, 52px); line-height: 1.08; letter-spacing: -0.025em; color: white; margin-bottom: 16px; }
-.cta-box h2 em { font-style: italic; font-weight: 300; opacity: .75; }
-.cta-box p { font-size: 17px; opacity: .8; margin-bottom: 36px; }
-.btn-white { background: white; color: var(--ch); font-weight: 600; }
-.btn-white:hover { opacity: .92; }
-.cta-note { font-size: 13px; opacity: .6; margin-top: 16px; }
-
-footer { border-top: 1px solid var(--line); padding: 48px 32px; }
-.footer-inner { max-width: var(--max); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
-.footer-logo img { height: 28px; opacity: .4; }
-.footer-copy { font-size: 13.5px; color: var(--ink-mute); }
-.footer-links { display: flex; gap: 24px; }
-.footer-links a { font-size: 13.5px; color: var(--ink-mute); text-decoration: none; }
-.footer-links a:hover { color: var(--ink-soft); }
-
-@media (max-width: 768px) {
-  .hero-grid { grid-template-columns: 1fr; gap: 48px; }
-  .features-grid, .steps, .pricing-grid { grid-template-columns: 1fr; gap: 12px; }
-  .feature, .step { border-radius: 16px !important; }
-  h1 { font-size: 42px; } h2 { font-size: 32px; }
-  section { padding: 72px 0; }
-  .cta-box { padding: 48px 28px; }
-}
-/* HAMBURGER / MOBILE MENU */
+/* ===== HAMBURGER + MOBILE MENU ===== */
 .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; margin-left: 4px; }
 .hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: all .25s; }
 .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
 .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-@media (max-width: 900px) { .hamburger { display: flex; } }
+@media (max-width: 900px) {
+  .hamburger { display: flex; }
+  .nav-dropdown { display: none; }
+}
 .mobile-menu { position: fixed; inset: 0; top: 67px; background: var(--bg); z-index: 90; transform: translateY(-110%); transition: transform .3s cubic-bezier(.4,0,.2,1); overflow-y: auto; border-top: 1px solid var(--line); }
 .mobile-menu.open { transform: translateY(0); }
 .mobile-menu-inner { padding: 20px 28px 60px; display: flex; flex-direction: column; }
 .mobile-section-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .12em; color: var(--ink-mute); padding: 20px 0 10px; }
 .mobile-menu-inner a { display: flex; align-items: center; gap: 14px; padding: 14px 0; font-size: 17px; font-weight: 500; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line-soft); }
 .mobile-divider { height: 1px; background: var(--line); margin: 16px 0 4px; }
-.mobile-cta-btn { display: flex !important; justify-content: center; background: var(--ch); color: white !important; padding: 15px 24px !important; border-radius: 100px; font-size: 16px; font-weight: 600; margin-top: 20px; border-bottom: none !important; }
+.mobile-cta-btn { display: flex !important; justify-content: center; background: var(--ink); color: white !important; padding: 15px 24px !important; border-radius: 100px; font-size: 16px; font-weight: 600; margin-top: 20px; border-bottom: none !important; }
 </style>
 </head>
 <body>
 
+<!-- ====== NAV ====== -->
 <nav>
   <div class="nav-inner">
-    <a href="/" class="logo"><img src="/images/logo/logo-horizontal.svg" alt="empentIA"></a>
+    <a href="/" class="logo">
+      <img src="/images/logo/logo-horizontal.svg" alt="empentIA">
+    </a>
     <div class="nav-links">
       <div class="nav-dropdown">
         <button class="dropdown-btn">Servicios <span style="font-size:10px;margin-left:2px">▾</span></button>
@@ -176,9 +2074,9 @@ footer { border-top: 1px solid var(--line); padding: 48px 32px; }
           <a href="/agentes-ia-atencion-cliente/resenas/"><span class="dropdown-icon">⭐</span> Reseñas</a>
         </div>
       </div>
-      <a href="/agentes-ia-atencion-cliente/#por-que">Quiénes somos</a>
+      <a href="#quienes-somos">Quiénes somos</a>
       <a href="#como-funciona">Cómo funciona</a>
-      <a href="#pricing" class="nav-cta">Contratar</a>
+      <a href="#cta" class="nav-cta">Contratar</a>
       <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú">
         <span></span><span></span><span></span>
       </button>
@@ -186,6 +2084,7 @@ footer { border-top: 1px solid var(--line); padding: 48px 32px; }
   </div>
 </nav>
 
+<!-- ====== MOBILE MENU ====== -->
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-inner">
     <div class="mobile-section-label">Servicios</div>
@@ -195,49 +2094,96 @@ footer { border-top: 1px solid var(--line); padding: 48px 32px; }
     <a href="/agentes-ia-atencion-cliente/llamadas/" onclick="closeMenu()"><span style="font-size:20px">📞</span> Llamadas</a>
     <a href="/agentes-ia-atencion-cliente/resenas/" onclick="closeMenu()"><span style="font-size:20px">⭐</span> Reseñas</a>
     <div class="mobile-divider"></div>
-    <a href="/agentes-ia-atencion-cliente/#por-que" onclick="closeMenu()">Quiénes somos</a>
+    <a href="#quienes-somos" onclick="closeMenu()">Quiénes somos</a>
     <a href="#como-funciona" onclick="closeMenu()">Cómo funciona</a>
-    <a href="#pricing" class="mobile-cta-btn" onclick="closeMenu()">Contratar →</a>
+    <a href="#cta" class="mobile-cta-btn" onclick="closeMenu()">Contratar →</a>
   </div>
 </div>
 
+<!-- ====== HERO ====== -->
 <section class="hero">
   <div class="container">
     <div class="hero-grid">
       <div>
-        <div class="channel-badge">📱 Agente IA · WhatsApp</div>
-        <h1 class="serif">Donde están<br>tus clientes,<br><em>siempre.</em></h1>
-        <p class="hero-sub">Un agente de IA que atiende tu WhatsApp Business 24 horas. Responde, gestiona pedidos y reserva citas sin que tú intervengas.</p>
-        <div class="hero-ctas">
-          <a href="#pricing" class="btn btn-primary">Ver planes →</a>
-          <a href="#funcionalidades" class="btn btn-secondary">Qué incluye</a>
+        <div class="hero-eyebrow fade-up">
+          <span class="pulse-dot"></span>
+          Agente IA atendiendo en WhatsApp 24h
+        </div>
+        <h1 class="fade-up fade-up-1">
+          Donde están<br>
+          tus clientes, <em>siempre<br>
+          a la escucha.</em>
+        </h1>
+        <p class="hero-sub fade-up fade-up-2">
+          Un agente de inteligencia artificial que conoce tu catálogo, asesora clientes, genera presupuestos i cierra ventas. Sin descanso, sin errores, sin formación.
+        </p>
+        <div class="hero-ctas fade-up fade-up-3">
+          <a href="#demo" class="btn btn-primary">
+            Prueba la demo ahora
+            <span class="btn-arrow">→</span>
+          </a>
+          <a href="#precios" class="btn btn-secondary">
+            Veure plans i precios
+          </a>
+        </div>
+        <div class="hero-stats fade-up fade-up-4">
+          <div>
+            <div class="stat-num">24/7</div>
+            <div class="stat-label">Disponible siempre</div>
+          </div>
+          <div>
+            <div class="stat-num">&lt;1s</div>
+            <div class="stat-label">Tiempo de respuesta</div>
+          </div>
+          <div>
+            <div class="stat-num">+20%</div>
+            <div class="stat-label">Incremento de ventas</div>
+          </div>
         </div>
       </div>
-      <div>
-        <div class="wa-mockup">
-          <div class="wa-header">
-            <div class="wa-avatar">🤖</div>
-            <div class="wa-header-info">
-              <div class="wa-name">TuNegocio · Asistente IA</div>
-              <div class="wa-status">En línea</div>
-            </div>
+
+      <div class="hero-visual fade-up fade-up-2">
+        <div class="browser-mock">
+          <div class="browser-bar">
+            <div class="browser-dot"></div>
+            <div class="browser-dot"></div>
+            <div class="browser-dot"></div>
+            <div class="browser-url">labotiga.com</div>
           </div>
-          <div class="wa-body">
-            <div>
-              <div class="wa-msg wa-msg-user">Hola, ¿cuándo llega mi pedido #4521?</div>
-              <div class="wa-time right">11:03</div>
+          <div class="browser-content">
+            <div class="fake-product">
+              <div class="fake-img"></div>
+              <div>
+                <div class="fake-product-title">Bicicleta Trail 29"</div>
+                <div class="fake-product-meta">Talla M · En estoc</div>
+              </div>
+              <div class="fake-price">1.299€</div>
             </div>
-            <div>
-              <div class="wa-msg wa-msg-bot">¡Hola! Tu pedido #4521 está en camino. Salió del almacén hoy y llegará mañana entre 9h y 14h. ¿Necesitas cambiar la dirección o el horario?</div>
-              <div class="wa-time">11:03</div>
+            <div class="fake-product">
+              <div class="fake-img"></div>
+              <div>
+                <div class="fake-product-title">Casc Pro Carbon</div>
+                <div class="fake-product-meta">Varis colors</div>
+              </div>
+              <div class="fake-price">149€</div>
             </div>
-            <div>
-              <div class="wa-msg wa-msg-user">No, está bien. ¡Gracias!</div>
-              <div class="wa-time right">11:04</div>
-            </div>
-            <div>
-              <div class="wa-msg wa-msg-bot">¡Perfecto! Si tienes cualquier duda estoy aquí. 😊</div>
-              <div class="wa-time">11:04</div>
+
+            <div class="chat-widget">
+              <div class="chat-header">
+                <div class="chat-avatar">e</div>
+                <div>
+                  <div class="chat-title">Assistent</div>
+                  <div class="chat-status">En línia</div>
+                </div>
+              </div>
+              <div class="chat-body">
+                <div class="msg msg-user">¿Tenéis una bici para hacer montaña, mido 1,75m?</div>
+                <div class="msg msg-bot">La Trail 29" talla M es perfecta para tu altura. La tenemos en stock con entrega en 48h.</div>
+                <div class="msg msg-bot second">¿Quieres que te añada al carrito con el casco a juego?</div>
+              </div>
+              <div class="chat-input">
+                Escrivint...
+              </div>
             </div>
           </div>
         </div>
@@ -246,172 +2192,1041 @@ footer { border-top: 1px solid var(--line); padding: 48px 32px; }
   </div>
 </section>
 
-<section class="section-alt" id="funcionalidades">
+<!-- ====== LOGOS STRIP ====== -->
+<div class="logos-strip">
+  <div class="container">
+    <div class="logos-label">Ya confían en empentIA</div>
+    <div class="logos-row">
+      <div class="logo-item">Ciclos Martí</div>
+      <div class="logo-item alt">SECURITY+</div>
+      <div class="logo-item">Distribucions B2B</div>
+      <div class="logo-item alt">COMERÇ LOCAL</div>
+      <div class="logo-item">Esports & Co</div>
+      <div class="logo-item alt">HOME·TECH</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== PROBLEM ====== -->
+<section>
+  <div class="container">
+    <div class="section-label">El problema</div>
+    <h2>Tus clientes hacen preguntas. <em>Tú no puedes responderlas todas.</em></h2>
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-num">68<span class="small">%</span></div>
+        <div class="problem-headline">Abandonen sense comprar</div>
+        <div class="problem-desc">dels visitants marxen si no troben resposta ràpida a un dubte. Cada pregunta no resposta és una venda perduda.</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-num">0<span class="small">€</span></div>
+        <div class="problem-headline">Facturats fora d'horari</div>
+        <div class="problem-desc">Tu negocio cierra. Las preguntas de los clientes no. Cada noche y fin de semana es una oportunidad perdida.</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-num">2k<span class="small">€</span></div>
+        <div class="problem-headline">Cost d'un comercial</div>
+        <div class="problem-desc">Un comercial a jornada completa costa entre 1.800 i 2.500€/mes. I no pot atendre 10 clients alhora.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== DEMO + VIDEO ====== -->
+<section class="demo-section" id="demo">
+  <div class="container">
+    <div class="demo-inner">
+      <div>
+        <div class="section-label">Verlo en acción</div>
+        <h2>Mira cómo funciona en <em>45 segundos.</em></h2>
+        <p class="section-intro">Una conversación real con un cliente indeciso. Pregunta, respuesta, presupuesto y venta cerrada. Sin intervención humana.</p>
+
+        <div class="video-wrap">
+          <div class="video-inner">
+            <div class="play-btn"></div>
+          </div>
+          <div class="video-caption">▸ Demo · 0:45</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label">O pruébalo tú mismo</div>
+        <h2 style="font-size: 38px;">Pregunta lo que <em>quieras.</em></h2>
+        <p class="section-intro">Esta demo es un agente real conectado a un catálogo ficticio. Pruébalo como si fueras un cliente.</p>
+
+        <div class="demo-box">
+          <div class="chat-header" style="margin: -40px -40px 20px; border-radius: 20px 20px 0 0;">
+            <div class="chat-avatar">e</div>
+            <div>
+              <div class="chat-title">Assistent empentIA</div>
+              <div class="chat-status">En línia</div>
+            </div>
+          </div>
+          <p style="color: var(--ink-mute); font-size: 14px; padding: 20px 0; text-align: center;">[Widget de chat interactiu]</p>
+          <div class="demo-prompts">
+            <div class="demo-prompt">Com funciona el agente de WhatsApp?</div>
+            <div class="demo-prompt">Quant costa el pla Pro?</div>
+            <div class="demo-prompt">¿Funciona con WooCommerce?</div>
+            <div class="demo-prompt">Quan estaria operatiu?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FEATURES ====== -->
+<section id="funcionalidades">
   <div class="container">
     <div class="section-label">Funcionalidades</div>
-    <h2>Más que respuestas<br><em>automáticas.</em></h2>
-    <p class="section-intro">El agente entiende el contexto, consulta tu sistema y actúa: todo sin salir de WhatsApp.</p>
+    <h2>Todo lo que necesita un <em>comercial digital.</em></h2>
+    <p class="section-intro">No es un chatbot de FAQs. Es un agente que vende, asesora y actúa sobre tu eCommerce en tiempo real.</p>
+
     <div class="features-grid">
-      <div class="feature">
-        <div class="feature-icon">📦</div>
-        <div class="feature-title">Estado de pedidos</div>
-        <div class="feature-desc">Conectado a tu eCommerce o sistema de gestión. El agente consulta el estado de cualquier pedido en tiempo real.</div>
+      <div class="feature-card">
+        <div class="feature-icon">⌕</div>
+        <div class="feature-title">Cerca intel·ligent</div>
+        <div class="feature-desc">Encuentra productos por nombre, categoría, precio o características. Catálogos estáticos o sincronización via API.</div>
       </div>
-      <div class="feature">
-        <div class="feature-icon">📅</div>
-        <div class="feature-title">Gestión de citas</div>
-        <div class="feature-desc">Reserva, modifica y cancela citas directamente desde la conversación de WhatsApp. Sin apps adicionales.</div>
+      <div class="feature-card">
+        <div class="feature-icon">+</div>
+        <div class="feature-title">Afegeix al carret</div>
+        <div class="feature-desc">El agente añade productos al carrito real. Compatible con WhatsApp Business API y CRMs.</div>
       </div>
-      <div class="feature">
-        <div class="feature-icon">🔄</div>
-        <div class="feature-title">Devoluciones y cambios</div>
-        <div class="feature-desc">Gestiona solicitudes de devolución siguiendo tus políticas, sin que tu equipo tenga que intervenir en cada caso.</div>
+      <div class="feature-card">
+        <div class="feature-icon">€</div>
+        <div class="feature-title">Pressupostos auto</div>
+        <div class="feature-desc">Genera y envía presupuestos por email con productos, precios, IVA y total. Sin intervención manual.</div>
       </div>
-      <div class="feature">
-        <div class="feature-icon">📊</div>
-        <div class="feature-title">Bandeja unificada</div>
-        <div class="feature-desc">Todas las conversaciones de WhatsApp en un panel. Tu equipo puede intervenir en cualquier momento si lo necesita.</div>
+      <div class="feature-card">
+        <div class="feature-icon">↗</div>
+        <div class="feature-title">Captació i escalada</div>
+        <div class="feature-desc">Recoge datos de contacto cuando el cliente muestra interés y escala a humano cuando es necesario.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&lt;/&gt;</div>
+        <div class="feature-title">Widget lleuger</div>
+        <div class="feature-desc">Instalación con un solo script. Sin plugins, sin dependencias. Funciona en cualquier web.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">◐</div>
+        <div class="feature-title">Personalització total</div>
+        <div class="feature-desc">Colores, avatar, posición y CSS custom. Se integra en el diseño de tu web como si fuera nativo.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">Aa</div>
+        <div class="feature-title">Multiidioma auto</div>
+        <div class="feature-desc">Detecta el idioma del visitante y responde en español, catalán, inglés o cualquier otro. Sin configuración.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">◧</div>
+        <div class="feature-title">Analytics en tiempo real</div>
+        <div class="feature-desc">Conversaciones, leads, productos más consultados i rendiment. Todo visible en tu panel privado.</div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="como-funciona">
+<!-- ====== DASHBOARD / CLIENT AREA PREVIEW ====== -->
+<section class="dashboard-section">
   <div class="container">
-    <div class="section-label">El proceso</div>
-    <h2>Conectado a tu WhatsApp<br><em>en 24 horas.</em></h2>
-    <p class="section-intro">Usamos la API oficial de WhatsApp Business. Sin aplicaciones de terceros, sin riesgos.</p>
-    <div class="steps">
+    <div class="dashboard-grid">
+      <div>
+        <div class="section-label">Tu panel privado</div>
+        <h2>Todo lo que pasa, en <em>tiempo real.</em></h2>
+        <p class="section-intro" style="margin-bottom: 32px;">Accede a tu espacio de cliente desde cualquier dispositivo. Consulta conversaciones, descarga leads, ajusta tu agente y mide su impacto.</p>
+
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 14px;">
+          <li style="display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--ink-soft);">
+            <span style="color: var(--positive); font-weight: 700;">✓</span>
+            Conversaciones completas con transcripción
+          </li>
+          <li style="display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--ink-soft);">
+            <span style="color: var(--positive); font-weight: 700;">✓</span>
+            Leads generados con exportación a CSV
+          </li>
+          <li style="display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--ink-soft);">
+            <span style="color: var(--positive); font-weight: 700;">✓</span>
+            Productos més consultats i dubtes recurrents
+          </li>
+          <li style="display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--ink-soft);">
+            <span style="color: var(--positive); font-weight: 700;">✓</span>
+            Ajustes de tono, instrucciones y respuestas clave
+          </li>
+          <li style="display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--ink-soft);">
+            <span style="color: var(--positive); font-weight: 700;">✓</span>
+            Facturación, planes y gestión de la cuenta
+          </li>
+        </ul>
+
+        <a href="#" class="btn btn-secondary" style="margin-top: 32px;">
+          Entra a tu espacio <span class="btn-arrow">→</span>
+        </a>
+      </div>
+
+      <div class="dashboard-mock">
+        <div class="dash-header">
+          <div class="dash-title">Panell · ciclosmarti.cat</div>
+          <div class="dash-period">Últimos 30 días</div>
+        </div>
+        <div class="dash-stats">
+          <div class="dash-stat">
+            <div class="dash-stat-label">Conversaciones</div>
+            <div class="dash-stat-val">1.247</div>
+            <div class="dash-stat-trend">↑ 23%</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-label">Leads</div>
+            <div class="dash-stat-val">89</div>
+            <div class="dash-stat-trend">↑ 41%</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-label">Presupuestos</div>
+            <div class="dash-stat-val">34</div>
+            <div class="dash-stat-trend">↑ 18%</div>
+          </div>
+        </div>
+        <div class="dash-chart">
+          <div class="bar" style="height: 30%"></div>
+          <div class="bar" style="height: 45%"></div>
+          <div class="bar" style="height: 38%"></div>
+          <div class="bar" style="height: 62%"></div>
+          <div class="bar" style="height: 55%"></div>
+          <div class="bar active" style="height: 78%"></div>
+          <div class="bar" style="height: 68%"></div>
+          <div class="bar active" style="height: 88%"></div>
+          <div class="bar" style="height: 72%"></div>
+          <div class="bar active" style="height: 95%"></div>
+          <div class="bar" style="height: 82%"></div>
+          <div class="bar active" style="height: 100%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== TESTIMONIALS ====== -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-label">Casos de uso reales</div>
+    <h2>Negocios como el tuyo <em>ya lo usan.</em></h2>
+    <p class="section-intro">Tres historias reales de tiendas que han dejado de perder ventas fuera de horario.</p>
+
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-quote">
+          Los clientes tenían dudas sobre tallas y compatibilidades. Ara l'agent respon al moment i genera presupuestos incluso els caps de setmana.
+        </div>
+        <div class="testi-author">
+          <div class="testi-avatar">M</div>
+          <div>
+            <div class="testi-name">Marc Riera</div>
+            <div class="testi-role">Ciclos Martí · 630+ productos</div>
+          </div>
+        </div>
+        <div class="testi-metric">
+          <strong>+34%</strong>
+          Consultas atendidas fuera de horario
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-quote">
+          Nuestros productos tienen muchísimas opciones. El agente guía al cliente paso a paso y llega con el presupuesto casi cerrado.
+        </div>
+        <div class="testi-author">
+          <div class="testi-avatar">L</div>
+          <div>
+            <div class="testi-name">Laura Puig</div>
+            <div class="testi-role">Security+ · Sistemas de seguridad</div>
+          </div>
+        </div>
+        <div class="testi-metric">
+          <strong>2,5×</strong>
+          Presupuestos cualificados al mes
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-quote">
+          Filtra el 80% de consultas rutinarias de nuestros clientes B2B. El equipo comercial se dedica solo a las oportunidades reales.
+        </div>
+        <div class="testi-author">
+          <div class="testi-avatar">J</div>
+          <div>
+            <div class="testi-name">Jordi Sabater</div>
+            <div class="testi-role">Distribucions B2B · Catalunya</div>
+          </div>
+        </div>
+        <div class="testi-metric">
+          <strong>−60%</strong>
+          Tiempo en consultas repetitivas
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PLANS / PRICING ====== -->
+<section class="plans-section" id="precios">
+  <div class="container">
+    <div class="section-label">Planes y precios</div>
+    <h2>Transparente desde el <em>primer día.</em></h2>
+    <p class="section-intro">Todos los planes incluyen configuración, entrenamiento y soporte. Sin permanencia, sin letra pequeña.</p>
+
+    <!-- PLAN CARDS -->
+    <div class="plan-cards">
+
+      <!-- Starter -->
+      <div class="plan-card">
+        <span class="plan-name">Starter</span>
+        <span class="plan-price">59€</span>
+        <span class="plan-price-period">/mes · sin IVA</span>
+        <hr class="plan-card-divider">
+        <ul class="plan-card-features">
+          <li>50 conversaciones incluidas/mes</li>
+          <li>1 usuario del panel</li>
+          <li>2 idiomas activos</li>
+          <li>Gestión del conocimiento manual + web</li>
+          <li>Soporte per ticket · resposta 48h</li>
+        </ul>
+        <a href="#" class="plan-cta outline">Contratar Starter</a>
+      </div>
+
+      <!-- Pro (featured) -->
+      <div class="plan-card featured">
+        <span class="plan-card-popular-label">Más popular</span>
+        <span class="plan-name">Pro</span>
+        <span class="plan-price">119€</span>
+        <span class="plan-price-period">/mes · sin IVA</span>
+        <hr class="plan-card-divider">
+        <ul class="plan-card-features">
+          <li>100 conversaciones incluidas/mes</li>
+          <li>3 usuarios del panel</li>
+          <li>4 idiomas · 1 agente extra</li>
+          <li>Presupuestos automáticos e integración carrito</li>
+          <li>Implementación asistida · respuesta 24h</li>
+        </ul>
+        <a href="#" class="plan-cta">Contratar Pro</a>
+      </div>
+
+      <!-- Business -->
+      <div class="plan-card">
+        <span class="plan-name">Business</span>
+        <span class="plan-price">229€</span>
+        <span class="plan-price-period">/mes · sin IVA</span>
+        <hr class="plan-card-divider">
+        <ul class="plan-card-features">
+          <li>200 conversaciones incluidas/mes</li>
+          <li>5 usuarios · hasta 3 agentes</li>
+          <li>Idiomas ilimitados</li>
+          <li>Personalización completa (CSS custom)</li>
+          <li>Implementación dedicada · respuesta 4h</li>
+        </ul>
+        <a href="#" class="plan-cta outline">Contratar Business</a>
+      </div>
+
+      <!-- Personalizado -->
+      <div class="plan-card">
+        <span class="plan-name">Personalizado</span>
+        <span class="plan-price" style="font-size: 24px; margin-top: 4px;">A medida</span>
+        <span class="plan-price-period">Hablemos</span>
+        <hr class="plan-card-divider">
+        <ul class="plan-card-features">
+          <li>Conversaciones y usuarios sin límite</li>
+          <li>Para cadenas y franquicias</li>
+          <li>Integraciones específicas</li>
+          <li>SLA y soporte dedicado</li>
+          <li>Facturación personalizada</li>
+        </ul>
+        <a href="#cta" class="plan-cta outline">Hablemos</a>
+      </div>
+
+    </div>
+
+    <!-- TOGGLE COMPARACIÓ -->
+    <div class="compare-toggle-wrap">
+      <button class="compare-toggle" id="compareToggle" aria-expanded="false">
+        Ver comparación completa
+        <span class="toggle-arrow">▾</span>
+      </button>
+    </div>
+
+    <!-- TAULA COMPARATIVA (desplegable) -->
+    <div class="plans-compare" id="plansCompare" aria-hidden="true">
+      <div class="plans-compare-inner">
+        <div class="plans-table-wrap" style="margin-bottom: 0;">
+          <table class="plans-table">
+            <thead>
+              <tr>
+                <th style="width: 28%;">
+                  <span style="font-size: 13px; color: var(--ink-mute);">Elige tu plan</span>
+                </th>
+                <th>
+                  <span class="plan-name">Starter</span>
+                  <span class="plan-price">59€</span>
+                  <span class="plan-price-period">/mes · sin IVA</span>
+                </th>
+                <th class="featured">
+                  <span class="plan-name">Pro</span>
+                  <span class="plan-price">119€</span>
+                  <span class="plan-price-period">/mes · sin IVA</span>
+                  <span class="plan-badge">Más popular</span>
+                </th>
+                <th>
+                  <span class="plan-name">Business</span>
+                  <span class="plan-price">229€</span>
+                  <span class="plan-price-period">/mes · sin IVA</span>
+                </th>
+                <th>
+                  <span class="plan-name">Personalizado</span>
+                  <span class="plan-price" style="font-size: 22px;">A medida</span>
+                  <span class="plan-price-period">Hablemos</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr class="group-row">
+                <td colspan="5" class="group-label">Conversaciones y uso</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Conversaciones incluidas/mes</div></td>
+                <td class="cell-val">50</td>
+                <td class="cell-val highlight">100</td>
+                <td class="cell-val highlight">200</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Extra por conversación adicional</div></td>
+                <td class="cell-val">0,25€</td>
+                <td class="cell-val">0,25€</td>
+                <td class="cell-val">0,25€</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Usuaris del panell</div></td>
+                <td class="cell-val">1</td>
+                <td class="cell-val highlight">3</td>
+                <td class="cell-val highlight">5</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+
+              <tr class="group-row">
+                <td colspan="5" class="group-label">Catálogo y conocimiento</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Gestión del conocimiento</div></td>
+                <td class="cell-val">Manual</td>
+                <td class="cell-val highlight">Automático</td>
+                <td class="cell-val highlight">Automático</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Fuente de información</div></td>
+                <td class="cell-val">Manual + Web</td>
+                <td class="cell-val highlight">+ API eCommerce</td>
+                <td class="cell-val highlight">+ API eCommerce</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+
+              <tr class="group-row">
+                <td colspan="5" class="group-label">Agent i personalització</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Personalització visual</div></td>
+                <td class="cell-val">Bàsica (colors)</td>
+                <td class="cell-val highlight">Estàndard</td>
+                <td class="cell-val highlight">Completa (CSS custom)</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Multi-agent</div></td>
+                <td class="cross">—</td>
+                <td class="cell-val highlight">1 agente extra</td>
+                <td class="cell-val highlight">Fins a 3 agentes</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Idiomes actius</div></td>
+                <td class="cell-val">2</td>
+                <td class="cell-val highlight">4</td>
+                <td class="cell-val highlight">Il·limitats</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Respostes ràpides</div></td>
+                <td class="cell-val">3 fixes</td>
+                <td class="cell-val highlight">Il·limitades</td>
+                <td class="cell-val highlight">
+                  Il·limitades + dinàmiques
+                  <span class="soon-badge">Próximamente</span>
+                </td>
+                <td class="cell-val muted">—</td>
+              </tr>
+
+              <tr class="group-row">
+                <td colspan="5" class="group-label">Accions comercials</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Alertes per lead rebut</div></td>
+                <td class="cell-val">Email</td>
+                <td class="cell-val highlight">Email + panell</td>
+                <td class="cell-val highlight">
+                  Email + panell + webhook
+                  <span class="soon-badge">Próximamente</span>
+                </td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Pressupostos automàtics</div></td>
+                <td class="cross">—</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Integració carret</div></td>
+                <td class="cross">—</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+
+              <tr class="group-row">
+                <td colspan="5" class="group-label">Dades i historial</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Historial de converses</div></td>
+                <td class="cell-val">60 dies</td>
+                <td class="cell-val highlight">180 dies</td>
+                <td class="cell-val highlight">Complet</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Mètriques i analytics</div></td>
+                <td class="cell-val">Bàsiques</td>
+                <td class="cell-val highlight">Completes</td>
+                <td class="cell-val highlight">Completes + exportació</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Exportació de leads</div></td>
+                <td class="cell-val">CSV</td>
+                <td class="cell-val highlight">
+                  CSV + Webhook
+                  <span class="soon-badge">Próximamente</span>
+                </td>
+                <td class="cell-val highlight">
+                  CSV + Webhook + CRM
+                  <span class="soon-badge">Próximamente</span>
+                </td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Informe mensual</div></td>
+                <td class="cross">—</td>
+                <td class="cell-val highlight">
+                  PDF automàtic
+                  <span class="soon-badge">Próximamente</span>
+                </td>
+                <td class="cell-val highlight">
+                  PDF + reunió trimestral
+                  <span class="soon-badge">Próximamente</span>
+                </td>
+                <td class="cell-val muted">—</td>
+              </tr>
+
+              <tr class="group-row">
+                <td colspan="5" class="group-label">Soporte</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">Soporte implementació</div></td>
+                <td class="cell-val">Documentación + ticket</td>
+                <td class="cell-val highlight">Implementació assistida</td>
+                <td class="cell-val highlight">Implementació dedicada</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+              <tr>
+                <td><div class="feature-name">SLA resposta suport</div></td>
+                <td class="cell-val">48h</td>
+                <td class="cell-val highlight">24h</td>
+                <td class="cell-val highlight">4h</td>
+                <td class="cell-val muted">—</td>
+              </tr>
+
+            </tbody>
+            <tfoot>
+              <tr>
+                <td></td>
+                <td><a href="#" class="plan-cta outline">Contratar Starter</a></td>
+                <td><a href="#" class="plan-cta">Contratar Pro</a></td>
+                <td><a href="#" class="plan-cta outline">Contratar Business</a></td>
+                <td><a href="#cta" class="plan-cta outline">Hablemos</a></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="guarantee-strip" style="margin-top: 40px;">
+      <span class="guarantee-item">Sense permanència</span>
+      <span class="guarantee-item">Cancel·lació immediata</span>
+      <span class="guarantee-item">Operativo en 48h o no pagues</span>
+      <span class="guarantee-item">Dades GDPR · servidors UE</span>
+    </div>
+
+    <p style="text-align: center; margin-top: 40px; color: var(--ink-soft); font-size: 15px;">
+      Necessites més? Pla <strong style="color: var(--ink);">Personalizado</strong> per a cadenes, franquícies o integracions específiques. <a href="#cta" style="color: var(--ink); text-decoration: underline; text-underline-offset: 3px;">Hablemos →</a>
+    </p>
+  </div>
+</section>
+
+<!-- ====== MÒDULS ADDICIONALS ====== -->
+<section class="modules-section" id="modulos">
+  <div class="container">
+    <div class="modules-header">
+      <div>
+        <div class="section-label">Amplía tu agente</div>
+        <h2>Módulos que <em>encajan</em> con tu plan.</h2>
+      </div>
+      <p>Tu agente no acaba en el widget. Añade capacidades especializadas según lo que necesita tu negocio: formularios, WhatsApp, recuperación de carritos, postventa o integraciones. Todo comparte el mismo conocimiento.</p>
+    </div>
+
+    <div class="modules-grid">
+
+      <div class="module-card">
+        <div class="module-icon">✎</div>
+        <div class="module-title">Formularios inteligentes</div>
+        <div class="module-desc">Sustituye los formularios de contacto por una conversación. Califica el lead mientras habla, lo clasifica y lo envía al equipo adecuado.</div>
+        <ul class="module-highlights">
+          <li>Adaptado a B2B y particulares</li>
+          <li>Multiidioma automático</li>
+          <li>Enrutamiento por tipo de consulta</li>
+        </ul>
+        <div class="module-price">
+          <div>
+            <span class="module-price-val">19€</span>
+            <span class="module-price-period">/mes</span>
+          </div>
+          <a href="#cta" class="module-link">Añadir →</a>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-icon">◉</div>
+        <div class="module-title">WhatsApp Business</div>
+        <div class="module-desc">El mismo agente accesible por WhatsApp. Atiende a los clientes en el canal que ya usan, con memoria e integración con tu catálogo.</div>
+        <ul class="module-highlights">
+          <li>Conversación continuada desde cualquier canal</li>
+          <li>Compatible con WhatsApp Business API</li>
+          <li>Escalada a humano desde el mismo chat</li>
+        </ul>
+        <div class="module-price">
+          <div>
+            <span class="module-price-val">29€</span>
+            <span class="module-price-period">/mes</span>
+          </div>
+          <a href="#cta" class="module-link">Añadir →</a>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-badge">Próximamente</div>
+        <div class="module-icon">↺</div>
+        <div class="module-title">Recuperación de carritos</div>
+        <div class="module-desc">Cuando detecta un carrito abandonado, el agente inicia una conversación proactiva para resolver objeciones finales y cerrar la venta.</div>
+        <ul class="module-highlights">
+          <li>Detección automática de abandono</li>
+          <li>Respuesta a objeciones de precio o dudas</li>
+          <li>Cupones dinámicos según contexto</li>
+        </ul>
+        <div class="module-price">
+          <div>
+            <span class="module-price-val">29€</span>
+            <span class="module-price-period">/mes</span>
+          </div>
+          <a href="#cta" class="module-link">Apuntarme →</a>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-icon">⏎</div>
+        <div class="module-title">Agente postventa</div>
+        <div class="module-desc">Un segundo agente entrenado para clientes que ya han comprado: estado de pedidos, devoluciones, dudas de uso y facturas. Menos tickets para tu equipo.</div>
+        <ul class="module-highlights">
+          <li>Conexión con sistema de pedidos</li>
+          <li>Gestión de devoluciones guiada</li>
+          <li>Acceso a facturas e histórico</li>
+        </ul>
+        <div class="module-price">
+          <div>
+            <span class="module-price-val">39€</span>
+            <span class="module-price-period">/mes</span>
+          </div>
+          <a href="#cta" class="module-link">Añadir →</a>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-icon">⇄</div>
+        <div class="module-title">Sincronización CRM</div>
+        <div class="module-desc">Cada lead captado se envía automáticamente a tu CRM con todos los datos de la conversación. Compatible con los principales sistemas.</div>
+        <ul class="module-highlights">
+          <li>HubSpot, Pipedrive, Zoho, Holded</li>
+          <li>Mapeo de campos personalizable</li>
+          <li>Historial de conversación adjunto al contacto</li>
+        </ul>
+        <div class="module-price">
+          <div>
+            <span class="module-price-val">19€</span>
+            <span class="module-price-period">/mes</span>
+          </div>
+          <a href="#cta" class="module-link">Añadir →</a>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-badge">Próximamente</div>
+        <div class="module-icon">♪</div>
+        <div class="module-title">Agente de voz</div>
+        <div class="module-desc">Atiende llamadas telefónicas fuera de horario con el mismo conocimiento del catálogo. Toma mensajes, califica y concierta visitas.</div>
+        <ul class="module-highlights">
+          <li>Número propio o integración con el tuyo</li>
+          <li>Transcripción de cada llamada</li>
+          <li>Desvío a humano cuando es necesario</li>
+        </ul>
+        <div class="module-price">
+          <div>
+            <span class="module-price-val">59€</span>
+            <span class="module-price-period">/mes</span>
+          </div>
+          <a href="#cta" class="module-link">Apuntarme →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bundle example -->
+    <div class="bundle-example">
+      <div>
+        <div class="bundle-label">Ejemplo · Tienda que vende B2B y B2C</div>
+        <div class="bundle-title">Plan Pro <em>+ formularis + WhatsApp + CRM</em></div>
+        <div class="bundle-items">
+          <div class="bundle-chip"><strong>Pro</strong> · 79€</div>
+          <div class="bundle-chip"><strong>Formularios</strong> · 19€</div>
+          <div class="bundle-chip"><strong>WhatsApp</strong> · 29€</div>
+          <div class="bundle-chip"><strong>CRM</strong> · 19€</div>
+        </div>
+      </div>
+      <div class="bundle-total">
+        <div class="bundle-total-label">Total</div>
+        <div class="bundle-total-val">146€</div>
+        <div class="bundle-total-period">/mes · sin IVA</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SERVEIS ====== -->
+<section class="services-section">
+  <div class="container">
+    <div class="section-label">Servicios profesionales</div>
+    <h2>Cuando quieres que <em>te acompañemos.</em></h2>
+    <p class="section-intro">Si tu negocio necesita más que un setup estándar. Dos servicios que complementan cualquier plan.</p>
+
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div>
+          <div class="service-tag">Pago único</div>
+          <div class="service-title">Onboarding <em>Premium</em></div>
+          <div class="service-desc">
+            Auditamos tu web, optimizamos el catálogo, entrenamos al agente con tus argumentos de venta y formamos a tu equipo para sacarle el máximo.
+          </div>
+          <ul class="service-includes">
+            <li>Auditoría de la web y catálogo (2h)</li>
+            <li>Entrenamiento del agente con tono y argumentario propios</li>
+            <li>Configuración de respuestas clave y objeciones frecuentes</li>
+            <li>Sesión de formación para el equipo (1h)</li>
+            <li>Soporte prioritari els primers 30 dies</li>
+          </ul>
+          <a href="#cta" class="service-cta">Reservar onboarding</a>
+        </div>
+        <div class="service-pricebox">
+          <span class="service-price-val">390€</span>
+          <div class="service-price-note">Único · sin IVA</div>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div>
+          <div class="service-tag">Recurrente</div>
+          <div class="service-title">Informe <em>estratégico</em></div>
+          <div class="service-desc">
+            Cada trimestre analizamos todas las conversaciones de tu agente para identificar oportunidades de negocio que de otra manera se te escaparían.
+          </div>
+          <ul class="service-includes">
+            <li>Productos más consultados que no tienes en catálogo</li>
+            <li>Objeciones recurrentes y cómo neutralizarlas</li>
+            <li>Productos consultados pero no comprados</li>
+            <li>Análisis de sentimiento y NPS conversacional</li>
+            <li>Reunión de 1h para revisar conclusiones</li>
+          </ul>
+          <a href="#cta" class="service-cta">Activar informe</a>
+        </div>
+        <div class="service-pricebox">
+          <span class="service-price-val">149€</span>
+          <div class="service-price-note">/trimestre</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ====== PROCESS ====== -->
+<section id="como-funciona" style="background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+  <div class="container">
+    <div class="section-label">Cómo se activa</div>
+    <h2>Operativo en <em>1-2 días laborables.</em></h2>
+    <p class="section-intro">Nosotros nos encargamos de todo. Tú solo nos explicas tu negocio.</p>
+
+    <div class="process-steps">
       <div class="step">
         <div class="step-num">01</div>
-        <div class="step-title">Conectamos tu número</div>
-        <div class="step-desc">Vinculamos tu número de WhatsApp Business a través de la API oficial de Meta. Tu número actual, sin cambiarlo.</div>
+        <div class="step-time">Día 0 · 10 min</div>
+        <div class="step-title">Contrata</div>
+        <div class="step-desc">Elige el plan y rellena el formulario. En menos de 24h te contactamos para confirmar y obtener la información de tu catálogo.</div>
       </div>
       <div class="step">
         <div class="step-num">02</div>
-        <div class="step-title">El agente aprende tu negocio</div>
-        <div class="step-desc">Configuramos el agente con tus productos, políticas, tono de comunicación y los sistemas que quieres conectar.</div>
+        <div class="step-time">Día 1 · Nosotros</div>
+        <div class="step-title">Configuramos</div>
+        <div class="step-desc">Nuestro equipo configura y entrena el agente con tu catálogo, tu tono de comunicación y tus instrucciones específicas.</div>
       </div>
       <div class="step">
         <div class="step-num">03</div>
-        <div class="step-title">Atiende y tú supervisas</div>
-        <div class="step-desc">El agente gestiona las conversaciones. Desde tu panel ves todo y puedes intervenir o ajustar en cualquier momento.</div>
+        <div class="step-time">Día 2 · Listo</div>
+        <div class="step-title">Vende</div>
+        <div class="step-desc">Añadimos el widget a tu web con una línea de código. El agente comienza a atender clientes, generar leads y cerrar ventas.</div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section-alt" id="pricing">
+<!-- ====== NOT FOR YOU ====== -->
+<section class="not-for">
   <div class="container">
-    <div class="section-label">Membresía WhatsApp</div>
-    <h2>Planes claros,<br><em>sin sorpresas.</em></h2>
-    <p class="section-intro">Sin permanencia. Cancela cuando quieras. Cambia de plan en cualquier momento.</p>
-    <div class="pricing-grid">
-      <div class="plan">
-        <div class="plan-name">Starter</div>
-        <div class="plan-price">59<span>€/mes</span></div>
-        <div class="plan-tagline">Para empezar a automatizar las consultas más frecuentes por WhatsApp.</div>
-        <div class="plan-divider"></div>
-        <ul class="plan-features">
-          <li>1 número WhatsApp Business</li>
-          <li>Hasta 500 conversaciones/mes</li>
-          <li>Respuestas a FAQs y catálogo</li>
-          <li>Estado de pedidos (manual)</li>
-          <li>Panel de conversaciones</li>
-          <li>Soporte por email</li>
+    <div class="section-label">Honestidad</div>
+    <h2>No es para <em>todo el mundo.</em></h2>
+    <p class="section-intro">Si nos vas a acompañar 12 meses, mejor que desde el día 1 tengamos claro si encaja o no.</p>
+
+    <div class="not-for-grid">
+      <div class="nf-card">
+        <div class="nf-title">Es perfecto si...</div>
+        <div class="nf-subtitle">Encaja con tu negocio</div>
+        <ul class="nf-list positive">
+          <li>Tienes un eCommerce con catálogo (50+ productos)</li>
+          <li>Recibes consultas repetitivas de los clientes</li>
+          <li>Pierdes ventas fuera de horario o fines de semana</li>
+          <li>Tienes productos con opciones, tallas o configuraciones</li>
+          <li>Quieres calificar leads antes de atenderlos tú</li>
+          <li>Vendeen internacionalment i necessites multiidioma</li>
         </ul>
-        <a href="#contacto" class="plan-cta plan-cta-outline">Contratar Starter</a>
       </div>
-      <div class="plan featured">
-        <div class="plan-badge">Más popular</div>
-        <div class="plan-name">Pro</div>
-        <div class="plan-price">119<span>€/mes</span></div>
-        <div class="plan-tagline">Para negocios con volumen y procesos que quieren automatizar de verdad.</div>
-        <div class="plan-divider"></div>
-        <ul class="plan-features">
-          <li>Hasta 2 números WhatsApp Business</li>
-          <li>Hasta 2.000 conversaciones/mes</li>
-          <li>Gestión de citas integrada</li>
-          <li>Estado de pedidos en tiempo real</li>
-          <li>Gestión de devoluciones</li>
-          <li>Soporte prioritario</li>
+      <div class="nf-card">
+        <div class="nf-title">Mejor que no...</div>
+        <div class="nf-subtitle">No encaja tanto</div>
+        <ul class="nf-list negative">
+          <li>Vendes serveis molt personalitzats sense catàleg clar</li>
+          <li>Tens menys de 20 productos (no compensa)</li>
+          <li>Todavía no tienes tráfico web significativo</li>
+          <li>Buscas un sustituto total de la atención humana</li>
+          <li>Necesitas respuesta a preguntas fuera de tu ámbito</li>
         </ul>
-        <a href="#contacto" class="plan-cta plan-cta-filled">Contratar Pro</a>
-      </div>
-      <div class="plan">
-        <div class="plan-name">Business</div>
-        <div class="plan-price">229<span>€/mes</span></div>
-        <div class="plan-tagline">Para empresas con alto volumen y múltiples números o equipos.</div>
-        <div class="plan-divider"></div>
-        <ul class="plan-features">
-          <li>Números ilimitados</li>
-          <li>Conversaciones ilimitadas</li>
-          <li>Integración con tu CRM/ERP</li>
-          <li>Múltiples agentes y colas</li>
-          <li>Acceso a API</li>
-          <li>Gestor de cuenta dedicado</li>
-        </ul>
-        <a href="#contacto" class="plan-cta plan-cta-outline">Contratar Business</a>
       </div>
     </div>
   </div>
 </section>
 
-<section>
+<!-- ====== FOUNDER ====== -->
+<section class="founder" id="quienes-somos">
   <div class="container">
-    <div class="section-label">FAQ</div>
-    <h2>Preguntas <em>frecuentes.</em></h2>
-    <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">¿Necesito cambiar mi número de WhatsApp? <span class="faq-icon">+</span></button>
-        <div class="faq-a">No. Usamos tu número actual de WhatsApp Business. Solo necesitamos que tengas una cuenta WhatsApp Business API activada, que gestionamos nosotros.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">¿Es la API oficial de WhatsApp? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Sí. Usamos únicamente la API oficial de Meta/WhatsApp Business. Esto garantiza que tu cuenta no corre ningún riesgo de ban o restricción.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">¿Puede mi equipo seguir usando WhatsApp? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Sí. Desde el panel unificado, cualquier miembro de tu equipo puede ver las conversaciones e intervenir cuando sea necesario. El agente y los humanos trabajan juntos.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">¿Qué pasa con las plantillas de mensaje? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Las plantillas para mensajes salientes (notificaciones, recordatorios) deben ser aprobadas por Meta. Nosotros gestionamos todo el proceso de aprobación.</div>
+    <div class="founder-inner">
+      <div class="founder-photo"></div>
+      <div>
+        <div class="section-label">Quiénes somos</div>
+        <div class="founder-quote">
+          "Creamos empentIA para que ningún pequeño eCommerce tenga que resignarse a perder ventas por no poder responder a tiempo. La IA puede hacerlo. Y nosotros hacemos que funcione bien."
+        </div>
+        <div class="founder-name">Marc Soler</div>
+        <div class="founder-role">Fundador · empentIA · Igualada</div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="contacto">
+<!-- ====== CLIENT ACCESS ====== -->
+<section class="client-access">
   <div class="container">
-    <div class="cta-box">
-      <h2 class="serif">Tu WhatsApp,<br><em>sin límite de horas.</em></h2>
-      <p>Activa el agente y atiende a tus clientes donde ya te escriben, las 24 horas.</p>
-      <a href="mailto:hola@empentia.ai?subject=Quiero activar el Agente WhatsApp" class="btn btn-white">Activar ahora →</a>
-      <div class="cta-note">Sin compromiso · Cancela cuando quieras</div>
+    <div class="ca-box">
+      <div>
+        <div class="ca-label">¿Ya eres cliente?</div>
+        <h3 class="ca-title">Accede a tu <em>espacio privado.</em></h3>
+        <p class="ca-desc">Gestiona tu agente, consulta las conversaciones, descarga tus leads y ajusta la configuración desde tu panel.</p>
+        <a href="#" class="ca-btn">Entra al panel de cliente <span>→</span></a>
+      </div>
+      <div class="ca-mock">
+        <div class="ca-mock-row">
+          <span class="ca-mock-label">Plan activo</span>
+          <span class="ca-mock-val">Pro</span>
+        </div>
+        <div class="ca-mock-row">
+          <span class="ca-mock-label">Converses avui</span>
+          <span class="ca-mock-val">47</span>
+        </div>
+        <div class="ca-mock-row">
+          <span class="ca-mock-label">Leads pendents</span>
+          <span class="ca-mock-val">3</span>
+        </div>
+        <div class="ca-mock-row">
+          <span class="ca-mock-label">Estat agent</span>
+          <span class="ca-mock-val" style="color: #8fbf9f;">● Actiu</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- ====== FAQ ====== -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="faq-grid">
+      <div>
+        <div class="section-label">Preguntas frecuentes</div>
+        <h2>Todo lo que necesitas <em>saber.</em></h2>
+        <p class="section-intro" style="margin-top: 24px;">Si tienes una duda que no ves aquí, escríbenos. Te respondemos el mismo día.</p>
+      </div>
+
+      <div class="faq-items">
+        <div class="faq-item open">
+          <div class="faq-q">¿Cuánto tarda en estar operativo?</div>
+          <div class="faq-a">Entre 24 y 48 horas laborables desde que nos pasas la información del catálogo. Nosotros lo configuramos todo.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Funciona con WooCommerce y PrestaShop?</div>
+          <div class="faq-a">Sí, con integración nativa para añadir al carrito y sincronizar catálogo via API. También funciona con cualquier otra web con catálogo estático.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Puedo cancelar cuando quiera?</div>
+          <div class="faq-a">Sin permanencia ni letra pequeña. Cancelas desde el panel con un clic y dejas de pagar el mes siguiente.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Qué pasa si supero las conversaciones del plan?</div>
+          <div class="faq-a">Te avisamos antes de llegar al límite. Puedes subir de plan o pagar cada conversación adicional a 0,25€. Sin sorpresas.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Los datos de mis clientes están seguros?</div>
+          <div class="faq-a">Totalmente. Servidores en la UE, cifrado en tránsito y reposo, y cumplimiento RGPD. Las conversaciones son propiedad tuya.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Qué tecnología hay detrás?</div>
+          <div class="faq-a">Usamos modelos de lenguaje líderes (GPT-4, Claude) combinados con nuestra propia capa de conocimiento de tu catálogo y lógica de venta.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Atiende en español e inglés?</div>
+          <div class="faq-a">Y en más de 30 idiomas. Detecta automáticamente el idioma del visitante y le responde en su idioma.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Puedo probarlo antes de contratar?</div>
+          <div class="faq-a">Sí. Además, los primeros 14 días son con devolución garantizada si no te convence.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FINAL CTA ====== -->
+<section class="final-cta" id="cta">
+  <div class="container">
+    <div class="section-label">Empieza hoy</div>
+    <h2>Tu agente comercial <em>listo en 48 horas.</em></h2>
+    <p>Pruébalo sin compromiso. Si quieres hablar primero, reserva una llamada de 15 min con nuestro equipo.</p>
+    <div class="final-ctas">
+      <a href="#" class="btn btn-primary">Activar WhatsApp ahora <span class="btn-arrow">→</span></a>
+      <a href="#" class="btn btn-secondary">Reservar llamada de 15 min</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
 <footer>
-  <div class="footer-inner">
-    <a href="/" class="logo footer-logo"><img src="/images/logo/logo-horizontal.svg" alt="empentIA"></a>
-    <p class="footer-copy">© 2025 empentIA. Todos los derechos reservados.</p>
-    <div class="footer-links">
-      <a href="/agentes-ia-atencion-cliente/">← Todos los servicios</a>
-      <a href="/legal">Aviso legal</a>
-      <a href="/privacy">Privacidad</a>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <a href="#" class="logo">
+          <img src="/images/logo/logo-horizontal.svg" alt="empentIA">
+        </a>
+        <p class="footer-tag">Agentes de inteligencia artificial para tiendas online que quieren vender más sin contratar más.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Producto</h4>
+        <a href="#demo">Demo</a>
+        <a href="#funcionalidades">Funcionalidades</a>
+        <a href="#precios">Planes y precios</a>
+        <a href="#modulos">Módulos</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Clientes</h4>
+        <a href="#">Acceso al panel</a>
+        <a href="#">Soporte</a>
+        <a href="#">Documentación</a>
+        <a href="#">Estado del servicio</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <a href="mailto:hola@empentia.ai">hola@empentia.ai</a>
+        <a href="#">Reservar llamada</a>
+        <a href="#">LinkedIn</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 empentIA. Todos los derechos reservados.</div>
+      <div>
+        <a href="/legal">Aviso legal</a>
+        <a href="/privacy">Privacidad</a>
+        <a href="/cookies">Cookies</a>
+        <a href="#" data-cookie-open>Gestionar cookies</a>
+      </div>
     </div>
   </div>
 </footer>
 
 <script>
-function toggleFaq(btn) {
-  const item = btn.parentElement;
-  const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
-  if (!isOpen) item.classList.add('open');
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    item.classList.toggle('open');
+  });
+});
+
+const compareToggle = document.getElementById('compareToggle');
+const plansCompare = document.getElementById('plansCompare');
+if (compareToggle && plansCompare) {
+  compareToggle.addEventListener('click', () => {
+    const isOpen = plansCompare.classList.toggle('open');
+    compareToggle.classList.toggle('open', isOpen);
+    compareToggle.setAttribute('aria-expanded', isOpen);
+    plansCompare.setAttribute('aria-hidden', !isOpen);
+    compareToggle.childNodes[0].textContent = isOpen
+      ? 'Ocultar comparación '
+      : 'Ver comparación completa ';
+  });
 }
+
 function toggleMenu() {
   const btn = document.getElementById('hamburger');
   const menu = document.getElementById('mobileMenu');
@@ -425,5 +3240,8 @@ function closeMenu() {
   document.body.style.overflow = '';
 }
 </script>
+
+<script src="/agentes-ia-atencion-cliente/whatsapp/cookie-consent.js" defer></script>
+
 </body>
 </html>
