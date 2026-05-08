@@ -613,7 +613,7 @@
   .case-card {
     background: #fff;
     border-radius: var(--radius);
-    padding: 36px 32px 32px;
+    padding: 26px 24px 22px;
     border: 0.5px solid var(--line-soft);
     display: flex; flex-direction: column;
     transition: transform .25s ease, box-shadow .25s ease;
@@ -632,14 +632,14 @@
   .case-card.featured .case-metric .big { color: var(--brand); }
 
   .case-metric {
-    margin-bottom: 28px;
+    margin-bottom: 18px;
     border-bottom: 0.5px solid var(--line-soft);
-    padding-bottom: 22px;
+    padding-bottom: 14px;
   }
   .case-card.featured .case-metric { border-bottom-color: rgba(0,195,137,0.18); }
   .case-metric .big {
     font-family: var(--serif);
-    font-size: 64px; font-weight: 400;
+    font-size: 48px; font-weight: 400;
     letter-spacing: -0.03em;
     line-height: 1;
     color: var(--brand-deep);
@@ -1586,12 +1586,11 @@
   }
   .channels-head {
     margin-bottom: 64px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: end;
+    display: block;
+    max-width: 720px;
     position: relative; z-index: 1;
   }
+  .channels-head p { margin-top: 24px; }
   .channels-head .eyebrow { color: var(--brand-deep); }
   .channels-head .eyebrow::before { border-color: var(--brand-deep); }
   .channels-head .eyebrow::after { background: var(--brand-deep); }
@@ -2487,6 +2486,22 @@
   .como-trabaja-tabs .block-bento .cell.tall {
     grid-column: auto !important;
     grid-row: auto !important;
+  }
+  @media (max-width: 640px) {
+    .como-trabaja-tabs .block-bento {
+      grid-template-columns: 1fr 1fr !important;
+      gap: 10px !important;
+    }
+    .como-trabaja-tabs .block-bento .cell {
+      padding: 18px 16px !important;
+    }
+    .como-trabaja-tabs .block-bento .cell h3 {
+      font-size: 16px !important;
+      line-height: 1.25 !important;
+    }
+    .como-trabaja-tabs .block-bento .cell p {
+      font-size: 13px !important;
+    }
   }
 
   /* Celdas del bento — fondo blanco con sombra suave */
