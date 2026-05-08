@@ -1360,16 +1360,15 @@
     opacity: 0.25;
   }
   .faqs-grid {
-    display: grid;
-    grid-template-columns: 5fr 7fr;
-    gap: 80px;
-    align-items: start;
-    position: relative; z-index: 1;
+    display: block;
+    position: relative;
+    z-index: 1;
   }
   .faqs-head {
-    position: sticky;
-    top: 100px;
+    margin-bottom: 56px;
+    max-width: 720px;
   }
+  .faqs-head p { max-width: 600px; }
   .faqs-head .eyebrow { color: var(--brand-deep); margin-bottom: 24px; }
   .faqs-head .eyebrow::before { border-color: var(--brand-deep); }
   .faqs-head .eyebrow::after { background: var(--brand-deep); }
@@ -3754,11 +3753,6 @@
           Si la tuya no está aquí, escríbenos.
         </p>
 
-        <div class="faqs-contact">
-          <span class="faqs-contact-label">Equipo activo</span>
-          <div class="faqs-contact-title">¿Otra pregunta?<br>Te respondemos hoy.</div>
-          <a href="mailto:hola@empentia.ai">hola@empentia.ai →</a>
-        </div>
       </div>
 
       <!-- Lista de FAQs -->
