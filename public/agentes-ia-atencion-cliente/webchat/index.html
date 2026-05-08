@@ -2503,6 +2503,16 @@
     grid-auto-rows: minmax(180px, auto);
     gap: 14px;
   }
+  /* Chats de conversación ocultos — solo funciones */
+  .como-trabaja-tabs .cell.demo { display: none !important; }
+  .como-trabaja-tabs .block-bento:has(.cell.demo) {
+    grid-template-columns: 1fr 1fr;
+  }
+  .como-trabaja-tabs .block-bento .cell.big,
+  .como-trabaja-tabs .block-bento .cell.tall {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
 
   /* Celdas del bento — fondo blanco con sombra suave */
   .como-trabaja-tabs .cell {
