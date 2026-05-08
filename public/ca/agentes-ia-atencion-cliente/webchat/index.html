@@ -1584,11 +1584,17 @@
     pointer-events: none;
     opacity: 0.3;
   }
-  .channels-head {
-    margin-bottom: 64px;
-    display: block;
-    max-width: 720px;
+  .channels-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    margin-bottom: 56px;
     position: relative; z-index: 1;
+  }
+  .channels-head {
+    display: block;
+    max-width: 520px;
   }
   .channels-head p { margin-top: 24px; }
   .channels-head .eyebrow { color: var(--brand-deep); }
@@ -1738,18 +1744,21 @@
 
   /* Visualización 360 — agente al centro, canales orbitando */
   .channels-360 {
-    margin-bottom: 80px;
+    margin-bottom: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     z-index: 1;
-    height: 320px;
+    height: auto;
+    min-height: 320px;
   }
   .orbit-stage {
     position: relative;
-    width: 560px;
-    height: 320px;
+    width: 100%;
+    max-width: 560px;
+    aspect-ratio: 560/320;
+    height: auto;
   }
   .orbit-ring {
     position: absolute;
@@ -1930,7 +1939,10 @@
     .choice-divider { display: none !important; }
     .next-step { grid-template-columns: 1fr !important; gap: 20px !important; padding: 32px 24px !important; text-align: center; }
     .next-step::before { display: none !important; }
-    .channels-360 { display: none !important; }
+    /* channels-top: stack vertical en mobile */
+    .channels-top { grid-template-columns: 1fr !important; gap: 32px !important; }
+    .channels-360 { min-height: 280px !important; }
+    .orbit-stage { max-width: 420px !important; }
     .chat-card { position: relative !important; bottom: auto !important; right: auto !important; width: 100% !important; transform: none !important; margin-top: 16px; }
     .browser { position: relative; transform: none !important; aspect-ratio: 4/3; }
   }
@@ -3920,19 +3932,20 @@
   </svg>
 
   <div class="container">
-    <div class="channels-head">
-      <div>
-        <div class="eyebrow">Atenció IA 360</div>
-        <h2 class="section-title">Un agente,<br><em>tots els canales.</em></h2>
+    <div class="channels-top">
+      <div class="channels-head">
+        <div>
+          <div class="eyebrow">Atenció IA 360</div>
+          <h2 class="section-title">Un agent,<br><em>tots els canals.</em></h2>
+        </div>
+        <p>
+          El Webchat és només el principi. Estem preparant agents IA per a
+          WhatsApp, email, trucades i ressenyes. Cada canal amb la seva membresia,
+          tots compartint el mateix coneixement del teu negoci.
+        </p>
       </div>
-      <p>
-        El Webchat és només el principi. Estem preper ant agents IA per a
-        WhatsApp, email, trucades i ressenyes. Cada canal con su membresía,
-        tots compartint el mateix coneixement del teu negoci.
-      </p>
-    </div>
 
-    <!-- Visualización 360: agente al centro, canales orbitando -->
+    <!-- Visualització 360: agent al centre, canals orbitant -->
     <div class="channels-360" aria-hidden="true">
       <div class="orbit-stage">
         <!-- Líneas conectoras desde el centro -->
@@ -3977,15 +3990,16 @@
         <!-- VOZ -->
         <div class="orbit-node" style="left: 480px; top: 160px;" title="Voz">
           <svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><path d="M12 18v4"/><path d="M8 22h8"/></svg>
-          <span class="label">Voz</span>
+          <span class="label">Veu</span>
         </div>
 
         <!-- RESEÑAS (centrado abajo) -->
         <div class="orbit-node" style="left: 280px; top: 280px;" title="Reseñas">
           <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9 12 2"/></svg>
-          <span class="label">Reseñas</span>
+          <span class="label">Ressenyes</span>
         </div>
       </div>
+    </div>
     </div>
 
     <div class="channels-grid">
