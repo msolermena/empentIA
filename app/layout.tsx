@@ -6,8 +6,15 @@ import { CookieBanner } from "@/components/CookieBanner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://empentia.com'),
   title: "empentIA - Automatització i IA per pimes",
   description: "Automatitzacions i agents IA a mida per impulsar l'eficiència i el creixement del teu negoci. Sense complicacions tècniques.",
+  alternates: { canonical: '/' },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
+  },
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },
@@ -21,7 +28,7 @@ export const metadata: Metadata = {
     description: 'Automatitzacions i agents IA a mida per impulsar l\'eficiència i el creixement del teu negoci.',
     images: [
       {
-        url: 'https://empentia.cat/images/social/og-image.png',
+        url: 'https://empentia.com/images/social/og-image.png',
         width: 1200,
         height: 630,
         alt: 'empentIA',
@@ -34,7 +41,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'empentIA - Automatització i IA per pimes',
     description: 'Automatitzacions i agents IA a mida per impulsar l\'eficiència del teu negoci.',
-    images: ['https://empentia.cat/images/social/og-image.png'],
+    images: ['https://empentia.com/images/social/og-image.png'],
   },
 };
 
