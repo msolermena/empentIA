@@ -1,0 +1,16 @@
+# empentia.com — robots.txt
+
+User-agent: *
+Allow: /
+
+# No indexar páginas de servicios aún no operativos
+Disallow: /agentes-ia-atencion-cliente/whatsapp/
+Disallow: /agentes-ia-atencion-cliente/email/
+Disallow: /agentes-ia-atencion-cliente/llamadas/
+Disallow: /agentes-ia-atencion-cliente/resenas/
+
+# No indexar landings antiguas
+Disallow: /landing-webchat/
+
+# Sitemap
+Sitemap: https://empentia.com/sitemap.xml
