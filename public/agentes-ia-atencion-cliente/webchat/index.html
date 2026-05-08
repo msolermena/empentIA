@@ -1584,11 +1584,17 @@
     pointer-events: none;
     opacity: 0.3;
   }
-  .channels-head {
-    margin-bottom: 64px;
-    display: block;
-    max-width: 720px;
+  .channels-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    margin-bottom: 56px;
     position: relative; z-index: 1;
+  }
+  .channels-head {
+    display: block;
+    max-width: 520px;
   }
   .channels-head p { margin-top: 24px; }
   .channels-head .eyebrow { color: var(--brand-deep); }
@@ -1738,18 +1744,21 @@
 
   /* Visualización 360 — agente al centro, canales orbitando */
   .channels-360 {
-    margin-bottom: 80px;
+    margin-bottom: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     z-index: 1;
-    height: 320px;
+    height: auto;
+    min-height: 320px;
   }
   .orbit-stage {
     position: relative;
-    width: 560px;
-    height: 320px;
+    width: 100%;
+    max-width: 560px;
+    aspect-ratio: 560/320;
+    height: auto;
   }
   .orbit-ring {
     position: absolute;
@@ -1937,8 +1946,10 @@
     /* Next step (siguiente paso) — stack vertical */
     .next-step { grid-template-columns: 1fr !important; gap: 20px !important; padding: 32px 24px !important; text-align: center; }
     .next-step::before { display: none !important; }
-    /* Atención IA 360 — orbit ocultar (visual no responsive) */
-    .channels-360 { display: none !important; }
+    /* channels-top: stack vertical en mobile */
+    .channels-top { grid-template-columns: 1fr !important; gap: 32px !important; }
+    .channels-360 { min-height: 280px !important; }
+    .orbit-stage { max-width: 420px !important; }
     /* Hero chat-card — sense overflow */
     .chat-card { position: relative !important; bottom: auto !important; right: auto !important; width: 100% !important; transform: none !important; margin-top: 16px; }
     .browser { position: relative; transform: none !important; aspect-ratio: 4/3; }
@@ -3943,17 +3954,18 @@
   </svg>
 
   <div class="container">
-    <div class="channels-head">
-      <div>
-        <div class="eyebrow">Atención IA 360</div>
-        <h2 class="section-title">Un agente,<br><em>todos los canales.</em></h2>
+    <div class="channels-top">
+      <div class="channels-head">
+        <div>
+          <div class="eyebrow">Atención IA 360</div>
+          <h2 class="section-title">Un agente,<br><em>todos los canales.</em></h2>
+        </div>
+        <p>
+          El Webchat es solo el principio. Estamos preparando agentes IA para
+          WhatsApp, email, llamadas y reseñas. Cada canal con su membresía,
+          todos compartiendo el mismo conocimiento de tu negocio.
+        </p>
       </div>
-      <p>
-        El Webchat es solo el principio. Estamos preparando agentes IA para
-        WhatsApp, email, llamadas y reseñas. Cada canal con su membresía,
-        todos compartiendo el mismo conocimiento de tu negocio.
-      </p>
-    </div>
 
     <!-- Visualización 360: agente al centro, canales orbitando -->
     <div class="channels-360" aria-hidden="true">
@@ -4009,6 +4021,7 @@
           <span class="label">Reseñas</span>
         </div>
       </div>
+    </div>
     </div>
 
     <div class="channels-grid">
