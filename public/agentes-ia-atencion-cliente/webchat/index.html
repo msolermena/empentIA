@@ -2113,6 +2113,51 @@
     .chat-card { padding: 14px !important; }
   }
 
+  /* ============ MOBILE FIXES — overflow + section spacing ============ */
+  @media (max-width: 720px) {
+    /* Section spacing — reducir mucho en mobile */
+    section.features,
+    section.cases,
+    section.pricing,
+    section.channels,
+    section.faqs,
+    section.steps,
+    section.cta-final {
+      padding-top: 64px !important;
+      padding-bottom: 64px !important;
+    }
+    .pricing-head { margin-bottom: 40px !important; }
+    /* Code block — sin overflow horizontal */
+    .code-line {
+      font-size: 11px !important;
+      word-break: break-all !important;
+      white-space: normal !important;
+      padding: 12px !important;
+      overflow: hidden !important;
+    }
+    /* Cells/cards padding más ajustado */
+    .cell { padding: 22px 20px !important; }
+    .cell h3 { line-height: 1.2 !important; }
+    /* Botones dentro de cards a full width */
+    .channel-card .btn-cta,
+    .channel-card a.btn-cta,
+    .module-link {
+      width: 100% !important;
+      justify-content: center !important;
+      box-sizing: border-box !important;
+    }
+    /* Channel/module card: padding interno */
+    .channel-card,
+    .module-card { padding: 22px 20px !important; }
+    .channel-card * ,
+    .module-card * { max-width: 100%; box-sizing: border-box; }
+    /* Analytics stats — mantener legibles */
+    .ana-mini-stat { padding: 14px 12px !important; }
+    .ana-mini-num { font-size: 24px !important; }
+    /* Eliminar padding lateral excesivo del container en mobile */
+    .container { padding: 0 18px !important; }
+  }
+
   /* ============ CTA FINAL ============ */
   section.cta-final {
     padding: 120px 0 140px;
