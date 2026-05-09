@@ -1,7 +1,8 @@
 /*
  * Mecanisme oficial de consentiment de cookies — landing estàtica.
  * Comparteix la mateixa clau d'emmagatzematge i cookie que el site principal,
- * de manera que una decisió presa aquí es respecta també a empentia.cat (i viceversa).
+ * de manera que una decisió presa aquí es respecta també a empentia.com (i viceversa).
+ * i18n: detecta l'idioma de <html lang="..."> i serveix els textos en ES o CA.
  */
 (function () {
   "use strict";
@@ -14,31 +15,107 @@
   var COOKIE_NAME = "empentia_cc";
   var MAX_AGE_DAYS = 365;
   var POLICY_URL = "/cookies";
-  var POLICY_UPDATED = "11 de febrer de 2026";
 
-  var CATEGORIES = [
-    {
-      id: "necessary",
-      label: "Tècniques (necessàries)",
-      required: true,
-      description:
-        "Imprescindibles per al funcionament del lloc. Inclouen sessió i preferències bàsiques. No es poden desactivar.",
+  // ---------- i18n ----------
+  var LANG = (document.documentElement.lang || "es").toLowerCase().slice(0, 2);
+  if (LANG !== "ca") LANG = "es"; // por defecto castellano
+
+  var I18N = {
+    es: {
+      policyUpdated: "11 de febrero de 2026",
+      bannerAriaLabel: "Aviso de cookies",
+      modalAriaLabel: "Preferencias de cookies",
+      bannerTitle: "Respetamos tu privacidad",
+      bannerText:
+        "Usamos cookies técnicas necesarias y, con tu consentimiento, cookies opcionales para analítica y preferencias. Puedes aceptarlas, rechazarlas o configurarlas. ",
+      moreInfo: "Más información",
+      configure: "Configurar",
+      rejectAll: "Rechazar todas",
+      acceptAll: "Aceptar todas",
+      save: "Guardar preferencias",
+      modalTitle: "Preferencias de cookies",
+      lastUpdated: "Última actualización de la política: ",
+      modalIntroPre:
+        "Activa o desactiva las categorías. Los cambios se guardarán al pulsar ",
+      modalIntroSave: "Guardar preferencias",
+      modalIntroPost: ". Consulta el detalle en la ",
+      cookiesPolicy: "Política de Cookies",
+      close: "Cerrar",
+      activateCategory: "Activar categoría ",
+      categories: [
+        {
+          id: "necessary",
+          label: "Técnicas (necesarias)",
+          required: true,
+          description:
+            "Imprescindibles para el funcionamiento del sitio. Incluyen sesión y preferencias básicas. No se pueden desactivar.",
+        },
+        {
+          id: "analytics",
+          label: "Analíticas",
+          required: false,
+          description:
+            "Miden el uso del sitio de forma agregada y anónima para mejorar el contenido y el rendimiento.",
+        },
+        {
+          id: "marketing",
+          label: "Marketing y preferencias",
+          required: false,
+          description:
+            "Personalizan contenidos y miden campañas. Quedarán desactivadas hasta que lo autorices.",
+        },
+      ],
     },
-    {
-      id: "analytics",
-      label: "Analítiques",
-      required: false,
-      description:
-        "Mesuren l'ús del lloc de forma agregada i anònima per millorar el contingut i el rendiment.",
+    ca: {
+      policyUpdated: "11 de febrer de 2026",
+      bannerAriaLabel: "Avís de cookies",
+      modalAriaLabel: "Preferències de cookies",
+      bannerTitle: "Respectem la teva privacitat",
+      bannerText:
+        "Utilitzem cookies tècniques necessàries i, amb el teu consentiment, cookies opcionals per a analítica i preferències. Pots acceptar-les, rebutjar-les o configurar-les. ",
+      moreInfo: "Més informació",
+      configure: "Configurar",
+      rejectAll: "Rebutjar totes",
+      acceptAll: "Acceptar totes",
+      save: "Desar preferències",
+      modalTitle: "Preferències de cookies",
+      lastUpdated: "Darrera actualització de la política: ",
+      modalIntroPre:
+        "Activa o desactiva les categories. Els canvis es desaran quan premis ",
+      modalIntroSave: "Desar preferències",
+      modalIntroPost: ". Consulta el detall a la ",
+      cookiesPolicy: "Política de Cookies",
+      close: "Tancar",
+      activateCategory: "Activar categoria ",
+      categories: [
+        {
+          id: "necessary",
+          label: "Tècniques (necessàries)",
+          required: true,
+          description:
+            "Imprescindibles per al funcionament del lloc. Inclouen sessió i preferències bàsiques. No es poden desactivar.",
+        },
+        {
+          id: "analytics",
+          label: "Analítiques",
+          required: false,
+          description:
+            "Mesuren l'ús del lloc de forma agregada i anònima per millorar el contingut i el rendiment.",
+        },
+        {
+          id: "marketing",
+          label: "Màrqueting i preferències",
+          required: false,
+          description:
+            "Personalitzen continguts i mesuren campanyes. Quedaran desactivades fins que ho autoritzis.",
+        },
+      ],
     },
-    {
-      id: "marketing",
-      label: "Màrqueting i preferències",
-      required: false,
-      description:
-        "Personalitzen continguts i mesuren campanyes. Quedaran desactivades fins que ho autoritzis.",
-    },
-  ];
+  };
+
+  var T = I18N[LANG];
+  var POLICY_UPDATED = T.policyUpdated;
+  var CATEGORIES = T.categories;
 
   // ---------- storage ----------
   function readCookie(name) {
@@ -68,75 +145,49 @@
     document.cookie = name + "=; Max-Age=0; Path=/; SameSite=Lax";
   }
 
-  function parseConsent(raw) {
-    if (!raw) return null;
-    try {
-      var p = JSON.parse(raw);
-      if (
-        !p ||
-        typeof p.version !== "number" ||
-        typeof p.timestamp !== "string" ||
-        !p.categories ||
-        typeof p.categories.analytics !== "boolean" ||
-        typeof p.categories.marketing !== "boolean"
-      )
-        return null;
-      return {
-        version: p.version,
-        timestamp: p.timestamp,
-        categories: {
-          necessary: true,
-          analytics: p.categories.analytics,
-          marketing: p.categories.marketing,
-        },
-      };
-    } catch (_) {
-      return null;
-    }
-  }
-
-  function isExpired(consent) {
-    var ts = Date.parse(consent.timestamp);
-    if (isNaN(ts)) return true;
-    var ageDays = (Date.now() - ts) / (1000 * 60 * 60 * 24);
-    return ageDays > MAX_AGE_DAYS;
-  }
-
   function readConsent() {
-    var raw = null;
     try {
-      raw = window.localStorage.getItem(LS_KEY);
+      var raw = window.localStorage.getItem(LS_KEY);
+      if (raw) {
+        var parsed = JSON.parse(raw);
+        if (parsed && parsed.version === VERSION && parsed.categories) {
+          return parsed;
+        }
+      }
     } catch (_) {}
-    if (!raw) raw = readCookie(COOKIE_NAME);
-    var consent = parseConsent(raw);
-    if (!consent) return null;
-    if (consent.version !== VERSION) return null;
-    if (isExpired(consent)) return null;
-    return consent;
+    var cookie = readCookie(COOKIE_NAME);
+    if (cookie) {
+      try {
+        var parsedCookie = JSON.parse(cookie);
+        if (parsedCookie && parsedCookie.version === VERSION && parsedCookie.categories) {
+          return parsedCookie;
+        }
+      } catch (_) {}
+    }
+    return null;
   }
 
-  function writeConsent(cats) {
+  function writeConsent(categories) {
     var consent = {
       version: VERSION,
-      timestamp: new Date().toISOString(),
+      decidedAt: new Date().toISOString(),
       categories: {
         necessary: true,
-        analytics: cats.analytics === true,
-        marketing: cats.marketing === true,
+        analytics: !!categories.analytics,
+        marketing: !!categories.marketing,
       },
     };
-    var serialized = JSON.stringify(consent);
     try {
-      window.localStorage.setItem(LS_KEY, serialized);
+      window.localStorage.setItem(LS_KEY, JSON.stringify(consent));
     } catch (_) {}
-    writeCookie(COOKIE_NAME, serialized, MAX_AGE_DAYS);
+    writeCookie(COOKIE_NAME, JSON.stringify(consent), MAX_AGE_DAYS);
     window.dispatchEvent(
       new CustomEvent("empentia:cookies:change", { detail: consent }),
     );
     return consent;
   }
 
-  function resetConsent() {
+  function clearConsent() {
     try {
       window.localStorage.removeItem(LS_KEY);
     } catch (_) {}
@@ -146,84 +197,99 @@
     );
   }
 
-  // ---------- styles ----------
+  function hasDecided() {
+    return !!readConsent();
+  }
+
+  // ---------- styles (un sol cop) ----------
   function injectStyles() {
     if (document.getElementById("empentia-cc-styles")) return;
     var css =
-      "" +
-      ".ecc-overlay{position:fixed;inset:0;background:rgba(26,26,26,.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:9998;display:none;align-items:flex-end;justify-content:center;padding:16px;}" +
-      "@media(min-width:640px){.ecc-overlay{align-items:center;}}" +
-      ".ecc-overlay.open{display:flex;}" +
-      ".ecc-banner{position:fixed;left:0;right:0;bottom:0;z-index:9997;padding:16px;display:none;}" +
-      "@media(min-width:640px){.ecc-banner{padding:24px;}}" +
-      ".ecc-banner.open{display:block;}" +
-      ".ecc-card{max-width:960px;margin:0 auto;background:#ffffff;border:1px solid #e8e6df;border-radius:14px;box-shadow:0 20px 50px rgba(26,26,26,.18);padding:20px;font-family:'Instrument Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1a1a1a;}" +
-      "@media(min-width:640px){.ecc-card{padding:24px;}}" +
-      ".ecc-title{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:20px;margin:0 0 8px;letter-spacing:-.01em;}" +
-      ".ecc-text{font-size:14px;line-height:1.55;color:#4a4a4a;margin:0;}" +
-      ".ecc-text a{color:#1a1a1a;text-decoration:underline;text-underline-offset:2px;}" +
-      ".ecc-actions{margin-top:16px;display:flex;flex-direction:column-reverse;gap:8px;}" +
-      "@media(min-width:640px){.ecc-actions{flex-direction:row;justify-content:flex-end;align-items:center;}}" +
-      ".ecc-btn{appearance:none;border:1px solid transparent;border-radius:10px;padding:10px 16px;font:inherit;font-size:14px;font-weight:500;cursor:pointer;transition:background .15s ease,border-color .15s ease,color .15s ease;}" +
-      ".ecc-btn:focus-visible{outline:2px solid #1a1a1a;outline-offset:2px;}" +
-      ".ecc-btn-primary{background:#1a1a1a;color:#ffffff;}" +
-      ".ecc-btn-primary:hover{background:#2a2a2a;}" +
-      ".ecc-btn-secondary{background:#f4f3ee;color:#1a1a1a;border-color:#e8e6df;}" +
-      ".ecc-btn-secondary:hover{background:#ece9e0;}" +
-      ".ecc-btn-ghost{background:transparent;color:#4a4a4a;}" +
-      ".ecc-btn-ghost:hover{color:#1a1a1a;}" +
-      ".ecc-modal{width:100%;max-width:640px;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;background:#ffffff;border:1px solid #e8e6df;border-radius:16px;box-shadow:0 24px 60px rgba(26,26,26,.22);font-family:'Instrument Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1a1a1a;}" +
-      ".ecc-modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:20px 20px 16px;border-bottom:1px solid #efede6;}" +
-      ".ecc-modal-title{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:22px;margin:0;}" +
-      ".ecc-modal-sub{font-size:12px;color:#8a8a85;margin-top:4px;}" +
-      ".ecc-close{background:none;border:0;cursor:pointer;font-size:22px;line-height:1;color:#8a8a85;padding:4px;border-radius:6px;}" +
-      ".ecc-close:hover{color:#1a1a1a;background:#f4f3ee;}" +
-      ".ecc-modal-body{padding:16px 20px;overflow-y:auto;}" +
-      ".ecc-intro{font-size:14px;line-height:1.55;color:#4a4a4a;margin:0 0 12px;}" +
-      ".ecc-intro a{color:#1a1a1a;text-decoration:underline;}" +
-      ".ecc-cat{border:1px solid #e8e6df;border-radius:12px;padding:14px;margin-top:10px;background:#fafaf7;}" +
-      ".ecc-cat-row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}" +
-      ".ecc-cat-label{font-size:14px;font-weight:600;margin:0;}" +
-      ".ecc-cat-desc{font-size:12px;line-height:1.5;color:#4a4a4a;margin:4px 0 0;}" +
-      ".ecc-switch{position:relative;width:42px;height:24px;border-radius:999px;background:#d4d1c8;border:0;cursor:pointer;transition:background .2s ease;flex-shrink:0;padding:0;}" +
-      ".ecc-switch[aria-checked='true']{background:#1a1a1a;}" +
-      ".ecc-switch[disabled]{opacity:.6;cursor:not-allowed;}" +
-      ".ecc-switch:focus-visible{outline:2px solid #1a1a1a;outline-offset:2px;}" +
-      ".ecc-switch::after{content:'';position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#ffffff;transition:transform .2s ease;box-shadow:0 1px 2px rgba(0,0,0,.15);}" +
-      ".ecc-switch[aria-checked='true']::after{transform:translateX(18px);}" +
-      ".ecc-modal-foot{display:flex;flex-direction:column-reverse;gap:8px;padding:16px 20px;border-top:1px solid #efede6;}" +
+      ".ecc-banner{position:fixed;inset-inline:0;bottom:0;z-index:2147483646;padding:16px;}" +
+      ".ecc-card{max-width:880px;margin:0 auto;background:#0f172a;color:#e2e8f0;border:1px solid rgba(16,185,129,.25);border-radius:18px;box-shadow:0 30px 60px rgba(0,0,0,.4);padding:20px;}" +
+      "@media(min-width:640px){.ecc-card{padding:24px;}.ecc-banner{padding:24px;}}" +
+      ".ecc-title{font-size:16px;font-weight:600;margin:0 0 10px;color:#f1f5f9;}" +
+      ".ecc-text{margin:0;font-size:14px;color:#cbd5e1;line-height:1.55;}" +
+      ".ecc-text a{color:#34d399;text-decoration:underline;text-underline-offset:2px;}" +
+      ".ecc-actions{display:flex;flex-direction:column-reverse;gap:8px;margin-top:18px;}" +
+      "@media(min-width:640px){.ecc-actions{flex-direction:row;justify-content:flex-end;}}" +
+      ".ecc-btn{appearance:none;border:0;cursor:pointer;font:inherit;font-size:14px;font-weight:500;padding:10px 18px;border-radius:999px;transition:background .15s,color .15s,border-color .15s;}" +
+      ".ecc-btn-primary{background:#10b981;color:#022c22;}" +
+      ".ecc-btn-primary:hover{background:#34d399;}" +
+      ".ecc-btn-secondary{background:transparent;color:#e2e8f0;border:1px solid rgba(226,232,240,.25);}" +
+      ".ecc-btn-secondary:hover{border-color:#34d399;color:#34d399;}" +
+      ".ecc-btn-ghost{background:transparent;color:#cbd5e1;}" +
+      ".ecc-btn-ghost:hover{color:#34d399;}" +
+      ".ecc-modal{position:fixed;inset:0;z-index:2147483647;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(2,6,23,.7);backdrop-filter:blur(4px);}" +
+      ".ecc-modal.open{display:flex;}" +
+      ".ecc-modal-card{width:100%;max-width:640px;background:#0f172a;color:#e2e8f0;border:1px solid rgba(16,185,129,.25);border-radius:18px;box-shadow:0 30px 80px rgba(0,0,0,.5);overflow:hidden;display:flex;flex-direction:column;max-height:calc(100vh - 32px);}" +
+      ".ecc-modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:24px;border-bottom:1px solid rgba(16,185,129,.12);}" +
+      ".ecc-modal-title{margin:0;font-size:18px;font-weight:700;color:#f1f5f9;}" +
+      ".ecc-modal-sub{margin:6px 0 0;font-size:12px;color:#94a3b8;}" +
+      ".ecc-close{background:transparent;border:0;color:#94a3b8;cursor:pointer;font-size:22px;line-height:1;padding:6px;border-radius:8px;}" +
+      ".ecc-close:hover{background:#1e293b;color:#e2e8f0;}" +
+      ".ecc-modal-body{padding:24px;overflow-y:auto;}" +
+      ".ecc-intro{margin:0 0 18px;font-size:14px;color:#cbd5e1;line-height:1.55;}" +
+      ".ecc-intro a{color:#34d399;text-decoration:underline;text-underline-offset:2px;}" +
+      ".ecc-cat{border:1px solid rgba(16,185,129,.12);background:rgba(2,6,23,.4);border-radius:14px;padding:16px;margin-bottom:10px;}" +
+      ".ecc-cat-row{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;}" +
+      ".ecc-cat-label{margin:0;font-size:14px;font-weight:600;color:#f1f5f9;}" +
+      ".ecc-cat-desc{margin:6px 0 0;font-size:12px;color:#94a3b8;line-height:1.55;}" +
+      ".ecc-switch{appearance:none;border:0;cursor:pointer;background:#475569;width:44px;height:24px;border-radius:999px;position:relative;flex-shrink:0;transition:background .15s;}" +
+      ".ecc-switch[aria-checked='true']{background:#10b981;}" +
+      ".ecc-switch[disabled]{cursor:not-allowed;opacity:.7;}" +
+      ".ecc-switch::after{content:'';position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .15s;}" +
+      ".ecc-switch[aria-checked='true']::after{transform:translateX(20px);}" +
+      ".ecc-modal-foot{display:flex;flex-direction:column-reverse;gap:8px;padding:18px 24px;border-top:1px solid rgba(16,185,129,.12);}" +
       "@media(min-width:640px){.ecc-modal-foot{flex-direction:row;justify-content:flex-end;}}";
-    var style = document.createElement("style");
-    style.id = "empentia-cc-styles";
-    style.textContent = css;
-    document.head.appendChild(style);
+    var styleEl = document.createElement("style");
+    styleEl.id = "empentia-cc-styles";
+    styleEl.textContent = css;
+    document.head.appendChild(styleEl);
   }
 
-  // ---------- DOM ----------
+  // ---------- DOM helper ----------
   function el(tag, attrs, children) {
     var node = document.createElement(tag);
-    if (attrs)
-      Object.keys(attrs).forEach(function (k) {
-        if (k === "html") node.innerHTML = attrs[k];
-        else if (k === "onclick") node.addEventListener("click", attrs[k]);
-        else node.setAttribute(k, attrs[k]);
+    if (attrs) {
+      for (var key in attrs) {
+        if (key === "html") {
+          node.innerHTML = attrs.html;
+        } else if (key === "onclick") {
+          node.addEventListener("click", attrs.onclick);
+        } else {
+          node.setAttribute(key, attrs[key]);
+        }
+      }
+    }
+    if (children) {
+      children.forEach(function (child) {
+        if (typeof child === "string") {
+          node.appendChild(document.createTextNode(child));
+        } else if (child) {
+          node.appendChild(child);
+        }
       });
-    if (children)
-      children.forEach(function (c) {
-        if (c) node.appendChild(typeof c === "string" ? document.createTextNode(c) : c);
-      });
+    }
     return node;
   }
 
+  // ---------- state + render ----------
   var bannerEl = null;
   var overlayEl = null;
   var selection = { necessary: true, analytics: false, marketing: false };
 
-  function hideBanner() {
-    if (bannerEl) bannerEl.classList.remove("open");
+  function syncSelection() {
+    var existing = readConsent();
+    if (existing) {
+      selection.analytics = !!existing.categories.analytics;
+      selection.marketing = !!existing.categories.marketing;
+    }
   }
-  function showBanner() {
-    if (bannerEl) bannerEl.classList.add("open");
+
+  function hideBanner() {
+    if (bannerEl && bannerEl.parentNode) bannerEl.parentNode.removeChild(bannerEl);
+    bannerEl = null;
   }
   function hideModal() {
     if (overlayEl) overlayEl.classList.remove("open");
@@ -233,25 +299,25 @@
   }
 
   function buildBanner() {
-    var card = el("div", { class: "ecc-card", role: "dialog", "aria-label": "Avís de cookies" }, [
-      el("h2", { class: "ecc-title" }, ["Respectem la teva privacitat"]),
+    var card = el("div", { class: "ecc-card", role: "dialog", "aria-label": T.bannerAriaLabel }, [
+      el("h2", { class: "ecc-title" }, [T.bannerTitle]),
       el("p", {
         class: "ecc-text",
         html:
-          "Utilitzem cookies tècniques necessàries i, amb el teu consentiment, cookies opcionals per a analítica i preferències. Pots acceptar-les, rebutjar-les o configurar-les. " +
+          T.bannerText +
           '<a href="' +
           POLICY_URL +
-          '">Més informació</a>.',
+          '">' + T.moreInfo + '</a>.',
       }),
       el("div", { class: "ecc-actions" }, [
         el("button", { class: "ecc-btn ecc-btn-ghost", type: "button", onclick: openPreferencesFromBanner }, [
-          "Configurar",
+          T.configure,
         ]),
         el("button", { class: "ecc-btn ecc-btn-secondary", type: "button", onclick: onRejectAll }, [
-          "Rebutjar totes",
+          T.rejectAll,
         ]),
         el("button", { class: "ecc-btn ecc-btn-primary", type: "button", onclick: onAcceptAll }, [
-          "Acceptar totes",
+          T.acceptAll,
         ]),
       ]),
     ]);
@@ -265,7 +331,7 @@
       type: "button",
       role: "switch",
       "aria-checked": selection[cat.id] ? "true" : "false",
-      "aria-label": "Activar categoria " + cat.label,
+      "aria-label": T.activateCategory + cat.label,
     });
     if (cat.required) sw.setAttribute("disabled", "");
     sw.addEventListener("click", function () {
@@ -288,7 +354,7 @@
     var closeBtn = el("button", {
       class: "ecc-close",
       type: "button",
-      "aria-label": "Tancar",
+      "aria-label": T.close,
       onclick: function () {
         if (readConsent()) hideModal();
       },
@@ -296,8 +362,8 @@
 
     var head = el("div", { class: "ecc-modal-head" }, [
       el("div", {}, [
-        el("h2", { class: "ecc-modal-title" }, ["Preferències de cookies"]),
-        el("p", { class: "ecc-modal-sub" }, ["Darrera actualització de la política: " + POLICY_UPDATED]),
+        el("h2", { class: "ecc-modal-title" }, [T.modalTitle]),
+        el("p", { class: "ecc-modal-sub" }, [T.lastUpdated + POLICY_UPDATED]),
       ]),
       closeBtn,
     ]);
@@ -306,9 +372,12 @@
       el("p", {
         class: "ecc-intro",
         html:
-          'Activa o desactiva les categories. Els canvis es desaran quan premis <strong>Desar preferències</strong>. Consulta el detall a la <a href="' +
+          T.modalIntroPre +
+          '<strong>' + T.modalIntroSave + '</strong>' +
+          T.modalIntroPost +
+          '<a href="' +
           POLICY_URL +
-          '">Política de Cookies</a>.',
+          '">' + T.cookiesPolicy + '</a>.',
       }),
     ]);
     CATEGORIES.forEach(function (cat) {
@@ -317,111 +386,99 @@
 
     var foot = el("div", { class: "ecc-modal-foot" }, [
       el("button", { class: "ecc-btn ecc-btn-secondary", type: "button", onclick: onRejectAll }, [
-        "Rebutjar totes",
+        T.rejectAll,
       ]),
       el("button", { class: "ecc-btn ecc-btn-secondary", type: "button", onclick: onAcceptAll }, [
-        "Acceptar totes",
+        T.acceptAll,
       ]),
       el("button", { class: "ecc-btn ecc-btn-primary", type: "button", onclick: onSave }, [
-        "Desar preferències",
+        T.save,
       ]),
     ]);
 
-    var modal = el("div", { class: "ecc-modal", role: "dialog", "aria-modal": "true", "aria-label": "Preferències de cookies" }, [
-      head,
-      body,
-      foot,
-    ]);
-
-    overlayEl = el("div", { class: "ecc-overlay" }, [modal]);
+    var card = el("div", { class: "ecc-modal-card" }, [head, body, foot]);
+    overlayEl = el("div", { class: "ecc-modal", role: "dialog", "aria-modal": "true", "aria-label": T.modalAriaLabel }, [card]);
     overlayEl.addEventListener("click", function (e) {
       if (e.target === overlayEl && readConsent()) hideModal();
     });
     document.body.appendChild(overlayEl);
   }
 
-  function syncSelectionFromStorage() {
-    var stored = readConsent();
-    selection = stored
-      ? {
-          necessary: true,
-          analytics: !!stored.categories.analytics,
-          marketing: !!stored.categories.marketing,
-        }
-      : { necessary: true, analytics: false, marketing: false };
-    if (!overlayEl) return;
-    var switches = overlayEl.querySelectorAll(".ecc-switch");
-    switches.forEach(function (sw, idx) {
-      var cat = CATEGORIES[idx];
-      if (!cat) return;
-      sw.setAttribute("aria-checked", selection[cat.id] ? "true" : "false");
-    });
-  }
-
-  function openPreferencesFromBanner() {
-    syncSelectionFromStorage();
-    hideBanner();
-    showModal();
-  }
-
+  // ---------- actions ----------
   function onAcceptAll() {
-    writeConsent({ analytics: true, marketing: true });
+    selection = { necessary: true, analytics: true, marketing: true };
+    writeConsent(selection);
     hideBanner();
     hideModal();
   }
-
   function onRejectAll() {
-    writeConsent({ analytics: false, marketing: false });
+    selection = { necessary: true, analytics: false, marketing: false };
+    writeConsent(selection);
     hideBanner();
     hideModal();
   }
-
   function onSave() {
     writeConsent(selection);
     hideBanner();
     hideModal();
   }
+  function openPreferencesFromBanner() {
+    if (!overlayEl) buildModal();
+    syncSelection();
+    refreshSwitches();
+    showModal();
+  }
+
+  function refreshSwitches() {
+    if (!overlayEl) return;
+    var switches = overlayEl.querySelectorAll(".ecc-switch");
+    var i = 0;
+    CATEGORIES.forEach(function (cat) {
+      if (switches[i]) {
+        switches[i].setAttribute(
+          "aria-checked",
+          selection[cat.id] ? "true" : "false",
+        );
+      }
+      i++;
+    });
+  }
 
   // ---------- public API ----------
-  window.empentIACookies = {
+  window.empentiaCookies = {
     open: function () {
-      syncSelectionFromStorage();
-      hideBanner();
+      if (!overlayEl) buildModal();
+      syncSelection();
+      refreshSwitches();
       showModal();
     },
-    reset: function () {
-      resetConsent();
-      showBanner();
-    },
-    get: readConsent,
-    hasConsent: function (cat) {
-      if (cat === "necessary") return true;
-      var c = readConsent();
-      return !!(c && c.categories && c.categories[cat]);
-    },
+    accept: onAcceptAll,
+    reject: onRejectAll,
+    read: readConsent,
+    clear: clearConsent,
   };
+
+  // ---------- delegació data-cookie-open ----------
+  document.addEventListener("click", function (e) {
+    var target = e.target;
+    while (target && target !== document) {
+      if (target.nodeType === 1 && target.hasAttribute && target.hasAttribute("data-cookie-open")) {
+        e.preventDefault();
+        window.empentiaCookies.open();
+        return;
+      }
+      target = target.parentNode;
+    }
+  });
 
   // ---------- init ----------
   function init() {
     injectStyles();
-    buildBanner();
+    syncSelection();
     buildModal();
-    syncSelectionFromStorage();
-
-    // Delegació: qualsevol element amb data-cookie-open obre el modal.
-    document.addEventListener("click", function (e) {
-      var target = e.target;
-      while (target && target !== document) {
-        if (target.nodeType === 1 && target.hasAttribute && target.hasAttribute("data-cookie-open")) {
-          e.preventDefault();
-          window.empentIACookies.open();
-          return;
-        }
-        target = target.parentNode;
-      }
-    });
-
-    if (!readConsent()) showBanner();
+    if (!hasDecided()) {
+      buildBanner();
+    }
   }
 
   if (document.readyState === "loading") {
