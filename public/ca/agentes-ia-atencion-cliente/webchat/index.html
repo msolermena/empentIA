@@ -1942,8 +1942,9 @@
     .next-step::before { display: none !important; }
     /* channels-top: stack vertical en mobile */
     .channels-top { grid-template-columns: 1fr !important; gap: 32px !important; }
-    .channels-360 { min-height: 280px !important; }
-    .orbit-stage { max-width: 420px !important; }
+    .channels-360 { min-height: auto !important; padding: 0 !important; overflow: hidden; }
+    .orbit-stage { max-width: 100% !important; width: 100%; }
+    section.channels { overflow: hidden !important; }
     .chat-card { position: relative !important; bottom: auto !important; right: auto !important; width: 100% !important; transform: none !important; margin-top: 16px; }
     .browser { position: relative; transform: none !important; aspect-ratio: 4/3; }
   }
@@ -2502,18 +2503,18 @@
   }
   @media (max-width: 640px) {
     .como-trabaja-tabs .block-bento {
-      grid-template-columns: 1fr 1fr !important;
-      gap: 10px !important;
+      grid-template-columns: 1fr !important;
+      gap: 12px !important;
     }
     .como-trabaja-tabs .block-bento .cell {
-      padding: 18px 16px !important;
+      padding: 22px 20px !important;
     }
     .como-trabaja-tabs .block-bento .cell h3 {
-      font-size: 16px !important;
+      font-size: 18px !important;
       line-height: 1.25 !important;
     }
     .como-trabaja-tabs .block-bento .cell p {
-      font-size: 13px !important;
+      font-size: 14px !important;
     }
   }
 
