@@ -1,0 +1,4612 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Atenció al client per email amb IA | empentIA</title>
+<meta name="description" content="Atenció al client per email amb IA: classifica consultes, comandes i queixes, deriva a qui correspon i prepara esborranys llestos per revisar. RGPD, servidors UE." />
+<meta name="keywords" content="atenció al client per email amb IA, gestió de correus amb IA, respondre emails automàticament, classificació emails IA, automatitzar respostes d'email, gestió emails de suport" />
+<meta name="author" content="empentIA" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+<meta name="googlebot" content="index, follow" />
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://empentia.com/ca/agentes-ia-atencion-cliente/email/" />
+
+<!-- Hreflang -->
+<link rel="alternate" hreflang="es" href="https://empentia.com/agentes-ia-atencion-cliente/email/" />
+<link rel="alternate" hreflang="ca" href="https://empentia.com/ca/agentes-ia-atencion-cliente/email/" />
+<link rel="alternate" hreflang="x-default" href="https://empentia.com/agentes-ia-atencion-cliente/email/" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="ca_ES" />
+<meta property="og:url" content="https://empentia.com/ca/agentes-ia-atencion-cliente/email/" />
+<meta property="og:title" content="Atenció al client per email amb IA | empentIA" />
+<meta property="og:description" content="Classifica consultes, comandes i queixes automàticament. Esborranys llestos per revisar o enviament directe. Compleix RGPD." />
+<meta property="og:image" content="https://empentia.com/images/social/og-email.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:site_name" content="empentIA" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Atenció al client per email amb IA | empentIA" />
+<meta name="twitter:description" content="Classifica consultes, comandes i queixes automàticament. Esborranys llestos per revisar o enviament directe. Compleix RGPD." />
+<meta name="twitter:image" content="https://empentia.com/images/social/og-email.jpg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f5f0;
+    --bg-soft: #efede5;
+    --bg-card: #ffffff;
+    --ink: #0e0e0c;
+    --ink-soft: #4a4a47;
+    --ink-mute: #8a8a85;
+    --line-soft: rgba(14,14,12,0.08);
+    --line-mid: rgba(14,14,12,0.14);
+
+    /* Azul cielo — email empentIA */
+    --brand: #7bb8f0;
+    --brand-deep: #3a82cc;
+    --brand-darker: #1a5a99;
+    --brand-soft: #ddeeff;
+    --brand-glow: rgba(123,184,240,0.18);
+
+    --dark-bg: #09111a;        /* casi negro con leve tinte azul */
+    --dark-bg-card: #11201a;
+    --dark-ink: #f5f4ee;
+    --dark-ink-soft: #a5a49e;
+    --dark-line: rgba(123,184,240,0.10);
+
+    --serif: "Fraunces", "Times New Roman", serif;
+    --sans: "Inter", system-ui, sans-serif;
+    --mono: "JetBrains Mono", monospace;
+
+    --radius: 18px;
+    --radius-sm: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+  }
+
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+  /* ============ NAV ============ */
+  nav.top {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(246,245,240,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 0.5px solid var(--line-soft);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 32px;
+    max-width: 1280px; margin: 0 auto;
+  }
+  .logo-mark {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .logo-mark svg, .logo-mark img {
+    height: 32px; width: auto; display: block;
+    filter: hue-rotate(49deg) saturate(0.75);
+  }
+  .product-label {
+    font-size: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+    padding-left: 14px;
+    border-left: 0.5px solid var(--line-soft);
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+  .product-label strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .product-divider {
+    color: var(--line);
+    margin: 0 4px;
+  }
+
+  .nav-links { display: flex; gap: 32px; align-items: center; font-size: 14px; }
+  .nav-links a { color: var(--ink-soft); text-decoration: none; transition: color .15s; }
+  .nav-links a:hover { color: var(--ink); }
+  .btn-cta {
+    background: transparent;
+    color: var(--ink);
+    padding: 9px 18px;
+    border-radius: 100px;
+    font-size: 13.5px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid rgba(14,14,12,0.18);
+    transition: all .2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .nav-links a.btn-cta:hover,
+  .btn-cta:hover {
+    background: var(--ink);
+    color: #fff !important;
+    border-color: var(--ink);
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    padding: 80px 0 100px;
+    position: relative; overflow: hidden;
+  }
+  /* halo verde marca */
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -10%; left: 50%; transform: translateX(-50%);
+    width: 1300px; height: 800px;
+    background: radial-gradient(ellipse at center, var(--brand-glow), transparent 65%);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* Decoración: nodos del logo flotando */
+  .hero-nodes {
+    position: absolute; inset: 0;
+    pointer-events: none; z-index: 0;
+  }
+  .hero-nodes svg {
+    position: absolute;
+    opacity: 0.7;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    position: relative; z-index: 1;
+  }
+
+  .badge-live {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px;
+    background: rgba(255,255,255,0.6);
+    border: 0.5px solid var(--line-mid);
+    border-radius: 100px;
+    font-size: 13px; color: var(--ink-soft);
+    margin-bottom: 28px;
+    backdrop-filter: blur(8px);
+  }
+  .pulse {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--brand);
+    box-shadow: 0 0 0 0 var(--brand-glow);
+    animation: pulse 1.8s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(123,184,240,0.55); }
+    70% { box-shadow: 0 0 0 10px rgba(123,184,240,0); }
+    100% { box-shadow: 0 0 0 0 rgba(123,184,240,0); }
+  }
+
+  h1.display {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(56px, 7.5vw, 96px);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    margin-bottom: 28px;
+  }
+  h1.display em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--brand-deep);
+  }
+  h1.display .strike {
+    position: relative;
+    display: inline-block;
+  }
+  h1.display .strike::after {
+    content: "";
+    position: absolute; left: -2%; right: -2%; top: 58%;
+    height: 4px; background: var(--brand);
+    transform: rotate(-1.5deg);
+    z-index: -1;
+    border-radius: 2px;
+    opacity: 0.85;
+  }
+
+  .hero p.lede {
+    font-size: 19px; line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 540px; margin-bottom: 36px;
+  }
+
+  .hero-ctas { display: flex; gap: 14px; align-items: center; margin-bottom: 56px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--ink); color: #fff;
+    padding: 16px 26px; border-radius: 100px;
+    font-size: 15px; font-weight: 500;
+    border: none; cursor: pointer; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 10px;
+    transition: transform .2s ease, background .2s ease;
+  }
+  .btn-primary:hover { background: #1f1f1c; transform: translateY(-1px); }
+  .btn-primary .arr {
+    width: 22px; height: 22px; background: var(--brand);
+    border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 13px;
+  }
+  .btn-secondary {
+    background: transparent; color: var(--ink);
+    padding: 16px 22px; border-radius: 100px;
+    font-size: 15px; font-weight: 500;
+    border: 0.5px solid var(--line-mid);
+    text-decoration: none;
+    transition: background .2s ease;
+  }
+  .btn-secondary:hover { background: rgba(14,14,12,0.04); }
+
+  .hero-metrics {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    border-top: 0.5px solid var(--line-mid);
+    padding-top: 32px;
+    max-width: 540px;
+  }
+  .metric .num {
+    font-family: var(--serif);
+    font-size: 44px; font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .metric .lab {
+    font-size: 12px; color: var(--ink-mute);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-top: 8px;
+  }
+
+  /* Mockup hero */
+  .hero-mock {
+    position: relative;
+    aspect-ratio: 4/4.6;
+    perspective: 2400px;
+  }
+  .browser {
+    position: absolute; inset: 0;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.7) inset,
+      0 30px 80px -20px rgba(14,14,12,0.25),
+      0 8px 20px -8px rgba(14,14,12,0.15);
+    overflow: hidden;
+    transform: rotateY(-6deg) rotateX(4deg);
+    transform-style: preserve-3d;
+  }
+  .browser-bar {
+    height: 38px; background: #f3f2ec;
+    display: flex; align-items: center; padding: 0 14px; gap: 8px;
+    border-bottom: 0.5px solid var(--line-soft);
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: #d8d6cf; }
+  .url-bar {
+    margin-left: 12px;
+    background: #fff; border-radius: 6px;
+    padding: 5px 12px; font-size: 11px; color: var(--ink-mute);
+    flex: 1; max-width: 280px;
+  }
+  .browser-content {
+    padding: 28px 24px;
+    background: linear-gradient(180deg, #fff 0%, #fbfaf5 100%);
+    height: calc(100% - 38px);
+    position: relative;
+  }
+  .product-card {
+    border: 0.5px solid var(--line-mid);
+    border-radius: 12px;
+    padding: 14px;
+    display: grid; grid-template-columns: 56px 1fr auto;
+    gap: 12px; align-items: center;
+    background: #fff;
+  }
+  .product-img {
+    width: 56px; height: 56px; border-radius: 8px;
+    background: linear-gradient(135deg, #e8e6dd, #d4d2c7);
+  }
+  .product-name { font-weight: 500; font-size: 13px; }
+  .product-meta { font-size: 11px; color: var(--ink-mute); margin-top: 2px; }
+  .product-price { font-family: var(--serif); font-size: 18px; }
+
+  /* chat overlay */
+  .chat-card {
+    position: absolute;
+    bottom: -30px; right: -40px;
+    width: 320px;
+    background: #0a1410; color: #fff;
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow:
+      0 30px 80px -20px rgba(14,14,12,0.45),
+      0 0 0 1px rgba(123,184,240,0.12) inset;
+    transform: rotateY(-4deg) rotateX(2deg) translateZ(40px);
+    transform-style: preserve-3d;
+  }
+  .chat-head {
+    display: flex; align-items: center; gap: 10px;
+    padding-bottom: 14px;
+    border-bottom: 0.5px solid rgba(123,184,240,0.12);
+    margin-bottom: 14px;
+  }
+  /* avatar = mini logo SVG */
+  .avatar { font-family: var(--serif); font-size: 18px; font-weight: 500; color: var(--brand-deep); text-transform: lowercase;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--brand-soft);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .avatar svg { width: 22px; height: 22px; }
+  .chat-name { font-size: 13px; font-weight: 500; }
+  .chat-status { font-size: 11px; color: var(--brand); }
+  .msg {
+    border-radius: 12px;
+    padding: 10px 13px;
+    font-size: 13px; line-height: 1.45;
+    margin-bottom: 8px;
+    max-width: 88%;
+  }
+  .msg.user {
+    background: rgba(255,255,255,0.08);
+    margin-left: auto;
+  }
+  .msg.bot {
+    background: var(--brand);
+    color: #033726;
+  }
+  .typing {
+    display: inline-flex; gap: 4px; padding: 10px 14px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 12px;
+  }
+  .typing span {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    animation: bounce 1.4s infinite ease-in-out;
+  }
+  .typing span:nth-child(2) { animation-delay: .2s; }
+  .typing span:nth-child(3) { animation-delay: .4s; }
+  @keyframes bounce {
+    0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
+    40% { transform: scale(1); opacity: 1; }
+  }
+
+  /* ============ MARQUEE ============ */
+  .marquee-section {
+    padding: 60px 0;
+    border-top: 0.5px solid var(--line-soft);
+    border-bottom: 0.5px solid var(--line-soft);
+  }
+  .marquee-label {
+    text-align: center;
+    font-size: 12px; color: var(--ink-mute);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .marquee {
+    display: flex; gap: 80px; align-items: center;
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+  }
+  .marquee-track {
+    display: flex; gap: 80px; align-items: center;
+    animation: scroll 30s linear infinite;
+    flex-shrink: 0;
+  }
+  .client-logo {
+    font-family: var(--serif);
+    font-size: 22px; font-weight: 400;
+    color: var(--ink-soft);
+    white-space: nowrap;
+    opacity: 0.75;
+    display: flex; align-items: center; gap: 10px;
+  }
+  /* marca de cliente con nodo del logo */
+  .client-node {
+    width: 10px; height: 10px;
+    border: 1.5px solid var(--brand);
+    border-radius: 50%;
+    background: var(--bg);
+    flex-shrink: 0;
+  }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ============ FUNCIONALIDADES (bento dark) ============ */
+  section.features {
+    padding: 140px 0;
+    background: var(--dark-bg);
+    color: var(--dark-ink);
+    position: relative;
+    overflow: hidden;
+  }
+  /* circuit pattern de fondo */
+  .features::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, var(--brand-glow), transparent 40%),
+      radial-gradient(circle at 80% 70%, var(--brand-glow), transparent 40%);
+    pointer-events: none;
+  }
+  /* nodos decorativos del logo */
+  .features-bg-nodes {
+    position: absolute; inset: 0;
+    pointer-events: none;
+    opacity: 0.18;
+  }
+  .features-head {
+    margin-bottom: 64px;
+    position: relative; z-index: 1;
+  }
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brand);
+    margin-bottom: 16px;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  /* eyebrow con nodo + línea */
+  .eyebrow::before {
+    content: "";
+    width: 8px; height: 8px; border-radius: 50%;
+    background: transparent;
+    border: 1.5px solid var(--brand);
+  }
+  .eyebrow::after {
+    content: ""; width: 32px; height: 1px; background: var(--brand);
+  }
+  h2.section-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    max-width: 800px;
+  }
+  h2.section-title em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--brand);
+  }
+  .section-sub {
+    font-size: 17px; color: var(--dark-ink-soft);
+    max-width: 540px;
+    margin-top: 24px;
+  }
+
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: minmax(180px, auto);
+    gap: 14px;
+    position: relative; z-index: 1;
+  }
+  .cell {
+    background: var(--dark-bg-card);
+    border: 0.5px solid var(--dark-line);
+    border-radius: var(--radius);
+    padding: 28px;
+    position: relative; overflow: hidden;
+    transition: border-color .25s ease, transform .25s ease;
+    display: flex; flex-direction: column;
+  }
+  .cell:hover { border-color: rgba(123,184,240,0.4); transform: translateY(-2px); }
+  .cell h3 {
+    font-family: var(--serif); font-weight: 400; font-size: 22px;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+  }
+  .cell p { font-size: 14px; color: var(--dark-ink-soft); line-height: 1.55; }
+
+  .cell.big { grid-column: span 4; grid-row: span 2; }
+  .cell.med { grid-column: span 2; grid-row: span 1; }
+  .cell.tall { grid-column: span 2; grid-row: span 2; }
+  .cell.wide { grid-column: span 4; grid-row: span 1; }
+
+  /* search visual */
+  .search-vis {
+    background: rgba(0,0,0,0.3);
+    border-radius: 12px; padding: 14px;
+    margin-top: 20px;
+    border: 0.5px solid rgba(123,184,240,0.08);
+  }
+  .search-input {
+    background: rgba(255,255,255,0.04);
+    padding: 10px 14px; border-radius: 8px;
+    font-family: var(--mono); font-size: 12px;
+    color: var(--dark-ink); margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .search-input::before {
+    content: "⌕"; color: var(--brand); font-size: 14px;
+  }
+  .search-result {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 4px;
+    font-size: 12px;
+    border-bottom: 0.5px solid rgba(255,255,255,0.04);
+  }
+  .search-result:last-child { border: none; }
+  .search-result .pname { color: var(--dark-ink); }
+  .search-result .pprice { font-family: var(--serif); color: var(--brand); }
+
+  /* lang vis */
+  .lang-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .flag {
+    width: 38px; height: 38px;
+    background: rgba(255,255,255,0.04);
+    border: 0.5px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .flag.more {
+    background: var(--brand); color: #033726;
+    font-family: var(--mono); font-weight: 500; font-size: 13px;
+    border-color: var(--brand);
+  }
+  /* Banderas SVG unificadas — todas mismo tamaño y estilo */
+  .flag svg {
+    width: 26px; height: 17px;
+    border-radius: 2px;
+    display: block;
+    box-shadow: 0 0 0 0.5px rgba(0,0,0,0.12);
+    overflow: hidden;
+  }
+
+  .code-line {
+    background: rgba(0,0,0,0.3);
+    border-radius: 10px; padding: 14px 16px;
+    font-family: var(--mono); font-size: 12px;
+    margin-top: 22px;
+    color: var(--dark-ink-soft);
+    border: 0.5px solid rgba(123,184,240,0.08);
+  }
+  .code-line .key { color: #ff7b72; }
+  .code-line .str { color: var(--brand); }
+  .code-line .com { color: rgba(255,255,255,0.3); }
+
+  .ana-mini {
+    display: flex; align-items: end; gap: 6px;
+    height: 70px; margin-top: 22px;
+  }
+  .bar {
+    flex: 1; background: rgba(255,255,255,0.08);
+    border-radius: 4px 4px 0 0;
+  }
+  .bar.hi { background: var(--brand); }
+
+  /* ============ CASOS DE ÉXITO ============ */
+  section.cases { padding: 140px 0; background: var(--bg); position: relative; }
+  .cases-head { margin-bottom: 64px; }
+  .cases-head .eyebrow { color: var(--brand-deep); }
+  .cases-head .eyebrow::before { border-color: var(--brand-deep); }
+  .cases-head .eyebrow::after { background: var(--brand-deep); }
+
+  .cases-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .case-card {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 26px 24px 22px;
+    border: 0.5px solid var(--line-soft);
+    display: flex; flex-direction: column;
+    transition: transform .25s ease, box-shadow .25s ease;
+    position: relative; overflow: hidden;
+  }
+  .case-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 30px 60px -30px rgba(14,14,12,0.18);
+  }
+  .case-card.featured {
+    background: var(--dark-bg); color: var(--dark-ink);
+    border: none;
+  }
+  .case-card.featured .case-quote { color: var(--dark-ink); }
+  .case-card.featured .case-author { color: var(--dark-ink-soft); }
+  .case-card.featured .case-metric .big { color: var(--brand); }
+
+  .case-metric {
+    margin-bottom: 18px;
+    border-bottom: 0.5px solid var(--line-soft);
+    padding-bottom: 14px;
+  }
+  .case-card.featured .case-metric { border-bottom-color: rgba(123,184,240,0.18); }
+  .case-metric .big {
+    font-family: var(--serif);
+    font-size: 48px; font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--brand-deep);
+  }
+  .case-metric .lab {
+    font-size: 13px; color: var(--ink-mute);
+    margin-top: 10px;
+  }
+  .case-card.featured .case-metric .lab { color: var(--dark-ink-soft); }
+  .case-quote {
+    font-family: var(--serif);
+    font-size: 18px; line-height: 1.45;
+    font-weight: 400;
+    color: var(--ink); margin-bottom: 28px;
+    flex: 1;
+  }
+  .case-author {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    padding-top: 22px;
+    border-top: 0.5px solid var(--line-soft);
+  }
+  .case-card.featured .case-author { border-top-color: rgba(123,184,240,0.18); }
+  .case-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--brand-soft);
+    color: var(--brand-darker);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-weight: 500; font-size: 16px;
+    overflow: hidden;
+    flex-shrink: 0;
+    flex-shrink: 0;
+  }
+  .case-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .case-card.featured .case-avatar {
+    background: rgba(123,184,240,0.15);
+    color: var(--brand);
+  }
+  .case-name { font-weight: 500; color: inherit; }
+
+  /* ============ PRECIOS ============ */
+  section.pricing {
+    padding: 140px 0;
+    background: var(--bg-soft);
+    position: relative;
+  }
+  .pricing-head { margin-bottom: 72px; max-width: 720px; }
+  .pricing-head .eyebrow { color: var(--brand-deep); }
+  .pricing-head .eyebrow::before { border-color: var(--brand-deep); }
+  .pricing-head .eyebrow::after { background: var(--brand-deep); }
+
+  .pricing-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    align-items: stretch;
+  }
+  .plan {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    display: flex; flex-direction: column;
+    border: 0.5px solid var(--line-soft);
+    position: relative;
+    transition: transform .25s ease;
+  }
+  .plan:hover { transform: translateY(-3px); }
+  .plan.popular {
+    background: var(--dark-bg);
+    color: var(--dark-ink);
+    transform: scale(1.04);
+    box-shadow: 0 30px 80px -30px rgba(14,14,12,0.4);
+    border: none;
+  }
+  .plan.popular:hover { transform: scale(1.04) translateY(-3px); }
+
+  .ribbon {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--brand);
+    color: #033726;
+    font-size: 11px; font-weight: 500;
+    padding: 6px 14px; border-radius: 100px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+
+  .plan-name {
+    font-family: var(--serif);
+    font-size: 22px; font-weight: 400;
+    margin-bottom: 18px;
+  }
+  .plan-price {
+    font-family: var(--serif);
+    font-size: 56px; font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-bottom: 6px;
+  }
+  .plan.popular .plan-price { color: var(--brand); }
+  .plan-period {
+    font-size: 12px; color: var(--ink-mute);
+    margin-bottom: 28px;
+  }
+  .plan.popular .plan-period { color: var(--dark-ink-soft); }
+  .plan-features {
+    list-style: none;
+    margin-bottom: 32px;
+    flex: 1;
+  }
+  .plan-features li {
+    font-size: 13px;
+    padding: 10px 0;
+    border-bottom: 0.5px solid var(--line-soft);
+    display: flex; gap: 10px; align-items: flex-start;
+    color: var(--ink-soft);
+  }
+  .plan.popular .plan-features li {
+    color: var(--dark-ink-soft);
+    border-bottom-color: rgba(123,184,240,0.12);
+  }
+  /* iconos check con nodo del logo */
+  .plan-features li::before {
+    content: "";
+    width: 6px; height: 6px;
+    background: var(--brand-deep);
+    border-radius: 50%;
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+  .plan.popular .plan-features li::before { background: var(--brand); }
+
+  .plan-btn {
+    background: transparent;
+    border: 0.5px solid var(--line-mid);
+    padding: 14px 18px;
+    border-radius: 100px;
+    font-size: 14px; font-weight: 500;
+    color: var(--ink); text-decoration: none;
+    text-align: center;
+    transition: background .2s ease, color .2s ease;
+    cursor: pointer;
+  }
+  .plan-btn:hover { background: var(--ink); color: #fff; }
+  .plan.popular .plan-btn {
+    background: var(--brand); color: #033726;
+    border-color: var(--brand);
+  }
+  .plan.popular .plan-btn:hover { background: #5fdcb4; }
+
+  .pricing-foot {
+    text-align: center;
+    margin-top: 40px;
+    display: flex; gap: 32px; justify-content: center;
+    font-size: 13px; color: var(--ink-mute);
+    flex-wrap: wrap;
+  }
+  .pricing-foot span { display: inline-flex; align-items: center; gap: 8px; }
+  .pricing-foot span::before {
+    content: ""; width: 6px; height: 6px;
+    border: 1.2px solid var(--brand-deep);
+    border-radius: 50%;
+  }
+
+  /* ============ SERVICIOS PROFESIONALES (acompañamiento) ============ */
+  .pro-services {
+    margin-top: 88px;
+    padding: 56px 0 0;
+    border-top: 0.5px solid var(--line-mid);
+  }
+  .pro-services-head {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .pro-services-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brand-deep);
+    margin-bottom: 14px;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .pro-services-eyebrow::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%;
+    border: 1.5px solid var(--brand-deep);
+  }
+  .pro-services-eyebrow::after {
+    content: ""; width: 24px; height: 1px; background: var(--brand-deep);
+  }
+  .pro-services-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    margin-bottom: 14px;
+  }
+  .pro-services-title em {
+    font-style: italic;
+    color: var(--brand-deep);
+    font-weight: 300;
+  }
+  .pro-services-sub {
+    font-size: 16px;
+    color: var(--ink-soft);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.55;
+  }
+
+  /* Onboarding: DIY vs Premium (paso 1) */
+  .onboarding-choice {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 24px;
+    align-items: stretch;
+    margin-bottom: 24px;
+  }
+  .choice-card {
+    background: #fff;
+    border: 0.5px solid var(--line-soft);
+    border-radius: var(--radius);
+    padding: 32px 30px;
+    display: flex;
+    flex-direction: column;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+  .choice-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(123,184,240,0.3);
+    box-shadow: 0 20px 50px -25px rgba(14,14,12,0.15);
+  }
+  .choice-card.premium {
+    background: var(--ink);
+    color: var(--dark-ink);
+    border: none;
+  }
+  .choice-card.premium:hover {
+    box-shadow: 0 30px 60px -25px rgba(123,184,240,0.25);
+  }
+  .choice-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px;
+    color: var(--brand-deep);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 14px;
+    align-self: flex-start;
+  }
+  .choice-card.premium .choice-tag { color: var(--brand); }
+  .choice-tag::before {
+    content: ""; width: 6px; height: 6px;
+    background: var(--brand-deep);
+    border-radius: 50%;
+  }
+  .choice-card.premium .choice-tag::before { background: var(--brand); }
+
+  .choice-name {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin-bottom: 12px;
+  }
+  .choice-name em { font-style: italic; color: var(--brand-deep); font-weight: 300; }
+  .choice-card.premium .choice-name em { color: var(--brand); }
+
+  .choice-desc {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    margin-bottom: 20px;
+  }
+  .choice-card.premium .choice-desc { color: var(--dark-ink-soft); }
+
+  .choice-features {
+    list-style: none;
+    margin-bottom: 24px;
+    flex: 1;
+  }
+  .choice-features li {
+    font-size: 13px;
+    padding: 7px 0;
+    color: var(--ink-soft);
+    display: flex; gap: 10px; align-items: flex-start;
+    line-height: 1.5;
+  }
+  .choice-card.premium .choice-features li { color: var(--dark-ink-soft); }
+  .choice-features li::before {
+    content: ""; width: 5px; height: 5px;
+    background: var(--brand-deep);
+    border-radius: 50%;
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+  .choice-card.premium .choice-features li::before { background: var(--brand); }
+
+  .choice-price {
+    padding-top: 20px;
+    border-top: 0.5px solid var(--line-soft);
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .choice-card.premium .choice-price { border-top-color: rgba(255,255,255,0.1); }
+  .choice-price-amount {
+    font-family: var(--serif);
+    font-size: 32px;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .choice-card.premium .choice-price-amount { color: var(--brand); }
+  .choice-price-amount.free {
+    font-size: 22px;
+    color: var(--brand-deep);
+  }
+  .choice-price-note {
+    font-size: 11px;
+    color: var(--ink-mute);
+  }
+  .choice-card.premium .choice-price-note { color: var(--dark-ink-soft); }
+
+  .choice-cta {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 14px 18px;
+    border-radius: 100px;
+    border: 0.5px solid var(--line-mid);
+    background: transparent;
+    font-size: 13.5px; font-weight: 500;
+    color: var(--ink); text-decoration: none; cursor: pointer;
+    transition: background .2s, color .2s, border-color .2s;
+  }
+  .choice-cta:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .choice-card.premium .choice-cta {
+    background: var(--brand); color: #033726; border-color: var(--brand);
+  }
+  .choice-card.premium .choice-cta:hover { background: #5fdcb4; }
+
+  /* divider OR */
+  .choice-divider {
+    display: flex; align-items: center; justify-content: center;
+    width: 56px;
+    position: relative;
+  }
+  .choice-divider::before {
+    content: "";
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1px; height: 60%;
+    background: var(--line-mid);
+  }
+  .choice-divider span {
+    background: var(--bg-soft);
+    color: var(--ink-mute);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 0;
+    position: relative;
+    z-index: 1;
+    font-weight: 500;
+  }
+
+  /* Paso 2: tras 30 días, optimización */
+  .next-step {
+    margin-top: 56px;
+    background: var(--bg-card);
+    border: 0.5px solid var(--line-soft);
+    border-radius: var(--radius);
+    padding: 44px 40px 36px;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 32px;
+    align-items: center;
+    position: relative;
+  }
+  /* línea conectora visual con paso anterior */
+  .next-step::before {
+    content: "";
+    position: absolute;
+    top: -56px; left: 50%;
+    width: 1px; height: 56px;
+    background: linear-gradient(to bottom, transparent, var(--brand-deep));
+    transform: translateX(-50%);
+  }
+  .next-step-tag {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--bg-soft);
+    color: var(--brand-deep);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    border: 0.5px solid rgba(123,184,240,0.3);
+    font-weight: 500;
+    display: inline-flex; align-items: center; gap: 8px;
+    white-space: nowrap;
+    z-index: 2;
+  }
+  .next-step-tag::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--brand);
+  }
+  .next-step-content h4 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .next-step-content h4 em { font-style: italic; color: var(--brand-deep); font-weight: 300; }
+  .next-step-content p {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    max-width: 520px;
+  }
+  .next-step-price {
+    text-align: right;
+  }
+  .next-step-price-amount {
+    font-family: var(--serif);
+    font-size: 32px;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .next-step-price-note {
+    font-size: 11px;
+    color: var(--ink-mute);
+    margin-top: 4px;
+  }
+  .next-step .choice-cta { white-space: nowrap; }
+
+  /* ============ TABLA COMPARATIVA ============ */
+  .compare-toggle {
+    text-align: center;
+    margin-top: 56px;
+  }
+  .compare-toggle button {
+    background: transparent;
+    border: 0.5px solid var(--line-mid);
+    padding: 14px 24px;
+    border-radius: 100px;
+    font-family: var(--sans);
+    font-size: 14px; font-weight: 500;
+    color: var(--ink); cursor: pointer;
+    display: inline-flex; align-items: center; gap: 10px;
+    transition: background .2s ease, color .2s ease;
+  }
+  .compare-toggle button:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .compare-toggle button .chev {
+    transition: transform .3s ease;
+    font-size: 12px;
+  }
+  .compare-wrap[data-open="true"] .compare-toggle button .chev {
+    transform: rotate(180deg);
+  }
+  .compare-toggle button:hover .chev-circle { background: #fff; color: var(--ink); }
+
+  /* contenedor expandible */
+  .compare-content {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height .5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .compare-wrap[data-open="true"] .compare-content {
+    max-height: 6000px;
+  }
+
+  /* === DESKTOP: tabla === */
+  .compare-table {
+    margin-top: 48px;
+    background: #fff;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 0.5px solid var(--line-soft);
+    position: relative;
+  }
+  .compare-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  /* posicionado relativo para z-index en celdas */
+  .compare-table th, .compare-table td { position: relative; }
+
+  .compare-table thead {
+    position: sticky; top: 64px; z-index: 5;
+    background: #fff;
+  }
+  .compare-table th {
+    padding: 28px 18px 24px;
+    text-align: center;
+    font-weight: 400;
+    border-bottom: 0.5px solid var(--line-soft);
+    vertical-align: top;
+    background: #fff;
+  }
+  .compare-table th:first-child {
+    text-align: left;
+    width: 30%;
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ink-mute);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-left: 28px;
+  }
+  .compare-table th .plan-h {
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .compare-table th .plan-h-price {
+    font-family: var(--serif);
+    font-size: 24px;
+    line-height: 1;
+    margin-bottom: 4px;
+    letter-spacing: -0.02em;
+  }
+  .compare-table th .plan-h-period {
+    font-size: 11px;
+    color: var(--ink-mute);
+  }
+  /* Pro destacado SIN fondo negro flotante */
+  .compare-table th.featured {
+    background: rgba(123,184,240,0.08);
+    color: var(--ink);
+    position: relative;
+    border-bottom: 1.5px solid var(--brand);
+  }
+  .compare-table th.featured .plan-h-price { color: var(--brand-deep); }
+  .compare-table th.featured::before {
+    content: "Más popular";
+    position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+    background: var(--brand); color: #033726;
+    font-size: 9px; font-family: var(--sans);
+    padding: 4px 12px; border-radius: 100px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  /* sección headers (FUNCIONALIDADES, USO, etc.) */
+  .compare-table tr.section-row td {
+    background: var(--brand-soft);
+    color: var(--brand-darker);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 12px 28px;
+    border-bottom: 0.5px solid rgba(123,184,240,0.2);
+  }
+
+  .compare-table td {
+    padding: 16px 18px;
+    text-align: center;
+    border-bottom: 0.5px solid var(--line-soft);
+    color: var(--ink-soft);
+  }
+  .compare-table td:first-child {
+    text-align: left;
+    color: var(--ink);
+    padding-left: 28px;
+  }
+  .compare-table td.featured {
+    background: rgba(123,184,240,0.05);
+  }
+  .compare-table tbody tr:hover td:not(.section-row td) {
+    background: rgba(123,184,240,0.03);
+  }
+  .compare-table tbody tr:hover td.featured {
+    background: rgba(123,184,240,0.1);
+  }
+
+  /* checkmarks y dashes */
+  .check-y {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(123,184,240,0.12);
+    color: var(--brand-deep);
+    font-size: 11px;
+  }
+  .check-n { color: var(--ink-mute); font-size: 14px; }
+
+  /* badge "próximamente" */
+  .soon {
+    display: inline-block;
+    font-size: 9px;
+    padding: 3px 8px;
+    border-radius: 100px;
+    background: rgba(123,184,240,0.1);
+    color: var(--brand-deep);
+    border: 0.5px solid rgba(123,184,240,0.2);
+    margin-top: 4px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* última fila — botones */
+  .compare-table tr.cta-row td {
+    padding: 24px 18px;
+    background: var(--bg-soft);
+    border-bottom: none;
+  }
+  .compare-table tr.cta-row td.featured { background: rgba(123,184,240,0.08); }
+  /* asegurar que el highlight Pro respete el border-radius de la tabla */
+  .compare-table tr:first-child th.featured {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .compare-table tr.cta-row td.featured {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .compare-cta {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 100px;
+    border: 0.5px solid var(--line-mid);
+    font-size: 13px; font-weight: 500;
+    text-decoration: none;
+    color: var(--ink);
+    transition: background .2s, color .2s;
+  }
+  .compare-cta:hover { background: var(--ink); color: #fff; }
+  .compare-cta.featured-cta {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+  }
+  .compare-cta.featured-cta:hover { background: var(--brand); color: #033726; border-color: var(--brand); }
+
+  /* === MOBILE: chips selector + lista === */
+  .compare-mobile { display: none; }
+  .compare-mobile-chips {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 4px 0 16px;
+    margin-bottom: 24px;
+    scrollbar-width: none;
+  }
+  .compare-mobile-chips::-webkit-scrollbar { display: none; }
+  .chip {
+    flex-shrink: 0;
+    padding: 10px 18px;
+    border-radius: 100px;
+    background: #fff;
+    border: 0.5px solid var(--line-mid);
+    font-size: 13px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    font-family: var(--sans);
+    font-weight: 500;
+    transition: all .2s ease;
+  }
+  .chip[data-active="true"] {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+  }
+  .chip[data-active="true"][data-popular="true"] {
+    background: var(--brand);
+    color: #033726;
+    border-color: var(--brand);
+  }
+  .compare-pane {
+    display: none;
+    background: #fff;
+    border: 0.5px solid var(--line-soft);
+    border-radius: var(--radius);
+    padding: 28px;
+  }
+  .compare-pane[data-active="true"] { display: block; }
+  .pane-head {
+    border-bottom: 0.5px solid var(--line-soft);
+    padding-bottom: 22px;
+    margin-bottom: 22px;
+  }
+  .pane-name {
+    font-family: var(--serif);
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+  .pane-price {
+    font-family: var(--serif);
+    font-size: 40px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .pane-period {
+    font-size: 11px;
+    color: var(--ink-mute);
+    margin-top: 4px;
+  }
+  .pane-section {
+    margin-bottom: 20px;
+  }
+  .pane-section-title {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brand-deep);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .pane-row {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    font-size: 13.5px;
+    border-bottom: 0.5px solid var(--line-soft);
+  }
+  .pane-row:last-child { border-bottom: none; }
+  .pane-row .feat { color: var(--ink-soft); flex: 1; }
+  .pane-row .val { color: var(--ink); font-weight: 500; text-align: right; }
+  .pane-row .val.no { color: var(--ink-mute); font-weight: 400; }
+
+  /* ============ FAQs ============ */
+  section.faqs {
+    padding: 80px 0 140px;
+    background: var(--bg-soft);
+    border-top: 0.5px solid var(--line-soft);
+    position: relative;
+    overflow: hidden;
+  }
+  .faqs-bg-nodes {
+    position: absolute; inset: 0;
+    pointer-events: none;
+    opacity: 0.25;
+  }
+  .faqs-grid {
+    display: block;
+    position: relative;
+    z-index: 1;
+  }
+  .faqs-head {
+    margin-bottom: 56px;
+    max-width: 720px;
+  }
+  .faqs-head p { max-width: 600px; }
+  .faqs-head .eyebrow { color: var(--brand-deep); margin-bottom: 24px; }
+  .faqs-head .eyebrow::before { border-color: var(--brand-deep); }
+  .faqs-head .eyebrow::after { background: var(--brand-deep); }
+  .faqs-head h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+  }
+  .faqs-head h2 em {
+    font-style: italic;
+    color: var(--brand-deep);
+    font-weight: 300;
+  }
+  .faqs-head p {
+    font-size: 16px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    max-width: 380px;
+    margin-bottom: 32px;
+  }
+
+  /* Contact card debajo del head */
+  .faqs-contact {
+    padding: 24px 28px;
+    background: var(--bg-card);
+    border: 0.5px solid var(--line-soft);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 380px;
+  }
+  .faqs-contact-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brand-deep);
+    font-weight: 500;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .faqs-contact-label::before {
+    content: ""; width: 6px; height: 6px;
+    background: var(--brand);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(123,184,240,0.15);
+  }
+  .faqs-contact-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+  .faqs-contact a {
+    color: var(--brand-deep);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: gap .2s ease;
+  }
+  .faqs-contact a:hover { gap: 12px; }
+
+  /* Categorías + items */
+  .faqs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .faq-category {
+    display: flex;
+    flex-direction: column;
+  }
+  .faq-cat-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--brand-deep);
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 8px;
+    padding-bottom: 16px;
+    border-bottom: 0.5px solid rgba(123,184,240,0.2);
+  }
+
+  .faq-item {
+    border-bottom: 0.5px solid var(--line-soft);
+    transition: border-color .25s ease;
+  }
+  .faq-item:hover { border-bottom-color: rgba(123,184,240,0.4); }
+  .faq-question {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 24px 0;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    line-height: 1.3;
+    transition: color .25s ease;
+  }
+  .faq-question:hover { color: var(--brand-deep); }
+  .faq-icon {
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 0.5px solid var(--line-mid);
+    display: flex; align-items: center; justify-content: center;
+    transition: background .25s ease, border-color .25s ease, transform .35s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--ink-soft);
+    position: relative;
+  }
+  .faq-icon::before, .faq-icon::after {
+    content: "";
+    position: absolute;
+    background: currentColor;
+    transition: transform .35s cubic-bezier(0.4, 0, 0.2, 1), opacity .25s ease;
+  }
+  .faq-icon::before {
+    width: 12px; height: 1.2px;
+  }
+  .faq-icon::after {
+    width: 1.2px; height: 12px;
+  }
+  .faq-item[data-open="true"] .faq-icon {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+  }
+  .faq-item[data-open="true"] .faq-icon::after {
+    transform: rotate(90deg);
+    opacity: 0;
+  }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .faq-item[data-open="true"] .faq-answer {
+    max-height: 600px;
+  }
+  .faq-answer-inner {
+    padding: 0 0 28px;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    max-width: 580px;
+  }
+  .faq-answer-inner p { margin-bottom: 12px; }
+  .faq-answer-inner p:last-child { margin-bottom: 0; }
+  .faq-answer-inner strong { color: var(--ink); font-weight: 500; }
+  .faq-answer-inner code {
+    font-family: var(--mono);
+    font-size: 13px;
+    background: rgba(123,184,240,0.1);
+    color: var(--brand-darker);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  @media (max-width: 960px) {
+    .faqs-grid { grid-template-columns: 1fr; gap: 48px; }
+    .faqs-head { position: static; }
+    .faqs-contact { max-width: 100%; }
+    .faq-question { font-size: 17px; }
+    section.faqs { padding: 100px 0; }
+  }
+
+  footer {
+    padding: 60px 0 40px;
+    text-align: center;
+    background: var(--dark-bg); color: var(--dark-ink-soft);
+    font-size: 13px;
+  }
+
+  /* ============ MÁS CANALES (próximamente) ============ */
+  section.channels {
+    padding: 140px 0;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+  /* nodos del logo de fondo */
+  .channels-bg-nodes {
+    position: absolute; inset: 0;
+    pointer-events: none;
+    opacity: 0.3;
+  }
+  .channels-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    margin-bottom: 56px;
+    position: relative; z-index: 1;
+  }
+  .channels-head {
+    display: block;
+    max-width: 520px;
+  }
+  .channels-head p { margin-top: 24px; }
+  .channels-head .eyebrow { color: var(--brand-deep); }
+  .channels-head .eyebrow::before { border-color: var(--brand-deep); }
+  .channels-head .eyebrow::after { background: var(--brand-deep); }
+  .channels-head p {
+    font-size: 17px; color: var(--ink-soft);
+    line-height: 1.55;
+    max-width: 480px;
+  }
+
+  .channels-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    position: relative; z-index: 1;
+  }
+  .channel-card {
+    background: #fff;
+    border: 0.5px solid var(--line-soft);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .channel-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 30px 60px -30px rgba(14,14,12,0.15);
+    border-color: rgba(123,184,240,0.3);
+  }
+  .channel-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+  .channel-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: var(--brand-soft);
+    color: var(--brand-darker);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .channel-icon svg {
+    width: 22px; height: 22px;
+    stroke: var(--brand-deep);
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .channel-soon {
+    font-size: 9px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    background: rgba(123,184,240,0.1);
+    color: var(--brand-deep);
+    border: 0.5px solid rgba(123,184,240,0.25);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .channel-name {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .channel-desc {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+    flex: 1;
+  }
+  .channel-features {
+    list-style: none;
+    margin-bottom: 28px;
+    padding-top: 22px;
+    border-top: 0.5px solid var(--line-soft);
+  }
+  .channel-features li {
+    font-size: 12.5px;
+    padding: 7px 0;
+    color: var(--ink-soft);
+    display: flex; gap: 10px; align-items: flex-start;
+    line-height: 1.5;
+  }
+  .channel-features li::before {
+    content: "";
+    width: 5px; height: 5px;
+    background: var(--brand);
+    border-radius: 50%;
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+  .channel-price {
+    font-family: var(--serif);
+    font-size: 24px;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+  .channel-period {
+    font-size: 11px;
+    color: var(--ink-mute);
+    margin-bottom: 20px;
+  }
+  .channel-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 18px;
+    border-radius: 100px;
+    border: 0.5px solid var(--line-mid);
+    font-size: 13px; font-weight: 500;
+    color: var(--ink); text-decoration: none;
+    text-align: center;
+    transition: background .2s, color .2s, border-color .2s;
+    cursor: pointer;
+  }
+  .channel-cta:hover {
+    background: var(--ink); color: #fff; border-color: var(--ink);
+  }
+  .channel-cta .arr {
+    transition: transform .2s ease;
+  }
+  .channel-cta:hover .arr {
+    transform: translateX(3px);
+  }
+
+  /* foot info */
+  .channels-foot {
+    text-align: center;
+    margin-top: 56px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    position: relative; z-index: 1;
+  }
+  .channels-foot em { color: var(--brand-deep); font-style: italic; font-family: var(--serif); }
+
+  /* Visualización 360 — agente al centro, canales orbitando */
+  .channels-360 {
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    height: auto;
+    min-height: 320px;
+  }
+  .orbit-stage {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    aspect-ratio: 560/320;
+    height: auto;
+  }
+  .orbit-ring {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px dashed rgba(123,184,240,0.3);
+    border-radius: 50%;
+  }
+  .orbit-ring.r1 { width: 280px; height: 280px; }
+  .orbit-ring.r2 { width: 460px; height: 280px; opacity: 0.5; }
+  .orbit-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    background: var(--brand-soft);
+    border: 1px solid rgba(123,184,240,0.4);
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    z-index: 2;
+    box-shadow: 0 0 0 8px rgba(123,184,240,0.05);
+  }
+  .orbit-center-inner {
+    font-family: var(--serif);
+    font-size: 13px;
+    color: var(--brand-darker);
+    line-height: 1.2;
+  }
+  .orbit-center-inner strong {
+    display: block;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--brand-deep);
+    margin-bottom: 2px;
+  }
+  /* nodos orbitando */
+  .orbit-node {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: #fff;
+    border: 0.5px solid var(--line-mid);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    box-shadow: 0 8px 20px -8px rgba(14,14,12,0.1);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .orbit-node:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+    box-shadow: 0 12px 28px -8px rgba(123,184,240,0.25);
+  }
+  .orbit-node svg {
+    width: 22px; height: 22px;
+    stroke: var(--brand-deep);
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .orbit-node .label {
+    font-size: 9px;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+  /* posiciones de los nodos: webchat (activo) izq, los otros 4 alrededor */
+  .orbit-node.active {
+    background: var(--ink); color: #fff;
+    border-color: var(--ink);
+  }
+  .orbit-node.active svg { stroke: var(--brand); }
+  .orbit-node.active .label { color: rgba(255,255,255,0.7); }
+  .orbit-node.active::before {
+    content: ""; position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: var(--brand);
+    z-index: -1;
+    opacity: 0.18;
+    animation: pulseRing 2s infinite ease-out;
+  }
+  @keyframes pulseRing {
+    0% { transform: scale(0.95); opacity: 0.18; }
+    70% { transform: scale(1.15); opacity: 0; }
+    100% { transform: scale(0.95); opacity: 0; }
+  }
+  /* connector lines desde center a cada nodo */
+  .orbit-lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  /* ============ HAMBURGER + MOBILE MENU ============ */
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    z-index: 110;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: all .25s;
+  }
+  .nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+  .nav-mobile {
+    position: fixed;
+    inset: 0;
+    top: 64px;
+    background: var(--bg);
+    z-index: 99;
+    transform: translateY(-110%);
+    transition: transform .3s cubic-bezier(.4,0,.2,1);
+    overflow-y: auto;
+    border-top: 0.5px solid var(--line-soft);
+    display: none;
+  }
+  .nav-mobile.open { transform: translateY(0); }
+  .nav-mobile-inner {
+    padding: 20px 28px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .nav-mobile-inner a {
+    display: block;
+    padding: 16px 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--line-soft);
+  }
+  .nav-mobile-cta {
+    background: var(--ink);
+    color: var(--bg) !important;
+    text-align: center;
+    border-radius: 100px;
+    padding: 14px 24px !important;
+    margin-top: 16px;
+    border: none !important;
+  }
+  @media (max-width: 960px) {
+    .nav-toggle { display: flex; }
+    .nav-mobile { display: block; }
+    .nav-links { display: none; }
+    /* Hero: stack vertical */
+    .hero-grid { grid-template-columns: 1fr !important; gap: 60px !important; }
+    .hero-mock { max-width: 480px; margin: 0 auto; }
+    .hero h1 { font-size: clamp(40px, 6vw, 64px) !important; }
+    /* Grids principales: 2 columnas */
+    .bento, .group-bento { grid-template-columns: repeat(2, 1fr) !important; }
+    .cell.big, .cell.med, .cell.tall, .cell.wide { grid-column: span 2 !important; grid-row: auto !important; }
+    .cases-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .pricing-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 14px !important; }
+    .channels-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .plan.popular { transform: none !important; }
+    /* Comparativa: switch to mobile chips */
+    .compare-table { display: none !important; }
+    .compare-mobile { display: block !important; }
+    /* FAQs: 1 col */
+    .faqs-grid { display: block !important; }
+    .faqs-head { position: static !important; margin-bottom: 48px; }
+    /* Footer: 2 col */
+    .footer-inner { grid-template-columns: 1fr 1fr !important; gap: 40px !important; }
+    /* Onboarding choice (acompañamiento) — stack vertical */
+    .onboarding-choice { grid-template-columns: 1fr !important; gap: 16px !important; }
+    .choice-divider { display: none !important; }
+    /* Next step (siguiente paso) — stack vertical */
+    .next-step { grid-template-columns: 1fr !important; gap: 20px !important; padding: 32px 24px !important; text-align: center; }
+    .next-step::before { display: none !important; }
+    /* channels-top: stack vertical en mobile */
+    .channels-top { grid-template-columns: 1fr !important; gap: 32px !important; }
+    .channels-360 { min-height: auto !important; padding: 0 !important; overflow: hidden; }
+    .orbit-stage { max-width: 100% !important; width: 100%; }
+    section.channels { overflow: hidden !important; }
+    /* Hero chat-card — sense overflow */
+    .chat-card { position: relative !important; bottom: auto !important; right: auto !important; width: 100% !important; transform: none !important; margin-top: 16px; }
+    .browser { position: relative; transform: none !important; aspect-ratio: 4/3; }
+  }
+  @media (max-width: 640px) {
+    /* Todas las grids a 1 columna */
+    .bento, .group-bento { grid-template-columns: 1fr !important; }
+    .cell.big, .cell.med, .cell.tall, .cell.wide { grid-column: span 1 !important; }
+    .cases-grid { grid-template-columns: 1fr !important; }
+    .pricing-grid { grid-template-columns: 1fr !important; }
+    .channels-grid { grid-template-columns: 1fr !important; }
+    .footer-inner { grid-template-columns: 1fr !important; gap: 36px !important; text-align: center; }
+    .footer-brand { margin: 0 auto; }
+    /* Container más estrecho */
+    .container { padding: 0 18px !important; }
+    /* H1 hero más pequeño */
+    .hero h1 { font-size: 38px !important; line-height: 1.05 !important; }
+    .hero-sub { font-size: 16px !important; }
+    /* Hero CTA stack */
+    .hero-actions { flex-direction: column !important; align-items: stretch !important; }
+    .hero-actions .btn-primary,
+    .hero-actions .btn-secondary { width: 100%; justify-content: center; }
+    /* H2 en secciones */
+    .section-title { font-size: clamp(32px, 7vw, 44px) !important; }
+    /* Hero mockup más pequeño */
+    .hero-mock { max-width: 100%; }
+    /* CTA final actions stack */
+    .cta-final-actions { flex-direction: column !important; }
+    .cta-final-primary, .cta-final-secondary { width: 100%; justify-content: center; }
+    .cta-final-title { font-size: clamp(32px, 8vw, 44px) !important; }
+    /* Marquee más pequeño */
+    .marquee-track { gap: 32px !important; }
+    .client-logo { font-size: 14px !important; }
+    /* Tabs cómo trabaja */
+    .como-trabaja-tabs .tabs-nav { flex-wrap: wrap; }
+    /* Eyebrow más pequeño */
+    .eyebrow { font-size: 11px !important; }
+    /* Footer social: mantenir centrats i dins */
+    .footer-social { justify-content: center !important; flex-wrap: wrap; }
+    .footer-social-link { width: 38px !important; height: 38px !important; }
+    .footer-brand { max-width: 100% !important; align-items: center; text-align: center; }
+    /* Acompañamiento cards padding compactat */
+    .choice-card, .next-step { padding: 24px 20px !important; }
+  }
+  @media (max-width: 420px) {
+    .hero h1 { font-size: 34px !important; }
+    .section-title { font-size: 28px !important; }
+    .cta-final-title { font-size: 30px !important; }
+  }
+
+  /* ============ MOBILE FIXES ============ */
+  @media (max-width: 600px) {
+    /* hero — chat sin overflow */
+    .hero { overflow: hidden; }
+    .hero-mock { aspect-ratio: auto; max-width: 100%; padding: 0; }
+    .browser { position: relative; transform: none; aspect-ratio: 4/3; }
+    .chat-card {
+      position: relative;
+      bottom: auto; right: auto;
+      width: 100%;
+      transform: none;
+      margin-top: 16px;
+    }
+    /* bento + group-bento siempre 1 col */
+    .bento, .group-bento { grid-template-columns: 1fr !important; }
+    [class~="group-bento"][style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+    .cell { padding: 24px 22px !important; }
+    .cell h3, .cell .num { font-size: 22px !important; }
+    /* features groups */
+    .group-head { padding: 24px 0 !important; }
+    /* nav padding */
+    .nav-inner { padding: 12px 18px; }
+  }
+  @media (max-width: 480px) {
+    .product-label {
+      font-size: 9.5px;
+      padding-left: 8px;
+    }
+    .product-label .product-divider { display: none; }
+    .product-label .label-prefix { display: none; }
+  }
+  @media (max-width: 420px) {
+    .hero h1 { font-size: 38px !important; }
+    .browser-content { padding: 18px 14px !important; }
+    .chat-card { padding: 14px !important; }
+  }
+
+  /* ============ MOBILE FIXES — overflow + section spacing ============ */
+  @media (max-width: 720px) {
+    /* Section spacing — reducir mucho en mobile */
+    section.como-trabaja-tabs,
+    section.cases,
+    section.pricing,
+    section.channels,
+    section.faqs,
+    section.cta-final {
+      padding-top: 64px !important;
+      padding-bottom: 64px !important;
+    }
+    .pricing-head { margin-bottom: 40px !important; }
+    /* Code block — sin overflow horizontal */
+    .code-line {
+      font-size: 11px !important;
+      word-break: break-all !important;
+      white-space: normal !important;
+      padding: 12px !important;
+      overflow: hidden !important;
+    }
+    /* Cells/cards padding más ajustado */
+    .cell { padding: 22px 20px !important; }
+    .cell h3 { line-height: 1.2 !important; }
+    /* Botones dentro de cards a full width */
+    .channel-card .btn-cta,
+    .channel-card a.btn-cta,
+    .module-link {
+      width: 100% !important;
+      justify-content: center !important;
+      box-sizing: border-box !important;
+    }
+    /* Channel/module card: padding interno */
+    .channel-card,
+    .module-card { padding: 22px 20px !important; }
+    .channel-card * ,
+    .module-card * { max-width: 100%; box-sizing: border-box; }
+    /* Analytics stats — mantener legibles */
+    .ana-mini-stat { padding: 14px 12px !important; }
+    .ana-mini-num { font-size: 24px !important; }
+    /* Eliminar padding lateral excesivo del container en mobile */
+    .container { padding: 0 18px !important; }
+  }
+
+  /* ============ CTA FINAL ============ */
+  section.cta-final {
+    padding: 120px 0 140px;
+    background: linear-gradient(180deg, #eaf1f8 0%, #d5e6f5 100%);
+    border-top: 0.5px solid rgba(45, 61, 90, 0.16);
+    text-align: center;
+  }
+  .cta-final-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .cta-final-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 32px;
+    font-weight: 500;
+  }
+  .cta-final-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(40px, 5.5vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin: 0 0 28px;
+  }
+  .cta-final-title em {
+    font-style: italic;
+    font-weight: 400;
+  }
+  .cta-final-sub {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0 auto 40px;
+    max-width: 560px;
+  }
+  .cta-final-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .cta-final-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--ink);
+    color: #fff;
+    padding: 16px 28px;
+    border-radius: 100px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background .2s ease, transform .2s ease;
+  }
+  .cta-final-primary:hover {
+    background: var(--brand-deep);
+    transform: translateY(-1px);
+  }
+  .cta-final-arrow {
+    display: inline-block;
+    transition: transform .2s ease;
+  }
+  .cta-final-primary:hover .cta-final-arrow {
+    transform: translateX(3px);
+  }
+  .cta-final-secondary {
+    display: inline-flex;
+    align-items: center;
+    background: transparent;
+    color: var(--ink);
+    padding: 16px 28px;
+    border-radius: 100px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 0.5px solid var(--line-mid);
+    transition: border-color .2s ease, background .2s ease;
+  }
+  .cta-final-secondary:hover {
+    border-color: var(--ink);
+    background: var(--bg-soft);
+  }
+  @media (max-width: 600px) {
+    section.cta-final { padding: 80px 0 100px; }
+    .cta-final-actions { flex-direction: column; align-items: stretch; }
+    .cta-final-primary, .cta-final-secondary {
+      justify-content: center;
+      width: 100%;
+    }
+  }
+
+  /* ============ FOOTER ============ */
+  .visually-hidden {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0);
+    white-space: nowrap; border: 0;
+  }
+  .site-footer {
+    background: var(--bg-soft);
+    color: var(--ink-soft);
+    border-top: 0.5px solid var(--line-soft);
+    padding: 80px 0 0;
+  }
+  .footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px 64px;
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .footer-brand {
+    max-width: 340px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .footer-logo {
+    margin-bottom: 20px;
+  }
+  .footer-logo svg, .footer-logo img {
+    height: 36px;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+    filter: hue-rotate(49deg) saturate(0.75);
+  }
+  .footer-tagline {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0 0 24px;
+  }
+  .footer-email {
+    display: inline-block;
+    font-size: 15px;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-mid);
+    padding-bottom: 2px;
+    transition: color .2s ease, border-color .2s ease;
+  }
+  .footer-email:hover {
+    color: var(--brand-deep);
+    border-color: var(--brand-deep);
+  }
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+  }
+  .footer-heading {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 500;
+    margin: 0 0 18px;
+  }
+  .footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .footer-list a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color .15s ease;
+  }
+  .footer-list a:hover {
+    color: var(--ink);
+  }
+  .footer-social {
+    display: flex;
+    gap: 10px;
+    margin-top: 28px;
+    justify-content: center;
+  }
+  .footer-social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 0.5px solid var(--line-mid);
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+  }
+  .footer-social-link svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
+  .footer-social-link:hover {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+    transform: translateY(-2px);
+  }
+  .footer-bottom {
+    border-top: 0.5px solid var(--line-soft);
+    padding: 24px 0;
+  }
+  .footer-bottom-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .footer-copy {
+    font-size: 13px;
+    color: var(--ink-mute);
+    margin: 0;
+    line-height: 1.5;
+  }
+  @media (max-width: 960px) {
+    .footer-inner {
+      grid-template-columns: 1fr 1fr;
+      gap: 48px 32px;
+    }
+    .footer-brand {
+      grid-column: 1 / -1;
+      max-width: 100%;
+    }
+  }
+  @media (max-width: 560px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding: 0 24px 48px;
+    }
+    .footer-bottom-inner {
+      padding: 0 24px;
+    }
+    .site-footer { padding-top: 64px; }
+  }
+  /* ============ CÓMO TRABAJA — Versión clara ============ */
+  section.como-trabaja-tabs {
+    padding: 140px 0;
+    background: #fafaf6;
+    color: var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+  section.como-trabaja-tabs::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(123,184,240,0.06), transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(123,184,240,0.05), transparent 40%);
+    pointer-events: none;
+  }
+  /* Nodos decorativos de fondo: más visibles que en la versión oscura */
+  section.como-trabaja-tabs .features-bg-nodes {
+    position: absolute; inset: 0;
+    pointer-events: none;
+    opacity: 0.25;
+  }
+
+  .como-trabaja-tabs .ct-head {
+    margin-bottom: 64px;
+    position: relative; z-index: 1;
+    max-width: 800px;
+  }
+  /* Sobrescribir colores del eyebrow heredado para fondo claro */
+  .como-trabaja-tabs .ct-head .eyebrow { color: var(--brand-deep); }
+  .como-trabaja-tabs .ct-head .eyebrow::before { border-color: var(--brand-deep); }
+  .como-trabaja-tabs .ct-head .eyebrow::after { background: var(--brand-deep); }
+  .como-trabaja-tabs .ct-head h2.section-title { color: var(--ink); }
+  .como-trabaja-tabs .ct-head h2.section-title em { color: var(--brand-deep); }
+  .como-trabaja-tabs .ct-head .section-sub { color: var(--ink-soft); }
+
+  /* HINT pulsante */
+  .como-trabaja-tabs .tabs-hint {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 18px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--brand-deep);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    position: relative; z-index: 1;
+  }
+  .como-trabaja-tabs .tabs-hint::before {
+    content: "";
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--brand-deep);
+    box-shadow: 0 0 0 4px rgba(0,129,89,0.18);
+    animation: ct-pulse 2s ease-in-out infinite;
+  }
+  @keyframes ct-pulse {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(0,129,89,0.18); }
+    50% { box-shadow: 0 0 0 7px rgba(0,129,89,0.06); }
+  }
+
+  /* TABS NAV */
+  .como-trabaja-tabs .tabs-wrapper { position: relative; z-index: 1; }
+  .como-trabaja-tabs .tabs-nav {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .como-trabaja-tabs .tab {
+    background: #ffffff;
+    border: 0.5px solid var(--line-soft);
+    border-radius: var(--radius);
+    padding: 28px 24px 56px;
+    cursor: pointer;
+    text-align: left;
+    color: var(--ink);
+    font-family: var(--sans);
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    gap: 14px;
+    box-shadow: 0 1px 2px rgba(14,14,12,0.03);
+  }
+  .como-trabaja-tabs .tab::before {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--brand-deep);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .como-trabaja-tabs .tab:hover {
+    border-color: rgba(0,129,89,0.3);
+    box-shadow: 0 12px 30px -12px rgba(14,14,12,0.12);
+    transform: translateY(-2px);
+  }
+  .como-trabaja-tabs .tab.active {
+    background: #ffffff;
+    border-color: rgba(0,129,89,0.4);
+    box-shadow: 0 16px 36px -16px rgba(0,129,89,0.18);
+    transform: none;
+  }
+  .como-trabaja-tabs .tab.active::before { transform: scaleX(1); }
+
+  .como-trabaja-tabs .tab-num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--brand-deep);
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  .como-trabaja-tabs .tab-name {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 32px;
+    color: var(--ink);
+    letter-spacing: -0.025em;
+    line-height: 1;
+  }
+  .como-trabaja-tabs .tab-name em { font-style: italic; color: var(--brand-deep); font-weight: 300; }
+  .como-trabaja-tabs .tab-claim {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+
+  /* Indicador de estado en cada tab */
+  .como-trabaja-tabs .tab-status {
+    position: absolute;
+    bottom: 20px;
+    left: 24px;
+    right: 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    opacity: 0.7;
+    transition: all .3s ease;
+  }
+  .como-trabaja-tabs .tab-status .label-default { display: inline; }
+  .como-trabaja-tabs .tab-status .label-active { display: none; }
+  .como-trabaja-tabs .tab-status .arrow {
+    width: 14px; height: 14px;
+    transition: transform .3s ease;
+    stroke: currentColor;
+  }
+  .como-trabaja-tabs .tab:hover .tab-status {
+    color: var(--brand-deep);
+    opacity: 1;
+  }
+  .como-trabaja-tabs .tab:hover .tab-status .arrow { transform: translateX(4px); }
+  .como-trabaja-tabs .tab.active .tab-status {
+    color: var(--brand-deep);
+    opacity: 1;
+  }
+  .como-trabaja-tabs .tab.active .tab-status .label-default { display: none; }
+  .como-trabaja-tabs .tab.active .tab-status .label-active { display: inline; }
+  .como-trabaja-tabs .tab.active .tab-status .arrow { transform: rotate(90deg); }
+
+  /* PANELS */
+  .como-trabaja-tabs .tabs-panels { position: relative; z-index: 1; }
+  .como-trabaja-tabs .tab-panel {
+    display: none;
+    animation: ct-fade-in .4s ease;
+  }
+  .como-trabaja-tabs .tab-panel.active { display: block; }
+  @keyframes ct-fade-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Bento del panel — Opción 2: demo grande izquierda + big/tall apiladas derecha */
+  .como-trabaja-tabs .block-bento {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: minmax(180px, auto);
+    gap: 14px;
+  }
+  /* Chats de conversación ocultos — solo funciones */
+  .como-trabaja-tabs .cell.demo { display: none !important; }
+  .como-trabaja-tabs .block-bento .cell.big,
+  .como-trabaja-tabs .block-bento .cell.tall {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+  /* Mobile: las cells siguen en 2 columnas (más compacto) */
+  @media (max-width: 640px) {
+    .como-trabaja-tabs .block-bento {
+      grid-template-columns: 1fr !important;
+      gap: 12px !important;
+    }
+    .como-trabaja-tabs .block-bento .cell {
+      padding: 22px 20px !important;
+    }
+    .como-trabaja-tabs .block-bento .cell h3 {
+      font-size: 18px !important;
+      line-height: 1.25 !important;
+    }
+    .como-trabaja-tabs .block-bento .cell p {
+      font-size: 14px !important;
+    }
+  }
+
+  /* Celdas del bento — fondo blanco con sombra suave */
+  .como-trabaja-tabs .cell {
+    background: #ffffff;
+    border: 0.5px solid var(--line-soft);
+    border-radius: var(--radius);
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+    display: flex; flex-direction: column;
+    box-shadow: 0 1px 2px rgba(14,14,12,0.03);
+  }
+  .como-trabaja-tabs .cell:hover {
+    border-color: rgba(0,129,89,0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px -16px rgba(14,14,12,0.1);
+  }
+  .como-trabaja-tabs .cell h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+  .como-trabaja-tabs .cell p {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+
+  /* Celda DEMO destacada — columna izquierda, ocupa toda la altura */
+  .como-trabaja-tabs .cell.demo {
+    grid-column: 1;
+    grid-row: span 2;
+    background: linear-gradient(180deg, rgba(123,184,240,0.07), rgba(123,184,240,0.02));
+    border-color: rgba(0,129,89,0.18);
+  }
+  .como-trabaja-tabs .cell.demo .demo-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--brand-deep);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .como-trabaja-tabs .cell.demo .demo-tag::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--brand-deep);
+    box-shadow: 0 0 0 4px rgba(0,129,89,0.15);
+  }
+  .como-trabaja-tabs .cell.demo .demo-intro {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.35;
+    margin-bottom: 14px;
+  }
+  .como-trabaja-tabs .cell.demo .demo-convo {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 16px;
+    margin-top: auto;
+    border: 0.5px solid rgba(0,129,89,0.12);
+  }
+  .como-trabaja-tabs .demo-msg {
+    font-size: 13.5px;
+    line-height: 1.5;
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    max-width: 92%;
+  }
+  .como-trabaja-tabs .demo-msg:last-child { margin-bottom: 0; }
+  .como-trabaja-tabs .demo-msg.user {
+    background: var(--bg-soft);
+    color: var(--ink-soft);
+    border: 0.5px solid var(--line-soft);
+    margin-left: auto;
+  }
+  .como-trabaja-tabs .demo-msg.bot {
+    background: var(--brand);
+    color: #033726;
+    font-weight: 400;
+  }
+
+  /* Celdas big y tall — columna derecha, una fila cada una */
+  .como-trabaja-tabs .cell.big { grid-column: 2; grid-row: 1; }
+  .como-trabaja-tabs .cell.tall { grid-column: 2; grid-row: 2; }
+
+  /* search-vis sobre fondo claro */
+  .como-trabaja-tabs .search-vis {
+    background: var(--bg-soft);
+    border-radius: 12px;
+    padding: 14px;
+    margin-top: 20px;
+    border: 0.5px solid var(--line-soft);
+  }
+  .como-trabaja-tabs .search-input {
+    background: #ffffff;
+    padding: 10px 14px; border-radius: 8px;
+    font-family: var(--mono); font-size: 12px;
+    color: var(--ink); margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+    border: 0.5px solid var(--line-soft);
+  }
+  .como-trabaja-tabs .search-input::before {
+    content: "⌕"; color: var(--brand-deep); font-size: 14px;
+  }
+  .como-trabaja-tabs .search-result {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 4px;
+    font-size: 12px;
+    border-bottom: 0.5px solid rgba(14,14,12,0.06);
+  }
+  .como-trabaja-tabs .search-result:last-child { border: none; }
+  .como-trabaja-tabs .search-result .pname { color: var(--ink); }
+  .como-trabaja-tabs .search-result .pprice { font-family: var(--serif); color: var(--brand-deep); }
+
+  /* code-line sobre fondo claro */
+  .como-trabaja-tabs .code-line {
+    background: #0e0e0c;
+    color: #f5f4ee;
+    padding: 16px;
+    border-radius: 10px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.7;
+  }
+  .como-trabaja-tabs .code-line .com { color: #6b7570; font-style: italic; }
+  .como-trabaja-tabs .code-line .str { color: #7bb8f0; }
+  .como-trabaja-tabs .code-line .key { color: #f59e0b; }
+
+  /* lang-grid sobre claro */
+  .como-trabaja-tabs .lang-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .como-trabaja-tabs .flag {
+    width: 38px; height: 38px;
+    background: var(--bg-soft);
+    border: 0.5px solid var(--line-soft);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .como-trabaja-tabs .flag.more {
+    background: var(--brand);
+    color: #033726;
+    font-family: var(--mono); font-weight: 500; font-size: 13px;
+    border-color: var(--brand);
+  }
+  .como-trabaja-tabs .flag svg {
+    width: 26px; height: 17px;
+    border-radius: 2px;
+    display: block;
+  }
+
+  /* Bloques de productos (carrito, presupuesto) sobre claro */
+  .como-trabaja-tabs .cell .search-vis [style*="border-bottom"] {
+    border-bottom-color: rgba(14,14,12,0.06) !important;
+  }
+  /* Tags interiores de cells (pills) — invertir colores para fondo claro */
+  .como-trabaja-tabs .cell [style*="rgba(123,184,240,0.1)"] {
+    background: rgba(123,184,240,0.1) !important;
+    color: var(--brand-deep) !important;
+    border-color: rgba(0,129,89,0.25) !important;
+  }
+  .como-trabaja-tabs .cell [style*="rgba(255,255,255,0.04)"] {
+    background: var(--bg-soft) !important;
+    color: var(--ink-soft) !important;
+    border-color: var(--line-soft) !important;
+  }
+
+  /* Mini stats del panel 04 (Rescata) */
+  .como-trabaja-tabs .cell [style*="rgba(0,0,0,0.25)"] {
+    background: var(--bg-soft) !important;
+    border-color: rgba(0,129,89,0.12) !important;
+  }
+  .como-trabaja-tabs .cell [style*="rgba(0,0,0,0.25)"] [style*="color: var(--brand)"] {
+    color: var(--brand-deep) !important;
+  }
+  .como-trabaja-tabs .cell [style*="rgba(0,0,0,0.25)"] [style*="color: var(--dark-ink)"] {
+    color: var(--ink) !important;
+  }
+  .como-trabaja-tabs .cell [style*="rgba(0,0,0,0.25)"] [style*="color: var(--dark-ink-soft)"] {
+    color: var(--ink-soft) !important;
+  }
+
+  /* Sobrescribir colores inline restantes que apuntan a variables dark */
+  .como-trabaja-tabs .cell [style*="color: var(--dark-ink)"] { color: var(--ink) !important; }
+  .como-trabaja-tabs .cell [style*="color: var(--dark-ink-soft)"] { color: var(--ink-soft) !important; }
+  .como-trabaja-tabs .cell [style*="color: var(--brand)"] { color: var(--brand-deep) !important; }
+  .como-trabaja-tabs .cell [style*="background:var(--brand)"] { background: var(--brand) !important; }
+  .como-trabaja-tabs .cell [style*="background: var(--brand)"] { background: var(--brand) !important; }
+
+  /* Y ADEMÁS — fila inferior */
+  .como-trabaja-tabs .ct-extras {
+    margin-top: 56px;
+    position: relative; z-index: 1;
+  }
+  .como-trabaja-tabs .extras-head {
+    display: flex; align-items: baseline; gap: 20px;
+    margin-bottom: 22px;
+    padding-bottom: 18px;
+    border-bottom: 0.5px solid rgba(0,129,89,0.18);
+  }
+  .como-trabaja-tabs .extras-num {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--brand-deep);
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  .como-trabaja-tabs .extras-name {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 28px;
+    color: var(--ink);
+    letter-spacing: -0.025em;
+    line-height: 1;
+  }
+  .como-trabaja-tabs .extras-name em { font-style: italic; color: var(--brand-deep); font-weight: 300; }
+  .como-trabaja-tabs .extras-desc {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-left: auto;
+  }
+  .como-trabaja-tabs .extras-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 14px;
+  }
+  /* Anclas de color verde del bloque Y ADEMÁS */
+  .como-trabaja-tabs .ct-extras [style*="rgba(123,184,240,0.12)"] {
+    background: rgba(123,184,240,0.12) !important;
+    color: var(--brand-deep) !important;
+    border-color: rgba(0,129,89,0.3) !important;
+  }
+
+  /* Gráfico de barras (panel 04 Rescata) — adaptado a fondo claro */
+  .como-trabaja-tabs .ana-mini .bar {
+    background: rgba(123,184,240,0.22);
+  }
+  .como-trabaja-tabs .ana-mini .bar.hi {
+    background: var(--brand);
+  }
+
+  /* Responsive — tabs → acordeón en móvil */
+  @media (max-width: 960px) {
+    .como-trabaja-tabs .tabs-hint { margin-bottom: 14px; }
+    .como-trabaja-tabs .tabs-nav {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-bottom: 0;
+    }
+    .como-trabaja-tabs .tab {
+      padding: 20px 24px;
+      flex-direction: row;
+      align-items: center;
+      gap: 16px;
+    }
+    .como-trabaja-tabs .tab-num { display: none; }
+    .como-trabaja-tabs .tab-name { font-size: 26px; flex-shrink: 0; }
+    .como-trabaja-tabs .tab-claim { font-size: 13px; flex: 1; }
+    .como-trabaja-tabs .tab-status { display: none; }
+    .como-trabaja-tabs .tab:hover { transform: none; }
+    .como-trabaja-tabs .tab::after {
+      content: "+";
+      font-family: var(--mono);
+      font-size: 24px;
+      color: var(--brand-deep);
+      transition: transform .3s ease;
+    }
+    .como-trabaja-tabs .tab.active::after { transform: rotate(45deg); }
+
+    .como-trabaja-tabs .tabs-panels { display: contents; }
+    .como-trabaja-tabs .tab-panel { grid-column: 1 / -1; order: 99; margin-bottom: 10px; }
+    .como-trabaja-tabs .tab-panel.active { display: block; padding: 16px 0 8px; }
+    .como-trabaja-tabs .tab[data-tab="01"] { order: 1; }
+    .como-trabaja-tabs .tab-panel[data-panel="01"] { order: 2; }
+    .como-trabaja-tabs .tab[data-tab="02"] { order: 3; }
+    .como-trabaja-tabs .tab-panel[data-panel="02"] { order: 4; }
+    .como-trabaja-tabs .tab[data-tab="03"] { order: 5; }
+    .como-trabaja-tabs .tab-panel[data-panel="03"] { order: 6; }
+    .como-trabaja-tabs .tab[data-tab="04"] { order: 7; }
+    .como-trabaja-tabs .tab-panel[data-panel="04"] { order: 8; }
+    .como-trabaja-tabs .tabs-wrapper { display: flex; flex-direction: column; }
+
+    .como-trabaja-tabs .block-bento { grid-template-columns: 1fr; }
+    .como-trabaja-tabs .cell.demo { grid-column: 1; grid-row: auto; }
+    .como-trabaja-tabs .cell.big { grid-column: 1; grid-row: auto; }
+    .como-trabaja-tabs .cell.tall { grid-column: 1; grid-row: auto; }
+    .como-trabaja-tabs .extras-grid { grid-template-columns: 1fr; }
+    .como-trabaja-tabs .extras-head { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .como-trabaja-tabs .extras-desc { margin-left: 0; }
+  }
+  @media (max-width: 640px) {
+    section.como-trabaja-tabs { padding: 80px 0; }
+    .como-trabaja-tabs .tab-name { font-size: 22px; }
+  }
+
+  /* ============ LANGUAGE SWITCHER ============ */
+  .nav-lang {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-mute);
+    padding: 0 4px;
+    margin-right: 4px;
+  }
+  .nav-lang .lang-current {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .nav-lang .lang-sep {
+    color: var(--line);
+  }
+  .nav-lang a {
+    color: var(--ink-mute) !important;
+    text-decoration: none;
+    transition: color .15s;
+  }
+  .nav-lang a:hover {
+    color: var(--ink) !important;
+  }
+  .nav-mobile-lang {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    padding: 18px 0;
+    border-top: 0.5px solid var(--line-soft);
+    border-bottom: 0.5px solid var(--line-soft);
+    font-size: 14px;
+    margin: 16px 0;
+  }
+  .nav-mobile-lang .lang-current {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .nav-mobile-lang a {
+    color: var(--ink-mute);
+    text-decoration: none;
+  }
+  .nav-mobile-lang a:hover { color: var(--ink); }
+  @media (max-width: 960px) {
+    .nav-lang { display: none; }
+  }
+</style>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3HNWY32B0D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-3HNWY32B0D');
+</script>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="top">
+  <div class="nav-inner">
+    <div class="logo-mark">
+      <img src="/images/logo/logo-horizontal.svg" alt="empentIA" />
+      <span class="product-label"><span class="label-prefix">Atenció al client <span class="product-divider">·</span> </span><strong>emailIA</strong></span>
+    </div>
+    <div class="nav-links">
+      <a href="#com-treballa">Com treballa</a>
+      <a href="#casos">Casos</a>
+      <a href="#canals">Canals</a>
+      <a href="#preus">Preus</a>
+      <a href="#faqs">FAQs</a>
+      <div class="nav-lang" aria-label="Canviar idioma">
+        <a href="/agentes-ia-atencion-cliente/email/" hreflang="es" lang="es">ES</a>
+        <span class="lang-sep">·</span>
+        <span class="lang-current" aria-current="true">CA</span>
+      </div>
+      <a href="https://app.empentia.com/login" target="_blank" rel="noopener noreferrer" class="btn-cta">Accés clients →</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" onclick="toggleNav()" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ============ MOBILE MENU ============ -->
+<div class="nav-mobile" id="navMobile">
+  <div class="nav-mobile-inner">
+    <a href="#com-treballa" onclick="closeNav()">Com treballa</a>
+    <a href="#casos" onclick="closeNav()">Casos</a>
+    <a href="#canals" onclick="closeNav()">Canals</a>
+    <a href="#preus" onclick="closeNav()">Preus</a>
+    <a href="#faqs" onclick="closeNav()">FAQs</a>
+    <div class="nav-mobile-lang">
+      <a href="/agentes-ia-atencion-cliente/email/" hreflang="es" lang="es">Español →</a>
+      <span class="lang-current">CA</span>
+    </div>
+    <a href="https://app.empentia.com/login" target="_blank" rel="noopener noreferrer" class="nav-mobile-cta" onclick="closeNav()">Accés clients →</a>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <!-- Nodos decorativos flotantes (lenguaje del logo) -->
+  <div class="hero-nodes">
+    <svg style="top: 12%; left: 6%; width: 80px; height: 80px;" viewBox="0 0 80 80">
+      <circle cx="10" cy="40" r="5" stroke="#7bb8f0" stroke-width="2" fill="none"/>
+      <path d="M 15 40 Q 40 20, 70 40" stroke="#7bb8f0" stroke-width="2" fill="none"/>
+      <circle cx="70" cy="40" r="3" fill="#7bb8f0"/>
+    </svg>
+    <svg style="top: 70%; left: 3%; width: 100px; height: 60px;" viewBox="0 0 100 60">
+      <path d="M 5 30 Q 50 5, 95 30" stroke="#7bb8f0" stroke-width="2" fill="none" opacity="0.5"/>
+      <circle cx="5" cy="30" r="4" stroke="#7bb8f0" stroke-width="2" fill="none"/>
+      <circle cx="95" cy="30" r="3" fill="#7bb8f0"/>
+    </svg>
+    <svg style="top: 18%; right: 4%; width: 70px; height: 70px;" viewBox="0 0 70 70">
+      <circle cx="35" cy="10" r="4" stroke="#7bb8f0" stroke-width="2" fill="none"/>
+      <path d="M 35 14 Q 60 35, 35 60" stroke="#7bb8f0" stroke-width="2" fill="none"/>
+      <circle cx="35" cy="60" r="3" fill="#7bb8f0"/>
+    </svg>
+  </div>
+
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="badge-live">
+          <span class="pulse"></span>
+          <span>Processant emails en 20+ empreses</span>
+        </div>
+        <h1 class="display">
+          La teva bústia<br>
+          es respon <em>sola.</em><br>
+          Tu només <em>revises.</em>
+        </h1>
+        <p class="lede">
+          Llegeix cada email entrant, el classifica per departament, consulta el teu ERP o CRM
+          i prepara la resposta amb dades reals. Tu aproves amb un clic.
+        </p>
+        <div class="hero-ctas">
+          <a href="#" class="btn-primary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_email_hero'}}}); return false;">
+            Reserva una trucada gratuïta
+            <span class="arr">→</span>
+          </a>
+          <a href="#preus" class="btn-secondary">Veure plans i preus</a>
+        </div>
+        <div class="hero-metrics">
+          <div class="metric">
+            <div class="num">−70%</div>
+            <div class="lab">Temps a la bústia</div>
+          </div>
+          <div class="metric">
+            <div class="num">&lt;30s</div>
+            <div class="lab">Per email gestionat</div>
+          </div>
+          <div class="metric">
+            <div class="num">24/7</div>
+            <div class="lab">Classificació activa</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-mock">
+        <div class="browser">
+          <div class="browser-bar">
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            <div class="url-bar">inbox · empentIA</div>
+          </div>
+          <div class="browser-content" style="padding: 0;">
+            <div class="product-card" style="margin-bottom: 0; border-radius: 0; border-bottom: 0.5px solid var(--line-soft); display: grid; grid-template-columns: 36px 1fr auto auto; gap: 12px; align-items: center;">
+              <div class="product-img" style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #ddeeff, #7bb8f0);"></div>
+              <div>
+                <div class="product-name">Anna Pujol</div>
+                <div class="product-meta">Demano pressupost per 50 unitats…</div>
+              </div>
+              <div style="font-size: 10px; font-weight: 600; padding: 4px 9px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em; background: rgba(123,184,240,0.12); color: var(--brand-deep);">Vendes</div>
+              <div style="font-family: var(--mono); font-size: 11px; color: var(--ink-mute);">→ comercial</div>
+            </div>
+            <div class="product-card" style="margin-bottom: 0; border-radius: 0; border-bottom: 0.5px solid var(--line-soft); display: grid; grid-template-columns: 36px 1fr auto auto; gap: 12px; align-items: center;">
+              <div class="product-img" style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #e8e6df, #a8a49a);"></div>
+              <div>
+                <div class="product-name">Marc Soler</div>
+                <div class="product-meta">On és la meva comanda #4521?</div>
+              </div>
+              <div style="font-size: 10px; font-weight: 600; padding: 4px 9px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em; background: rgba(154,90,26,0.12); color: #9a5a1a;">Suport</div>
+              <div style="font-family: var(--mono); font-size: 11px; color: var(--ink-mute);">↳ esborrany</div>
+            </div>
+            <div class="product-card" style="margin-bottom: 0; border-radius: 0; border-bottom: 0.5px solid var(--line-soft); display: grid; grid-template-columns: 36px 1fr auto auto; gap: 12px; align-items: center;">
+              <div class="product-img" style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #ddeeff, #3a82cc);"></div>
+              <div>
+                <div class="product-name">Laura Vidal</div>
+                <div class="product-meta">Necessito la factura de març</div>
+              </div>
+              <div style="font-size: 10px; font-weight: 600; padding: 4px 9px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em; background: rgba(123,184,240,0.12); color: var(--brand-deep);">Facturació</div>
+              <div style="font-family: var(--mono); font-size: 11px; color: var(--ink-mute);">↳ auto-enviada</div>
+            </div>
+            <div class="product-card" style="margin-bottom: 0; border-radius: 0; display: grid; grid-template-columns: 36px 1fr auto auto; gap: 12px; align-items: center;">
+              <div class="product-img" style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #2a2a26, #0e0e0c);"></div>
+              <div>
+                <div class="product-name">Jordi Ferrer</div>
+                <div class="product-meta">Proposta col·laboració editorial</div>
+              </div>
+              <div style="font-size: 10px; font-weight: 600; padding: 4px 9px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em; background: rgba(14,14,12,0.08); color: var(--ink);">Direcció</div>
+              <div style="font-family: var(--mono); font-size: 11px; color: var(--ink-mute);">→ direcció</div>
+            </div>
+          </div>
+        </div>
+        <div class="chat-card">
+          <div class="chat-head">
+            <div class="avatar">e</div>
+            <div>
+              <div class="chat-name">Esborrany IA · Re: comanda #4521</div>
+              <div class="chat-status">● Llest per revisar</div>
+            </div>
+          </div>
+          <div class="msg bot" style="background: var(--bg-soft); color: var(--ink); border: 0.5px solid var(--line-soft);">
+            Hola Marc, la teva comanda <strong>#4521</strong> surt demà per missatgeria 24h. La rebràs divendres entre les 10h i les 14h. T'envio el codi de seguiment tan bon punt es generi.
+          </div>
+          <div class="typing" style="justify-content: flex-start; gap: 8px;">
+            <span style="background: var(--brand); width: 6px; height: 6px;"></span>
+            <span style="font-family: var(--mono); font-size: 10px; color: var(--ink-mute); animation: none;">Confiança 94% · generat en 1,2s</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<section class="marquee-section">
+  <div class="marquee-label">Ja confien en empentIA</div>
+  <div class="marquee">
+    <div class="marquee-track">
+      <div class="client-logo"><span class="client-node"></span> VB Sports Bike</div>
+      <div class="client-logo"><span class="client-node"></span> International Safety Center</div>
+      <div class="client-logo"><span class="client-node"></span> ACED Asesores</div>
+      <div class="client-logo"><span class="client-node"></span> Esports & Co</div>
+      <div class="client-logo"><span class="client-node"></span> Home·Tech</div>
+      <div class="client-logo"><span class="client-node"></span> La Botiga</div>
+      <div class="client-logo"><span class="client-node"></span> VB Sports Bike</div>
+      <div class="client-logo"><span class="client-node"></span> International Safety Center</div>
+      <div class="client-logo"><span class="client-node"></span> ACED Asesores</div>
+      <div class="client-logo"><span class="client-node"></span> Esports & Co</div>
+      <div class="client-logo"><span class="client-node"></span> Home·Tech</div>
+      <div class="client-logo"><span class="client-node"></span> La Botiga</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CÓMO TRABAJA — Sección unificada con tabs ============ -->
+<section class="como-trabaja-tabs" id="com-treballa">
+  <!-- Nodos decorativos del logo de fondo (heredados de Funcionalidades) -->
+  <svg class="features-bg-nodes" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice">
+    <circle cx="120" cy="120" r="6" stroke="#7bb8f0" stroke-width="2" fill="none"/>
+    <path d="M 120 120 Q 280 80, 380 200" stroke="#7bb8f0" stroke-width="1.5" fill="none"/>
+    <circle cx="380" cy="200" r="4" fill="#7bb8f0"/>
+    <circle cx="1320" cy="180" r="6" stroke="#7bb8f0" stroke-width="2" fill="none"/>
+    <path d="M 1320 180 Q 1200 280, 1100 240" stroke="#7bb8f0" stroke-width="1.5" fill="none"/>
+    <circle cx="1100" cy="240" r="4" fill="#7bb8f0"/>
+    <circle cx="80" cy="650" r="5" fill="#7bb8f0"/>
+    <path d="M 80 650 Q 200 700, 320 620" stroke="#7bb8f0" stroke-width="1.5" fill="none"/>
+    <circle cx="320" cy="620" r="4" stroke="#7bb8f0" stroke-width="2" fill="none"/>
+  </svg>
+
+  <div class="container">
+
+    <!-- HEAD UNIFICADO -->
+    <div class="ct-head">
+      <div class="eyebrow">Com treballa</div>
+      <h2 class="section-title">Llegeix, classifica, consulta<br>i <em>respon.</em></h2>
+      <p class="section-sub">
+        L'agent no és un filtre de spam ni una resposta automàtica. Replica el rol complet
+        d'una assistent experimentada — llegeix, entén, busca informació als teus sistemes
+        i prepara la resposta llesta per enviar.
+      </p>
+    </div>
+
+    <div class="tabs-wrapper">
+
+      <!-- HINT — invita a interactuar -->
+      <div class="tabs-hint">
+        <span>Clica cada acció per veure com ho fa</span>
+      </div>
+
+      <!-- TABS NAV -->
+      <div class="tabs-nav" role="tablist">
+        <button class="tab active" data-tab="01" role="tab" aria-selected="true">
+          <span class="tab-num">01</span>
+          <span class="tab-name"><em>Llegeix</em></span>
+          <span class="tab-claim">Entén cada email entrant.</span>
+          <span class="tab-status">
+            <span><span class="label-default">Veure detall</span><span class="label-active">Veient ara</span></span>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </button>
+        <button class="tab" data-tab="02" role="tab" aria-selected="false">
+          <span class="tab-num">02</span>
+          <span class="tab-name"><em>Classifica</em></span>
+          <span class="tab-claim">Cada email a la persona correcta.</span>
+          <span class="tab-status">
+            <span><span class="label-default">Veure detall</span><span class="label-active">Veient ara</span></span>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </button>
+        <button class="tab" data-tab="03" role="tab" aria-selected="false">
+          <span class="tab-num">03</span>
+          <span class="tab-name"><em>Consulta</em></span>
+          <span class="tab-claim">Busca dades reals als teus sistemes.</span>
+          <span class="tab-status">
+            <span><span class="label-default">Veure detall</span><span class="label-active">Veient ara</span></span>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </button>
+        <button class="tab" data-tab="04" role="tab" aria-selected="false">
+          <span class="tab-num">04</span>
+          <span class="tab-name"><em>Respon</em></span>
+          <span class="tab-claim">Esborrany llest o enviament automàtic.</span>
+          <span class="tab-status">
+            <span><span class="label-default">Veure detall</span><span class="label-active">Veient ara</span></span>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </button>
+      </div>
+
+      <!-- PANELS -->
+      <div class="tabs-panels">
+
+        <!-- PANEL 01 — LEE -->
+        <div class="tab-panel active" data-panel="01" role="tabpanel">
+          <div class="block-bento">
+
+            <div class="cell demo">
+              <div class="demo-tag">Email entrant</div>
+              <div class="demo-intro">Llegeix cada missatge com ho faria la teva assistent més atenta.</div>
+              <div class="demo-convo">
+                <div class="demo-msg user"><strong>De:</strong> anna@distri-pujol.com<br><strong>Assumpte:</strong> Comanda gran per a l'octubre</div>
+                <div class="demo-msg bot"><strong>Detectat:</strong> intenció de compra B2B · client recurrent · urgència mitjana</div>
+                <div class="demo-msg user"><strong>De:</strong> info@spam-oferta.es<br><strong>Assumpte:</strong> Última oportunitat -50%!</div>
+                <div class="demo-msg bot"><strong>Detectat:</strong> spam comercial · descartat · no compta per al teu pla</div>
+                <div class="demo-msg user"><strong>De:</strong> marc.soler@gmail.com<br><strong>Assumpte:</strong> La meva comanda encara no ha arribat</div>
+                <div class="demo-msg bot"><strong>Detectat:</strong> incidència postvenda · client identificat · comanda #4521</div>
+              </div>
+            </div>
+
+            <div class="cell big">
+              <h3>Entén el context, no només les paraules</h3>
+              <p>Analitza el remitent, l'assumpte, el cos, els adjunts i l'historial previ del client. Detecta intenció, urgència i sentiment — encara que l'email sigui ambigu o estigui mal escrit.</p>
+              <div class="search-vis">
+                <div class="search-result"><span class="pname">Intenció detectada</span><span class="pprice" style="font-family: var(--mono); font-size: 12px;">sol·licitar pressupost</span></div>
+                <div class="search-result"><span class="pname">Urgència</span><span class="pprice" style="font-family: var(--mono); font-size: 12px;">mitjana · respondre en 24h</span></div>
+                <div class="search-result"><span class="pname">Sentiment</span><span class="pprice" style="font-family: var(--mono); font-size: 12px;">positiu · interès real</span></div>
+                <div class="search-result"><span class="pname">Tipus de client</span><span class="pprice" style="font-family: var(--mono); font-size: 12px;">B2B · recurrent</span></div>
+                <div class="search-result"><span class="pname">Adjunts</span><span class="pprice" style="font-family: var(--mono); font-size: 12px;">1 PDF · comanda anterior</span></div>
+              </div>
+            </div>
+
+            <div class="cell tall">
+              <h3>Multiidioma automàtic</h3>
+              <p>Detecta l'idioma de l'email i el processa nativament. Respon després en el mateix idioma. +30 idiomes suportats.</p>
+              <div class="lang-grid">
+                <div class="flag" title="Espanyol"><svg viewBox="0 0 9 6" xmlns="http://www.w3.org/2000/svg"><rect width="9" height="6" fill="#AA151B"/><rect y="1.5" width="9" height="3" fill="#F1BF00"/></svg></div>
+                <div class="flag" title="Català"><svg viewBox="0 0 9 6" xmlns="http://www.w3.org/2000/svg"><rect width="9" height="6" fill="#FCDD09"/><rect y="0.667" width="9" height="0.667" fill="#DA121A"/><rect y="2.000" width="9" height="0.667" fill="#DA121A"/><rect y="3.333" width="9" height="0.667" fill="#DA121A"/><rect y="4.667" width="9" height="0.667" fill="#DA121A"/></svg></div>
+                <div class="flag" title="Euskera"><svg viewBox="0 0 28 14" xmlns="http://www.w3.org/2000/svg"><rect width="28" height="14" fill="#D52B1E"/><path d="M0 0 L28 14 M0 14 L28 0" stroke="#FFFFFF" stroke-width="2.4" fill="none"/><path d="M0 0 L28 14 M0 14 L28 0" stroke="#009B48" stroke-width="1.6" fill="none"/><path d="M14 0 V14 M0 7 H28" stroke="#FFFFFF" stroke-width="2.4" fill="none"/></svg></div>
+                <div class="flag" title="English"><svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg"><clipPath id="uk-clip-1"><path d="M0 0 v30 h60 v-30 z"/></clipPath><clipPath id="uk-half-1"><path d="M30 15 v15 h-30 z M0 0 v15 h30 z M30 15 h30 v-15 z M30 15 v15 h30 v-15 z" fill-rule="nonzero"/></clipPath><rect width="60" height="30" fill="#012169"/><g clip-path="url(#uk-clip-1)"><path d="M0 0 L60 30 M60 0 L0 30" stroke="#FFFFFF" stroke-width="6"/><g clip-path="url(#uk-half-1)"><path d="M0 0 L60 30 M60 0 L0 30" stroke="#C8102E" stroke-width="4"/></g></g><path d="M30 0 V30 M0 15 H60" stroke="#FFFFFF" stroke-width="10"/><path d="M30 0 V30 M0 15 H60" stroke="#C8102E" stroke-width="6"/></svg></div>
+                <div class="flag" title="Français"><svg viewBox="0 0 9 6" xmlns="http://www.w3.org/2000/svg"><rect width="3" height="6" fill="#0055A4"/><rect x="3" width="3" height="6" fill="#FFFFFF"/><rect x="6" width="3" height="6" fill="#EF4135"/></svg></div>
+                <div class="flag" title="Deutsch"><svg viewBox="0 0 5 3" xmlns="http://www.w3.org/2000/svg"><rect width="5" height="1" fill="#000000"/><rect y="1" width="5" height="1" fill="#DD0000"/><rect y="2" width="5" height="1" fill="#FFCE00"/></svg></div>
+                <div class="flag" title="Italiano"><svg viewBox="0 0 9 6" xmlns="http://www.w3.org/2000/svg"><rect width="3" height="6" fill="#009246"/><rect x="3" width="3" height="6" fill="#FFFFFF"/><rect x="6" width="3" height="6" fill="#CE2B37"/></svg></div>
+                <div class="flag" title="Português"><svg viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg"><rect width="60" height="40" fill="#FF0000"/><rect width="24" height="40" fill="#006600"/><circle cx="24" cy="20" r="6" fill="#FFCC00" stroke="#FFFFFF" stroke-width="0.6"/></svg></div>
+                <div class="flag" title="中文"><svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#DE2910"/><g fill="#FFDE00"><polygon points="6,3.5 6.7,5.6 8.9,5.6 7.1,6.9 7.8,9 6,7.7 4.2,9 4.9,6.9 3.1,5.6 5.3,5.6"/><polygon points="11.5,1.8 12,2.7 13,2.7 12.2,3.3 12.5,4.3 11.5,3.7 10.6,4.3 10.9,3.3 10.1,2.7 11.1,2.7"/><polygon points="13.6,4 13.9,5 14.9,5 14.1,5.6 14.4,6.5 13.6,5.9 12.8,6.5 13.1,5.6 12.3,5 13.3,5"/><polygon points="13.6,7.3 13.9,8.3 14.9,8.3 14.1,8.9 14.4,9.9 13.6,9.3 12.8,9.9 13.1,8.9 12.3,8.3 13.3,8.3"/><polygon points="11.5,9.5 12,10.4 13,10.4 12.2,11 12.5,12 11.5,11.4 10.6,12 10.9,11 10.1,10.4 11.1,10.4"/></g></svg></div>
+                <div class="flag" title="日本語"><svg viewBox="0 0 9 6" xmlns="http://www.w3.org/2000/svg"><rect width="9" height="6" fill="#FFFFFF"/><circle cx="4.5" cy="3" r="1.8" fill="#BC002D"/></svg></div>
+                <div class="flag more">+30</div>
+              </div>
+              <div style="margin-top: 18px; font-family: var(--mono); font-size: 11px; color: var(--brand); display: flex; align-items: center; gap: 8px;">
+                <span style="width:6px;height:6px;border-radius:50%;background:var(--brand);"></span>
+                Detectat: CA → respondrà en CA
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- PANEL 02 — CLASIFICA -->
+        <div class="tab-panel" data-panel="02" role="tabpanel">
+          <div class="block-bento">
+
+            <div class="cell demo">
+              <div class="demo-tag">Enrutament real</div>
+              <div class="demo-intro">Cada email a la persona correcta. Sense reenviar, sense perdre's.</div>
+              <div class="demo-convo">
+                <div class="demo-msg user"><strong>Email:</strong> Quin és el vostre horari d'atenció?<br><strong>De:</strong> client@gmail.com</div>
+                <div class="demo-msg bot"><strong>Pregunta habitual</strong> → resposta automàtica enviada<br><em>FAQ detectada · confiança 98%</em></div>
+                <div class="demo-msg user"><strong>Email:</strong> On és la meva comanda #4521?<br><strong>De:</strong> marc.soler@gmail.com</div>
+                <div class="demo-msg bot"><strong>Consulta comanda</strong> → suport@latevaempresa.com<br><em>Esborrany amb tracking preparat · en trànsit</em></div>
+                <div class="demo-msg user"><strong>Email:</strong> Fa 3 dies que espero i ningú em respon<br><strong>De:</strong> ana.vidal@hotmail.com</div>
+                <div class="demo-msg bot"><strong>Queixa · urgent</strong> → responsable@latevaempresa.com<br><em>Marcat prioritari · esborrany de disculpa llest</em></div>
+              </div>
+            </div>
+
+            <div class="cell big">
+              <h3>Regles d'enrutament que tu defineixes</h3>
+              <p>Decideixes qui rep què segons categoria, urgència, import, zona geogràfica o qualsevol criteri. L'agent segueix les teves regles i aprèn amb cada cas que el teu equip li corregeix.</p>
+              <div class="search-vis">
+                <div class="search-input">Email entrant: "pressupost 50 unitats Barcelona"</div>
+                <div class="search-result"><span class="pname">Categoria</span><span class="pprice" style="font-family: var(--mono); font-size: 12px;">Vendes B2B</span></div>
+                <div class="search-result"><span class="pname">Volum</span><span class="pprice" style="font-family: var(--mono); font-size: 12px;">&gt; 30 u.</span></div>
+                <div class="search-result"><span class="pname">Zona</span><span class="pprice" style="font-family: var(--mono); font-size: 12px;">Catalunya</span></div>
+                <div class="search-result"><span class="pname">→ Assignat a</span><span class="pprice" style="font-family: var(--mono); font-size: 12px;">marta@</span></div>
+              </div>
+              <div style="margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap;">
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.2);">preguntes habituals</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.2);">consultes de comandes</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.2);">queixes</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.2);">vendes</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(255,255,255,0.04); color: var(--dark-ink-soft); border: 0.5px solid rgba(255,255,255,0.06);">+ les que necessitis</span>
+              </div>
+            </div>
+
+            <div class="cell tall">
+              <h3>Categories a la teva mida</h3>
+              <p>No fem servir categories genèriques. Tu decideixes com organitzes la bústia — i l'agent aprèn la teva lògica de negoci.</p>
+              <div class="code-line" style="margin-top: 22px;">
+                <span class="com">// categories actives</span><br>
+                <span class="str">"preguntes_habituals"</span><br>
+                <span class="str">"consultes_comandes"</span><br>
+                <span class="str">"queixes_reclamacions"</span><br>
+                <span class="str">"sollicitud_factura"</span><br>
+                <span class="str">"vendes_b2b"</span><br>
+                <span class="str">"collaboracions"</span><br>
+                <br>
+                <span class="com">// + les que necessitis</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- PANEL 03 — CONSULTA -->
+        <div class="tab-panel" data-panel="03" role="tabpanel">
+          <div class="block-bento">
+
+            <div class="cell demo">
+              <div class="demo-tag">Consulta en temps real</div>
+              <div class="demo-intro">Abans de respondre, busca les dades reals als teus sistemes.</div>
+              <div class="demo-convo">
+                <div class="demo-msg user"><strong>Email:</strong> On és la meva comanda #4521?</div>
+                <div class="demo-msg bot">→ <strong>Consultant ERP</strong>... comanda #4521 localitzada</div>
+                <div class="demo-msg bot"><strong>Client:</strong> Marc Soler · compte verificat<br><strong>Estat:</strong> preparada, surt demà<br><strong>Tracking:</strong> pendent de generar</div>
+                <div class="demo-msg user"><strong>Email:</strong> Necessito la factura de març</div>
+                <div class="demo-msg bot">→ <strong>Consultant Holded</strong>... 1 factura trobada</div>
+                <div class="demo-msg bot"><strong>Factura:</strong> 2026-0341 · 1.847€<br><strong>Estat:</strong> pagada · març 2026<br><strong>PDF:</strong> generat i adjuntat</div>
+              </div>
+            </div>
+
+            <div class="cell big">
+              <h3>Connecta amb els teus sistemes via API</h3>
+              <p>Compatible amb els principals ERP, CRM i plataformes. Si el teu sistema té API o webhook, el podem connectar. Permisos mínims, només lectura per defecte.</p>
+              <div class="search-vis" style="margin-top: 22px;">
+                <div style="display: flex; align-items: center; gap: 12px; padding: 10px 4px; border-bottom: 0.5px solid rgba(255,255,255,0.06);">
+                  <div style="width: 36px; height: 36px; border-radius: 6px; background: linear-gradient(135deg, #7bb8f0, #3a82cc); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: var(--serif); color: #fff; font-size: 14px;">H</div>
+                  <div style="flex: 1;">
+                    <div style="font-size: 13px; color: var(--dark-ink);">Holded · Facturació</div>
+                    <div style="font-size: 11px; color: var(--dark-ink-soft);">Lectura · factures, clients</div>
+                  </div>
+                  <div style="font-family: var(--mono); font-size: 11px; color: var(--brand);">connectat</div>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 10px 4px; font-size: 12px;">
+                  <span style="color: var(--brand); display: flex; align-items: center; gap: 8px;">
+                    <span style="width:8px;height:8px;border-radius:50%;background:var(--brand);"></span>
+                    Consulta resolta · factura adjuntada
+                  </span>
+                  <span style="color: var(--dark-ink-soft); font-family: var(--mono);">en 0.8s</span>
+                </div>
+              </div>
+              <div style="margin-top: 18px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <span style="font-size: 11px; color: var(--dark-ink-soft); margin-right: 4px;">Compatible amb:</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(255,255,255,0.04); color: var(--dark-ink); border: 0.5px solid rgba(255,255,255,0.08); font-family: var(--mono);">Holded</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(255,255,255,0.04); color: var(--dark-ink); border: 0.5px solid rgba(255,255,255,0.08); font-family: var(--mono);">Odoo</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(255,255,255,0.04); color: var(--dark-ink); border: 0.5px solid rgba(255,255,255,0.08); font-family: var(--mono);">SAP B1</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(255,255,255,0.04); color: var(--dark-ink); border: 0.5px solid rgba(255,255,255,0.08); font-family: var(--mono);">HubSpot</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(255,255,255,0.04); color: var(--dark-ink); border: 0.5px solid rgba(255,255,255,0.08); font-family: var(--mono);">Pipedrive</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(255,255,255,0.04); color: var(--dark-ink); border: 0.5px solid rgba(255,255,255,0.08); font-family: var(--mono);">API REST</span>
+              </div>
+            </div>
+
+            <div class="cell tall">
+              <h3>Dades sempre fresques, mai inventades</h3>
+              <p>L'agent mai improvisa una resposta. Si no troba la dada, la marca per a revisió humana en lloc d'inventar.</p>
+              <div class="code-line" style="margin-top: 22px;">
+                <span class="com">// consulta executada</span><br>
+                GET /comandes/4521<br>
+                <br>
+                <span class="com">// resposta</span><br>
+                <span class="str">"estat: preparada"</span><br>
+                <span class="str">"sortida: 2026-05-20"</span><br>
+                <br>
+                <span class="com">// confiança</span><br>
+                <span class="str">94% · ok auto-enviar</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- PANEL 04 — RESPONDE -->
+        <div class="tab-panel" data-panel="04" role="tabpanel">
+          <div class="block-bento">
+
+            <div class="cell demo">
+              <div class="demo-tag">Esborrany generat</div>
+              <div class="demo-intro">Una resposta a un clic. Aproves, edites o regeneres.</div>
+              <div class="demo-convo">
+                <div class="demo-msg user"><strong>Per a:</strong> marc.soler@gmail.com<br><strong>Assumpte:</strong> Re: comanda #4521 — surt demà</div>
+                <div class="demo-msg bot">Hola Marc,<br><br>La teva comanda <strong>#4521</strong> ja està preparada i surt demà per missatgeria 24h. La rebràs <strong>divendres entre les 10h i les 14h</strong>.<br><br>T'envio el codi de seguiment tan bon punt es generi. Si necessites canviar l'adreça, respon-me a aquest email.<br><br>Salutacions,<br>Equip de suport</div>
+                <div class="demo-msg user" style="background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.25);">Aprovar i enviar · Editar · Regenerar · Reassignar</div>
+              </div>
+            </div>
+
+            <div class="cell big">
+              <h3>Esborrany o enviament automàtic, tu decideixes</h3>
+              <p>Per defecte, tot són esborranys que aproves amb un clic. Per a categories rutinàries (estat de comanda, horaris, factures), pots activar l'enviament automàtic quan la confiança supera un llindar.</p>
+              <div class="search-vis" style="margin-top: 22px;">
+                <div style="display: flex; align-items: center; gap: 10px; padding: 10px 4px; border-bottom: 0.5px solid rgba(255,255,255,0.06);">
+                  <div style="font-family: var(--mono); font-size: 11px; color: var(--brand);">✉</div>
+                  <div style="flex: 1; font-family: var(--mono); font-size: 11px; color: var(--dark-ink);">Re: comanda #4521 — surt demà</div>
+                  <div style="font-family: var(--serif); font-size: 14px; color: var(--brand);">94%</div>
+                </div>
+                <div style="padding: 10px 4px; font-size: 11px; color: var(--dark-ink-soft); display: flex; justify-content: space-between;">
+                  <span>→ marc.soler@gmail.com</span>
+                  <span style="color: var(--brand);">enviat · 1,2s</span>
+                </div>
+              </div>
+              <div style="margin-top: 18px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <span style="font-size: 11px; color: var(--dark-ink-soft); margin-right: 4px;">Llindars d'enviament automàtic:</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.2);">&gt; 90% confiança</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.2);">categoria aprovada</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.2);">dades verificades</span>
+              </div>
+            </div>
+
+            <div class="cell tall">
+              <h3>Mètriques en temps real</h3>
+              <p>Taxa d'aprovació, temps mitjà de resposta, distribució per categoria. Tot al teu panell.</p>
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 22px;">
+                <div style="background: rgba(0,0,0,0.25); border-radius: 10px; padding: 12px; border: 0.5px solid rgba(123,184,240,0.08);">
+                  <div style="font-family: var(--serif); font-size: 24px; color: var(--brand); line-height: 1;">487</div>
+                  <div style="font-size: 10px; color: var(--dark-ink-soft); margin-top: 6px;">Emails processats</div>
+                </div>
+                <div style="background: rgba(0,0,0,0.25); border-radius: 10px; padding: 12px; border: 0.5px solid rgba(123,184,240,0.08);">
+                  <div style="font-family: var(--serif); font-size: 24px; color: var(--dark-ink); line-height: 1;">92%</div>
+                  <div style="font-size: 10px; color: var(--dark-ink-soft); margin-top: 6px;">Aprovats sense editar</div>
+                </div>
+                <div style="background: rgba(0,0,0,0.25); border-radius: 10px; padding: 12px; border: 0.5px solid rgba(123,184,240,0.08);">
+                  <div style="font-family: var(--serif); font-size: 24px; color: var(--dark-ink); line-height: 1;">2h</div>
+                  <div style="font-size: 10px; color: var(--dark-ink-soft); margin-top: 6px;">Temps mitjà</div>
+                </div>
+              </div>
+              <div class="ana-mini" style="margin-top: 16px;">
+                <div class="bar" style="height: 30%"></div>
+                <div class="bar" style="height: 50%"></div>
+                <div class="bar" style="height: 40%"></div>
+                <div class="bar" style="height: 70%"></div>
+                <div class="bar" style="height: 55%"></div>
+                <div class="bar hi" style="height: 85%"></div>
+                <div class="bar hi" style="height: 95%"></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Y ADEMÁS — fila técnica que aplica a los 4 -->
+    <div class="ct-extras">
+      <div class="extras-head">
+        <span class="extras-num">+</span>
+        <span class="extras-name"><em>I a més</em></span>
+        <span class="extras-desc">Detalls tècnics que marquen la diferència.</span>
+      </div>
+      <div class="extras-grid">
+        <div class="cell">
+          <h3>Connexió en 5 minuts</h3>
+          <p>La manera més neta: configura una regla de reenviament a la teva bústia i ja està. Sense instal·lar res, sense permisos especials. També disponible via OAuth o IMAP si ho prefereixes.</p>
+          <div class="code-line">
+            <span class="com">// opcions de connexió</span><br>
+            <span class="str">Reenviament d'emails</span> <span class="com">← recomanat</span><br>
+            OAuth · IMAP
+          </div>
+        </div>
+        <div class="cell">
+          <h3>Aprèn de les teves correccions</h3>
+          <p>Cada vegada que el teu equip edita un esborrany, l'agent aprèn. La precisió millora setmana rere setmana.</p>
+          <div style="display: flex; gap: 8px; margin-top: 18px; flex-wrap: wrap;">
+            <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(123,184,240,0.12); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.25);">Setmana 1 · 78%</span>
+            <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(123,184,240,0.12); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.25);">Setmana 4 · 89%</span>
+            <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(123,184,240,0.18); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.35);">Setmana 12 · 96%</span>
+          </div>
+        </div>
+        <div class="cell">
+          <h3>RGPD · servidors UE</h3>
+          <p>Xifrat en trànsit i en repòs. Els teus emails no es fan servir per entrenar models generals.</p>
+          <div style="display: flex; gap: 6px; margin-top: 18px; flex-wrap: wrap;">
+            <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(123,184,240,0.12); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.25);">RGPD</span>
+            <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(123,184,240,0.12); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.25);">AES-256</span>
+            <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(123,184,240,0.12); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.25);">UE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (function() {
+      const tabs = document.querySelectorAll('.como-trabaja-tabs .tab');
+      const panels = document.querySelectorAll('.como-trabaja-tabs .tab-panel');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const target = tab.dataset.tab;
+          const isMobile = window.matchMedia('(max-width: 960px)').matches;
+          const wasActive = tab.classList.contains('active');
+          tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+          panels.forEach(p => p.classList.remove('active'));
+          if (!isMobile || !wasActive) {
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
+            const panel = document.querySelector('.como-trabaja-tabs .tab-panel[data-panel="' + target + '"]');
+            if (panel) panel.classList.add('active');
+          }
+        });
+      });
+    })();
+  </script>
+
+</section>
+
+
+<!-- ============ CASOS DE ÉXITO ============ -->
+<section class="cases" id="casos">
+  <div class="container">
+    <div class="cases-head">
+      <div class="eyebrow">Casos reals</div>
+      <h2 class="section-title">Negocis com el teu<br><em>ja l'utilitzen.</em></h2>
+    </div>
+
+    <div class="cases-grid">
+      <div class="case-card">
+        <div class="case-metric">
+          <div class="big">−70%</div>
+          <div class="lab">Temps de l'equip dedicat a emails de SAC</div>
+        </div>
+        <p class="case-quote">
+          "Al Black Friday vam rebre 800 emails en tres dies. L'agent els va classificar, va respondre els de seguiment de comanda i va preparar els esborranys de la resta. No vam col·lapsar."
+        </p>
+        <div class="case-author">
+          <div class="case-avatar">M</div>
+          <div>
+            <div class="case-name">Marta Puig</div>
+            <div>Maison Ritual · Cosmètica online</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-card featured">
+        <div class="case-metric">
+          <div class="big">4,8×</div>
+          <div class="lab">Més ràpids responent sol·licituds de pressupost</div>
+        </div>
+        <p class="case-quote">
+          "Cada sol·licitud arriba al comercial correcte amb les dades del client ja extretes i el primer esborrany llest. Responem abans que ningú i això es nota en el tancament."
+        </p>
+        <div class="case-author">
+          <div class="case-avatar">C</div>
+          <div>
+            <div class="case-name">Carles Vendrell</div>
+            <div>Vendrell Distribuïdors · Subministrament industrial B2B</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-metric">
+          <div class="big">91%</div>
+          <div class="lab">Sol·licituds administratives sense intervenció humana</div>
+        </div>
+        <p class="case-quote">
+          "Duplicats de factura, certificats, estats de compte… tot això ja no arriba a la nostra bústia. L'agent ho gestiona i nosaltres només toquem el que requereix criteri."
+        </p>
+        <div class="case-author">
+          <div class="case-avatar">C</div>
+          <div>
+            <div class="case-name">Cristina Folch</div>
+            <div>Folch & Partners · Assessoria fiscal i comptable</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRECIOS ============ -->
+<section class="pricing" id="preus">
+  <div class="container">
+    <div class="pricing-head">
+      <div class="eyebrow">Plans</div>
+      <h2 class="section-title">Transparent des del<br><em>primer dia.</em></h2>
+      <p class="section-sub" style="color: var(--ink-soft);">
+        Tots els plans inclouen configuració, entrenament i suport.
+        Sense permanència, sense lletra petita.
+      </p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="plan">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">59€</div>
+        <div class="plan-period">/mes · sense IVA</div>
+        <ul class="plan-features">
+          <li>100 emails/mes</li>
+          <li>1 bústia connectada</li>
+          <li>5 categories personalitzades</li>
+          <li>Lectura d'adjunts · 50/mes</li>
+          <li>Esborranys IA</li>
+          <li>Respostes en 2 idiomes</li>
+          <li>Suport per ticket</li>
+        </ul>
+        <a href="#" class="plan-btn" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_email_pricing_starter'}}}); return false;">Contractar Starter</a>
+      </div>
+
+      <div class="plan popular">
+        <div class="ribbon">Més popular</div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">115€</div>
+        <div class="plan-period">/mes · sense IVA</div>
+        <ul class="plan-features">
+          <li>250 emails/mes</li>
+          <li>3 bústies connectades</li>
+          <li>10 categories + regles avançades</li>
+          <li>Lectura d'adjunts · 100/mes</li>
+          <li>1 connexió API/BBDD</li>
+          <li>Respostes automàtiques per a FAQs</li>
+          <li>Respostes en 3 idiomes</li>
+          <li>Implementació assistida</li>
+        </ul>
+        <a href="#" class="plan-btn" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_email_pricing_pro'}}}); return false;">Contractar Pro</a>
+      </div>
+
+      <div class="plan">
+        <div class="plan-name">Business</div>
+        <div class="plan-price">260€</div>
+        <div class="plan-period">/mes · sense IVA</div>
+        <ul class="plan-features">
+          <li>650 emails/mes</li>
+          <li>5 bústies connectades</li>
+          <li>Categories i regles il·limitades</li>
+          <li>Lectura d'adjunts · 250/mes</li>
+          <li>3 connexions API/BBDD</li>
+          <li>Respostes automàtiques per categoria</li>
+          <li>Respostes en 5 idiomes</li>
+          <li>Implementació dedicada</li>
+        </ul>
+        <a href="#" class="plan-btn" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_email_pricing_business'}}}); return false;">Contractar Business</a>
+      </div>
+
+      <div class="plan">
+        <div class="plan-name">Personalitzat</div>
+        <div class="plan-price" style="font-size: 32px; padding-top: 18px;">A mida</div>
+        <div class="plan-period">Parlem</div>
+        <ul class="plan-features">
+          <li>Volum a mida</li>
+          <li>Bústies il·limitades</li>
+          <li>Integracions específiques</li>
+          <li>SSO / SAML · rols granulars</li>
+          <li>SLA i suport dedicat</li>
+          <li>Facturació personalitzada</li>
+        </ul>
+        <a href="#" class="plan-btn" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_email_pricing_custom'}}}); return false;">Parlem</a>
+      </div>
+    </div>
+
+    <div class="pricing-foot">
+      <span>Sense permanència</span>
+      <span>Cancel·lació immediata</span>
+      <span>Operatiu en 5 dies</span>
+      <span>RGPD · servidors UE</span>
+    </div>
+
+    <!-- ============ SERVICIOS PROFESIONALES (acompañamiento) ============ -->
+    <div class="pro-services">
+      <div class="pro-services-head">
+        <div class="pro-services-eyebrow">Acompanyament</div>
+        <h3 class="pro-services-title">Ho configures tu o<br><em>t'acompanyem?</em></h3>
+        <p class="pro-services-sub">
+          Qualsevol pla es pot activar de manera autònoma o amb el nostre equip.
+          I quan ja estigui en marxa, t'ajudem a optimitzar-lo.
+        </p>
+      </div>
+
+      <!-- PASO 1: DIY vs Premium -->
+      <div class="onboarding-choice">
+        <!-- DIY -->
+        <div class="choice-card">
+          <div class="choice-tag">Inclòs a tots els plans</div>
+          <h4 class="choice-name">Ho configures <em>tu mateix</em></h4>
+          <p class="choice-desc">
+            Et donem les eines i la documentació per connectar el teu correu,
+            crear les teves categories i regles, i començar a funcionar el mateix dia.
+          </p>
+          <ul class="choice-features">
+            <li>Panell intuïtiu amb tutorials pas a pas</li>
+            <li>Documentació completa i vídeos guia</li>
+            <li>Reenviament d'emails o connexió OAuth en minuts</li>
+            <li>Plantilles de categories i regles per sector</li>
+            <li>Suport per ticket inclòs</li>
+          </ul>
+          <div class="choice-price">
+            <div>
+              <div class="choice-price-amount free">Sense cost</div>
+              <div class="choice-price-note">Inclòs amb el teu pla</div>
+            </div>
+          </div>
+          <a href="#" class="choice-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_email_onboarding_self'}}}); return false;">Començar jo mateix</a>
+        </div>
+
+        <!-- Divisor -->
+        <div class="choice-divider">
+          <span>o</span>
+        </div>
+
+        <!-- Premium -->
+        <div class="choice-card premium">
+          <div class="choice-tag">Pagament únic</div>
+          <h4 class="choice-name">Ho fem <em>nosaltres</em></h4>
+          <p class="choice-desc">
+            Analitzem els teus emails dels últims 30 dies, definim amb tu les
+            categories i regles, connectem els teus sistemes i entrenem l'agent
+            amb el to de la teva marca. Llest i afinat en 5 dies.
+          </p>
+          <ul class="choice-features">
+            <li>Anàlisi d'emails històrics (2h)</li>
+            <li>Definició de categories i regles d'enrutament</li>
+            <li>Connexió al teu ERP/CRM i entrenament del to</li>
+            <li>Sessió de formació per al teu equip (1h)</li>
+            <li>Suport prioritari els primers 30 dies</li>
+          </ul>
+          <div class="choice-price">
+            <div>
+              <div class="choice-price-amount">390€<span style="font-size:14px;vertical-align:super;color:var(--ink-mute);font-weight:400;">*</span></div>
+              <div class="choice-price-note">Pagament únic · sense IVA · *segons projecte</div>
+            </div>
+          </div>
+          <a href="#" class="choice-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_email_onboarding_assisted'}}}); return false;">Reservar onboarding</a>
+        </div>
+      </div>
+
+      <!-- PASO 2: Tras 30 días, optimización -->
+      <div class="next-step">
+        <div class="next-step-tag">Després de 30 dies</div>
+        <div class="next-step-content">
+          <h4>I si el <em>portem al següent nivell?</em></h4>
+          <p>
+            Quan el teu agent porta un mes en marxa, analitzem quins patrons es repeteixen
+            i descobrim oportunitats que se t'escapen: temes que generen més fricció,
+            categories mal assignades, processos automatitzables al 100%.
+          </p>
+        </div>
+        <div class="next-step-price">
+          <div class="next-step-price-amount">149€</div>
+          <div class="next-step-price-note">/trimestre · sense IVA</div>
+        </div>
+        <a href="#" class="choice-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_email_informe'}}}); return false;">Activar informe</a>
+      </div>
+    </div>
+
+    <!-- ============ TABLA COMPARATIVA ============ -->
+    <div class="compare-wrap" data-open="false">
+      <div class="compare-toggle">
+        <button onclick="this.closest('.compare-wrap').dataset.open = this.closest('.compare-wrap').dataset.open === 'true' ? 'false' : 'true'">
+          <span>Veure comparació completa</span>
+          <span class="chev">▾</span>
+        </button>
+      </div>
+
+      <div class="compare-content">
+        <!-- DESKTOP: tabla -->
+        <div class="compare-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Tria el teu pla</th>
+                <th>
+                  <div class="plan-h">Starter</div>
+                  <div class="plan-h-price">59€</div>
+                  <div class="plan-h-period">/mes · sense IVA</div>
+                </th>
+                <th class="featured">
+                  <div class="plan-h">Pro</div>
+                  <div class="plan-h-price">115€</div>
+                  <div class="plan-h-period">/mes · sense IVA</div>
+                </th>
+                <th>
+                  <div class="plan-h">Business</div>
+                  <div class="plan-h-price">260€</div>
+                  <div class="plan-h-period">/mes · sense IVA</div>
+                </th>
+                <th>
+                  <div class="plan-h">Personalitzat</div>
+                  <div class="plan-h-price" style="font-size: 16px; padding-top: 6px;">A mida</div>
+                  <div class="plan-h-period">Parlem</div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Volum -->
+              <tr class="section-row"><td colspan="5">Volum</td></tr>
+              <tr><td>Emails inclosos/mes</td><td>100</td><td class="featured">250</td><td>650</td><td><span class="check-y">✓</span></td></tr>
+              <tr><td>Cost per email addicional</td><td>0,60€</td><td class="featured">0,50€</td><td>0,42€</td><td><span class="check-y">✓</span></td></tr>
+              <tr><td>Bústies connectades</td><td>1</td><td class="featured">3</td><td>5</td><td><span class="check-y">✓</span></td></tr>
+
+              <!-- Classificació i enrutament -->
+              <tr class="section-row"><td colspan="5">Classificació i enrutament</td></tr>
+              <tr><td>Categories personalitzades</td><td>5</td><td class="featured">10</td><td>Il·limitades</td><td><span class="check-y">✓</span></td></tr>
+              <tr><td>Lectura d'adjunts/mes</td><td>50</td><td class="featured">100</td><td>250</td><td><span class="check-y">✓</span></td></tr>
+              <tr><td>Regles d'enrutament</td><td>Bàsiques</td><td class="featured">Avançades</td><td>+ condicionals</td><td><span class="check-y">✓</span></td></tr>
+              <tr><td>Detecció d'urgència</td><td><span class="check-n">—</span></td><td class="featured"><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td></tr>
+
+              <!-- Generació de respostes -->
+              <tr class="section-row"><td colspan="5">Generació de respostes</td></tr>
+              <tr><td>Esborranys IA</td><td><span class="check-y">✓</span></td><td class="featured"><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td></tr>
+              <tr><td>Respostes automàtiques</td><td><span class="check-n">—</span></td><td class="featured">Per a FAQs</td><td>Per categoria</td><td><span class="check-y">✓</span></td></tr>
+              <tr><td>Connexions a API/BBDD</td><td><span class="check-n">—</span></td><td class="featured">1 connexió</td><td>3 connexions</td><td><span class="check-y">✓</span></td></tr>
+              <tr><td>Respostes en idiomes</td><td>2</td><td class="featured">3</td><td>5</td><td><span class="check-y">✓</span></td></tr>
+
+              <!-- Equip i panell -->
+              <tr class="section-row"><td colspan="5">Equip i panell</td></tr>
+              <tr><td>Usuaris del panell</td><td>1</td><td class="featured">3</td><td>8</td><td><span class="check-y">✓</span></td></tr>
+              <tr><td>Rols i permisos</td><td>Bàsics</td><td class="featured">Estàndard</td><td>Per departament</td><td><span class="check-y">✓</span></td></tr>
+              <tr><td>Mètriques i analytics</td><td>Bàsiques</td><td class="featured">Completes</td><td>+ exportació</td><td><span class="check-y">✓</span></td></tr>
+
+              <!-- Suport -->
+              <tr class="section-row"><td colspan="5">Suport</td></tr>
+              <tr><td>Onboarding</td><td>Documentació</td><td class="featured">Assistit</td><td>Dedicat</td><td><span class="check-y">✓</span></td></tr>
+              <tr><td>SLA resposta suport</td><td>Ticket</td><td class="featured">Prioritari</td><td>Dedicat</td><td><span class="check-y">✓</span></td></tr>
+
+              <!-- CTA row -->
+              <tr class="cta-row">
+                <td></td>
+                <td><a href="#" class="compare-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_email_compare_starter'}}}); return false;">Contractar Starter</a></td>
+                <td class="featured"><a href="#" class="compare-cta featured-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_email_compare_pro'}}}); return false;">Contractar Pro</a></td>
+                <td><a href="#" class="compare-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_email_compare_business'}}}); return false;">Contractar Business</a></td>
+                <td><a href="#" class="compare-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_email_compare_custom'}}}); return false;">Parlem</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- MOBILE: chips + paneles -->
+        <div class="compare-mobile">
+          <div class="compare-mobile-chips">
+            <button class="chip" data-pane="starter" data-active="false" onclick="selectPane(this)">Starter · 59€</button>
+            <button class="chip" data-pane="pro" data-active="true" data-popular="true" onclick="selectPane(this)">Pro · 115€</button>
+            <button class="chip" data-pane="business" data-active="false" onclick="selectPane(this)">Business · 260€</button>
+            <button class="chip" data-pane="custom" data-active="false" onclick="selectPane(this)">A mida</button>
+          </div>
+
+          <!-- STARTER -->
+          <div class="compare-pane" data-pane="starter" data-active="false">
+            <div class="pane-head">
+              <div class="pane-name">Starter</div>
+              <div class="pane-price">59€</div>
+              <div class="pane-period">/mes · sense IVA</div>
+            </div>
+            <div class="pane-section">
+              <div class="pane-section-title">Volum</div>
+              <div class="pane-row"><span class="feat">Emails/mes</span><span class="val">100</span></div>
+              <div class="pane-row"><span class="feat">Email addicional</span><span class="val">0,60€</span></div>
+              <div class="pane-row"><span class="feat">Bústies connectades</span><span class="val">1</span></div>
+            </div>
+            <div class="pane-section">
+              <div class="pane-section-title">Classificació</div>
+              <div class="pane-row"><span class="feat">Categories</span><span class="val">5</span></div>
+              <div class="pane-row"><span class="feat">Lectura adjunts</span><span class="val">50/mes</span></div>
+              <div class="pane-row"><span class="feat">Regles enrutament</span><span class="val">Bàsiques</span></div>
+              <div class="pane-row"><span class="feat">Detecció urgència</span><span class="val no">—</span></div>
+            </div>
+            <div class="pane-section">
+              <div class="pane-section-title">Respostes</div>
+              <div class="pane-row"><span class="feat">Esborranys IA</span><span class="val">✓</span></div>
+              <div class="pane-row"><span class="feat">Respostes automàtiques</span><span class="val no">—</span></div>
+              <div class="pane-row"><span class="feat">Connexions API/BBDD</span><span class="val no">—</span></div>
+              <div class="pane-row"><span class="feat">Respostes en idiomes</span><span class="val">2</span></div>
+            </div>
+            <div class="pane-section">
+              <div class="pane-section-title">Equip</div>
+              <div class="pane-row"><span class="feat">Usuaris</span><span class="val">1</span></div>
+              <div class="pane-row"><span class="feat">Mètriques</span><span class="val">Bàsiques</span></div>
+            </div>
+            <div class="pane-section">
+              <div class="pane-section-title">Suport</div>
+              <div class="pane-row"><span class="feat">Onboarding</span><span class="val">Documentació</span></div>
+              <div class="pane-row"><span class="feat">Suport</span><span class="val">Ticket</span></div>
+            </div>
+            <a href="#" class="plan-btn" style="display: block; margin-top: 24px; text-align: center;" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_email_pricing_starter'}}}); return false;">Contractar Starter</a>
+          </div>
+
+          <!-- PRO -->
+          <div class="compare-pane" data-pane="pro" data-active="true">
+            <div class="pane-head">
+              <div class="pane-name">Pro <span style="font-size: 11px; padding: 4px 10px; border-radius: 100px; background: var(--brand); color: white; margin-left: 8px;">Més popular</span></div>
+              <div class="pane-price">115€</div>
+              <div class="pane-period">/mes · sense IVA</div>
+            </div>
+            <div class="pane-section">
+              <div class="pane-section-title">Volum</div>
+              <div class="pane-row"><span class="feat">Emails/mes</span><span class="val">250</span></div>
+              <div class="pane-row"><span class="feat">Email addicional</span><span class="val">0,50€</span></div>
+              <div class="pane-row"><span class="feat">Bústies connectades</span><span class="val">3</span></div>
+            </div>
+            <div class="pane-section">
+              <div class="pane-section-title">Classificació</div>
+              <div class="pane-row"><span class="feat">Categories</span><span class="val">10</span></div>
+              <div class="pane-row"><span class="feat">Lectura adjunts</span><span class="val">100/mes</span></div>
+              <div class="pane-row"><span class="feat">Regles enrutament</span><span class="val">Avançades</span></div>
+              <div class="pane-row"><span class="feat">Detecció urgència</span><span class="val">✓</span></div>
+            </div>
+            <div class="pane-section">
+              <div class="pane-section-title">Respostes</div>
+              <div class="pane-row"><span class="feat">Esborranys IA</span><span class="val">✓</span></div>
+              <div class="pane-row"><span class="feat">Respostes automàtiques</span><span class="val">Per a FAQs</span></div>
+              <div class="pane-row"><span class="feat">Connexions API/BBDD</span><span class="val">1 connexió</span></div>
+              <div class="pane-row"><span class="feat">Respostes en idiomes</span><span class="val">3</span></div>
+            </div>
+            <div class="pane-section">
+              <div class="pane-section-title">Equip</div>
+              <div class="pane-row"><span class="feat">Usuaris</span><span class="val">3</span></div>
+              <div class="pane-row"><span class="feat">Mètriques</span><span class="val">Completes</span></div>
+            </div>
+            <div class="pane-section">
+              <div class="pane-section-title">Suport</div>
+              <div class="pane-row"><span class="feat">Onboarding</span><span class="val">Assistit</span></div>
+              <div class="pane-row"><span class="feat">Suport</span><span class="val">Prioritari</span></div>
+            </div>
+            <a href="#" class="plan-btn" style="display: block; margin-top: 24px; text-align: center;" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_email_pricing_pro'}}}); return false;">Contractar Pro</a>
+          </div>
+
+          <!-- BUSINESS -->
+          <div class="compare-pane" data-pane="business" data-active="false">
+            <div class="pane-head">
+              <div class="pane-name">Business</div>
+              <div class="pane-price">260€</div>
+              <div class="pane-period">/mes · sense IVA</div>
+            </div>
+            <div class="pane-section">
+              <div class="pane-section-title">Volum</div>
+              <div class="pane-row"><span class="feat">Emails/mes</span><span class="val">650</span></div>
+              <div class="pane-row"><span class="feat">Email addicional</span><span class="val">0,42€</span></div>
+              <div class="pane-row"><span class="feat">Bústies connectades</span><span class="val">5</span></div>
+            </div>
+            <div class="pane-section">
+              <div class="pane-section-title">Classificació</div>
+              <div class="pane-row"><span class="feat">Categories</span><span class="val">Il·limitades</span></div>
+              <div class="pane-row"><span class="feat">Lectura adjunts</span><span class="val">250/mes</span></div>
+              <div class="pane-row"><span class="feat">Regles enrutament</span><span class="val">+ condicionals</span></div>
+              <div class="pane-row"><span class="feat">Detecció urgència</span><span class="val">✓</span></div>
+            </div>
+            <div class="pane-section">
+              <div class="pane-section-title">Respostes</div>
+              <div class="pane-row"><span class="feat">Esborranys IA</span><span class="val">✓</span></div>
+              <div class="pane-row"><span class="feat">Respostes automàtiques</span><span class="val">Per categoria</span></div>
+              <div class="pane-row"><span class="feat">Connexions API/BBDD</span><span class="val">3 connexions</span></div>
+              <div class="pane-row"><span class="feat">Respostes en idiomes</span><span class="val">5</span></div>
+            </div>
+            <div class="pane-section">
+              <div class="pane-section-title">Equip</div>
+              <div class="pane-row"><span class="feat">Usuaris</span><span class="val">8</span></div>
+              <div class="pane-row"><span class="feat">Mètriques</span><span class="val">+ exportació</span></div>
+            </div>
+            <div class="pane-section">
+              <div class="pane-section-title">Suport</div>
+              <div class="pane-row"><span class="feat">Onboarding</span><span class="val">Dedicat</span></div>
+              <div class="pane-row"><span class="feat">Suport</span><span class="val">Dedicat</span></div>
+            </div>
+            <a href="#" class="plan-btn" style="display: block; margin-top: 24px; text-align: center;" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_email_pricing_business'}}}); return false;">Contractar Business</a>
+          </div>
+
+          <!-- CUSTOM -->
+          <div class="compare-pane" data-pane="custom" data-active="false">
+            <div class="pane-head">
+              <div class="pane-name">Personalitzat</div>
+              <div class="pane-price" style="font-size: 28px;">A mida</div>
+              <div class="pane-period">Parlem</div>
+            </div>
+            <div class="pane-section">
+              <div class="pane-section-title">Volum</div>
+              <div class="pane-row"><span class="feat">Emails/mes</span><span class="val">✓</span></div>
+              <div class="pane-row"><span class="feat">Bústies connectades</span><span class="val">✓</span></div>
+              <div class="pane-row"><span class="feat">Lectura adjunts</span><span class="val">✓</span></div>
+            </div>
+            <div class="pane-section">
+              <div class="pane-section-title">Classificació</div>
+              <div class="pane-row"><span class="feat">Categories</span><span class="val">✓</span></div>
+              <div class="pane-row"><span class="feat">Regles enrutament</span><span class="val">✓</span></div>
+              <div class="pane-row"><span class="feat">Detecció urgència</span><span class="val">✓</span></div>
+            </div>
+            <div class="pane-section">
+              <div class="pane-section-title">Respostes</div>
+              <div class="pane-row"><span class="feat">Esborranys IA</span><span class="val">✓</span></div>
+              <div class="pane-row"><span class="feat">Respostes automàtiques</span><span class="val">✓</span></div>
+              <div class="pane-row"><span class="feat">Connexions API/BBDD</span><span class="val">✓</span></div>
+              <div class="pane-row"><span class="feat">Respostes en idiomes</span><span class="val">✓</span></div>
+            </div>
+            <div class="pane-section">
+              <div class="pane-section-title">Equip</div>
+              <div class="pane-row"><span class="feat">Usuaris</span><span class="val">✓</span></div>
+              <div class="pane-row"><span class="feat">Rols i permisos</span><span class="val">✓</span></div>
+              <div class="pane-row"><span class="feat">Mètriques</span><span class="val">✓</span></div>
+            </div>
+            <div class="pane-section">
+              <div class="pane-section-title">Suport</div>
+              <div class="pane-row"><span class="feat">Onboarding</span><span class="val">✓</span></div>
+              <div class="pane-row"><span class="feat">SLA</span><span class="val">✓</span></div>
+            </div>
+            <p style="font-size: 13.5px; color: var(--ink-soft); line-height: 1.55; margin-top: 16px;">
+              Dissenyem un pla a mida segons el volum i els sistemes de la teva empresa. Parlem.
+            </p>
+            <a href="#" class="plan-btn" style="display: block; margin-top: 24px; text-align: center;" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_email_pricing_custom'}}}); return false;">Parlem</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MÁS CANALES (próximamente) ============ -->
+<section class="channels" id="canals">
+  <!-- Nodos decorativos del logo -->
+  <svg class="channels-bg-nodes" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice">
+    <circle cx="120" cy="80" r="5" stroke="#7bb8f0" stroke-width="2" fill="none"/>
+    <path d="M 120 80 Q 240 50, 320 130" stroke="#7bb8f0" stroke-width="1.5" fill="none"/>
+    <circle cx="320" cy="130" r="3" fill="#7bb8f0"/>
+    <circle cx="1340" cy="450" r="5" stroke="#7bb8f0" stroke-width="2" fill="none"/>
+    <path d="M 1340 450 Q 1240 380, 1140 420" stroke="#7bb8f0" stroke-width="1.5" fill="none"/>
+    <circle cx="1140" cy="420" r="3" fill="#7bb8f0"/>
+  </svg>
+
+  <div class="container">
+    <div class="channels-top">
+      <div class="channels-head">
+        <div>
+          <div class="eyebrow">Atenció IA 360</div>
+          <h2 class="section-title">Un agent,<br><em>tots els canals.</em></h2>
+        </div>
+        <p>
+          L'email és només un dels canals. Tenim un Webchat IA ja en producció
+          i estem preparant agents per a WhatsApp, trucades i ressenyes. Cada canal
+          amb la seva subscripció, tots compartint el mateix coneixement del teu negoci.
+        </p>
+      </div>
+
+    <!-- Visualización 360: agente al centro, canales orbitando -->
+    <div class="channels-360" aria-hidden="true">
+      <div class="orbit-stage">
+        <!-- Líneas conectoras desde el centro -->
+        <svg class="orbit-lines" viewBox="0 0 560 320" preserveAspectRatio="none">
+          <!-- desde centro (280, 160) hacia cada nodo -->
+          <line x1="280" y1="160" x2="80" y2="160" stroke="rgba(123,184,240,0.45)" stroke-width="1.2" stroke-dasharray="3 4"/>
+          <line x1="280" y1="160" x2="200" y2="40" stroke="rgba(123,184,240,0.3)" stroke-width="1" stroke-dasharray="3 4"/>
+          <line x1="280" y1="160" x2="360" y2="40" stroke="rgba(123,184,240,0.3)" stroke-width="1" stroke-dasharray="3 4"/>
+          <line x1="280" y1="160" x2="480" y2="160" stroke="rgba(123,184,240,0.3)" stroke-width="1" stroke-dasharray="3 4"/>
+          <line x1="280" y1="160" x2="280" y2="280" stroke="rgba(123,184,240,0.3)" stroke-width="1" stroke-dasharray="3 4"/>
+        </svg>
+
+        <!-- Anillos -->
+        <div class="orbit-ring r1"></div>
+
+        <!-- Centro: Conocimiento del negocio -->
+        <div class="orbit-center">
+          <div class="orbit-center-inner">
+            <strong>360°</strong>
+            El teu negoci
+          </div>
+        </div>
+
+        <!-- WEBCHAT (izquierda) -->
+        <div class="orbit-node" style="left: 14.28%; top: 50%;" title="Webchat">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span class="label">Webchat</span>
+        </div>
+
+        <!-- WHATSAPP -->
+        <div class="orbit-node" style="left: 35.71%; top: 12.5%;" title="WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg>
+          <span class="label">WhatsApp</span>
+        </div>
+
+        <!-- EMAIL (activo) -->
+        <div class="orbit-node active" style="left: 64.28%; top: 12.5%;" title="Email">
+          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          <span class="label">Email</span>
+        </div>
+
+        <!-- VOZ -->
+        <div class="orbit-node" style="left: 85.71%; top: 50%;" title="Veu">
+          <svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><path d="M12 18v4"/><path d="M8 22h8"/></svg>
+          <span class="label">Veu</span>
+        </div>
+
+        <!-- RESEÑAS (centrado abajo) -->
+        <div class="orbit-node" style="left: 50%; top: 87.5%;" title="Ressenyes">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9 12 2"/></svg>
+          <span class="label">Ressenyes</span>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="channels-grid">
+      <!-- Webchat -->
+      <div class="channel-card" style="--brand-soft: #d4f5e9; --brand-deep: #008159; --brand-darker: #005a3e;">
+        <div class="channel-icon-wrap">
+          <div class="channel-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+        </div>
+        <h3 class="channel-name">Agent Webchat</h3>
+        <p class="channel-desc">
+          El teu millor comercial 24/7 a la web. Respon, assessora amb criteri,
+          busca al teu estoc i tanca la compra dins del xat.
+        </p>
+        <ul class="channel-features">
+          <li>Compatible amb WooCommerce, PrestaShop, Shopify</li>
+          <li>Pressupostos automàtics per email</li>
+          <li>Captació de leads qualificats</li>
+        </ul>
+        <div class="channel-price">Des de 49€</div>
+        <div class="channel-period">/mes · sense IVA</div>
+        <a href="/ca/agentes-ia-atencion-cliente/webchat/" class="channel-cta">
+          Veure Webchat <span class="arr">→</span>
+        </a>
+      </div>
+
+      <!-- WhatsApp -->
+      <div class="channel-card">
+        <div class="channel-icon-wrap">
+          <div class="channel-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg>
+          </div>
+          <span class="channel-soon">Pròximament</span>
+        </div>
+        <h3 class="channel-name">Agent WhatsApp</h3>
+        <p class="channel-desc">
+          Atén els teus clients per WhatsApp Business 24h.
+          Respon, gestiona comandes i reserva cites al canal que ja fan servir.
+        </p>
+        <ul class="channel-features">
+          <li>API oficial de WhatsApp Business</li>
+          <li>Estat de comandes en temps real</li>
+          <li>Mateix coneixement que el teu webchat</li>
+        </ul>
+        <div class="channel-price">Des de 59€</div>
+        <div class="channel-period">/mes · sense IVA</div>
+        <a href="mailto:hola@empentia.ai?subject=Aviseu-me quan WhatsApp estigui llest" class="channel-cta">
+          Aviseu-me <span class="arr">→</span>
+        </a>
+      </div>
+
+      <!-- Voz -->
+      <div class="channel-card">
+        <div class="channel-icon-wrap">
+          <div class="channel-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><path d="M12 18v4"/><path d="M8 22h8"/></svg>
+          </div>
+          <span class="channel-soon">Pròximament</span>
+        </div>
+        <h3 class="channel-name">Agent de veu · Trucades</h3>
+        <p class="channel-desc">
+          Rep trucades telefòniques amb veu natural. Resol consultes,
+          gestiona cites i transfereix quan cal.
+        </p>
+        <ul class="channel-features">
+          <li>Veus naturals en CA, ES, EN</li>
+          <li>Reserva de cites integrada</li>
+          <li>Transcripció i resum automàtic</li>
+        </ul>
+        <div class="channel-price">Des de 79€</div>
+        <div class="channel-period">/mes · sense IVA</div>
+        <a href="mailto:hola@empentia.ai?subject=Aviseu-me quan Trucades estigui llest" class="channel-cta">
+          Aviseu-me <span class="arr">→</span>
+        </a>
+      </div>
+
+      <!-- Reseñas -->
+      <div class="channel-card">
+        <div class="channel-icon-wrap">
+          <div class="channel-icon">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9 12 2"/></svg>
+          </div>
+          <span class="channel-soon">Pròximament</span>
+        </div>
+        <h3 class="channel-name">Agent de Ressenyes</h3>
+        <p class="channel-desc">
+          Detecta i respon ressenyes de Google i Trustpilot amb respostes
+          personalitzades, coherents amb la teva marca, sense que hagis de fer res.
+        </p>
+        <ul class="channel-features">
+          <li>Google Business i Trustpilot</li>
+          <li>Alertes de ressenyes negatives</li>
+          <li>Anàlisi de sentiment</li>
+        </ul>
+        <div class="channel-price">Des de 29€</div>
+        <div class="channel-period">/mes · sense IVA</div>
+        <a href="mailto:hola@empentia.ai?subject=Aviseu-me quan Ressenyes estigui llest" class="channel-cta">
+          Aviseu-me <span class="arr">→</span>
+        </a>
+      </div>
+    </div>
+
+    <p class="channels-foot">
+      <em>Un sol coneixement, tots els canals.</em> Configura l'agent una vegada i atén tots els canals que el teu negoci necessiti.
+    </p>
+  </div>
+</section>
+
+<!-- ============ FAQs ============ -->
+<section class="faqs" id="faqs">
+  <!-- Nodos decorativos del logo -->
+  <svg class="faqs-bg-nodes" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice">
+    <circle cx="100" cy="120" r="5" stroke="#7bb8f0" stroke-width="2" fill="none"/>
+    <path d="M 100 120 Q 250 80, 320 200" stroke="#7bb8f0" stroke-width="1.5" fill="none"/>
+    <circle cx="320" cy="200" r="3" fill="#7bb8f0"/>
+    <circle cx="1340" cy="650" r="5" stroke="#7bb8f0" stroke-width="2" fill="none"/>
+    <path d="M 1340 650 Q 1240 580, 1140 620" stroke="#7bb8f0" stroke-width="1.5" fill="none"/>
+    <circle cx="1140" cy="620" r="3" fill="#7bb8f0"/>
+  </svg>
+
+  <div class="container">
+    <div class="faqs-grid">
+      <!-- Cabecera izquierda (sticky) -->
+      <div class="faqs-head">
+        <div class="eyebrow">Preguntes freqüents</div>
+        <h2>El que <em>vols saber</em><br>abans de començar.</h2>
+        <p>
+          Els dubtes més habituals que ens arriben, respostos amb honestedat.
+          Si el teu no hi és, escriu-nos.
+        </p>
+
+      </div>
+
+      <!-- Lista de FAQs -->
+      <div class="faqs-list">
+
+        <!-- Categoría: Setup e implementación -->
+        <div class="faq-category">
+          <div class="faq-cat-label">01 · Setup i implementació</div>
+
+          <div class="faq-item" data-open="true" onclick="toggleFaq(this)">
+            <button class="faq-question" type="button" aria-expanded="true">
+              <span>Quant triga a estar operatiu?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>Entre <strong>3 i 5 dies laborables</strong>. Connectem el teu correu (OAuth o IMAP), analitzem amb tu els emails dels últims 30 dies per definir categories i regles, entrenem l'agent amb el to de la teva marca i fem una setmana de seguiment ajustant la precisió.</p>
+                <p>Si tries l'<strong>Onboarding Premium</strong>, a més connectem el teu ERP/CRM i formem el teu equip.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Com es connecta al meu correu?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>L'opció més senzilla és el <strong>reenviament d'emails</strong>: configures una regla a la teva bústia per reenviar els emails entrants a una adreça empentIA. Sense instal·lar res, sense permisos especials, sense tocar el teu proveïdor.</p>
+                <p>També disponible via <strong>OAuth</strong> (Gmail, Microsoft 365) o <strong>IMAP</strong>. El teu equip continua rebent i responent des dels seus clients habituals.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Es pot connectar al meu ERP o CRM?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>Sí. Tenim integracions natives amb <strong>HubSpot, Pipedrive, Holded, Odoo, SAP Business One</strong> i d'altres. Si el teu sistema té API REST o webhook, el podem connectar.</p>
+                <p>Sempre amb permisos mínims i, per defecte, només lectura per construir les respostes amb dades reals.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categoría: Producto -->
+        <div class="faq-category">
+          <div class="faq-cat-label">02 · Producte i funcionament</div>
+
+          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>L'agent envia emails sense que jo els vegi?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>Només si tu ho actives. <strong>Per defecte, tot són esborranys</strong> que el teu equip revisa amb un clic abans d'enviar.</p>
+                <p>Per a categories rutinàries (estat de comanda, horaris, sol·licitud de factura...) pots activar l'<strong>enviament automàtic</strong> quan la confiança de l'agent supera un llindar que tu decideixes. Control humà total.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Com es compten els emails?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>Un email = un <strong>fil de conversa entrant</strong> processat per la IA al mes. Si un client envia 3 missatges dins del mateix fil, compta com 1.</p>
+                <p>El spam i els emails no-reply detectats automàticament es descarten i <strong>no compten</strong> per al teu pla.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Atén en català, espanyol i anglès?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>Sí, i en <strong>+30 idiomes més</strong>. L'agent detecta automàticament l'idioma de cada email i respon en la mateixa llengua, sense que hagis de configurar res.</p>
+                <p>Cada pla té un nombre d'idiomes <em>actius</em> entrenats amb el teu to: Starter 2, Pro 5, Business il·limitats.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Aprèn de les correccions del meu equip?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>Sí. Cada vegada que el teu equip edita un esborrany abans d'enviar-lo, l'agent registra què va canviar i per què. La precisió millora setmana rere setmana, especialment les primeres 4-6 setmanes.</p>
+                <p>De mitjana, la taxa d'esborranys aprovats sense editar passa del 75% inicial al 90%+ als 3 mesos.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categoría: Precios y permanencia -->
+        <div class="faq-category">
+          <div class="faq-cat-label">03 · Preus i permanència</div>
+
+          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Què passa si supero els emails del meu pla?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>T'avisem al <strong>80%</strong> i al <strong>100%</strong> del consum des del panell. Pots pujar de pla o pagar només els emails extres al preu del teu pla: <strong>0,60€</strong> a Starter, <strong>0,50€</strong> a Pro, <strong>0,42€</strong> a Business.</p>
+                <p>Mai et tallem el servei sense avisar.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Puc cancel·lar quan vulgui?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>Sí, sense permanència i sense penalització. Cancel·les des del teu panell i es fa efectiu al final del període facturat. Sense trucades, sense formularis, sense retenció.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Puc canviar de pla més endavant?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>Sí, en qualsevol moment. Pujar de pla s'aplica a l'instant (amb prorrateig automàtic). Baixar de pla s'aplica a l'inici del següent cicle de facturació.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categoría: Seguridad y datos -->
+        <div class="faq-category">
+          <div class="faq-cat-label">04 · Dades i seguretat</div>
+
+          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Els meus emails són segurs?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>Totalment. Complim el <strong>RGPD</strong>, les dades s'emmagatzemen en <strong>servidors a la UE</strong> (Frankfurt i Irlanda), xifrades en trànsit (TLS) i en repòs (AES-256).</p>
+                <p>Els teus emails <strong>no es fan servir</strong> per entrenar models generals: l'agent aprèn només del teu negoci. Pots exportar, esborrar o auditar les teves dades en qualsevol moment.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="cta-final" id="cta-final">
+  <div class="container">
+    <div class="cta-final-inner">
+      <div class="cta-final-eyebrow">Comença avui</div>
+      <h2 class="cta-final-title">
+        La teva bústia, <em>sota control en 5 dies.</em>
+      </h2>
+      <p class="cta-final-sub">
+        Connectem el teu correu i el provem sense compromís.<br>
+        Si vols parlar primer, reserva una trucada de 15 min.
+      </p>
+      <div class="cta-final-actions">
+        <a href="#" class="cta-final-primary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_email_cta_bottom'}}}); return false;">
+          Activar el meu agent IA d'email
+          <span class="cta-final-arrow" aria-hidden="true">→</span>
+        </a>
+        <a href="#" class="cta-final-secondary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_email_cta_bottom_secondary'}}}); return false;">Reservar trucada de 15 min</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+
+    <!-- Bloque marca + descripción -->
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="/images/logo/logo-horizontal.svg" alt="empentIA" />
+      </div>
+      <p class="footer-tagline">
+        Agent IA que llegeix, classifica i respon els teus emails. Connecta amb el teu ERP/CRM i prepara esborranys amb dades reals. La teva bústia, sota control.
+      </p>
+      <div class="footer-social" aria-label="Xarxes socials i contacte">
+        <a href="mailto:hola@empentia.com" aria-label="Enviar email a hola@empentia.com" class="footer-social-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/>
+          </svg>
+          <span class="visually-hidden">Email</span>
+        </a>
+        <a href="https://www.linkedin.com/company/empentia" target="_blank" rel="noopener noreferrer" aria-label="empentIA en LinkedIn" class="footer-social-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+          </svg>
+          <span class="visually-hidden">LinkedIn</span>
+        </a>
+        <a href="https://www.instagram.com/empent_ia/" target="_blank" rel="noopener noreferrer" aria-label="empentIA en Instagram" class="footer-social-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63a5.9 5.9 0 0 0-2.13 1.38A5.9 5.9 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.8.73 1.48 1.38 2.13a5.9 5.9 0 0 0 2.13 1.38c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.9 5.9 0 0 0 2.13-1.38 5.9 5.9 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.86.63C19.1.33 18.22.13 16.95.07 15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zm0 10.16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/>
+          </svg>
+          <span class="visually-hidden">Instagram</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Navegación: Producto -->
+    <nav class="footer-col" aria-label="Producte">
+      <h3 class="footer-heading">Producte</h3>
+      <ul class="footer-list">
+        <li><a href="#com-treballa">Com treballa</a></li>
+        <li><a href="#canals">Canals</a></li>
+        <li><a href="#preus">Preus</a></li>
+      </ul>
+    </nav>
+
+    <!-- Navegación: Recursos -->
+    <nav class="footer-col" aria-label="Recursos">
+      <h3 class="footer-heading">Recursos</h3>
+      <ul class="footer-list">
+        <li><a href="#casos">Casos d'ús</a></li>
+        <li><a href="#faqs">Preguntes freqüents</a></li>
+        <li><a href="#cta-final">Reservar demo</a></li>
+      </ul>
+    </nav>
+
+    <!-- Navegación: Empresa + redes -->
+    <div class="footer-col">
+      <h3 class="footer-heading">Empresa</h3>
+      <ul class="footer-list">
+        <li><a href="mailto:hola@empentia.com">Contacte</a></li>
+        <li><a href="https://empentia.com/privacy" aria-label="Política de privacitat">Privacitat</a></li>
+        <li><a href="https://empentia.com/legal" aria-label="Avís legal">Avís legal</a></li>
+        <li><a href="#" data-cookie-open aria-label="Gestionar galetes">Gestionar galetes</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Línea inferior -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <p class="footer-copy">
+        © <span id="footer-year">2025</span> empentIA. Tots els drets reservats.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- Schema.org Organization + Service + WebPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://empentia.com/#org",
+      "name": "empentIA",
+      "url": "https://empentia.com",
+      "logo": "https://empentia.com/images/logo/logo-horizontal.svg",
+      "description": "Agents d'intel·ligència artificial per a atenció al client: webchat, WhatsApp, email, trucades i ressenyes.",
+      "email": "hola@empentia.com",
+      "sameAs": [
+        "https://www.linkedin.com/company/empentia",
+        "https://www.instagram.com/empent_ia/"
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://empentia.com/ca/agentes-ia-atencion-cliente/email/#service",
+      "name": "Agent IA d'email empentIA",
+      "serviceType": "Agent IA per a gestió, classificació i resposta d'emails",
+      "description": "Agent d'intel·ligència artificial que llegeix, classifica i deriva els emails entrants, consulta dades al teu ERP/CRM i prepara esborranys de resposta llestos per revisar o envia respostes automàtiques controlades. Operatiu en 5 dies.",
+      "provider": { "@id": "https://empentia.com/#org" },
+      "areaServed": { "@type": "Country", "name": "Espanya" },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Pla Starter",
+          "price": "59",
+          "priceCurrency": "EUR",
+          "url": "https://empentia.com/ca/agentes-ia-atencion-cliente/email/#preus"
+        },
+        {
+          "@type": "Offer",
+          "name": "Pla Pro",
+          "price": "115",
+          "priceCurrency": "EUR",
+          "url": "https://empentia.com/ca/agentes-ia-atencion-cliente/email/#preus"
+        },
+        {
+          "@type": "Offer",
+          "name": "Pla Business",
+          "price": "260",
+          "priceCurrency": "EUR",
+          "url": "https://empentia.com/ca/agentes-ia-atencion-cliente/email/#preus"
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://empentia.com/ca/agentes-ia-atencion-cliente/email/#webpage",
+      "url": "https://empentia.com/ca/agentes-ia-atencion-cliente/email/",
+      "name": "Agent IA per a gestió d'emails | empentIA",
+      "description": "Agent IA que llegeix, classifica i respon els teus emails. Connecta amb el teu ERP/CRM i prepara esborranys amb dades reals. Operatiu en 5 dies. RGPD.",
+      "inLanguage": "ca-ES",
+      "isPartOf": { "@id": "https://empentia.com/#org" },
+      "primaryImageOfPage": "https://empentia.com/images/social/og-email.jpg",
+      "about": { "@id": "https://empentia.com/ca/agentes-ia-atencion-cliente/email/#service" }
+    }
+  ]
+}
+</script>
+
+<!-- Cookie consent banner (compartit amb empentia.com) -->
+<script src="/agentes-ia-atencion-cliente/email/cookie-consent.js" defer></script>
+
+<!-- Cal.eu — reserva de trucada comercial -->
+<script type="text/javascript">
+(function (C, A, L) {
+  let p = function (a, ar) { a.q.push(ar); };
+  let d = C.document;
+  C.Cal = C.Cal || function () {
+    let cal = C.Cal; let ar = arguments;
+    if (!cal.loaded) {
+      cal.ns = {}; cal.q = cal.q || [];
+      d.head.appendChild(d.createElement("script")).src = A;
+      cal.loaded = true;
+    }
+    if (ar[0] === L) {
+      const api = function () { p(api, arguments); };
+      const namespace = ar[1];
+      api.q = api.q || [];
+      typeof namespace === "string" ? (cal.ns[namespace] = api) && p(api, ar) : p(cal, ar);
+      return;
+    }
+    p(cal, ar);
+  };
+})(window, "https://app.cal.eu/embed/embed.js", "init");
+
+Cal("init", "descobriment", { origin: "https://app.cal.eu" });
+Cal.ns["descobriment"]("ui", { hideEventTypeDetails: false });
+</script>
+
+</body>
+<script>
+  function selectPane(btn) {
+    const wrap = btn.closest('.compare-mobile');
+    wrap.querySelectorAll('.chip').forEach(c => c.dataset.active = 'false');
+    btn.dataset.active = 'true';
+    const target = btn.dataset.pane;
+    wrap.querySelectorAll('.compare-pane').forEach(p => {
+      p.dataset.active = (p.dataset.pane === target) ? 'true' : 'false';
+    });
+  }
+
+  function toggleFaq(item) {
+    const isOpen = item.dataset.open === 'true';
+    // Cerrar todas las demás del mismo .faqs-list
+    const list = item.closest('.faqs-list');
+    if (list) {
+      list.querySelectorAll('.faq-item').forEach(f => {
+        f.dataset.open = 'false';
+        const btn = f.querySelector('.faq-question');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // Abrir esta si estaba cerrada
+    if (!isOpen) {
+      item.dataset.open = 'true';
+      const btn = item.querySelector('.faq-question');
+      if (btn) btn.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  // Año dinámico en footer
+  (function() {
+    var y = document.getElementById('footer-year');
+    if (y) y.textContent = new Date().getFullYear();
+  })();
+
+  function toggleNav() {
+    var btn = document.getElementById('navToggle');
+    var menu = document.getElementById('navMobile');
+    btn.classList.toggle('open');
+    menu.classList.toggle('open');
+    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+  }
+  function closeNav() {
+    document.getElementById('navToggle').classList.remove('open');
+    document.getElementById('navMobile').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+</script>
+</html>
