@@ -1654,9 +1654,9 @@
     font-size: 9px;
     padding: 4px 10px;
     border-radius: 100px;
-    background: rgba(0,195,137,0.1);
+    background: var(--brand-soft);
     color: var(--brand-deep);
-    border: 0.5px solid rgba(0,195,137,0.25);
+    border: 0.5px solid var(--brand-soft);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     font-weight: 500;
@@ -4013,7 +4013,7 @@
 
     <div class="channels-grid">
       <!-- WhatsApp -->
-      <div class="channel-card">
+      <div class="channel-card" style="--brand-soft: #eef7cc; --brand-deep: #7aaa10; --brand-darker: #527510;">
         <div class="channel-icon-wrap">
           <div class="channel-icon">
             <svg viewBox="0 0 24 24"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg>
@@ -4038,32 +4038,31 @@
       </div>
 
       <!-- Email -->
-      <div class="channel-card">
+      <div class="channel-card" style="--brand-soft: #ddeeff; --brand-deep: #3a82cc; --brand-darker: #1a5a99;">
         <div class="channel-icon-wrap">
           <div class="channel-icon">
             <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
           </div>
-          <span class="channel-soon">Properament</span>
         </div>
         <h3 class="channel-name">Agent Email</h3>
         <p class="channel-desc">
-          Clasifica, prioriza i respon tiquets d'email automàticament.
-          La teva safata de suport, sota control sense saturar l'equip.
+          Classifica consultes, comandes i queixes. Enruta a qui correspon
+          i prepara esborranys a punt per revisar o envia automàticament.
         </p>
         <ul class="channel-features">
-          <li>Compatible amb Gmail, Outlook i Zendesk</li>
-          <li>Classificació + respostes automàtiques</li>
-          <li>Escalat intel·ligent amb context</li>
+          <li>Reenviament d'emails o connexió OAuth/IMAP</li>
+          <li>Lectura d'adjunts inclosa</li>
+          <li>Respostes automàtiques per a preguntes habituals</li>
         </ul>
-        <div class="channel-price">Des de 39€</div>
+        <div class="channel-price">Des de 59€</div>
         <div class="channel-period">/mes · sense IVA</div>
-        <a href="mailto:hola@empentia.ai?subject=Aviseu-me quan Email estigui llest" class="channel-cta">
-          Aviseu-me <span class="arr">→</span>
+        <a href="/ca/agentes-ia-atencion-cliente/email/" class="channel-cta">
+          Veure Email <span class="arr">→</span>
         </a>
       </div>
 
       <!-- Voz -->
-      <div class="channel-card">
+      <div class="channel-card" style="--brand-soft: #fde8e0; --brand-deep: #c0522a; --brand-darker: #8a3419;">
         <div class="channel-icon-wrap">
           <div class="channel-icon">
             <svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><path d="M12 18v4"/><path d="M8 22h8"/></svg>
@@ -4087,8 +4086,8 @@
         </a>
       </div>
 
-      <!-- Reseñas -->
-      <div class="channel-card">
+      <!-- Ressenyes -->
+      <div class="channel-card" style="--brand-soft: #fdf4dc; --brand-deep: #c08a1e; --brand-darker: #8a6010;">
         <div class="channel-icon-wrap">
           <div class="channel-icon">
             <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9 12 2"/></svg>
