@@ -3235,12 +3235,12 @@
               <div class="demo-tag">Enrutamiento real</div>
               <div class="demo-intro">Cada email a la persona correcta. Sin reenviar, sin perderse.</div>
               <div class="demo-convo">
-                <div class="demo-msg user"><strong>Email:</strong> Pido presupuesto 50 unidades<br><strong>De:</strong> anna@distri-pujol.com</div>
-                <div class="demo-msg bot"><strong>Ventas B2B</strong> → comercial.norte@tuempresa.com<br><em>Marta atiende cuentas &gt;30 uds en zona norte</em></div>
-                <div class="demo-msg user"><strong>Email:</strong> Mi pedido no ha llegado<br><strong>De:</strong> marc.soler@gmail.com</div>
-                <div class="demo-msg bot"><strong>Soporte post-venta</strong> → soporte@tuempresa.com<br><em>Borrador preparado · pedido #4521 localizado</em></div>
-                <div class="demo-msg user"><strong>Email:</strong> Propuesta colaboración<br><strong>De:</strong> jordi@editorial-x.cat</div>
-                <div class="demo-msg bot"><strong>Dirección</strong> → director@tuempresa.com<br><em>Marcado como "revisar personalmente"</em></div>
+                <div class="demo-msg user"><strong>Email:</strong> ¿Cuál es vuestro horario de atención?<br><strong>De:</strong> cliente@gmail.com</div>
+                <div class="demo-msg bot"><strong>Pregunta habitual</strong> → respuesta automática enviada<br><em>FAQ detectada · confianza 98%</em></div>
+                <div class="demo-msg user"><strong>Email:</strong> ¿Dónde está mi pedido #4521?<br><strong>De:</strong> marc.soler@gmail.com</div>
+                <div class="demo-msg bot"><strong>Consulta pedido</strong> → soporte@tuempresa.com<br><em>Borrador con tracking preparado · en tránsito</em></div>
+                <div class="demo-msg user"><strong>Email:</strong> Llevo 3 días esperando y nadie me responde<br><strong>De:</strong> ana.vidal@hotmail.com</div>
+                <div class="demo-msg bot"><strong>Queja · urgente</strong> → responsable@tuempresa.com<br><em>Marcado prioritario · borrador de disculpa listo</em></div>
               </div>
             </div>
 
@@ -3255,11 +3255,11 @@
                 <div class="search-result"><span class="pname">→ Asignado a</span><span class="pprice" style="font-family: var(--mono); font-size: 12px;">marta@</span></div>
               </div>
               <div style="margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap;">
-                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.2);">por categoría</span>
-                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.2);">por urgencia</span>
-                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.2);">por zona</span>
-                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.2);">por cliente</span>
-                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(255,255,255,0.04); color: var(--dark-ink-soft); border: 0.5px solid rgba(255,255,255,0.06);">+ reglas custom</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.2);">preguntas habituales</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.2);">consultas pedidos</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.2);">quejas</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.2);">ventas</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(255,255,255,0.04); color: var(--dark-ink-soft); border: 0.5px solid rgba(255,255,255,0.06);">+ las que necesites</span>
               </div>
             </div>
 
@@ -3268,12 +3268,12 @@
               <p>No usamos categorías genéricas. Tú decides cómo organizas la bandeja — y el agente aprende tu lógica de negocio.</p>
               <div class="code-line" style="margin-top: 22px;">
                 <span class="com">// categorías activas</span><br>
+                <span class="str">"preguntas_habituales"</span><br>
+                <span class="str">"consultas_pedidos"</span><br>
+                <span class="str">"quejas_reclamaciones"</span><br>
+                <span class="str">"solicitud_factura"</span><br>
                 <span class="str">"ventas_b2b"</span><br>
-                <span class="str">"ventas_particular"</span><br>
-                <span class="str">"soporte_post_venta"</span><br>
-                <span class="str">"facturación"</span><br>
-                <span class="str">"rrhh_cv"</span><br>
-                <span class="str">"prensa_colaboraciones"</span><br>
+                <span class="str">"colaboraciones"</span><br>
                 <br>
                 <span class="com">// + las que necesites</span>
               </div>
