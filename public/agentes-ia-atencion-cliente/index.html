@@ -4,44 +4,52 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agentes IA de Atención al Cliente | empentIA</title>
-<meta name="description" content="Agentes de inteligencia artificial que atienden a tus clientes por webchat, WhatsApp, email, teléfono y reseñas. 24 horas. Sin ampliar equipo.">
-<meta name="keywords" content="agentes IA, atención al cliente, webchat IA, IA conversacional, automatización atención cliente, chatbot eCommerce">
+<meta name="description" content="Agentes de inteligencia artificial que atienden a tus clientes por webchat, email, WhatsApp, teléfono y reseñas. 24 horas. Sin ampliar equipo.">
+<meta name="keywords" content="agentes IA, atención al cliente, webchat IA, atención al cliente por email con IA, IA conversacional, automatización atención cliente, chatbot eCommerce">
 <meta name="author" content="empentIA">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="googlebot" content="index, follow">
 
 <link rel="canonical" href="https://empentia.com/agentes-ia-atencion-cliente/">
+<link rel="alternate" hreflang="es" href="https://empentia.com/agentes-ia-atencion-cliente/">
+<link rel="alternate" hreflang="ca" href="https://empentia.com/ca/agentes-ia-atencion-cliente/">
+<link rel="alternate" hreflang="x-default" href="https://empentia.com/agentes-ia-atencion-cliente/">
 
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="empentIA">
 <meta property="og:locale" content="es_ES">
-<meta property="og:url" content="https://empentia.com/agentes-ia-atencion-cliente/">
 <meta property="og:title" content="Agentes IA de Atención al Cliente | empentIA">
-<meta property="og:description" content="Agentes IA que responden 24h por webchat, WhatsApp, email, teléfono y reseñas. Sin ampliar equipo.">
+<meta property="og:description" content="Agentes IA que responden 24h por webchat, email, WhatsApp, teléfono y reseñas. Sin ampliar equipo.">
+<meta property="og:url" content="https://empentia.com/agentes-ia-atencion-cliente/">
 <meta property="og:image" content="https://empentia.com/images/social/og-atencion-cliente.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:site_name" content="empentIA">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Agentes IA de Atención al Cliente | empentIA">
-<meta name="twitter:description" content="Agentes IA que responden 24h por webchat, WhatsApp, email, teléfono y reseñas.">
+<meta name="twitter:description" content="Agentes IA que responden 24h por webchat, email, WhatsApp, teléfono y reseñas.">
 <meta name="twitter:image" content="https://empentia.com/images/social/og-atencion-cliente.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
 :root {
   --bg: #fafaf7;
   --bg-alt: #f4f3ee;
   --bg-card: #ffffff;
-  --ink: #1a1a1a;
+  --ink: #15140f;
   --ink-soft: #4a4a4a;
   --ink-mute: #8a8a85;
   --line: #e8e6df;
   --line-soft: #efede6;
-  --accent: #1a1a1a;
+  --accent: #15140f;
+  --accent-hover: #2a2a2a;
   --positive: #2d5a3d;
+  --positive-soft: rgba(45, 90, 61, 0.08);
+  --dark: #16150f;
+  --dark-soft: #211f17;
   --max: 1240px;
 }
 
@@ -56,13 +64,17 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 .serif { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
+.mono { font-family: 'JetBrains Mono', monospace; }
 .container { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
 
-/* NAV */
+svg { display: block; }
+.ic { width: 24px; height: 24px; stroke: currentColor; stroke-width: 1.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ===== NAV ===== */
 nav {
   position: sticky; top: 0; z-index: 100;
-  background: rgba(250,250,247,0.88);
-  backdrop-filter: blur(20px);
+  background: rgba(250, 250, 247, 0.88);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--line-soft);
 }
 .nav-inner {
@@ -70,356 +82,319 @@ nav {
   padding: 18px 32px; max-width: var(--max); margin: 0 auto;
 }
 .logo { display: flex; align-items: center; text-decoration: none; }
-.logo img { height: 30px; width: auto; }
+.logo img { height: 30px; width: auto; display: block; }
 .nav-links { display: flex; align-items: center; gap: 32px; }
-.nav-links a {
-  color: var(--ink-soft); text-decoration: none;
-  font-size: 14.5px; font-weight: 500; transition: color .2s;
-}
+.nav-links a { color: var(--ink-soft); text-decoration: none; font-size: 14.5px; font-weight: 500; transition: color 0.2s; }
 .nav-links a:hover { color: var(--ink); }
-.nav-cta {
-  background: var(--ink); color: var(--bg) !important;
-  padding: 9px 20px; border-radius: 100px;
-  font-size: 14px !important; font-weight: 500;
-}
-.nav-cta:hover { background: #2a2a2a !important; }
+.nav-client { font-size: 14px !important; color: var(--ink-soft) !important; }
+.nav-cta { background: var(--ink); color: var(--bg) !important; padding: 10px 20px; border-radius: 100px; font-size: 14px !important; font-weight: 500; transition: background 0.2s; }
+.nav-cta:hover { background: var(--accent-hover) !important; }
 
-/* DROPDOWN */
-.nav-dropdown { position: relative; }
-.dropdown-btn { background: none; border: none; color: var(--ink-soft); font-size: 14.5px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 4px; padding: 0; font-family: 'Instrument Sans', sans-serif; transition: color .2s; }
-.dropdown-btn:hover { color: var(--ink); }
-.dropdown-menu { position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%); background: var(--bg-card); border: 1px solid var(--line); border-radius: 16px; padding: 8px; min-width: 210px; box-shadow: 0 8px 32px rgba(0,0,0,.08); opacity: 0; visibility: hidden; transition: all .18s; z-index: 200; }
-.nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; }
-.dropdown-menu a { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; font-size: 14px; font-weight: 500; color: var(--ink); text-decoration: none; transition: background .15s; }
-.dropdown-menu a:hover { background: var(--bg-alt); }
-.dropdown-icon { font-size: 18px; width: 28px; text-align: center; }
-
-@media (max-width: 900px) {
-  .nav-links a:not(.nav-cta) { display: none; }
-  .nav-dropdown { display: none; }
-}
-
-/* HERO */
-.hero { padding: 100px 0 90px; overflow: hidden; position: relative; }
-.hero::before {
-  content: '';
-  position: absolute; top: -180px; right: -180px;
-  width: 560px; height: 560px;
-  background: radial-gradient(circle, rgba(45,90,61,0.05) 0%, transparent 70%);
-  pointer-events: none;
-}
-.hero-grid {
-  display: grid; grid-template-columns: 1.1fr 1fr;
-  gap: 80px; align-items: center;
-}
-.hero-eyebrow {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 6px 14px 6px 6px;
-  background: var(--bg-card); border: 1px solid var(--line);
-  border-radius: 100px; font-size: 13px; color: var(--ink-soft);
-  margin-bottom: 32px; font-weight: 500;
-}
-.pulse-dot {
-  width: 16px; height: 16px; background: var(--positive);
-  border-radius: 50%; position: relative;
-  display: inline-flex; align-items: center; justify-content: center;
-}
-.pulse-dot::after {
-  content: ''; position: absolute; inset: 4px;
-  background: var(--bg-card); border-radius: 50%;
-}
-.pulse-dot::before {
-  content: ''; position: absolute; inset: 0;
-  background: var(--positive); border-radius: 50%;
-  animation: pulse 2s ease-out infinite;
-}
-@keyframes pulse {
-  0% { transform: scale(1); opacity: 0.6; }
-  100% { transform: scale(2.2); opacity: 0; }
-}
-h1 {
-  font-family: 'Fraunces', serif;
-  font-weight: 400; font-size: clamp(46px, 5.5vw, 76px);
-  line-height: 1.02; letter-spacing: -0.035em;
-  margin-bottom: 28px;
-}
-h1 em { font-style: italic; font-weight: 300; color: var(--ink-soft); }
-.hero-sub {
-  font-size: 19px; color: var(--ink-soft); line-height: 1.65;
-  margin-bottom: 40px; max-width: 500px;
-}
-.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
-.btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 13px 26px; border-radius: 100px;
-  font-size: 15px; font-weight: 500;
-  text-decoration: none; transition: all .2s; cursor: pointer;
-  border: none;
-}
-.btn-primary { background: var(--ink); color: var(--bg); }
-.btn-primary:hover { background: #2a2a2a; }
-.btn-secondary {
-  background: transparent; color: var(--ink);
-  border: 1px solid var(--line);
-}
-.btn-secondary:hover { border-color: var(--ink-mute); }
-
-/* Hero visual — canal chips */
-.hero-visual {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 14px; position: relative;
-}
-.channel-chip {
-  background: var(--bg-card); border: 1px solid var(--line);
-  border-radius: 16px; padding: 20px 22px;
-  text-decoration: none; color: var(--ink);
-  transition: all .25s; display: flex; flex-direction: column; gap: 8px;
-  position: relative; overflow: hidden;
-}
-.channel-chip:hover {
-  border-color: var(--ink-mute);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.06);
-}
-.channel-chip::before {
-  content: ''; position: absolute;
-  top: 0; left: 0; right: 0; height: 3px;
-  background: var(--ch-color);
-  border-radius: 16px 16px 0 0;
-}
-.ch-icon { font-size: 24px; margin-bottom: 4px; }
-.ch-name { font-size: 14px; font-weight: 600; }
-.ch-desc { font-size: 12.5px; color: var(--ink-mute); line-height: 1.4; }
-.ch-arrow { margin-top: auto; font-size: 13px; color: var(--ink-mute); }
-
-/* SECTIONS */
-section { padding: 110px 0; }
-.section-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11.5px; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--ink-mute);
-  margin-bottom: 20px;
-}
-.section-intro {
-  font-size: 18px; color: var(--ink-soft);
-  line-height: 1.65; max-width: 580px; margin-bottom: 60px;
-}
-h2 {
-  font-family: 'Fraunces', serif;
-  font-weight: 400; font-size: clamp(34px, 4vw, 56px);
-  line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 24px;
-}
-h2 em { font-style: italic; font-weight: 300; color: var(--ink-soft); }
-
-/* PROBLEMA */
-.problema-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; }
-.problema-item {
-  background: var(--bg-card); border: 1px solid var(--line);
-  padding: 36px 32px;
-}
-.problema-item:first-child { border-radius: 16px 0 0 16px; }
-.problema-item:last-child { border-radius: 0 16px 16px 0; }
-.problema-icon { font-size: 28px; margin-bottom: 16px; }
-.problema-title { font-weight: 600; font-size: 15px; margin-bottom: 8px; }
-.problema-desc { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
-
-/* CANALES */
-.canales-bg { background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.canales-grid {
-  display: grid; grid-template-columns: repeat(5, 1fr);
-  gap: 16px; margin-top: 60px;
-}
-.canal-card {
-  background: var(--bg-card); border: 1px solid var(--line);
-  border-radius: 20px; padding: 32px 24px;
-  text-decoration: none; color: var(--ink);
-  transition: all .25s; display: flex; flex-direction: column; gap: 12px;
-  position: relative; overflow: hidden;
-}
-.canal-card:hover {
-  border-color: var(--ink-mute);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.07);
-}
-.canal-card::before {
-  content: ''; position: absolute;
-  top: 0; left: 0; right: 0; height: 4px;
-  background: var(--ch-color);
-  border-radius: 20px 20px 0 0;
-}
-.canal-icon { font-size: 32px; }
-.canal-name { font-size: 16px; font-weight: 600; }
-.canal-tagline { font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; flex: 1; }
-.canal-price {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px; color: var(--ink-mute);
-  padding-top: 12px; border-top: 1px solid var(--line-soft);
-}
-.canal-cta {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 13.5px; font-weight: 500; color: var(--ink);
-  margin-top: 4px;
-}
-
-/* COMO FUNCIONA */
-.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; }
-.step {
-  background: var(--bg-card); border: 1px solid var(--line);
-  padding: 40px 36px; position: relative;
-}
-.step:first-child { border-radius: 16px 0 0 16px; }
-.step:last-child { border-radius: 0 16px 16px 0; }
-.step-num {
-  font-family: 'Fraunces', serif;
-  font-size: 56px; font-weight: 400;
-  color: var(--line); line-height: 1;
-  margin-bottom: 20px;
-}
-.step-title { font-size: 17px; font-weight: 600; margin-bottom: 10px; }
-.step-desc { font-size: 14.5px; color: var(--ink-soft); line-height: 1.65; }
-
-/* POR QUÉ */
-.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-.why-list { display: flex; flex-direction: column; gap: 28px; margin-top: 20px; }
-.why-item { display: flex; gap: 16px; align-items: flex-start; }
-.why-check {
-  width: 24px; height: 24px; border-radius: 50%;
-  background: var(--positive); display: flex; align-items: center;
-  justify-content: center; flex-shrink: 0; margin-top: 2px;
-  color: white; font-size: 12px;
-}
-.why-text strong { display: block; font-size: 15px; margin-bottom: 4px; }
-.why-text span { font-size: 14px; color: var(--ink-soft); }
-.why-visual {
-  background: var(--bg-card); border: 1px solid var(--line);
-  border-radius: 20px; padding: 40px; display: flex; flex-direction: column; gap: 16px;
-}
-.stat-row {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 16px 0; border-bottom: 1px solid var(--line-soft);
-}
-.stat-row:last-child { border-bottom: none; }
-.stat-label { font-size: 14px; color: var(--ink-soft); }
-.stat-value {
-  font-family: 'Fraunces', serif;
-  font-size: 28px; font-weight: 400; color: var(--positive);
-}
-
-/* FAQ */
-.faq-bg { background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.faq-list { max-width: 720px; margin-top: 60px; }
-.faq-item {
-  border-bottom: 1px solid var(--line); padding: 28px 0;
-}
-.faq-item:first-child { border-top: 1px solid var(--line); }
-.faq-q {
-  font-size: 16px; font-weight: 500; cursor: pointer;
-  display: flex; justify-content: space-between; align-items: center; gap: 20px;
-  background: none; border: none; text-align: left;
-  color: var(--ink); width: 100%; padding: 0;
-}
-.faq-icon { font-size: 20px; color: var(--ink-mute); flex-shrink: 0; transition: transform .2s; }
-.faq-a {
-  font-size: 14.5px; color: var(--ink-soft); line-height: 1.7;
-  max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s ease;
-}
-.faq-item.open .faq-a { max-height: 300px; padding-top: 14px; }
-.faq-item.open .faq-icon { transform: rotate(45deg); }
-
-/* CTA FINAL */
-.cta-final {
-  text-align: center; max-width: 680px; margin: 0 auto; padding: 110px 32px;
-}
-.cta-final h2 { margin-bottom: 20px; }
-.cta-final p { font-size: 18px; color: var(--ink-soft); margin-bottom: 48px; }
-.cta-canales { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 32px; }
-.cta-canal-btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 10px 18px; border-radius: 100px;
-  border: 1px solid var(--line); background: var(--bg-card);
-  font-size: 14px; font-weight: 500; color: var(--ink);
-  text-decoration: none; transition: all .2s;
-}
-.cta-canal-btn:hover { border-color: var(--ink-mute); background: white; }
-
-/* FOOTER */
-footer {
-  border-top: 1px solid var(--line);
-  padding: 48px 32px;
-}
-.footer-inner {
-  max-width: var(--max); margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 20px;
-}
-.footer-logo img { height: 28px; opacity: 0.45; }
-.footer-copy { font-size: 13.5px; color: var(--ink-mute); }
-.footer-links { display: flex; gap: 24px; }
-.footer-links a { font-size: 13.5px; color: var(--ink-mute); text-decoration: none; }
-.footer-links a:hover { color: var(--ink-soft); }
-
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-  .canales-grid { grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 768px) {
-  .hero-grid { grid-template-columns: 1fr; gap: 48px; }
-  .hero-visual { grid-template-columns: 1fr 1fr; }
-  .problema-grid, .steps { grid-template-columns: 1fr; gap: 12px; }
-  .problema-item:first-child, .step:first-child { border-radius: 16px; }
-  .problema-item:last-child, .step:last-child { border-radius: 16px; }
-  .problema-item, .step { border-radius: 16px; }
-  .canales-grid { grid-template-columns: 1fr 1fr; }
-  .why-grid { grid-template-columns: 1fr; }
-  h1 { font-size: 44px; }
-  h2 { font-size: 34px; }
-  section { padding: 72px 0; }
-}
-@media (max-width: 480px) {
-  .canales-grid { grid-template-columns: 1fr; }
-  .hero-visual { grid-template-columns: 1fr 1fr; }
-  .container { padding: 0 20px; }
-  .nav-inner { padding: 16px 20px; }
-}
-/* HAMBURGER / MOBILE MENU */
-.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; margin-left: 4px; }
+/* Hamburger */
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
 .hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: all .25s; }
 .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
 .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-@media (max-width: 900px) { .hamburger { display: flex; } }
-.mobile-menu { position: fixed; inset: 0; top: 67px; background: var(--bg); z-index: 90; transform: translateY(-110%); transition: transform .3s cubic-bezier(.4,0,.2,1); overflow-y: auto; border-top: 1px solid var(--line); }
+@media (max-width: 900px) {
+  .hamburger { display: flex; }
+  .nav-links { display: none; }
+}
+
+/* Mobile menu */
+.mobile-menu {
+  position: fixed; inset: 0; top: 67px;
+  background: var(--bg); z-index: 90;
+  transform: translateY(-110%); transition: transform .3s cubic-bezier(.4,0,.2,1);
+  overflow-y: auto; border-top: 1px solid var(--line);
+}
 .mobile-menu.open { transform: translateY(0); }
 .mobile-menu-inner { padding: 20px 28px 60px; display: flex; flex-direction: column; }
-.mobile-section-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .12em; color: var(--ink-mute); padding: 20px 0 10px; }
-.mobile-menu-inner a { display: flex; align-items: center; gap: 14px; padding: 14px 0; font-size: 17px; font-weight: 500; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line-soft); }
-.mobile-divider { height: 1px; background: var(--line); margin: 16px 0 4px; }
-.mobile-cta-btn { display: flex !important; justify-content: center; background: var(--ink); color: white !important; padding: 15px 24px !important; border-radius: 100px; font-size: 16px; font-weight: 600; margin-top: 20px; border-bottom: none !important; }
+.mobile-menu-inner a {
+  display: block; padding: 14px 0; font-size: 17px; font-weight: 500;
+  color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line-soft);
+}
+.mobile-cta-btn {
+  display: flex !important; justify-content: center;
+  background: var(--ink); color: white !important; padding: 15px 24px !important;
+  border-radius: 100px; font-size: 16px; font-weight: 600;
+  margin-top: 20px; border-bottom: none !important;
+}
 
-/* SOON / PRÓXIMAMENTE */
-.channel-chip.soon, .canal-card.soon { cursor: default; opacity: .6; }
-.channel-chip.soon:hover, .canal-card.soon:hover { transform: none; box-shadow: none; border-color: var(--line); }
-.canal-soon-badge { position: absolute; top: 14px; right: 14px; background: var(--ink); color: white; font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 100px; letter-spacing: 0.04em; text-transform: uppercase; z-index: 5; }
-.canal-card.soon .canal-soon-badge { background: var(--ink-mute); }
+/* ===== HERO ===== */
+.hero { padding: 104px 0 80px; position: relative; overflow: hidden; }
+.hero::before {
+  content: ''; position: absolute; top: -260px; right: -160px;
+  width: 680px; height: 680px;
+  background: radial-gradient(circle, rgba(45, 90, 61, 0.05) 0%, transparent 68%);
+  pointer-events: none;
+}
+.hero::after {
+  content: ''; position: absolute; inset: 0;
+  background-image: linear-gradient(var(--line-soft) 1px, transparent 1px), linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(circle at 75% 18%, #000 0%, transparent 55%);
+  mask-image: radial-gradient(circle at 75% 18%, #000 0%, transparent 55%);
+  opacity: 0.6; pointer-events: none;
+}
+.hero .container { position: relative; z-index: 2; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 6px 16px 6px 7px; background: var(--bg-card);
+  border: 1px solid var(--line); border-radius: 100px;
+  font-size: 13px; color: var(--ink-soft); margin-bottom: 30px; font-weight: 500;
+}
+.pulse-dot { width: 15px; height: 15px; background: var(--positive); border-radius: 50%; position: relative; display: inline-flex; }
+.pulse-dot::after { content: ''; position: absolute; inset: 4px; background: var(--bg-card); border-radius: 50%; }
+.pulse-dot::before { content: ''; position: absolute; inset: 0; background: var(--positive); border-radius: 50%; animation: pulse 2.4s ease-out infinite; }
+@keyframes pulse { 0% { transform: scale(1); opacity: 0.55; } 100% { transform: scale(2.1); opacity: 0; } }
 
-/* LOGOS STRIP */
-.logos-strip { padding: 56px 0; border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); background: var(--bg-card); }
-.logos-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); text-align: center; margin-bottom: 32px; }
-.logos-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 32px 56px; align-items: center; }
-.logo-item { font-family: 'Fraunces', serif; font-size: 22px; font-style: italic; font-weight: 400; color: var(--ink-soft); letter-spacing: -0.01em; opacity: .65; transition: opacity .2s; }
-.logo-item:hover { opacity: 1; }
-.logo-item.alt { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-style: normal; font-weight: 600; letter-spacing: 0.06em; }
+.hero-center { max-width: 920px; }
+h1 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: clamp(48px, 7vw, 92px); line-height: 0.98;
+  letter-spacing: -0.04em; margin-bottom: 30px; color: var(--ink);
+}
+h1 em { font-style: italic; font-weight: 300; color: var(--positive); }
+.hero-sub { font-size: 19px; line-height: 1.55; color: var(--ink-soft); margin-bottom: 40px; max-width: 600px; }
+.hero-ctas { display: flex; gap: 14px; margin-bottom: 64px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 28px; border-radius: 100px; font-weight: 500; font-size: 15px;
+  text-decoration: none; transition: all 0.2s; border: 1px solid transparent;
+  cursor: pointer; font-family: inherit;
+}
+.btn-primary { background: var(--ink); color: var(--bg); }
+.btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+.btn-secondary { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn-secondary:hover { background: var(--bg-card); border-color: var(--ink); }
+.btn-arrow { transition: transform 0.2s; }
+.btn:hover .btn-arrow { transform: translateX(3px); }
+.btn .ic { width: 18px; height: 18px; }
 
-/* FOUNDER */
-.founder { padding: 110px 0; background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.founder-inner { display: grid; grid-template-columns: 1fr 1.6fr; gap: 64px; align-items: center; max-width: 980px; margin: 0 auto; }
-.founder-photo { aspect-ratio: 1; background: linear-gradient(135deg, #d8d4c5 0%, #b5b09e 100%); border-radius: 24px; position: relative; overflow: hidden; max-width: 280px; }
-.founder-photo::after { content: '👤'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 56px; opacity: .4; }
-.founder-quote { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 400; line-height: 1.35; letter-spacing: -0.015em; color: var(--ink); margin: 16px 0 28px; }
+/* ===== HERO CHANNELS ===== */
+.hero-channels {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
+  background: var(--line); gap: 1px;
+}
+.hchan {
+  background: var(--bg-card); padding: 26px 22px 22px; text-decoration: none;
+  color: var(--ink); display: flex; flex-direction: column;
+  min-height: 188px; position: relative; transition: background 0.3s;
+}
+.hchan.live:hover { background: var(--bg); }
+.hchan.soon { background: var(--bg-alt); cursor: default; }
+.hchan-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 22px; }
+.hchan-icwrap {
+  width: 46px; height: 46px; border-radius: 12px; border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center; color: var(--ink);
+  background: var(--bg); transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+.hchan.live:hover .hchan-icwrap { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.hchan-icwrap .ic { width: 22px; height: 22px; }
+.hchan-tag {
+  font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;
+  padding: 4px 9px; border-radius: 100px; white-space: nowrap;
+}
+.hchan-tag.on { background: var(--positive-soft); color: var(--positive); }
+.hchan-tag.off { background: var(--line); color: var(--ink-mute); }
+.hchan-name { font-family: 'Fraunces', serif; font-size: 21px; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 6px; }
+.hchan-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.42; flex: 1; }
+.hchan-foot { margin-top: 16px; font-size: 12.5px; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+.hchan.live .hchan-foot { color: var(--ink); }
+.hchan.live .hchan-foot::after { content: '→'; transition: transform 0.2s; }
+.hchan.live:hover .hchan-foot::after { transform: translateX(4px); }
+.hchan-price { color: var(--ink-mute); }
+@media (max-width: 980px) { .hero-channels { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .hero-channels { grid-template-columns: 1fr; } }
+
+/* ===== LOGOS STRIP ===== */
+.logos-strip { padding: 54px 0; border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
+.logos-label { text-align: center; font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-mute); margin-bottom: 28px; }
+.logos-row { display: flex; align-items: center; justify-content: center; gap: 56px; flex-wrap: wrap; opacity: 0.5; }
+.logo-item { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; }
+.logo-item.alt { font-family: 'Instrument Sans', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; font-size: 14px; }
+
+/* ===== SECTIONS ===== */
+section { padding: 108px 0; }
+.section-label {
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--ink-mute); margin-bottom: 20px; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.section-label::before { content: ''; width: 24px; height: 1px; background: var(--ink-mute); }
+h2 { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(36px, 4.8vw, 58px); line-height: 1.06; letter-spacing: -0.035em; margin-bottom: 24px; max-width: 840px; }
+h2 em { font-style: italic; font-weight: 300; color: var(--positive); }
+.section-intro { font-size: 18px; color: var(--ink-soft); max-width: 620px; margin-bottom: 60px; line-height: 1.6; }
+
+/* ===== PROBLEM ===== */
+.problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.problem-card { padding: 38px 34px; background: var(--bg-card); border: 1px solid var(--line); border-radius: 18px; transition: transform 0.3s, box-shadow 0.3s; }
+.problem-card:hover { transform: translateY(-4px); box-shadow: 0 22px 44px -24px rgba(0,0,0,0.1); }
+.problem-icwrap { width: 48px; height: 48px; border-radius: 12px; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; color: var(--positive); margin-bottom: 24px; }
+.problem-num { font-family: 'Fraunces', serif; font-size: 58px; font-weight: 400; line-height: 1; letter-spacing: -0.04em; color: var(--ink); margin-bottom: 10px; }
+.problem-num .small { font-size: 30px; vertical-align: top; margin-left: 2px; color: var(--ink-mute); }
+.problem-headline { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--ink); }
+.problem-desc { font-size: 14.5px; color: var(--ink-soft); line-height: 1.55; }
+@media (max-width: 860px) { .problem-grid { grid-template-columns: 1fr; } }
+
+/* ===== SERVICES ===== */
+.services-section { background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.service-card {
+  background: var(--bg-card); border: 1px solid var(--line); border-radius: 22px;
+  padding: 42px; display: flex; flex-direction: column; position: relative; overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+.service-card.live::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--positive), transparent 70%);
+}
+.service-card.live:hover { transform: translateY(-5px); box-shadow: 0 28px 56px -28px rgba(0,0,0,0.14); border-color: var(--ink); }
+.service-card.soon { background: var(--bg-alt); border-style: dashed; }
+.svc-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; }
+.svc-icwrap { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; }
+.service-card.live .svc-icwrap { background: var(--ink); color: var(--bg); }
+.service-card.soon .svc-icwrap,
+.service-card.custom .svc-icwrap { background: var(--bg-card); border: 1px solid var(--line); color: var(--ink); }
+.svc-icwrap .ic { width: 26px; height: 26px; }
+.svc-badge { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; padding: 5px 12px; border-radius: 100px; }
+.svc-badge.on { background: var(--positive-soft); color: var(--positive); }
+.svc-badge.off { background: var(--line); color: var(--ink-mute); }
+.svc-title { font-family: 'Fraunces', serif; font-size: 30px; font-weight: 500; letter-spacing: -0.025em; margin-bottom: 12px; }
+.svc-title em { font-style: italic; font-weight: 300; }
+.svc-desc { font-size: 15px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 24px; }
+.svc-list { list-style: none; margin-bottom: 28px; flex: 1; }
+.svc-list li { font-size: 13.5px; color: var(--ink-soft); padding: 7px 0; display: flex; gap: 11px; align-items: flex-start; }
+.svc-list li .tick { color: var(--positive); flex-shrink: 0; margin-top: 2px; }
+.svc-list li .tick .ic { width: 15px; height: 15px; stroke-width: 1.8; }
+.svc-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 24px; border-top: 1px solid var(--line-soft); gap: 16px; }
+.svc-price { display: flex; align-items: baseline; gap: 6px; }
+.svc-price-from { font-size: 12px; color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.06em; }
+.svc-price-val { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 500; letter-spacing: -0.02em; color: var(--ink); }
+.svc-price-period { font-size: 13px; color: var(--ink-mute); }
+.svc-cta { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; background: var(--ink); color: var(--bg); border-radius: 100px; font-size: 14px; font-weight: 500; text-decoration: none; transition: background 0.2s; white-space: nowrap; }
+.svc-cta:hover { background: var(--accent-hover); }
+.svc-cta.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.svc-cta.ghost:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.svc-cta .arr { transition: transform 0.2s; }
+.svc-cta:hover .arr { transform: translateX(3px); }
+@media (max-width: 860px) { .services-grid { grid-template-columns: 1fr; } .service-card { padding: 34px 28px; } }
+
+.shared-strip {
+  margin-top: 40px; padding: 26px 36px; background: var(--ink); color: var(--bg);
+  border-radius: 18px; display: flex; align-items: center; justify-content: center;
+  gap: 14px; flex-wrap: wrap; font-size: 15.5px; text-align: center;
+}
+.shared-strip strong { font-weight: 600; }
+.shared-strip span.txt { opacity: 0.78; }
+.shared-strip .pulse-dot { background: #8fbf9f; }
+.shared-strip .pulse-dot::after { background: var(--ink); }
+.shared-strip .pulse-dot::before { background: #8fbf9f; }
+
+/* ===== PROCESS ===== */
+.process-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; position: relative; }
+.process-steps::before { content: ''; position: absolute; top: 32px; left: 10%; right: 10%; height: 1px; background: var(--line); z-index: 0; }
+.step { position: relative; z-index: 1; }
+.step-num { width: 64px; height: 64px; background: var(--bg); border: 1px solid var(--line); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500; margin-bottom: 24px; }
+.step-time { display: inline-block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-mute); margin-bottom: 8px; }
+.step-title { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 10px; }
+.step-desc { font-size: 14.5px; color: var(--ink-soft); line-height: 1.55; }
+@media (max-width: 860px) { .process-steps { grid-template-columns: 1fr; gap: 30px; } .process-steps::before { display: none; } }
+
+/* ===== WHY ===== */
+.why-section { background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 8px; }
+.why-card { background: var(--bg-card); border: 1px solid var(--line); border-radius: 18px; padding: 34px; display: flex; gap: 18px; align-items: flex-start; }
+.why-icwrap { width: 44px; height: 44px; border-radius: 11px; background: var(--positive-soft); color: var(--positive); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.why-icwrap .ic { width: 22px; height: 22px; stroke-width: 1.6; }
+.why-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+.why-desc { font-size: 14.5px; color: var(--ink-soft); line-height: 1.55; }
+@media (max-width: 860px) { .why-grid { grid-template-columns: 1fr; } }
+
+/* ===== RESULTS ===== */
+.results-section { background: var(--dark); color: var(--bg); border-top: 1px solid var(--line); position: relative; overflow: hidden; }
+.results-section::before {
+  content: ''; position: absolute; top: -200px; left: -120px; width: 520px; height: 520px;
+  background: radial-gradient(circle, rgba(143,191,159,0.1) 0%, transparent 68%); pointer-events: none;
+}
+.results-section .section-label { color: rgba(255,255,255,0.6); }
+.results-section .section-label::before { background: rgba(255,255,255,0.4); }
+.results-section h2 { color: var(--bg); }
+.results-section h2 em { color: #8fbf9f; }
+.results-section .section-intro { color: rgba(255,255,255,0.62); }
+.results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; overflow: hidden; }
+.result-cell { background: var(--dark); padding: 42px 30px; position: relative; }
+.result-cell::after { content: ''; position: absolute; left: 30px; top: 30px; width: 22px; height: 2px; background: #8fbf9f; }
+.result-val { font-family: 'Fraunces', serif; font-size: 48px; font-weight: 400; letter-spacing: -0.03em; line-height: 1; margin: 28px 0 14px; color: var(--bg); }
+.result-label { font-size: 13.5px; color: rgba(255,255,255,0.62); line-height: 1.45; }
+@media (max-width: 860px) { .results-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 460px) { .results-grid { grid-template-columns: 1fr; } }
+
+/* ===== FOUNDER ===== */
+.founder-section { background: var(--bg-alt); border-bottom: 1px solid var(--line); }
+.founder-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 60px; align-items: center; max-width: 1000px; margin: 0 auto; }
+.founder-photo { aspect-ratio: 1; background: radial-gradient(circle at 30% 30%, #e8e6df 0%, #a8a49a 100%); border-radius: 50%; position: relative; overflow: hidden; border: 1px solid var(--line); }
+.founder-photo::after { content: ''; position: absolute; inset: 20%; background: radial-gradient(circle, rgba(255,255,255,0.4), transparent); border-radius: 50%; }
+.founder-quote { font-family: 'Fraunces', serif; font-size: 27px; line-height: 1.34; font-weight: 300; font-style: italic; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 24px; }
 .founder-name { font-weight: 600; font-size: 15px; }
 .founder-role { font-size: 14px; color: var(--ink-mute); margin-top: 2px; }
-@media (max-width: 768px) { .founder-inner { grid-template-columns: 1fr; gap: 32px; text-align: center; } .founder-photo { max-width: 200px; margin: 0 auto; } .founder-quote { font-size: 22px; } }
+@media (max-width: 860px) { .founder-inner { grid-template-columns: 1fr; gap: 32px; text-align: center; } .founder-photo { max-width: 200px; margin: 0 auto; } }
+
+/* ===== FAQ ===== */
+.faq-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; align-items: flex-start; }
+.faq-items { display: flex; flex-direction: column; }
+.faq-item { border-bottom: 1px solid var(--line); padding: 24px 0; }
+.faq-item:first-child { padding-top: 0; }
+.faq-q { display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-size: 17px; font-weight: 500; color: var(--ink); gap: 20px; user-select: none; }
+.faq-q::after { content: '+'; font-family: 'Fraunces', serif; font-size: 24px; font-weight: 300; transition: transform 0.3s; color: var(--ink-mute); flex-shrink: 0; }
+.faq-item.open .faq-q::after { transform: rotate(45deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; font-size: 15px; color: var(--ink-soft); line-height: 1.6; }
+.faq-item.open .faq-a { max-height: 340px; padding-top: 16px; }
+@media (max-width: 860px) { .faq-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+/* ===== FINAL CTA ===== */
+.final-cta { padding: 130px 0; text-align: center; position: relative; overflow: hidden; background: var(--dark); color: var(--bg); }
+.final-cta::before { content: ''; position: absolute; bottom: -240px; left: 50%; transform: translateX(-50%); width: 720px; height: 720px; background: radial-gradient(circle, rgba(143,191,159,0.12) 0%, transparent 62%); pointer-events: none; }
+.final-cta .container { position: relative; z-index: 2; }
+.final-cta .section-label { color: rgba(255,255,255,0.6); justify-content: center; }
+.final-cta .section-label::before { background: rgba(255,255,255,0.4); }
+.final-cta h2 { margin: 0 auto 24px; text-align: center; max-width: 840px; color: var(--bg); }
+.final-cta h2 em { color: #8fbf9f; }
+.final-cta p { font-size: 19px; color: rgba(255,255,255,0.66); max-width: 540px; margin: 0 auto 38px; }
+.final-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 26px; }
+.final-cta .btn-primary { background: var(--bg); color: var(--ink); }
+.final-cta .btn-primary:hover { background: #fff; }
+.final-cta .btn-secondary { color: var(--bg); border-color: rgba(255,255,255,0.25); }
+.final-cta .btn-secondary:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.5); }
+.final-mini { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.final-mini a { font-size: 14px; color: rgba(255,255,255,0.7); text-decoration: none; padding: 8px 16px; border: 1px solid rgba(255,255,255,0.18); border-radius: 100px; transition: all 0.2s; }
+.final-mini a:hover { border-color: rgba(255,255,255,0.5); color: var(--bg); }
+
+/* ===== FOOTER ===== */
+footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); background: var(--dark-soft); color: rgba(255,255,255,0.7); }
+.footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+.footer-logo img { height: 28px; width: auto; display: block; filter: brightness(0) invert(1); opacity: 0.75; }
+.footer-tag { font-size: 14px; color: rgba(255,255,255,0.55); margin-top: 16px; max-width: 300px; line-height: 1.5; }
+.footer-col h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.45); margin-bottom: 16px; font-weight: 500; }
+.footer-col a { display: block; color: rgba(255,255,255,0.7); text-decoration: none; padding: 6px 0; font-size: 14px; transition: color 0.2s; }
+.footer-col a:hover { color: var(--bg); }
+.footer-bottom { padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; font-size: 13px; color: rgba(255,255,255,0.45); }
+.footer-bottom a { color: inherit; text-decoration: none; margin-left: 24px; }
+.footer-bottom a:hover { color: var(--bg); }
+@media (max-width: 860px) { .footer-inner { grid-template-columns: 1fr 1fr; } .footer-bottom { flex-direction: column; gap: 12px; } .footer-bottom a { margin-left: 0; margin-right: 16px; } }
+@media (max-width: 480px) { .footer-inner { grid-template-columns: 1fr; } .container { padding: 0 20px; } .nav-inner { padding: 16px 20px; } }
+
+/* Fade-in on load */
+.fade-up { animation: fadeUp 0.8s ease-out both; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.fade-up-1 { animation-delay: 0.1s; }
+.fade-up-2 { animation-delay: 0.25s; }
+.fade-up-3 { animation-delay: 0.4s; }
+.fade-up-4 { animation-delay: 0.55s; }
 </style>
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3HNWY32B0D"></script>
 <script>
@@ -431,195 +406,356 @@ footer {
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ====== NAV ====== -->
 <nav>
   <div class="nav-inner">
-    <a href="/" class="logo">
+    <a href="https://empentia.com/" class="logo">
       <img src="/images/logo/logo-horizontal.svg" alt="empentIA">
     </a>
     <div class="nav-links">
-      <div class="nav-dropdown">
-        <button class="dropdown-btn">Servicios <span style="font-size:10px;margin-left:2px">▾</span></button>
-        <div class="dropdown-menu">
-          <a href="webchat/"><span class="dropdown-icon">💬</span> Webchat</a>
-        </div>
-      </div>
-      <a href="#quienes-somos">Quiénes somos</a>
+      <a href="#canales">Servicios</a>
       <a href="#como-funciona">Cómo funciona</a>
+      <a href="#por-que">Por qué empentIA</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://app.empentia.com/login" class="nav-client">Acceso clientes →</a>
       <a href="#canales" class="nav-cta">Empezar ahora</a>
-      <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú">
-        <span></span><span></span><span></span>
-      </button>
     </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-inner">
-    <div class="mobile-section-label">Servicios</div>
-    <a href="webchat/" onclick="closeMenu()"><span style="font-size:20px">💬</span> Webchat</a>
-    <div class="mobile-divider"></div>
-    <a href="#quienes-somos" onclick="closeMenu()">Quiénes somos</a>
+    <a href="#canales" onclick="closeMenu()">Servicios</a>
     <a href="#como-funciona" onclick="closeMenu()">Cómo funciona</a>
-    <a href="#canales" class="mobile-cta-btn" onclick="closeMenu()">Empezar ahora →</a>
+    <a href="#por-que" onclick="closeMenu()">Por qué empentIA</a>
+    <a href="#faq" onclick="closeMenu()">FAQ</a>
+    <a href="https://app.empentia.com/login" class="mobile-cta-btn" onclick="closeMenu()">Acceso clientes →</a>
   </div>
 </div>
 
-<!-- HERO -->
+<!-- ====== HERO ====== -->
 <section class="hero">
   <div class="container">
-    <div class="hero-grid">
-      <div class="hero-content">
-        <div class="hero-eyebrow">
-          <span class="pulse-dot"></span>
-          Agentes IA · Atención al cliente
-        </div>
-        <h1 class="serif">Tu negocio,<br>atendido<br><em>24 horas.</em></h1>
-        <p class="hero-sub">Agentes de inteligencia artificial que responden a tus clientes por webchat, WhatsApp, email, teléfono y reseñas. Sin ampliar equipo. Sin esperas.</p>
-        <div class="hero-ctas">
-          <a href="#canales" class="btn btn-primary">Ver servicios →</a>
-          <a href="#como-funciona" class="btn btn-secondary">Cómo funciona</a>
-        </div>
+    <div class="hero-center">
+      <div class="hero-eyebrow fade-up">
+        <span class="pulse-dot"></span>
+        Dos agentes ya operativos · más en camino
       </div>
-      <div class="hero-visual">
-        <a href="webchat/" class="channel-chip" style="--ch-color: #00c389;">
-          <div class="ch-icon">💬</div>
-          <div class="ch-name">Webchat</div>
-          <div class="ch-desc">Responde en tu web, capta leads y cierra ventas</div>
-          <div class="ch-arrow">Ver servicio →</div>
-        </a>
-        <div class="channel-chip soon" style="--ch-color: #c8e85a;">
-          <div class="ch-icon">📱</div>
-          <div class="ch-name">WhatsApp</div>
-          <div class="ch-desc">Atiende donde ya están tus clientes</div>
-          <div class="ch-arrow">Próximamente</div>
+      <h1 class="fade-up fade-up-1">
+        Tu negocio,<br>
+        atendido <em>24 horas.</em>
+      </h1>
+      <p class="hero-sub fade-up fade-up-2">
+        Agentes de inteligencia artificial que responden a tus clientes por webchat, email, WhatsApp, teléfono y reseñas. Cada canal con su propia membresía, todos compartiendo el mismo conocimiento de tu negocio. Sin ampliar equipo. Sin esperas.
+      </p>
+      <div class="hero-ctas fade-up fade-up-3">
+        <a href="#canales" class="btn btn-primary">Ver servicios <span class="btn-arrow">→</span></a>
+        <a href="#como-funciona" class="btn btn-secondary">Cómo funciona</a>
+      </div>
+    </div>
+
+    <div class="hero-channels fade-up fade-up-4">
+      <a href="https://empentia.com/agentes-ia-atencion-cliente/webchat/" class="hchan live">
+        <div class="hchan-top">
+          <span class="hchan-icwrap">
+            <svg class="ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 0 1-.9-3.8A8.38 8.38 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg>
+          </span>
+          <span class="hchan-tag on">Operativo</span>
         </div>
-        <a href="email/" class="channel-chip" style="--ch-color: #7bb8f0;">
-          <div class="ch-icon">📧</div>
-          <div class="ch-name">Email</div>
-          <div class="ch-desc">Clasifica y responde tickets automáticamente</div>
-          <div class="ch-arrow">Ver servicio →</div>
-        </a>
-        <div class="channel-chip soon" style="--ch-color: #f09b7b;">
-          <div class="ch-icon">📞</div>
-          <div class="ch-name">Llamadas</div>
-          <div class="ch-desc">Agente de voz que recibe y gestiona llamadas</div>
-          <div class="ch-arrow">Próximamente</div>
+        <span class="hchan-name">Webchat</span>
+        <span class="hchan-desc">Responde en tu web, capta leads y cierra ventas.</span>
+        <span class="hchan-foot">Ver servicio</span>
+      </a>
+      <a href="https://empentia.com/agentes-ia-atencion-cliente/email/" class="hchan live">
+        <div class="hchan-top">
+          <span class="hchan-icwrap">
+            <svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          </span>
+          <span class="hchan-tag on">Operativo</span>
         </div>
+        <span class="hchan-name">Email</span>
+        <span class="hchan-desc">Clasifica y responde tickets automáticamente.</span>
+        <span class="hchan-foot">Ver servicio</span>
+      </a>
+      <div class="hchan soon">
+        <div class="hchan-top">
+          <span class="hchan-icwrap">
+            <svg class="ic" viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.2 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 9.2c.4 2.6 3.7 5.9 6.3 6.3.6.1 1.2-.2 1.5-.7l.3-.6c.2-.4 0-.9-.4-1.1l-1.6-.7c-.4-.2-.8 0-1 .3l-.3.4c-1.1-.5-2-1.4-2.5-2.5l.4-.3c.3-.2.5-.6.3-1l-.7-1.6c-.2-.4-.7-.6-1.1-.4l-.6.3c-.5.3-.8.9-.7 1.5z"/></svg>
+          </span>
+          <span class="hchan-tag off">Próximamente</span>
+        </div>
+        <span class="hchan-name">WhatsApp</span>
+        <span class="hchan-desc">Atiende donde ya están tus clientes.</span>
+        <span class="hchan-foot hchan-price">Desde 59€/mes</span>
+      </div>
+      <div class="hchan soon">
+        <div class="hchan-top">
+          <span class="hchan-icwrap">
+            <svg class="ic" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+          </span>
+          <span class="hchan-tag off">Próximamente</span>
+        </div>
+        <span class="hchan-name">Llamadas</span>
+        <span class="hchan-desc">Agente de voz que recibe y gestiona llamadas.</span>
+        <span class="hchan-foot hchan-price">Desde 79€/mes</span>
+      </div>
+      <div class="hchan soon">
+        <div class="hchan-top">
+          <span class="hchan-icwrap">
+            <svg class="ic" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg>
+          </span>
+          <span class="hchan-tag off">Próximamente</span>
+        </div>
+        <span class="hchan-name">Reseñas</span>
+        <span class="hchan-desc">Responde reseñas de Google y Trustpilot.</span>
+        <span class="hchan-foot hchan-price">Desde 29€/mes</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- LOGOS STRIP -->
+<!-- ====== LOGOS STRIP ====== -->
 <div class="logos-strip">
   <div class="container">
     <div class="logos-label">Confían en empentIA</div>
     <div class="logos-row">
-      <div class="logo-item">Ciclos Martí</div>
+      <div class="logo-item">VB Sports Bike</div>
       <div class="logo-item alt">SECURITY+</div>
-      <div class="logo-item">Distribuciones B2B</div>
-      <div class="logo-item alt">Clinic Health</div>
-      <div class="logo-item">TechStore</div>
-      <div class="logo-item alt">FoodPlus</div>
+      <div class="logo-item">ACED Asesores</div>
+      <div class="logo-item alt">DISTRIBUCIONES B2B</div>
+      <div class="logo-item">Esports &amp; Co</div>
+      <div class="logo-item alt">HOME·TECH</div>
     </div>
   </div>
 </div>
 
-<!-- EL PROBLEMA -->
+<!-- ====== PROBLEM ====== -->
 <section>
   <div class="container">
     <div class="section-label">El problema</div>
-    <h2>Tus clientes preguntan por todos lados.<br><em>Y tú no llegas a todo.</em></h2>
+    <h2>Tus clientes preguntan por todos lados. <em>Y tú no llegas a todo.</em></h2>
     <p class="section-intro">Cada canal sin atender es un cliente perdido. Y contratar más personas no siempre es la solución.</p>
-    <div class="problema-grid">
-      <div class="problema-item">
-        <div class="problema-icon">🌙</div>
-        <div class="problema-title">Fuera de horario</div>
-        <div class="problema-desc">El 40% de las consultas llegan cuando tu equipo no está. Esas preguntas sin respuesta se van a la competencia.</div>
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <span class="problem-icwrap">
+          <svg class="ic" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </span>
+        <div class="problem-num">40<span class="small">%</span></div>
+        <div class="problem-headline">Llegan fuera de horario</div>
+        <div class="problem-desc">de las consultas entran cuando tu equipo no está. Esas preguntas sin respuesta se van a la competencia.</div>
       </div>
-      <div class="problema-item">
-        <div class="problema-icon">🔀</div>
-        <div class="problema-title">Demasiados canales</div>
-        <div class="problema-desc">WhatsApp, web, email, teléfono... imposible dar el mismo nivel de atención en todos sin multiplicar el equipo.</div>
+      <div class="problem-card">
+        <span class="problem-icwrap">
+          <svg class="ic" viewBox="0 0 24 24"><path d="M16 3h5v5"/><path d="M21 3 13.5 10.5"/><path d="M8 21H3v-5"/><path d="M3 21l7.5-7.5"/><path d="M21 16v5h-5"/><path d="M3 8V3h5"/></svg>
+        </span>
+        <div class="problem-num">5<span class="small">+</span></div>
+        <div class="problem-headline">Demasiados canales</div>
+        <div class="problem-desc">Web, email, WhatsApp, teléfono, reseñas... imposible dar el mismo nivel en todos sin multiplicar el equipo.</div>
       </div>
-      <div class="problema-item">
-        <div class="problema-icon">🔁</div>
-        <div class="problema-title">Siempre las mismas preguntas</div>
-        <div class="problema-desc">El 70% de las consultas son recurrentes. Tu equipo gasta horas respondiendo lo mismo cuando podría hacer cosas más valiosas.</div>
+      <div class="problem-card">
+        <span class="problem-icwrap">
+          <svg class="ic" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>
+        </span>
+        <div class="problem-num">70<span class="small">%</span></div>
+        <div class="problem-headline">Siempre lo mismo</div>
+        <div class="problem-desc">de las consultas son recurrentes. Tu equipo gasta horas respondiendo lo mismo en lugar de hacer cosas más valiosas.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- LOS 5 CANALES -->
-<section class="canales-bg" id="canales">
+<!-- ====== SERVICES ====== -->
+<section class="services-section" id="canales">
   <div class="container">
     <div class="section-label">Servicios</div>
-    <h2>Un agente IA para<br><em>cada canal.</em></h2>
-    <p class="section-intro">Cada servicio tiene su propia membresía. Activa solo lo que necesitas y escala cuando quieras.</p>
-    <div class="canales-grid">
-      <a href="webchat/" class="canal-card" style="--ch-color: #00c389;">
-        <div class="canal-icon">💬</div>
-        <div class="canal-name">Webchat</div>
-        <div class="canal-tagline">Responde en tu web, califica leads, genera presupuestos y cierra ventas sin intervención humana.</div>
-        <div class="canal-price">Desde 49€/mes</div>
-        <div class="canal-cta">Ver planes →</div>
-      </a>
-      <div class="canal-card soon" style="--ch-color: #c8e85a;">
-        <div class="canal-soon-badge">Próximamente</div>
-        <div class="canal-icon">📱</div>
-        <div class="canal-name">WhatsApp</div>
-        <div class="canal-tagline">Atiende a tus clientes en el canal que más usan, con respuestas instantáneas las 24 horas.</div>
-        <div class="canal-price">En desarrollo</div>
-        <div class="canal-cta" style="opacity:.5">Avísame →</div>
+    <h2>Un agente IA para <em>cada canal.</em></h2>
+    <p class="section-intro">Cada servicio tiene su propia membresía. Activa solo lo que necesitas y escala cuando quieras. Empieza hoy con los dos agentes ya en producción.</p>
+
+    <div class="services-grid">
+
+      <!-- Webchat -->
+      <div class="service-card live">
+        <div class="svc-head">
+          <span class="svc-icwrap">
+            <svg class="ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 0 1-.9-3.8A8.38 8.38 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg>
+          </span>
+          <span class="svc-badge on">Operativo</span>
+        </div>
+        <div class="svc-title">Agente <em>Webchat</em></div>
+        <div class="svc-desc">Tu mejor comercial 24/7 en la web. Responde, asesora con criterio, busca en tu stock y cierra la compra dentro del chat.</div>
+        <ul class="svc-list">
+          <li><span class="tick"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Compatible con WooCommerce, PrestaShop y Shopify</li>
+          <li><span class="tick"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Presupuestos automáticos por email</li>
+          <li><span class="tick"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Captación de leads cualificados</li>
+        </ul>
+        <div class="svc-foot">
+          <div class="svc-price">
+            <span class="svc-price-from">Desde</span>
+            <span class="svc-price-val">49€</span>
+            <span class="svc-price-period">/mes</span>
+          </div>
+          <a href="https://empentia.com/agentes-ia-atencion-cliente/webchat/" class="svc-cta">Ver planes <span class="arr">→</span></a>
+        </div>
       </div>
-      <a href="email/" class="canal-card" style="--ch-color: #7bb8f0;">
-        <div class="canal-icon">📧</div>
-        <div class="canal-name">Email</div>
-        <div class="canal-tagline">Clasifica consultas, pedidos y quejas. Enruta a quien corresponde y prepara borradores listos para revisar.</div>
-        <div class="canal-price">Desde 59€/mes</div>
-        <div class="canal-cta">Ver planes →</div>
-      </a>
-      <div class="canal-card soon" style="--ch-color: #f09b7b;">
-        <div class="canal-soon-badge">Próximamente</div>
-        <div class="canal-icon">📞</div>
-        <div class="canal-name">Llamadas</div>
-        <div class="canal-tagline">Un agente de voz que recibe llamadas, responde dudas y gestiona citas en tu nombre.</div>
-        <div class="canal-price">En desarrollo</div>
-        <div class="canal-cta" style="opacity:.5">Avísame →</div>
+
+      <!-- Email -->
+      <div class="service-card live">
+        <div class="svc-head">
+          <span class="svc-icwrap">
+            <svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          </span>
+          <span class="svc-badge on">Operativo</span>
+        </div>
+        <div class="svc-title">Agente <em>Email</em></div>
+        <div class="svc-desc">Tu bandeja se responde sola, tú solo revisas. Lee cada email, lo clasifica, consulta tu ERP o CRM y prepara la respuesta con datos reales.</div>
+        <ul class="svc-list">
+          <li><span class="tick"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Clasificación y enrutamiento por departamento</li>
+          <li><span class="tick"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Conexión con Holded, Odoo, SAP B1, HubSpot, Pipedrive</li>
+          <li><span class="tick"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Borradores listos para revisar o envío automático</li>
+        </ul>
+        <div class="svc-foot">
+          <div class="svc-price">
+            <span class="svc-price-from">Desde</span>
+            <span class="svc-price-val">59€</span>
+            <span class="svc-price-period">/mes</span>
+          </div>
+          <a href="https://empentia.com/agentes-ia-atencion-cliente/email/" class="svc-cta">Ver planes <span class="arr">→</span></a>
+        </div>
       </div>
-      <div class="canal-card soon" style="--ch-color: #f0c97b;">
-        <div class="canal-soon-badge">Próximamente</div>
-        <div class="canal-icon">⭐</div>
-        <div class="canal-name">Reseñas</div>
-        <div class="canal-tagline">Detecta y responde reseñas de Google y Trustpilot con respuestas personalizadas y coherentes.</div>
-        <div class="canal-price">En desarrollo</div>
-        <div class="canal-cta" style="opacity:.5">Avísame →</div>
+
+      <!-- WhatsApp -->
+      <div class="service-card soon">
+        <div class="svc-head">
+          <span class="svc-icwrap">
+            <svg class="ic" viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.2 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 9.2c.4 2.6 3.7 5.9 6.3 6.3.6.1 1.2-.2 1.5-.7l.3-.6c.2-.4 0-.9-.4-1.1l-1.6-.7c-.4-.2-.8 0-1 .3l-.3.4c-1.1-.5-2-1.4-2.5-2.5l.4-.3c.3-.2.5-.6.3-1l-.7-1.6c-.2-.4-.7-.6-1.1-.4l-.6.3c-.5.3-.8.9-.7 1.5z"/></svg>
+          </span>
+          <span class="svc-badge off">Próximamente</span>
+        </div>
+        <div class="svc-title">Agente <em>WhatsApp</em></div>
+        <div class="svc-desc">Atiende a tus clientes por WhatsApp Business 24h. Responde, gestiona pedidos y reserva citas en el canal que ya usan.</div>
+        <ul class="svc-list">
+          <li><span class="tick"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>API oficial de WhatsApp Business</li>
+          <li><span class="tick"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Estado de pedidos en tiempo real</li>
+          <li><span class="tick"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Mismo conocimiento que tu webchat</li>
+        </ul>
+        <div class="svc-foot">
+          <div class="svc-price">
+            <span class="svc-price-from">Desde</span>
+            <span class="svc-price-val">59€</span>
+            <span class="svc-price-period">/mes</span>
+          </div>
+          <a href="mailto:hola@empentia.com?subject=Avisadme%20cuando%20WhatsApp%20esté%20listo" class="svc-cta ghost">Avisadme <span class="arr">→</span></a>
+        </div>
       </div>
+
+      <!-- Llamadas -->
+      <div class="service-card soon">
+        <div class="svc-head">
+          <span class="svc-icwrap">
+            <svg class="ic" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+          </span>
+          <span class="svc-badge off">Próximamente</span>
+        </div>
+        <div class="svc-title">Agente de <em>voz · Llamadas</em></div>
+        <div class="svc-desc">Recibe llamadas telefónicas con voz natural. Resuelve consultas, gestiona citas y transfiere a una persona cuando es necesario.</div>
+        <ul class="svc-list">
+          <li><span class="tick"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Voces naturales en ES, CA, EN</li>
+          <li><span class="tick"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Reserva de citas integrada</li>
+          <li><span class="tick"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Transcripción y resumen automático</li>
+        </ul>
+        <div class="svc-foot">
+          <div class="svc-price">
+            <span class="svc-price-from">Desde</span>
+            <span class="svc-price-val">79€</span>
+            <span class="svc-price-period">/mes</span>
+          </div>
+          <a href="mailto:hola@empentia.com?subject=Avisadme%20cuando%20Llamadas%20esté%20listo" class="svc-cta ghost">Avisadme <span class="arr">→</span></a>
+        </div>
+      </div>
+
+      <!-- Reseñas -->
+      <div class="service-card soon">
+        <div class="svc-head">
+          <span class="svc-icwrap">
+            <svg class="ic" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg>
+          </span>
+          <span class="svc-badge off">Próximamente</span>
+        </div>
+        <div class="svc-title">Agente de <em>Reseñas</em></div>
+        <div class="svc-desc">Detecta y responde reseñas de Google y Trustpilot con respuestas personalizadas, coherentes con tu marca, sin que tengas que hacer nada.</div>
+        <ul class="svc-list">
+          <li><span class="tick"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Google Business y Trustpilot</li>
+          <li><span class="tick"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Alertas de reseñas negativas</li>
+          <li><span class="tick"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Análisis de sentimiento</li>
+        </ul>
+        <div class="svc-foot">
+          <div class="svc-price">
+            <span class="svc-price-from">Desde</span>
+            <span class="svc-price-val">29€</span>
+            <span class="svc-price-period">/mes</span>
+          </div>
+          <a href="mailto:hola@empentia.com?subject=Avisadme%20cuando%20Reseñas%20esté%20listo" class="svc-cta ghost">Avisadme <span class="arr">→</span></a>
+        </div>
+      </div>
+
+      <!-- Plan a medida -->
+      <div class="service-card custom">
+        <div class="svc-head">
+          <span class="svc-icwrap">
+            <svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </span>
+        </div>
+        <div class="svc-title">Plan <em>a medida</em></div>
+        <div class="svc-desc">Para cadenas, franquicias o negocios con varios canales. Combinamos los agentes que necesitas con volumen, integraciones y SLA a tu medida.</div>
+        <ul class="svc-list">
+          <li><span class="tick"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Varios canales bajo una sola cuenta</li>
+          <li><span class="tick"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Integraciones específicas y SSO/SAML</li>
+          <li><span class="tick"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Facturación y soporte dedicados</li>
+        </ul>
+        <div class="svc-foot">
+          <div class="svc-price">
+            <span class="svc-price-val">Hablemos</span>
+          </div>
+          <a href="mailto:hola@empentia.com?subject=Plan%20a%20medida" class="svc-cta ghost">Contactar <span class="arr">→</span></a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="shared-strip">
+      <span class="pulse-dot"></span>
+      <span><strong>Un solo conocimiento, todos los canales.</strong> <span class="txt">Configura el agente una vez y atiende en todos los canales que tu negocio necesite.</span></span>
     </div>
   </div>
 </section>
 
-<!-- COMO FUNCIONA -->
+<!-- ====== PROCESS ====== -->
 <section id="como-funciona">
   <div class="container">
     <div class="section-label">El proceso</div>
-    <h2>Activa tu primer agente<br><em>en menos de 24h.</em></h2>
+    <h2>Activa tu primer agente <em>en menos de 24h.</em></h2>
     <p class="section-intro">Sin integraciones complicadas. Sin necesitar un equipo técnico. Lo configuramos nosotros.</p>
-    <div class="steps">
+
+    <div class="process-steps">
       <div class="step">
         <div class="step-num">01</div>
+        <div class="step-time">Día 0 · 10 min</div>
         <div class="step-title">Elige el canal</div>
-        <div class="step-desc">Selecciona por dónde quieres empezar. Te recomendamos el que más conversaciones sin atender tenga ahora mismo.</div>
+        <div class="step-desc">Selecciona por dónde quieres empezar. Te recomendamos el que más conversaciones sin atender tenga ahora mismo: webchat o email.</div>
       </div>
       <div class="step">
         <div class="step-num">02</div>
+        <div class="step-time">Día 1 · Nosotros</div>
         <div class="step-title">El agente aprende tu negocio</div>
         <div class="step-desc">Subimos tu catálogo, FAQs, tono y políticas. El agente lo procesa y en 24h ya sabe responder como parte de tu equipo.</div>
       </div>
       <div class="step">
         <div class="step-num">03</div>
+        <div class="step-time">Día 2 · Listo</div>
         <div class="step-title">Responde solo. Tú supervisas.</div>
         <div class="step-desc">El agente atiende las consultas. Tú ves todo desde tu panel: conversaciones, estadísticas y ajustes en tiempo real.</div>
       </div>
@@ -627,70 +763,76 @@ footer {
   </div>
 </section>
 
-<!-- POR QUÉ EMPENTIA -->
-<section id="por-que" data-quienes>
+<!-- ====== WHY ====== -->
+<section class="why-section" id="por-que">
   <div class="container">
+    <div class="section-label">Por qué empentIA</div>
+    <h2>No es un chatbot <em>de botones.</em></h2>
+    <p class="section-intro">Un agente IA real que entiende el contexto, recuerda la conversación y sabe cuándo escalar a una persona.</p>
+
     <div class="why-grid">
-      <div>
-        <div class="section-label">Por qué empentIA</div>
-        <h2>No es un chatbot<br>de <em>botones.</em></h2>
-        <p class="section-intro" style="margin-bottom: 0;">Un agente IA real que entiende el contexto, recuerda la conversación y sabe cuándo escalar a una persona.</p>
-        <div class="why-list">
-          <div class="why-item">
-            <div class="why-check">✓</div>
-            <div class="why-text">
-              <strong>Precios transparentes, sin sorpresas</strong>
-              <span>Cada canal con su membresía clara. Sin comisiones ocultas ni contratos largos.</span>
-            </div>
-          </div>
-          <div class="why-item">
-            <div class="why-check">✓</div>
-            <div class="why-text">
-              <strong>Listo en 24 horas</strong>
-              <span>Te lo configuramos nosotros. Sin necesidad de integraciones técnicas por tu parte.</span>
-            </div>
-          </div>
-          <div class="why-item">
-            <div class="why-check">✓</div>
-            <div class="why-text">
-              <strong>Datos en la UE, cumplimiento GDPR</strong>
-              <span>Todos los datos procesados en servidores europeos. Tranquilidad para ti y tus clientes.</span>
-            </div>
-          </div>
-          <div class="why-item">
-            <div class="why-check">✓</div>
-            <div class="why-text">
-              <strong>Soporte real, en español</strong>
-              <span>Un equipo que conoce tu negocio y te ayuda cuando lo necesitas. Nada de tickets perdidos.</span>
-            </div>
-          </div>
+      <div class="why-card">
+        <span class="why-icwrap"><svg class="ic" viewBox="0 0 24 24"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+        <div>
+          <div class="why-title">Precios transparentes, sin sorpresas</div>
+          <div class="why-desc">Cada canal con su membresía clara. Sin comisiones ocultas ni contratos largos. Sin permanencia.</div>
         </div>
       </div>
-      <div class="why-visual">
-        <div class="section-label" style="margin-bottom: 8px;">Resultados medios</div>
-        <div class="stat-row">
-          <div class="stat-label">Consultas resueltas sin intervención</div>
-          <div class="stat-value">78%</div>
+      <div class="why-card">
+        <span class="why-icwrap"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <div>
+          <div class="why-title">Operativo en días, no en meses</div>
+          <div class="why-desc">Webchat listo en 48h y email en 5 días. Te lo configuramos nosotros, sin integraciones técnicas por tu parte.</div>
         </div>
-        <div class="stat-row">
-          <div class="stat-label">Reducción tiempo de respuesta</div>
-          <div class="stat-value">−94%</div>
+      </div>
+      <div class="why-card">
+        <span class="why-icwrap"><svg class="ic" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <div>
+          <div class="why-title">Datos en la UE, cumplimiento RGPD</div>
+          <div class="why-desc">Todos los datos procesados en servidores europeos, cifrados en tránsito y reposo. Tranquilidad para ti y tus clientes.</div>
         </div>
-        <div class="stat-row">
-          <div class="stat-label">Tiempo hasta primer agente activo</div>
-          <div class="stat-value">&lt;24h</div>
-        </div>
-        <div class="stat-row">
-          <div class="stat-label">Satisfacción media del cliente</div>
-          <div class="stat-value">4.7★</div>
+      </div>
+      <div class="why-card">
+        <span class="why-icwrap"><svg class="ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 0 1-.9-3.8A8.38 8.38 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg></span>
+        <div>
+          <div class="why-title">Soporte real, en español</div>
+          <div class="why-desc">Un equipo que conoce tu negocio y te ayuda cuando lo necesitas. Nada de tickets perdidos.</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- QUIÉNES SOMOS -->
-<section class="founder" id="quienes-somos">
+<!-- ====== RESULTS ====== -->
+<section class="results-section">
+  <div class="container">
+    <div class="section-label">Resultados medios</div>
+    <h2>Lo que consiguen los <em>negocios que ya lo usan.</em></h2>
+    <p class="section-intro">Cifras medias de las tiendas y empresas con un agente empentIA en producción.</p>
+
+    <div class="results-grid">
+      <div class="result-cell">
+        <div class="result-val">78%</div>
+        <div class="result-label">Consultas resueltas sin intervención humana</div>
+      </div>
+      <div class="result-cell">
+        <div class="result-val">−70%</div>
+        <div class="result-label">Tiempo del equipo dedicado a la bandeja de email</div>
+      </div>
+      <div class="result-cell">
+        <div class="result-val">&lt;24h</div>
+        <div class="result-label">Tiempo hasta tener el primer agente activo</div>
+      </div>
+      <div class="result-cell">
+        <div class="result-val">4.7</div>
+        <div class="result-label">Satisfacción media del cliente atendido (sobre 5)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOUNDER ====== -->
+<section class="founder-section">
   <div class="container">
     <div class="founder-inner">
       <div class="founder-photo"></div>
@@ -706,87 +848,118 @@ footer {
   </div>
 </section>
 
-<!-- FAQ -->
-<section class="faq-bg">
+<!-- ====== FAQ ====== -->
+<section id="faq">
   <div class="container">
-    <div class="section-label">FAQ</div>
-    <h2>Preguntas <em>frecuentes.</em></h2>
-    <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          ¿Puedo contratar solo un canal?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a">Sí. Cada servicio es independiente. Puedes empezar con Webchat y añadir WhatsApp o Email cuando quieras. No hay mínimo de canales.</div>
+    <div class="faq-grid">
+      <div>
+        <div class="section-label">FAQ</div>
+        <h2>Preguntas <em>frecuentes.</em></h2>
+        <p class="section-intro" style="margin-top: 24px;">Si tienes una duda que no ves aquí, escríbenos. Te respondemos el mismo día.</p>
       </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          ¿Cuánto tarda en estar listo el agente?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a">En menos de 24 horas desde que nos proporcionas la información de tu negocio. Te pedimos: descripción de productos/servicios, preguntas frecuentes y tono de comunicación.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          ¿Qué pasa cuando el agente no sabe responder?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a">El agente detecta cuándo una consulta está fuera de su alcance y escala a tu equipo con un resumen del contexto. Tú decides los criterios de escalado.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          ¿Puedo cancelar cuando quiera?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a">Sí. No hay permanencia. Puedes cancelar cualquier membresía en cualquier momento desde tu panel de cliente.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          ¿Mis datos están seguros?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a">Todos los datos se procesan en servidores dentro de la Unión Europea y cumplimos con el RGPD. Nunca usamos tus datos para entrenar modelos de terceros.</div>
+
+      <div class="faq-items">
+        <div class="faq-item open">
+          <div class="faq-q">¿Puedo contratar solo un canal?</div>
+          <div class="faq-a">Sí. Cada servicio es independiente y tiene su propia membresía. Puedes empezar con Webchat o Email y añadir el resto de canales cuando quieras. No hay mínimo de canales.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Qué agentes están disponibles ahora mismo?</div>
+          <div class="faq-a">Webchat y Email ya están en producción y puedes contratarlos hoy. WhatsApp, Llamadas y Reseñas están en desarrollo: puedes dejarnos tu email para avisarte en cuanto se lancen.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Cuánto tarda en estar listo el agente?</div>
+          <div class="faq-a">El Webchat queda operativo en 24-48h laborables. El agente de Email tarda entre 3 y 5 días, ya que conectamos tu correo y analizamos tus emails para definir categorías y reglas. Nosotros nos encargamos de la configuración.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Qué pasa cuando el agente no sabe responder?</div>
+          <div class="faq-a">El agente detecta cuándo una consulta está fuera de su alcance y escala a tu equipo con un resumen del contexto. Tú decides los criterios de escalado.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Comparten el conocimiento entre canales?</div>
+          <div class="faq-a">Sí. Configuras el conocimiento de tu negocio una vez (catálogo, FAQs, tono, políticas) y todos los agentes que actives lo comparten. Así un cliente recibe la misma respuesta tanto si pregunta por webchat como por email.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Puedo cancelar cuando quiera?</div>
+          <div class="faq-a">Sí. No hay permanencia. Puedes cancelar cualquier membresía en cualquier momento desde tu panel de cliente, y se hace efectivo al final del período facturado.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Mis datos están seguros?</div>
+          <div class="faq-a">Todos los datos se procesan en servidores dentro de la Unión Europea, cifrados en tránsito (TLS) y en reposo (AES-256), cumpliendo el RGPD. Nunca usamos tus datos para entrenar modelos de terceros.</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA FINAL -->
-<section>
-  <div class="cta-final">
+<!-- ====== FINAL CTA ====== -->
+<section class="final-cta" id="cta">
+  <div class="container">
     <div class="section-label">Empieza hoy</div>
-    <h2 class="serif">Dos agentes<br><em>ya operativos.</em></h2>
-    <p>Webchat y Email disponibles ahora. WhatsApp, Llamadas y Reseñas próximamente.</p>
-    <a href="webchat/" class="btn btn-primary" style="margin: 0 auto;">Ver Webchat →</a>
-    <div class="cta-canales">
-      <a href="webchat/" class="cta-canal-btn">💬 Webchat</a>
-      <a href="email/" class="cta-canal-btn">📧 Email</a>
+    <h2>Dos agentes <em>ya operativos.</em></h2>
+    <p>Webchat y Email disponibles ahora. WhatsApp, Llamadas y Reseñas próximamente. Elige por dónde empezar.</p>
+    <div class="final-ctas">
+      <a href="https://empentia.com/agentes-ia-atencion-cliente/webchat/" class="btn btn-primary">Ver Webchat <span class="btn-arrow">→</span></a>
+      <a href="https://empentia.com/agentes-ia-atencion-cliente/email/" class="btn btn-secondary">Ver Email</a>
+    </div>
+    <div class="final-mini">
+      <a href="mailto:hola@empentia.com?subject=Reservar%20llamada%20de%2015%20min">Reservar llamada de 15 min</a>
+      <a href="#canales">Comparar canales</a>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ====== FOOTER ====== -->
 <footer>
-  <div class="footer-inner">
-    <a href="/" class="footer-logo logo">
-      <img src="/images/logo/logo-horizontal.svg" alt="empentIA">
-    </a>
-    <p class="footer-copy">© 2025 empentIA. Todos los derechos reservados.</p>
-    <div class="footer-links">
-      <a href="/legal">Aviso legal</a>
-      <a href="/privacy">Privacidad</a>
-      <a href="/cookies">Cookies</a>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <a href="https://empentia.com/" class="footer-logo">
+          <img src="/images/logo/logo-horizontal.svg" alt="empentIA">
+        </a>
+        <p class="footer-tag">Agentes de inteligencia artificial que atienden a tus clientes en todos los canales, sin ampliar equipo.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <a href="https://empentia.com/agentes-ia-atencion-cliente/webchat/">Webchat</a>
+        <a href="https://empentia.com/agentes-ia-atencion-cliente/email/">Email</a>
+        <a href="#canales">WhatsApp · Próximamente</a>
+        <a href="#canales">Llamadas · Próximamente</a>
+        <a href="#canales">Reseñas · Próximamente</a>
+      </div>
+      <div class="footer-col">
+        <h4>Recursos</h4>
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#por-que">Por qué empentIA</a>
+        <a href="#faq">Preguntas frecuentes</a>
+        <a href="https://app.empentia.com/login">Acceso clientes</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <a href="mailto:hola@empentia.com">hola@empentia.com</a>
+        <a href="mailto:hola@empentia.com?subject=Reservar%20llamada">Reservar llamada</a>
+        <a href="https://www.linkedin.com/company/empentia">LinkedIn</a>
+        <a href="https://www.instagram.com/empent_ia/">Instagram</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© <span id="footer-year">2026</span> empentIA. Todos los derechos reservados.</div>
+      <div>
+        <a href="https://empentia.com/legal">Aviso legal</a>
+        <a href="https://empentia.com/privacy">Privacidad</a>
+        <a href="https://empentia.com/cookies">Cookies</a>
+      </div>
     </div>
   </div>
 </footer>
 
 <script>
-function toggleFaq(btn) {
-  const item = btn.parentElement;
-  const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
-  if (!isOpen) item.classList.add('open');
-}
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    item.classList.toggle('open');
+  });
+});
+
 function toggleMenu() {
   const btn = document.getElementById('hamburger');
   const menu = document.getElementById('mobileMenu');
@@ -799,6 +972,8 @@ function closeMenu() {
   document.getElementById('mobileMenu').classList.remove('open');
   document.body.style.overflow = '';
 }
+
+document.getElementById('footer-year').textContent = new Date().getFullYear();
 </script>
 
 <script type="application/ld+json">
@@ -822,7 +997,7 @@ function closeMenu() {
       "@id": "https://empentia.com/agentes-ia-atencion-cliente/#webpage",
       "url": "https://empentia.com/agentes-ia-atencion-cliente/",
       "name": "Agentes IA de Atención al Cliente | empentIA",
-      "description": "Agentes IA que atienden a clientes por webchat, WhatsApp, email, teléfono y reseñas. 24 horas, sin ampliar equipo.",
+      "description": "Agentes IA que atienden a clientes por webchat, email, WhatsApp, teléfono y reseñas. 24 horas, sin ampliar equipo.",
       "inLanguage": "es-ES",
       "isPartOf": { "@id": "https://empentia.com/#org" }
     }
