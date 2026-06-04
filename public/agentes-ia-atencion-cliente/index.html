@@ -177,75 +177,7 @@ h1 em { font-style: italic; font-weight: 300; color: var(--positive); }
 .btn:hover .btn-arrow { transform: translateX(3px); }
 .btn .ic { width: 18px; height: 18px; }
 
-/* ===== HERO CHANNELS ===== */
-.hero-channels { display: flex; flex-direction: column; gap: 10px; }
 
-/* Live cards — 2 columnes grans */
-.hchan-live-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.hchan {
-  background: var(--bg-card); padding: 30px 28px 26px; text-decoration: none;
-  color: var(--ink); display: flex; flex-direction: column;
-  border: 1px solid var(--line); border-radius: 16px;
-  position: relative; transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s; overflow: hidden;
-}
-.hchan::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: var(--ch, transparent);
-}
-.hchan.live:hover { border-color: var(--ch, var(--line)); transform: translateY(-2px); box-shadow: 0 16px 40px -16px rgba(0,0,0,0.10); }
-.hchan-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px; }
-.hchan-icwrap {
-  width: 46px; height: 46px; border-radius: 11px;
-  display: flex; align-items: center; justify-content: center;
-  background: var(--ch-soft, var(--bg)); color: var(--ch, var(--ink));
-  transition: transform 0.25s;
-}
-.hchan.live:hover .hchan-icwrap { transform: scale(1.06); }
-.hchan-icwrap .ic { width: 22px; height: 22px; }
-.hchan-tag {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;
-  padding: 4px 9px; border-radius: 100px; white-space: nowrap;
-}
-.hchan-tag.on { background: var(--positive-soft); color: var(--positive); }
-.hchan-name { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 500; letter-spacing: -0.025em; margin-bottom: 8px; }
-.hchan-desc { font-size: 14px; color: var(--ink-soft); line-height: 1.5; flex: 1; }
-.hchan-foot { margin-top: 20px; font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 6px; color: var(--ink); }
-.hchan-foot::after { content: '→'; transition: transform 0.2s; }
-.hchan.live:hover .hchan-foot::after { transform: translateX(4px); }
-
-/* Soon strip — fila de pills compactes */
-.hchan-soon-strip {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
-}
-.hchan-pill {
-  display: flex; align-items: center; gap: 12px;
-  padding: 14px 16px;
-  background: var(--bg-card); border: 1px solid var(--line); border-radius: 12px;
-}
-.hchan-pill-ic {
-  width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  background: var(--ch-soft); color: var(--ch);
-}
-.hchan-pill-ic .ic { width: 18px; height: 18px; }
-.hchan-pill-info { flex: 1; min-width: 0; }
-.hchan-pill-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.2; }
-.hchan-pill-meta { font-size: 11.5px; color: var(--ink-mute); margin-top: 3px; }
-.hchan-pill-tag {
-  font-family: 'JetBrains Mono', monospace; font-size: 9px;
-  text-transform: uppercase; letter-spacing: 0.08em;
-  padding: 3px 8px; border-radius: 100px;
-  background: var(--line); color: var(--ink-mute); white-space: nowrap; flex-shrink: 0;
-}
-
-@media (max-width: 860px) {
-  .hchan-live-grid { grid-template-columns: 1fr; }
-  .hchan-soon-strip { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 480px) {
-  .hchan-soon-strip { grid-template-columns: 1fr; }
-}
 
 /* ===== LOGOS STRIP ===== */
 .logos-strip { padding: 54px 0; border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
@@ -552,72 +484,6 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
         <a href="#canales" class="btn btn-primary">Ver servicios <span class="btn-arrow">→</span></a>
         <a href="#como-funciona" class="btn btn-secondary">Cómo funciona</a>
       </div>
-    </div>
-
-    <div class="hero-channels fade-up fade-up-4">
-
-      <!-- Operativos: 2 targetes grans -->
-      <div class="hchan-live-grid">
-        <a href="https://empentia.com/agentes-ia-atencion-cliente/webchat/" class="hchan live" style="--ch: #00c389; --ch-soft: #d4f5e9;">
-          <div class="hchan-top">
-            <span class="hchan-icwrap">
-              <svg class="ic" viewBox="0 0 24 24"><path d="M4 7.5A3.5 3.5 0 0 1 7.5 4h9A3.5 3.5 0 0 1 20 7.5v5A3.5 3.5 0 0 1 16.5 16H10l-4.5 3.2V16H7.5A3.5 3.5 0 0 1 4 12.5z"/><circle cx="9" cy="10" r="1" fill="#00c088" stroke="none"/><circle cx="12" cy="10" r="1" fill="#00c088" stroke="none"/><circle cx="15" cy="10" r="1" fill="#00c088" stroke="none"/></svg>
-            </span>
-            <span class="hchan-tag on">Operativo</span>
-          </div>
-          <span class="hchan-name">Webchat</span>
-          <span class="hchan-desc">Responde en tu web 24h, capta leads cualificados y cierra ventas dentro del chat.</span>
-          <span class="hchan-foot">Ver servicio</span>
-        </a>
-        <a href="https://empentia.com/agentes-ia-atencion-cliente/email/" class="hchan live" style="--ch: #3a82cc; --ch-soft: #ddeeff;">
-          <div class="hchan-top">
-            <span class="hchan-icwrap">
-              <svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-            </span>
-            <span class="hchan-tag on">Operativo</span>
-          </div>
-          <span class="hchan-name">Email</span>
-          <span class="hchan-desc">Lee, clasifica y responde tickets con datos reales de tu ERP o CRM. Tu bandeja, sola.</span>
-          <span class="hchan-foot">Ver servicio</span>
-        </a>
-      </div>
-
-      <!-- Pròximament: fila de pills -->
-      <div class="hchan-soon-strip">
-        <div class="hchan-pill" style="--ch: #7aaa10; --ch-soft: #eef7cc;">
-          <span class="hchan-pill-ic"><svg class="ic" viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.2 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 9.2c.4 2.6 3.7 5.9 6.3 6.3.6.1 1.2-.2 1.5-.7l.3-.6c.2-.4 0-.9-.4-1.1l-1.6-.7c-.4-.2-.8 0-1 .3l-.3.4c-1.1-.5-2-1.4-2.5-2.5l.4-.3c.3-.2.5-.6.3-1l-.7-1.6c-.2-.4-.7-.6-1.1-.4l-.6.3c-.5.3-.8.9-.7 1.5z"/></svg></span>
-          <div class="hchan-pill-info">
-            <div class="hchan-pill-name">WhatsApp</div>
-            <div class="hchan-pill-meta">Desde 59€/mes</div>
-          </div>
-          <span class="hchan-pill-tag">Pronto</span>
-        </div>
-        <div class="hchan-pill" style="--ch: #c0522a; --ch-soft: #fde8e0;">
-          <span class="hchan-pill-ic"><svg class="ic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3M9 21h6"/></svg></span>
-          <div class="hchan-pill-info">
-            <div class="hchan-pill-name">Llamadas</div>
-            <div class="hchan-pill-meta">Desde 79€/mes</div>
-          </div>
-          <span class="hchan-pill-tag">Pronto</span>
-        </div>
-        <div class="hchan-pill" style="--ch: #c08a1e; --ch-soft: #fdf4dc;">
-          <span class="hchan-pill-ic"><svg class="ic" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg></span>
-          <div class="hchan-pill-info">
-            <div class="hchan-pill-name">Reseñas</div>
-            <div class="hchan-pill-meta">Desde 29€/mes</div>
-          </div>
-          <span class="hchan-pill-tag">Pronto</span>
-        </div>
-        <div class="hchan-pill" style="--ch: #7c3aed; --ch-soft: #ede9fe;">
-          <span class="hchan-pill-ic"><svg class="ic" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
-          <div class="hchan-pill-info">
-            <div class="hchan-pill-name">Redes sociales</div>
-            <div class="hchan-pill-meta">Desde 49€/mes</div>
-          </div>
-          <span class="hchan-pill-tag">Pronto</span>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
