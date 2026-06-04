@@ -906,15 +906,14 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
 <section class="final-cta" id="cta">
   <div class="container">
     <div class="section-label">Empieza hoy</div>
-    <h2>Dos agentes <em>ya operativos.</em></h2>
-    <p>Webchat y Email disponibles ahora. WhatsApp, Llamadas y Reseñas próximamente. Elige por dónde empezar.</p>
+    <h2>Tu agente de atención al cliente <em>listo en 48 horas.</em></h2>
+    <p>Cuéntanos tu caso y te preparamos una propuesta a medida. Sin compromisos.</p>
     <div class="final-ctas">
-      <a href="https://empentia.com/agentes-ia-atencion-cliente/webchat/" class="btn btn-primary">Ver Webchat <span class="btn-arrow">→</span></a>
-      <a href="https://empentia.com/agentes-ia-atencion-cliente/email/" class="btn btn-secondary">Ver Email</a>
+      <a href="#" class="btn btn-primary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_atencion_cliente_cta_bottom'}}}); return false;">Hablar con el equipo <span class="btn-arrow">→</span></a>
+      <a href="#" class="btn btn-secondary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_atencion_cliente_cta_bottom_secondary'}}}); return false;">Reservar llamada de 15 min</a>
     </div>
     <div class="final-mini">
-      <a href="mailto:hola@empentia.com?subject=Reservar%20llamada%20de%2015%20min">Reservar llamada de 15 min</a>
-      <a href="#canales">Comparar canales</a>
+      <a href="#canales">Ver todos los canales</a>
     </div>
   </div>
 </section>
@@ -1014,5 +1013,31 @@ document.getElementById('footer-year').textContent = new Date().getFullYear();
   ]
 }
 </script>
+<script type="text/javascript">
+(function (C, A, L) {
+  let p = function (a, ar) { a.q.push(ar); };
+  let d = C.document;
+  C.Cal = C.Cal || function () {
+    let cal = C.Cal; let ar = arguments;
+    if (!cal.loaded) {
+      cal.ns = {}; cal.q = cal.q || [];
+      d.head.appendChild(d.createElement("script")).src = A;
+      cal.loaded = true;
+    }
+    if (ar[0] === L) {
+      const api = function () { p(api, arguments); };
+      const namespace = ar[1];
+      api.q = api.q || [];
+      typeof namespace === "string" ? (cal.ns[namespace] = api) && p(api, ar) : p(cal, ar);
+      return;
+    }
+    p(cal, ar);
+  };
+})(window, "https://app.cal.eu/embed/embed.js", "init");
+
+Cal("init", "descobriment", { origin: "https://app.cal.eu" });
+Cal.ns["descobriment"]("ui", { hideEventTypeDetails: false });
+</script>
+
 </body>
 </html>
