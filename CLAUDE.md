@@ -44,3 +44,16 @@ Actua directament en tots els casos següents. **No demanis confirmació, no pre
 - Deploy automàtic a producció via Vercel en cada push a `main`
 - No hi ha branca de staging — `main` és producció
 - Idiomes: català per comunicar-se amb l'usuari; el codi i els commits en anglès o català segons el context existent
+
+---
+
+## Manual de marca
+
+- Resum operatiu: `brand/guidelines.md`
+- Document complet: `brand/empentIA-manual-de-marca.pdf`
+- Tipografies: Fraunces (display), Instrument Sans (UI/cos), JetBrains Mono (codi)
+- Colors: `brand/03-colores/empentia-colores.css` i `empentia-colores.json`
+- Logos SVG: `brand/01-logos/svg/`
+- Components HTML de referència: `brand/05-componentes/empentIA-componentes.html`
+
+Consultar aquests fitxers abans de crear o modificar qualsevol element visual.
