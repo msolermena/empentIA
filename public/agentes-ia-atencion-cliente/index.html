@@ -127,20 +127,20 @@ nav {
 }
 
 /* ===== HERO ===== */
-.hero { padding: 104px 0 80px; position: relative; overflow: hidden; }
+.hero { padding: 104px 0 80px; position: relative; }
 .hero::before {
   content: ''; position: absolute; top: -260px; right: -160px;
   width: 680px; height: 680px;
   background: radial-gradient(circle, rgba(0, 192, 136, 0.07) 0%, transparent 68%);
-  pointer-events: none;
+  pointer-events: none; z-index: 0;
 }
 .hero::after {
   content: ''; position: absolute; inset: 0;
   background-image: url('/images/patterns/patron-crema-sutil.png');
   background-size: cover; background-position: center top;
-  -webkit-mask-image: radial-gradient(ellipse 90% 100% at 50% 0%, #000 40%, transparent 100%);
-  mask-image: radial-gradient(ellipse 90% 100% at 50% 0%, #000 40%, transparent 100%);
-  opacity: 0.85; pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+  opacity: 0.9; pointer-events: none; z-index: 0;
 }
 .hero .container { position: relative; z-index: 2; }
 .hero-eyebrow {
@@ -277,29 +277,30 @@ h2 em { font-style: italic; font-weight: 300; color: var(--positive); }
 
 /* Plan a medida — full-width banner */
 .service-card-custom {
-  background: var(--ink); color: var(--bg);
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-deep) 100%);
+  color: #06241a;
   border-radius: 18px; padding: 44px 48px;
   display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 48px;
   position: relative; overflow: hidden;
 }
 .service-card-custom::before {
-  content: ''; position: absolute; right: -80px; top: -80px;
-  width: 320px; height: 320px;
-  background: radial-gradient(circle, rgba(0,192,136,0.12) 0%, transparent 65%);
+  content: ''; position: absolute; right: -60px; top: -60px;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 65%);
   pointer-events: none;
 }
 .scc-left { position: relative; z-index: 1; }
-.scc-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255,255,255,0.45); margin-bottom: 14px; }
-.scc-title { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 400; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
-.scc-title em { font-style: italic; font-weight: 300; color: var(--green-light); }
-.scc-desc { font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.6; max-width: 520px; }
+.scc-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(6,36,26,0.55); margin-bottom: 14px; }
+.scc-title { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 400; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; color: #06241a; }
+.scc-title em { font-style: italic; font-weight: 300; color: rgba(6,36,26,0.7); }
+.scc-desc { font-size: 15px; color: rgba(6,36,26,0.7); line-height: 1.6; max-width: 520px; }
 .scc-perks { display: flex; gap: 24px; margin-top: 20px; flex-wrap: wrap; }
-.scc-perk { font-size: 13px; color: rgba(255,255,255,0.55); display: flex; align-items: center; gap: 7px; }
-.scc-perk::before { content: ''; width: 5px; height: 5px; background: var(--green); border-radius: 50%; flex-shrink: 0; }
+.scc-perk { font-size: 13px; color: rgba(6,36,26,0.65); display: flex; align-items: center; gap: 7px; }
+.scc-perk::before { content: ''; width: 5px; height: 5px; background: #06241a; border-radius: 50%; opacity: 0.5; flex-shrink: 0; }
 .scc-right { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-end; gap: 14px; }
-.scc-price { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 400; color: rgba(255,255,255,0.9); white-space: nowrap; }
-.scc-cta { display: inline-flex; align-items: center; gap: 8px; padding: 14px 26px; background: var(--green); color: #06241a; border-radius: 100px; font-size: 14px; font-weight: 600; text-decoration: none; transition: background 0.2s; white-space: nowrap; }
-.scc-cta:hover { background: var(--green-deep); color: #fff; }
+.scc-price { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 400; color: rgba(6,36,26,0.8); white-space: nowrap; }
+.scc-cta { display: inline-flex; align-items: center; gap: 8px; padding: 14px 26px; background: #06241a; color: var(--green); border-radius: 100px; font-size: 14px; font-weight: 600; text-decoration: none; transition: all 0.2s; white-space: nowrap; }
+.scc-cta:hover { background: #0a3320; color: #fff; }
 
 @media (max-width: 1024px) { .services-soon-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 860px) {
@@ -311,16 +312,6 @@ h2 em { font-style: italic; font-weight: 300; color: var(--positive); }
 }
 @media (max-width: 520px) { .services-soon-grid { grid-template-columns: 1fr; } }
 
-.shared-strip {
-  margin-top: 40px; padding: 26px 36px; background: var(--ink); color: var(--bg);
-  border-radius: 18px; display: flex; align-items: center; justify-content: center;
-  gap: 14px; flex-wrap: wrap; font-size: 15.5px; text-align: center;
-}
-.shared-strip strong { font-weight: 600; }
-.shared-strip span.txt { opacity: 0.78; }
-.shared-strip .pulse-dot { background: var(--green-light); }
-.shared-strip .pulse-dot::after { background: var(--ink); }
-.shared-strip .pulse-dot::before { background: var(--green-light); }
 
 /* ===== PROCESS ===== */
 .process-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; position: relative; }
@@ -657,7 +648,7 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
         <div class="scc-left">
           <div class="scc-label">Plan personalizado</div>
           <div class="scc-title">Varios canales.<br><em>Un solo agente.</em></div>
-          <div class="scc-desc">Para cadenas, franquicias o negocios con varios canales. Combinamos los agentes que necesitas con volumen, integraciones y SLA a tu medida.</div>
+          <div class="scc-desc">Configura el agente una vez y atiende en todos los canales que necesites. Para cadenas, franquicias o negocios multi-canal con volumen, integraciones específicas y SLA a medida.</div>
           <div class="scc-perks">
             <span class="scc-perk">Varios canales bajo una sola cuenta</span>
             <span class="scc-perk">Integraciones específicas y SSO/SAML</span>
@@ -670,10 +661,6 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
         </div>
       </div>
 
-    <div class="shared-strip">
-      <span class="pulse-dot"></span>
-      <span><strong>Un solo conocimiento, todos los canales.</strong> <span class="txt">Configura el agente una vez y atiende en todos los canales que tu negocio necesite.</span></span>
-    </div>
   </div>
 </section>
 
