@@ -100,6 +100,10 @@ nav {
 .nav-client { font-size: 14px !important; color: var(--ink-soft) !important; }
 .nav-cta { background: var(--ink); color: var(--bg) !important; padding: 10px 20px; border-radius: 100px; font-size: 14px !important; font-weight: 500; transition: background 0.2s; }
 .nav-cta:hover { background: var(--accent-hover) !important; }
+.lang-switch { display: flex; align-items: center; gap: 2px; border: 1px solid var(--line); border-radius: 100px; padding: 3px; }
+.lang-switch a { font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 100px; text-decoration: none; color: var(--ink-mute); transition: all 0.2s; }
+.lang-switch a.active { background: var(--ink); color: var(--bg); }
+.lang-switch a:not(.active):hover { color: var(--ink); }
 
 /* Hamburger */
 .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
@@ -445,6 +449,10 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
       <a href="#como-funciona">Cómo funciona</a>
       <a href="#por-que">Por qué empentIA</a>
       <a href="#faq">FAQ</a>
+      <div class="lang-switch">
+        <a href="/agentes-ia-atencion-cliente/" class="active">ES</a>
+        <a href="/ca/agentes-ia-atencion-cliente/">CA</a>
+      </div>
       <a href="https://app.empentia.com/login" class="nav-client">Acceso clientes →</a>
       <a href="#canales" class="nav-cta">Empezar ahora</a>
     </div>
