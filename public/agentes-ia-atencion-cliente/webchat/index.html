@@ -599,7 +599,9 @@
   .bar.hi { background: var(--brand); }
 
   /* ============ CASOS DE ÉXITO ============ */
-  section.cases { padding: 140px 0; background: var(--bg); position: relative; }
+  section.cases { padding: 140px 0; background: var(--bg); position: relative; overflow: hidden; }
+  .cases-bg-nodes { position: absolute; inset: 0; pointer-events: none; opacity: 0.15; }
+  .cases .container { position: relative; z-index: 1; }
   .cases-head { margin-bottom: 64px; }
   .cases-head .eyebrow { color: var(--brand-deep); }
   .cases-head .eyebrow::before { border-color: var(--brand-deep); }
@@ -686,7 +688,10 @@
     padding: 140px 0;
     background: var(--bg-soft);
     position: relative;
+    overflow: hidden;
   }
+  .pricing-bg-nodes { position: absolute; inset: 0; pointer-events: none; opacity: 0.13; }
+  .pricing .container { position: relative; z-index: 1; }
   .pricing-head { margin-bottom: 72px; max-width: 720px; }
   .pricing-head .eyebrow { color: var(--brand-deep); }
   .pricing-head .eyebrow::before { border-color: var(--brand-deep); }
@@ -1969,19 +1974,31 @@
     background: linear-gradient(180deg, #ecf3ee 0%, #d8e9dd 100%);
     border-top: 0.5px solid rgba(45, 90, 61, 0.16);
     text-align: center;
+    position: relative;
+    overflow: hidden;
   }
   .cta-final-inner {
     max-width: 820px;
     margin: 0 auto;
     padding: 0 24px;
+    position: relative;
+    z-index: 1;
   }
   .cta-final-eyebrow {
     font-size: 12px;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--ink-mute);
+    color: var(--brand-deep);
     margin-bottom: 32px;
     font-weight: 500;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .cta-final-eyebrow::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%;
+    background: transparent; border: 1.5px solid var(--brand-deep); flex-shrink: 0;
+  }
+  .cta-final-eyebrow::after {
+    content: ""; width: 32px; height: 1px; background: var(--brand-deep);
   }
   .cta-final-title {
     font-family: var(--serif);
@@ -1994,7 +2011,8 @@
   }
   .cta-final-title em {
     font-style: italic;
-    font-weight: 400;
+    font-weight: 300;
+    color: var(--brand-deep);
   }
   .cta-final-sub {
     font-size: 17px;
@@ -3338,6 +3356,14 @@
 
 <!-- ============ CASOS DE ÉXITO ============ -->
 <section class="cases" id="casos">
+  <svg class="cases-bg-nodes" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <circle cx="1320" cy="110" r="6" stroke="#00c389" stroke-width="2" fill="none"/>
+    <path d="M 1320 110 Q 1180 60, 1080 180" stroke="#00c389" stroke-width="1.5" fill="none"/>
+    <circle cx="1080" cy="180" r="4" fill="#00c389"/>
+    <circle cx="90" cy="520" r="5" fill="#00c389"/>
+    <path d="M 90 520 Q 220 580, 340 500" stroke="#00c389" stroke-width="1.5" fill="none"/>
+    <circle cx="340" cy="500" r="4" stroke="#00c389" stroke-width="2" fill="none"/>
+  </svg>
   <div class="container">
     <div class="cases-head">
       <div class="eyebrow">Casos reales</div>
@@ -3401,6 +3427,14 @@
 
 <!-- ============ PRECIOS ============ -->
 <section class="pricing" id="precios">
+  <svg class="pricing-bg-nodes" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <circle cx="110" cy="130" r="6" stroke="#00c389" stroke-width="2" fill="none"/>
+    <path d="M 110 130 Q 250 90, 360 220" stroke="#00c389" stroke-width="1.5" fill="none"/>
+    <circle cx="360" cy="220" r="4" fill="#00c389"/>
+    <circle cx="1340" cy="640" r="5" fill="#00c389"/>
+    <path d="M 1340 640 Q 1210 700, 1090 600" stroke="#00c389" stroke-width="1.5" fill="none"/>
+    <circle cx="1090" cy="600" r="4" stroke="#00c389" stroke-width="2" fill="none"/>
+  </svg>
   <div class="container">
     <div class="pricing-head">
       <div class="eyebrow">Planes</div>
@@ -4122,6 +4156,7 @@
 
 <!-- ============ CTA FINAL ============ -->
 <section class="cta-final" id="cta-final">
+  <img src="/images/logo/simbolo-tinta.png" alt="" aria-hidden="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:620px;opacity:0.05;pointer-events:none;z-index:0;user-select:none;">
   <div class="container">
     <div class="cta-final-inner">
       <div class="cta-final-eyebrow">Empieza hoy</div>
