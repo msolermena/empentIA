@@ -237,12 +237,12 @@ h2 em { font-style: italic; font-weight: 300; color: var(--positive); }
 }
 .service-card.live::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: linear-gradient(90deg, var(--ch, var(--positive)), transparent 70%);
+  background: linear-gradient(90deg, var(--positive), transparent 70%);
 }
-.service-card.live:hover { transform: translateY(-4px); box-shadow: 0 24px 48px -24px rgba(0,0,0,0.12); border-color: color-mix(in srgb, var(--ch) 40%, var(--line)); }
+.service-card.live:hover { transform: translateY(-4px); box-shadow: 0 24px 48px -24px rgba(0,0,0,0.12); border-color: color-mix(in srgb, var(--positive) 40%, var(--line)); }
 .svc-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; }
 .svc-icwrap { width: 52px; height: 52px; border-radius: 13px; display: flex; align-items: center; justify-content: center; }
-.service-card.live .svc-icwrap { background: var(--ch-soft); color: var(--ch); }
+.service-card.live .svc-icwrap { background: linear-gradient(155deg, #1c2420 0%, #101512 100%); color: #00c389; box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 14px rgba(16,21,18,0.18); }
 .svc-icwrap .ic { width: 24px; height: 24px; }
 .svc-badge { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; padding: 5px 12px; border-radius: 100px; }
 .svc-badge.on { background: var(--positive-soft); color: var(--positive); }
@@ -275,10 +275,10 @@ h2 em { font-style: italic; font-weight: 300; color: var(--positive); }
 }
 .service-card-soon::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: var(--ch); opacity: 0.4;
+  background: var(--positive); opacity: 0.22;
 }
 .scs-top { display: flex; align-items: center; justify-content: space-between; }
-.scs-icwrap { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: var(--ch-soft); color: var(--ch); }
+.scs-icwrap { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: linear-gradient(155deg, #1c2420 0%, #101512 100%); color: #7fae98; box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 14px rgba(16,21,18,0.18); }
 .scs-icwrap .ic { width: 18px; height: 18px; }
 .scs-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; padding: 3px 9px; border-radius: 100px; background: var(--line); color: var(--ink-mute); }
 .scs-title { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 500; letter-spacing: -0.02em; }
