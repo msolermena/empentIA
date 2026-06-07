@@ -37,7 +37,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Instrument+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #f6f5f0;
@@ -63,7 +63,7 @@
     --dark-line: rgba(0,195,137,0.10);
 
     --serif: "Fraunces", "Times New Roman", serif;
-    --sans: "Inter", system-ui, sans-serif;
+    --sans: "Instrument Sans", system-ui, sans-serif;
     --mono: "JetBrains Mono", monospace;
 
     --radius: 18px;
@@ -2845,6 +2845,8 @@
     </svg>
   </div>
 
+  <img src="/images/logo/simbolo-tinta.png" alt="" aria-hidden="true" style="position:absolute;right:-60px;top:50%;transform:translateY(-50%);width:520px;opacity:0.045;pointer-events:none;z-index:1;user-select:none;">
+
   <div class="container">
     <div class="hero-grid">
       <div class="hero-text">
@@ -3851,7 +3853,7 @@
         </div>
         <p>
           El Webchat es solo el principio. Estamos preparando agentes IA para
-          WhatsApp, email, llamadas y reseñas. Cada canal con su membresía,
+          WhatsApp, email, llamadas, redes sociales y reseñas. Cada canal con su membresía,
           todos compartiendo el mismo conocimiento de tu negocio.
         </p>
       </div>
@@ -3904,8 +3906,14 @@
           <span class="label">Voz</span>
         </div>
 
-        <!-- RESEÑAS (centrado abajo) -->
-        <div class="orbit-node" style="left: 50%; top: 87.5%;" title="Reseñas">
+        <!-- REDES SOCIALES (abajo derecha) -->
+        <div class="orbit-node" style="left: 71%; top: 80%;" title="Redes Sociales">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          <span class="label">Redes Soc.</span>
+        </div>
+
+        <!-- RESEÑAS (abajo izquierda) -->
+        <div class="orbit-node" style="left: 29%; top: 80%;" title="Reseñas">
           <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9 12 2"/></svg>
           <span class="label">Reseñas</span>
         </div>
@@ -3984,6 +3992,31 @@
         <div class="channel-price">Desde 79€</div>
         <div class="channel-period">/mes · sin IVA</div>
         <a href="mailto:hola@empentia.ai?subject=Avisadme cuando Llamadas esté listo" class="channel-cta">
+          Avisadme <span class="arr">→</span>
+        </a>
+      </div>
+
+      <!-- Redes Sociales -->
+      <div class="channel-card" style="--brand-soft: #ede9fe; --brand-deep: #7c3aed; --brand-darker: #5b21b6;">
+        <div class="channel-icon-wrap">
+          <div class="channel-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </div>
+          <span class="channel-soon">Próximamente</span>
+        </div>
+        <h3 class="channel-name">Agente Redes Sociales</h3>
+        <p class="channel-desc">
+          Responde mensajes directos de Instagram y Facebook Messenger 24h.
+          Gestiona consultas, leads y atención al cliente desde un solo agente.
+        </p>
+        <ul class="channel-features">
+          <li>Instagram DM y Facebook Messenger</li>
+          <li>Respuestas automáticas a comentarios</li>
+          <li>Mismo conocimiento que tu webchat</li>
+        </ul>
+        <div class="channel-price">Desde 49€</div>
+        <div class="channel-period">/mes · sin IVA</div>
+        <a href="mailto:hola@empentia.ai?subject=Avisadme cuando Redes Sociales esté listo" class="channel-cta">
           Avisadme <span class="arr">→</span>
         </a>
       </div>
