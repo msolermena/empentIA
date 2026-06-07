@@ -19,8 +19,12 @@
   --line-soft: #efede6;
   --accent: #1a1a1a;
   --accent-hover: #2a2a2a;
-  --positive: #2d5a3d;
+  --positive: #008159;
   --warning: #9a5a1a;
+  --brand: #00c389;
+  --brand-deep: #008159;
+  --brand-soft: #d4f5e9;
+  --brand-glow: rgba(0, 195, 137, 0.14);
   --max: 1240px;
 }
 
@@ -126,13 +130,21 @@ footer .logo img {
 .hero::before {
   content: '';
   position: absolute;
-  top: -200px;
-  right: -200px;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(45, 90, 61, 0.04) 0%, transparent 70%);
+  top: -10%; left: 50%; transform: translateX(-50%);
+  width: 1200px; height: 700px;
+  background: radial-gradient(ellipse at center, var(--brand-glow) 0%, transparent 65%);
   pointer-events: none;
+  z-index: 0;
 }
+.hero-nodes {
+  position: absolute; inset: 0;
+  pointer-events: none; z-index: 0;
+}
+.hero-nodes svg {
+  position: absolute;
+  opacity: 0.65;
+}
+.hero-grid { position: relative; z-index: 1; }
 .hero-grid {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
@@ -155,7 +167,7 @@ footer .logo img {
 .pulse-dot {
   width: 16px;
   height: 16px;
-  background: #2d5a3d;
+  background: var(--brand);
   border-radius: 50%;
   position: relative;
   display: inline-flex;
@@ -173,7 +185,7 @@ footer .logo img {
   content: '';
   position: absolute;
   inset: 0;
-  background: #2d5a3d;
+  background: var(--brand);
   border-radius: 50%;
   animation: pulse 2s ease-out infinite;
 }
@@ -624,7 +636,7 @@ h2 em {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 30% 30%, rgba(45,90,61,0.08) 0%, transparent 50%),
+    radial-gradient(circle at 30% 30%, rgba(0,195,137,0.08) 0%, transparent 50%),
     linear-gradient(135deg, var(--bg-alt) 0%, var(--bg-card) 100%);
   display: flex;
   align-items: center;
@@ -921,8 +933,8 @@ h2 em {
   display: inline-block;
   margin-left: 6px;
   padding: 2px 8px;
-  background: rgba(45, 90, 61, 0.08);
-  color: var(--positive);
+  background: rgba(0, 195, 137, 0.1);
+  color: var(--brand-deep);
   border-radius: 100px;
   font-size: 10px;
   font-weight: 600;
@@ -985,8 +997,8 @@ h2 em {
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--positive);
-  background: rgba(45, 90, 61, 0.08);
+  color: var(--brand-deep);
+  background: rgba(0, 195, 137, 0.1);
   padding: 4px 10px;
   border-radius: 100px;
   font-weight: 600;
@@ -1524,17 +1536,29 @@ h2 em {
 }
 
 /* ===== FAQ ===== */
-.faq-section { padding: 110px 0; background: var(--bg-alt); border-top: 1px solid var(--line); }
-.faq-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 80px;
-  align-items: flex-start;
+.faq-section {
+  padding: 110px 0;
+  background: var(--bg-alt);
+  border-top: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
 }
-.faq-items { display: flex; flex-direction: column; }
+.faq-bg-nodes {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  opacity: 0.22;
+}
+.faq-grid { display: flex; flex-direction: column; gap: 48px; }
+.faq-header { max-width: 640px; }
+.faq-header .section-intro { margin-bottom: 0; }
+.faq-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 48px;
+}
 .faq-item {
   border-bottom: 1px solid var(--line);
-  padding: 24px 0;
+  padding: 16px 0;
 }
 .faq-item:first-child { padding-top: 0; }
 .faq-q {
@@ -1545,6 +1569,8 @@ h2 em {
   font-size: 17px;
   font-weight: 500;
   color: var(--ink);
+  gap: 20px;
+  user-select: none;
 }
 .faq-q::after {
   content: '+';
@@ -1553,6 +1579,7 @@ h2 em {
   font-weight: 300;
   transition: transform 0.3s;
   color: var(--ink-mute);
+  flex-shrink: 0;
 }
 .faq-item.open .faq-q::after { transform: rotate(45deg); }
 .faq-a {
@@ -1564,11 +1591,11 @@ h2 em {
   line-height: 1.6;
 }
 .faq-item.open .faq-a {
-  max-height: 300px;
-  padding-top: 16px;
+  max-height: 340px;
+  padding-top: 10px;
 }
-@media (max-width: 860px) {
-  .faq-grid { grid-template-columns: 1fr; gap: 40px; }
+@media (max-width: 720px) {
+  .faq-items { grid-template-columns: 1fr; }
 }
 
 /* ===== CLIENT ACCESS ===== */
@@ -1666,7 +1693,7 @@ h2 em {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 50% 100%, rgba(45,90,61,0.06) 0%, transparent 50%);
+    radial-gradient(circle at 50% 100%, rgba(0,195,137,0.08) 0%, transparent 50%);
   pointer-events: none;
 }
 .final-cta h2 {
@@ -1863,7 +1890,7 @@ footer {
   .founder-quote { font-size: 20px; }
 
   /* FAQ */
-  .faq-grid { gap: 32px; }
+  .faq-header { max-width: 100%; }
   .faq-q { font-size: 16px; }
   .faq-a { font-size: 14.5px; }
 
@@ -1915,8 +1942,8 @@ footer {
 }
 .plan-card.featured {
   background: var(--bg-card);
-  border: 2px solid #8fbf9f;
-  box-shadow: 0 4px 24px rgba(143, 191, 159, 0.18);
+  border: 2px solid var(--brand);
+  box-shadow: 0 4px 24px rgba(0, 195, 137, 0.15);
 }
 .plan-card.featured .plan-name { color: var(--ink); }
 .plan-card.featured .plan-price { color: var(--ink); }
@@ -1930,7 +1957,7 @@ footer {
 .plan-card .plan-badge { display: none; }
 .plan-card-popular-label {
   display: block;
-  background: #2d5a3d;
+  background: var(--brand);
   color: #fff;
   font-size: 11px;
   font-weight: 700;
@@ -2057,6 +2084,29 @@ footer {
 
 <!-- ====== HERO ====== -->
 <section class="hero">
+  <img src="/images/logo/simbolo-tinta.png" alt="" aria-hidden="true" style="position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:560px;opacity:0.04;pointer-events:none;z-index:0;user-select:none;">
+  <div class="hero-nodes" aria-hidden="true">
+    <svg style="top: 12%; left: 5%; width: 80px; height: 80px;" viewBox="0 0 80 80">
+      <circle cx="10" cy="40" r="5" stroke="#00c389" stroke-width="2" fill="none"/>
+      <path d="M 15 40 Q 40 20, 70 40" stroke="#00c389" stroke-width="2" fill="none"/>
+      <circle cx="70" cy="40" r="3" fill="#00c389"/>
+    </svg>
+    <svg style="top: 68%; left: 3%; width: 100px; height: 60px;" viewBox="0 0 100 60">
+      <path d="M 5 30 Q 50 5, 95 30" stroke="#00c389" stroke-width="2" fill="none" opacity="0.5"/>
+      <circle cx="5" cy="30" r="4" stroke="#00c389" stroke-width="2" fill="none"/>
+      <circle cx="95" cy="30" r="3" fill="#00c389"/>
+    </svg>
+    <svg style="top: 16%; right: 4%; width: 70px; height: 70px;" viewBox="0 0 70 70">
+      <circle cx="35" cy="10" r="4" stroke="#00c389" stroke-width="2" fill="none"/>
+      <path d="M 35 14 Q 60 35, 35 60" stroke="#00c389" stroke-width="2" fill="none"/>
+      <circle cx="35" cy="60" r="3" fill="#00c389"/>
+    </svg>
+    <svg style="top: 55%; right: 8%; width: 60px; height: 60px;" viewBox="0 0 60 60">
+      <circle cx="10" cy="10" r="3" fill="#00c389"/>
+      <path d="M 13 10 Q 30 30, 50 50" stroke="#00c389" stroke-width="1.5" fill="none" opacity="0.6"/>
+      <circle cx="50" cy="50" r="3" stroke="#00c389" stroke-width="2" fill="none"/>
+    </svg>
+  </div>
   <div class="container">
     <div class="hero-grid">
       <div>
@@ -2232,7 +2282,18 @@ footer {
 </section>
 
 <!-- ====== FEATURES ====== -->
-<section id="funcionalitats">
+<section id="funcionalitats" style="position: relative; overflow: hidden;">
+  <svg aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.18;" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice">
+    <circle cx="120" cy="100" r="6" stroke="#00c389" stroke-width="2" fill="none"/>
+    <path d="M 120 100 Q 280 60, 380 180" stroke="#00c389" stroke-width="1.5" fill="none"/>
+    <circle cx="380" cy="180" r="4" fill="#00c389"/>
+    <circle cx="1320" cy="140" r="6" stroke="#00c389" stroke-width="2" fill="none"/>
+    <path d="M 1320 140 Q 1200 240, 1100 200" stroke="#00c389" stroke-width="1.5" fill="none"/>
+    <circle cx="1100" cy="200" r="4" fill="#00c389"/>
+    <circle cx="80" cy="520" r="5" fill="#00c389"/>
+    <path d="M 80 520 Q 200 560, 320 490" stroke="#00c389" stroke-width="1.5" fill="none"/>
+    <circle cx="320" cy="490" r="4" stroke="#00c389" stroke-width="2" fill="none"/>
+  </svg>
   <div class="container">
     <div class="section-label">Funcionalitats</div>
     <h2>Tot el que necessita un <em>comercial digital.</em></h2>
@@ -3058,12 +3119,20 @@ footer {
 
 <!-- ====== FAQ ====== -->
 <section class="faq-section" id="faq">
+  <svg class="faq-bg-nodes" aria-hidden="true" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice">
+    <circle cx="100" cy="120" r="5" stroke="#00c389" stroke-width="2" fill="none"/>
+    <path d="M 100 120 Q 250 80, 320 200" stroke="#00c389" stroke-width="1.5" fill="none"/>
+    <circle cx="320" cy="200" r="3" fill="#00c389"/>
+    <circle cx="1340" cy="650" r="5" stroke="#00c389" stroke-width="2" fill="none"/>
+    <path d="M 1340 650 Q 1240 580, 1140 620" stroke="#00c389" stroke-width="1.5" fill="none"/>
+    <circle cx="1140" cy="620" r="3" fill="#00c389"/>
+  </svg>
   <div class="container">
     <div class="faq-grid">
-      <div>
+      <div class="faq-header">
         <div class="section-label">Preguntes freqüents</div>
         <h2>Tot el que necessites <em>saber.</em></h2>
-        <p class="section-intro" style="margin-top: 24px;">Si tens un dubte que no veus aquí, escriu-nos. Et responem el mateix dia.</p>
+        <p class="section-intro" style="margin-top: 16px;">Si tens un dubte que no veus aquí, escriu-nos. Et responem el mateix dia.</p>
       </div>
 
       <div class="faq-items">
@@ -3106,7 +3175,8 @@ footer {
 
 <!-- ====== FINAL CTA ====== -->
 <section class="final-cta" id="cta">
-  <div class="container">
+  <img src="/images/logo/simbolo-tinta.png" alt="" aria-hidden="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:600px;opacity:0.035;pointer-events:none;z-index:0;user-select:none;">
+  <div class="container" style="position:relative;z-index:1;">
     <div class="section-label">Comença avui</div>
     <h2>El teu agent comercial <em>llest en 48 hores.</em></h2>
     <p>Prova'l sense compromís. Si vols parlar primer, reserva una trucada de 15 min amb el nostre equip.</p>
