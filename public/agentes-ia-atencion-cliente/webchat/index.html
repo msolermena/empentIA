@@ -599,7 +599,7 @@
   .bar.hi { background: var(--brand); }
 
   /* ============ CASOS DE ÉXITO ============ */
-  section.cases { padding: 140px 0; background: var(--bg); position: relative; overflow: hidden; }
+  section.cases { padding: 140px 0; background: var(--bg); position: relative; }
   .cases-bg-nodes { position: absolute; inset: 0; pointer-events: none; opacity: 0.15; }
   .cases .container { position: relative; z-index: 1; }
   .cases-head { margin-bottom: 64px; }
@@ -688,7 +688,6 @@
     padding: 140px 0;
     background: var(--bg-soft);
     position: relative;
-    overflow: hidden;
   }
   .pricing-bg-nodes { position: absolute; inset: 0; pointer-events: none; opacity: 0.13; }
   .pricing .container { position: relative; z-index: 1; }
@@ -2849,24 +2848,6 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero">
-  <!-- Nodos decorativos flotantes (lenguaje del logo) -->
-  <div class="hero-nodes">
-    <svg style="top: 12%; left: 6%; width: 80px; height: 80px;" viewBox="0 0 80 80">
-      <circle cx="10" cy="40" r="5" stroke="#00c389" stroke-width="2" fill="none"/>
-      <path d="M 15 40 Q 40 20, 70 40" stroke="#00c389" stroke-width="2" fill="none"/>
-      <circle cx="70" cy="40" r="3" fill="#00c389"/>
-    </svg>
-    <svg style="top: 70%; left: 3%; width: 100px; height: 60px;" viewBox="0 0 100 60">
-      <path d="M 5 30 Q 50 5, 95 30" stroke="#00c389" stroke-width="2" fill="none" opacity="0.5"/>
-      <circle cx="5" cy="30" r="4" stroke="#00c389" stroke-width="2" fill="none"/>
-      <circle cx="95" cy="30" r="3" fill="#00c389"/>
-    </svg>
-    <svg style="top: 18%; right: 4%; width: 70px; height: 70px;" viewBox="0 0 70 70">
-      <circle cx="35" cy="10" r="4" stroke="#00c389" stroke-width="2" fill="none"/>
-      <path d="M 35 14 Q 60 35, 35 60" stroke="#00c389" stroke-width="2" fill="none"/>
-      <circle cx="35" cy="60" r="3" fill="#00c389"/>
-    </svg>
-  </div>
 
   <img src="/images/logo/simbolo-tinta.png" alt="" aria-hidden="true" style="position:absolute;right:-60px;top:50%;transform:translateY(-50%);width:520px;opacity:0.045;pointer-events:none;z-index:1;user-select:none;">
 
@@ -2977,18 +2958,6 @@
 
 <!-- ============ CÓMO TRABAJA — Sección unificada con tabs ============ -->
 <section class="como-trabaja-tabs" id="como-trabaja">
-  <!-- Nodos decorativos del logo de fondo (heredados de Funcionalidades) -->
-  <svg class="features-bg-nodes" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice">
-    <circle cx="120" cy="120" r="6" stroke="#00c389" stroke-width="2" fill="none"/>
-    <path d="M 120 120 Q 280 80, 380 200" stroke="#00c389" stroke-width="1.5" fill="none"/>
-    <circle cx="380" cy="200" r="4" fill="#00c389"/>
-    <circle cx="1320" cy="180" r="6" stroke="#00c389" stroke-width="2" fill="none"/>
-    <path d="M 1320 180 Q 1200 280, 1100 240" stroke="#00c389" stroke-width="1.5" fill="none"/>
-    <circle cx="1100" cy="240" r="4" fill="#00c389"/>
-    <circle cx="80" cy="650" r="5" fill="#00c389"/>
-    <path d="M 80 650 Q 200 700, 320 620" stroke="#00c389" stroke-width="1.5" fill="none"/>
-    <circle cx="320" cy="620" r="4" stroke="#00c389" stroke-width="2" fill="none"/>
-  </svg>
 
   <div class="container">
 
@@ -3361,14 +3330,6 @@
 
 <!-- ============ CASOS DE ÉXITO ============ -->
 <section class="cases" id="casos">
-  <svg class="cases-bg-nodes" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <circle cx="1320" cy="110" r="6" stroke="#00c389" stroke-width="2" fill="none"/>
-    <path d="M 1320 110 Q 1180 60, 1080 180" stroke="#00c389" stroke-width="1.5" fill="none"/>
-    <circle cx="1080" cy="180" r="4" fill="#00c389"/>
-    <circle cx="90" cy="520" r="5" fill="#00c389"/>
-    <path d="M 90 520 Q 220 580, 340 500" stroke="#00c389" stroke-width="1.5" fill="none"/>
-    <circle cx="340" cy="500" r="4" stroke="#00c389" stroke-width="2" fill="none"/>
-  </svg>
   <div class="container">
     <div class="cases-head">
       <div class="eyebrow">Casos reales</div>
@@ -3432,14 +3393,6 @@
 
 <!-- ============ PRECIOS ============ -->
 <section class="pricing" id="precios">
-  <svg class="pricing-bg-nodes" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <circle cx="110" cy="130" r="6" stroke="#00c389" stroke-width="2" fill="none"/>
-    <path d="M 110 130 Q 250 90, 360 220" stroke="#00c389" stroke-width="1.5" fill="none"/>
-    <circle cx="360" cy="220" r="4" fill="#00c389"/>
-    <circle cx="1340" cy="640" r="5" fill="#00c389"/>
-    <path d="M 1340 640 Q 1210 700, 1090 600" stroke="#00c389" stroke-width="1.5" fill="none"/>
-    <circle cx="1090" cy="600" r="4" stroke="#00c389" stroke-width="2" fill="none"/>
-  </svg>
   <div class="container">
     <div class="pricing-head">
       <div class="eyebrow">Planes</div>
@@ -3873,15 +3826,6 @@
 
 <!-- ============ MÁS CANALES (próximamente) ============ -->
 <section class="channels" id="canales">
-  <!-- Nodos decorativos del logo -->
-  <svg class="channels-bg-nodes" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice">
-    <circle cx="120" cy="80" r="5" stroke="#00c389" stroke-width="2" fill="none"/>
-    <path d="M 120 80 Q 240 50, 320 130" stroke="#00c389" stroke-width="1.5" fill="none"/>
-    <circle cx="320" cy="130" r="3" fill="#00c389"/>
-    <circle cx="1340" cy="450" r="5" stroke="#00c389" stroke-width="2" fill="none"/>
-    <path d="M 1340 450 Q 1240 380, 1140 420" stroke="#00c389" stroke-width="1.5" fill="none"/>
-    <circle cx="1140" cy="420" r="3" fill="#00c389"/>
-  </svg>
 
   <div class="container">
     <div class="channels-top">
@@ -4069,14 +4013,6 @@
 
 <!-- ============ FAQs ============ -->
 <section class="faqs" id="faqs">
-  <svg class="faqs-bg-nodes" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <circle cx="100" cy="120" r="5" stroke="#00c389" stroke-width="2" fill="none"/>
-    <path d="M 100 120 Q 250 80, 320 200" stroke="#00c389" stroke-width="1.5" fill="none"/>
-    <circle cx="320" cy="200" r="3" fill="#00c389"/>
-    <circle cx="1340" cy="650" r="5" stroke="#00c389" stroke-width="2" fill="none"/>
-    <path d="M 1340 650 Q 1240 580, 1140 620" stroke="#00c389" stroke-width="1.5" fill="none"/>
-    <circle cx="1140" cy="620" r="3" fill="#00c389"/>
-  </svg>
 
   <div class="container">
     <div class="faqs-grid">
