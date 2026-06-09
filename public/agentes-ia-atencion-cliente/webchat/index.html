@@ -1513,18 +1513,24 @@
   }
   .channel-card {
     background: #fff;
-    border: 1px solid var(--accent, var(--line-soft));
+    border: 1px solid var(--line-soft);
     border-radius: var(--radius);
     padding: 24px 20px;
     display: flex;
     flex-direction: column;
     position: relative;
+    overflow: hidden;
     transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .channel-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent, var(--brand)), transparent 70%);
   }
   .channel-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 30px 60px -30px color-mix(in srgb, var(--accent, #00c389) 38%, transparent);
-    border-color: var(--accent, rgba(0,195,137,0.3));
+    box-shadow: 0 24px 48px -24px rgba(14,14,12,0.12);
+    border-color: color-mix(in srgb, var(--accent, #00c389) 40%, var(--line-soft));
   }
   .channel-icon-wrap {
     display: flex;
