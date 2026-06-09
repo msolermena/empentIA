@@ -861,62 +861,10 @@
     align-items: stretch;
     margin-bottom: 24px;
   }
-  .onboarding-choice.single {
-    display: flex;
-    justify-content: center;
-  }
-  .onboarding-choice.single .choice-card {
-    max-width: 620px;
-    width: 100%;
-  }
-  /* Tarjeta de acompañamiento en horizontal */
-  .onboarding-choice.single .choice-card.horizontal {
-    flex-direction: row;
-    align-items: center;
-    gap: 0;
-    max-width: 960px;
-    padding: 40px;
-    text-align: left;
-  }
-  .choice-card.horizontal .choice-main {
-    flex: 1.6;
-    display: flex;
-    flex-direction: column;
-    padding-right: 44px;
-  }
-  .choice-card.horizontal .choice-features { margin-bottom: 0; flex: 0; }
-  .choice-card.horizontal .choice-aside {
-    flex: 1;
-    align-self: stretch;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 20px;
-    padding-left: 44px;
-    border-left: 1px solid rgba(255,255,255,0.12);
-  }
-  .choice-card.horizontal .choice-price {
-    border-top: none;
-    padding-top: 0;
-    margin-bottom: 0;
-  }
-  .choice-card.horizontal .choice-price-amount { font-size: 40px; }
-  .choice-card.horizontal .choice-cta { width: 100%; }
-  @media (max-width: 700px) {
-    .onboarding-choice.single .choice-card.horizontal {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0;
-      padding: 30px 26px;
-    }
-    .choice-card.horizontal .choice-main { padding-right: 0; }
-    .choice-card.horizontal .choice-features { margin-bottom: 24px; }
-    .choice-card.horizontal .choice-aside {
-      padding-left: 0;
-      border-left: none;
-      border-top: 1px solid rgba(255,255,255,0.12);
-      padding-top: 24px;
-    }
+  /* Dos módulos lado a lado */
+  .onboarding-choice.pair {
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
   }
   .choice-card {
     background: #fff;
@@ -3583,53 +3531,56 @@
         </p>
       </div>
 
-      <!-- PASO 1: DIY vs Premium -->
-      <div class="onboarding-choice single">
-        <!-- Acompañamiento -->
-        <div class="choice-card premium horizontal">
-          <div class="choice-main">
-            <div class="choice-tag">Pago único</div>
-            <h4 class="choice-name">Lo hacemos <em>nosotros</em></h4>
-            <p class="choice-desc">
-              Auditamos tu web, optimizamos tu catálogo, entrenamos al agente con
-              tu tono de marca y formamos a tu equipo. Listo y afinado en 48h.
-            </p>
-            <ul class="choice-features">
-              <li>Auditoría de la web y catálogo (2h)</li>
-              <li>Entrenamiento con tu tono y argumentario propios</li>
-              <li>Configuración de respuestas clave y objeciones frecuentes</li>
-              <li>Sesión de formación para tu equipo (1h)</li>
-              <li>Soporte prioritario los primeros 30 días</li>
-            </ul>
-          </div>
-          <div class="choice-aside">
-            <div class="choice-price">
-              <div>
-                <div class="choice-price-amount">249€<span style="font-size:14px;vertical-align:super;color:var(--ink-mute);font-weight:400;">*</span></div>
-                <div class="choice-price-note">Pago único · sin IVA · *según proyecto</div>
-              </div>
-            </div>
-            <a href="#" class="choice-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_onboarding_assisted'}}}); return false;">Reservar onboarding</a>
-          </div>
-        </div>
-      </div>
+      <!-- Dos módulos lado a lado -->
+      <div class="onboarding-choice pair">
 
-      <!-- PASO 2: Tras 30 días, optimización -->
-      <div class="next-step">
-        <div class="next-step-tag">Después de 30 días</div>
-        <div class="next-step-content">
-          <h4>¿Y si lo <em>llevamos al siguiente nivel?</em></h4>
-          <p>
-            Cuando tu agente lleva un mes en marcha, analizamos sus conversaciones
-            y descubrimos oportunidades que se te están escapando: productos que
-            piden y no tienes, objeciones recurrentes, leads no convertidos.
+        <!-- Puesta en marcha -->
+        <div class="choice-card premium">
+          <div class="choice-tag">Pago único</div>
+          <h4 class="choice-name">Lo hacemos <em>nosotros</em></h4>
+          <p class="choice-desc">
+            Auditamos tu web, optimizamos tu catálogo, entrenamos al agente con
+            tu tono de marca y formamos a tu equipo. Listo y afinado en 48h.
           </p>
+          <ul class="choice-features">
+            <li>Auditoría de la web y catálogo (2h)</li>
+            <li>Entrenamiento con tu tono y argumentario propios</li>
+            <li>Configuración de respuestas clave y objeciones frecuentes</li>
+            <li>Sesión de formación para tu equipo (1h)</li>
+            <li>Soporte prioritario los primeros 30 días</li>
+          </ul>
+          <div class="choice-price">
+            <div>
+              <div class="choice-price-amount">249€<span style="font-size:14px;vertical-align:super;color:var(--ink-mute);font-weight:400;">*</span></div>
+              <div class="choice-price-note">Pago único · sin IVA · *según proyecto</div>
+            </div>
+          </div>
+          <a href="#" class="choice-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_onboarding_assisted'}}}); return false;">Reservar onboarding</a>
         </div>
-        <div class="next-step-price">
-          <div class="next-step-price-amount">149€</div>
-          <div class="next-step-price-note">/trimestre · sin IVA</div>
+
+        <!-- Optimización (después de 30 días) -->
+        <div class="choice-card">
+          <div class="choice-tag">Después de 30 días</div>
+          <h4 class="choice-name">Lo llevamos al <em>siguiente nivel</em></h4>
+          <p class="choice-desc">
+            Cuando tu agente lleva un mes en marcha, analizamos sus conversaciones
+            y descubrimos oportunidades que se te están escapando.
+          </p>
+          <ul class="choice-features">
+            <li>Análisis de las conversaciones del mes</li>
+            <li>Productos que piden y no tienes</li>
+            <li>Objeciones recurrentes y leads sin convertir</li>
+            <li>Informe con acciones concretas</li>
+          </ul>
+          <div class="choice-price">
+            <div>
+              <div class="choice-price-amount">149€</div>
+              <div class="choice-price-note">/trimestre · sin IVA</div>
+            </div>
+          </div>
+          <a href="#" class="choice-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_informe'}}}); return false;">Activar informe</a>
         </div>
-        <a href="#" class="choice-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_informe'}}}); return false;">Activar informe</a>
+
       </div>
     </div>
 
