@@ -1995,12 +1995,22 @@
 
   /* ============ CTA FINAL ============ */
   section.cta-final {
-    padding: 120px 0 140px;
-    background: linear-gradient(180deg, #ecf3ee 0%, #d8e9dd 100%);
-    border-top: 0.5px solid rgba(45, 90, 61, 0.16);
+    padding: 130px 0;
+    background: #101512;
+    background-image: url('/images/patterns/patron-oscuro-sutil.png');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
     text-align: center;
     position: relative;
     overflow: hidden;
+  }
+  section.cta-final::before {
+    content: '';
+    position: absolute; bottom: -240px; left: 50%; transform: translateX(-50%);
+    width: 720px; height: 720px;
+    background: radial-gradient(circle, rgba(143,191,159,0.12) 0%, transparent 62%);
+    pointer-events: none;
   }
   .cta-final-inner {
     max-width: 820px;
@@ -2013,17 +2023,17 @@
     font-size: 12px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--brand-deep);
+    color: rgba(255,255,255,0.6);
     margin-bottom: 32px;
     font-weight: 500;
     display: inline-flex; align-items: center; gap: 10px;
   }
   .cta-final-eyebrow::before {
     content: ""; width: 8px; height: 8px; border-radius: 50%;
-    background: transparent; border: 1.5px solid var(--brand-deep); flex-shrink: 0;
+    background: transparent; border: 1.5px solid rgba(255,255,255,0.5); flex-shrink: 0;
   }
   .cta-final-eyebrow::after {
-    content: ""; width: 32px; height: 1px; background: var(--brand-deep);
+    content: ""; width: 32px; height: 1px; background: rgba(255,255,255,0.4);
   }
   .cta-final-title {
     font-family: var(--serif);
@@ -2031,18 +2041,18 @@
     font-size: clamp(40px, 5.5vw, 64px);
     line-height: 1.05;
     letter-spacing: -0.025em;
-    color: var(--ink);
+    color: #fff;
     margin: 0 0 28px;
   }
   .cta-final-title em {
     font-style: italic;
     font-weight: 300;
-    color: var(--brand-deep);
+    color: #8fbf9f;
   }
   .cta-final-sub {
     font-size: 17px;
     line-height: 1.55;
-    color: var(--ink-soft);
+    color: rgba(255,255,255,0.66);
     margin: 0 auto 40px;
     max-width: 560px;
   }
@@ -2057,17 +2067,17 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: var(--ink);
-    color: #fff;
+    background: var(--brand);
+    color: #06241a;
     padding: 16px 28px;
     border-radius: 100px;
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 600;
     text-decoration: none;
     transition: background .2s ease, transform .2s ease;
   }
   .cta-final-primary:hover {
-    background: var(--brand-deep);
+    background: #14d89b;
     transform: translateY(-1px);
   }
   .cta-final-arrow {
@@ -2081,18 +2091,19 @@
     display: inline-flex;
     align-items: center;
     background: transparent;
-    color: var(--ink);
+    color: rgba(255,255,255,0.82);
     padding: 16px 28px;
     border-radius: 100px;
     font-size: 15px;
     font-weight: 500;
     text-decoration: none;
-    border: 0.5px solid var(--line-mid);
-    transition: border-color .2s ease, background .2s ease;
+    border: 1px solid rgba(255,255,255,0.25);
+    transition: border-color .2s ease, background .2s ease, color .2s ease;
   }
   .cta-final-secondary:hover {
-    border-color: var(--ink);
-    background: var(--bg-soft);
+    border-color: rgba(255,255,255,0.55);
+    background: rgba(255,255,255,0.06);
+    color: #fff;
   }
   @media (max-width: 600px) {
     section.cta-final { padding: 80px 0 100px; }
@@ -2227,8 +2238,10 @@
     margin: 0 auto;
     padding: 0 32px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
   }
   .footer-copy {
     font-size: 13px;
@@ -2236,6 +2249,18 @@
     margin: 0;
     line-height: 1.5;
   }
+  .footer-legal {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+  .footer-legal a {
+    font-size: 13px;
+    color: var(--ink-mute);
+    text-decoration: none;
+    transition: color .15s ease;
+  }
+  .footer-legal a:hover { color: var(--ink); }
   @media (max-width: 960px) {
     .footer-inner {
       grid-template-columns: 1fr 1fr;
@@ -4091,7 +4116,6 @@
 
 <!-- ============ CTA FINAL ============ -->
 <section class="cta-final" id="cta-final">
-  <img src="/images/logo/simbolo-tinta.png" alt="" aria-hidden="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:620px;opacity:0.05;pointer-events:none;z-index:0;user-select:none;">
   <div class="container">
     <div class="cta-final-inner">
       <div class="cta-final-eyebrow">Empieza hoy</div>
@@ -4147,13 +4171,16 @@
       </div>
     </div>
 
-    <!-- Navegación: Producto -->
-    <nav class="footer-col" aria-label="Producto">
-      <h3 class="footer-heading">Producto</h3>
+    <!-- Navegación: Servicios -->
+    <nav class="footer-col" aria-label="Servicios">
+      <h3 class="footer-heading">Servicios</h3>
       <ul class="footer-list">
-        <li><a href="#como-trabaja">Cómo trabaja</a></li>
-        <li><a href="#canales">Canales</a></li>
-        <li><a href="#precios">Precios</a></li>
+        <li><a href="https://empentia.com/agentes-ia-atencion-cliente/webchat/">Webchat</a></li>
+        <li><a href="https://empentia.com/agentes-ia-atencion-cliente/email/">Email</a></li>
+        <li><a href="#canales">WhatsApp · Próximamente</a></li>
+        <li><a href="#canales">Llamadas · Próximamente</a></li>
+        <li><a href="#canales">Redes Sociales · Próximamente</a></li>
+        <li><a href="#canales">Reseñas · Próximamente</a></li>
       </ul>
     </nav>
 
@@ -4161,22 +4188,23 @@
     <nav class="footer-col" aria-label="Recursos">
       <h3 class="footer-heading">Recursos</h3>
       <ul class="footer-list">
+        <li><a href="#como-trabaja">Cómo funciona</a></li>
         <li><a href="#casos">Casos de uso</a></li>
         <li><a href="#faqs">Preguntas frecuentes</a></li>
-        <li><a href="#cta-final">Reservar demo</a></li>
+        <li><a href="https://app.empentia.com/login">Acceso clientes</a></li>
       </ul>
     </nav>
 
-    <!-- Navegación: Empresa + redes -->
-    <div class="footer-col">
-      <h3 class="footer-heading">Empresa</h3>
+    <!-- Navegación: Contacto -->
+    <nav class="footer-col" aria-label="Contacto">
+      <h3 class="footer-heading">Contacto</h3>
       <ul class="footer-list">
-        <li><a href="mailto:hola@empentia.com">Contacto</a></li>
-        <li><a href="https://empentia.com/privacy" aria-label="Política de privacidad">Privacidad</a></li>
-        <li><a href="https://empentia.com/legal" aria-label="Aviso legal">Aviso legal</a></li>
-        <li><a href="#" data-cookie-open aria-label="Gestionar cookies">Gestionar cookies</a></li>
+        <li><a href="mailto:hola@empentia.com">hola@empentia.com</a></li>
+        <li><a href="mailto:hola@empentia.com?subject=Reservar%20llamada">Reservar llamada</a></li>
+        <li><a href="https://www.linkedin.com/company/empentia" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="https://www.instagram.com/empent_ia/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
       </ul>
-    </div>
+    </nav>
 
   </div>
 
@@ -4186,6 +4214,11 @@
       <p class="footer-copy">
         © <span id="footer-year">2025</span> empentIA. Todos los derechos reservados.
       </p>
+      <div class="footer-legal">
+        <a href="https://empentia.com/privacy">Privacidad</a>
+        <a href="https://empentia.com/legal">Aviso legal</a>
+        <a href="#" data-cookie-open aria-label="Gestionar cookies">Cookies</a>
+      </div>
     </div>
   </div>
 </footer>
