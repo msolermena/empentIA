@@ -1500,7 +1500,7 @@
   }
   .channel-card {
     background: #fff;
-    border: 0.5px solid var(--line-soft);
+    border: 1px solid var(--accent, var(--line-soft));
     border-radius: var(--radius);
     padding: 32px 28px;
     display: flex;
@@ -1510,8 +1510,8 @@
   }
   .channel-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 30px 60px -30px rgba(14,14,12,0.15);
-    border-color: rgba(0,195,137,0.3);
+    box-shadow: 0 30px 60px -30px color-mix(in srgb, var(--accent, #00c389) 38%, transparent);
+    border-color: var(--accent, rgba(0,195,137,0.3));
   }
   .channel-icon-wrap {
     display: flex;
@@ -1520,8 +1520,8 @@
     margin-bottom: 28px;
   }
   .channel-icon {
-    width: 44px; height: 44px;
-    border-radius: 12px;
+    width: 54px; height: 54px;
+    border-radius: 14px;
     background: linear-gradient(155deg, #1c2420 0%, #101512 100%);
     color: #00c389;
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 14px rgba(16,21,18,0.18);
@@ -1537,7 +1537,7 @@
     stroke-linejoin: round;
   }
   .channel-icon img {
-    width: 30px; height: 30px;
+    width: 42px; height: 42px;
     display: block;
   }
   .channel-soon {
@@ -3962,7 +3962,7 @@
 
     <div class="channels-grid">
       <!-- WhatsApp -->
-      <div class="channel-card" style="--brand-soft: #eef7cc; --brand-deep: #7aaa10; --brand-darker: #527510;">
+      <div class="channel-card" style="--accent: #7bc200;">
         <div class="channel-icon-wrap">
           <div class="channel-icon">
             <img src="/images/icons/agente-whatsapp.svg" alt="" aria-hidden="true">
@@ -3987,7 +3987,7 @@
       </div>
 
       <!-- Email -->
-      <div class="channel-card" style="--brand-soft: #ddeeff; --brand-deep: #3a82cc; --brand-darker: #1a5a99;">
+      <div class="channel-card" style="--accent: #0061c2;">
         <div class="channel-icon-wrap">
           <div class="channel-icon">
             <img src="/images/icons/agente-email.svg" alt="" aria-hidden="true">
@@ -4011,7 +4011,7 @@
       </div>
 
       <!-- Voz -->
-      <div class="channel-card" style="--brand-soft: #fde8e0; --brand-deep: #c0522a; --brand-darker: #8a3419;">
+      <div class="channel-card" style="--accent: #c23400;">
         <div class="channel-icon-wrap">
           <div class="channel-icon">
             <img src="/images/icons/agente-voz.svg" alt="" aria-hidden="true">
@@ -4036,7 +4036,7 @@
       </div>
 
       <!-- Redes Sociales -->
-      <div class="channel-card" style="--brand-soft: #ede9fe; --brand-deep: #7c3aed; --brand-darker: #5b21b6;">
+      <div class="channel-card" style="--accent: #4700c2;">
         <div class="channel-icon-wrap">
           <div class="channel-icon">
             <img src="/images/icons/agente-redes-sociales.svg" alt="" aria-hidden="true">
@@ -4061,7 +4061,7 @@
       </div>
 
       <!-- Reseñas -->
-      <div class="channel-card" style="--brand-soft: #fdf4dc; --brand-deep: #c08a1e; --brand-darker: #8a6010;">
+      <div class="channel-card" style="--accent: #c28100;">
         <div class="channel-icon-wrap">
           <div class="channel-icon">
             <img src="/images/icons/agente-resenas.svg" alt="" aria-hidden="true">
