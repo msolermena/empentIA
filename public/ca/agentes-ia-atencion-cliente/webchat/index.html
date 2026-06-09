@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>empentIA — Webchat IA per a eCommerce | Agent comercial 24/7</title>
 <meta name="description" content="Webchat amb IA que actua com el teu millor comercial: respon, assessora i converteix visites en vendes 24/7. Llest en 48 hores. Compleix RGPD, dades a la UE." />
-<meta name="keywords" content="webchat IA, chatbot eCommerce, agente comercial IA, atención al client automatizada, chatbot vendas, IA conversacional, asistente virtual eCommerce" />
+<meta name="keywords" content="webchat IA, chatbot eCommerce, agent comercial IA, atenció al client automatitzada, chatbot vendes, IA conversacional, assistent virtual eCommerce" />
 <meta name="author" content="empentIA" />
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
 <meta name="googlebot" content="index, follow" />
@@ -21,9 +21,9 @@
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="ca_ES" />
-<meta property="og:url" content="https://empentia.com/agentes-ia-atencion-cliente/webchat/" />
+<meta property="og:url" content="https://empentia.com/ca/agentes-ia-atencion-cliente/webchat/" />
 <meta property="og:title" content="empentIA — Webchat IA per a eCommerce" />
-<meta property="og:description" content="El teu agent comercial llest en 48 hores. Webchat con IA que converteix visites en vendes 24/7." />
+<meta property="og:description" content="El teu agent comercial llest en 48 hores. Webchat amb IA que converteix visites en vendes 24/7." />
 <meta property="og:image" content="https://empentia.com/images/social/og-webchat.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -32,12 +32,12 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="empentIA — Webchat IA per a eCommerce" />
-<meta name="twitter:description" content="El teu agent comercial llest en 48 hores. Webchat con IA que converteix visites en vendes 24/7." />
+<meta name="twitter:description" content="El teu agent comercial llest en 48 hores. Webchat amb IA que converteix visites en vendes 24/7." />
 <meta name="twitter:image" content="https://empentia.com/images/social/og-webchat.jpg" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Instrument+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #f6f5f0;
@@ -63,7 +63,7 @@
     --dark-line: rgba(0,195,137,0.10);
 
     --serif: "Fraunces", "Times New Roman", serif;
-    --sans: "Inter", system-ui, sans-serif;
+    --sans: "Instrument Sans", system-ui, sans-serif;
     --mono: "JetBrains Mono", monospace;
 
     --radius: 18px;
@@ -202,10 +202,11 @@
   h1.display {
     font-family: var(--serif);
     font-weight: 400;
-    font-size: clamp(56px, 7.5vw, 96px);
-    line-height: 0.95;
+    font-size: clamp(56px, 6.4vw, 82px);
+    line-height: 1.0;
     letter-spacing: -0.035em;
     margin-bottom: 28px;
+    text-wrap: balance;
   }
   h1.display em {
     font-style: italic;
@@ -420,7 +421,7 @@
     opacity: 0.75;
     display: flex; align-items: center; gap: 10px;
   }
-  /* marca de client con nodo del logo */
+  /* marca de cliente con nodo del logo */
   .client-node {
     width: 10px; height: 10px;
     border: 1.5px solid var(--brand);
@@ -463,27 +464,25 @@
     font-size: 12px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--brand);
+    color: var(--brand-deep);
     margin-bottom: 16px;
     display: inline-flex; align-items: center; gap: 10px;
   }
-  /* eyebrow con nodo + línia */
+  /* eyebrow con rallita inicial */
   .eyebrow::before {
     content: "";
-    width: 8px; height: 8px; border-radius: 50%;
-    background: transparent;
-    border: 1.5px solid var(--brand);
+    width: 24px; height: 1px;
+    background: var(--brand-deep);
   }
-  .eyebrow::after {
-    content: ""; width: 32px; height: 1px; background: var(--brand);
-  }
+  .eyebrow::after { content: none; }
   h2.section-title {
     font-family: var(--serif);
     font-weight: 400;
     font-size: clamp(40px, 5vw, 64px);
     line-height: 1;
     letter-spacing: -0.03em;
-    max-width: 800px;
+    max-width: 900px;
+    text-wrap: balance;
   }
   h2.section-title em {
     font-style: italic;
@@ -492,7 +491,7 @@
   }
   .section-sub {
     font-size: 17px; color: var(--dark-ink-soft);
-    max-width: 540px;
+    max-width: 820px;
     margin-top: 24px;
   }
 
@@ -567,7 +566,7 @@
     font-family: var(--mono); font-weight: 500; font-size: 13px;
     border-color: var(--brand);
   }
-  /* Banderas SVG unificadas — totes mismo tamany i estilo */
+  /* Banderas SVG unificadas — todas mismo tamaño y estilo */
   .flag svg {
     width: 26px; height: 17px;
     border-radius: 2px;
@@ -600,6 +599,8 @@
 
   /* ============ CASOS DE ÉXITO ============ */
   section.cases { padding: 140px 0; background: var(--bg); position: relative; }
+  .cases-bg-nodes { position: absolute; inset: 0; pointer-events: none; opacity: 0.15; }
+  .cases .container { position: relative; z-index: 1; }
   .cases-head { margin-bottom: 64px; }
   .cases-head .eyebrow { color: var(--brand-deep); }
   .cases-head .eyebrow::before { border-color: var(--brand-deep); }
@@ -687,7 +688,9 @@
     background: var(--bg-soft);
     position: relative;
   }
-  .pricing-head { margin-bottom: 72px; max-width: 720px; }
+  .pricing-bg-nodes { position: absolute; inset: 0; pointer-events: none; opacity: 0.13; }
+  .pricing .container { position: relative; z-index: 1; }
+  .pricing-head { margin-bottom: 72px; max-width: 900px; }
   .pricing-head .eyebrow { color: var(--brand-deep); }
   .pricing-head .eyebrow::before { border-color: var(--brand-deep); }
   .pricing-head .eyebrow::after { background: var(--brand-deep); }
@@ -809,7 +812,7 @@
     border-top: 0.5px solid var(--line-mid);
   }
   .pro-services-head {
-    text-align: center;
+    text-align: left;
     margin-bottom: 48px;
   }
   .pro-services-eyebrow {
@@ -821,12 +824,10 @@
     display: inline-flex; align-items: center; gap: 10px;
   }
   .pro-services-eyebrow::before {
-    content: ""; width: 8px; height: 8px; border-radius: 50%;
-    border: 1.5px solid var(--brand-deep);
+    content: ""; width: 24px; height: 1px;
+    background: var(--brand-deep);
   }
-  .pro-services-eyebrow::after {
-    content: ""; width: 24px; height: 1px; background: var(--brand-deep);
-  }
+  .pro-services-eyebrow::after { content: none; }
   .pro-services-title {
     font-family: var(--serif);
     font-weight: 400;
@@ -837,24 +838,29 @@
   }
   .pro-services-title em {
     font-style: italic;
-    color: var(--brand-deep);
+    color: var(--brand);
     font-weight: 300;
   }
   .pro-services-sub {
     font-size: 16px;
     color: var(--ink-soft);
-    max-width: 560px;
-    margin: 0 auto;
+    max-width: 760px;
+    margin: 0;
     line-height: 1.55;
   }
 
-  /* Onboarding: DIY vs Premium (pas 1) */
+  /* Onboarding: DIY vs Premium (paso 1) */
   .onboarding-choice {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     gap: 24px;
     align-items: stretch;
     margin-bottom: 24px;
+  }
+  /* Dos módulos lado a lado */
+  .onboarding-choice.pair {
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
   }
   .choice-card {
     background: #fff;
@@ -1002,7 +1008,7 @@
     font-weight: 500;
   }
 
-  /* Paso 2: tras 30 dies, optimización */
+  /* Paso 2: tras 30 días, optimización */
   .next-step {
     margin-top: 56px;
     background: var(--bg-card);
@@ -1015,7 +1021,7 @@
     align-items: center;
     position: relative;
   }
-  /* línia conectora visual con pas anterior */
+  /* línea conectora visual con paso anterior */
   .next-step::before {
     content: "";
     position: absolute;
@@ -1124,7 +1130,7 @@
     border-collapse: collapse;
     font-size: 13.5px;
   }
-  /* posicionado relativo per a z-index en celdas */
+  /* posicionado relativo para z-index en celdas */
   .compare-table th, .compare-table td { position: relative; }
 
   .compare-table thead {
@@ -1218,7 +1224,7 @@
     background: rgba(0,195,137,0.1);
   }
 
-  /* checkmarks i dashes */
+  /* checkmarks y dashes */
   .check-y {
     display: inline-flex; align-items: center; justify-content: center;
     width: 22px; height: 22px;
@@ -1229,7 +1235,7 @@
   }
   .check-n { color: var(--ink-mute); font-size: 14px; }
 
-  /* badge "properament" */
+  /* badge "próximamente" */
   .soon {
     display: inline-block;
     font-size: 9px;
@@ -1366,203 +1372,95 @@
 
   /* ============ FAQs ============ */
   section.faqs {
-    padding: 80px 0 140px;
+    padding: 80px 0 100px;
     background: var(--bg-soft);
-    border-top: 0.5px solid var(--line-soft);
+    border-top: 1px solid var(--line-soft);
     position: relative;
-    overflow: hidden;
   }
-  .faqs-bg-nodes {
-    position: absolute; inset: 0;
-    pointer-events: none;
-    opacity: 0.25;
+  /* FAQ con la misma identidad que agentes-ia */
+  .faqs-head .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--brand-deep); margin-bottom: 20px; font-weight: 400;
+    display: inline-flex; align-items: center; gap: 10px;
   }
+  .faqs-head .section-label::before {
+    content: ''; width: 24px; height: 1px;
+    background: var(--brand-deep); flex-shrink: 0;
+  }
+  .faqs-head .section-label::after { content: none; }
+  .faqs-head h2 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(36px, 4.8vw, 58px); line-height: 1.06;
+    letter-spacing: -0.035em; color: var(--ink); margin: 0;
+  }
+  .faqs-head h2 em { font-style: italic; font-weight: 300; color: var(--brand); }
   .faqs-grid {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
     position: relative;
     z-index: 1;
   }
   .faqs-head {
-    margin-bottom: 56px;
-    max-width: 720px;
+    max-width: 640px;
   }
-  .faqs-head p { max-width: 600px; }
-  .faqs-head .eyebrow { color: var(--brand-deep); margin-bottom: 24px; }
-  .faqs-head .eyebrow::before { border-color: var(--brand-deep); }
-  .faqs-head .eyebrow::after { background: var(--brand-deep); }
-  .faqs-head h2 {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(40px, 5vw, 64px);
-    line-height: 1.02;
-    letter-spacing: -0.03em;
-    margin-bottom: 24px;
-  }
-  .faqs-head h2 em {
-    font-style: italic;
-    color: var(--brand-deep);
-    font-weight: 300;
-  }
+  .faqs-head .section-intro { margin-bottom: 0; }
   .faqs-head p {
-    font-size: 16px;
+    font-size: 18px;
     color: var(--ink-soft);
-    line-height: 1.55;
-    max-width: 380px;
-    margin-bottom: 32px;
+    line-height: 1.6;
+    margin-top: 16px;
   }
-
-  /* Contact card debajo del head */
-  .faqs-contact {
-    padding: 24px 28px;
-    background: var(--bg-card);
-    border: 0.5px solid var(--line-soft);
-    border-radius: var(--radius);
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    max-width: 380px;
+  .faqs-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 48px;
   }
-  .faqs-contact-label {
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--brand-deep);
-    font-weight: 500;
-    display: inline-flex; align-items: center; gap: 8px;
-  }
-  .faqs-contact-label::before {
-    content: ""; width: 6px; height: 6px;
-    background: var(--brand);
-    border-radius: 50%;
-    box-shadow: 0 0 0 4px rgba(0,195,137,0.15);
-  }
-  .faqs-contact-title {
-    font-family: var(--serif);
-    font-size: 22px;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-  }
-  .faqs-contact a {
-    color: var(--brand-deep);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 14px;
-    display: inline-flex; align-items: center; gap: 8px;
-    transition: gap .2s ease;
-  }
-  .faqs-contact a:hover { gap: 12px; }
-
-  /* Categorias + items */
-  .faqs-list {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-  }
-  .faq-category {
-    display: flex;
-    flex-direction: column;
-  }
-  .faq-cat-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--brand-deep);
-    text-transform: uppercase;
-    font-weight: 500;
-    margin-bottom: 8px;
-    padding-bottom: 16px;
-    border-bottom: 0.5px solid rgba(0,195,137,0.2);
-  }
-
   .faq-item {
-    border-bottom: 0.5px solid var(--line-soft);
-    transition: border-color .25s ease;
+    border-bottom: 1px solid var(--line-soft);
+    padding: 16px 0;
   }
-  .faq-item:hover { border-bottom-color: rgba(0,195,137,0.4); }
-  .faq-question {
-    width: 100%;
-    background: transparent;
-    border: none;
-    padding: 24px 0;
-    text-align: left;
-    cursor: pointer;
+  .faq-item:first-child { padding-top: 0; }
+  .faq-q {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    gap: 24px;
-    font-family: var(--serif);
-    font-size: 19px;
-    font-weight: 400;
-    letter-spacing: -0.015em;
+    align-items: center;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 500;
     color: var(--ink);
-    line-height: 1.3;
-    transition: color .25s ease;
+    gap: 20px;
+    user-select: none;
   }
-  .faq-question:hover { color: var(--brand-deep); }
-  .faq-icon {
+  .faq-q::after {
+    content: '+';
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 300;
+    transition: transform 0.3s;
+    color: var(--ink-mute);
     flex-shrink: 0;
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    border: 0.5px solid var(--line-mid);
-    display: flex; align-items: center; justify-content: center;
-    transition: background .25s ease, border-color .25s ease, transform .35s cubic-bezier(0.4, 0, 0.2, 1);
-    color: var(--ink-soft);
-    position: relative;
   }
-  .faq-icon::before, .faq-icon::after {
-    content: "";
-    position: absolute;
-    background: currentColor;
-    transition: transform .35s cubic-bezier(0.4, 0, 0.2, 1), opacity .25s ease;
-  }
-  .faq-icon::before {
-    width: 12px; height: 1.2px;
-  }
-  .faq-icon::after {
-    width: 1.2px; height: 12px;
-  }
-  .faq-item[data-open="true"] .faq-icon {
-    background: var(--ink);
-    color: #fff;
-    border-color: var(--ink);
-  }
-  .faq-item[data-open="true"] .faq-icon::after {
-    transform: rotate(90deg);
-    opacity: 0;
-  }
-  .faq-answer {
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a {
     max-height: 0;
     overflow: hidden;
-    transition: max-height .4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .faq-item[data-open="true"] .faq-answer {
-    max-height: 600px;
-  }
-  .faq-answer-inner {
-    padding: 0 0 28px;
+    transition: max-height 0.4s ease, padding 0.4s ease;
     font-size: 15px;
     color: var(--ink-soft);
-    line-height: 1.65;
-    max-width: 580px;
+    line-height: 1.6;
   }
-  .faq-answer-inner p { margin-bottom: 12px; }
-  .faq-answer-inner p:last-child { margin-bottom: 0; }
-  .faq-answer-inner strong { color: var(--ink); font-weight: 500; }
-  .faq-answer-inner code {
-    font-family: var(--mono);
-    font-size: 13px;
-    background: rgba(0,195,137,0.1);
-    color: var(--brand-darker);
-    padding: 2px 6px;
-    border-radius: 4px;
+  .faq-item.open .faq-a {
+    max-height: 340px;
+    padding-top: 10px;
   }
 
   @media (max-width: 960px) {
-    .faqs-grid { grid-template-columns: 1fr; gap: 48px; }
-    .faqs-head { position: static; }
-    .faqs-contact { max-width: 100%; }
-    .faq-question { font-size: 17px; }
-    section.faqs { padding: 100px 0; }
+    section.faqs { padding: 80px 0 100px; }
+  }
+  @media (max-width: 720px) {
+    .faqs-items { grid-template-columns: 1fr; }
   }
 
   footer {
@@ -1572,9 +1470,9 @@
     font-size: 13px;
   }
 
-  /* ============ MÁS CANALES (properament) ============ */
+  /* ============ MÁS CANALES (próximamente) ============ */
   section.channels {
-    padding: 140px 0;
+    padding: 140px 0 88px;
     background: var(--bg);
     position: relative;
     overflow: hidden;
@@ -1609,72 +1507,83 @@
 
   .channels-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
     position: relative; z-index: 1;
   }
   .channel-card {
     background: #fff;
-    border: 0.5px solid var(--line-soft);
+    border: 1px solid var(--line-soft);
     border-radius: var(--radius);
-    padding: 32px 28px;
+    padding: 24px 20px;
     display: flex;
     flex-direction: column;
     position: relative;
+    overflow: hidden;
     transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .channel-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent, var(--brand)), transparent 70%);
   }
   .channel-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 30px 60px -30px rgba(14,14,12,0.15);
-    border-color: rgba(0,195,137,0.3);
+    box-shadow: 0 24px 48px -24px rgba(14,14,12,0.12);
+    border-color: color-mix(in srgb, var(--accent, #00c389) 40%, var(--line-soft));
   }
   .channel-icon-wrap {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
   }
   .channel-icon {
-    width: 44px; height: 44px;
-    border-radius: 12px;
-    background: var(--brand-soft);
-    color: var(--brand-darker);
+    width: 54px; height: 54px;
+    border-radius: 14px;
+    background: linear-gradient(155deg, #1c2420 0%, #101512 100%);
+    color: #00c389;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 14px rgba(16,21,18,0.18);
     display: flex; align-items: center; justify-content: center;
     font-size: 20px;
   }
   .channel-icon svg {
     width: 22px; height: 22px;
-    stroke: var(--brand-deep);
+    stroke: #00c389;
     fill: none;
     stroke-width: 1.8;
     stroke-linecap: round;
     stroke-linejoin: round;
   }
+  .channel-icon img {
+    width: 42px; height: 42px;
+    display: block;
+  }
   .channel-soon {
     font-size: 9px;
     padding: 4px 10px;
     border-radius: 100px;
-    background: var(--brand-soft);
-    color: var(--brand-deep);
-    border: 0.5px solid var(--brand-soft);
+    background: var(--bg-soft);
+    color: var(--ink-mute);
+    border: 0.5px solid var(--line-soft);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     font-weight: 500;
   }
   .channel-name {
     font-family: var(--serif);
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 400;
     letter-spacing: -0.02em;
-    line-height: 1.1;
-    margin-bottom: 12px;
+    line-height: 1.12;
+    margin-bottom: 8px;
     color: var(--ink);
   }
   .channel-desc {
-    font-size: 13.5px;
-    line-height: 1.55;
+    font-size: 12.5px;
+    line-height: 1.5;
     color: var(--ink-soft);
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     flex: 1;
   }
   .channel-features {
@@ -1700,24 +1609,24 @@
   }
   .channel-price {
     font-family: var(--serif);
-    font-size: 24px;
+    font-size: 19px;
     letter-spacing: -0.02em;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
   }
   .channel-period {
-    font-size: 11px;
+    font-size: 10.5px;
     color: var(--ink-mute);
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
   .channel-cta {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 12px 18px;
+    padding: 10px 14px;
     border-radius: 100px;
     border: 0.5px solid var(--line-mid);
-    font-size: 13px; font-weight: 500;
+    font-size: 12px; font-weight: 500;
     color: var(--ink); text-decoration: none;
     text-align: center;
     transition: background .2s, color .2s, border-color .2s;
@@ -1923,22 +1832,28 @@
     .nav-toggle { display: flex; }
     .nav-mobile { display: block; }
     .nav-links { display: none; }
+    /* Hero: stack vertical */
     .hero-grid { grid-template-columns: 1fr !important; gap: 60px !important; }
     .hero-mock { max-width: 480px; margin: 0 auto; }
     .hero h1 { font-size: clamp(40px, 6vw, 64px) !important; }
+    /* Grids principales: 2 columnas */
     .bento, .group-bento { grid-template-columns: repeat(2, 1fr) !important; }
     .cell.big, .cell.med, .cell.tall, .cell.wide { grid-column: span 2 !important; grid-row: auto !important; }
     .cases-grid { grid-template-columns: repeat(2, 1fr) !important; }
     .pricing-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 14px !important; }
     .channels-grid { grid-template-columns: repeat(2, 1fr) !important; }
     .plan.popular { transform: none !important; }
+    /* Comparativa: switch to mobile chips */
     .compare-table { display: none !important; }
     .compare-mobile { display: block !important; }
-    .faqs-grid { display: block !important; }
-    .faqs-head { position: static !important; margin-bottom: 48px; }
+    /* FAQs: 1 col */
+    .faqs-items { grid-template-columns: 1fr !important; }
+    /* Footer: 2 col */
     .footer-inner { grid-template-columns: 1fr 1fr !important; gap: 40px !important; }
+    /* Onboarding choice (acompañamiento) — stack vertical */
     .onboarding-choice { grid-template-columns: 1fr !important; gap: 16px !important; }
     .choice-divider { display: none !important; }
+    /* Next step (siguiente paso) — stack vertical */
     .next-step { grid-template-columns: 1fr !important; gap: 20px !important; padding: 32px 24px !important; text-align: center; }
     .next-step::before { display: none !important; }
     /* channels-top: stack vertical en mobile */
@@ -1946,10 +1861,12 @@
     .channels-360 { min-height: auto !important; padding: 0 !important; overflow: hidden; }
     .orbit-stage { max-width: 100% !important; width: 100%; }
     section.channels { overflow: hidden !important; }
+    /* Hero chat-card — sense overflow */
     .chat-card { position: relative !important; bottom: auto !important; right: auto !important; width: 100% !important; transform: none !important; margin-top: 16px; }
     .browser { position: relative; transform: none !important; aspect-ratio: 4/3; }
   }
   @media (max-width: 640px) {
+    /* Todas las grids a 1 columna */
     .bento, .group-bento { grid-template-columns: 1fr !important; }
     .cell.big, .cell.med, .cell.tall, .cell.wide { grid-column: span 1 !important; }
     .cases-grid { grid-template-columns: 1fr !important; }
@@ -1957,24 +1874,35 @@
     .channels-grid { grid-template-columns: 1fr !important; }
     .footer-inner { grid-template-columns: 1fr !important; gap: 36px !important; text-align: center; }
     .footer-brand { margin: 0 auto; }
+    /* Container más estrecho */
     .container { padding: 0 18px !important; }
+    /* H1 hero más pequeño */
     .hero h1 { font-size: 38px !important; line-height: 1.05 !important; }
     .hero-sub { font-size: 16px !important; }
+    /* Hero CTA stack */
     .hero-actions { flex-direction: column !important; align-items: stretch !important; }
     .hero-actions .btn-primary,
     .hero-actions .btn-secondary { width: 100%; justify-content: center; }
+    /* H2 en secciones */
     .section-title { font-size: clamp(32px, 7vw, 44px) !important; }
+    /* Hero mockup más pequeño */
     .hero-mock { max-width: 100%; }
+    /* CTA final actions stack */
     .cta-final-actions { flex-direction: column !important; }
     .cta-final-primary, .cta-final-secondary { width: 100%; justify-content: center; }
     .cta-final-title { font-size: clamp(32px, 8vw, 44px) !important; }
+    /* Marquee más pequeño */
     .marquee-track { gap: 32px !important; }
     .client-logo { font-size: 14px !important; }
+    /* Tabs cómo trabaja */
     .como-trabaja-tabs .tabs-nav { flex-wrap: wrap; }
+    /* Eyebrow más pequeño */
     .eyebrow { font-size: 11px !important; }
+    /* Footer social: mantenir centrats i dins */
     .footer-social { justify-content: center !important; flex-wrap: wrap; }
     .footer-social-link { width: 38px !important; height: 38px !important; }
     .footer-brand { max-width: 100% !important; align-items: center; text-align: center; }
+    /* Acompañamiento cards padding compactat */
     .choice-card, .next-step { padding: 24px 20px !important; }
   }
   @media (max-width: 420px) {
@@ -2041,7 +1969,7 @@
       padding: 12px !important;
       overflow: hidden !important;
     }
-    /* Cells/cards padding més ajustado */
+    /* Cells/cards padding más ajustado */
     .cell { padding: 22px 20px !important; }
     .cell h3 { line-height: 1.2 !important; }
     /* Botones dentro de cards a full width */
@@ -2057,7 +1985,7 @@
     .module-card { padding: 22px 20px !important; }
     .channel-card * ,
     .module-card * { max-width: 100%; box-sizing: border-box; }
-    /* Analytics stats — mantenir legibles */
+    /* Analytics stats — mantener legibles */
     .ana-mini-stat { padding: 14px 12px !important; }
     .ana-mini-num { font-size: 24px !important; }
     /* Eliminar padding lateral excesivo del container en mobile */
@@ -2066,43 +1994,64 @@
 
   /* ============ CTA FINAL ============ */
   section.cta-final {
-    padding: 120px 0 140px;
-    background: linear-gradient(180deg, #ecf3ee 0%, #d8e9dd 100%);
-    border-top: 0.5px solid rgba(45, 90, 61, 0.16);
+    padding: 130px 0;
+    background: #101512;
+    background-image: url('/images/patterns/patron-oscuro-sutil.png');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  section.cta-final::before {
+    content: '';
+    position: absolute; bottom: -240px; left: 50%; transform: translateX(-50%);
+    width: 720px; height: 720px;
+    background: radial-gradient(circle, rgba(143,191,159,0.12) 0%, transparent 62%);
+    pointer-events: none;
   }
   .cta-final-inner {
     max-width: 820px;
     margin: 0 auto;
     padding: 0 24px;
+    position: relative;
+    z-index: 1;
   }
   .cta-final-eyebrow {
     font-size: 12px;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--ink-mute);
+    color: rgba(255,255,255,0.6);
     margin-bottom: 32px;
     font-weight: 500;
+    display: inline-flex; align-items: center; gap: 10px;
   }
+  .cta-final-eyebrow::before {
+    content: ""; width: 24px; height: 1px;
+    background: rgba(255,255,255,0.45); flex-shrink: 0;
+  }
+  .cta-final-eyebrow::after { content: none; }
   .cta-final-title {
     font-family: var(--serif);
     font-weight: 400;
     font-size: clamp(40px, 5.5vw, 64px);
     line-height: 1.05;
     letter-spacing: -0.025em;
-    color: var(--ink);
+    color: #fff;
     margin: 0 0 28px;
   }
   .cta-final-title em {
     font-style: italic;
-    font-weight: 400;
+    font-weight: 300;
+    color: #8fbf9f;
   }
   .cta-final-sub {
     font-size: 17px;
     line-height: 1.55;
-    color: var(--ink-soft);
+    color: rgba(255,255,255,0.66);
     margin: 0 auto 40px;
-    max-width: 560px;
+    max-width: 680px;
   }
   .cta-final-actions {
     display: flex;
@@ -2115,17 +2064,17 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: var(--ink);
-    color: #fff;
+    background: var(--brand);
+    color: #06241a;
     padding: 16px 28px;
     border-radius: 100px;
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 600;
     text-decoration: none;
     transition: background .2s ease, transform .2s ease;
   }
   .cta-final-primary:hover {
-    background: var(--brand-deep);
+    background: #14d89b;
     transform: translateY(-1px);
   }
   .cta-final-arrow {
@@ -2139,18 +2088,19 @@
     display: inline-flex;
     align-items: center;
     background: transparent;
-    color: var(--ink);
+    color: rgba(255,255,255,0.82);
     padding: 16px 28px;
     border-radius: 100px;
     font-size: 15px;
     font-weight: 500;
     text-decoration: none;
-    border: 0.5px solid var(--line-mid);
-    transition: border-color .2s ease, background .2s ease;
+    border: 1px solid rgba(255,255,255,0.25);
+    transition: border-color .2s ease, background .2s ease, color .2s ease;
   }
   .cta-final-secondary:hover {
-    border-color: var(--ink);
-    background: var(--bg-soft);
+    border-color: rgba(255,255,255,0.55);
+    background: rgba(255,255,255,0.06);
+    color: #fff;
   }
   @media (max-width: 600px) {
     section.cta-final { padding: 80px 0 100px; }
@@ -2285,8 +2235,10 @@
     margin: 0 auto;
     padding: 0 32px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
   }
   .footer-copy {
     font-size: 13px;
@@ -2294,6 +2246,18 @@
     margin: 0;
     line-height: 1.5;
   }
+  .footer-legal {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+  .footer-legal a {
+    font-size: 13px;
+    color: var(--ink-mute);
+    text-decoration: none;
+    transition: color .15s ease;
+  }
+  .footer-legal a:hover { color: var(--ink); }
   @media (max-width: 960px) {
     .footer-inner {
       grid-template-columns: 1fr 1fr;
@@ -2330,27 +2294,18 @@
       radial-gradient(circle at 80% 70%, rgba(0,195,137,0.05), transparent 40%);
     pointer-events: none;
   }
-  /* Nodos decorativos de fondo: més visibles que en la versión oscura */
-  section.como-trabaja-tabs .features-bg-nodes {
-    position: absolute; inset: 0;
-    pointer-events: none;
-    opacity: 0.25;
-  }
 
   .como-trabaja-tabs .ct-head {
     margin-bottom: 64px;
     position: relative; z-index: 1;
     max-width: 800px;
   }
-  /* Sobrescribir colors del eyebrow heredato per a fondo claro */
   .como-trabaja-tabs .ct-head .eyebrow { color: var(--brand-deep); }
-  .como-trabaja-tabs .ct-head .eyebrow::before { border-color: var(--brand-deep); }
-  .como-trabaja-tabs .ct-head .eyebrow::after { background: var(--brand-deep); }
+  .como-trabaja-tabs .ct-head .eyebrow::before { background: var(--brand-deep); }
   .como-trabaja-tabs .ct-head h2.section-title { color: var(--ink); }
-  .como-trabaja-tabs .ct-head h2.section-title em { color: var(--brand-deep); }
+  .como-trabaja-tabs .ct-head h2.section-title em { color: var(--brand); }
   .como-trabaja-tabs .ct-head .section-sub { color: var(--ink-soft); }
 
-  /* HINT pulsante */
   .como-trabaja-tabs .tabs-hint {
     display: flex; align-items: center; gap: 12px;
     margin-bottom: 18px;
@@ -2373,7 +2328,6 @@
     50% { box-shadow: 0 0 0 7px rgba(0,129,89,0.06); }
   }
 
-  /* TABS NAV */
   .como-trabaja-tabs .tabs-wrapper { position: relative; z-index: 1; }
   .como-trabaja-tabs .tabs-nav {
     display: grid;
@@ -2407,25 +2361,74 @@
     transform-origin: left;
     transition: transform .4s cubic-bezier(0.4, 0, 0.2, 1);
   }
+  /* Gradient top — color verde corporativo, intensidad según estado
+     Inactiva: difuminado · Hover: media intensidad · Activa: saturado
+     Mantiene la identidad de marca y guía al usuario hacia la sección actual */
+  .como-trabaja-tabs .tab::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #9FE1CB, #00c389 50%, #008159);
+    opacity: 0.25;
+    pointer-events: none;
+    transition: opacity .35s ease, height .35s ease;
+  }
+  .como-trabaja-tabs .tab:hover::after {
+    opacity: 0.65;
+  }
+  .como-trabaja-tabs .tab.active::after {
+    opacity: 1;
+    height: 4px;
+  }
   .como-trabaja-tabs .tab:hover {
     border-color: rgba(0,129,89,0.3);
     box-shadow: 0 12px 30px -12px rgba(14,14,12,0.12);
     transform: translateY(-2px);
   }
   .como-trabaja-tabs .tab.active {
-    background: #ffffff;
-    border-color: rgba(0,129,89,0.4);
-    box-shadow: 0 16px 36px -16px rgba(0,129,89,0.18);
+    background: #0e0e0c;
+    border-color: rgba(0,195,137,0.4);
+    box-shadow: 0 16px 36px -16px rgba(0,129,89,0.3);
     transform: none;
+  }
+  .como-trabaja-tabs .tab.active .tab-num {
+    color: var(--brand);
+  }
+  .como-trabaja-tabs .tab.active .tab-name {
+    color: #f5f4ee;
+  }
+  .como-trabaja-tabs .tab.active .tab-name em {
+    color: var(--brand);
+  }
+  .como-trabaja-tabs .tab.active .tab-num {
+    color: #f5f4ee;
+    opacity: 0.10;
+  }
+  .como-trabaja-tabs .tab.active .tab-claim {
+    color: rgba(245,244,238,0.72);
   }
   .como-trabaja-tabs .tab.active::before { transform: scaleX(1); }
 
   .como-trabaja-tabs .tab-num {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--brand-deep);
-    letter-spacing: 0.06em;
-    font-weight: 500;
+    position: absolute;
+    top: 10px;
+    right: 22px;
+    font-family: var(--serif);
+    font-size: 88px;
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--ink);
+    opacity: 0.07;
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity .3s ease, color .3s ease;
+  }
+  .como-trabaja-tabs .tab-name,
+  .como-trabaja-tabs .tab-claim {
+    position: relative;
+    z-index: 1;
   }
   .como-trabaja-tabs .tab-name {
     font-family: var(--serif);
@@ -2434,15 +2437,22 @@
     color: var(--ink);
     letter-spacing: -0.025em;
     line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .como-trabaja-tabs .tab-name em { font-style: italic; color: var(--brand-deep); font-weight: 300; }
   .como-trabaja-tabs .tab-claim {
     font-size: 13px;
     color: var(--ink-soft);
     line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 2.9em;
   }
 
-  /* Indicador de estado en cada tab */
   .como-trabaja-tabs .tab-status {
     position: absolute;
     bottom: 20px;
@@ -2470,32 +2480,31 @@
   }
   .como-trabaja-tabs .tab:hover .tab-status .arrow { transform: translateX(4px); }
   .como-trabaja-tabs .tab.active .tab-status {
-    color: var(--brand-deep);
+    color: var(--brand);
     opacity: 1;
   }
   .como-trabaja-tabs .tab.active .tab-status .label-default { display: none; }
   .como-trabaja-tabs .tab.active .tab-status .label-active { display: inline; }
   .como-trabaja-tabs .tab.active .tab-status .arrow { transform: rotate(90deg); }
 
-  /* PANELS */
-  .como-trabaja-tabs .tabs-panells { position: relative; z-index: 1; }
-  .como-trabaja-tabs .tab-panell {
+  .como-trabaja-tabs .tabs-panels { position: relative; z-index: 1; }
+  .como-trabaja-tabs .tab-panel {
     display: none;
     animation: ct-fade-in .4s ease;
   }
-  .como-trabaja-tabs .tab-panell.active { display: block; }
+  .como-trabaja-tabs .tab-panel.active { display: block; }
   @keyframes ct-fade-in {
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Bento del panell — Opción 2: demo grande izquierda + big/tall apiladas derecha */
   .como-trabaja-tabs .block-bento {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-auto-rows: minmax(180px, auto);
     gap: 14px;
   }
+  /* Chats de conversación ocultos — solo funciones */
   .como-trabaja-tabs .cell.demo { display: none !important; }
   .como-trabaja-tabs .block-bento .cell.big,
   .como-trabaja-tabs .block-bento .cell.tall {
@@ -2519,7 +2528,6 @@
     }
   }
 
-  /* Celdas del bento — fondo blanco con sombra suave */
   .como-trabaja-tabs .cell {
     background: #ffffff;
     border: 0.5px solid var(--line-soft);
@@ -2608,7 +2616,6 @@
     font-weight: 400;
   }
 
-  /* Celdas big i tall — columna derecha, una fila cada una */
   .como-trabaja-tabs .cell.big { grid-column: 2; grid-row: 1; }
   .como-trabaja-tabs .cell.tall { grid-column: 2; grid-row: 2; }
 
@@ -2655,66 +2662,246 @@
   .como-trabaja-tabs .code-line .str { color: #2dd6a0; }
   .como-trabaja-tabs .code-line .key { color: #f59e0b; }
 
-  /* lang-grid sobre claro */
-  .como-trabaja-tabs .lang-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
-  .como-trabaja-tabs .flag {
-    width: 38px; height: 38px;
+  /* Pills / tags reutilizables */
+  .como-trabaja-tabs .pill {
+    font-size: 11px;
+    padding: 5px 11px;
+    border-radius: 100px;
+    font-family: var(--mono);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .como-trabaja-tabs .pill-brand {
+    background: rgba(0,195,137,0.1);
+    color: var(--brand-deep);
+    border: 0.5px solid rgba(0,129,89,0.25);
+  }
+  .como-trabaja-tabs .pill-neutral {
+    background: var(--bg-soft);
+    color: var(--ink-soft);
+    border: 0.5px solid var(--line-soft);
+  }
+
+  /* Source items (panel 01 — Aprende de tu web) */
+  .como-trabaja-tabs .source-list {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .como-trabaja-tabs .source-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
     background: var(--bg-soft);
     border: 0.5px solid var(--line-soft);
     border-radius: 10px;
+    font-size: 13px;
+    color: var(--ink);
+  }
+  .como-trabaja-tabs .source-item .source-icon {
+    width: 28px; height: 28px;
+    background: #ffffff;
+    border: 0.5px solid var(--line-soft);
+    border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
+    color: var(--brand-deep);
+    font-family: var(--mono);
+    font-size: 14px;
+    flex-shrink: 0;
   }
-  .como-trabaja-tabs .flag.more {
+  .como-trabaja-tabs .source-item .source-meta {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-mute);
+  }
+
+  /* Lead card (panel 03 — Datos a CRM) */
+  .como-trabaja-tabs .lead-card {
+    margin-top: 20px;
+    background: var(--bg-soft);
+    border: 0.5px solid var(--line-soft);
+    border-radius: 12px;
+    padding: 14px;
+  }
+  .como-trabaja-tabs .lead-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 0.5px solid rgba(14,14,12,0.06);
+    font-size: 12px;
+  }
+  .como-trabaja-tabs .lead-row:last-child { border-bottom: none; }
+  .como-trabaja-tabs .lead-row .k {
+    color: var(--ink-mute);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .como-trabaja-tabs .lead-row .v {
+    color: var(--ink);
+    font-family: var(--mono);
+  }
+  .como-trabaja-tabs .lead-row .v.brand {
+    color: var(--brand-deep);
+  }
+
+  .como-trabaja-tabs .crm-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+    align-items: center;
+  }
+  .como-trabaja-tabs .crm-row .crm-label {
+    font-size: 11px;
+    color: var(--ink-mute);
+    margin-right: 4px;
+  }
+
+  /* Analytics mini (panel 04 — del actual panel Rescata) */
+  .como-trabaja-tabs .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 22px;
+  }
+  .como-trabaja-tabs .stat-mini {
+    background: var(--bg-soft);
+    border: 0.5px solid rgba(0,129,89,0.12);
+    border-radius: 10px;
+    padding: 12px;
+  }
+  .como-trabaja-tabs .stat-mini .stat-val {
+    font-family: var(--serif);
+    font-size: 24px;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .como-trabaja-tabs .stat-mini.brand .stat-val { color: var(--brand-deep); }
+  .como-trabaja-tabs .stat-mini .stat-label {
+    font-size: 10px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+  }
+  .como-trabaja-tabs .ana-mini {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 36px;
+    margin-top: 16px;
+  }
+  .como-trabaja-tabs .ana-mini .bar {
+    flex: 1;
+    background: rgba(0,195,137,0.22);
+    border-radius: 2px 2px 0 0;
+  }
+  .como-trabaja-tabs .ana-mini .bar.hi {
     background: var(--brand);
-    color: #033726;
-    font-family: var(--mono); font-weight: 500; font-size: 13px;
-    border-color: var(--brand);
-  }
-  .como-trabaja-tabs .flag svg {
-    width: 26px; height: 17px;
-    border-radius: 2px;
-    display: block;
   }
 
-  /* Bloques de productes (carret, presupuesto) sobre claro */
-  .como-trabaja-tabs .cell .search-vis [style*="border-bottom"] {
-    border-bottom-color: rgba(14,14,12,0.06) !important;
+  /* Cart added card (panel 04 — del actual panel Vende) */
+  .como-trabaja-tabs .cart-card {
+    margin-top: 22px;
+    background: var(--bg-soft);
+    border: 0.5px solid var(--line-soft);
+    border-radius: 12px;
+    padding: 14px;
   }
-  /* Tags interiores de cells (pills) — invertir colors per a fondo claro */
-  .como-trabaja-tabs .cell [style*="rgba(0,195,137,0.1)"] {
-    background: rgba(0,195,137,0.1) !important;
-    color: var(--brand-deep) !important;
-    border-color: rgba(0,129,89,0.25) !important;
+  .como-trabaja-tabs .cart-product {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 4px;
+    border-bottom: 0.5px solid rgba(14,14,12,0.06);
   }
-  .como-trabaja-tabs .cell [style*="rgba(255,255,255,0.04)"] {
-    background: var(--bg-soft) !important;
-    color: var(--ink-soft) !important;
-    border-color: var(--line-soft) !important;
+  .como-trabaja-tabs .cart-product .ph-img {
+    width: 36px; height: 36px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #2dd6a0, #008159);
+    flex-shrink: 0;
+  }
+  .como-trabaja-tabs .cart-product .cp-info { flex: 1; }
+  .como-trabaja-tabs .cart-product .cp-name {
+    font-size: 13px; color: var(--ink);
+  }
+  .como-trabaja-tabs .cart-product .cp-meta {
+    font-size: 11px; color: var(--ink-soft);
+  }
+  .como-trabaja-tabs .cart-product .cp-price {
+    font-family: var(--serif);
+    font-size: 16px;
+    color: var(--ink);
+  }
+  .como-trabaja-tabs .cart-confirm {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 4px 4px;
+    font-size: 12px;
+  }
+  .como-trabaja-tabs .cart-confirm .confirm-text {
+    color: var(--brand-deep);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .como-trabaja-tabs .cart-confirm .confirm-text::before {
+    content: "";
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--brand);
+  }
+  .como-trabaja-tabs .cart-confirm .confirm-time {
+    color: var(--ink-mute);
+    font-family: var(--mono);
   }
 
-  /* Mini stats del panell 04 (Rescata) */
-  .como-trabaja-tabs .cell [style*="rgba(0,0,0,0.25)"] {
-    background: var(--bg-soft) !important;
-    border-color: rgba(0,129,89,0.12) !important;
+  /* Budget PDF row (panel 03 — del actual panel Rescata) */
+  .como-trabaja-tabs .budget-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 4px;
+    border-bottom: 0.5px solid rgba(14,14,12,0.06);
   }
-  .como-trabaja-tabs .cell [style*="rgba(0,0,0,0.25)"] [style*="color: var(--brand)"] {
-    color: var(--brand-deep) !important;
+  .como-trabaja-tabs .budget-row .bd-icon {
+    width: 32px; height: 32px;
+    background: rgba(0,195,137,0.1);
+    border: 0.5px solid rgba(0,129,89,0.2);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--brand-deep);
+    font-family: var(--mono);
+    font-size: 14px;
   }
-  .como-trabaja-tabs .cell [style*="rgba(0,0,0,0.25)"] [style*="color: var(--dark-ink)"] {
-    color: var(--ink) !important;
+  .como-trabaja-tabs .budget-row .bd-file {
+    flex: 1;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink);
   }
-  .como-trabaja-tabs .cell [style*="rgba(0,0,0,0.25)"] [style*="color: var(--dark-ink-soft)"] {
-    color: var(--ink-soft) !important;
+  .como-trabaja-tabs .budget-row .bd-amount {
+    font-family: var(--serif);
+    font-size: 16px;
+    color: var(--brand-deep);
   }
+  .como-trabaja-tabs .budget-meta {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 4px 4px;
+    font-size: 11px;
+    color: var(--ink-soft);
+  }
+  .como-trabaja-tabs .budget-meta .sent { color: var(--brand-deep); }
 
-  /* Sobrescribir colors inline restantes que apuntan a variables dark */
-  .como-trabaja-tabs .cell [style*="color: var(--dark-ink)"] { color: var(--ink) !important; }
-  .como-trabaja-tabs .cell [style*="color: var(--dark-ink-soft)"] { color: var(--ink-soft) !important; }
-  .como-trabaja-tabs .cell [style*="color: var(--brand)"] { color: var(--brand-deep) !important; }
-  .como-trabaja-tabs .cell [style*="background:var(--brand)"] { background: var(--brand) !important; }
-  .como-trabaja-tabs .cell [style*="background: var(--brand)"] { background: var(--brand) !important; }
-
-  /* Y ADEMÁS — fila inferior */
+  /* ============================================================
+     Y ADEMÁS — fila inferior · 4 columnas (antes eran 3)
+     ============================================================ */
   .como-trabaja-tabs .ct-extras {
     margin-top: 56px;
     position: relative; z-index: 1;
@@ -2746,27 +2933,111 @@
     color: var(--ink-soft);
     margin-left: auto;
   }
+  /* CAMBIO: 4 columnas en lugar de 3 */
   .como-trabaja-tabs .extras-grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
     gap: 14px;
   }
-  /* Anclas de color verde del bloque Y ADEMÁS */
-  .como-trabaja-tabs .ct-extras [style*="rgba(0,195,137,0.12)"] {
-    background: rgba(0,195,137,0.12) !important;
-    color: var(--brand-deep) !important;
-    border-color: rgba(0,129,89,0.3) !important;
+  .como-trabaja-tabs .extras-grid .cell {
+    padding: 24px;
+  }
+  .como-trabaja-tabs .extras-grid .cell h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  .como-trabaja-tabs .extras-grid .cell p {
+    font-size: 13.5px;
   }
 
-  /* Gráfico de barras (panell 04 Rescata) — adaptado a fondo claro */
-  .como-trabaja-tabs .ana-mini .bar {
-    background: rgba(0,195,137,0.22);
+  /* Empujar el contenido visual al fondo (swatches, banderas, badges, code) — 
+     elimina el espacio en blanco bajo el contenido visual cuando el grid las iguala en altura */
+  .como-trabaja-tabs .extras-grid .cell > *:last-child {
+    margin-top: auto;
   }
-  .como-trabaja-tabs .ana-mini .bar.hi {
+
+  /* Code-line dentro de extras — versión compacta para no forzar la altura de la fila */
+  .como-trabaja-tabs .extras-grid .code-line {
+    font-size: 10px;
+    line-height: 1.6;
+    padding: 10px 12px;
+    word-break: break-word;
+  }
+
+  /* Gradient top en cells del "Y además" — verde corporativo, dos estados */
+  .como-trabaja-tabs .extras-grid .cell {
+    position: relative;
+    overflow: hidden;
+  }
+  .como-trabaja-tabs .extras-grid .cell::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #9FE1CB, #00c389 50%, #008159);
+    opacity: 0.4;
+    pointer-events: none;
+    transition: opacity .25s ease, height .25s ease;
+  }
+  .como-trabaja-tabs .extras-grid .cell:hover::before {
+    opacity: 0.9;
+    height: 3px;
+  }
+
+  /* Color swatches del extras (Personalización) */
+  .como-trabaja-tabs .color-swatches {
+    display: flex; gap: 8px; margin-top: 18px;
+  }
+  .como-trabaja-tabs .color-swatches > div {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.4);
+    box-shadow: 0 1px 3px rgba(14,14,12,0.08);
+  }
+
+  /* Flag grid del extras (Multiidioma) */
+  .como-trabaja-tabs .extras-grid .lang-grid {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px;
+  }
+  .como-trabaja-tabs .extras-grid .flag {
+    width: 32px; height: 32px;
+    background: var(--bg-soft);
+    border: 0.5px solid var(--line-soft);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .como-trabaja-tabs .extras-grid .flag.more {
     background: var(--brand);
+    color: #033726;
+    font-family: var(--mono); font-weight: 500; font-size: 11px;
+    border-color: var(--brand);
+  }
+  .como-trabaja-tabs .extras-grid .flag svg {
+    width: 22px; height: 14px;
+    border-radius: 2px;
+    display: block;
   }
 
-  /* Responsive — tabs → acordeón en móvil */
+  /* RGPD badges */
+  .como-trabaja-tabs .extras-grid .rgpd-row {
+    display: flex; gap: 6px; margin-top: 18px; flex-wrap: wrap;
+  }
+  .como-trabaja-tabs .extras-grid .rgpd-row span {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    background: rgba(0,195,137,0.12);
+    color: var(--brand-deep);
+    border: 0.5px solid rgba(0,129,89,0.25);
+  }
+
+  /* Responsive */
+  @media (max-width: 1100px) {
+    .como-trabaja-tabs .extras-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
   @media (max-width: 960px) {
     .como-trabaja-tabs .tabs-hint { margin-bottom: 14px; }
     .como-trabaja-tabs .tabs-nav {
@@ -2787,24 +3058,30 @@
     .como-trabaja-tabs .tab:hover { transform: none; }
     .como-trabaja-tabs .tab::after {
       content: "+";
+      position: static;
+      height: auto;
+      background: none;
+      opacity: 1;
+      flex-shrink: 0;
       font-family: var(--mono);
       font-size: 24px;
+      line-height: 1;
       color: var(--brand-deep);
       transition: transform .3s ease;
     }
     .como-trabaja-tabs .tab.active::after { transform: rotate(45deg); }
 
-    .como-trabaja-tabs .tabs-panells { display: contents; }
-    .como-trabaja-tabs .tab-panell { grid-column: 1 / -1; order: 99; margin-bottom: 10px; }
-    .como-trabaja-tabs .tab-panell.active { display: block; padding: 16px 0 8px; }
+    .como-trabaja-tabs .tabs-panels { display: contents; }
+    .como-trabaja-tabs .tab-panel { grid-column: 1 / -1; order: 99; margin-bottom: 10px; }
+    .como-trabaja-tabs .tab-panel.active { display: block; padding: 16px 0 8px; }
     .como-trabaja-tabs .tab[data-tab="01"] { order: 1; }
-    .como-trabaja-tabs .tab-panell[data-panell="01"] { order: 2; }
+    .como-trabaja-tabs .tab-panel[data-panel="01"] { order: 2; }
     .como-trabaja-tabs .tab[data-tab="02"] { order: 3; }
-    .como-trabaja-tabs .tab-panell[data-panell="02"] { order: 4; }
+    .como-trabaja-tabs .tab-panel[data-panel="02"] { order: 4; }
     .como-trabaja-tabs .tab[data-tab="03"] { order: 5; }
-    .como-trabaja-tabs .tab-panell[data-panell="03"] { order: 6; }
+    .como-trabaja-tabs .tab-panel[data-panel="03"] { order: 6; }
     .como-trabaja-tabs .tab[data-tab="04"] { order: 7; }
-    .como-trabaja-tabs .tab-panell[data-panell="04"] { order: 8; }
+    .como-trabaja-tabs .tab-panel[data-panel="04"] { order: 8; }
     .como-trabaja-tabs .tabs-wrapper { display: flex; flex-direction: column; }
 
     .como-trabaja-tabs .block-bento { grid-template-columns: 1fr; }
@@ -2869,6 +3146,7 @@
     .nav-lang { display: none; }
   }
 </style>
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3HNWY32B0D"></script>
 <script>
@@ -2889,11 +3167,11 @@
     </div>
     <div class="nav-links">
       <a href="#como-trabaja">Com treballa</a>
-      <a href="#cass">Casos</a>
+      <a href="#casos">Casos</a>
       <a href="#canales">Canals</a>
       <a href="#precios">Preus</a>
       <a href="#faqs">FAQs</a>
-      <div class="nav-lang" aria-label="Cambiar idioma">
+      <div class="nav-lang" aria-label="Canviar idioma">
         <a href="/agentes-ia-atencion-cliente/webchat/" hreflang="es" lang="es">ES</a>
         <span class="lang-sep">·</span>
         <span class="lang-current" aria-current="true">CA</span>
@@ -2910,7 +3188,7 @@
 <div class="nav-mobile" id="navMobile">
   <div class="nav-mobile-inner">
     <a href="#como-trabaja" onclick="closeNav()">Com treballa</a>
-    <a href="#cass" onclick="closeNav()">Casos</a>
+    <a href="#casos" onclick="closeNav()">Casos</a>
     <a href="#canales" onclick="closeNav()">Canals</a>
     <a href="#precios" onclick="closeNav()">Preus</a>
     <a href="#faqs" onclick="closeNav()">FAQs</a>
@@ -2924,44 +3202,26 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero">
-  <!-- Nodos decorativos flotantes (lenguaje del logo) -->
-  <div class="hero-nodes">
-    <svg style="top: 12%; left: 6%; width: 80px; height: 80px;" viewBox="0 0 80 80">
-      <circle cx="10" cy="40" r="5" stroke="#00c389" stroke-width="2" fill="none"/>
-      <path d="M 15 40 Q 40 20, 70 40" stroke="#00c389" stroke-width="2" fill="none"/>
-      <circle cx="70" cy="40" r="3" fill="#00c389"/>
-    </svg>
-    <svg style="top: 70%; left: 3%; width: 100px; height: 60px;" viewBox="0 0 100 60">
-      <path d="M 5 30 Q 50 5, 95 30" stroke="#00c389" stroke-width="2" fill="none" opacity="0.5"/>
-      <circle cx="5" cy="30" r="4" stroke="#00c389" stroke-width="2" fill="none"/>
-      <circle cx="95" cy="30" r="3" fill="#00c389"/>
-    </svg>
-    <svg style="top: 18%; right: 4%; width: 70px; height: 70px;" viewBox="0 0 70 70">
-      <circle cx="35" cy="10" r="4" stroke="#00c389" stroke-width="2" fill="none"/>
-      <path d="M 35 14 Q 60 35, 35 60" stroke="#00c389" stroke-width="2" fill="none"/>
-      <circle cx="35" cy="60" r="3" fill="#00c389"/>
-    </svg>
-  </div>
+
+  <img src="/images/logo/simbolo-tinta.png" alt="" aria-hidden="true" style="position:absolute;right:-60px;top:50%;transform:translateY(-50%);width:520px;opacity:0.045;pointer-events:none;z-index:1;user-select:none;">
 
   <div class="container">
     <div class="hero-grid">
       <div class="hero-text">
         <div class="badge-live">
           <span class="pulse"></span>
-          <span>Treballant ara a 30+ botigues</span>
+          <span>Treballant ara en 30+ botigues</span>
         </div>
         <h1 class="display">
-          El teu millor<br>
-          comercial <em>no</em><br>
-          <span class="strike">dorm</span> <em>mai.</em>
+          El teu millor comercial <em>no</em> <span class="strike">dorm</span> <em>mai.</em>
         </h1>
         <p class="lede">
           Resol dubtes, assessora amb criteri, busca al teu estoc i rescata la venda
-          per email quan cal. Un dependent expert que no tanca mai.
+          per email quan cal. Un dependent expert que mai tanca.
         </p>
         <div class="hero-ctas">
-          <a href="#" class="btn-primary">
-            Provar la demo
+          <a href="#" class="btn-primary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_hero'}}}); return false;">
+            Reserva una trucada gratuïta
             <span class="arr">→</span>
           </a>
           <a href="#precios" class="btn-secondary">Veure plans i preus</a>
@@ -2977,7 +3237,7 @@
           </div>
           <div class="metric">
             <div class="num">+20%</div>
-            <div class="lab">En vendas</div>
+            <div class="lab">En vendes</div>
           </div>
         </div>
       </div>
@@ -3001,7 +3261,7 @@
               <div class="product-img" style="background: linear-gradient(135deg, #2a2a26, #0e0e0c);"></div>
               <div>
                 <div class="product-name">Casc Pro Carbon</div>
-                <div class="product-meta">Varios colors</div>
+                <div class="product-meta">Diversos colors</div>
               </div>
               <div class="product-price">149€</div>
             </div>
@@ -3015,8 +3275,8 @@
               <div class="chat-status">● En línia</div>
             </div>
           </div>
-          <div class="msg user">Teniu una bici de muntanya? Faig 1,75m</div>
-          <div class="msg bot">La Trail 29" talla M és perfecta. En estoc amb entrega en 48h. Te l&#39;afegeixo al carret amb el casc a joc?</div>
+          <div class="msg user">Teniu una bici de muntanya? Mido 1,75m</div>
+          <div class="msg bot">La Trail 29" talla M és perfecta. En estoc amb entrega en 48h. Te l'afegeixo al carret amb el casc a joc?</div>
           <div class="typing">
             <span></span><span></span><span></span>
           </div>
@@ -3027,52 +3287,17 @@
   </div>
 </section>
 
-<!-- ============ MARQUEE ============ -->
-<section class="marquee-section">
-  <div class="marquee-label">Ja confien en empentIA</div>
-  <div class="marquee">
-    <div class="marquee-track">
-      <div class="client-logo"><span class="client-node"></span> VB Sports Bike</div>
-      <div class="client-logo"><span class="client-node"></span> International Safety Center</div>
-      <div class="client-logo"><span class="client-node"></span> ACED Asesores</div>
-      <div class="client-logo"><span class="client-node"></span> Esports & Co</div>
-      <div class="client-logo"><span class="client-node"></span> Home·Tech</div>
-      <div class="client-logo"><span class="client-node"></span> La Botiga</div>
-      <div class="client-logo"><span class="client-node"></span> VB Sports Bike</div>
-      <div class="client-logo"><span class="client-node"></span> International Safety Center</div>
-      <div class="client-logo"><span class="client-node"></span> ACED Asesores</div>
-      <div class="client-logo"><span class="client-node"></span> Esports & Co</div>
-      <div class="client-logo"><span class="client-node"></span> Home·Tech</div>
-      <div class="client-logo"><span class="client-node"></span> La Botiga</div>
-    </div>
-  </div>
-</section>
-
 <!-- ============ CÓMO TRABAJA — Sección unificada con tabs ============ -->
 <section class="como-trabaja-tabs" id="como-trabaja">
-  <!-- Nodos decorativos del logo de fondo (heredatos de Funcionalitats) -->
-  <svg class="features-bg-nodes" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice">
-    <circle cx="120" cy="120" r="6" stroke="#00c389" stroke-width="2" fill="none"/>
-    <path d="M 120 120 Q 280 80, 380 200" stroke="#00c389" stroke-width="1.5" fill="none"/>
-    <circle cx="380" cy="200" r="4" fill="#00c389"/>
-    <circle cx="1320" cy="180" r="6" stroke="#00c389" stroke-width="2" fill="none"/>
-    <path d="M 1320 180 Q 1200 280, 1100 240" stroke="#00c389" stroke-width="1.5" fill="none"/>
-    <circle cx="1100" cy="240" r="4" fill="#00c389"/>
-    <circle cx="80" cy="650" r="5" fill="#00c389"/>
-    <path d="M 80 650 Q 200 700, 320 620" stroke="#00c389" stroke-width="1.5" fill="none"/>
-    <circle cx="320" cy="620" r="4" stroke="#00c389" stroke-width="2" fill="none"/>
-  </svg>
 
   <div class="container">
 
     <!-- HEAD UNIFICADO -->
     <div class="ct-head">
       <div class="eyebrow">Com treballa</div>
-      <h2 class="section-title">Les quatre coses que fa<br>un <em>bon dependent.</em></h2>
+      <h2 class="section-title">Les quatre coses que fa un <em>bon comercial.</em></h2>
       <p class="section-sub">
-        L'agent no és un chatbot ni una FAQ intel·ligent. Replica el rol complet
-        del teu millor venedor en botiga — i cada funció està sustentada per les
-        eines tècniques que ho fan possible.
+        No és un chatbot ni una FAQ intel·ligent. Replica el rol complet del teu millor comercial.
       </p>
     </div>
 
@@ -3105,8 +3330,8 @@
         </button>
         <button class="tab" data-tab="03" role="tab" aria-selected="false">
           <span class="tab-num">03</span>
-          <span class="tab-name"><em>Vende</em></span>
-          <span class="tab-claim">Comprova estoc i tanca la compra.</span>
+          <span class="tab-name"><em>Capta</em></span>
+          <span class="tab-claim">Recull leads i envia pressupostos.</span>
           <span class="tab-status">
             <span><span class="label-default">Veure detall</span><span class="label-active">Veient ara</span></span>
             <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -3114,8 +3339,8 @@
         </button>
         <button class="tab" data-tab="04" role="tab" aria-selected="false">
           <span class="tab-num">04</span>
-          <span class="tab-name"><em>Rescata</em></span>
-          <span class="tab-claim">Si no compra avui, la venda s'ajorna.</span>
+          <span class="tab-name"><em>Ven</em></span>
+          <span class="tab-claim">Comprova estoc i tanca la compra.</span>
           <span class="tab-status">
             <span><span class="label-default">Veure detall</span><span class="label-active">Veient ara</span></span>
             <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -3124,76 +3349,87 @@
       </div>
 
       <!-- PANELS -->
-      <div class="tabs-panells">
+      <div class="tabs-panels">
 
-        <!-- PANEL 01 — INFORMA -->
-        <div class="tab-panell active" data-panell="01" role="tabpanell">
+        <!-- ========================================================
+             PANEL 01 — INFORMA
+             (mantiene demo + big; cambia tall: multiidioma → aprende de tu web)
+             ======================================================== -->
+        <div class="tab-panel active" data-panel="01" role="tabpanel">
           <div class="block-bento">
 
             <div class="cell demo">
-              <div class="demo-tag">Conversación real</div>
-              <div class="demo-intro">Com tenir al teu millor empleado disponible 24/7.</div>
+              <div class="demo-tag">Conversa real</div>
+              <div class="demo-intro">Com tenir el teu millor empleat disponible 24/7.</div>
               <div class="demo-convo">
                 <div class="demo-msg user">Fins a quina hora esteu oberts avui?</div>
-                <div class="demo-msg bot">Avui fins a les 20:30. Demà dissabte, de 10 a 14h. Et puc ajudar amb res més?</div>
+                <div class="demo-msg bot">Avui fins a les 20:30. Demà dissabte, de 10 a 14h. T'ajudo amb res més?</div>
                 <div class="demo-msg user">Feu enviament a Canàries?</div>
-                <div class="demo-msg bot">Sí, enviament a tota Espanya. A Canàries triga 5-7 dies laborables i costen 12,90€.</div>
+                <div class="demo-msg bot">Sí, enviament a tota Espanya. A Canàries triga 5-7 dies laborables i són 12,90€.</div>
                 <div class="demo-msg user">I devolucions?</div>
                 <div class="demo-msg bot">30 dies gratis. T'enviem l'etiqueta sense cost i l'abonament es fa quan rebem el producte.</div>
               </div>
             </div>
 
             <div class="cell big">
-              <h3>Consultes operatives resueltas a l'instant</h3>
-              <p>Horaris, ubicació, mètodes de pagament, condicions de devolució, terminis d'enviament, dades de contacte. Aprèn de la teva web i de la informació que li passes.</p>
+              <h3>Consultes operatives resoltes a l'instant</h3>
+              <p>Horaris, ubicació, mètodes de pagament, condicions de devolució, terminis d'enviament, dades de contacte. Qualsevol dubte recurrent que ara respon el teu equip, l'atén l'agent.</p>
               <div class="search-vis">
                 <div class="search-result"><span class="pname">A quina hora tanqueu avui?</span><span class="pprice" style="font-family: var(--mono); font-size: 12px;">20:30</span></div>
-                <div class="search-result"><span class="pname">On esteu?</span><span class="pprice" style="font-family: var(--mono); font-size: 12px;">C/ Major, 12 · Igualada</span></div>
+                <div class="search-result"><span class="pname">On sou?</span><span class="pprice" style="font-family: var(--mono); font-size: 12px;">C/ Major, 12 · Igualada</span></div>
                 <div class="search-result"><span class="pname">Política de devolució?</span><span class="pprice" style="font-family: var(--mono); font-size: 12px;">30 dies gratis</span></div>
                 <div class="search-result"><span class="pname">Feu enviament a Canàries?</span><span class="pprice" style="font-family: var(--mono); font-size: 12px;">Sí · 5-7 dies</span></div>
                 <div class="search-result"><span class="pname">Accepteu Bizum?</span><span class="pprice" style="font-family: var(--mono); font-size: 12px;">Sí · i targeta · transf.</span></div>
               </div>
             </div>
 
+            <!-- NUEVA TALL CARD: Aprende de tu web (en lugar de Multiidioma) -->
             <div class="cell tall">
-              <h3>Multiidioma automàtic</h3>
-              <p>Detecta l'idioma del visitant i respon en la seva llengua. Sense configuració, +30 idiomes suportats.</p>
-              <div class="lang-grid">
-                <div class="flag" title="Castellà"><svg viewBox="0 0 9 6" xmlns="http://www.w3.org/2000/svg"><rect width="9" height="6" fill="#AA151B"/><rect y="1.5" width="9" height="3" fill="#F1BF00"/></svg></div>
-                <div class="flag" title="Català"><svg viewBox="0 0 9 6" xmlns="http://www.w3.org/2000/svg"><rect width="9" height="6" fill="#FCDD09"/><rect y="0.667" width="9" height="0.667" fill="#DA121A"/><rect y="2.000" width="9" height="0.667" fill="#DA121A"/><rect y="3.333" width="9" height="0.667" fill="#DA121A"/><rect y="4.667" width="9" height="0.667" fill="#DA121A"/></svg></div>
-                <div class="flag" title="Euskera"><svg viewBox="0 0 28 14" xmlns="http://www.w3.org/2000/svg"><rect width="28" height="14" fill="#D52B1E"/><path d="M0 0 L28 14 M0 14 L28 0" stroke="#FFFFFF" stroke-width="2.4" fill="none"/><path d="M0 0 L28 14 M0 14 L28 0" stroke="#009B48" stroke-width="1.6" fill="none"/><path d="M14 0 V14 M0 7 H28" stroke="#FFFFFF" stroke-width="2.4" fill="none"/></svg></div>
-                <div class="flag" title="English"><svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg"><clipPath id="uk-clip-1"><path d="M0 0 v30 h60 v-30 z"/></clipPath><clipPath id="uk-half-1"><path d="M30 15 v15 h-30 z M0 0 v15 h30 z M30 15 h30 v-15 z M30 15 v15 h30 v-15 z" fill-rule="nonzero"/></clipPath><rect width="60" height="30" fill="#012169"/><g clip-path="url(#uk-clip-1)"><path d="M0 0 L60 30 M60 0 L0 30" stroke="#FFFFFF" stroke-width="6"/><g clip-path="url(#uk-half-1)"><path d="M0 0 L60 30 M60 0 L0 30" stroke="#C8102E" stroke-width="4"/></g></g><path d="M30 0 V30 M0 15 H60" stroke="#FFFFFF" stroke-width="10"/><path d="M30 0 V30 M0 15 H60" stroke="#C8102E" stroke-width="6"/></svg></div>
-                <div class="flag" title="Français"><svg viewBox="0 0 9 6" xmlns="http://www.w3.org/2000/svg"><rect width="3" height="6" fill="#0055A4"/><rect x="3" width="3" height="6" fill="#FFFFFF"/><rect x="6" width="3" height="6" fill="#EF4135"/></svg></div>
-                <div class="flag" title="Deutsch"><svg viewBox="0 0 5 3" xmlns="http://www.w3.org/2000/svg"><rect width="5" height="1" fill="#000000"/><rect y="1" width="5" height="1" fill="#DD0000"/><rect y="2" width="5" height="1" fill="#FFCE00"/></svg></div>
-                <div class="flag" title="Italiano"><svg viewBox="0 0 9 6" xmlns="http://www.w3.org/2000/svg"><rect width="3" height="6" fill="#009246"/><rect x="3" width="3" height="6" fill="#FFFFFF"/><rect x="6" width="3" height="6" fill="#CE2B37"/></svg></div>
-                <div class="flag" title="Português"><svg viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg"><rect width="60" height="40" fill="#FF0000"/><rect width="24" height="40" fill="#006600"/><circle cx="24" cy="20" r="6" fill="#FFCC00" stroke="#FFFFFF" stroke-width="0.6"/></svg></div>
-                <div class="flag" title="中文"><svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#DE2910"/><g fill="#FFDE00"><polygon points="6,3.5 6.7,5.6 8.9,5.6 7.1,6.9 7.8,9 6,7.7 4.2,9 4.9,6.9 3.1,5.6 5.3,5.6"/><polygon points="11.5,1.8 12,2.7 13,2.7 12.2,3.3 12.5,4.3 11.5,3.7 10.6,4.3 10.9,3.3 10.1,2.7 11.1,2.7"/><polygon points="13.6,4 13.9,5 14.9,5 14.1,5.6 14.4,6.5 13.6,5.9 12.8,6.5 13.1,5.6 12.3,5 13.3,5"/><polygon points="13.6,7.3 13.9,8.3 14.9,8.3 14.1,8.9 14.4,9.9 13.6,9.3 12.8,9.9 13.1,8.9 12.3,8.3 13.3,8.3"/><polygon points="11.5,9.5 12,10.4 13,10.4 12.2,11 12.5,12 11.5,11.4 10.6,12 10.9,11 10.1,10.4 11.1,10.4"/></g></svg></div>
-                <div class="flag" title="日本語"><svg viewBox="0 0 9 6" xmlns="http://www.w3.org/2000/svg"><rect width="9" height="6" fill="#FFFFFF"/><circle cx="4.5" cy="3" r="1.8" fill="#BC002D"/></svg></div>
-                <div class="flag more">+30</div>
-              </div>
-              <div style="margin-top: 18px; font-family: var(--mono); font-size: 11px; color: var(--brand); display: flex; align-items: center; gap: 8px;">
-                <span style="width:6px;height:6px;border-radius:50%;background:var(--brand);"></span>
-                Detectat: CA → responent en CA
+              <h3>Aprèn de la teva web i documents</h3>
+              <p>Indexa automàticament el teu lloc, FAQs, PDFs i es connecta via API a les eines del teu negoci. S'actualitza quan la teva informació canvia. Sense formularis manuals per mantenir.</p>
+              <div class="source-list">
+                <div class="source-item">
+                  <div class="source-icon">⌘</div>
+                  <span>La teva web pública</span>
+                  <span class="source-meta">42 pàgines</span>
+                </div>
+                <div class="source-item">
+                  <div class="source-icon">≡</div>
+                  <span>FAQs i polítiques</span>
+                  <span class="source-meta">8 docs</span>
+                </div>
+                <div class="source-item">
+                  <div class="source-icon">¶</div>
+                  <span>PDFs i catàlegs</span>
+                  <span class="source-meta">14 arxius</span>
+                </div>
+                <div class="source-item">
+                  <div class="source-icon">⇄</div>
+                  <span>API connectada a les teves eines</span>
+                  <span class="source-meta">temps real</span>
+                </div>
               </div>
             </div>
 
           </div>
         </div>
 
-        <!-- PANEL 02 — ASESORA -->
-        <div class="tab-panell" data-panell="02" role="tabpanell">
+        <!-- ========================================================
+             PANEL 02 — ASESORA (sin cambios respecto al actual)
+             ======================================================== -->
+        <div class="tab-panel" data-panel="02" role="tabpanel">
           <div class="block-bento">
 
             <div class="cell demo">
-              <div class="demo-tag">Conversación real</div>
+              <div class="demo-tag">Conversa real</div>
               <div class="demo-intro">Coneix el teu catàleg i guia el client com el teu millor venedor.</div>
               <div class="demo-convo">
-                <div class="demo-msg user">Busco una bici per al meu fill de 12 anys, no molt cara</div>
-                <div class="demo-msg bot">Per a aquesta edat i ús ocasional, et recomano la Junior Sport 24" (349€). Si farà rutes, millor la Trail Kids amb suspensió (499€). Et passo fitxes?</div>
+                <div class="demo-msg user">Busco una bici per al meu fill de 12 anys, no gaire cara</div>
+                <div class="demo-msg bot">Per a aquesta edat i ús ocasional, et recomano la Junior Sport 24" (349€). Si ha de fer rutes, millor la Trail Kids amb suspensió (499€). Et passo fitxes?</div>
                 <div class="demo-msg user">Quina és més resistent per a ús diari?</div>
                 <div class="demo-msg bot">La Trail Kids — quadre d'alumini reforçat i frens de disc. Aguanta millor el dia a dia i camins irregulars.</div>
                 <div class="demo-msg user">I el manteniment és complicat?</div>
-                <div class="demo-msg bot">Molt senzill: revisió als 6 mesos (inclosa el primer any) i canvi de pastilles cada 1.000 km aprox. T'ho explico tot en el moment de la compra.</div>
+                <div class="demo-msg bot">Molt senzill: revisió als 6 mesos (inclosa el primer any) i canvi de pastilles cada 1.000 km aprox. T'explico tot en el moment de la compra.</div>
               </div>
             </div>
 
@@ -3201,33 +3437,33 @@
               <h3>Cerca intel·ligent del catàleg</h3>
               <p>Troba productes per nom, categoria, preu, talla, edat, ús o qualsevol característica. Recomana alternatives i compara opcions segons el perfil del client.</p>
               <div class="search-vis">
-                <div class="search-input">bici per a niño 12 anys, no molt cara</div>
+                <div class="search-input">bici per a nen 12 anys, no gaire cara</div>
                 <div class="search-result"><span class="pname">Junior Sport 24"</span><span class="pprice">349€</span></div>
-                <div class="search-result"><span class="pname">Trail Kids · els seuspensión</span><span class="pprice">499€</span></div>
+                <div class="search-result"><span class="pname">Trail Kids · suspensió</span><span class="pprice">499€</span></div>
                 <div class="search-result"><span class="pname">Mini Race 20"</span><span class="pprice">289€</span></div>
               </div>
-              <div style="margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap;">
-                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(0,195,137,0.1); color: var(--brand); border: 0.5px solid rgba(0,195,137,0.2);">por edat</span>
-                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(0,195,137,0.1); color: var(--brand); border: 0.5px solid rgba(0,195,137,0.2);">por presupuesto</span>
-                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(0,195,137,0.1); color: var(--brand); border: 0.5px solid rgba(0,195,137,0.2);">por uso</span>
-                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(0,195,137,0.1); color: var(--brand); border: 0.5px solid rgba(0,195,137,0.2);">por talla</span>
-                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(255,255,255,0.04); color: var(--dark-ink-soft); border: 0.5px solid rgba(255,255,255,0.06);">+ filtros custom</span>
+              <div style="margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap;">
+                <span class="pill pill-brand">per edat</span>
+                <span class="pill pill-brand">per pressupost</span>
+                <span class="pill pill-brand">per ús</span>
+                <span class="pill pill-brand">per talla</span>
+                <span class="pill pill-neutral">+ filtres custom</span>
               </div>
             </div>
 
             <div class="cell tall">
-              <h3>Tono i argumentari propis</h3>
-              <p>Configura el to dl'agent, les objeccions freqüents i els arguments de venda del teu negoci. Com entrenes a un comercial nou.</p>
+              <h3>To i argumentari propis</h3>
+              <p>Configura el to de l'agent, les objeccions freqüents i els arguments de venda del teu negoci. Com entrenes un comercial nou.</p>
               <div class="code-line" style="margin-top: 22px;">
                 <span class="com">// to</span><br>
                 <span class="str">"proper · directe"</span><br>
                 <br>
                 <span class="com">// objecció habitual</span><br>
-                <span class="str">"es molt car?"</span><br>
+                <span class="str">"és gaire car?"</span><br>
                 <span class="com">→ resposta</span><br>
                 <span class="str">"valor per preu"</span><br>
                 <br>
-                <span class="com">// argument clave</span><br>
+                <span class="com">// argument clau</span><br>
                 <span class="str">"enviament 24h gratis"</span>
               </div>
             </div>
@@ -3235,19 +3471,98 @@
           </div>
         </div>
 
-        <!-- PANEL 03 — VENDE -->
-        <div class="tab-panell" data-panell="03" role="tabpanell">
+        <!-- ========================================================
+             PANEL 03 — CAPTA (NUEVO ENFOQUE)
+             Antes era VENDE — ahora se enfoca en lead capture + presupuestos
+             ======================================================== -->
+        <div class="tab-panel" data-panel="03" role="tabpanel">
           <div class="block-bento">
 
             <div class="cell demo">
-              <div class="demo-tag">Conversación real</div>
-              <div class="demo-intro">Comprova estoc real i tanca la compra dentro del xat.</div>
+              <div class="demo-tag">Conversa real</div>
+              <div class="demo-intro">Si no compra avui, la venda no es perd — només s'ajorna.</div>
+              <div class="demo-convo">
+                <div class="demo-msg user">M'ho he de pensar, gràcies</div>
+                <div class="demo-msg bot">Cap problema. T'envio el pressupost per email perquè el tinguis desat? Així pots comprar-lo quan vulguis amb un clic.</div>
+                <div class="demo-msg user">D'acord, marc@empresa.com</div>
+                <div class="demo-msg bot">Enviat a marc@empresa.com. Portes 1 bici Junior Sport, casc i cadenat per 437€. El preu queda reservat 7 dies.</div>
+                <div class="demo-msg user">I si el vull comprar més tard?</div>
+                <div class="demo-msg bot">A l'email tens un enllaç directe de compra. Un clic i al checkout, sense tornar a buscar res.</div>
+              </div>
+            </div>
+
+            <div class="cell big">
+              <h3>Pressupostos per email automàtics</h3>
+              <p>Si el client dubta, l'agent li envia un PDF amb productes, preus, IVA i total — amb enllaç directe de compra. Menys de 30 segons, sense el teu equip pel mig.</p>
+              <div class="search-vis" style="margin-top: 22px;">
+                <div class="budget-row">
+                  <div class="bd-icon">▤</div>
+                  <div class="bd-file">pressupost-2841.pdf</div>
+                  <div class="bd-amount">437€</div>
+                </div>
+                <div class="budget-meta">
+                  <span>→ marc@empresa.com</span>
+                  <span class="sent">enviat · 28s</span>
+                </div>
+              </div>
+              <div style="margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap;">
+                <span class="pill pill-brand">PDF amb el teu branding</span>
+                <span class="pill pill-brand">Preu reservat 7 dies</span>
+                <span class="pill pill-brand">Enllaç directe a checkout</span>
+              </div>
+            </div>
+
+            <div class="cell tall">
+              <h3>Lead qualificat al teu equip o CRM</h3>
+              <p>Quan detecta interès real, recull nom, email i producte consultat. L'envia on vulguis: la teva safata, un webhook o el CRM que ja facis servir.</p>
+              <div class="lead-card">
+                <div class="lead-row">
+                  <span class="k">Email</span>
+                  <span class="v">marc@empresa.com</span>
+                </div>
+                <div class="lead-row">
+                  <span class="k">Telèfon</span>
+                  <span class="v">+34 612 345 678</span>
+                </div>
+                <div class="lead-row">
+                  <span class="k">Interès</span>
+                  <span class="v brand">Junior Sport 24" blau</span>
+                </div>
+                <div class="lead-row">
+                  <span class="k">Origen</span>
+                  <span class="v">Webchat · 18:42h</span>
+                </div>
+              </div>
+              <div class="crm-row">
+                <span class="crm-label">Destí:</span>
+                <span class="pill pill-neutral">Email</span>
+                <span class="pill pill-neutral">CSV</span>
+                <span class="pill pill-neutral">Webhook</span>
+                <span class="pill pill-neutral">HubSpot</span>
+                <span class="pill pill-neutral">Pipedrive</span>
+                <span class="pill pill-neutral">Holded</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ========================================================
+             PANEL 04 — VENDE (REENFOCADO)
+             Antes era VENDE + RESCATA — ahora se centra en cierre + analytics
+             ======================================================== -->
+        <div class="tab-panel" data-panel="04" role="tabpanel">
+          <div class="block-bento">
+
+            <div class="cell demo">
+              <div class="demo-tag">Conversa real</div>
+              <div class="demo-intro">Comprova estoc real i tanca la compra dins del xat.</div>
               <div class="demo-convo">
                 <div class="demo-msg user">La Junior Sport, la teniu en blau?</div>
-                <div class="demo-msg bot">Sí, en blau i vermell. La he afegit al teu carret en blau. Vols que afegeixi també el casc a joc?</div>
+                <div class="demo-msg bot">Sí, en blau i vermell. L'he afegida al teu carret en blau. Vols que afegeixi també el casc a joc?</div>
                 <div class="demo-msg user">Sí, i un cadenat bo</div>
                 <div class="demo-msg bot">Casc Junior Pro blau (39€) i cadenat U-Lock antirobatori (49€) afegits. Total carret: 437€ amb enviament gratis.</div>
-                <div class="demo-msg user">Quan m&#39;arriba?</div>
+                <div class="demo-msg user">Quan m'arriba?</div>
                 <div class="demo-msg bot">Si finalitzes avui abans de les 18h, demà a casa teva. Et passo al checkout?</div>
               </div>
             </div>
@@ -3255,101 +3570,46 @@
             <div class="cell big">
               <h3>Afegeix al carret real, no simulat</h3>
               <p>Compatible amb WooCommerce, PrestaShop i Shopify via API. El producte entra al carret del client amb la talla, color i quantitat correctes. Sense redireccions, sense fricció.</p>
-              <div class="search-vis" style="margin-top: 22px;">
-                <div style="display: flex; align-items: center; gap: 12px; padding: 10px 4px; border-bottom: 0.5px solid rgba(255,255,255,0.06);">
-                  <div style="width: 36px; height: 36px; border-radius: 6px; background: linear-gradient(135deg, #2dd6a0, #008159); flex-shrink: 0;"></div>
-                  <div style="flex: 1;">
-                    <div style="font-size: 13px; color: var(--dark-ink);">Junior Sport 24"</div>
-                    <div style="font-size: 11px; color: var(--dark-ink-soft);">Blau · Talla nen</div>
+              <div class="cart-card">
+                <div class="cart-product">
+                  <div class="ph-img"></div>
+                  <div class="cp-info">
+                    <div class="cp-name">Junior Sport 24"</div>
+                    <div class="cp-meta">Blau · Talla nen</div>
                   </div>
-                  <div style="font-family: var(--serif); font-size: 16px; color: var(--dark-ink);">349€</div>
+                  <div class="cp-price">349€</div>
                 </div>
-                <div style="display: flex; justify-content: space-between; padding: 10px 4px; font-size: 12px;">
-                  <span style="color: var(--brand); display: flex; align-items: center; gap: 8px;">
-                    <span style="width:8px;height:8px;border-radius:50%;background:var(--brand);"></span>
-                    Afegit al carret · WooCommerce
-                  </span>
-                  <span style="color: var(--dark-ink-soft); font-family: var(--mono);">en 1.2s</span>
+                <div class="cart-confirm">
+                  <span class="confirm-text">Afegit al carret · WooCommerce</span>
+                  <span class="confirm-time">en 1.2s</span>
                 </div>
               </div>
-              <div style="margin-top: 18px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                <span style="font-size: 11px; color: var(--dark-ink-soft); margin-right: 4px;">Compatible amb:</span>
-                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(255,255,255,0.04); color: var(--dark-ink); border: 0.5px solid rgba(255,255,255,0.08); font-family: var(--mono);">WooCommerce</span>
-                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(255,255,255,0.04); color: var(--dark-ink); border: 0.5px solid rgba(255,255,255,0.08); font-family: var(--mono);">PrestaShop</span>
-                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(255,255,255,0.04); color: var(--dark-ink); border: 0.5px solid rgba(255,255,255,0.08); font-family: var(--mono);">Shopify</span>
+              <div style="margin-top: 14px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                <span style="font-size: 11px; color: var(--ink-mute);">Compatible amb:</span>
+                <span class="pill pill-neutral">WooCommerce</span>
+                <span class="pill pill-neutral">PrestaShop</span>
+                <span class="pill pill-neutral">Shopify</span>
               </div>
             </div>
 
             <div class="cell tall">
-              <h3>Captació de leads qualificats</h3>
-              <p>Quan detecta interès real (preguntes concretes, comparatives, intenció de compra), demana l'email i recull el lead automàticament.</p>
-              <div class="code-line" style="margin-top: 22px;">
-                <span class="com">// nou lead</span><br>
-                marc@empresa.com<br>
-                +34 612 345 678<br>
-                <br>
-                <span class="com">// interés detectado</span><br>
-                <span class="str">"junior sport 24, azul"</span><br>
-                <br>
-                <span class="com">// exportación</span><br>
-                CSV · Webhook · CRM
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- PANEL 04 — RESCATA -->
-        <div class="tab-panell" data-panell="04" role="tabpanell">
-          <div class="block-bento">
-
-            <div class="cell demo">
-              <div class="demo-tag">Conversación real</div>
-              <div class="demo-intro">Si no compra avui, la venda no es perd — només s'ajorna.</div>
-              <div class="demo-convo">
-                <div class="demo-msg user">M&#39;ho he de pensar, gràcies</div>
-                <div class="demo-msg bot">Sense problema. T'envio el pressupost per email perquè el tinguis guardat? Així pots comprar-lo quan vulguis amb un clic.</div>
-                <div class="demo-msg user">D&#39;acord, marc@empresa.com</div>
-                <div class="demo-msg bot">Enviat a marc@empresa.com. Portes 1 bici Junior Sport, casc i cadenat per 437€. El preu queda reservat 7 dies.</div>
-                <div class="demo-msg user">I si el vull comprar més tard?</div>
-                <div class="demo-msg bot">En el email tens un enllaç directe de compra. Un clic i al checkout, sense tornar a buscar res.</div>
-              </div>
-            </div>
-
-            <div class="cell big">
-              <h3>Pressupostos per email automàtics</h3>
-              <p>Si el client duda, l'agent le envia un PDF amb productes, preus, IVA i total. Con un enllaç directe de compra. Menos de 30 segons.</p>
-              <div class="search-vis" style="margin-top: 22px;">
-                <div style="display: flex; align-items: center; gap: 10px; padding: 10px 4px; border-bottom: 0.5px solid rgba(255,255,255,0.06);">
-                  <div style="font-family: var(--mono); font-size: 11px; color: var(--brand);">📎</div>
-                  <div style="flex: 1; font-family: var(--mono); font-size: 11px; color: var(--dark-ink);">presupuesto-2841.pdf</div>
-                  <div style="font-family: var(--serif); font-size: 14px; color: var(--brand);">1.547€</div>
+              <h3>Analytics i seguiment en temps real</h3>
+              <p>Converses, leads captats, pressupostos enviats, productes més consultats. Al teu panell privat, exportable.</p>
+              <div class="stats-grid">
+                <div class="stat-mini brand">
+                  <div class="stat-val">1.247</div>
+                  <div class="stat-label">Converses</div>
                 </div>
-                <div style="padding: 10px 4px; font-size: 11px; color: var(--dark-ink-soft); display: flex; justify-content: space-between;">
-                  <span>→ marc@empresa.com</span>
-                  <span style="color: var(--brand);">enviado · 28s</span>
+                <div class="stat-mini">
+                  <div class="stat-val">89</div>
+                  <div class="stat-label">Leads</div>
+                </div>
+                <div class="stat-mini">
+                  <div class="stat-val">34</div>
+                  <div class="stat-label">Pressupostos</div>
                 </div>
               </div>
-            </div>
-
-            <div class="cell tall">
-              <h3>Analítica i seguiment en temps real</h3>
-              <p>Conversions, leads captats, pressupostos enviats, productes més consultats. En tu panell privado, exportable.</p>
-              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 22px;">
-                <div style="background: rgba(0,0,0,0.25); border-radius: 10px; padding: 12px; border: 0.5px solid rgba(0,195,137,0.08);">
-                  <div style="font-family: var(--serif); font-size: 24px; color: var(--brand); line-height: 1;">1.247</div>
-                  <div style="font-size: 10px; color: var(--dark-ink-soft); margin-top: 6px;">Converses</div>
-                </div>
-                <div style="background: rgba(0,0,0,0.25); border-radius: 10px; padding: 12px; border: 0.5px solid rgba(0,195,137,0.08);">
-                  <div style="font-family: var(--serif); font-size: 24px; color: var(--dark-ink); line-height: 1;">89</div>
-                  <div style="font-size: 10px; color: var(--dark-ink-soft); margin-top: 6px;">Leads</div>
-                </div>
-                <div style="background: rgba(0,0,0,0.25); border-radius: 10px; padding: 12px; border: 0.5px solid rgba(0,195,137,0.08);">
-                  <div style="font-family: var(--serif); font-size: 24px; color: var(--dark-ink); line-height: 1;">34</div>
-                  <div style="font-size: 10px; color: var(--dark-ink-soft); margin-top: 6px;">Pressupostos</div>
-                </div>
-              </div>
-              <div class="ana-mini" style="margin-top: 16px;">
+              <div class="ana-mini">
                 <div class="bar" style="height: 30%"></div>
                 <div class="bar" style="height: 50%"></div>
                 <div class="bar" style="height: 40%"></div>
@@ -3366,42 +3626,63 @@
       </div>
     </div>
 
-    <!-- Y ADEMÁS — fila técnica que aplica a los 4 -->
+    <!-- ============================================================
+         Y ADEMÁS — fila técnica · ahora con 4 celdas (era 3)
+         Cambios: añadida Multiidioma (movida desde Panel 01)
+         ============================================================ -->
     <div class="ct-extras">
       <div class="extras-head">
         <span class="extras-num">+</span>
         <span class="extras-name"><em>I a més</em></span>
-        <span class="extras-desc">Detalls tècnics que fan la diferència.</span>
+        <span class="extras-desc">Detalls tècnics que marquen la diferència.</span>
       </div>
       <div class="extras-grid">
+
         <div class="cell">
           <h3>Integració en una línia</h3>
-          <p>Enganxa un script al header. Sense plugins, sense dependències, compatible amb qualsevol plataforma. Operatiu en menys de 60 segons.</p>
+          <p>Enganxa un script al header. Sense plugins, sense dependències. Operatiu en menys de 60 segons.</p>
           <div class="code-line">
-            <span class="com">// dentro del &lt;header&gt;</span><br>
-            &lt;<span class="key">script</span> src=<span class="str">"https://cdn.empentia.com/widget.js"</span>&gt;&lt;/<span class="key">script</span>&gt;
+            <span class="com">// al &lt;head&gt;</span><br>
+            &lt;<span class="key">script</span> src=<span class="str">"empentia.com/widget.js"</span>&gt;&lt;/<span class="key">script</span>&gt;
           </div>
         </div>
+
         <div class="cell">
           <h3>Personalització visual</h3>
-          <p>Colors, avatar, posició i CSS custom. Com si fos nadiu de la teva web.</p>
-          <div style="display: flex; gap: 8px; margin-top: 18px;">
-            <div style="width: 26px; height: 26px; border-radius: 50%; background: var(--brand); border: 2px solid rgba(255,255,255,0.1);"></div>
-            <div style="width: 26px; height: 26px; border-radius: 50%; background: #5b8def; border: 2px solid rgba(255,255,255,0.1);"></div>
-            <div style="width: 26px; height: 26px; border-radius: 50%; background: #f59e0b; border: 2px solid rgba(255,255,255,0.1);"></div>
-            <div style="width: 26px; height: 26px; border-radius: 50%; background: #ef4444; border: 2px solid rgba(255,255,255,0.1);"></div>
-            <div style="width: 26px; height: 26px; border-radius: 50%; background: #1f1f1c; border: 2px solid rgba(255,255,255,0.1);"></div>
+          <p>Colors, avatar, posició i CSS custom. Com si fos natiu de la teva web.</p>
+          <div class="color-swatches">
+            <div style="background: var(--brand);"></div>
+            <div style="background: #5b8def;"></div>
+            <div style="background: #f59e0b;"></div>
+            <div style="background: #ef4444;"></div>
+            <div style="background: #1f1f1c;"></div>
           </div>
         </div>
+
+        <!-- NUEVA CELDA: Multiidioma (movida desde el Panel 01) -->
+        <div class="cell">
+          <h3>Multiidioma automàtic</h3>
+          <p>Detecta l'idioma del visitant i respon en la seva llengua. 30+ idiomes suportats, sense configuració.</p>
+          <div class="lang-grid">
+            <div class="flag" title="Español"><svg viewBox="0 0 9 6" xmlns="http://www.w3.org/2000/svg"><rect width="9" height="6" fill="#AA151B"/><rect y="1.5" width="9" height="3" fill="#F1BF00"/></svg></div>
+            <div class="flag" title="Català"><svg viewBox="0 0 9 6" xmlns="http://www.w3.org/2000/svg"><rect width="9" height="6" fill="#FCDD09"/><rect y="0.667" width="9" height="0.667" fill="#DA121A"/><rect y="2.000" width="9" height="0.667" fill="#DA121A"/><rect y="3.333" width="9" height="0.667" fill="#DA121A"/><rect y="4.667" width="9" height="0.667" fill="#DA121A"/></svg></div>
+            <div class="flag" title="English"><svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg"><rect width="60" height="30" fill="#012169"/><path d="M0 0 L60 30 M60 0 L0 30" stroke="#FFFFFF" stroke-width="6"/><path d="M30 0 V30 M0 15 H60" stroke="#FFFFFF" stroke-width="10"/><path d="M30 0 V30 M0 15 H60" stroke="#C8102E" stroke-width="6"/></svg></div>
+            <div class="flag" title="Français"><svg viewBox="0 0 9 6" xmlns="http://www.w3.org/2000/svg"><rect width="3" height="6" fill="#0055A4"/><rect x="3" width="3" height="6" fill="#FFFFFF"/><rect x="6" width="3" height="6" fill="#EF4135"/></svg></div>
+            <div class="flag" title="Deutsch"><svg viewBox="0 0 5 3" xmlns="http://www.w3.org/2000/svg"><rect width="5" height="1" fill="#000000"/><rect y="1" width="5" height="1" fill="#DD0000"/><rect y="2" width="5" height="1" fill="#FFCE00"/></svg></div>
+            <div class="flag more">+25</div>
+          </div>
+        </div>
+
         <div class="cell">
           <h3>RGPD · servidors UE</h3>
-          <p>Xifratge en trànsit i repòs. Les converses són propietat teva.</p>
-          <div style="display: flex; gap: 6px; margin-top: 18px; flex-wrap: wrap;">
-            <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(0,195,137,0.12); color: var(--brand); border: 0.5px solid rgba(0,195,137,0.25);">RGPD</span>
-            <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(0,195,137,0.12); color: var(--brand); border: 0.5px solid rgba(0,195,137,0.25);">SSL</span>
-            <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(0,195,137,0.12); color: var(--brand); border: 0.5px solid rgba(0,195,137,0.25);">UE</span>
+          <p>Xifrat en trànsit i repòs. Les converses són propietat teva.</p>
+          <div class="rgpd-row">
+            <span>RGPD</span>
+            <span>SSL</span>
+            <span>UE</span>
           </div>
         </div>
+
       </div>
     </div>
 
@@ -3410,19 +3691,19 @@
   <script>
     (function() {
       const tabs = document.querySelectorAll('.como-trabaja-tabs .tab');
-      const panells = document.querySelectorAll('.como-trabaja-tabs .tab-panell');
+      const panels = document.querySelectorAll('.como-trabaja-tabs .tab-panel');
       tabs.forEach(tab => {
         tab.addEventListener('click', () => {
           const target = tab.dataset.tab;
           const isMobile = window.matchMedia('(max-width: 960px)').matches;
           const wasActive = tab.classList.contains('active');
           tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
-          panells.forEach(p => p.classList.remove('active'));
+          panels.forEach(p => p.classList.remove('active'));
           if (!isMobile || !wasActive) {
             tab.classList.add('active');
             tab.setAttribute('aria-selected', 'true');
-            const panell = document.querySelector('.como-trabaja-tabs .tab-panell[data-panell="' + target + '"]');
-            if (panell) panell.classList.add('active');
+            const panel = document.querySelector('.como-trabaja-tabs .tab-panel[data-panel="' + target + '"]');
+            if (panel) panel.classList.add('active');
           }
         });
       });
@@ -3433,11 +3714,11 @@
 
 
 <!-- ============ CASOS DE ÉXITO ============ -->
-<section class="cases" id="cass">
+<section class="cases" id="casos">
   <div class="container">
     <div class="cases-head">
       <div class="eyebrow">Casos reals</div>
-      <h2 class="section-title">Negocis com el teu<br><em>ja el fan servir.</em></h2>
+      <h2 class="section-title">Negocis com el teu <em>ja l'utilitzen.</em></h2>
     </div>
 
     <div class="cases-grid">
@@ -3450,7 +3731,7 @@
           "Abans, moltes consultes quedaven sense resposta. Ara, l'agent atén en temps real 24/7, resolent dubtes clau i avançant la compra des del primer contacte."
         </p>
         <div class="case-author">
-          <div class="case-avatar"><img src="/images/team/jaume-llordes.jpg" alt="Jaume Llordes"></div>
+          <div class="case-avatar"><img src="/images/team/jaume.png" alt="Jaume Llordes"></div>
           <div>
             <div class="case-name">Jaume Llordes</div>
             <div>VB Sports Bike · 630+ productes</div>
@@ -3487,7 +3768,7 @@
           <div class="case-avatar">J</div>
           <div>
             <div class="case-name">Jordi Sabater</div>
-            <div>ACED Asesores · Catalunya</div>
+            <div>ACED Assessors · Catalunya</div>
           </div>
         </div>
       </div>
@@ -3500,7 +3781,7 @@
   <div class="container">
     <div class="pricing-head">
       <div class="eyebrow">Plans</div>
-      <h2 class="section-title">Transparent des del<br><em>primer dia.</em></h2>
+      <h2 class="section-title">Transparent des del <em>primer dia.</em></h2>
       <p class="section-sub" style="color: var(--ink-soft);">
         Tots els plans inclouen configuració, entrenament i suport.
         Sense permanència, sense lletra petita.
@@ -3519,7 +3800,7 @@
           <li>Coneixement manual + web</li>
           <li>Suport per ticket · 48h</li>
         </ul>
-        <a href="#" class="plan-btn">Contractar Starter</a>
+        <a href="#" class="plan-btn" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_pricing_starter'}}}); return false;">Contractar Starter</a>
       </div>
 
       <div class="plan popular">
@@ -3535,7 +3816,7 @@
           <li>Integració carret real</li>
           <li>Implementació assistida · 24h</li>
         </ul>
-        <a href="#" class="plan-btn">Contractar Pro</a>
+        <a href="#" class="plan-btn" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_pricing_pro'}}}); return false;">Contractar Pro</a>
       </div>
 
       <div class="plan">
@@ -3549,13 +3830,13 @@
           <li>Personalització total (CSS)</li>
           <li>Implementació dedicada · 4h</li>
         </ul>
-        <a href="#" class="plan-btn">Contractar Business</a>
+        <a href="#" class="plan-btn" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_pricing_business'}}}); return false;">Contractar Business</a>
       </div>
 
       <div class="plan">
         <div class="plan-name">Personalitzat</div>
         <div class="plan-price" style="font-size: 32px; padding-top: 18px;">A mida</div>
-        <div class="plan-period">Parlem</div>
+        <div class="plan-period">En parlem</div>
         <ul class="plan-features">
           <li>Volum a mida</li>
           <li>Per a cadenes i franquícies</li>
@@ -3563,7 +3844,7 @@
           <li>SLA i suport dedicat</li>
           <li>Facturació personalitzada</li>
         </ul>
-        <a href="#" class="plan-btn">Parlem</a>
+        <a href="#" class="plan-btn" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_pricing_custom'}}}); return false;">En parlem</a>
       </div>
     </div>
 
@@ -3572,91 +3853,6 @@
       <span>Cancel·lació immediata</span>
       <span>Operatiu en 48h</span>
       <span>RGPD · servidors UE</span>
-    </div>
-
-    <!-- ============ SERVICIOS PROFESIONALES (acompañamiento) ============ -->
-    <div class="pro-services">
-      <div class="pro-services-head">
-        <div class="pro-services-eyebrow">Acompanyament</div>
-        <h3 class="pro-services-title">Ho configures tu o<br><em>t'acompanyem?</em></h3>
-        <p class="pro-services-sub">
-          Qualsevol pla es pot activar de forma autònoma o amb el nostre equip.
-          I quan ja estigui en marxa, t'ajudem a optimitzar-lo.
-        </p>
-      </div>
-
-      <!-- PASO 1: DIY vs Premium -->
-      <div class="onboarding-choice">
-        <!-- DIY -->
-        <div class="choice-card">
-          <div class="choice-tag">Inclòs a tots els plans</div>
-          <h4 class="choice-name">Ho configures <em>tu mateix</em></h4>
-          <p class="choice-desc">
-            Et donem les eines i la documentació per tenir el teu agent
-            funcionant en menys d'un dia. Suport per ticket quan ho necessitis.
-          </p>
-          <ul class="choice-features">
-            <li>Panell intuïtiu amb tutorials pas a pas</li>
-            <li>Documentació completa i vídeos guia</li>
-            <li>Connexió de catàleg en 3 clics</li>
-            <li>Suport per ticket inclòs</li>
-          </ul>
-          <div class="choice-price">
-            <div>
-              <div class="choice-price-amount free">Sense cost</div>
-              <div class="choice-price-note">Inclòs amb el teu pla</div>
-            </div>
-          </div>
-          <a href="#" class="choice-cta">Començar jo mateix</a>
-        </div>
-
-        <!-- Divisor -->
-        <div class="choice-divider">
-          <span>o</span>
-        </div>
-
-        <!-- Premium -->
-        <div class="choice-card premium">
-          <div class="choice-tag">Pagament únic</div>
-          <h4 class="choice-name">Ho fem <em>nosaltres</em></h4>
-          <p class="choice-desc">
-            Auditem la teva web, optimitzem el teu catàleg, entrenem l'agent amb
-            el teu to de marca i formem el teu equip. Llest i afinat en 48h.
-          </p>
-          <ul class="choice-features">
-            <li>Auditoria de la web i catàleg (2h)</li>
-            <li>Entrenament amb el teu to i argumentari propis</li>
-            <li>Configuració de respostes clau i objeccions freqüents</li>
-            <li>Sessió de formació per al teu equip (1h)</li>
-            <li>Suport prioritari els primers 30 dies</li>
-          </ul>
-          <div class="choice-price">
-            <div>
-              <div class="choice-price-amount">249€<span style="font-size:14px;vertical-align:super;color:var(--ink-mute);font-weight:400;">*</span></div>
-              <div class="choice-price-note">Pagament únic · sense IVA · *segons projecte</div>
-            </div>
-          </div>
-          <a href="#" class="choice-cta">Reservar onboarding</a>
-        </div>
-      </div>
-
-      <!-- PASO 2: Tras 30 dies, optimización -->
-      <div class="next-step">
-        <div class="next-step-tag">Després de 30 dies</div>
-        <div class="next-step-content">
-          <h4>Y si lo <em>portem al següent nivell?</em></h4>
-          <p>
-            Quan el teu agent porta un mes en marxa, analitzem les seves converses
-            i descobrim oportunitats que se t'estan escapant: productes que
-            demanen i no tens, objeccions recurrents, leads no convertits.
-          </p>
-        </div>
-        <div class="next-step-price">
-          <div class="next-step-price-amount">149€</div>
-          <div class="next-step-price-note">/trimestre · sin IVA</div>
-        </div>
-        <a href="#" class="choice-cta">Activar informe</a>
-      </div>
     </div>
 
     <!-- ============ TABLA COMPARATIVA ============ -->
@@ -3674,7 +3870,7 @@
           <table>
             <thead>
               <tr>
-                <th>Elige el teu pla</th>
+                <th>Tria el teu pla</th>
                 <th>
                   <div class="plan-h">Starter</div>
                   <div class="plan-h-price">49€</div>
@@ -3693,12 +3889,12 @@
                 <th>
                   <div class="plan-h">Personalitzat</div>
                   <div class="plan-h-price" style="font-size: 16px; padding-top: 6px;">A mida</div>
-                  <div class="plan-h-period">Parlem</div>
+                  <div class="plan-h-period">En parlem</div>
                 </th>
               </tr>
             </thead>
             <tbody>
-              <!-- Funcionalitats incloses -->
+              <!-- Funcionalidades incluidas -->
               <tr class="section-row"><td colspan="5">Funcionalitats incloses</td></tr>
               <tr><td>Cerca intel·ligent del catàleg</td><td><span class="check-y">✓</span></td><td class="featured"><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td></tr>
               <tr><td>Consultes operatives (horaris, comandes, devolucions, contacte)</td><td><span class="check-y">✓</span></td><td class="featured"><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td></tr>
@@ -3710,55 +3906,55 @@
               <tr><td>Personalització del widget</td><td>Bàsica</td><td class="featured">Estàndard</td><td>Completa (CSS)</td><td>A mida</td></tr>
               <tr><td>Analytics en temps real</td><td><span class="check-y">✓</span></td><td class="featured"><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td></tr>
 
-              <!-- Converses i uso -->
-              <tr class="section-row"><td colspan="5">Converses i uso</td></tr>
+              <!-- Conversaciones y uso -->
+              <tr class="section-row"><td colspan="5">Converses i ús</td></tr>
               <tr><td>Converses incloses/mes</td><td>50</td><td class="featured">100</td><td>200</td><td><span class="check-n">—</span></td></tr>
               <tr><td>Extra per conversa addicional</td><td>0,32€</td><td class="featured">0,28€</td><td>0,24€</td><td><span class="check-n">—</span></td></tr>
               <tr><td>Usuaris del panell</td><td>1</td><td class="featured">3</td><td>5</td><td><span class="check-n">—</span></td></tr>
 
-              <!-- Catàleg i coneixement -->
+              <!-- Catálogo y conocimiento -->
               <tr class="section-row"><td colspan="5">Catàleg i coneixement</td></tr>
               <tr><td>Gestió del coneixement</td><td>Manual</td><td class="featured">Automàtic</td><td>Automàtic</td><td><span class="check-n">—</span></td></tr>
               <tr><td>Font d'informació</td><td>Manual + Web</td><td class="featured">+ API eCommerce</td><td>+ API eCommerce</td><td><span class="check-n">—</span></td></tr>
 
-              <!-- Agent i personalització -->
+              <!-- Agente y personalización -->
               <tr class="section-row"><td colspan="5">Agent i personalització</td></tr>
               <tr><td>Personalització visual</td><td>Bàsica (colors)</td><td class="featured">Estàndard</td><td>Completa (CSS custom)</td><td><span class="check-n">—</span></td></tr>
-              <tr><td>Multi-agente</td><td><span class="check-n">—</span></td><td class="featured">1 agent extra</td><td>Hasta 3 agentes</td><td><span class="check-n">—</span></td></tr>
+              <tr><td>Multi-agent</td><td><span class="check-n">—</span></td><td class="featured">1 agent extra</td><td>Fins a 3 agents</td><td><span class="check-n">—</span></td></tr>
               <tr><td>Idiomes actius</td><td>2</td><td class="featured">3</td><td>5</td><td>A mida</td></tr>
-              <tr><td>Respostes ràpides</td><td>3 fixes</td><td class="featured">Il·limitades</td><td>Il·limitades + dinàmiques <span class="soon">properament</span></td><td><span class="check-n">—</span></td></tr>
+              <tr><td>Respostes ràpides</td><td>3 fixes</td><td class="featured">Il·limitades</td><td>Il·limitades + dinàmiques</td><td><span class="check-n">—</span></td></tr>
 
-              <!-- Accions comercials -->
+              <!-- Acciones comerciales -->
               <tr class="section-row"><td colspan="5">Accions comercials</td></tr>
-              <tr><td>Alertes per lead rebut</td><td>Email</td><td class="featured">Email + panell</td><td>Email + panelll + webhook <span class="soon">properament</span></td><td><span class="check-n">—</span></td></tr>
+              <tr><td>Alertes per lead rebut</td><td>Email</td><td class="featured">Email + panell</td><td>Email + panell + webhook</td><td><span class="check-n">—</span></td></tr>
               <tr><td>Pressupostos automàtics</td><td><span class="check-n">—</span></td><td class="featured"><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td><td><span class="check-n">—</span></td></tr>
               <tr><td>Integració carret</td><td><span class="check-n">—</span></td><td class="featured"><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td><td><span class="check-n">—</span></td></tr>
 
-              <!-- Dades i historial -->
+              <!-- Datos e historial -->
               <tr class="section-row"><td colspan="5">Dades i historial</td></tr>
-              <tr><td>Historial de converses</td><td>60 dies</td><td class="featured">180 dies</td><td>Completo</td><td><span class="check-n">—</span></td></tr>
+              <tr><td>Historial de converses</td><td>60 dies</td><td class="featured">180 dies</td><td>Complet</td><td><span class="check-n">—</span></td></tr>
               <tr><td>Mètriques i analytics</td><td>Bàsiques</td><td class="featured">Completes</td><td>Completes + exportació</td><td><span class="check-n">—</span></td></tr>
-              <tr><td>Exportació de leads</td><td>CSV</td><td class="featured">CSV + Webhook <span class="soon">properament</span></td><td>CSV + Webhook + CRM <span class="soon">properament</span></td><td><span class="check-n">—</span></td></tr>
-              <tr><td>Informe mensual</td><td><span class="check-n">—</span></td><td class="featured">PDF automàtic <span class="soon">properament</span></td><td>PDF + reunió trimestral <span class="soon">properament</span></td><td><span class="check-n">—</span></td></tr>
+              <tr><td>Exportació de leads</td><td>CSV</td><td class="featured">CSV + Webhook</td><td>CSV + Webhook + CRM</td><td><span class="check-n">—</span></td></tr>
+              <tr><td>Informe mensual</td><td><span class="check-n">—</span></td><td class="featured">PDF automàtic</td><td>PDF + reunió trimestral</td><td><span class="check-n">—</span></td></tr>
 
-              <!-- Suport -->
+              <!-- Soporte -->
               <tr class="section-row"><td colspan="5">Suport</td></tr>
-              <tr><td>Suport implementación</td><td>Documentació + ticket</td><td class="featured">Implementació assistida</td><td>Implementació dedicada</td><td><span class="check-n">—</span></td></tr>
+              <tr><td>Suport implementació</td><td>Documentació + ticket</td><td class="featured">Implementació assistida</td><td>Implementació dedicada</td><td><span class="check-n">—</span></td></tr>
               <tr><td>SLA resposta suport</td><td>48h</td><td class="featured">24h</td><td>4h</td><td><span class="check-n">—</span></td></tr>
 
               <!-- CTA row -->
               <tr class="cta-row">
                 <td></td>
-                <td><a href="#" class="compare-cta">Contractar Starter</a></td>
-                <td class="featured"><a href="#" class="compare-cta featured-cta">Contractar Pro</a></td>
-                <td><a href="#" class="compare-cta">Contractar Business</a></td>
-                <td><a href="#" class="compare-cta">Parlem</a></td>
+                <td><a href="#" class="compare-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_compare_starter'}}}); return false;">Contractar Starter</a></td>
+                <td class="featured"><a href="#" class="compare-cta featured-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_compare_pro'}}}); return false;">Contractar Pro</a></td>
+                <td><a href="#" class="compare-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_compare_business'}}}); return false;">Contractar Business</a></td>
+                <td><a href="#" class="compare-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_compare_custom'}}}); return false;">En parlem</a></td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <!-- MOBILE: chips + panelles -->
+        <!-- MOBILE: chips + paneles -->
         <div class="compare-mobile">
           <div class="compare-mobile-chips">
             <button class="chip" data-pane="starter" data-active="false" onclick="selectPane(this)">Starter · 49€</button>
@@ -3786,14 +3982,14 @@
               <div class="pane-row"><span class="feat">Analytics</span><span class="val">✓</span></div>
             </div>
             <div class="pane-section">
-              <div class="pane-section-title">Uso i converses</div>
+              <div class="pane-section-title">Ús i converses</div>
               <div class="pane-row"><span class="feat">Converses/mes</span><span class="val">50</span></div>
-              <div class="pane-row"><span class="feat">Extra/conv. adicional</span><span class="val">0,32€</span></div>
+              <div class="pane-row"><span class="feat">Extra/conv. addicional</span><span class="val">0,32€</span></div>
               <div class="pane-row"><span class="feat">Usuaris del panell</span><span class="val">1</span></div>
             </div>
             <div class="pane-section">
-              <div class="pane-section-title">Agente</div>
-              <div class="pane-row"><span class="feat">Multi-agente</span><span class="val no">—</span></div>
+              <div class="pane-section-title">Agent</div>
+              <div class="pane-row"><span class="feat">Multi-agent</span><span class="val no">—</span></div>
               <div class="pane-row"><span class="feat">Idiomes actius</span><span class="val">2</span></div>
               <div class="pane-row"><span class="feat">Respostes ràpides</span><span class="val">3 fixes</span></div>
               <div class="pane-row"><span class="feat">Personalització visual</span><span class="val">Bàsica</span></div>
@@ -3801,7 +3997,7 @@
             <div class="pane-section">
               <div class="pane-section-title">Dades i historial</div>
               <div class="pane-row"><span class="feat">Historial</span><span class="val">60 dies</span></div>
-              <div class="pane-row"><span class="feat">Exportación leads</span><span class="val">CSV</span></div>
+              <div class="pane-row"><span class="feat">Exportació leads</span><span class="val">CSV</span></div>
               <div class="pane-row"><span class="feat">Informe mensual</span><span class="val no">—</span></div>
             </div>
             <div class="pane-section">
@@ -3809,7 +4005,7 @@
               <div class="pane-row"><span class="feat">Implementació</span><span class="val">Doc. + ticket</span></div>
               <div class="pane-row"><span class="feat">SLA resposta</span><span class="val">48h</span></div>
             </div>
-            <a href="#" class="plan-btn" style="display: block; margin-top: 24px; text-align: center;">Contractar Starter</a>
+            <a href="#" class="plan-btn" style="display: block; margin-top: 24px; text-align: center;" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_pricing_starter'}}}); return false;">Contractar Starter</a>
           </div>
 
           <!-- PRO -->
@@ -3831,14 +4027,14 @@
               <div class="pane-row"><span class="feat">Analytics</span><span class="val">✓</span></div>
             </div>
             <div class="pane-section">
-              <div class="pane-section-title">Uso i converses</div>
+              <div class="pane-section-title">Ús i converses</div>
               <div class="pane-row"><span class="feat">Converses/mes</span><span class="val">100</span></div>
-              <div class="pane-row"><span class="feat">Extra/conv. adicional</span><span class="val">0,28€</span></div>
+              <div class="pane-row"><span class="feat">Extra/conv. addicional</span><span class="val">0,28€</span></div>
               <div class="pane-row"><span class="feat">Usuaris del panell</span><span class="val">3</span></div>
             </div>
             <div class="pane-section">
-              <div class="pane-section-title">Agente</div>
-              <div class="pane-row"><span class="feat">Multi-agente</span><span class="val">1 agent extra</span></div>
+              <div class="pane-section-title">Agent</div>
+              <div class="pane-row"><span class="feat">Multi-agent</span><span class="val">1 agent extra</span></div>
               <div class="pane-row"><span class="feat">Idiomes actius</span><span class="val">3</span></div>
               <div class="pane-row"><span class="feat">Respostes ràpides</span><span class="val">Il·limitades</span></div>
               <div class="pane-row"><span class="feat">Personalització visual</span><span class="val">Estàndard</span></div>
@@ -3846,15 +4042,15 @@
             <div class="pane-section">
               <div class="pane-section-title">Dades i historial</div>
               <div class="pane-row"><span class="feat">Historial</span><span class="val">180 dies</span></div>
-              <div class="pane-row"><span class="feat">Exportación leads</span><span class="val">CSV + Webhook</span></div>
+              <div class="pane-row"><span class="feat">Exportació leads</span><span class="val">CSV + Webhook</span></div>
               <div class="pane-row"><span class="feat">Informe mensual</span><span class="val">PDF automàtic</span></div>
             </div>
             <div class="pane-section">
               <div class="pane-section-title">Suport</div>
-              <div class="pane-row"><span class="feat">Implementació</span><span class="val">Asistida</span></div>
+              <div class="pane-row"><span class="feat">Implementació</span><span class="val">Assistida</span></div>
               <div class="pane-row"><span class="feat">SLA resposta</span><span class="val">24h</span></div>
             </div>
-            <a href="#" class="plan-btn" style="display: block; margin-top: 24px; text-align: center; background: var(--brand); border-color: var(--brand); color: #033726;">Contractar Pro</a>
+            <a href="#" class="plan-btn" style="display: block; margin-top: 24px; text-align: center; background: var(--brand); border-color: var(--brand); color: #033726;" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_pricing_pro'}}}); return false;">Contractar Pro</a>
           </div>
 
           <!-- BUSINESS -->
@@ -3876,22 +4072,22 @@
               <div class="pane-row"><span class="feat">Analytics</span><span class="val">✓</span></div>
             </div>
             <div class="pane-section">
-              <div class="pane-section-title">Uso i converses</div>
+              <div class="pane-section-title">Ús i converses</div>
               <div class="pane-row"><span class="feat">Converses/mes</span><span class="val">200</span></div>
-              <div class="pane-row"><span class="feat">Extra/conv. adicional</span><span class="val">0,24€</span></div>
+              <div class="pane-row"><span class="feat">Extra/conv. addicional</span><span class="val">0,24€</span></div>
               <div class="pane-row"><span class="feat">Usuaris del panell</span><span class="val">5</span></div>
             </div>
             <div class="pane-section">
-              <div class="pane-section-title">Agente</div>
-              <div class="pane-row"><span class="feat">Multi-agente</span><span class="val">Hasta 3 agentes</span></div>
+              <div class="pane-section-title">Agent</div>
+              <div class="pane-row"><span class="feat">Multi-agent</span><span class="val">Fins a 3 agents</span></div>
               <div class="pane-row"><span class="feat">Idiomes actius</span><span class="val">5</span></div>
               <div class="pane-row"><span class="feat">Respostes ràpides</span><span class="val">Il·limitades + dinàmiques</span></div>
               <div class="pane-row"><span class="feat">Personalització visual</span><span class="val">Completa (CSS)</span></div>
             </div>
             <div class="pane-section">
               <div class="pane-section-title">Dades i historial</div>
-              <div class="pane-row"><span class="feat">Historial</span><span class="val">Completo</span></div>
-              <div class="pane-row"><span class="feat">Exportación leads</span><span class="val">CSV + Webhook + CRM</span></div>
+              <div class="pane-row"><span class="feat">Historial</span><span class="val">Complet</span></div>
+              <div class="pane-row"><span class="feat">Exportació leads</span><span class="val">CSV + Webhook + CRM</span></div>
               <div class="pane-row"><span class="feat">Informe mensual</span><span class="val">PDF + reunió trim.</span></div>
             </div>
             <div class="pane-section">
@@ -3899,7 +4095,7 @@
               <div class="pane-row"><span class="feat">Implementació</span><span class="val">Dedicada</span></div>
               <div class="pane-row"><span class="feat">SLA resposta</span><span class="val">4h</span></div>
             </div>
-            <a href="#" class="plan-btn" style="display: block; margin-top: 24px; text-align: center;">Contractar Business</a>
+            <a href="#" class="plan-btn" style="display: block; margin-top: 24px; text-align: center;" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_pricing_business'}}}); return false;">Contractar Business</a>
           </div>
 
           <!-- CUSTOM -->
@@ -3907,54 +4103,106 @@
             <div class="pane-head">
               <div class="pane-name">Personalitzat</div>
               <div class="pane-price" style="font-size: 28px;">A mida</div>
-              <div class="pane-period">Parlem</div>
+              <div class="pane-period">En parlem</div>
             </div>
             <div class="pane-section">
-              <div class="pane-section-title">Per a quién</div>
-              <div class="pane-row"><span class="feat">Cadenas i franquicias</span><span class="val">✓</span></div>
+              <div class="pane-section-title">Per a qui</div>
+              <div class="pane-row"><span class="feat">Cadenes i franquícies</span><span class="val">✓</span></div>
               <div class="pane-row"><span class="feat">Volum alt</span><span class="val">A mida</span></div>
               <div class="pane-row"><span class="feat">Integracions específiques</span><span class="val">✓</span></div>
-              <div class="pane-row"><span class="feat">SLA dedicado</span><span class="val">✓</span></div>
-              <div class="pane-row"><span class="feat">Facturación</span><span class="val">Personalizada</span></div>
+              <div class="pane-row"><span class="feat">SLA dedicat</span><span class="val">✓</span></div>
+              <div class="pane-row"><span class="feat">Facturació</span><span class="val">Personalitzada</span></div>
             </div>
             <p style="font-size: 13.5px; color: var(--ink-soft); line-height: 1.55; margin-top: 16px;">
-              Dissenyem un plan a medida segons els teus necessitates. Parlem per a entender el teu cas i preper ar-te una proposta.
+              Dissenyem un pla a mida segons les teves necessitats. En parlem per entendre el teu cas i preparar-te una proposta.
             </p>
-            <a href="#" class="plan-btn" style="display: block; margin-top: 24px; text-align: center;">Parlem</a>
+            <a href="#" class="plan-btn" style="display: block; margin-top: 24px; text-align: center;" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_pricing_custom'}}}); return false;">En parlem</a>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- ============ SERVICIOS PROFESIONALES (acompañamiento) ============ -->
+    <div class="pro-services">
+      <div class="pro-services-head">
+        <div class="pro-services-eyebrow">Acompanyament</div>
+        <h3 class="pro-services-title">L'engeguem <em>per tu.</em></h3>
+        <p class="pro-services-sub">
+          Ens encarreguem de la configuració inicial i d'optimitzar-lo cada trimestre.
+        </p>
+      </div>
+
+      <!-- Dos módulos lado a lado -->
+      <div class="onboarding-choice pair">
+
+        <!-- Puesta en marcha -->
+        <div class="choice-card premium">
+          <div class="choice-tag">Pagament únic</div>
+          <h4 class="choice-name">Ho fem <em>nosaltres</em></h4>
+          <p class="choice-desc">
+            Auditem la teva web, optimitzem el teu catàleg, entrenem l'agent amb
+            el teu to de marca i formem el teu equip. Llest i afinat en 48h.
+          </p>
+          <ul class="choice-features">
+            <li>Auditoria de la web i catàleg (2h)</li>
+            <li>Entrenament amb el teu to i argumentari propis</li>
+            <li>Configuració de respostes clau i objeccions freqüents</li>
+            <li>Sessió de formació per al teu equip (1h)</li>
+            <li>Suport prioritari els primers 30 dies</li>
+          </ul>
+          <div class="choice-price">
+            <div>
+              <div class="choice-price-amount">249€<span style="font-size:14px;vertical-align:super;color:var(--ink-mute);font-weight:400;">*</span></div>
+              <div class="choice-price-note">Pagament únic · sense IVA · *segons projecte</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Optimización (después de 30 días) -->
+        <div class="choice-card">
+          <div class="choice-tag">Després de 30 dies</div>
+          <h4 class="choice-name">El portem al <em>següent nivell</em></h4>
+          <p class="choice-desc">
+            Quan el teu agent porta un mes en marxa, analitzem les seves converses
+            i descobrim oportunitats que se t'estan escapant.
+          </p>
+          <ul class="choice-features">
+            <li>Anàlisi de les converses del mes</li>
+            <li>Productes que demanen i no tens</li>
+            <li>Objeccions recurrents i leads sense convertir</li>
+            <li>Informe amb accions concretes</li>
+          </ul>
+          <div class="choice-price">
+            <div>
+              <div class="choice-price-amount">149€</div>
+              <div class="choice-price-note">/trimestre · sense IVA</div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ MÁS CANALES (properament) ============ -->
+<!-- ============ MÁS CANALES (próximamente) ============ -->
 <section class="channels" id="canales">
-  <!-- Nodos decorativos del logo -->
-  <svg class="channels-bg-nodes" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice">
-    <circle cx="120" cy="80" r="5" stroke="#00c389" stroke-width="2" fill="none"/>
-    <path d="M 120 80 Q 240 50, 320 130" stroke="#00c389" stroke-width="1.5" fill="none"/>
-    <circle cx="320" cy="130" r="3" fill="#00c389"/>
-    <circle cx="1340" cy="450" r="5" stroke="#00c389" stroke-width="2" fill="none"/>
-    <path d="M 1340 450 Q 1240 380, 1140 420" stroke="#00c389" stroke-width="1.5" fill="none"/>
-    <circle cx="1140" cy="420" r="3" fill="#00c389"/>
-  </svg>
 
   <div class="container">
     <div class="channels-top">
       <div class="channels-head">
         <div>
           <div class="eyebrow">Atenció IA 360</div>
-          <h2 class="section-title">Un agent,<br><em>tots els canals.</em></h2>
+          <h2 class="section-title">Un agent, <em>tots els canals.</em></h2>
         </div>
         <p>
           El Webchat és només el principi. Estem preparant agents IA per a
-          WhatsApp, email, trucades i ressenyes. Cada canal amb la seva membresia,
+          WhatsApp, email, trucades, xarxes socials i ressenyes. Cada canal amb la seva membresia,
           tots compartint el mateix coneixement del teu negoci.
         </p>
       </div>
 
-    <!-- Visualització 360: agent al centre, canals orbitant -->
+    <!-- Visualización 360: agente al centro, canales orbitando -->
     <div class="channels-360" aria-hidden="true">
       <div class="orbit-stage">
         <!-- Líneas conectoras desde el centro -->
@@ -3970,7 +4218,7 @@
         <!-- Anillos -->
         <div class="orbit-ring r1"></div>
 
-        <!-- Centro: Coneixement del negoci -->
+        <!-- Centro: Conocimiento del negocio -->
         <div class="orbit-center">
           <div class="orbit-center-inner">
             <strong>360°</strong>
@@ -3997,13 +4245,19 @@
         </div>
 
         <!-- VOZ -->
-        <div class="orbit-node" style="left: 85.71%; top: 50%;" title="Voz">
+        <div class="orbit-node" style="left: 85.71%; top: 50%;" title="Veu">
           <svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><path d="M12 18v4"/><path d="M8 22h8"/></svg>
           <span class="label">Veu</span>
         </div>
 
-        <!-- RESEÑAS (centrado abajo) -->
-        <div class="orbit-node" style="left: 50%; top: 87.5%;" title="Reseñas">
+        <!-- REDES SOCIALES (abajo derecha) -->
+        <div class="orbit-node" style="left: 71%; top: 80%;" title="Xarxes Socials">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          <span class="label">Xarxes</span>
+        </div>
+
+        <!-- RESEÑAS (abajo izquierda) -->
+        <div class="orbit-node" style="left: 29%; top: 80%;" title="Ressenyes">
           <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9 12 2"/></svg>
           <span class="label">Ressenyes</span>
         </div>
@@ -4013,23 +4267,17 @@
 
     <div class="channels-grid">
       <!-- WhatsApp -->
-      <div class="channel-card" style="--brand-soft: #eef7cc; --brand-deep: #7aaa10; --brand-darker: #527510;">
+      <div class="channel-card" style="--accent: #7bc200;">
         <div class="channel-icon-wrap">
           <div class="channel-icon">
-            <svg viewBox="0 0 24 24"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg>
+            <img src="/images/icons/agente-whatsapp.svg" alt="" aria-hidden="true">
           </div>
-          <span class="channel-soon">Properament</span>
         </div>
         <h3 class="channel-name">Agent WhatsApp</h3>
         <p class="channel-desc">
           Atén els teus clients per WhatsApp Business 24h.
           Respon, gestiona comandes i reserva cites al canal que ja fan servir.
         </p>
-        <ul class="channel-features">
-          <li>API oficial de WhatsApp Business</li>
-          <li>Estat de comandes en temps real</li>
-          <li>Mateix coneixement que el teu webchat</li>
-        </ul>
         <div class="channel-price">Des de 59€</div>
         <div class="channel-period">/mes · sense IVA</div>
         <a href="mailto:hola@empentia.ai?subject=Aviseu-me quan WhatsApp estigui llest" class="channel-cta">
@@ -4038,262 +4286,143 @@
       </div>
 
       <!-- Email -->
-      <div class="channel-card" style="--brand-soft: #ddeeff; --brand-deep: #3a82cc; --brand-darker: #1a5a99;">
+      <div class="channel-card" style="--accent: #0061c2;">
         <div class="channel-icon-wrap">
           <div class="channel-icon">
-            <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            <img src="/images/icons/agente-email.svg" alt="" aria-hidden="true">
           </div>
         </div>
         <h3 class="channel-name">Agent Email</h3>
         <p class="channel-desc">
-          Classifica consultes, comandes i queixes. Enruta a qui correspon
-          i prepara esborranys a punt per revisar o envia automàticament.
+          Classifica consultes, comandes i queixes. Encamina a qui correspon
+          i prepara esborranys llestos per revisar o envia automàticament.
         </p>
-        <ul class="channel-features">
-          <li>Reenviament d'emails o connexió OAuth/IMAP</li>
-          <li>Lectura d'adjunts inclosa</li>
-          <li>Respostes automàtiques per a preguntes habituals</li>
-        </ul>
         <div class="channel-price">Des de 59€</div>
         <div class="channel-period">/mes · sense IVA</div>
-        <a href="/ca/agentes-ia-atencion-cliente/email/" class="channel-cta">
+        <a href="https://empentia.com/ca/agentes-ia-atencion-cliente/email/" class="channel-cta">
           Veure Email <span class="arr">→</span>
         </a>
       </div>
 
       <!-- Voz -->
-      <div class="channel-card" style="--brand-soft: #fde8e0; --brand-deep: #c0522a; --brand-darker: #8a3419;">
+      <div class="channel-card" style="--accent: #c23400;">
         <div class="channel-icon-wrap">
           <div class="channel-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><path d="M12 18v4"/><path d="M8 22h8"/></svg>
+            <img src="/images/icons/agente-voz.svg" alt="" aria-hidden="true">
           </div>
-          <span class="channel-soon">Properament</span>
         </div>
         <h3 class="channel-name">Agent de veu · Trucades</h3>
         <p class="channel-desc">
           Rep trucades telefòniques amb veu natural. Resol consultes,
           gestiona cites i transfereix quan cal.
         </p>
-        <ul class="channel-features">
-          <li>Veus naturals en ES, CA, EN</li>
-          <li>Reserva de cites integrada</li>
-          <li>Transcripció i resum automàtic</li>
-        </ul>
         <div class="channel-price">Des de 79€</div>
         <div class="channel-period">/mes · sense IVA</div>
-        <a href="mailto:hola@empentia.ai?subject=Aviseu-me quan Llamadas estigui llest" class="channel-cta">
+        <a href="mailto:hola@empentia.ai?subject=Aviseu-me quan Trucades estigui llest" class="channel-cta">
           Aviseu-me <span class="arr">→</span>
         </a>
       </div>
 
-      <!-- Ressenyes -->
-      <div class="channel-card" style="--brand-soft: #fdf4dc; --brand-deep: #c08a1e; --brand-darker: #8a6010;">
+      <!-- Redes Sociales -->
+      <div class="channel-card" style="--accent: #4700c2;">
         <div class="channel-icon-wrap">
           <div class="channel-icon">
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9 12 2"/></svg>
+            <img src="/images/icons/agente-redes-sociales.svg" alt="" aria-hidden="true">
           </div>
-          <span class="channel-soon">Properament</span>
+        </div>
+        <h3 class="channel-name">Agent Xarxes Socials</h3>
+        <p class="channel-desc">
+          Respon missatges directes d'Instagram i Facebook Messenger 24h.
+          Gestiona consultes, leads i atenció al client des d'un sol agent.
+        </p>
+        <div class="channel-price">Des de 49€</div>
+        <div class="channel-period">/mes · sense IVA</div>
+        <a href="mailto:hola@empentia.ai?subject=Aviseu-me quan Xarxes Socials estigui llest" class="channel-cta">
+          Aviseu-me <span class="arr">→</span>
+        </a>
+      </div>
+
+      <!-- Reseñas -->
+      <div class="channel-card" style="--accent: #c28100;">
+        <div class="channel-icon-wrap">
+          <div class="channel-icon">
+            <img src="/images/icons/agente-resenas.svg" alt="" aria-hidden="true">
+          </div>
         </div>
         <h3 class="channel-name">Agent de Ressenyes</h3>
         <p class="channel-desc">
-          Detecta i respon ressenyes de Google i Trustpilot con respostes
-          personalizadas, coherents amb la teva marca, sense que hagis de fer res.
+          Detecta i respon ressenyes de Google i Trustpilot amb respostes
+          personalitzades, coherents amb la teva marca, sense que hagis de fer res.
         </p>
-        <ul class="channel-features">
-          <li>Google Business i Trustpilot</li>
-          <li>Alertes de ressenyes negatives</li>
-          <li>Anàlisi de sentiment</li>
-        </ul>
         <div class="channel-price">Des de 29€</div>
         <div class="channel-period">/mes · sense IVA</div>
-        <a href="mailto:hola@empentia.ai?subject=Aviseu-me quan Reseñas estigui llest" class="channel-cta">
+        <a href="mailto:hola@empentia.ai?subject=Aviseu-me quan Ressenyes estigui llest" class="channel-cta">
           Aviseu-me <span class="arr">→</span>
         </a>
       </div>
     </div>
 
     <p class="channels-foot">
-      <em>Un només coneixement, tots els canales.</em> Configura l'agent una vez i atén a tots els canales que el teu negoci necessiti.
+      <em>Un sol coneixement, tots els canals.</em> Configura l'agent un cop i atén a tots els canals que el teu negoci necessiti.
     </p>
   </div>
 </section>
 
 <!-- ============ FAQs ============ -->
 <section class="faqs" id="faqs">
-  <!-- Nodos decorativos del logo -->
-  <svg class="faqs-bg-nodes" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice">
-    <circle cx="100" cy="120" r="5" stroke="#00c389" stroke-width="2" fill="none"/>
-    <path d="M 100 120 Q 250 80, 320 200" stroke="#00c389" stroke-width="1.5" fill="none"/>
-    <circle cx="320" cy="200" r="3" fill="#00c389"/>
-    <circle cx="1340" cy="650" r="5" stroke="#00c389" stroke-width="2" fill="none"/>
-    <path d="M 1340 650 Q 1240 580, 1140 620" stroke="#00c389" stroke-width="1.5" fill="none"/>
-    <circle cx="1140" cy="620" r="3" fill="#00c389"/>
-  </svg>
 
   <div class="container">
     <div class="faqs-grid">
-      <!-- Cabecera izquierda (sticky) -->
+
       <div class="faqs-head">
-        <div class="eyebrow">Preguntes freqüents</div>
-        <h2>El que <em>vols saber</em><br>abans de començar.</h2>
-        <p>
-          Els dubtes més habituals que ens arriben, respostes amb honestedat.
-          Si el teu no és aquí, escriu-nos.
-        </p>
-
+        <div class="section-label">FAQ</div>
+        <h2>Preguntes <em>freqüents.</em></h2>
+        <p>Si tens un dubte que no veus aquí, escriu-nos. Et responem el mateix dia.</p>
       </div>
 
-      <!-- Lista de FAQs -->
-      <div class="faqs-list">
-
-        <!-- Categoria: Setup i implementació -->
-        <div class="faq-category">
-          <div class="faq-cat-label">01 · Setup i implementació</div>
-
-          <div class="faq-item" data-open="true" onclick="toggleFaq(this)">
-            <button class="faq-question" type="button" aria-expanded="true">
-              <span>Quant triga a estar operatiu?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer">
-              <div class="faq-answer-inner">
-                <p>Entre <strong>24 i 48 hores laborables</strong> des que ens passes la informació del catàleg. Nosaltres ho configurem tot: connexió amb el teu eCommerce, entrenament de l'agent amb els teus arguments de venda i testing.</p>
-                <p>Si tries <strong>Onboarding Premium</strong>, a més auditem la teva web i et deixem l'agent afinat al detall.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>Funciona amb WooCommerce, PrestaShop i Shopify?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer">
-              <div class="faq-answer-inner">
-                <p>Sí. <strong>WooCommerce</strong>, <strong>PrestaShop</strong> i <strong>Shopify</strong> estan totalment integrats via API: l'agent pot comprovar estoc real i afegir productes al carret del client amb la talla, color i quantitat correctes.</p>
-                <p>Per a altres plataformes (Magento, plataformes custom), podem integrar sota pla Personalitzat.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>Com s'instal·la a la meva web?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer">
-              <div class="faq-answer-inner">
-                <p>Una sola línia de codi al <code>&lt;head&gt;</code> de la teva web. Sense plugins, sense dependències, compatible amb qualsevol plataforma. Operatiu en menys de 60 segons.</p>
-              </div>
-            </div>
-          </div>
+      <div class="faqs-items">
+        <div class="faq-item">
+          <div class="faq-q">Quant triga a estar operatiu?</div>
+          <div class="faq-a">Entre 24 i 48 hores laborables des que ens passes la informació del catàleg. Nosaltres ho configurem tot: connexió amb el teu eCommerce, entrenament de l'agent amb els teus arguments de venda i testing.</div>
         </div>
-
-        <!-- Categoria: Producte -->
-        <div class="faq-category">
-          <div class="faq-cat-label">02 · Producte i funcionament</div>
-
-          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>Atén en castellà, català i anglès?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer">
-              <div class="faq-answer-inner">
-                <p>Sí, i en <strong>+30 idiomes més</strong>. L&#39;agent detecta automàticament l&#39;idioma del visitant i respon en la seva llengua, sense que hagis de configurar res.</p>
-                <p>Cada pla té un nombre d&#39;idiomes <em>actius</em> (els que s&#39;entrenen amb el teu argumentari): Starter 2, Pro 3, Business 5, Personalitzat a mida.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>Què passa si supero les converses del meu pla?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer">
-              <div class="faq-answer-inner">
-                <p>Cada conversa addicional es factura al preu extra del teu pla: <strong>0,32€</strong> en Starter, <strong>0,28€</strong> en Pro, <strong>0,24€</strong> en Business. Sense sorpreses — veuràs el comptador en temps real des del teu panell.</p>
-                <p>Si superes el teu pla de forma recurrent, et recomanarem pujar al següent per optimitzar costos.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>Puc personalitzar les respostes i el to?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer">
-              <div class="faq-answer-inner">
-                <p>Sí, completament. Configures el <strong>to</strong> (proper, formal, directe), les <strong>objeccions freqüents</strong> del teu sector, els <strong>arguments de venda</strong> clau i les <strong>respostes ràpides</strong> a preguntes habituals.</p>
-                <p>Com entrenes a un comercial nou, però una sola vegada.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>Puc provar-lo abans de contractar?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer">
-              <div class="faq-answer-inner">
-                <p>Sí. Et muntem una <strong>demo amb el teu propi catàleg</strong> en 24h. Pots interactuar amb l'agent com si fos un client real i veure com respon als teus casos.</p>
-                <p>Sense compromís ni targeta — només escriu-nos a <a href="mailto:hola@empentia.ai" style="color: var(--brand-deep);">hola@empentia.ai</a>.</p>
-              </div>
-            </div>
-          </div>
+        <div class="faq-item">
+          <div class="faq-q">Funciona amb WooCommerce, PrestaShop i Shopify?</div>
+          <div class="faq-a">Sí. WooCommerce, PrestaShop i Shopify estan totalment integrats via API: l'agent pot comprovar estoc real i afegir productes al carret del client amb la talla, color i quantitat correctes.</div>
         </div>
-
-        <!-- Categoria: Preus i permanencia -->
-        <div class="faq-category">
-          <div class="faq-cat-label">03 · Preus i permanència</div>
-
-          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>Puc cancel·lar quan vulgui?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer">
-              <div class="faq-answer-inner">
-                <p>Sí, sense permanència i sense penalització. Canceles des del teu panell i es fa efectiu al final del període facturat. Sense trucades, sense formularis, sense retenció.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>Puc canviar de pla més endavant?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer">
-              <div class="faq-answer-inner">
-                <p>Sí, en qualsevol moment. Pujar de pla s&#39;aplica a l'instant (amb prorrateig automàtic). Baixar de pla s&#39;aplica a l&#39;inici del següent cicle de facturació.</p>
-              </div>
-            </div>
-          </div>
+        <div class="faq-item">
+          <div class="faq-q">Com s'instal·la a la meva web?</div>
+          <div class="faq-a">Una sola línia de codi al &lt;head&gt; de la teva web. Sense plugins, sense dependències, compatible amb qualsevol plataforma. Operatiu en menys de 60 segons.</div>
         </div>
-
-        <!-- Categoria: Seguridad i dades -->
-        <div class="faq-category">
-          <div class="faq-cat-label">04 · Dades i seguretat</div>
-
-          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>Les dades dels meus clients estan segures?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer">
-              <div class="faq-answer-inner">
-                <p>Totalment. Complim <strong>RGPD</strong>, totes les dades s'emmagatzemen a <strong>servidors a la UE</strong>, xifrats en trànsit (TLS) i en repòs (AES-256).</p>
-                <p>Les converses són <strong>propietat teva</strong>: les pots exportar, esborrar o auditar quan vulguis. No fem servir dades dels teus clients per entrenar models.</p>
-              </div>
-            </div>
-          </div>
+        <div class="faq-item">
+          <div class="faq-q">Atén en castellà, català i anglès?</div>
+          <div class="faq-a">Sí, i en +30 idiomes més. L'agent detecta automàticament l'idioma del visitant i respon en la seva llengua, sense que hagis de configurar res.</div>
         </div>
-
+        <div class="faq-item">
+          <div class="faq-q">Puc personalitzar les respostes i el to?</div>
+          <div class="faq-a">Sí, completament. Configures el to (proper, formal, directe), les objeccions freqüents del teu sector, els arguments de venda clau i les respostes ràpides a preguntes habituals. Com entrenes un comercial nou, però un sol cop.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Què passa si supero les converses del meu pla?</div>
+          <div class="faq-a">Cada conversa addicional es factura al preu extra del teu pla: 0,32€ a Starter, 0,28€ a Pro, 0,24€ a Business. Sense sorpreses — veuràs el comptador en temps real des del teu panell.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Puc cancel·lar quan vulgui?</div>
+          <div class="faq-a">Sí, sense permanència i sense penalització. Cancel·les des del teu panell i es fa efectiu al final del període facturat. Sense trucades, sense formularis, sense retenció.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Puc canviar de pla més endavant?</div>
+          <div class="faq-a">Sí, en qualsevol moment. Pujar de pla s'aplica a l'instant amb prorrateig automàtic. Baixar de pla s'aplica a l'inici del següent cicle de facturació.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Les dades dels meus clients estan segures?</div>
+          <div class="faq-a">Totalment. Complim RGPD, totes les dades s'emmagatzemen en servidors a la UE, xifrades en trànsit (TLS) i en repòs (AES-256). Les converses són propietat teva i mai s'utilitzen per entrenar models.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Puc provar-lo abans de contractar?</div>
+          <div class="faq-a">Sí. Et muntem una demo amb el teu propi catàleg en 24h. Pots interactuar amb l'agent com si fos un client real i veure com respon als teus casos. Sense compromís ni targeta.</div>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -4307,15 +4436,13 @@
         El teu agent comercial <em>llest en 48 hores.</em>
       </h2>
       <p class="cta-final-sub">
-        Prova'l sense compromís. Si vols parlar primer,<br>
-        reserva una trucada de 15 min amb el nostre equip.
+        Explica'ns el teu cas i et preparem una proposta a mida. Sense compromisos.
       </p>
       <div class="cta-final-actions">
-        <a href="#" class="cta-final-primary">
-          Activar el webchat ara
+        <a href="#" class="cta-final-primary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_cta_bottom'}}}); return false;">
+          Parlar amb l'equip
           <span class="cta-final-arrow" aria-hidden="true">→</span>
         </a>
-        <a href="#" class="cta-final-secondary">Reservar trucada de 15 min</a>
       </div>
     </div>
   </div>
@@ -4333,7 +4460,7 @@
       <p class="footer-tagline">
         Webchat amb IA que actua com el teu millor comercial. Respon, assessora i converteix visites en vendes 24/7.
       </p>
-      <div class="footer-social" aria-label="Redes sociales i contacto">
+      <div class="footer-social" aria-label="Redes sociales y contacto">
         <a href="mailto:hola@empentia.com" aria-label="Enviar email a hola@empentia.com" class="footer-social-link">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/>
@@ -4355,13 +4482,16 @@
       </div>
     </div>
 
-    <!-- Navegación: Producte -->
-    <nav class="footer-col" aria-label="Producte">
-      <h3 class="footer-heading">Producte</h3>
+    <!-- Navegación: Servicios -->
+    <nav class="footer-col" aria-label="Serveis">
+      <h3 class="footer-heading">Serveis</h3>
       <ul class="footer-list">
-        <li><a href="#como-trabaja">Com treballa</a></li>
-        <li><a href="#canales">Canals</a></li>
-        <li><a href="#precios">Preus</a></li>
+        <li><a href="https://empentia.com/ca/agentes-ia-atencion-cliente/webchat/">Agent IA Webchat</a></li>
+        <li><a href="https://empentia.com/ca/agentes-ia-atencion-cliente/email/">Agent IA Email</a></li>
+        <li><a href="#canales">Agent IA WhatsApp</a></li>
+        <li><a href="#canales">Agent IA Trucades</a></li>
+        <li><a href="#canales">Agent IA Xarxes Socials</a></li>
+        <li><a href="#canales">Agent IA Ressenyes</a></li>
       </ul>
     </nav>
 
@@ -4369,22 +4499,23 @@
     <nav class="footer-col" aria-label="Recursos">
       <h3 class="footer-heading">Recursos</h3>
       <ul class="footer-list">
-        <li><a href="#cass">Casos d'ús</a></li>
+        <li><a href="#como-trabaja">Com funciona</a></li>
+        <li><a href="#casos">Casos d'ús</a></li>
         <li><a href="#faqs">Preguntes freqüents</a></li>
-        <li><a href="#cta-final">Reservar demo</a></li>
+        <li><a href="https://app.empentia.com/login">Accés clients</a></li>
       </ul>
     </nav>
 
-    <!-- Navegación: Empresa + redes -->
-    <div class="footer-col">
-      <h3 class="footer-heading">Empresa</h3>
+    <!-- Navegación: Contacto -->
+    <nav class="footer-col" aria-label="Contacte">
+      <h3 class="footer-heading">Contacte</h3>
       <ul class="footer-list">
-        <li><a href="mailto:hola@empentia.com">Contacte</a></li>
-        <li><a href="https://empentia.com/privacy" aria-label="Política de privacitat">Privacitat</a></li>
-        <li><a href="https://empentia.com/legal" aria-label="Avís legal">Avís legal</a></li>
-        <li><a href="#" data-cookie-open aria-label="Gestionar cookies">Gestionar cookies</a></li>
+        <li><a href="mailto:hola@empentia.com">Enviar correu</a></li>
+        <li><a href="mailto:hola@empentia.com?subject=Reservar%20trucada">Reservar trucada</a></li>
+        <li><a href="https://www.linkedin.com/company/empentia" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="https://www.instagram.com/empent_ia/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
       </ul>
-    </div>
+    </nav>
 
   </div>
 
@@ -4394,6 +4525,11 @@
       <p class="footer-copy">
         © <span id="footer-year">2025</span> empentIA. Tots els drets reservats.
       </p>
+      <div class="footer-legal">
+        <a href="https://empentia.com/privacy">Privacitat</a>
+        <a href="https://empentia.com/legal">Avís legal</a>
+        <a href="#" data-cookie-open aria-label="Gestionar cookies">Cookies</a>
+      </div>
     </div>
   </div>
 </footer>
@@ -4409,7 +4545,7 @@
       "name": "empentIA",
       "url": "https://empentia.com",
       "logo": "https://empentia.com/images/logo/logo-horizontal.svg",
-      "description": "Agentes de intel·ligència artificial per a atención al client: webchat, WhatsApp, email, trucades i ressenyes.",
+      "description": "Agents d'intel·ligència artificial per a atenció al client: webchat, WhatsApp, email, trucades i ressenyes.",
       "email": "hola@empentia.com",
       "sameAs": [
         "https://www.linkedin.com/company/empentia",
@@ -4418,46 +4554,46 @@
     },
     {
       "@type": "Service",
-      "@id": "https://empentia.com/agentes-ia-atencion-cliente/webchat/#service",
+      "@id": "https://empentia.com/ca/agentes-ia-atencion-cliente/webchat/#service",
       "name": "Webchat IA empentIA",
-      "serviceType": "Agente IA conversacional per a eCommerce",
-      "description": "Webchat con intel·ligència artificial que actua com agente comercial 24/7 per a eCommerce. Responde preguntes, assessora clients, genera pressupostos i afegeix productes al carret sin intervención humana.",
+      "serviceType": "Agent IA conversacional per a eCommerce",
+      "description": "Webchat amb intel·ligència artificial que actua com a agent comercial 24/7 per a eCommerce. Respon preguntes, assessora clients, genera pressupostos i afegeix productes al carretó sense intervenció humana.",
       "provider": { "@id": "https://empentia.com/#org" },
-      "areaServed": { "@type": "Country", "name": "España" },
+      "areaServed": { "@type": "Country", "name": "Espanya" },
       "offers": [
         {
           "@type": "Offer",
-          "name": "Plan Starter",
+          "name": "Pla Starter",
           "price": "49",
           "priceCurrency": "EUR",
-          "url": "https://empentia.com/agentes-ia-atencion-cliente/webchat/#precios"
+          "url": "https://empentia.com/ca/agentes-ia-atencion-cliente/webchat/#precios"
         },
         {
           "@type": "Offer",
-          "name": "Plan Pro",
+          "name": "Pla Pro",
           "price": "79",
           "priceCurrency": "EUR",
-          "url": "https://empentia.com/agentes-ia-atencion-cliente/webchat/#precios"
+          "url": "https://empentia.com/ca/agentes-ia-atencion-cliente/webchat/#precios"
         },
         {
           "@type": "Offer",
-          "name": "Plan Business",
+          "name": "Pla Business",
           "price": "149",
           "priceCurrency": "EUR",
-          "url": "https://empentia.com/agentes-ia-atencion-cliente/webchat/#precios"
+          "url": "https://empentia.com/ca/agentes-ia-atencion-cliente/webchat/#precios"
         }
       ]
     },
     {
       "@type": "WebPage",
-      "@id": "https://empentia.com/agentes-ia-atencion-cliente/webchat/#webpage",
-      "url": "https://empentia.com/agentes-ia-atencion-cliente/webchat/",
+      "@id": "https://empentia.com/ca/agentes-ia-atencion-cliente/webchat/#webpage",
+      "url": "https://empentia.com/ca/agentes-ia-atencion-cliente/webchat/",
       "name": "Webchat IA per a eCommerce | empentIA",
       "description": "Webchat amb IA que actua com el teu millor comercial: respon, assessora i converteix visites en vendes 24/7. Llest en 48 hores. RGPD.",
       "inLanguage": "ca-ES",
       "isPartOf": { "@id": "https://empentia.com/#org" },
       "primaryImageOfPage": "https://empentia.com/images/social/og-webchat.jpg",
-      "about": { "@id": "https://empentia.com/agentes-ia-atencion-cliente/webchat/#service" }
+      "about": { "@id": "https://empentia.com/ca/agentes-ia-atencion-cliente/webchat/#service" }
     }
   ]
 }
@@ -4465,6 +4601,33 @@
 
 <!-- Cookie consent banner (compartit amb empentia.com) -->
 <script src="/ca/agentes-ia-atencion-cliente/webchat/cookie-consent.js" defer></script>
+
+<!-- Cal.eu — reserva de trucada comercial -->
+<script type="text/javascript">
+(function (C, A, L) {
+  let p = function (a, ar) { a.q.push(ar); };
+  let d = C.document;
+  C.Cal = C.Cal || function () {
+    let cal = C.Cal; let ar = arguments;
+    if (!cal.loaded) {
+      cal.ns = {}; cal.q = cal.q || [];
+      d.head.appendChild(d.createElement("script")).src = A;
+      cal.loaded = true;
+    }
+    if (ar[0] === L) {
+      const api = function () { p(api, arguments); };
+      const namespace = ar[1];
+      api.q = api.q || [];
+      typeof namespace === "string" ? (cal.ns[namespace] = api) && p(api, ar) : p(cal, ar);
+      return;
+    }
+    p(cal, ar);
+  };
+})(window, "https://app.cal.eu/embed/embed.js", "init");
+
+Cal("init", "descobriment", { origin: "https://app.cal.eu" });
+Cal.ns["descobriment"]("ui", { hideEventTypeDetails: false });
+</script>
 
 </body>
 <script>
@@ -4478,24 +4641,11 @@
     });
   }
 
-  function toggleFaq(item) {
-    const isOpen = item.dataset.open === 'true';
-    // Cerrar totes las demés del mismo .faqs-list
-    const list = item.closest('.faqs-list');
-    if (list) {
-      list.querySelectorAll('.faq-item').forEach(f => {
-        f.dataset.open = 'false';
-        const btn = f.querySelector('.faq-question');
-        if (btn) btn.setAttribute('aria-expanded', 'false');
-      });
-    }
-    // Abrir esta si estaba cerrada
-    if (!isOpen) {
-      item.dataset.open = 'true';
-      const btn = item.querySelector('.faq-question');
-      if (btn) btn.setAttribute('aria-expanded', 'true');
-    }
-  }
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      item.classList.toggle('open');
+    });
+  });
 
   // Año dinámico en footer
   (function() {
