@@ -3098,31 +3098,17 @@
   }
 
   /* ============ LANGUAGE SWITCHER ============ */
-  .nav-lang {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    letter-spacing: 0.04em;
-    color: var(--ink-mute);
-    padding: 0 4px;
-    margin-right: 4px;
+  .lang-switch {
+    display: inline-flex; align-items: center; gap: 2px;
+    border: 1px solid var(--line-mid); border-radius: 100px; padding: 3px;
   }
-  .nav-lang .lang-current {
-    color: var(--ink);
-    font-weight: 600;
+  .lang-switch a {
+    font-size: 12px; font-weight: 500; padding: 4px 10px;
+    border-radius: 100px; text-decoration: none;
+    color: var(--ink-mute); transition: all 0.2s;
   }
-  .nav-lang .lang-sep {
-    color: var(--line);
-  }
-  .nav-lang a {
-    color: var(--ink-mute) !important;
-    text-decoration: none;
-    transition: color .15s;
-  }
-  .nav-lang a:hover {
-    color: var(--ink) !important;
-  }
+  .lang-switch a.active { background: var(--ink); color: var(--bg); }
+  .lang-switch a:not(.active):hover { color: var(--ink); }
   .nav-mobile-lang {
     display: flex;
     justify-content: center;
@@ -3133,17 +3119,10 @@
     font-size: 14px;
     margin: 16px 0;
   }
-  .nav-mobile-lang .lang-current {
-    color: var(--ink);
-    font-weight: 600;
-  }
-  .nav-mobile-lang a {
-    color: var(--ink-mute);
-    text-decoration: none;
-  }
-  .nav-mobile-lang a:hover { color: var(--ink); }
+  /* En el menú móvil el switcher se muestra como pill (no se oculta) */
+  .nav-mobile-lang .lang-switch { display: inline-flex; }
   @media (max-width: 960px) {
-    .nav-lang { display: none; }
+    .lang-switch { display: none; }
   }
 </style>
 
@@ -3171,9 +3150,8 @@
       <a href="#canales">Canales</a>
       <a href="#precios">Precios</a>
       <a href="#faqs">FAQs</a>
-      <div class="nav-lang" aria-label="Cambiar idioma">
-        <span class="lang-current" aria-current="true">ES</span>
-        <span class="lang-sep">·</span>
+      <div class="lang-switch" aria-label="Cambiar idioma">
+        <a href="/agentes-ia-atencion-cliente/webchat/" class="active" hreflang="es" lang="es">ES</a>
         <a href="/ca/agentes-ia-atencion-cliente/webchat/" hreflang="ca" lang="ca">CA</a>
       </div>
       <a href="https://app.empentia.com/login" target="_blank" rel="noopener noreferrer" class="btn-cta">Acceso clientes →</a>
@@ -3193,8 +3171,10 @@
     <a href="#precios" onclick="closeNav()">Precios</a>
     <a href="#faqs" onclick="closeNav()">FAQs</a>
     <div class="nav-mobile-lang">
-      <span class="lang-current">ES</span>
-      <a href="/ca/agentes-ia-atencion-cliente/webchat/" hreflang="ca" lang="ca">Català →</a>
+      <div class="lang-switch">
+        <a href="/agentes-ia-atencion-cliente/webchat/" class="active" hreflang="es" lang="es">ES</a>
+        <a href="/ca/agentes-ia-atencion-cliente/webchat/" hreflang="ca" lang="ca">CA</a>
+      </div>
     </div>
     <a href="https://app.empentia.com/login" target="_blank" rel="noopener noreferrer" class="nav-mobile-cta" onclick="closeNav()">Acceso clientes →</a>
   </div>
