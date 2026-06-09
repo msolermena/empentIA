@@ -814,7 +814,7 @@
     border-top: 0.5px solid var(--line-mid);
   }
   .pro-services-head {
-    text-align: center;
+    text-align: left;
     margin-bottom: 48px;
   }
   .pro-services-eyebrow {
@@ -848,8 +848,8 @@
   .pro-services-sub {
     font-size: 16px;
     color: var(--ink-soft);
-    max-width: 560px;
-    margin: 0 auto;
+    max-width: 760px;
+    margin: 0;
     line-height: 1.55;
   }
 
@@ -3519,69 +3519,6 @@
       <span>RGPD · servidores UE</span>
     </div>
 
-    <!-- ============ SERVICIOS PROFESIONALES (acompañamiento) ============ -->
-    <div class="pro-services">
-      <div class="pro-services-head">
-        <div class="pro-services-eyebrow">Acompañamiento</div>
-        <h3 class="pro-services-title">Lo ponemos en marcha<br><em>por ti.</em></h3>
-        <p class="pro-services-sub">
-          Nos encargamos de toda la configuración: auditamos tu web, entrenamos al
-          agente con tu marca y lo dejamos afinado. Y cuando ya esté en marcha, te
-          ayudamos a optimizarlo.
-        </p>
-      </div>
-
-      <!-- Dos módulos lado a lado -->
-      <div class="onboarding-choice pair">
-
-        <!-- Puesta en marcha -->
-        <div class="choice-card premium">
-          <div class="choice-tag">Pago único</div>
-          <h4 class="choice-name">Lo hacemos <em>nosotros</em></h4>
-          <p class="choice-desc">
-            Auditamos tu web, optimizamos tu catálogo, entrenamos al agente con
-            tu tono de marca y formamos a tu equipo. Listo y afinado en 48h.
-          </p>
-          <ul class="choice-features">
-            <li>Auditoría de la web y catálogo (2h)</li>
-            <li>Entrenamiento con tu tono y argumentario propios</li>
-            <li>Configuración de respuestas clave y objeciones frecuentes</li>
-            <li>Sesión de formación para tu equipo (1h)</li>
-            <li>Soporte prioritario los primeros 30 días</li>
-          </ul>
-          <div class="choice-price">
-            <div>
-              <div class="choice-price-amount">249€<span style="font-size:14px;vertical-align:super;color:var(--ink-mute);font-weight:400;">*</span></div>
-              <div class="choice-price-note">Pago único · sin IVA · *según proyecto</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Optimización (después de 30 días) -->
-        <div class="choice-card">
-          <div class="choice-tag">Después de 30 días</div>
-          <h4 class="choice-name">Lo llevamos al <em>siguiente nivel</em></h4>
-          <p class="choice-desc">
-            Cuando tu agente lleva un mes en marcha, analizamos sus conversaciones
-            y descubrimos oportunidades que se te están escapando.
-          </p>
-          <ul class="choice-features">
-            <li>Análisis de las conversaciones del mes</li>
-            <li>Productos que piden y no tienes</li>
-            <li>Objeciones recurrentes y leads sin convertir</li>
-            <li>Informe con acciones concretas</li>
-          </ul>
-          <div class="choice-price">
-            <div>
-              <div class="choice-price-amount">149€</div>
-              <div class="choice-price-note">/trimestre · sin IVA</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
     <!-- ============ TABLA COMPARATIVA ============ -->
     <div class="compare-wrap" data-open="false">
       <div class="compare-toggle">
@@ -3846,6 +3783,67 @@
             <a href="#" class="plan-btn" style="display: block; margin-top: 24px; text-align: center;" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_pricing_custom'}}}); return false;">Hablemos</a>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- ============ SERVICIOS PROFESIONALES (acompañamiento) ============ -->
+    <div class="pro-services">
+      <div class="pro-services-head">
+        <div class="pro-services-eyebrow">Acompañamiento</div>
+        <h3 class="pro-services-title">Lo ponemos en marcha <em>por ti.</em></h3>
+        <p class="pro-services-sub">
+          Nos encargamos de la configuración inicial y de optimizarlo cada trimestre.
+        </p>
+      </div>
+
+      <!-- Dos módulos lado a lado -->
+      <div class="onboarding-choice pair">
+
+        <!-- Puesta en marcha -->
+        <div class="choice-card premium">
+          <div class="choice-tag">Pago único</div>
+          <h4 class="choice-name">Lo hacemos <em>nosotros</em></h4>
+          <p class="choice-desc">
+            Auditamos tu web, optimizamos tu catálogo, entrenamos al agente con
+            tu tono de marca y formamos a tu equipo. Listo y afinado en 48h.
+          </p>
+          <ul class="choice-features">
+            <li>Auditoría de la web y catálogo (2h)</li>
+            <li>Entrenamiento con tu tono y argumentario propios</li>
+            <li>Configuración de respuestas clave y objeciones frecuentes</li>
+            <li>Sesión de formación para tu equipo (1h)</li>
+            <li>Soporte prioritario los primeros 30 días</li>
+          </ul>
+          <div class="choice-price">
+            <div>
+              <div class="choice-price-amount">249€<span style="font-size:14px;vertical-align:super;color:var(--ink-mute);font-weight:400;">*</span></div>
+              <div class="choice-price-note">Pago único · sin IVA · *según proyecto</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Optimización (después de 30 días) -->
+        <div class="choice-card">
+          <div class="choice-tag">Después de 30 días</div>
+          <h4 class="choice-name">Lo llevamos al <em>siguiente nivel</em></h4>
+          <p class="choice-desc">
+            Cuando tu agente lleva un mes en marcha, analizamos sus conversaciones
+            y descubrimos oportunidades que se te están escapando.
+          </p>
+          <ul class="choice-features">
+            <li>Análisis de las conversaciones del mes</li>
+            <li>Productos que piden y no tienes</li>
+            <li>Objeciones recurrentes y leads sin convertir</li>
+            <li>Informe con acciones concretas</li>
+          </ul>
+          <div class="choice-price">
+            <div>
+              <div class="choice-price-amount">149€</div>
+              <div class="choice-price-note">/trimestre · sin IVA</div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
