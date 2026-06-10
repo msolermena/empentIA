@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-brand-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/favicon-brand-180.png">
+<link rel="icon" type="image/png" href="/favicons/favicon-brand.png">
+<link rel="shortcut icon" href="/favicons/favicon-brand-32.png">
 <title>Atención al cliente por email con IA | empentIA</title>
 <meta name="description" content="Atención al cliente por email con IA: clasifica consultas, pedidos y quejas, enruta a quien corresponde y prepara borradores listos para revisar. RGPD, servidores UE." />
 <meta name="keywords" content="atención al cliente por email con IA, gestión de correos con IA, responder emails automáticamente, clasificación emails IA, automatizar respuestas de email, gestión emails de soporte" />
@@ -37,7 +41,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Instrument+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #f6f5f0;
@@ -63,7 +67,7 @@
     --dark-line: rgba(123,184,240,0.10);
 
     --serif: "Fraunces", "Times New Roman", serif;
-    --sans: "Inter", system-ui, sans-serif;
+    --sans: "Instrument Sans", system-ui, sans-serif;
     --mono: "JetBrains Mono", monospace;
 
     --radius: 18px;
@@ -2845,31 +2849,18 @@
   }
 
   /* ============ LANGUAGE SWITCHER ============ */
-  .nav-lang {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    letter-spacing: 0.04em;
-    color: var(--ink-mute);
-    padding: 0 4px;
-    margin-right: 4px;
+  .lang-switch {
+    display: inline-flex; align-items: center; gap: 2px;
+    border: 1px solid var(--line-mid); border-radius: 100px; padding: 3px;
   }
-  .nav-lang .lang-current {
-    color: var(--ink);
-    font-weight: 600;
+  .lang-switch a {
+    font-size: 12px; font-weight: 500; padding: 4px 10px;
+    border-radius: 100px; text-decoration: none;
+    color: var(--ink-mute); transition: all 0.2s;
   }
-  .nav-lang .lang-sep {
-    color: var(--line);
-  }
-  .nav-lang a {
-    color: var(--ink-mute) !important;
-    text-decoration: none;
-    transition: color .15s;
-  }
-  .nav-lang a:hover {
-    color: var(--ink) !important;
-  }
+  .lang-switch a.active { background: var(--ink); color: var(--bg); }
+  .lang-switch a:not(.active):hover { color: var(--ink); }
+  .nav-mobile-lang .lang-switch { display: inline-flex; }
   .nav-mobile-lang {
     display: flex;
     justify-content: center;
@@ -2909,7 +2900,7 @@
 <nav class="top">
   <div class="nav-inner">
     <div class="logo-mark">
-      <img src="/images/logo/logo-horizontal.svg" alt="empentIA" />
+      <img src="/images/logo/logo-horizontal.png" alt="empentIA" />
       <span class="product-label"><span class="label-prefix">Atención al cliente <span class="product-divider">·</span> </span><strong>emailIA</strong></span>
     </div>
     <div class="nav-links">
@@ -2918,9 +2909,8 @@
       <a href="#canales">Canales</a>
       <a href="#precios">Precios</a>
       <a href="#faqs">FAQs</a>
-      <div class="nav-lang" aria-label="Cambiar idioma">
-        <span class="lang-current" aria-current="true">ES</span>
-        <span class="lang-sep">·</span>
+      <div class="lang-switch" aria-label="Cambiar idioma">
+        <a href="/agentes-ia-atencion-cliente/email/" class="active" hreflang="es" lang="es">ES</a>
         <a href="/ca/agentes-ia-atencion-cliente/email/" hreflang="ca" lang="ca">CA</a>
       </div>
       <a href="https://app.empentia.com/login" target="_blank" rel="noopener noreferrer" class="btn-cta">Acceso clientes →</a>
@@ -2940,8 +2930,10 @@
     <a href="#precios" onclick="closeNav()">Precios</a>
     <a href="#faqs" onclick="closeNav()">FAQs</a>
     <div class="nav-mobile-lang">
-      <span class="lang-current">ES</span>
-      <a href="/ca/agentes-ia-atencion-cliente/email/" hreflang="ca" lang="ca">Català →</a>
+      <div class="lang-switch">
+        <a href="/agentes-ia-atencion-cliente/email/" class="active" hreflang="es" lang="es">ES</a>
+        <a href="/ca/agentes-ia-atencion-cliente/email/" hreflang="ca" lang="ca">CA</a>
+      </div>
     </div>
     <a href="https://app.empentia.com/login" target="_blank" rel="noopener noreferrer" class="nav-mobile-cta" onclick="closeNav()">Acceso clientes →</a>
   </div>
@@ -3070,27 +3062,6 @@
         </div>
       </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- ============ MARQUEE ============ -->
-<section class="marquee-section">
-  <div class="marquee-label">Ya confían en empentIA</div>
-  <div class="marquee">
-    <div class="marquee-track">
-      <div class="client-logo"><span class="client-node"></span> VB Sports Bike</div>
-      <div class="client-logo"><span class="client-node"></span> International Safety Center</div>
-      <div class="client-logo"><span class="client-node"></span> ACED Asesores</div>
-      <div class="client-logo"><span class="client-node"></span> Esports & Co</div>
-      <div class="client-logo"><span class="client-node"></span> Home·Tech</div>
-      <div class="client-logo"><span class="client-node"></span> La Botiga</div>
-      <div class="client-logo"><span class="client-node"></span> VB Sports Bike</div>
-      <div class="client-logo"><span class="client-node"></span> International Safety Center</div>
-      <div class="client-logo"><span class="client-node"></span> ACED Asesores</div>
-      <div class="client-logo"><span class="client-node"></span> Esports & Co</div>
-      <div class="client-logo"><span class="client-node"></span> Home·Tech</div>
-      <div class="client-logo"><span class="client-node"></span> La Botiga</div>
     </div>
   </div>
 </section>
@@ -4394,7 +4365,7 @@
     <!-- Bloque marca + descripción -->
     <div class="footer-brand">
       <div class="footer-logo">
-        <img src="/images/logo/logo-horizontal.svg" alt="empentIA" />
+        <img src="/images/logo/logo-horizontal.png" alt="empentIA" />
       </div>
       <p class="footer-tagline">
         Agente IA que lee, clasifica y responde tus emails. Conecta con tu ERP/CRM y prepara borradores con datos reales. Tu bandeja, bajo control.
