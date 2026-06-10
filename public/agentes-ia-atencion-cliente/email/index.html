@@ -2662,6 +2662,41 @@
 
   /* lang-grid sobre claro */
   .como-trabaja-tabs .lang-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  /* Lista de fuentes/documentos (panel LEE) */
+  .como-trabaja-tabs .source-list {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .como-trabaja-tabs .source-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--bg-soft);
+    border: 0.5px solid var(--line-soft);
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--ink);
+  }
+  .como-trabaja-tabs .source-item .source-icon {
+    width: 28px; height: 28px;
+    background: #ffffff;
+    border: 0.5px solid var(--line-soft);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--brand-deep);
+    font-family: var(--mono);
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .como-trabaja-tabs .source-item .source-meta {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-mute);
+  }
   .como-trabaja-tabs .flag {
     width: 38px; height: 38px;
     background: var(--bg-soft);
@@ -3216,24 +3251,29 @@
             </div>
 
             <div class="cell tall">
-              <h3>Multiidioma automático</h3>
-              <p>Detecta el idioma del email y lo procesa nativamente. Responde después en el mismo idioma. +30 idiomas soportados.</p>
-              <div class="lang-grid">
-                <div class="flag" title="Español"><svg viewBox="0 0 9 6" xmlns="http://www.w3.org/2000/svg"><rect width="9" height="6" fill="#AA151B"/><rect y="1.5" width="9" height="3" fill="#F1BF00"/></svg></div>
-                <div class="flag" title="Català"><svg viewBox="0 0 9 6" xmlns="http://www.w3.org/2000/svg"><rect width="9" height="6" fill="#FCDD09"/><rect y="0.667" width="9" height="0.667" fill="#DA121A"/><rect y="2.000" width="9" height="0.667" fill="#DA121A"/><rect y="3.333" width="9" height="0.667" fill="#DA121A"/><rect y="4.667" width="9" height="0.667" fill="#DA121A"/></svg></div>
-                <div class="flag" title="Euskera"><svg viewBox="0 0 28 14" xmlns="http://www.w3.org/2000/svg"><rect width="28" height="14" fill="#D52B1E"/><path d="M0 0 L28 14 M0 14 L28 0" stroke="#FFFFFF" stroke-width="2.4" fill="none"/><path d="M0 0 L28 14 M0 14 L28 0" stroke="#009B48" stroke-width="1.6" fill="none"/><path d="M14 0 V14 M0 7 H28" stroke="#FFFFFF" stroke-width="2.4" fill="none"/></svg></div>
-                <div class="flag" title="English"><svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg"><clipPath id="uk-clip-1"><path d="M0 0 v30 h60 v-30 z"/></clipPath><clipPath id="uk-half-1"><path d="M30 15 v15 h-30 z M0 0 v15 h30 z M30 15 h30 v-15 z M30 15 v15 h30 v-15 z" fill-rule="nonzero"/></clipPath><rect width="60" height="30" fill="#012169"/><g clip-path="url(#uk-clip-1)"><path d="M0 0 L60 30 M60 0 L0 30" stroke="#FFFFFF" stroke-width="6"/><g clip-path="url(#uk-half-1)"><path d="M0 0 L60 30 M60 0 L0 30" stroke="#C8102E" stroke-width="4"/></g></g><path d="M30 0 V30 M0 15 H60" stroke="#FFFFFF" stroke-width="10"/><path d="M30 0 V30 M0 15 H60" stroke="#C8102E" stroke-width="6"/></svg></div>
-                <div class="flag" title="Français"><svg viewBox="0 0 9 6" xmlns="http://www.w3.org/2000/svg"><rect width="3" height="6" fill="#0055A4"/><rect x="3" width="3" height="6" fill="#FFFFFF"/><rect x="6" width="3" height="6" fill="#EF4135"/></svg></div>
-                <div class="flag" title="Deutsch"><svg viewBox="0 0 5 3" xmlns="http://www.w3.org/2000/svg"><rect width="5" height="1" fill="#000000"/><rect y="1" width="5" height="1" fill="#DD0000"/><rect y="2" width="5" height="1" fill="#FFCE00"/></svg></div>
-                <div class="flag" title="Italiano"><svg viewBox="0 0 9 6" xmlns="http://www.w3.org/2000/svg"><rect width="3" height="6" fill="#009246"/><rect x="3" width="3" height="6" fill="#FFFFFF"/><rect x="6" width="3" height="6" fill="#CE2B37"/></svg></div>
-                <div class="flag" title="Português"><svg viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg"><rect width="60" height="40" fill="#FF0000"/><rect width="24" height="40" fill="#006600"/><circle cx="24" cy="20" r="6" fill="#FFCC00" stroke="#FFFFFF" stroke-width="0.6"/></svg></div>
-                <div class="flag" title="中文"><svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#DE2910"/><g fill="#FFDE00"><polygon points="6,3.5 6.7,5.6 8.9,5.6 7.1,6.9 7.8,9 6,7.7 4.2,9 4.9,6.9 3.1,5.6 5.3,5.6"/><polygon points="11.5,1.8 12,2.7 13,2.7 12.2,3.3 12.5,4.3 11.5,3.7 10.6,4.3 10.9,3.3 10.1,2.7 11.1,2.7"/><polygon points="13.6,4 13.9,5 14.9,5 14.1,5.6 14.4,6.5 13.6,5.9 12.8,6.5 13.1,5.6 12.3,5 13.3,5"/><polygon points="13.6,7.3 13.9,8.3 14.9,8.3 14.1,8.9 14.4,9.9 13.6,9.3 12.8,9.9 13.1,8.9 12.3,8.3 13.3,8.3"/><polygon points="11.5,9.5 12,10.4 13,10.4 12.2,11 12.5,12 11.5,11.4 10.6,12 10.9,11 10.1,10.4 11.1,10.4"/></g></svg></div>
-                <div class="flag" title="日本語"><svg viewBox="0 0 9 6" xmlns="http://www.w3.org/2000/svg"><rect width="9" height="6" fill="#FFFFFF"/><circle cx="4.5" cy="3" r="1.8" fill="#BC002D"/></svg></div>
-                <div class="flag more">+30</div>
-              </div>
-              <div style="margin-top: 18px; font-family: var(--mono); font-size: 11px; color: var(--brand); display: flex; align-items: center; gap: 8px;">
-                <span style="width:6px;height:6px;border-radius:50%;background:var(--brand);"></span>
-                Detectado: ES → responderá en ES
+              <h3>Lee también los adjuntos</h3>
+              <p>No se queda en el texto del email: abre y entiende los documentos adjuntos y los cruza con el mensaje para responder con todo el contexto, no solo lo que está escrito.</p>
+              <div class="source-list">
+                <div class="source-item">
+                  <div class="source-icon">&para;</div>
+                  <span>PDF &middot; facturas, albaranes, contratos</span>
+                  <span class="source-meta">leído</span>
+                </div>
+                <div class="source-item">
+                  <div class="source-icon">W</div>
+                  <span>Word y PowerPoint</span>
+                  <span class="source-meta">.docx &middot; .pptx</span>
+                </div>
+                <div class="source-item">
+                  <div class="source-icon">&sum;</div>
+                  <span>Excel y hojas de cálculo</span>
+                  <span class="source-meta">.xlsx &middot; .csv</span>
+                </div>
+                <div class="source-item">
+                  <div class="source-icon">&#9638;</div>
+                  <span>Imágenes y capturas</span>
+                  <span class="source-meta">OCR</span>
+                </div>
               </div>
             </div>
 
@@ -3456,6 +3496,18 @@
             <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(123,184,240,0.12); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.25);">Semana 1 · 78%</span>
             <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(123,184,240,0.12); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.25);">Semana 4 · 89%</span>
             <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(123,184,240,0.18); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.35);">Semana 12 · 96%</span>
+          </div>
+        </div>
+        <div class="cell">
+          <h3>Multiidioma automático</h3>
+          <p>Detecta el idioma de cada email y responde en la misma lengua. 30+ idiomas, sin configuración.</p>
+          <div class="lang-grid">
+            <div class="flag" title="Español"><svg viewBox="0 0 9 6" xmlns="http://www.w3.org/2000/svg"><rect width="9" height="6" fill="#AA151B"/><rect y="1.5" width="9" height="3" fill="#F1BF00"/></svg></div>
+            <div class="flag" title="Català"><svg viewBox="0 0 9 6" xmlns="http://www.w3.org/2000/svg"><rect width="9" height="6" fill="#FCDD09"/><rect y="0.667" width="9" height="0.667" fill="#DA121A"/><rect y="2.000" width="9" height="0.667" fill="#DA121A"/><rect y="3.333" width="9" height="0.667" fill="#DA121A"/><rect y="4.667" width="9" height="0.667" fill="#DA121A"/></svg></div>
+            <div class="flag" title="English"><svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg"><rect width="60" height="30" fill="#012169"/><path d="M0 0 L60 30 M60 0 L0 30" stroke="#FFFFFF" stroke-width="6"/><path d="M30 0 V30 M0 15 H60" stroke="#FFFFFF" stroke-width="10"/><path d="M30 0 V30 M0 15 H60" stroke="#C8102E" stroke-width="6"/></svg></div>
+            <div class="flag" title="Français"><svg viewBox="0 0 9 6" xmlns="http://www.w3.org/2000/svg"><rect width="3" height="6" fill="#0055A4"/><rect x="3" width="3" height="6" fill="#FFFFFF"/><rect x="6" width="3" height="6" fill="#EF4135"/></svg></div>
+            <div class="flag" title="Deutsch"><svg viewBox="0 0 5 3" xmlns="http://www.w3.org/2000/svg"><rect width="5" height="1" fill="#000000"/><rect y="1" width="5" height="1" fill="#DD0000"/><rect y="2" width="5" height="1" fill="#FFCE00"/></svg></div>
+            <div class="flag more">+25</div>
           </div>
         </div>
         <div class="cell">
