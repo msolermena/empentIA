@@ -468,20 +468,17 @@
     font-size: 12px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--brand);
+    color: var(--brand-deep);
     margin-bottom: 16px;
     display: inline-flex; align-items: center; gap: 10px;
   }
-  /* eyebrow con nodo + línea */
+  /* eyebrow con rallita inicial */
   .eyebrow::before {
     content: "";
-    width: 8px; height: 8px; border-radius: 50%;
-    background: transparent;
-    border: 1.5px solid var(--brand);
+    width: 24px; height: 1px;
+    background: var(--brand-deep);
   }
-  .eyebrow::after {
-    content: ""; width: 32px; height: 1px; background: var(--brand);
-  }
+  .eyebrow::after { content: none; }
   h2.section-title {
     font-family: var(--serif);
     font-weight: 400;
@@ -860,6 +857,11 @@
     gap: 24px;
     align-items: stretch;
     margin-bottom: 24px;
+  }
+  /* Dos módulos lado a lado (acompañamiento) */
+  .onboarding-choice.pair {
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
   }
   .choice-card {
     background: #fff;
@@ -1371,203 +1373,94 @@
 
   /* ============ FAQs ============ */
   section.faqs {
-    padding: 80px 0 140px;
+    padding: 80px 0 100px;
     background: var(--bg-soft);
-    border-top: 0.5px solid var(--line-soft);
+    border-top: 1px solid var(--line-soft);
     position: relative;
-    overflow: hidden;
   }
-  .faqs-bg-nodes {
-    position: absolute; inset: 0;
-    pointer-events: none;
-    opacity: 0.25;
+  /* FAQ con la misma identidad que agentes-ia / webchat */
+  .faqs-head .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--brand-deep); margin-bottom: 20px; font-weight: 400;
+    display: inline-flex; align-items: center; gap: 10px;
   }
+  .faqs-head .section-label::before {
+    content: ''; width: 24px; height: 1px;
+    background: var(--brand-deep); flex-shrink: 0;
+  }
+  .faqs-head .section-label::after { content: none; }
+  .faqs-head h2 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(36px, 4.8vw, 58px); line-height: 1.06;
+    letter-spacing: -0.035em; color: var(--ink); margin: 0;
+  }
+  .faqs-head h2 em { font-style: italic; font-weight: 300; color: var(--brand); }
   .faqs-grid {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
     position: relative;
     z-index: 1;
   }
-  .faqs-head {
-    margin-bottom: 56px;
-    max-width: 720px;
-  }
-  .faqs-head p { max-width: 600px; }
-  .faqs-head .eyebrow { color: var(--brand-deep); margin-bottom: 24px; }
-  .faqs-head .eyebrow::before { border-color: var(--brand-deep); }
-  .faqs-head .eyebrow::after { background: var(--brand-deep); }
-  .faqs-head h2 {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(40px, 5vw, 64px);
-    line-height: 1.02;
-    letter-spacing: -0.03em;
-    margin-bottom: 24px;
-  }
-  .faqs-head h2 em {
-    font-style: italic;
-    color: var(--brand-deep);
-    font-weight: 300;
-  }
+  .faqs-head { max-width: 640px; }
+  .faqs-head .section-intro { margin-bottom: 0; }
   .faqs-head p {
-    font-size: 16px;
+    font-size: 18px;
     color: var(--ink-soft);
-    line-height: 1.55;
-    max-width: 380px;
-    margin-bottom: 32px;
+    line-height: 1.6;
+    margin-top: 16px;
   }
-
-  /* Contact card debajo del head */
-  .faqs-contact {
-    padding: 24px 28px;
-    background: var(--bg-card);
-    border: 0.5px solid var(--line-soft);
-    border-radius: var(--radius);
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    max-width: 380px;
+  .faqs-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 48px;
   }
-  .faqs-contact-label {
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--brand-deep);
-    font-weight: 500;
-    display: inline-flex; align-items: center; gap: 8px;
-  }
-  .faqs-contact-label::before {
-    content: ""; width: 6px; height: 6px;
-    background: var(--brand);
-    border-radius: 50%;
-    box-shadow: 0 0 0 4px rgba(123,184,240,0.15);
-  }
-  .faqs-contact-title {
-    font-family: var(--serif);
-    font-size: 22px;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-  }
-  .faqs-contact a {
-    color: var(--brand-deep);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 14px;
-    display: inline-flex; align-items: center; gap: 8px;
-    transition: gap .2s ease;
-  }
-  .faqs-contact a:hover { gap: 12px; }
-
-  /* Categorías + items */
-  .faqs-list {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-  }
-  .faq-category {
-    display: flex;
-    flex-direction: column;
-  }
-  .faq-cat-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--brand-deep);
-    text-transform: uppercase;
-    font-weight: 500;
-    margin-bottom: 8px;
-    padding-bottom: 16px;
-    border-bottom: 0.5px solid rgba(123,184,240,0.2);
-  }
-
   .faq-item {
-    border-bottom: 0.5px solid var(--line-soft);
-    transition: border-color .25s ease;
+    border-bottom: 1px solid var(--line-soft);
+    padding: 16px 0;
   }
-  .faq-item:hover { border-bottom-color: rgba(123,184,240,0.4); }
-  .faq-question {
-    width: 100%;
-    background: transparent;
-    border: none;
-    padding: 24px 0;
-    text-align: left;
-    cursor: pointer;
+  .faq-item:first-child { padding-top: 0; }
+  .faq-q {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    gap: 24px;
-    font-family: var(--serif);
-    font-size: 19px;
-    font-weight: 400;
-    letter-spacing: -0.015em;
+    align-items: center;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 500;
     color: var(--ink);
-    line-height: 1.3;
-    transition: color .25s ease;
+    gap: 20px;
+    user-select: none;
   }
-  .faq-question:hover { color: var(--brand-deep); }
-  .faq-icon {
+  .faq-q::after {
+    content: '+';
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 300;
+    transition: transform 0.3s;
+    color: var(--ink-mute);
     flex-shrink: 0;
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    border: 0.5px solid var(--line-mid);
-    display: flex; align-items: center; justify-content: center;
-    transition: background .25s ease, border-color .25s ease, transform .35s cubic-bezier(0.4, 0, 0.2, 1);
-    color: var(--ink-soft);
-    position: relative;
   }
-  .faq-icon::before, .faq-icon::after {
-    content: "";
-    position: absolute;
-    background: currentColor;
-    transition: transform .35s cubic-bezier(0.4, 0, 0.2, 1), opacity .25s ease;
-  }
-  .faq-icon::before {
-    width: 12px; height: 1.2px;
-  }
-  .faq-icon::after {
-    width: 1.2px; height: 12px;
-  }
-  .faq-item[data-open="true"] .faq-icon {
-    background: var(--ink);
-    color: #fff;
-    border-color: var(--ink);
-  }
-  .faq-item[data-open="true"] .faq-icon::after {
-    transform: rotate(90deg);
-    opacity: 0;
-  }
-  .faq-answer {
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a {
     max-height: 0;
     overflow: hidden;
-    transition: max-height .4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .faq-item[data-open="true"] .faq-answer {
-    max-height: 600px;
-  }
-  .faq-answer-inner {
-    padding: 0 0 28px;
+    transition: max-height 0.4s ease, padding 0.4s ease;
     font-size: 15px;
     color: var(--ink-soft);
-    line-height: 1.65;
-    max-width: 580px;
+    line-height: 1.6;
   }
-  .faq-answer-inner p { margin-bottom: 12px; }
-  .faq-answer-inner p:last-child { margin-bottom: 0; }
-  .faq-answer-inner strong { color: var(--ink); font-weight: 500; }
-  .faq-answer-inner code {
-    font-family: var(--mono);
-    font-size: 13px;
-    background: rgba(123,184,240,0.1);
-    color: var(--brand-darker);
-    padding: 2px 6px;
-    border-radius: 4px;
+  .faq-a strong { color: var(--ink); font-weight: 600; }
+  .faq-item.open .faq-a {
+    max-height: 520px;
+    padding-top: 10px;
   }
 
   @media (max-width: 960px) {
-    .faqs-grid { grid-template-columns: 1fr; gap: 48px; }
-    .faqs-head { position: static; }
-    .faqs-contact { max-width: 100%; }
-    .faq-question { font-size: 17px; }
-    section.faqs { padding: 100px 0; }
+    section.faqs { padding: 80px 0 100px; }
+  }
+  @media (max-width: 720px) {
+    .faqs-items { grid-template-columns: 1fr; }
   }
 
   footer {
@@ -1614,72 +1507,83 @@
 
   .channels-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
     position: relative; z-index: 1;
   }
   .channel-card {
     background: #fff;
-    border: 0.5px solid var(--line-soft);
+    border: 1px solid var(--line-soft);
     border-radius: var(--radius);
-    padding: 32px 28px;
+    padding: 24px 20px;
     display: flex;
     flex-direction: column;
     position: relative;
+    overflow: hidden;
     transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .channel-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent, var(--brand)), transparent 70%);
   }
   .channel-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 30px 60px -30px rgba(14,14,12,0.15);
-    border-color: rgba(123,184,240,0.3);
+    box-shadow: 0 24px 48px -24px rgba(14,14,12,0.12);
+    border-color: color-mix(in srgb, var(--accent, #7bb8f0) 40%, var(--line-soft));
   }
   .channel-icon-wrap {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
   }
   .channel-icon {
-    width: 44px; height: 44px;
-    border-radius: 12px;
-    background: var(--brand-soft);
-    color: var(--brand-darker);
+    width: 54px; height: 54px;
+    border-radius: 14px;
+    background: linear-gradient(155deg, #1c2420 0%, #101512 100%);
+    color: var(--brand);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 14px rgba(16,21,18,0.18);
     display: flex; align-items: center; justify-content: center;
     font-size: 20px;
   }
   .channel-icon svg {
     width: 22px; height: 22px;
-    stroke: var(--brand-deep);
+    stroke: var(--brand);
     fill: none;
     stroke-width: 1.8;
     stroke-linecap: round;
     stroke-linejoin: round;
   }
+  .channel-icon img {
+    width: 42px; height: 42px;
+    display: block;
+  }
   .channel-soon {
     font-size: 9px;
     padding: 4px 10px;
     border-radius: 100px;
-    background: var(--brand-soft);
-    color: var(--brand-deep);
-    border: 0.5px solid var(--brand-soft);
+    background: var(--bg-soft);
+    color: var(--ink-mute);
+    border: 0.5px solid var(--line-soft);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     font-weight: 500;
   }
   .channel-name {
     font-family: var(--serif);
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 400;
     letter-spacing: -0.02em;
-    line-height: 1.1;
-    margin-bottom: 12px;
+    line-height: 1.12;
+    margin-bottom: 8px;
     color: var(--ink);
   }
   .channel-desc {
-    font-size: 13.5px;
-    line-height: 1.55;
+    font-size: 12.5px;
+    line-height: 1.5;
     color: var(--ink-soft);
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     flex: 1;
   }
   .channel-features {
@@ -1705,24 +1609,24 @@
   }
   .channel-price {
     font-family: var(--serif);
-    font-size: 24px;
+    font-size: 19px;
     letter-spacing: -0.02em;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
   }
   .channel-period {
-    font-size: 11px;
+    font-size: 10.5px;
     color: var(--ink-mute);
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
   .channel-cta {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 12px 18px;
+    padding: 10px 14px;
     border-radius: 100px;
     border: 0.5px solid var(--line-mid);
-    font-size: 13px; font-weight: 500;
+    font-size: 12px; font-weight: 500;
     color: var(--ink); text-decoration: none;
     text-align: center;
     transition: background .2s, color .2s, border-color .2s;
@@ -2311,8 +2215,10 @@
     margin: 0 auto;
     padding: 0 32px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
   }
   .footer-copy {
     font-size: 13px;
@@ -2320,6 +2226,18 @@
     margin: 0;
     line-height: 1.5;
   }
+  .footer-legal {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+  .footer-legal a {
+    font-size: 13px;
+    color: var(--ink-mute);
+    text-decoration: none;
+    transition: color .15s ease;
+  }
+  .footer-legal a:hover { color: var(--ink); }
   @media (max-width: 960px) {
     .footer-inner {
       grid-template-columns: 1fr 1fr;
@@ -3605,93 +3523,6 @@
       <span>RGPD · servidores UE</span>
     </div>
 
-    <!-- ============ SERVICIOS PROFESIONALES (acompañamiento) ============ -->
-    <div class="pro-services">
-      <div class="pro-services-head">
-        <div class="pro-services-eyebrow">Acompañamiento</div>
-        <h3 class="pro-services-title">¿Lo configuras tú o<br><em>te acompañamos?</em></h3>
-        <p class="pro-services-sub">
-          Cualquier plan se puede activar de forma autónoma o con nuestro equipo.
-          Y cuando ya esté en marcha, te ayudamos a optimizarlo.
-        </p>
-      </div>
-
-      <!-- PASO 1: DIY vs Premium -->
-      <div class="onboarding-choice">
-        <!-- DIY -->
-        <div class="choice-card">
-          <div class="choice-tag">Incluido en todos los planes</div>
-          <h4 class="choice-name">Lo configuras <em>tú mismo</em></h4>
-          <p class="choice-desc">
-            Te damos las herramientas y la documentación para conectar tu correo,
-            crear tus categorías y reglas, y empezar a funcionar el mismo día.
-          </p>
-          <ul class="choice-features">
-            <li>Panel intuitivo con tutoriales paso a paso</li>
-            <li>Documentación completa y vídeos guía</li>
-            <li>Reenvío de emails o conexión OAuth en minutos</li>
-            <li>Plantillas de categorías y reglas por sector</li>
-            <li>Soporte por ticket incluido</li>
-          </ul>
-          <div class="choice-price">
-            <div>
-              <div class="choice-price-amount free">Sin coste</div>
-              <div class="choice-price-note">Incluido con tu plan</div>
-            </div>
-          </div>
-          <a href="#" class="choice-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_email_onboarding_self'}}}); return false;">Empezar yo mismo</a>
-        </div>
-
-        <!-- Divisor -->
-        <div class="choice-divider">
-          <span>o</span>
-        </div>
-
-        <!-- Premium -->
-        <div class="choice-card premium">
-          <div class="choice-tag">Pago único</div>
-          <h4 class="choice-name">Lo hacemos <em>nosotros</em></h4>
-          <p class="choice-desc">
-            Analizamos tus emails de los últimos 30 días, definimos contigo las
-            categorías y reglas, conectamos tus sistemas y entrenamos al agente
-            con tu tono de marca. Listo y afinado en 5 días.
-          </p>
-          <ul class="choice-features">
-            <li>Análisis de emails históricos (2h)</li>
-            <li>Definición de categorías y reglas de enrutamiento</li>
-            <li>Conexión a tu ERP/CRM y entrenamiento del tono</li>
-            <li>Sesión de formación para tu equipo (1h)</li>
-            <li>Soporte prioritario los primeros 30 días</li>
-          </ul>
-          <div class="choice-price">
-            <div>
-              <div class="choice-price-amount">390€<span style="font-size:14px;vertical-align:super;color:var(--ink-mute);font-weight:400;">*</span></div>
-              <div class="choice-price-note">Pago único · sin IVA · *según proyecto</div>
-            </div>
-          </div>
-          <a href="#" class="choice-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_email_onboarding_assisted'}}}); return false;">Reservar onboarding</a>
-        </div>
-      </div>
-
-      <!-- PASO 2: Tras 30 días, optimización -->
-      <div class="next-step">
-        <div class="next-step-tag">Después de 30 días</div>
-        <div class="next-step-content">
-          <h4>¿Y si lo <em>llevamos al siguiente nivel?</em></h4>
-          <p>
-            Cuando tu agente lleva un mes en marcha, analizamos qué patrones se repiten
-            y descubrimos oportunidades que se te escapan: temas que generan más fricción,
-            categorías mal asignadas, procesos automatizables al 100%.
-          </p>
-        </div>
-        <div class="next-step-price">
-          <div class="next-step-price-amount">149€</div>
-          <div class="next-step-price-note">/trimestre · sin IVA</div>
-        </div>
-        <a href="#" class="choice-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_email_informe'}}}); return false;">Activar informe</a>
-      </div>
-    </div>
-
     <!-- ============ TABLA COMPARATIVA ============ -->
     <div class="compare-wrap" data-open="false">
       <div class="compare-toggle">
@@ -3948,6 +3779,68 @@
         </div>
       </div>
     </div>
+    <!-- ============ ACOMPAÑAMIENTO ============ -->
+    <div class="pro-services">
+      <div class="pro-services-head">
+        <div class="pro-services-eyebrow">Acompañamiento</div>
+        <h3 class="pro-services-title">Lo ponemos en marcha <em>por ti.</em></h3>
+        <p class="pro-services-sub">
+          Nos encargamos de la configuración inicial y de optimizarlo cada trimestre.
+        </p>
+      </div>
+
+      <!-- Dos módulos lado a lado -->
+      <div class="onboarding-choice pair">
+
+        <!-- Puesta en marcha -->
+        <div class="choice-card premium">
+          <div class="choice-tag">Pago único</div>
+          <h4 class="choice-name">Lo hacemos <em>nosotros</em></h4>
+          <p class="choice-desc">
+            Analizamos tus emails de los últimos 30 días, definimos contigo las
+            categorías y reglas, conectamos tus sistemas y entrenamos al agente
+            con tu tono de marca. Listo y afinado en 5 días.
+          </p>
+          <ul class="choice-features">
+            <li>Análisis de emails históricos (2h)</li>
+            <li>Definición de categorías y reglas de enrutamiento</li>
+            <li>Conexión a tu ERP/CRM y entrenamiento del tono</li>
+            <li>Sesión de formación para tu equipo (1h)</li>
+            <li>Soporte prioritario los primeros 30 días</li>
+          </ul>
+          <div class="choice-price">
+            <div>
+              <div class="choice-price-amount">390€<span style="font-size:14px;vertical-align:super;color:var(--ink-mute);font-weight:400;">*</span></div>
+              <div class="choice-price-note">Pago único · sin IVA · *según proyecto</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Optimización (después de 30 días) -->
+        <div class="choice-card">
+          <div class="choice-tag">Después de 30 días</div>
+          <h4 class="choice-name">Lo llevamos al <em>siguiente nivel</em></h4>
+          <p class="choice-desc">
+            Cuando tu agente lleva un mes en marcha, analizamos qué patrones se
+            repiten y descubrimos oportunidades que se te están escapando.
+          </p>
+          <ul class="choice-features">
+            <li>Análisis de los emails y patrones del mes</li>
+            <li>Temas que generan más fricción</li>
+            <li>Categorías mal asignadas y reglas a afinar</li>
+            <li>Informe con acciones concretas</li>
+          </ul>
+          <div class="choice-price">
+            <div>
+              <div class="choice-price-amount">149€</div>
+              <div class="choice-price-note">/trimestre · sin IVA</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -4035,102 +3928,84 @@
     </div>
 
     <div class="channels-grid">
-      <!-- Webchat -->
-      <div class="channel-card" style="--brand-soft: #d4f5e9; --brand-deep: #008159; --brand-darker: #005a3e;">
+      <div class="channel-card" style="--accent: #7bc200;">
         <div class="channel-icon-wrap">
           <div class="channel-icon">
-            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <img src="/images/icons/agente-whatsapp.svg" alt="" aria-hidden="true">
+          </div>
+        </div>
+        <h3 class="channel-name">Agente WhatsApp</h3>
+        <p class="channel-desc">
+          Atiende a tus clientes por WhatsApp Business 24h. Responde, gestiona pedidos y reserva citas en el canal que ya usan.
+        </p>
+        <div class="channel-price">Desde 59€</div>
+        <div class="channel-period">/mes · sin IVA</div>
+        <a href="mailto:hola@empentia.com?subject=Avisadme%20cuando%20WhatsApp%20esté%20listo" class="channel-cta">
+          Avisadme <span class="arr">&rarr;</span>
+        </a>
+      </div>
+      <div class="channel-card" style="--accent: #00c389;">
+        <div class="channel-icon-wrap">
+          <div class="channel-icon">
+            <img src="/images/icons/agente-webchat.svg" alt="" aria-hidden="true">
           </div>
         </div>
         <h3 class="channel-name">Agente Webchat</h3>
         <p class="channel-desc">
-          Tu mejor comercial 24/7 en la web. Responde, asesora con criterio,
-          busca en tu stock y cierra la compra dentro del chat.
+          Tu mejor comercial 24/7 en la web. Responde, asesora con criterio, busca en tu stock y cierra la compra dentro del chat.
         </p>
-        <ul class="channel-features">
-          <li>Compatible con WooCommerce, PrestaShop, Shopify</li>
-          <li>Presupuestos automáticos por email</li>
-          <li>Captación de leads cualificados</li>
-        </ul>
         <div class="channel-price">Desde 49€</div>
         <div class="channel-period">/mes · sin IVA</div>
         <a href="/agentes-ia-atencion-cliente/webchat/" class="channel-cta">
-          Ver Webchat <span class="arr">→</span>
+          Ver Webchat <span class="arr">&rarr;</span>
         </a>
       </div>
-
-      <!-- WhatsApp -->
-      <div class="channel-card" style="--brand-soft: #eef7cc; --brand-deep: #7aaa10; --brand-darker: #527510;">
+      <div class="channel-card" style="--accent: #c23400;">
         <div class="channel-icon-wrap">
           <div class="channel-icon">
-            <svg viewBox="0 0 24 24"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg>
+            <img src="/images/icons/agente-voz.svg" alt="" aria-hidden="true">
           </div>
-          <span class="channel-soon">Próximamente</span>
-        </div>
-        <h3 class="channel-name">Agente WhatsApp</h3>
-        <p class="channel-desc">
-          Atiende a tus clientes por WhatsApp Business 24h.
-          Responde, gestiona pedidos y reserva citas en el canal que ya usan.
-        </p>
-        <ul class="channel-features">
-          <li>API oficial de WhatsApp Business</li>
-          <li>Estado de pedidos en tiempo real</li>
-          <li>Mismo conocimiento que tu webchat</li>
-        </ul>
-        <div class="channel-price">Desde 59€</div>
-        <div class="channel-period">/mes · sin IVA</div>
-        <a href="mailto:hola@empentia.ai?subject=Avisadme cuando WhatsApp esté listo" class="channel-cta">
-          Avisadme <span class="arr">→</span>
-        </a>
-      </div>
-
-      <!-- Voz -->
-      <div class="channel-card" style="--brand-soft: #fde8e0; --brand-deep: #c0522a; --brand-darker: #8a3419;">
-        <div class="channel-icon-wrap">
-          <div class="channel-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><path d="M12 18v4"/><path d="M8 22h8"/></svg>
-          </div>
-          <span class="channel-soon">Próximamente</span>
         </div>
         <h3 class="channel-name">Agente de voz · Llamadas</h3>
         <p class="channel-desc">
-          Recibe llamadas telefónicas con voz natural. Resuelve consultas,
-          gestiona citas y transfiere cuando es necesario.
+          Recibe llamadas telefónicas con voz natural. Resuelve consultas, gestiona citas y transfiere cuando es necesario.
         </p>
-        <ul class="channel-features">
-          <li>Voces naturales en ES, CA, EN</li>
-          <li>Reserva de citas integrada</li>
-          <li>Transcripción y resumen automático</li>
-        </ul>
         <div class="channel-price">Desde 79€</div>
         <div class="channel-period">/mes · sin IVA</div>
-        <a href="mailto:hola@empentia.ai?subject=Avisadme cuando Llamadas esté listo" class="channel-cta">
-          Avisadme <span class="arr">→</span>
+        <a href="mailto:hola@empentia.com?subject=Avisadme%20cuando%20Llamadas%20esté%20listo" class="channel-cta">
+          Avisadme <span class="arr">&rarr;</span>
         </a>
       </div>
-
-      <!-- Reseñas -->
-      <div class="channel-card" style="--brand-soft: #fdf4dc; --brand-deep: #c08a1e; --brand-darker: #8a6010;">
+      <div class="channel-card" style="--accent: #4700c2;">
         <div class="channel-icon-wrap">
           <div class="channel-icon">
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9 12 2"/></svg>
+            <img src="/images/icons/agente-redes-sociales.svg" alt="" aria-hidden="true">
           </div>
-          <span class="channel-soon">Próximamente</span>
+        </div>
+        <h3 class="channel-name">Agente Redes Sociales</h3>
+        <p class="channel-desc">
+          Responde mensajes directos de Instagram y Facebook Messenger 24h. Gestiona consultas, leads y atención al cliente desde un solo agente.
+        </p>
+        <div class="channel-price">Desde 49€</div>
+        <div class="channel-period">/mes · sin IVA</div>
+        <a href="mailto:hola@empentia.com?subject=Avisadme%20cuando%20Redes%20Sociales%20esté%20listo" class="channel-cta">
+          Avisadme <span class="arr">&rarr;</span>
+        </a>
+      </div>
+      <div class="channel-card" style="--accent: #c28100;">
+        <div class="channel-icon-wrap">
+          <div class="channel-icon">
+            <img src="/images/icons/agente-resenas.svg" alt="" aria-hidden="true">
+          </div>
         </div>
         <h3 class="channel-name">Agente de Reseñas</h3>
         <p class="channel-desc">
-          Detecta y responde reseñas de Google y Trustpilot con respuestas
-          personalizadas, coherentes con tu marca, sin que tengas que hacer nada.
+          Detecta y responde reseñas de Google y Trustpilot con respuestas personalizadas, coherentes con tu marca, sin que tengas que hacer nada.
         </p>
-        <ul class="channel-features">
-          <li>Google Business y Trustpilot</li>
-          <li>Alertas de reseñas negativas</li>
-          <li>Análisis de sentimiento</li>
-        </ul>
         <div class="channel-price">Desde 29€</div>
         <div class="channel-period">/mes · sin IVA</div>
-        <a href="mailto:hola@empentia.ai?subject=Avisadme cuando Reseñas esté listo" class="channel-cta">
-          Avisadme <span class="arr">→</span>
+        <a href="mailto:hola@empentia.com?subject=Avisadme%20cuando%20Reseñas%20esté%20listo" class="channel-cta">
+          Avisadme <span class="arr">&rarr;</span>
         </a>
       </div>
     </div>
@@ -4143,194 +4018,63 @@
 
 <!-- ============ FAQs ============ -->
 <section class="faqs" id="faqs">
-  <!-- Nodos decorativos del logo -->
-  <svg class="faqs-bg-nodes" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice">
-    <circle cx="100" cy="120" r="5" stroke="#7bb8f0" stroke-width="2" fill="none"/>
-    <path d="M 100 120 Q 250 80, 320 200" stroke="#7bb8f0" stroke-width="1.5" fill="none"/>
-    <circle cx="320" cy="200" r="3" fill="#7bb8f0"/>
-    <circle cx="1340" cy="650" r="5" stroke="#7bb8f0" stroke-width="2" fill="none"/>
-    <path d="M 1340 650 Q 1240 580, 1140 620" stroke="#7bb8f0" stroke-width="1.5" fill="none"/>
-    <circle cx="1140" cy="620" r="3" fill="#7bb8f0"/>
-  </svg>
 
   <div class="container">
     <div class="faqs-grid">
-      <!-- Cabecera izquierda (sticky) -->
+
       <div class="faqs-head">
-        <div class="eyebrow">Preguntas frecuentes</div>
-        <h2>Lo que <em>quieres saber</em><br>antes de empezar.</h2>
-        <p>
-          Las dudas más habituales que nos llegan, respondidas con honestidad.
-          Si la tuya no está aquí, escríbenos.
-        </p>
-
+        <div class="section-label">FAQ</div>
+        <h2>Preguntas <em>frecuentes.</em></h2>
+        <p>Las dudas más habituales, respondidas con honestidad. Si la tuya no está aquí, escríbenos.</p>
       </div>
 
-      <!-- Lista de FAQs -->
-      <div class="faqs-list">
-
-        <!-- Categoría: Setup e implementación -->
-        <div class="faq-category">
-          <div class="faq-cat-label">01 · Setup e implementación</div>
-
-          <div class="faq-item" data-open="true" onclick="toggleFaq(this)">
-            <button class="faq-question" type="button" aria-expanded="true">
-              <span>¿Cuánto tarda en estar operativo?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer">
-              <div class="faq-answer-inner">
-                <p>Entre <strong>3 y 5 días laborables</strong>. Conectamos tu correo (OAuth o IMAP), analizamos contigo los emails de los últimos 30 días para definir categorías y reglas, entrenamos al agente con tu tono de marca y hacemos una semana de seguimiento ajustando precisión.</p>
-                <p>Si eliges <strong>Onboarding Premium</strong>, además conectamos tu ERP/CRM y formamos a tu equipo.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>¿Cómo se conecta a mi correo?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer">
-              <div class="faq-answer-inner">
-                <p>La opción más sencilla es el <strong>reenvío de emails</strong>: configuras una regla en tu buzón para reenviar los emails entrantes a una dirección empentIA. Sin instalar nada, sin permisos especiales, sin tocar tu proveedor.</p>
-                <p>También disponible vía <strong>OAuth</strong> (Gmail, Microsoft 365) o <strong>IMAP</strong>. Tu equipo sigue recibiendo y respondiendo desde sus clientes habituales.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>¿Puede conectarse a mi ERP o CRM?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer">
-              <div class="faq-answer-inner">
-                <p>Sí. Tenemos integraciones nativas con <strong>HubSpot, Pipedrive, Holded, Odoo, SAP Business One</strong> y otros. Si tu sistema tiene API REST o webhook, podemos conectarlo.</p>
-                <p>Siempre con permisos mínimos y, por defecto, solo lectura para construir las respuestas con datos reales.</p>
-              </div>
-            </div>
-          </div>
+      <div class="faqs-items">
+        <div class="faq-item">
+          <div class="faq-q">¿Cuánto tarda en estar operativo?</div>
+          <div class="faq-a">Entre <strong>3 y 5 días laborables</strong>. Conectamos tu correo (OAuth o IMAP), analizamos contigo los emails de los últimos 30 días para definir categorías y reglas, entrenamos al agente con tu tono de marca y hacemos una semana de seguimiento ajustando precisión.</div>
         </div>
-
-        <!-- Categoría: Producto -->
-        <div class="faq-category">
-          <div class="faq-cat-label">02 · Producto y funcionamiento</div>
-
-          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>¿El agente envía emails sin que yo los vea?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer">
-              <div class="faq-answer-inner">
-                <p>Solo si tú lo activas. <strong>Por defecto, todo son borradores</strong> que tu equipo revisa con un clic antes de enviar.</p>
-                <p>Para categorías rutinarias (estado de pedido, horarios, solicitud de factura...) puedes activar el <strong>envío automático</strong> cuando la confianza del agente supera un umbral que tú decides. Control humano total.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>¿Cómo se cuentan los emails?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer">
-              <div class="faq-answer-inner">
-                <p>Un email = un <strong>fil de conversación entrante</strong> procesado por la IA al mes. Si un cliente envía 3 mensajes dentro del mismo hilo, cuenta como 1.</p>
-                <p>El spam y los emails no-reply detectados automáticamente se descartan y <strong>no cuentan</strong> para tu plan.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>¿Atiende en español, catalán e inglés?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer">
-              <div class="faq-answer-inner">
-                <p>Sí, y en <strong>+30 idiomas más</strong>. El agente detecta automáticamente el idioma de cada email y responde en la misma lengua, sin que tengas que configurar nada.</p>
-                <p>Cada plan tiene un número de idiomas <em>activos</em> entrenados con tu tono: Starter 2, Pro 5, Business ilimitados.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>¿Aprende de las correcciones de mi equipo?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer">
-              <div class="faq-answer-inner">
-                <p>Sí. Cada vez que tu equipo edita un borrador antes de enviarlo, el agente registra qué cambió y por qué. La precisión mejora semana a semana, especialmente las primeras 4-6 semanas.</p>
-                <p>De media, la tasa de borradores aprobados sin editar pasa del 75% inicial al 90%+ a los 3 meses.</p>
-              </div>
-            </div>
-          </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Cómo se conecta a mi correo?</div>
+          <div class="faq-a">La opción más sencilla es el <strong>reenvío de emails</strong>: configuras una regla en tu buzón para reenviar los emails entrantes a una dirección empentIA. Sin instalar nada, sin permisos especiales. También disponible vía <strong>OAuth</strong> (Gmail, Microsoft 365) o <strong>IMAP</strong>.</div>
         </div>
-
-        <!-- Categoría: Precios y permanencia -->
-        <div class="faq-category">
-          <div class="faq-cat-label">03 · Precios y permanencia</div>
-
-          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>¿Qué pasa si supero los emails de mi plan?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer">
-              <div class="faq-answer-inner">
-                <p>Te avisamos al <strong>80%</strong> y al <strong>100%</strong> del consumo desde el panel. Puedes subir de plan o pagar solo los emails extras al precio de tu plan: <strong>0,60€</strong> en Starter, <strong>0,50€</strong> en Pro, <strong>0,42€</strong> en Business.</p>
-                <p>Nunca te cortamos el servicio sin avisar.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>¿Puedo cancelar cuando quiera?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer">
-              <div class="faq-answer-inner">
-                <p>Sí, sin permanencia y sin penalización. Cancelas desde tu panel y se hace efectivo al final del período facturado. Sin llamadas, sin formularios, sin retención.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>¿Puedo cambiar de plan más adelante?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer">
-              <div class="faq-answer-inner">
-                <p>Sí, en cualquier momento. Subir de plan se aplica al instante (con prorrateo automático). Bajar de plan se aplica al inicio del siguiente ciclo de facturación.</p>
-              </div>
-            </div>
-          </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Puede conectarse a mi ERP o CRM?</div>
+          <div class="faq-a">Sí. Tenemos integraciones nativas con <strong>HubSpot, Pipedrive, Holded, Odoo, SAP Business One</strong> y otros. Si tu sistema tiene API REST o webhook, podemos conectarlo. Siempre con permisos mínimos y, por defecto, solo lectura.</div>
         </div>
-
-        <!-- Categoría: Seguridad y datos -->
-        <div class="faq-category">
-          <div class="faq-cat-label">04 · Datos y seguridad</div>
-
-          <div class="faq-item" data-open="false" onclick="toggleFaq(this)">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>¿Mis emails están seguros?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer">
-              <div class="faq-answer-inner">
-                <p>Totalmente. Cumplimos <strong>RGPD</strong>, los datos se almacenan en <strong>servidores en la UE</strong> (Frankfurt e Irlanda), cifrados en tránsito (TLS) y en reposo (AES-256).</p>
-                <p>Tus emails <strong>no se utilizan</strong> para entrenar modelos generales: el agente aprende solo de tu negocio. Puedes exportar, borrar o auditar tus datos en cualquier momento.</p>
-              </div>
-            </div>
-          </div>
+        <div class="faq-item">
+          <div class="faq-q">¿El agente envía emails sin que yo los vea?</div>
+          <div class="faq-a">Solo si tú lo activas. <strong>Por defecto, todo son borradores</strong> que tu equipo revisa con un clic antes de enviar. Para categorías rutinarias (estado de pedido, horarios, facturas) puedes activar el <strong>envío automático</strong> cuando la confianza supera un umbral que tú decides.</div>
         </div>
-
+        <div class="faq-item">
+          <div class="faq-q">¿Cómo se cuentan los emails?</div>
+          <div class="faq-a">Un email = un <strong>hilo de conversación entrante</strong> procesado por la IA al mes. Si un cliente envía 3 mensajes dentro del mismo hilo, cuenta como 1. El spam y los no-reply detectados automáticamente se descartan y <strong>no cuentan</strong> para tu plan.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Atiende en español, catalán e inglés?</div>
+          <div class="faq-a">Sí, y en <strong>+30 idiomas más</strong>. El agente detecta automáticamente el idioma de cada email y responde en la misma lengua, sin que tengas que configurar nada. Cada plan tiene un número de idiomas activos entrenados con tu tono: Starter 2, Pro 3, Business 5.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Aprende de las correcciones de mi equipo?</div>
+          <div class="faq-a">Sí. Cada vez que tu equipo edita un borrador antes de enviarlo, el agente registra qué cambió y por qué. La precisión mejora semana a semana, especialmente las primeras 4-6 semanas. De media, la tasa de borradores aprobados sin editar pasa del 75% inicial al 90%+ a los 3 meses.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Qué pasa si supero los emails de mi plan?</div>
+          <div class="faq-a">Te avisamos al <strong>80%</strong> y al <strong>100%</strong> del consumo desde el panel. Puedes subir de plan o pagar solo los emails extra al precio de tu plan: <strong>0,60€</strong> en Starter, <strong>0,50€</strong> en Pro, <strong>0,42€</strong> en Business. Nunca te cortamos el servicio sin avisar.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Puedo cancelar cuando quiera?</div>
+          <div class="faq-a">Sí, sin permanencia y sin penalización. Cancelas desde tu panel y se hace efectivo al final del período facturado. Sin llamadas, sin formularios, sin retención.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Puedo cambiar de plan más adelante?</div>
+          <div class="faq-a">Sí, en cualquier momento. Subir de plan se aplica al instante con prorrateo automático. Bajar de plan se aplica al inicio del siguiente ciclo de facturación.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Mis emails están seguros?</div>
+          <div class="faq-a">Totalmente. Cumplimos <strong>RGPD</strong>, los datos se almacenan en <strong>servidores en la UE</strong> (Frankfurt e Irlanda), cifrados en tránsito (TLS) y en reposo (AES-256). Tus emails <strong>no se utilizan</strong> para entrenar modelos generales: el agente aprende solo de tu negocio.</div>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -4344,15 +4088,13 @@
         Tu bandeja, <em>bajo control en 5 días.</em>
       </h2>
       <p class="cta-final-sub">
-        Conectamos tu correo y lo probamos sin compromiso.<br>
-        Si quieres hablar primero, reserva una llamada de 15 min.
+        Cuéntanos tu caso y te preparamos una propuesta a medida. Sin compromisos.
       </p>
       <div class="cta-final-actions">
         <a href="#" class="cta-final-primary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_email_cta_bottom'}}}); return false;">
-          Activar mi agente IA de email
+          Hablar con el equipo
           <span class="cta-final-arrow" aria-hidden="true">→</span>
         </a>
-        <a href="#" class="cta-final-secondary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_email_cta_bottom_secondary'}}}); return false;">Reservar llamada de 15 min</a>
       </div>
     </div>
   </div>
@@ -4392,13 +4134,16 @@
       </div>
     </div>
 
-    <!-- Navegación: Producto -->
-    <nav class="footer-col" aria-label="Producto">
-      <h3 class="footer-heading">Producto</h3>
+    <!-- Navegación: Servicios -->
+    <nav class="footer-col" aria-label="Servicios">
+      <h3 class="footer-heading">Servicios</h3>
       <ul class="footer-list">
-        <li><a href="#como-trabaja">Cómo trabaja</a></li>
-        <li><a href="#canales">Canales</a></li>
-        <li><a href="#precios">Precios</a></li>
+        <li><a href="https://empentia.com/agentes-ia-atencion-cliente/webchat/">Agente IA Webchat</a></li>
+        <li><a href="https://empentia.com/agentes-ia-atencion-cliente/email/">Agente IA Email</a></li>
+        <li><a href="#canales">Agente IA WhatsApp</a></li>
+        <li><a href="#canales">Agente IA Llamadas</a></li>
+        <li><a href="#canales">Agente IA Redes Sociales</a></li>
+        <li><a href="#canales">Agente IA Reseñas</a></li>
       </ul>
     </nav>
 
@@ -4406,22 +4151,23 @@
     <nav class="footer-col" aria-label="Recursos">
       <h3 class="footer-heading">Recursos</h3>
       <ul class="footer-list">
+        <li><a href="#como-trabaja">Cómo funciona</a></li>
         <li><a href="#casos">Casos de uso</a></li>
         <li><a href="#faqs">Preguntas frecuentes</a></li>
-        <li><a href="#cta-final">Reservar demo</a></li>
+        <li><a href="https://app.empentia.com/login">Acceso clientes</a></li>
       </ul>
     </nav>
 
-    <!-- Navegación: Empresa + redes -->
-    <div class="footer-col">
-      <h3 class="footer-heading">Empresa</h3>
+    <!-- Navegación: Contacto -->
+    <nav class="footer-col" aria-label="Contacto">
+      <h3 class="footer-heading">Contacto</h3>
       <ul class="footer-list">
-        <li><a href="mailto:hola@empentia.com">Contacto</a></li>
-        <li><a href="https://empentia.com/privacy" aria-label="Política de privacidad">Privacidad</a></li>
-        <li><a href="https://empentia.com/legal" aria-label="Aviso legal">Aviso legal</a></li>
-        <li><a href="#" data-cookie-open aria-label="Gestionar cookies">Gestionar cookies</a></li>
+        <li><a href="mailto:hola@empentia.com">Enviar correo</a></li>
+        <li><a href="mailto:hola@empentia.com?subject=Reservar%20llamada">Reservar llamada</a></li>
+        <li><a href="https://www.linkedin.com/company/empentia" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="https://www.instagram.com/empent_ia/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
       </ul>
-    </div>
+    </nav>
 
   </div>
 
@@ -4431,6 +4177,11 @@
       <p class="footer-copy">
         © <span id="footer-year">2025</span> empentIA. Todos los derechos reservados.
       </p>
+      <div class="footer-legal">
+        <a href="https://empentia.com/privacy">Privacidad</a>
+        <a href="https://empentia.com/legal">Aviso legal</a>
+        <a href="#" data-cookie-open aria-label="Gestionar cookies">Cookies</a>
+      </div>
     </div>
   </div>
 </footer>
@@ -4560,6 +4311,11 @@ Cal.ns["descobriment"]("ui", { hideEventTypeDetails: false });
       if (btn) btn.setAttribute('aria-expanded', 'true');
     }
   }
+
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    if (q) q.addEventListener('click', () => item.classList.toggle('open'));
+  });
 
   // Año dinámico en footer
   (function() {
