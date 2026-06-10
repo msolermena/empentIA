@@ -362,6 +362,7 @@
     flex-shrink: 0;
   }
   .avatar svg { width: 22px; height: 22px; }
+  .avatar img { width: 20px; height: 20px; display: block; object-fit: contain; }
   .chat-name { font-size: 13px; font-weight: 500; }
   .chat-status { font-size: 11px; color: var(--brand); }
   .msg {
@@ -2995,24 +2996,7 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero">
-  <!-- Nodos decorativos flotantes (lenguaje del logo) -->
-  <div class="hero-nodes">
-    <svg style="top: 12%; left: 6%; width: 80px; height: 80px;" viewBox="0 0 80 80">
-      <circle cx="10" cy="40" r="5" stroke="#7bb8f0" stroke-width="2" fill="none"/>
-      <path d="M 15 40 Q 40 20, 70 40" stroke="#7bb8f0" stroke-width="2" fill="none"/>
-      <circle cx="70" cy="40" r="3" fill="#7bb8f0"/>
-    </svg>
-    <svg style="top: 70%; left: 3%; width: 100px; height: 60px;" viewBox="0 0 100 60">
-      <path d="M 5 30 Q 50 5, 95 30" stroke="#7bb8f0" stroke-width="2" fill="none" opacity="0.5"/>
-      <circle cx="5" cy="30" r="4" stroke="#7bb8f0" stroke-width="2" fill="none"/>
-      <circle cx="95" cy="30" r="3" fill="#7bb8f0"/>
-    </svg>
-    <svg style="top: 18%; right: 4%; width: 70px; height: 70px;" viewBox="0 0 70 70">
-      <circle cx="35" cy="10" r="4" stroke="#7bb8f0" stroke-width="2" fill="none"/>
-      <path d="M 35 14 Q 60 35, 35 60" stroke="#7bb8f0" stroke-width="2" fill="none"/>
-      <circle cx="35" cy="60" r="3" fill="#7bb8f0"/>
-    </svg>
-  </div>
+  <img src="/images/logo/simbolo-tinta.png" alt="" aria-hidden="true" style="position:absolute;right:-60px;top:50%;transform:translateY(-50%);width:520px;opacity:0.045;pointer-events:none;z-index:1;user-select:none;">
 
   <div class="container">
     <div class="hero-grid">
@@ -3072,7 +3056,7 @@
             <div class="product-card" style="margin-bottom: 0; border-radius: 0; border-bottom: 0.5px solid var(--line-soft); display: grid; grid-template-columns: 36px 1fr auto auto; gap: 12px; align-items: center;">
               <div class="product-img" style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #e8e6df, #a8a49a);"></div>
               <div>
-                <div class="product-name">Marc Soler</div>
+                <div class="product-name">Pol Martí</div>
                 <div class="product-meta">¿Dónde está mi pedido #4521?</div>
               </div>
               <div style="font-size: 10px; font-weight: 600; padding: 4px 9px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em; background: rgba(154,90,26,0.12); color: #9a5a1a;">Soporte</div>
@@ -3087,7 +3071,7 @@
               <div style="font-size: 10px; font-weight: 600; padding: 4px 9px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em; background: rgba(123,184,240,0.12); color: var(--brand-deep);">Facturación</div>
               <div style="font-family: var(--mono); font-size: 11px; color: var(--ink-mute);">↳ auto-enviada</div>
             </div>
-            <div class="product-card" style="margin-bottom: 0; border-radius: 0; display: grid; grid-template-columns: 36px 1fr auto auto; gap: 12px; align-items: center;">
+            <div class="product-card" style="margin-bottom: 0; border-radius: 0; border-bottom: 0.5px solid var(--line-soft); display: grid; grid-template-columns: 36px 1fr auto auto; gap: 12px; align-items: center;">
               <div class="product-img" style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #2a2a26, #0e0e0c);"></div>
               <div>
                 <div class="product-name">Jordi Ferrer</div>
@@ -3096,18 +3080,36 @@
               <div style="font-size: 10px; font-weight: 600; padding: 4px 9px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em; background: rgba(14,14,12,0.08); color: var(--ink);">Dirección</div>
               <div style="font-family: var(--mono); font-size: 11px; color: var(--ink-mute);">→ dirección</div>
             </div>
+            <div class="product-card" style="margin-bottom: 0; border-radius: 0; border-bottom: 0.5px solid var(--line-soft); display: grid; grid-template-columns: 36px 1fr auto auto; gap: 12px; align-items: center;">
+              <div class="product-img" style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #ddeeff, #5a9bd8);"></div>
+              <div>
+                <div class="product-name">Núria Camps</div>
+                <div class="product-meta">¿Puedo cambiar la talla de mi pedido?</div>
+              </div>
+              <div style="font-size: 10px; font-weight: 600; padding: 4px 9px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em; background: rgba(154,90,26,0.12); color: #9a5a1a;">Soporte</div>
+              <div style="font-family: var(--mono); font-size: 11px; color: var(--ink-mute);">&#8627; borrador</div>
+            </div>
+            <div class="product-card" style="margin-bottom: 0; border-radius: 0; display: grid; grid-template-columns: 36px 1fr auto auto; gap: 12px; align-items: center;">
+              <div class="product-img" style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #e8e6df, #c2b8a0);"></div>
+              <div>
+                <div class="product-name">Sergi Roca</div>
+                <div class="product-meta">¿Tenéis stock del modelo en azul?</div>
+              </div>
+              <div style="font-size: 10px; font-weight: 600; padding: 4px 9px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em; background: rgba(123,184,240,0.12); color: var(--brand-deep);">Ventas</div>
+              <div style="font-family: var(--mono); font-size: 11px; color: var(--ink-mute);">&#8594; comercial</div>
+            </div>
           </div>
         </div>
         <div class="chat-card">
           <div class="chat-head">
-            <div class="avatar">e</div>
+            <div class="avatar"><img src="/images/logo/simbolo-tinta.png" alt="empentIA"></div>
             <div>
               <div class="chat-name">Borrador IA · Re: pedido #4521</div>
               <div class="chat-status">● Listo para revisar</div>
             </div>
           </div>
           <div class="msg bot" style="background: var(--bg-soft); color: var(--ink); border: 0.5px solid var(--line-soft);">
-            Hola Marc, tu pedido <strong>#4521</strong> sale mañana por mensajería 24h. Lo recibirás el viernes entre 10h y 14h. Te paso el código de seguimiento en cuanto se genere.
+            Hola Pol, tu pedido <strong>#4521</strong> sale mañana por mensajería 24h. Lo recibirás el viernes entre 10h y 14h. Te paso el código de seguimiento en cuanto se genere.
           </div>
           <div class="typing" style="justify-content: flex-start; gap: 8px;">
             <span style="background: var(--brand); width: 6px; height: 6px;"></span>
@@ -3305,7 +3307,7 @@
               <div class="demo-convo">
                 <div class="demo-msg user"><strong>Email:</strong> ¿Dónde está mi pedido #4521?</div>
                 <div class="demo-msg bot">→ <strong>Consultando ERP</strong>... pedido #4521 localizado</div>
-                <div class="demo-msg bot"><strong>Cliente:</strong> Marc Soler · cuenta verificada<br><strong>Estado:</strong> preparado, sale mañana<br><strong>Tracking:</strong> pendiente de generar</div>
+                <div class="demo-msg bot"><strong>Cliente:</strong> Pol Martí · cuenta verificada<br><strong>Estado:</strong> preparado, sale mañana<br><strong>Tracking:</strong> pendiente de generar</div>
                 <div class="demo-msg user"><strong>Email:</strong> Necesito factura de marzo</div>
                 <div class="demo-msg bot">→ <strong>Consultando Holded</strong>... 1 factura encontrada</div>
                 <div class="demo-msg bot"><strong>Factura:</strong> 2026-0341 · 1.847€<br><strong>Estado:</strong> pagada · marzo 2026<br><strong>PDF:</strong> generado y adjuntado</div>
@@ -3371,7 +3373,7 @@
               <div class="demo-intro">Una respuesta a un clic. Apruebas, editas o regeneras.</div>
               <div class="demo-convo">
                 <div class="demo-msg user"><strong>Para:</strong> marc.soler@gmail.com<br><strong>Asunto:</strong> Re: pedido #4521 — sale mañana</div>
-                <div class="demo-msg bot">Hola Marc,<br><br>Tu pedido <strong>#4521</strong> ya está preparado y sale mañana por mensajería 24h. Lo recibirás el <strong>viernes entre 10h y 14h</strong>.<br><br>Te paso el código de seguimiento en cuanto se genere. Si necesitas cambiar la dirección, respóndeme a este email.<br><br>Saludos,<br>Equipo de soporte</div>
+                <div class="demo-msg bot">Hola Pol,<br><br>Tu pedido <strong>#4521</strong> ya está preparado y sale mañana por mensajería 24h. Lo recibirás el <strong>viernes entre 10h y 14h</strong>.<br><br>Te paso el código de seguimiento en cuanto se genere. Si necesitas cambiar la dirección, respóndeme a este email.<br><br>Saludos,<br>Equipo de soporte</div>
                 <div class="demo-msg user" style="background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.25);">Aprobar y enviar · Editar · Regenerar · Reasignar</div>
               </div>
             </div>
@@ -3970,16 +3972,6 @@
 
 <!-- ============ MÁS CANALES (próximamente) ============ -->
 <section class="channels" id="canales">
-  <!-- Nodos decorativos del logo -->
-  <svg class="channels-bg-nodes" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice">
-    <circle cx="120" cy="80" r="5" stroke="#7bb8f0" stroke-width="2" fill="none"/>
-    <path d="M 120 80 Q 240 50, 320 130" stroke="#7bb8f0" stroke-width="1.5" fill="none"/>
-    <circle cx="320" cy="130" r="3" fill="#7bb8f0"/>
-    <circle cx="1340" cy="450" r="5" stroke="#7bb8f0" stroke-width="2" fill="none"/>
-    <path d="M 1340 450 Q 1240 380, 1140 420" stroke="#7bb8f0" stroke-width="1.5" fill="none"/>
-    <circle cx="1140" cy="420" r="3" fill="#7bb8f0"/>
-  </svg>
-
   <div class="container">
     <div class="channels-top">
       <div class="channels-head">
