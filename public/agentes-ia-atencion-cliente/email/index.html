@@ -54,17 +54,17 @@
     --line-mid: rgba(14,14,12,0.14);
 
     /* Azul cielo — email empentIA */
-    --brand: #7bb8f0;
-    --brand-deep: #3a82cc;
-    --brand-darker: #1a5a99;
+    --brand: #1a73e8;
+    --brand-deep: #13539e;
+    --brand-darker: #0c3a72;
     --brand-soft: #ddeeff;
-    --brand-glow: rgba(123,184,240,0.18);
+    --brand-glow: rgba(26,115,232,0.18);
 
     --dark-bg: #09111a;        /* casi negro con leve tinte azul */
     --dark-bg-card: #11201a;
     --dark-ink: #f5f4ee;
     --dark-ink-soft: #a5a49e;
-    --dark-line: rgba(123,184,240,0.10);
+    --dark-line: rgba(26,115,232,0.10);
 
     --serif: "Fraunces", "Times New Roman", serif;
     --sans: "Instrument Sans", system-ui, sans-serif;
@@ -198,9 +198,9 @@
     animation: pulse 1.8s infinite;
   }
   @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(123,184,240,0.55); }
-    70% { box-shadow: 0 0 0 10px rgba(123,184,240,0); }
-    100% { box-shadow: 0 0 0 0 rgba(123,184,240,0); }
+    0% { box-shadow: 0 0 0 0 rgba(26,115,232,0.55); }
+    70% { box-shadow: 0 0 0 10px rgba(26,115,232,0); }
+    100% { box-shadow: 0 0 0 0 rgba(26,115,232,0); }
   }
 
   h1.display {
@@ -343,14 +343,14 @@
     padding: 18px;
     box-shadow:
       0 30px 80px -20px rgba(14,14,12,0.45),
-      0 0 0 1px rgba(123,184,240,0.12) inset;
+      0 0 0 1px rgba(26,115,232,0.12) inset;
     transform: rotateY(-4deg) rotateX(2deg) translateZ(40px);
     transform-style: preserve-3d;
   }
   .chat-head {
     display: flex; align-items: center; gap: 10px;
     padding-bottom: 14px;
-    border-bottom: 0.5px solid rgba(123,184,240,0.12);
+    border-bottom: 0.5px solid rgba(26,115,232,0.12);
     margin-bottom: 14px;
   }
   /* avatar = mini logo SVG */
@@ -377,7 +377,7 @@
   }
   .msg.bot {
     background: var(--brand);
-    color: #033726;
+    color: #fff;
   }
   .typing {
     display: inline-flex; gap: 4px; padding: 10px 14px;
@@ -516,7 +516,7 @@
     transition: border-color .25s ease, transform .25s ease;
     display: flex; flex-direction: column;
   }
-  .cell:hover { border-color: rgba(123,184,240,0.4); transform: translateY(-2px); }
+  .cell:hover { border-color: rgba(26,115,232,0.4); transform: translateY(-2px); }
   .cell h3 {
     font-family: var(--serif); font-weight: 400; font-size: 22px;
     letter-spacing: -0.02em;
@@ -534,7 +534,7 @@
     background: rgba(0,0,0,0.3);
     border-radius: 12px; padding: 14px;
     margin-top: 20px;
-    border: 0.5px solid rgba(123,184,240,0.08);
+    border: 0.5px solid rgba(26,115,232,0.08);
   }
   .search-input {
     background: rgba(255,255,255,0.04);
@@ -567,7 +567,7 @@
     font-size: 18px;
   }
   .flag.more {
-    background: var(--brand); color: #033726;
+    background: var(--brand); color: #fff;
     font-family: var(--mono); font-weight: 500; font-size: 13px;
     border-color: var(--brand);
   }
@@ -586,7 +586,7 @@
     font-family: var(--mono); font-size: 12px;
     margin-top: 22px;
     color: var(--dark-ink-soft);
-    border: 0.5px solid rgba(123,184,240,0.08);
+    border: 0.5px solid rgba(26,115,232,0.08);
   }
   .code-line .key { color: #ff7b72; }
   .code-line .str { color: var(--brand); }
@@ -640,7 +640,7 @@
     border-bottom: 0.5px solid var(--line-soft);
     padding-bottom: 14px;
   }
-  .case-card.featured .case-metric { border-bottom-color: rgba(123,184,240,0.18); }
+  .case-card.featured .case-metric { border-bottom-color: rgba(26,115,232,0.18); }
   .case-metric .big {
     font-family: var(--serif);
     font-size: 48px; font-weight: 400;
@@ -667,7 +667,7 @@
     padding-top: 22px;
     border-top: 0.5px solid var(--line-soft);
   }
-  .case-card.featured .case-author { border-top-color: rgba(123,184,240,0.18); }
+  .case-card.featured .case-author { border-top-color: rgba(26,115,232,0.18); }
   .case-avatar {
     width: 38px; height: 38px; border-radius: 50%;
     background: var(--brand-soft);
@@ -680,7 +680,7 @@
   }
   .case-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .case-card.featured .case-avatar {
-    background: rgba(123,184,240,0.15);
+    background: rgba(26,115,232,0.15);
     color: var(--brand);
   }
   .case-name { font-weight: 500; color: inherit; }
@@ -723,7 +723,7 @@
   .ribbon {
     position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
     background: var(--brand);
-    color: #033726;
+    color: #fff;
     font-size: 11px; font-weight: 500;
     padding: 6px 14px; border-radius: 100px;
     letter-spacing: 0.06em; text-transform: uppercase;
@@ -761,7 +761,7 @@
   }
   .plan.popular .plan-features li {
     color: var(--dark-ink-soft);
-    border-bottom-color: rgba(123,184,240,0.12);
+    border-bottom-color: rgba(26,115,232,0.12);
   }
   /* iconos check con nodo del logo */
   .plan-features li::before {
@@ -787,7 +787,7 @@
   }
   .plan-btn:hover { background: var(--ink); color: #fff; }
   .plan.popular .plan-btn {
-    background: var(--brand); color: #033726;
+    background: var(--brand); color: #fff;
     border-color: var(--brand);
   }
   .plan.popular .plan-btn:hover { background: #5fdcb4; }
@@ -874,7 +874,7 @@
   }
   .choice-card:hover {
     transform: translateY(-2px);
-    border-color: rgba(123,184,240,0.3);
+    border-color: rgba(26,115,232,0.3);
     box-shadow: 0 20px 50px -25px rgba(14,14,12,0.15);
   }
   .choice-card.premium {
@@ -883,7 +883,7 @@
     border: none;
   }
   .choice-card.premium:hover {
-    box-shadow: 0 30px 60px -25px rgba(123,184,240,0.25);
+    box-shadow: 0 30px 60px -25px rgba(26,115,232,0.25);
   }
   .choice-tag {
     display: inline-flex; align-items: center; gap: 8px;
@@ -980,7 +980,7 @@
   }
   .choice-cta:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
   .choice-card.premium .choice-cta {
-    background: var(--brand); color: #033726; border-color: var(--brand);
+    background: var(--brand); color: #fff; border-color: var(--brand);
   }
   .choice-card.premium .choice-cta:hover { background: #5fdcb4; }
 
@@ -1040,7 +1040,7 @@
     text-transform: uppercase;
     padding: 6px 16px;
     border-radius: 100px;
-    border: 0.5px solid rgba(123,184,240,0.3);
+    border: 0.5px solid rgba(26,115,232,0.3);
     font-weight: 500;
     display: inline-flex; align-items: center; gap: 8px;
     white-space: nowrap;
@@ -1175,7 +1175,7 @@
   }
   /* Pro destacado SIN fondo negro flotante */
   .compare-table th.featured {
-    background: rgba(123,184,240,0.08);
+    background: rgba(26,115,232,0.08);
     color: var(--ink);
     position: relative;
     border-bottom: 1.5px solid var(--brand);
@@ -1184,7 +1184,7 @@
   .compare-table th.featured::before {
     content: "Más popular";
     position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
-    background: var(--brand); color: #033726;
+    background: var(--brand); color: #fff;
     font-size: 9px; font-family: var(--sans);
     padding: 4px 12px; border-radius: 100px;
     letter-spacing: 0.06em; text-transform: uppercase;
@@ -1201,7 +1201,7 @@
     text-transform: uppercase;
     font-weight: 500;
     padding: 12px 28px;
-    border-bottom: 0.5px solid rgba(123,184,240,0.2);
+    border-bottom: 0.5px solid rgba(26,115,232,0.2);
   }
 
   .compare-table td {
@@ -1216,13 +1216,13 @@
     padding-left: 28px;
   }
   .compare-table td.featured {
-    background: rgba(123,184,240,0.05);
+    background: rgba(26,115,232,0.05);
   }
   .compare-table tbody tr:hover td:not(.section-row td) {
-    background: rgba(123,184,240,0.03);
+    background: rgba(26,115,232,0.03);
   }
   .compare-table tbody tr:hover td.featured {
-    background: rgba(123,184,240,0.1);
+    background: rgba(26,115,232,0.1);
   }
 
   /* checkmarks y dashes */
@@ -1230,7 +1230,7 @@
     display: inline-flex; align-items: center; justify-content: center;
     width: 22px; height: 22px;
     border-radius: 50%;
-    background: rgba(123,184,240,0.12);
+    background: rgba(26,115,232,0.12);
     color: var(--brand-deep);
     font-size: 11px;
   }
@@ -1242,9 +1242,9 @@
     font-size: 9px;
     padding: 3px 8px;
     border-radius: 100px;
-    background: rgba(123,184,240,0.1);
+    background: rgba(26,115,232,0.1);
     color: var(--brand-deep);
-    border: 0.5px solid rgba(123,184,240,0.2);
+    border: 0.5px solid rgba(26,115,232,0.2);
     margin-top: 4px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -1257,7 +1257,7 @@
     background: var(--bg-soft);
     border-bottom: none;
   }
-  .compare-table tr.cta-row td.featured { background: rgba(123,184,240,0.08); }
+  .compare-table tr.cta-row td.featured { background: rgba(26,115,232,0.08); }
   /* asegurar que el highlight Pro respete el border-radius de la tabla */
   .compare-table tr:first-child th.featured {
     border-top-left-radius: 0;
@@ -1283,7 +1283,7 @@
     color: #fff;
     border-color: var(--ink);
   }
-  .compare-cta.featured-cta:hover { background: var(--brand); color: #033726; border-color: var(--brand); }
+  .compare-cta.featured-cta:hover { background: var(--brand); color: #fff; border-color: var(--brand); }
 
   /* === MOBILE: chips selector + lista === */
   .compare-mobile { display: none; }
@@ -1316,7 +1316,7 @@
   }
   .chip[data-active="true"][data-popular="true"] {
     background: var(--brand);
-    color: #033726;
+    color: #fff;
     border-color: var(--brand);
   }
   .compare-pane {
@@ -1530,7 +1530,7 @@
   .channel-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 24px 48px -24px rgba(14,14,12,0.12);
-    border-color: color-mix(in srgb, var(--accent, #7bb8f0) 40%, var(--line-soft));
+    border-color: color-mix(in srgb, var(--accent, #1a73e8) 40%, var(--line-soft));
   }
   .channel-icon-wrap {
     display: flex;
@@ -1674,7 +1674,7 @@
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    border: 1px dashed rgba(123,184,240,0.3);
+    border: 1px dashed rgba(26,115,232,0.3);
     border-radius: 50%;
   }
   .orbit-ring.r1 { width: 280px; height: 280px; }
@@ -1686,11 +1686,11 @@
     width: 110px; height: 110px;
     border-radius: 50%;
     background: var(--brand-soft);
-    border: 1px solid rgba(123,184,240,0.4);
+    border: 1px solid rgba(26,115,232,0.4);
     display: flex; align-items: center; justify-content: center;
     text-align: center;
     z-index: 2;
-    box-shadow: 0 0 0 8px rgba(123,184,240,0.05);
+    box-shadow: 0 0 0 8px rgba(26,115,232,0.05);
   }
   .orbit-center-inner {
     font-family: var(--serif);
@@ -1726,7 +1726,7 @@
   }
   .orbit-node:hover {
     transform: translate(-50%, -50%) scale(1.08);
-    box-shadow: 0 12px 28px -8px rgba(123,184,240,0.25);
+    box-shadow: 0 12px 28px -8px rgba(26,115,232,0.25);
   }
   .orbit-node svg {
     width: 22px; height: 22px;
@@ -2008,7 +2008,7 @@
     content: '';
     position: absolute; bottom: -240px; left: 50%; transform: translateX(-50%);
     width: 720px; height: 720px;
-    background: radial-gradient(circle, rgba(123,184,240,0.14) 0%, transparent 62%);
+    background: radial-gradient(circle, rgba(26,115,232,0.14) 0%, transparent 62%);
     pointer-events: none;
   }
   .cta-final-inner {
@@ -2065,7 +2065,7 @@
     align-items: center;
     gap: 10px;
     background: var(--brand);
-    color: #06212e;
+    color: #fff;
     padding: 16px 28px;
     border-radius: 100px;
     font-size: 15px;
@@ -2074,7 +2074,7 @@
     transition: background .2s ease, transform .2s ease;
   }
   .cta-final-primary:hover {
-    background: #93c8f5;
+    background: #4a90e2;
     transform: translateY(-1px);
   }
   .cta-final-arrow {
@@ -2290,8 +2290,8 @@
   section.como-trabaja-tabs::before {
     content: ""; position: absolute; inset: 0;
     background-image:
-      radial-gradient(circle at 20% 30%, rgba(123,184,240,0.06), transparent 40%),
-      radial-gradient(circle at 80% 70%, rgba(123,184,240,0.05), transparent 40%);
+      radial-gradient(circle at 20% 30%, rgba(26,115,232,0.06), transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(26,115,232,0.05), transparent 40%);
     pointer-events: none;
   }
   /* Nodos decorativos de fondo: más visibles que en la versión oscura */
@@ -2378,7 +2378,7 @@
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #b9d8f6, #7bb8f0 50%, #3a82cc);
+    background: linear-gradient(90deg, #9cc6f5, #1a73e8 50%, #13539e);
     opacity: 0.25;
     pointer-events: none;
     transition: opacity .35s ease, height .35s ease;
@@ -2392,7 +2392,7 @@
   }
   .como-trabaja-tabs .tab.active {
     background: #0e0e0c;
-    border-color: rgba(123,184,240,0.4);
+    border-color: rgba(26,115,232,0.4);
     box-shadow: 0 16px 36px -16px rgba(58,130,204,0.3);
     transform: none;
   }
@@ -2559,7 +2559,7 @@
   .como-trabaja-tabs .cell.demo {
     grid-column: 1;
     grid-row: span 2;
-    background: linear-gradient(180deg, rgba(123,184,240,0.07), rgba(123,184,240,0.02));
+    background: linear-gradient(180deg, rgba(26,115,232,0.07), rgba(26,115,232,0.02));
     border-color: rgba(0,129,89,0.18);
   }
   .como-trabaja-tabs .cell.demo .demo-tag {
@@ -2609,7 +2609,7 @@
   }
   .como-trabaja-tabs .demo-msg.bot {
     background: var(--brand);
-    color: #033726;
+    color: #fff;
     font-weight: 400;
   }
 
@@ -2706,7 +2706,7 @@
   }
   .como-trabaja-tabs .flag.more {
     background: var(--brand);
-    color: #033726;
+    color: #fff;
     font-family: var(--mono); font-weight: 500; font-size: 13px;
     border-color: var(--brand);
   }
@@ -2721,8 +2721,8 @@
     border-bottom-color: rgba(14,14,12,0.06) !important;
   }
   /* Tags interiores de cells (pills) — invertir colores para fondo claro */
-  .como-trabaja-tabs .cell [style*="rgba(123,184,240,0.1)"] {
-    background: rgba(123,184,240,0.1) !important;
+  .como-trabaja-tabs .cell [style*="rgba(26,115,232,0.1)"] {
+    background: rgba(26,115,232,0.1) !important;
     color: var(--brand-deep) !important;
     border-color: rgba(0,129,89,0.25) !important;
   }
@@ -2810,7 +2810,7 @@
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 2px;
-    background: linear-gradient(90deg, #b9d8f6, #7bb8f0 50%, #3a82cc);
+    background: linear-gradient(90deg, #9cc6f5, #1a73e8 50%, #13539e);
     opacity: 0.4;
     pointer-events: none;
     transition: opacity .25s ease, height .25s ease;
@@ -2833,7 +2833,7 @@
   }
   .como-trabaja-tabs .extras-grid .flag.more {
     background: var(--brand);
-    color: #06212e;
+    color: #fff;
     font-family: var(--mono); font-weight: 500; font-size: 11px;
     border-color: var(--brand);
   }
@@ -2844,7 +2844,7 @@
     font-size: 10px;
     padding: 4px 10px;
     border-radius: 100px;
-    background: rgba(123,184,240,0.14);
+    background: rgba(26,115,232,0.14);
     color: var(--brand-deep);
     border: 0.5px solid rgba(58,130,204,0.3);
   }
@@ -2852,15 +2852,15 @@
     .como-trabaja-tabs .extras-grid { grid-template-columns: repeat(2, 1fr); }
   }
   /* Anclas de color verde del bloque Y ADEMÁS */
-  .como-trabaja-tabs .ct-extras [style*="rgba(123,184,240,0.12)"] {
-    background: rgba(123,184,240,0.12) !important;
+  .como-trabaja-tabs .ct-extras [style*="rgba(26,115,232,0.12)"] {
+    background: rgba(26,115,232,0.12) !important;
     color: var(--brand-deep) !important;
     border-color: rgba(0,129,89,0.3) !important;
   }
 
   /* Gráfico de barras (panel 04 Rescata) — adaptado a fondo claro */
   .como-trabaja-tabs .ana-mini .bar {
-    background: rgba(123,184,240,0.22);
+    background: rgba(26,115,232,0.22);
   }
   .como-trabaja-tabs .ana-mini .bar.hi {
     background: var(--brand);
@@ -3083,7 +3083,7 @@
                 <div class="product-name">Anna Pujol</div>
                 <div class="product-meta">Pido presupuesto para 50 unidades…</div>
               </div>
-              <div style="font-size: 10px; font-weight: 600; padding: 4px 9px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em; background: rgba(123,184,240,0.12); color: var(--brand-deep);">Ventas</div>
+              <div style="font-size: 10px; font-weight: 600; padding: 4px 9px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em; background: rgba(26,115,232,0.12); color: var(--brand-deep);">Ventas</div>
               <div style="font-family: var(--mono); font-size: 11px; color: var(--ink-mute);">→ comercial</div>
             </div>
             <div class="product-card" style="margin-bottom: 0; border-radius: 0; border-bottom: 0.5px solid var(--line-soft); display: grid; grid-template-columns: 36px 1fr auto auto; gap: 12px; align-items: center;">
@@ -3101,7 +3101,7 @@
                 <div class="product-name">Laura Vidal</div>
                 <div class="product-meta">Necesito la factura de marzo</div>
               </div>
-              <div style="font-size: 10px; font-weight: 600; padding: 4px 9px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em; background: rgba(123,184,240,0.12); color: var(--brand-deep);">Facturación</div>
+              <div style="font-size: 10px; font-weight: 600; padding: 4px 9px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em; background: rgba(26,115,232,0.12); color: var(--brand-deep);">Facturación</div>
               <div style="font-family: var(--mono); font-size: 11px; color: var(--ink-mute);">↳ auto-enviada</div>
             </div>
             <div class="product-card" style="margin-bottom: 0; border-radius: 0; border-bottom: 0.5px solid var(--line-soft); display: grid; grid-template-columns: 36px 1fr auto auto; gap: 12px; align-items: center;">
@@ -3128,7 +3128,7 @@
                 <div class="product-name">Sergi Roca</div>
                 <div class="product-meta">¿Tenéis stock del modelo en azul?</div>
               </div>
-              <div style="font-size: 10px; font-weight: 600; padding: 4px 9px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em; background: rgba(123,184,240,0.12); color: var(--brand-deep);">Ventas</div>
+              <div style="font-size: 10px; font-weight: 600; padding: 4px 9px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em; background: rgba(26,115,232,0.12); color: var(--brand-deep);">Ventas</div>
               <div style="font-family: var(--mono); font-size: 11px; color: var(--ink-mute);">&#8594; comercial</div>
             </div>
           </div>
@@ -3310,10 +3310,10 @@
                 <div class="search-result"><span class="pname">→ Asignado a</span><span class="pprice" style="font-family: var(--mono); font-size: 12px;">marta@</span></div>
               </div>
               <div style="margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap;">
-                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.2);">preguntas habituales</span>
-                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.2);">consultas pedidos</span>
-                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.2);">quejas</span>
-                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.2);">ventas</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(26,115,232,0.1); color: var(--brand); border: 0.5px solid rgba(26,115,232,0.2);">preguntas habituales</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(26,115,232,0.1); color: var(--brand); border: 0.5px solid rgba(26,115,232,0.2);">consultas pedidos</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(26,115,232,0.1); color: var(--brand); border: 0.5px solid rgba(26,115,232,0.2);">quejas</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(26,115,232,0.1); color: var(--brand); border: 0.5px solid rgba(26,115,232,0.2);">ventas</span>
                 <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(255,255,255,0.04); color: var(--dark-ink-soft); border: 0.5px solid rgba(255,255,255,0.06);">+ las que necesites</span>
               </div>
             </div>
@@ -3414,7 +3414,7 @@
               <div class="demo-convo">
                 <div class="demo-msg user"><strong>Para:</strong> pol.marti@gmail.com<br><strong>Asunto:</strong> Re: pedido #4521 — sale mañana</div>
                 <div class="demo-msg bot">Hola Pol,<br><br>Tu pedido <strong>#4521</strong> ya está preparado y sale mañana por mensajería 24h. Lo recibirás el <strong>viernes entre 10h y 14h</strong>.<br><br>Te paso el código de seguimiento en cuanto se genere. Si necesitas cambiar la dirección, respóndeme a este email.<br><br>Saludos,<br>Equipo de soporte</div>
-                <div class="demo-msg user" style="background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.25);">Aprobar y enviar · Editar · Regenerar · Reasignar</div>
+                <div class="demo-msg user" style="background: rgba(26,115,232,0.1); color: var(--brand); border: 0.5px solid rgba(26,115,232,0.25);">Aprobar y enviar · Editar · Regenerar · Reasignar</div>
               </div>
             </div>
 
@@ -3434,9 +3434,9 @@
               </div>
               <div style="margin-top: 18px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
                 <span style="font-size: 11px; color: var(--dark-ink-soft); margin-right: 4px;">Umbrales de auto-envío:</span>
-                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.2);">&gt; 90% confianza</span>
-                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.2);">categoría aprobada</span>
-                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(123,184,240,0.1); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.2);">datos verificados</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(26,115,232,0.1); color: var(--brand); border: 0.5px solid rgba(26,115,232,0.2);">&gt; 90% confianza</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(26,115,232,0.1); color: var(--brand); border: 0.5px solid rgba(26,115,232,0.2);">categoría aprobada</span>
+                <span style="font-size: 11px; padding: 5px 11px; border-radius: 100px; background: rgba(26,115,232,0.1); color: var(--brand); border: 0.5px solid rgba(26,115,232,0.2);">datos verificados</span>
               </div>
             </div>
 
@@ -3444,15 +3444,15 @@
               <h3>Métricas en tiempo real</h3>
               <p>Tasa de aprobación, tiempo medio de respuesta, distribución por categoría. Todo en tu panel.</p>
               <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 22px;">
-                <div style="background: rgba(0,0,0,0.25); border-radius: 10px; padding: 12px; border: 0.5px solid rgba(123,184,240,0.08);">
+                <div style="background: rgba(0,0,0,0.25); border-radius: 10px; padding: 12px; border: 0.5px solid rgba(26,115,232,0.08);">
                   <div style="font-family: var(--serif); font-size: 24px; color: var(--brand); line-height: 1;">487</div>
                   <div style="font-size: 10px; color: var(--dark-ink-soft); margin-top: 6px;">Emails procesados</div>
                 </div>
-                <div style="background: rgba(0,0,0,0.25); border-radius: 10px; padding: 12px; border: 0.5px solid rgba(123,184,240,0.08);">
+                <div style="background: rgba(0,0,0,0.25); border-radius: 10px; padding: 12px; border: 0.5px solid rgba(26,115,232,0.08);">
                   <div style="font-family: var(--serif); font-size: 24px; color: var(--dark-ink); line-height: 1;">92%</div>
                   <div style="font-size: 10px; color: var(--dark-ink-soft); margin-top: 6px;">Aprobados sin editar</div>
                 </div>
-                <div style="background: rgba(0,0,0,0.25); border-radius: 10px; padding: 12px; border: 0.5px solid rgba(123,184,240,0.08);">
+                <div style="background: rgba(0,0,0,0.25); border-radius: 10px; padding: 12px; border: 0.5px solid rgba(26,115,232,0.08);">
                   <div style="font-family: var(--serif); font-size: 24px; color: var(--dark-ink); line-height: 1;">2h</div>
                   <div style="font-size: 10px; color: var(--dark-ink-soft); margin-top: 6px;">Tiempo medio</div>
                 </div>
@@ -3495,9 +3495,9 @@
           <h3>Aprende de tus correcciones</h3>
           <p>Cada vez que tu equipo edita un borrador, el agente aprende. La precisión mejora semana a semana.</p>
           <div style="display: flex; gap: 8px; margin-top: 18px; flex-wrap: wrap;">
-            <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(123,184,240,0.12); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.25);">Semana 1 · 78%</span>
-            <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(123,184,240,0.12); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.25);">Semana 4 · 89%</span>
-            <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(123,184,240,0.18); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.35);">Semana 12 · 96%</span>
+            <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(26,115,232,0.12); color: var(--brand); border: 0.5px solid rgba(26,115,232,0.25);">Semana 1 · 78%</span>
+            <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(26,115,232,0.12); color: var(--brand); border: 0.5px solid rgba(26,115,232,0.25);">Semana 4 · 89%</span>
+            <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(26,115,232,0.18); color: var(--brand); border: 0.5px solid rgba(26,115,232,0.35);">Semana 12 · 96%</span>
           </div>
         </div>
         <div class="cell">
@@ -3516,9 +3516,9 @@
           <h3>RGPD · servidores UE</h3>
           <p>Cifrado en tránsito y reposo. Tus emails no se usan para entrenar modelos generales.</p>
           <div style="display: flex; gap: 6px; margin-top: 18px; flex-wrap: wrap;">
-            <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(123,184,240,0.12); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.25);">RGPD</span>
-            <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(123,184,240,0.12); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.25);">AES-256</span>
-            <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(123,184,240,0.12); color: var(--brand); border: 0.5px solid rgba(123,184,240,0.25);">UE</span>
+            <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(26,115,232,0.12); color: var(--brand); border: 0.5px solid rgba(26,115,232,0.25);">RGPD</span>
+            <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(26,115,232,0.12); color: var(--brand); border: 0.5px solid rgba(26,115,232,0.25);">AES-256</span>
+            <span style="font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 100px; background: rgba(26,115,232,0.12); color: var(--brand); border: 0.5px solid rgba(26,115,232,0.25);">UE</span>
           </div>
         </div>
       </div>
@@ -4044,11 +4044,11 @@
         <!-- Líneas conectoras desde el centro -->
         <svg class="orbit-lines" viewBox="0 0 560 320" preserveAspectRatio="none">
           <!-- desde centro (280, 160) hacia cada nodo -->
-          <line x1="280" y1="160" x2="80" y2="160" stroke="rgba(123,184,240,0.45)" stroke-width="1.2" stroke-dasharray="3 4"/>
-          <line x1="280" y1="160" x2="200" y2="40" stroke="rgba(123,184,240,0.3)" stroke-width="1" stroke-dasharray="3 4"/>
-          <line x1="280" y1="160" x2="360" y2="40" stroke="rgba(123,184,240,0.3)" stroke-width="1" stroke-dasharray="3 4"/>
-          <line x1="280" y1="160" x2="480" y2="160" stroke="rgba(123,184,240,0.3)" stroke-width="1" stroke-dasharray="3 4"/>
-          <line x1="280" y1="160" x2="280" y2="280" stroke="rgba(123,184,240,0.3)" stroke-width="1" stroke-dasharray="3 4"/>
+          <line x1="280" y1="160" x2="80" y2="160" stroke="rgba(26,115,232,0.45)" stroke-width="1.2" stroke-dasharray="3 4"/>
+          <line x1="280" y1="160" x2="200" y2="40" stroke="rgba(26,115,232,0.3)" stroke-width="1" stroke-dasharray="3 4"/>
+          <line x1="280" y1="160" x2="360" y2="40" stroke="rgba(26,115,232,0.3)" stroke-width="1" stroke-dasharray="3 4"/>
+          <line x1="280" y1="160" x2="480" y2="160" stroke="rgba(26,115,232,0.3)" stroke-width="1" stroke-dasharray="3 4"/>
+          <line x1="280" y1="160" x2="280" y2="280" stroke="rgba(26,115,232,0.3)" stroke-width="1" stroke-dasharray="3 4"/>
         </svg>
 
         <!-- Anillos -->
