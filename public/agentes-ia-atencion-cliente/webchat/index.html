@@ -787,29 +787,19 @@
   .plan-btn {
     background: transparent;
     border: 0.5px solid var(--line-mid);
-    padding: 13px 18px;
+    padding: 14px 18px;
     border-radius: 100px;
     font-size: 14px; font-weight: 500;
     color: var(--ink); text-decoration: none;
-    display: inline-flex; align-items: center; justify-content: center; gap: 7px;
-    white-space: nowrap;
+    text-align: center;
     transition: background .2s ease, color .2s ease;
     cursor: pointer;
   }
   .plan-btn:hover { background: var(--ink); color: #fff; }
-  .plan-btn .arr {
-    width: 18px; height: 18px; flex: none;
-    background: var(--brand); border-radius: 50%;
-    display: inline-flex; align-items: center; justify-content: center;
-    color: #fff; font-size: 11px;
-    transition: transform .2s ease;
-  }
-  .plan-btn:hover .arr { transform: translateX(2px); }
   .plan.popular .plan-btn {
     background: var(--brand); color: #033726;
     border-color: var(--brand);
   }
-  .plan.popular .plan-btn .arr { background: #06241a; }
   .plan.popular .plan-btn:hover { background: #5fdcb4; }
 
   .pricing-foot {
@@ -2099,10 +2089,7 @@
     transform: translateY(-1px);
   }
   .cta-final-arrow {
-    width: 22px; height: 22px; flex: none;
-    background: #06241a; border-radius: 50%;
-    display: inline-flex; align-items: center; justify-content: center;
-    color: #fff; font-size: 13px;
+    display: inline-block;
     transition: transform .2s ease;
   }
   .cta-final-primary:hover .cta-final-arrow {
@@ -3846,7 +3833,7 @@
           <li>Conocimiento manual + web</li>
           <li>Soporte por ticket · 48h</li>
         </ul>
-        <a href="#" class="plan-btn" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_pricing_starter'}}}); return false;">Contratar Starter<span class="arr">→</span></a>
+        <a href="#" class="plan-btn" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_pricing_starter'}}}); return false;">Contratar Starter</a>
       </div>
 
       <div class="plan popular">
@@ -3862,7 +3849,7 @@
           <li>Integración carrito real</li>
           <li>Implementación asistida · 24h</li>
         </ul>
-        <a href="#" class="plan-btn" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_pricing_pro'}}}); return false;">Contratar Pro<span class="arr">→</span></a>
+        <a href="#" class="plan-btn" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_pricing_pro'}}}); return false;">Contratar Pro</a>
       </div>
 
       <div class="plan">
@@ -3876,7 +3863,7 @@
           <li>Personalización total (CSS)</li>
           <li>Implementación dedicada · 4h</li>
         </ul>
-        <a href="#" class="plan-btn" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_pricing_business'}}}); return false;">Contratar Business<span class="arr">→</span></a>
+        <a href="#" class="plan-btn" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_pricing_business'}}}); return false;">Contratar Business</a>
       </div>
 
       <div class="plan">
@@ -3890,7 +3877,7 @@
           <li>SLA y soporte dedicado</li>
           <li>Facturación personalizada</li>
         </ul>
-        <a href="#" class="plan-btn" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_pricing_custom'}}}); return false;">Hablemos<span class="arr">→</span></a>
+        <a href="#" class="plan-btn" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_webchat_pricing_custom'}}}); return false;">Hablemos</a>
       </div>
     </div>
 
