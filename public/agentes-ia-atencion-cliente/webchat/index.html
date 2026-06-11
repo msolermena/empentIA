@@ -3167,11 +3167,25 @@
   }
   .svc-panel .panel-head { max-width: 760px; margin-bottom: 44px; }
   .svc-panel .panel-intro { font-size: 18px; line-height: 1.6; color: var(--ink-soft); margin-top: 16px; }
+  .wdash-wrap { position: relative; max-width: 1000px; margin: 0 auto; }
   .wdash {
     background: #fff; border: 1px solid var(--line-mid); border-radius: 16px;
     box-shadow: 0 40px 80px -50px rgba(14,14,12,0.45);
-    overflow: hidden; max-width: 1000px; margin: 0 auto;
+    overflow: hidden;
   }
+  .wp-convo {
+    position: absolute; right: -16px; bottom: -30px; z-index: 4; width: 340px;
+    background: #fff; border: 1px solid var(--line-mid); border-radius: 16px;
+    box-shadow: 0 34px 64px -26px rgba(14,14,12,0.55); overflow: hidden;
+  }
+  .wp-convo-head { display: flex; align-items: center; gap: 10px; padding: 15px 16px 13px; border-bottom: 1px solid var(--line-soft); }
+  .wp-convo-head .nm { font-weight: 600; font-size: 13.5px; color: var(--ink); }
+  .wp-convo-head .x { margin-left: auto; color: var(--ink-mute); font-size: 17px; line-height: 1; }
+  .wp-convo-body { padding: 15px 15px 13px; display: flex; flex-direction: column; gap: 9px; background: #fbfbf9; }
+  .wp-msg { max-width: 82%; padding: 9px 13px; border-radius: 14px; font-size: 12.5px; line-height: 1.42; }
+  .wp-msg.bot { align-self: flex-start; background: #eceeea; color: var(--ink); border-bottom-left-radius: 5px; }
+  .wp-msg.usr { align-self: flex-end; background: var(--brand); color: #06241a; border-bottom-right-radius: 5px; }
+  .wp-convo-foot { padding: 11px 16px; border-top: 1px solid var(--line-soft); font-size: 11px; color: var(--ink-mute); }
   .wdash-bar {
     display: flex; align-items: center; gap: 7px; padding: 13px 18px;
     background: #fbfbf9; border-bottom: 1px solid var(--line-soft);
@@ -3215,6 +3229,8 @@
     .wp-tabs { gap: 18px; overflow-x: auto; }
     .wp-col-hide { display: none; }
     .wp-table th, .wp-table td { padding-left: 7px; padding-right: 7px; font-size: 12.5px; }
+    .wdash-wrap { max-width: 100%; }
+    .wp-convo { position: static; width: auto; right: auto; bottom: auto; margin-top: 16px; box-shadow: 0 18px 44px -24px rgba(14,14,12,0.4); }
   }
 </style>
 
@@ -3880,7 +3896,8 @@
       <h2 class="section-title">Cada conversación, lead y presupuesto, <em>en un solo sitio.</em></h2>
       <p class="panel-intro">El webchat no solo responde a tus clientes: registra cada conversación, detecta los leads y prepara los presupuestos. Tú lo ves todo organizado y en tiempo real, sin tocar nada.</p>
     </div>
-    <div class="wdash">
+    <div class="wdash-wrap">
+      <div class="wdash">
       <div class="wdash-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="wdash-url">app.empentia.com</span></div>
       <div class="wdash-body">
         <div class="wp-crumb">← Automatizaciones</div>
@@ -3943,6 +3960,21 @@
             </tr>
           </tbody>
         </table>
+      </div>
+      </div>
+      <div class="wp-convo">
+        <div class="wp-convo-head">
+          <span class="nm">Visitante anónimo</span>
+          <span class="wp-tag est-act">Activa</span>
+          <span class="x">×</span>
+        </div>
+        <div class="wp-convo-body">
+          <div class="wp-msg bot">¡Hola! 👋 ¿En qué te ayudo? ¿Buscas una bici, equipación o tienes una consulta?</div>
+          <div class="wp-msg usr">Busco una bici gravel</div>
+          <div class="wp-msg bot">¡Buena elección! 🚴 Antes de enseñarte opciones, dime: ¿cuál es tu altura aproximada?</div>
+          <div class="wp-msg usr">164 cm</div>
+        </div>
+        <div class="wp-convo-foot">18 mensajes · 11/06 18:15 · ES</div>
       </div>
     </div>
   </div>
