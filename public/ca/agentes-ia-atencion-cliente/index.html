@@ -480,6 +480,54 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
   .pm-act { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-mute); border: 1px solid var(--line); padding: 4px 11px; border-radius: 100px; }
   .pm-foot { margin-top: 2px; font-size: 12px; color: var(--ink-mute); text-align: center; display: flex; align-items: center; justify-content: center; gap: 7px; }
   .pm-foot::before { content: '+'; font-family: 'JetBrains Mono', monospace; color: var(--positive); font-weight: 600; }
+  /* ====== Panel real (dashboard mock) ====== */
+  .mgmt-head { max-width: 760px; margin: 0 auto 44px; text-align: center; }
+  .mgmt-head .section-label { display: inline-flex; }
+  .dash { background: var(--bg-card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: 0 40px 90px -40px rgba(16,21,18,0.30); }
+  .dash-bar { display: flex; align-items: center; gap: 7px; padding: 12px 18px; border-bottom: 1px solid var(--line-soft); background: var(--bg-alt); }
+  .dash-bar .d { width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
+  .dash-url { margin-left: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-mute); }
+  .dash-body { display: grid; grid-template-columns: 190px 1fr; }
+  .dash-side { background: #0e1311; padding: 20px 14px; display: flex; flex-direction: column; gap: 3px; }
+  .ds-brand { display: flex; align-items: center; margin: 2px 6px 16px; }
+  .ds-brand img { height: 20px; width: auto; }
+  .ds-sec { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.32); margin: 14px 8px 5px; }
+  .ds-item { display: flex; align-items: center; gap: 9px; font-size: 12.5px; padding: 7px 9px; border-radius: 8px; color: rgba(255,255,255,0.62); }
+  .ds-item .dt { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.55; flex-shrink: 0; }
+  .ds-item.active { background: rgba(255,255,255,0.08); color: #fff; }
+  .ds-item.active .dt { background: var(--positive); opacity: 1; }
+  .dash-main { padding: 22px 24px; }
+  .dm-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+  .dm-card { border: 1px solid var(--line-soft); border-radius: 12px; padding: 14px 15px; }
+  .dm-lbl { font-size: 11px; color: var(--ink-mute); display: flex; align-items: center; gap: 7px; margin-bottom: 8px; }
+  .dm-lbl svg { width: 14px; height: 14px; }
+  .dm-val { font-family: 'Fraunces', serif; font-size: 27px; font-weight: 500; color: var(--ink); letter-spacing: -0.02em; line-height: 1; }
+  .dm-sub { font-size: 10.5px; color: var(--ink-mute); margin-top: 7px; }
+  .dm-sub.warn { color: #c0772a; }
+  .dm-sub.ok { color: var(--positive); }
+  .dm-chart-h { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 12px; }
+  .dm-chart { border: 1px solid var(--line-soft); border-radius: 12px; padding: 16px 16px 14px; }
+  .dm-chart svg { width: 100%; height: auto; display: block; }
+  .dm-days { display: flex; justify-content: space-between; margin-top: 6px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--ink-mute); }
+  .dm-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 14px; }
+  .dm-leg { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--ink-soft); }
+  .dm-leg::before { content: ''; width: 9px; height: 3px; border-radius: 2px; background: var(--c); }
+  /* Franja CRM */
+  .mgmt-crm { margin-top: 24px; display: flex; align-items: center; justify-content: space-between; gap: 28px; flex-wrap: wrap; background: var(--bg-alt); border: 1px solid var(--line); border-radius: 16px; padding: 22px 26px; }
+  .mgmt-crm-txt strong { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 500; color: var(--ink); display: block; margin-bottom: 4px; letter-spacing: -0.01em; }
+  .mgmt-crm-txt span { font-size: 14px; color: var(--ink-soft); }
+  .mgmt-crm-mods { display: flex; gap: 8px; flex-wrap: wrap; }
+  .crm-mod { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; padding: 7px 13px; border-radius: 100px; font-weight: 500; }
+  .crm-mod.on { background: var(--positive-soft); color: var(--positive); }
+  .crm-mod.on::before { content: '\2713'; }
+  .crm-mod.off { color: var(--ink-mute); border: 1px dashed var(--line); }
+  .crm-mod.off::before { content: '+'; font-family: 'JetBrains Mono', monospace; }
+  @media (max-width: 860px) {
+    .dash-body { grid-template-columns: 1fr; }
+    .dash-side { display: none; }
+    .dm-cards { grid-template-columns: 1fr; }
+    .mgmt-crm { flex-direction: column; align-items: flex-start; }
+  }
 </style>
 
 <!-- Google tag (gtag.js) -->
@@ -751,49 +799,83 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
 <!-- ====== ESPAI DE GESTIÓ ====== -->
 <section class="mgmt-section" id="panel">
   <div class="container">
-    <div class="mgmt-grid">
-      <div class="mgmt-text">
-        <div class="section-label">El teu espai de gestió</div>
-        <h2>Un panell de control,<br><em>convertible en CRM.</em></h2>
-        <p class="section-intro">Gestiona el coneixement del teu negoci i tots els agents des d'un sol lloc. I quan ho necessitis, amplia'l a un CRM complet activant més funcions d'empentIA — campanyes intel·ligents, comptabilitat i més.</p>
-        <ul class="mgmt-points">
-          <li>
-            <span class="mgmt-pic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4a1 1 0 0 1 1-1h8l5 5v11a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg></span>
-            <div><strong>Coneixement i canals en un sol lloc</strong><span>Catàleg, FAQs, to i polítiques, més tots els teus agents (webchat, email…) sota un sol compte.</span></div>
-          </li>
-          <li>
-            <span class="mgmt-pic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 3-4 3 2 4-6"/></svg></span>
-            <div><strong>Mètriques i supervisió en temps real</strong><span>Converses, sentiment per canal, casos i rendiment. Amb control humà sempre que vulguis.</span></div>
-          </li>
-          <li>
-            <span class="mgmt-pic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 5-9 5-9-5z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg></span>
-            <div><strong>Creix a CRM quan vulguis</strong><span>Sobre la mateixa base, activa més mòduls d'empentIA: campanyes intel·ligents, comptabilitat i més.</span></div>
-          </li>
-        </ul>
-        <a href="https://app.empentia.com/login" target="_blank" rel="noopener noreferrer" class="mgmt-link">Accedir al panell <span>→</span></a>
-      </div>
+    <div class="mgmt-head">
+      <div class="section-label">El teu espai de gestió</div>
+      <h2>Un panell de control, <em>convertible en CRM.</em></h2>
+      <p class="section-intro">Gestiones el coneixement del teu negoci i tots els agents des d'un sol lloc: converses, casos, canals i mètriques en temps real. I quan ho necessitis, l'amplies a un CRM complet amb més funcions d'empentIA.</p>
+    </div>
 
-      <div class="mgmt-visual">
-        <div class="panel-mock">
-          <div class="pm-bar"><span class="pm-dot"></span><span class="pm-dot"></span><span class="pm-dot"></span><span class="pm-url">empentIA · Panell</span></div>
-          <div class="pm-body">
-            <div class="pm-stats">
-              <div class="pm-stat"><span class="pm-stat-v">142</span><span class="pm-stat-l">Converses avui</span></div>
-              <div class="pm-stat"><span class="pm-stat-v">78%</span><span class="pm-stat-l">Resoltes per IA</span></div>
-              <div class="pm-stat"><span class="pm-stat-v">&lt;1 min</span><span class="pm-stat-l">Resp. mitjana</span></div>
+    <div class="dash">
+      <div class="dash-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="dash-url">app.empentia.com</span></div>
+      <div class="dash-body">
+        <aside class="dash-side">
+          <div class="ds-brand"><img src="/images/logo/logo-horizontal-green.png" alt="empentIA"></div>
+          <div class="ds-item active"><span class="dt"></span>Inici</div>
+          <div class="ds-sec">Atenció al client</div>
+          <div class="ds-item"><span class="dt"></span>Converses</div>
+          <div class="ds-item"><span class="dt"></span>Casos</div>
+          <div class="ds-item"><span class="dt"></span>Contactes</div>
+          <div class="ds-sec">Canals</div>
+          <div class="ds-item"><span class="dt"></span>Xat web</div>
+          <div class="ds-item"><span class="dt"></span>Email</div>
+          <div class="ds-item"><span class="dt"></span>WhatsApp</div>
+          <div class="ds-sec">Intel·ligència</div>
+          <div class="ds-item"><span class="dt"></span>Assistent IA</div>
+          <div class="ds-item"><span class="dt"></span>Coneixement</div>
+        </aside>
+        <div class="dash-main">
+          <div class="dm-cards">
+            <div class="dm-card">
+              <div class="dm-lbl"><svg viewBox="0 0 24 24" fill="none" stroke="#6b7785" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg>Casos oberts</div>
+              <div class="dm-val">12</div>
+              <div class="dm-sub warn">5 prioritaris</div>
             </div>
-            <div>
-              <div class="pm-label">Mòduls empentIA</div>
-              <div class="pm-rows">
-                <div class="pm-row"><span class="pm-ch"><span class="pm-chic"><svg viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="2.5" y="14" width="3.5" height="6" rx="1"/><rect x="18" y="14" width="3.5" height="6" rx="1"/></svg></span>Atenció al client</span><span class="pm-on">Actiu</span></div>
-                <div class="pm-row"><span class="pm-ch"><span class="pm-chic"><svg viewBox="0 0 24 24"><path d="M5 5a2 2 0 0 1 2-2h12v16H7a2 2 0 0 0-2 2z"/><path d="M9 7h7M9 11h5"/></svg></span>Coneixement del negoci</span><span class="pm-on">Actiu</span></div>
-                <div class="pm-row off"><span class="pm-ch"><span class="pm-chic"><svg viewBox="0 0 24 24"><path d="m3 11 13-5v12L3 14z"/><path d="M3 11v4h3l1.5 5"/></svg></span>Campanyes intel·ligents</span><span class="pm-act">Activar</span></div>
-                <div class="pm-row off"><span class="pm-ch"><span class="pm-chic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6M9 11h6M9 15h3"/></svg></span>Comptabilitat</span><span class="pm-act">Activar</span></div>
-              </div>
+            <div class="dm-card">
+              <div class="dm-lbl"><svg viewBox="0 0 24 24" fill="none" stroke="#6b7785" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>Resolts avui</div>
+              <div class="dm-val">47</div>
+              <div class="dm-sub ok">78% per IA</div>
             </div>
-            <div class="pm-foot">Activa més mòduls i converteix-lo en el teu CRM</div>
+            <div class="dm-card">
+              <div class="dm-lbl"><svg viewBox="0 0 24 24" fill="none" stroke="#6b7785" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Resp. mitjana</div>
+              <div class="dm-val">&lt;1 min</div>
+              <div class="dm-sub ok">Assistent IA 24/7</div>
+            </div>
+          </div>
+          <div class="dm-chart-h">Volum de converses — darrers 7 dies</div>
+          <div class="dm-chart">
+            <svg viewBox="0 0 640 150" preserveAspectRatio="none">
+              <line x1="0" y1="38" x2="640" y2="38" stroke="#e7e5dd" stroke-width="1" stroke-dasharray="3 5"/>
+              <line x1="0" y1="84" x2="640" y2="84" stroke="#e7e5dd" stroke-width="1" stroke-dasharray="3 5"/>
+              <line x1="0" y1="130" x2="640" y2="130" stroke="#e7e5dd" stroke-width="1"/>
+              <polyline fill="none" stroke="#00c389" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="20,90 122,72 224,80 326,52 428,60 530,38 620,46"/>
+              <polyline fill="none" stroke="#0061c2" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="20,108 122,100 224,104 326,92 428,96 530,88 620,82"/>
+              <polyline fill="none" stroke="#7bc200" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="20,120 122,114 224,118 326,106 428,110 530,101 620,97"/>
+              <polyline fill="none" stroke="#c28100" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="20,126 122,124 224,125 326,120 428,122 530,116 620,112"/>
+              <polyline fill="none" stroke="#4700c2" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="20,129 122,128 224,128 326,126 428,127 530,124 620,122"/>
+            </svg>
+            <div class="dm-days"><span>dl</span><span>dt</span><span>dc</span><span>dj</span><span>dv</span><span>ds</span><span>dg</span></div>
+            <div class="dm-legend">
+              <span class="dm-leg" style="--c:#00c389">Xat web</span>
+              <span class="dm-leg" style="--c:#0061c2">Email</span>
+              <span class="dm-leg" style="--c:#7bc200">WhatsApp</span>
+              <span class="dm-leg" style="--c:#c28100">Ressenyes</span>
+              <span class="dm-leg" style="--c:#4700c2">Trucades</span>
+            </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="mgmt-crm">
+      <div class="mgmt-crm-txt">
+        <strong>Això és només atenció al client.</strong>
+        <span>Activa més mòduls d'empentIA sobre la mateixa base i converteix-lo en el teu CRM.</span>
+      </div>
+      <div class="mgmt-crm-mods">
+        <span class="crm-mod on">Atenció al client</span>
+        <span class="crm-mod on">Coneixement</span>
+        <span class="crm-mod off">Campanyes intel·ligents</span>
+        <span class="crm-mod off">Comptabilitat</span>
       </div>
     </div>
   </div>
