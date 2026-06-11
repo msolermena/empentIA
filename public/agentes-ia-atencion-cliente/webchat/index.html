@@ -3158,6 +3158,64 @@
   @media (max-width: 960px) {
     .lang-switch { display: none; }
   }
+
+  /* ===== Panel del servicio (vista real del webchat) ===== */
+  .svc-panel {
+    padding: 140px 0;
+    background: #eef2ec;
+    background-image: radial-gradient(circle at 82% 16%, rgba(0,195,137,0.12), transparent 55%);
+  }
+  .svc-panel .panel-head { max-width: 760px; margin-bottom: 44px; }
+  .svc-panel .panel-intro { font-size: 18px; line-height: 1.6; color: var(--ink-soft); margin-top: 16px; }
+  .wdash {
+    background: #fff; border: 1px solid var(--line-mid); border-radius: 16px;
+    box-shadow: 0 40px 80px -50px rgba(14,14,12,0.45);
+    overflow: hidden; max-width: 1000px; margin: 0 auto;
+  }
+  .wdash-bar {
+    display: flex; align-items: center; gap: 7px; padding: 13px 18px;
+    background: #fbfbf9; border-bottom: 1px solid var(--line-soft);
+  }
+  .wdash-bar .d { width: 11px; height: 11px; border-radius: 50%; background: #dcdcd6; }
+  .wdash-url { margin-left: 14px; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--ink-mute); }
+  .wdash-body { padding: 28px 30px 32px; }
+  .wp-crumb { font-size: 13px; color: var(--ink-mute); margin-bottom: 16px; }
+  .wp-titlerow { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+  .wp-ticon { width: 46px; height: 46px; border-radius: 12px; flex: none; background: var(--brand); display: flex; align-items: center; justify-content: center; }
+  .wp-ticon svg { width: 23px; height: 23px; }
+  .wp-tname { font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 25px; letter-spacing: -0.02em; color: var(--ink); line-height: 1.1; }
+  .wp-tsub { font-size: 13.5px; color: var(--ink-soft); margin-top: 4px; }
+  .wp-tabs { display: flex; gap: 28px; border-bottom: 1px solid var(--line-soft); margin-bottom: 26px; }
+  .wp-tab { font-size: 14px; color: var(--ink-mute); padding-bottom: 13px; white-space: nowrap; }
+  .wp-tab.active { color: var(--ink); font-weight: 600; box-shadow: inset 0 -2px 0 var(--brand); }
+  .wp-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
+  .wp-card { border: 1px solid var(--line-soft); border-radius: 13px; padding: 17px 19px; background: #fcfcfb; }
+  .wp-card .v { font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 32px; color: var(--ink); line-height: 1; }
+  .wp-card .v.hl { color: var(--brand-deep); }
+  .wp-card .l { font-size: 12.5px; color: var(--ink-soft); margin-top: 8px; }
+  .wp-table { width: 100%; border-collapse: collapse; }
+  .wp-table th { text-align: left; font-size: 11.5px; font-weight: 500; letter-spacing: 0.02em; color: var(--ink-mute); padding: 0 12px 13px; border-bottom: 1px solid var(--line-soft); }
+  .wp-table td { padding: 14px 12px; border-bottom: 1px solid var(--line-soft); font-size: 13.5px; color: var(--ink-soft); }
+  .wp-table tbody tr:last-child td { border-bottom: 0; }
+  .wp-date b { display: block; font-weight: 500; color: var(--ink); }
+  .wp-date span { font-size: 12px; color: var(--ink-mute); }
+  .wp-origin { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--ink-soft); }
+  .wp-msgs { color: var(--ink); font-weight: 500; }
+  .wp-tag { display: inline-block; padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 500; white-space: nowrap; }
+  .wp-tag.cat-pres { background: #efe6fb; color: #6b34c9; }
+  .wp-tag.cat-gen  { background: #eeede9; color: #6e6e68; }
+  .wp-tag.cat-lead { background: #e2edfb; color: #1f6fd1; }
+  .wp-tag.est-act  { background: rgba(0,195,137,0.15); color: var(--brand-deep); }
+  @media (max-width: 760px) {
+    .svc-panel { padding: 80px 0; }
+    .svc-panel .panel-intro { font-size: 16px; }
+    .wdash-body { padding: 18px 14px 22px; }
+    .wp-cards { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .wp-card .v { font-size: 26px; }
+    .wp-tabs { gap: 18px; overflow-x: auto; }
+    .wp-col-hide { display: none; }
+    .wp-table th, .wp-table td { padding-left: 7px; padding-right: 7px; font-size: 12.5px; }
+  }
 </style>
 
 <!-- Google tag (gtag.js) -->
@@ -3809,6 +3867,82 @@
             <div>ACED Asesores · Catalunya</div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PANEL DEL SERVICIO ============ -->
+<section class="svc-panel" id="panel">
+  <div class="container">
+    <div class="panel-head">
+      <div class="eyebrow">Tu panel de control</div>
+      <h2 class="section-title">Cada conversación, lead y presupuesto, <em>en un solo sitio.</em></h2>
+      <p class="panel-intro">El webchat no solo responde a tus clientes: registra cada conversación, detecta los leads y prepara los presupuestos. Tú lo ves todo organizado y en tiempo real, sin tocar nada.</p>
+    </div>
+    <div class="wdash">
+      <div class="wdash-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="wdash-url">app.empentia.com</span></div>
+      <div class="wdash-body">
+        <div class="wp-crumb">← Automatizaciones</div>
+        <div class="wp-titlerow">
+          <span class="wp-ticon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg></span>
+          <div>
+            <div class="wp-tname">Webchat</div>
+            <div class="wp-tsub">Conversaciones, leads y presupuestos generados por el webchat IA</div>
+          </div>
+        </div>
+        <div class="wp-tabs">
+          <span class="wp-tab active">Conversaciones</span>
+          <span class="wp-tab">Presupuestos</span>
+          <span class="wp-tab">Conocimiento</span>
+          <span class="wp-tab">Configuración</span>
+          <span class="wp-tab">Rendimiento</span>
+        </div>
+        <div class="wp-cards">
+          <div class="wp-card"><div class="v">131</div><div class="l">Conversaciones</div></div>
+          <div class="wp-card"><div class="v">8</div><div class="l">Hoy</div></div>
+          <div class="wp-card"><div class="v hl">12</div><div class="l">Leads capturados</div></div>
+          <div class="wp-card"><div class="v">5</div><div class="l">Presupuestos</div></div>
+        </div>
+        <table class="wp-table">
+          <thead><tr>
+            <th>Fecha</th><th class="wp-col-hide">Visitante</th><th class="wp-col-hide">Origen</th><th>Msgs</th><th>Categoría</th><th>Estado</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td class="wp-date"><b>11/06</b><span>18:15</span></td>
+              <td class="wp-col-hide">Anónimo</td>
+              <td class="wp-col-hide"><span class="wp-origin">/gravel/bici-carbono…</span></td>
+              <td class="wp-msgs">18</td>
+              <td><span class="wp-tag cat-pres">Presupuesto</span></td>
+              <td><span class="wp-tag est-act">Activa</span></td>
+            </tr>
+            <tr>
+              <td class="wp-date"><b>11/06</b><span>16:02</span></td>
+              <td class="wp-col-hide">Anónimo</td>
+              <td class="wp-col-hide"><span class="wp-origin">/accesorios/cascos…</span></td>
+              <td class="wp-msgs">7</td>
+              <td><span class="wp-tag cat-lead">Lead</span></td>
+              <td><span class="wp-tag est-act">Activa</span></td>
+            </tr>
+            <tr>
+              <td class="wp-date"><b>10/06</b><span>12:47</span></td>
+              <td class="wp-col-hide">Anónimo</td>
+              <td class="wp-col-hide"><span class="wp-origin">/</span></td>
+              <td class="wp-msgs">4</td>
+              <td><span class="wp-tag cat-gen">General</span></td>
+              <td><span class="wp-tag est-act">Activa</span></td>
+            </tr>
+            <tr>
+              <td class="wp-date"><b>09/06</b><span>19:58</span></td>
+              <td class="wp-col-hide">Anónimo</td>
+              <td class="wp-col-hide"><span class="wp-origin">/montaña/doble-suspensión…</span></td>
+              <td class="wp-msgs">6</td>
+              <td><span class="wp-tag cat-lead">Lead</span></td>
+              <td><span class="wp-tag est-act">Activa</span></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
