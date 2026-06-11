@@ -240,15 +240,15 @@ h2 em { font-style: italic; font-weight: 300; color: var(--positive); }
   background: linear-gradient(90deg, var(--ch), transparent 70%);
 }
 .service-card.live:hover { transform: translateY(-4px); box-shadow: 0 24px 48px -24px rgba(0,0,0,0.12); border-color: color-mix(in srgb, var(--ch) 40%, var(--line)); }
-.svc-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; }
-.svc-icwrap { width: 52px; height: 52px; border-radius: 13px; display: flex; align-items: center; justify-content: center; }
+.svc-head { display: flex; align-items: center; gap: 16px; margin-bottom: 22px; }
+.svc-icwrap { width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .service-card.live .svc-icwrap { background: linear-gradient(155deg, #1c2420 0%, #101512 100%); color: #00c389; box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 14px rgba(16,21,18,0.18); }
 .svc-icwrap .ic { width: 24px; height: 24px; }
-.svc-icwrap img { width: 40px; height: 40px; display: block; }
+.svc-icwrap img { width: 46px; height: 46px; display: block; }
 .svc-badge { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; padding: 5px 12px; border-radius: 100px; }
 .svc-badge.on { background: var(--positive-soft); color: var(--positive); }
 .svc-badge.off { background: var(--line); color: var(--ink-mute); }
-.svc-title { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 500; letter-spacing: -0.025em; margin-bottom: 10px; }
+.svc-title { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 500; letter-spacing: -0.025em; }
 .svc-title em { font-style: italic; font-weight: 300; }
 .svc-desc { font-size: 14.5px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 22px; }
 .svc-list { list-style: none; margin-bottom: 28px; flex: 1; }
@@ -278,10 +278,10 @@ h2 em { font-style: italic; font-weight: 300; color: var(--positive); }
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
   background: linear-gradient(90deg, var(--ch), transparent 70%);
 }
-.scs-top { display: flex; align-items: center; justify-content: space-between; }
-.scs-icwrap { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: linear-gradient(155deg, #1c2420 0%, #101512 100%); color: #7fae98; box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 14px rgba(16,21,18,0.18); }
+.scs-top { display: flex; align-items: center; gap: 12px; }
+.scs-icwrap { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: linear-gradient(155deg, #1c2420 0%, #101512 100%); flex-shrink: 0; box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 14px rgba(16,21,18,0.18); }
 .scs-icwrap .ic { width: 18px; height: 18px; }
-.scs-icwrap img { width: 28px; height: 28px; display: block; }
+.scs-icwrap img { width: 34px; height: 34px; display: block; }
 .scs-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; padding: 3px 9px; border-radius: 100px; background: var(--line); color: var(--ink-mute); }
 .scs-title { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 500; letter-spacing: -0.02em; }
 .scs-title em { font-style: italic; font-weight: 300; }
@@ -572,9 +572,8 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
             <span class="svc-icwrap">
               <img src="/images/icons/agente-webchat.svg" alt="" aria-hidden="true">
             </span>
-            <span class="svc-badge on">Operatiu</span>
+            <div class="svc-title">Agent <em>Webchat</em></div>
           </div>
-          <div class="svc-title">Agent <em>Webchat</em></div>
           <div class="svc-desc">El teu millor comercial 24/7 a la web. Respon, assessora amb criteri, busca al teu estoc i tanca la compra dins del xat.</div>
           <ul class="svc-list">
             <li><span class="tick"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Compatible amb WooCommerce, PrestaShop i Shopify</li>
@@ -596,9 +595,8 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
             <span class="svc-icwrap">
               <img src="/images/icons/agente-email.svg" alt="" aria-hidden="true">
             </span>
-            <span class="svc-badge on">Operatiu</span>
+            <div class="svc-title">Agent <em>Email</em></div>
           </div>
-          <div class="svc-title">Agent <em>Email</em></div>
           <div class="svc-desc">La teva safata es respon sola, tu només revises. Llegeix cada email, el classifica, consulta el teu ERP o CRM i prepara la resposta amb dades reals.</div>
           <ul class="svc-list">
             <li><span class="tick"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Classificació i enrutament per departament</li>
@@ -621,9 +619,8 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
         <div class="service-card-soon" style="--ch: #7bc200; --ch-soft: #eef7cc;">
           <div class="scs-top">
             <span class="scs-icwrap"><img src="/images/icons/agente-whatsapp.svg" alt="" aria-hidden="true"></span>
-            <span class="scs-tag">Properament</span>
+            <div class="scs-title">Agent <em>WhatsApp</em></div>
           </div>
-          <div class="scs-title">Agent <em>WhatsApp</em></div>
           <div class="scs-desc">Atén per WhatsApp Business 24h. Respon, gestiona comandes i reserva cites.</div>
           <div class="scs-foot">
             <span class="scs-price">Des de 59€/mes</span>
@@ -634,9 +631,8 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
         <div class="service-card-soon" style="--ch: #c23400; --ch-soft: #fde8e0;">
           <div class="scs-top">
             <span class="scs-icwrap"><img src="/images/icons/agente-voz.svg" alt="" aria-hidden="true"></span>
-            <span class="scs-tag">Properament</span>
+            <div class="scs-title">Agent de <em>veu</em></div>
           </div>
-          <div class="scs-title">Agent de <em>veu</em></div>
           <div class="scs-desc">Rep trucades amb veu natural. Gestiona cites i transfereix quan cal.</div>
           <div class="scs-foot">
             <span class="scs-price">Des de 79€/mes</span>
@@ -647,9 +643,8 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
         <div class="service-card-soon" style="--ch: #4700c2; --ch-soft: #ede9fe;">
           <div class="scs-top">
             <span class="scs-icwrap"><img src="/images/icons/agente-redes-sociales.svg" alt="" aria-hidden="true"></span>
-            <span class="scs-tag">Properament</span>
+            <div class="scs-title">Agent <em>Xarxes Socials</em></div>
           </div>
-          <div class="scs-title">Agent <em>Xarxes Socials</em></div>
           <div class="scs-desc">Missatges de Facebook Messenger i Instagram DM gestionats automàticament.</div>
           <div class="scs-foot">
             <span class="scs-price">Des de 49€/mes</span>
@@ -660,9 +655,8 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
         <div class="service-card-soon" style="--ch: #c28100; --ch-soft: #fdf4dc;">
           <div class="scs-top">
             <span class="scs-icwrap"><img src="/images/icons/agente-resenas.svg" alt="" aria-hidden="true"></span>
-            <span class="scs-tag">Properament</span>
+            <div class="scs-title">Agent de <em>Ressenyes</em></div>
           </div>
-          <div class="scs-title">Agent de <em>Ressenyes</em></div>
           <div class="scs-desc">Detecta i respon a Google i Trustpilot de manera coherent amb la teva marca.</div>
           <div class="scs-foot">
             <span class="scs-price">Des de 29€/mes</span>
