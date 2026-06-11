@@ -439,6 +439,38 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
 .fade-up-2 { animation-delay: 0.25s; }
 .fade-up-3 { animation-delay: 0.4s; }
 .fade-up-4 { animation-delay: 0.55s; }
+  /* ====== Espacio de gestión (panel) ====== */
+  .mgmt-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: center; }
+  .mgmt-points { list-style: none; margin-top: 30px; display: flex; flex-direction: column; gap: 20px; }
+  .mgmt-points li { display: flex; gap: 14px; align-items: flex-start; }
+  .mgmt-pic { width: 40px; height: 40px; border-radius: 11px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(155deg, #1c2420 0%, #101512 100%); color: #00c389; box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 14px rgba(16,21,18,0.18); }
+  .mgmt-pic .ic { width: 19px; height: 19px; }
+  .mgmt-points strong { display: block; font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+  .mgmt-points span { font-size: 14px; color: var(--ink-soft); line-height: 1.55; }
+  .mgmt-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 30px; font-size: 14px; font-weight: 600; color: var(--positive); text-decoration: none; transition: gap .2s; }
+  .mgmt-link:hover { gap: 12px; }
+  .panel-mock { background: var(--bg-card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: 0 34px 80px -34px rgba(16,21,18,0.28); }
+  .pm-bar { display: flex; align-items: center; gap: 7px; padding: 13px 18px; border-bottom: 1px solid var(--line-soft); background: var(--bg-alt); }
+  .pm-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
+  .pm-url { margin-left: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-mute); }
+  .pm-body { padding: 22px; display: flex; flex-direction: column; gap: 22px; }
+  .pm-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-mute); margin-bottom: 12px; }
+  .pm-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pm-chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; padding: 6px 12px; border-radius: 100px; background: var(--positive-soft); color: var(--positive); font-weight: 500; }
+  .pm-chip::before { content: '✓'; font-size: 11px; }
+  .pm-rows { display: flex; flex-direction: column; gap: 8px; }
+  .pm-row { display: flex; align-items: center; justify-content: space-between; padding: 11px 14px; border: 1px solid var(--line-soft); border-radius: 11px; }
+  .pm-ch { display: flex; align-items: center; gap: 11px; font-size: 14px; font-weight: 500; color: var(--ink); }
+  .pm-chic { width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0; background: linear-gradient(155deg,#1c2420,#101512); display: flex; align-items: center; justify-content: center; }
+  .pm-chic img { width: 19px; height: 19px; display: block; }
+  .pm-on { display: inline-flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--positive); }
+  .pm-on::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--positive); }
+  .pm-add { font-size: 13px; color: var(--ink-mute); padding: 11px 14px; border: 1px dashed var(--line); border-radius: 11px; text-align: center; }
+  .pm-metrics { display: flex; gap: 12px; padding-top: 18px; border-top: 1px solid var(--line-soft); }
+  .pm-metric { flex: 1; }
+  .pm-metric strong { display: block; font-family: 'Fraunces', serif; font-size: 23px; font-weight: 500; color: var(--ink); letter-spacing: -0.02em; }
+  .pm-metric span { font-size: 11px; color: var(--ink-mute); }
+  @media (max-width: 860px) { .mgmt-grid { grid-template-columns: 1fr; gap: 44px; } }
 </style>
 
 <!-- Google tag (gtag.js) -->
@@ -702,6 +734,65 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
         <div class="step-time">Dia 2 · Llest</div>
         <div class="step-title">Respon sol. Tu supervises.</div>
         <div class="step-desc">L'agent atén les consultes. Tu ho veus tot des del teu panell: converses, estadístiques i ajustos en temps real.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== ESPAI DE GESTIÓ ====== -->
+<section class="mgmt-section" id="panel">
+  <div class="container">
+    <div class="mgmt-grid">
+      <div class="mgmt-text">
+        <div class="section-label">El teu espai de gestió</div>
+        <h2>Coneixement i canals,<br><em>en un sol panell.</em></h2>
+        <p class="section-intro">Des del teu espai privat gestiones el coneixement del teu negoci i tots els agents. L'ensenyes una vegada i el fan servir tots els canals — sense tocar codi.</p>
+        <ul class="mgmt-points">
+          <li>
+            <span class="mgmt-pic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4a1 1 0 0 1 1-1h8l5 5v11a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg></span>
+            <div><strong>Coneixement centralitzat</strong><span>Catàleg, FAQs, to i polítiques. L'actualitzes una vegada i tots els agents aprenen a l'instant.</span></div>
+          </li>
+          <li>
+            <span class="mgmt-pic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h11M4 12h7M4 17h13"/><circle cx="18" cy="7" r="2"/><circle cx="14" cy="12" r="2"/><circle cx="20" cy="17" r="2"/></svg></span>
+            <div><strong>Activa i gestiona cada canal</strong><span>Webchat, email i els pròxims, des d'un sol compte. Sense integracions tècniques per part teva.</span></div>
+          </li>
+          <li>
+            <span class="mgmt-pic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 3-4 3 2 4-6"/></svg></span>
+            <div><strong>Revisa, aprova i mesura</strong><span>Esborranys, escalats i mètriques en temps real. Amb control humà sempre que vulguis.</span></div>
+          </li>
+        </ul>
+        <a href="https://app.empentia.com/login" target="_blank" rel="noopener noreferrer" class="mgmt-link">Accedir al panell <span>→</span></a>
+      </div>
+
+      <div class="mgmt-visual">
+        <div class="panel-mock">
+          <div class="pm-bar"><span class="pm-dot"></span><span class="pm-dot"></span><span class="pm-dot"></span><span class="pm-url">empentIA · Panell</span></div>
+          <div class="pm-body">
+            <div>
+              <div class="pm-label">Coneixement del negoci</div>
+              <div class="pm-chips">
+                <span class="pm-chip">Catàleg</span>
+                <span class="pm-chip">FAQs</span>
+                <span class="pm-chip">To de marca</span>
+                <span class="pm-chip">Polítiques</span>
+                <span class="pm-chip">Documents</span>
+              </div>
+            </div>
+            <div>
+              <div class="pm-label">Canals</div>
+              <div class="pm-rows">
+                <div class="pm-row"><span class="pm-ch"><span class="pm-chic"><img src="/images/icons/agente-webchat.svg" alt="" aria-hidden="true"></span>Webchat</span><span class="pm-on">Actiu</span></div>
+                <div class="pm-row"><span class="pm-ch"><span class="pm-chic"><img src="/images/icons/agente-email.svg" alt="" aria-hidden="true"></span>Email</span><span class="pm-on">Actiu</span></div>
+                <div class="pm-add">+ Afegir canal</div>
+              </div>
+            </div>
+            <div class="pm-metrics">
+              <div class="pm-metric"><strong>78%</strong><span>resoltes</span></div>
+              <div class="pm-metric"><strong>1.247</strong><span>converses</span></div>
+              <div class="pm-metric"><strong>4,7</strong><span>satisfacció</span></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
