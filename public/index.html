@@ -262,7 +262,7 @@ h2 em { font-style: italic; font-weight: 300; color: var(--positive); }
   background: linear-gradient(90deg, var(--ch), transparent 70%);
 }
 .service-card.live:hover { transform: translateY(-4px); box-shadow: 0 24px 48px -24px rgba(0,0,0,0.12); border-color: color-mix(in srgb, var(--ch) 40%, var(--line)); }
-.svc-head { display: flex; align-items: center; gap: 16px; margin-bottom: 22px; }
+.svc-head { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 22px; }
 .svc-icwrap { width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .service-card.live .svc-icwrap { background: linear-gradient(155deg, #1c2420 0%, #101512 100%); color: #00c389; box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 14px rgba(16,21,18,0.18); }
 .svc-icwrap .ic { width: 24px; height: 24px; }
@@ -270,7 +270,7 @@ h2 em { font-style: italic; font-weight: 300; color: var(--positive); }
 .svc-badge { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; padding: 5px 12px; border-radius: 100px; }
 .svc-badge.on { background: var(--positive-soft); color: var(--positive); }
 .svc-badge.off { background: var(--line); color: var(--ink-mute); }
-.svc-title { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 500; letter-spacing: -0.025em; }
+.svc-title { font-family: 'Fraunces', serif; font-size: 30px; font-weight: 500; letter-spacing: -0.025em; }
 .svc-title em { font-style: italic; font-weight: 300; }
 .svc-desc { font-size: 14.5px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 22px; }
 .svc-list { list-style: none; margin-bottom: 28px; flex: 1; }
@@ -305,7 +305,7 @@ h2 em { font-style: italic; font-weight: 300; color: var(--positive); }
 .scs-icwrap .ic { width: 18px; height: 18px; }
 .scs-icwrap img { width: 34px; height: 34px; display: block; }
 .scs-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; padding: 3px 9px; border-radius: 100px; background: var(--line); color: var(--ink-mute); }
-.scs-title { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 500; letter-spacing: -0.02em; }
+.scs-title { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 500; letter-spacing: -0.02em; }
 .scs-title em { font-style: italic; font-weight: 300; }
 .scs-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.5; flex: 1; }
 .scs-foot { display: flex; align-items: center; justify-content: space-between; }
@@ -335,7 +335,7 @@ h2 em { font-style: italic; font-weight: 300; color: var(--positive); }
 .scc-perks { display: flex; gap: 24px; margin-top: 20px; flex-wrap: wrap; }
 .scc-perk { font-size: 13px; color: var(--ink-mute); display: flex; align-items: center; gap: 7px; }
 .scc-perk::before { content: ''; width: 5px; height: 5px; background: var(--green); border-radius: 50%; flex-shrink: 0; }
-.scc-right { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-end; gap: 14px; }
+.scc-right { position: relative; z-index: 1; align-self: end; display: flex; flex-direction: column; align-items: flex-end; gap: 14px; }
 .scc-price { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 400; color: var(--ink-soft); white-space: nowrap; }
 .scc-cta { display: inline-flex; align-items: center; gap: 8px; padding: 14px 26px; background: var(--green); color: #06241a; border-radius: 100px; font-size: 14px; font-weight: 600; text-decoration: none; transition: all 0.2s; white-space: nowrap; }
 .scc-cta:hover { background: var(--green-deep); color: #fff; }
@@ -646,7 +646,7 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
 .card-mark { position: absolute !important; pointer-events: none; user-select: none; opacity: 0.16; z-index: 0 !important; height: auto; }
 .service-card .card-mark { width: 250px; right: -55px; top: -55px; }
 .service-card-soon .card-mark { width: 175px; right: -42px; top: -42px; }
-.service-card-custom .card-mark { width: 300px; right: -50px; top: -60px; }
+.service-card-custom .card-mark { width: 190px; right: -28px; top: -46px; }
 .service-card > *:not(.card-mark),
 .service-card-soon > *:not(.card-mark),
 .service-card-custom > *:not(.card-mark) { position: relative; z-index: 1; }
@@ -742,8 +742,8 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
       <div class="service-card live" style="--ch: #00c389; --ch-soft: #d4f5e9;">
         <img class="card-mark" src="/images/icons-pilares/pilar-atencion-mark.svg" alt="Atención al cliente" aria-hidden="true">
         <div class="svc-head">
+          <span class="svc-badge on">Listo para activar</span>
           <div class="svc-title">Atención al <em>cliente</em></div>
-          <span class="svc-badge on" style="margin-left:auto;">Listo para activar</span>
         </div>
         <div class="svc-desc">Agentes que responden a tus clientes en todos los canales. 24 horas, con el conocimiento de tu negocio y conectados a tu ERP o CRM.</div>
         <div class="vchips" style="flex:1;align-content:flex-start;">
@@ -762,8 +762,8 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
       <div class="service-card live" style="--ch: #0061c2; --ch-soft: #d6e6f8;">
         <img class="card-mark" src="/images/icons-pilares/pilar-documental-mark.svg" alt="Gestión documental" aria-hidden="true">
         <div class="svc-head">
+          <span class="svc-badge on">A medida</span>
           <div class="svc-title">Gestión <em>documental</em></div>
-          <span class="svc-badge on" style="margin-left:auto;">A medida</span>
         </div>
         <div class="svc-desc">Tus documentos se leen, se clasifican y se archivan solos — conectados a tu ERP y con búsqueda semántica en todo tu archivo.</div>
         <div class="vchips" style="flex:1;align-content:flex-start;">
