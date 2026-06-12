@@ -99,13 +99,17 @@ empentia.com (WEB GLOBAL)
 
 | Página | Estado |
 |--------|--------|
-| `/agentes-ia-atencion-cliente/webchat/` | ✅ Live, completa |
-| `/agentes-ia-atencion-cliente/` (umbrella) | ✅ Live (con próximamente para 4 servicios) |
-| `/agentes-ia-atencion-cliente/whatsapp/` | 🔒 Existe pero noindex |
-| `/agentes-ia-atencion-cliente/email/` | 🔒 Existe pero noindex |
-| `/agentes-ia-atencion-cliente/llamadas/` | 🔒 Existe pero noindex |
-| `/agentes-ia-atencion-cliente/resenas/` | 🔒 Existe pero noindex |
-| `/legal/`, `/privacy/`, `/cookies/` | ✅ Existen |
+| `/agentes-ia-atencion-cliente/` (umbrella) | ✅ Live |
+| `/agentes-ia-atencion-cliente/webchat/` | ✅ Live |
+| `/agentes-ia-atencion-cliente/whatsapp/` | 🔒 noindex |
+| `/agentes-ia-atencion-cliente/email/` | 🔒 noindex |
+| `/agentes-ia-atencion-cliente/llamadas/` | 🔒 noindex |
+| `/agentes-ia-atencion-cliente/resenas/` | 🔒 noindex |
+| `/ca/` | ✅ Live |
+| `/ca/agentes-ia-atencion-cliente/` | ✅ Live |
+| `/ca/agentes-ia-atencion-cliente/webchat/` | ✅ Live |
+| `/ca/agentes-ia-atencion-cliente/email/` | ✅ Live |
+| `/legal/`, `/privacy/`, `/cookies/` | ✅ Live |
 | Home global empresarial | ❌ Pendiente |
 | `/quienes-somos` | ❌ Pendiente |
 | `/casos-exito` | ❌ Pendiente |
