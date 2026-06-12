@@ -598,16 +598,17 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
   .hub-center { width: 96px; height: 96px; font-size: 13px; }
   .hub-ring { width: 160px; height: 160px; }
 }
-/* ===== Iconos de pilar (crema sobre caja oscura) — más grandes ===== */
-.svc-icwrap { width: 72px !important; height: 72px !important; }
-.svc-icwrap img { width: 58px !important; height: 58px !important; }
-.scs-icwrap { width: 58px !important; height: 58px !important; }
-.scs-icwrap img { width: 46px !important; height: 46px !important; }
-.scc-icwrap { width: 64px; height: 64px; border-radius: 15px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(155deg, #1c2420 0%, #101512 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 14px rgba(16,21,18,0.18); }
-.scc-icwrap img { width: 50px; height: 50px; display: block; }
-.hub-node { display: inline-flex; align-items: center; gap: 8px; }
-.hub-node img { width: 26px; height: 26px; display: block; }
-@media (max-width: 560px) { .hub-node img { width: 18px; height: 18px; } }
+/* ===== Iconos de pilar: fondo difuminado dentro de la caja oscura ===== */
+.svc-icwrap { width: 72px !important; height: 72px !important; position: relative; overflow: hidden; }
+.scs-icwrap { width: 58px !important; height: 58px !important; position: relative; overflow: hidden; }
+.scc-icwrap { width: 64px; height: 64px; border-radius: 15px; flex-shrink: 0; position: relative; overflow: hidden; background: linear-gradient(155deg, #1c2420 0%, #101512 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 14px rgba(16,21,18,0.18); }
+.svc-icwrap img, .scs-icwrap img, .scc-icwrap img {
+  position: absolute !important; left: 50% !important; top: 50% !important;
+  transform: translate(-50%, -50%);
+  width: 140% !important; height: 140% !important;
+  opacity: 0.6; filter: blur(0.8px);
+  pointer-events: none;
+}
 </style>
 
 <!-- Google tag (gtag.js) -->
@@ -706,11 +707,7 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
           <span class="vchip">Reseñas</span>
         </div>
         <div class="svc-foot">
-          <div class="svc-price">
-            <span class="svc-price-from">Desde</span>
-            <span class="svc-price-val">49€</span>
-            <span class="svc-price-period">/mes</span>
-          </div>
+          <span style="font-size:13px;color:var(--ink-mute);">Webchat y Email activables hoy</span>
           <a href="/agentes-ia-atencion-cliente/" class="svc-cta">Ver servicios <span class="arr">→</span></a>
         </div>
       </div>
@@ -912,12 +909,12 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
       </svg>
       <span class="hub-ring"></span>
       <div class="hub-center">empentIA</div>
-      <a class="hub-node live" href="/agentes-ia-atencion-cliente/" style="left: 19%; top: 50%;"><img src="/images/icons-pilares/pilar-atencion-crema.svg" alt="" aria-hidden="true">Atención al cliente</a>
-      <a class="hub-node" href="#soluciones" style="left: 30%; top: 20%;"><img src="/images/icons-pilares/pilar-documental-crema.svg" alt="" aria-hidden="true">Documentos</a>
-      <a class="hub-node" href="#soluciones" style="left: 70.5%; top: 22%;"><img src="/images/icons-pilares/pilar-procesos-crema.svg" alt="" aria-hidden="true">Procesos</a>
-      <a class="hub-node" href="#soluciones" style="left: 82%; top: 53%;"><img src="/images/icons-pilares/pilar-marketing-crema.svg" alt="" aria-hidden="true">Campañas</a>
-      <a class="hub-node" href="#soluciones" style="left: 68.4%; top: 82.3%;"><img src="/images/icons-pilares/pilar-datos-crema.svg" alt="" aria-hidden="true">Datos</a>
-      <a class="hub-node" href="#cta" style="left: 30%; top: 83.3%;"><img src="/images/icons-pilares/pilar-ia-crema.svg" alt="" aria-hidden="true">IA a medida</a>
+      <a class="hub-node live" href="/agentes-ia-atencion-cliente/" style="left: 19%; top: 50%;">Atención al cliente</a>
+      <a class="hub-node" href="#soluciones" style="left: 30%; top: 20%;">Documentos</a>
+      <a class="hub-node" href="#soluciones" style="left: 70.5%; top: 22%;">Procesos</a>
+      <a class="hub-node" href="#soluciones" style="left: 82%; top: 53%;">Campañas</a>
+      <a class="hub-node" href="#soluciones" style="left: 68.4%; top: 82.3%;">Datos</a>
+      <a class="hub-node" href="#cta" style="left: 30%; top: 83.3%;">IA a medida</a>
     </div>
   </div>
 </section>
@@ -1008,7 +1005,7 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
         </div>
         <div class="faq-item">
           <div class="faq-q">¿Cuánto cuesta?</div>
-          <div class="faq-a">Cada servicio tiene su propia membresía desde 49€/mes, sin permanencia. Activa solo lo que necesitas y cancela cuando quieras desde tu panel de cliente.</div>
+          <div class="faq-a">Cada servicio tiene su propia membresía, sin permanencia, y los proyectos a medida van siempre con propuesta y precio claro antes de empezar. Activa solo lo que necesitas y cancela cuando quieras desde tu panel de cliente.</div>
         </div>
         <div class="faq-item">
           <div class="faq-q">¿Mis datos están seguros?</div>
