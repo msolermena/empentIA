@@ -604,13 +604,13 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
 .hub-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 140px; height: 140px; border-radius: 50%; border: 1.5px solid var(--green); display: flex; align-items: center; justify-content: center; background: rgba(0,192,136,0.06); box-shadow: 0 0 60px rgba(0,192,136,0.18); font-weight: 600; color: var(--green); font-size: 17px; letter-spacing: -0.01em; }
 .hub-ring { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 230px; height: 230px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.07); }
 .hub-node { position: absolute; transform: translate(-50%,-50%); display: inline-flex; align-items: center; gap: 9px; padding: 6px 16px 6px 7px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.78); font-size: 13.5px; font-weight: 500; text-decoration: none; background: rgba(16,21,18,0.72); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); white-space: nowrap; transition: all .2s; }
-.hub-node img { width: 30px; height: 30px; border-radius: 8px; display: block; flex-shrink: 0; }
+.hub-node img { width: 40px; height: 40px; display: block; flex-shrink: 0; }
 .hub-node:hover { border-color: rgba(255,255,255,0.5); color: #fff; transform: translate(-50%,-50%) scale(1.05); }
 .hub-node.live { border-color: var(--green); color: var(--green); font-weight: 600; }
 .hub-node.live:hover { color: var(--green); border-color: var(--green); }
 @media (max-width: 560px) {
   .hub-node { font-size: 10.5px; padding: 4px 11px 4px 5px; gap: 6px; }
-  .hub-node img { width: 22px; height: 22px; }
+  .hub-node img { width: 30px; height: 30px; }
   .hub-center { width: 96px; height: 96px; font-size: 13px; }
   .hub-ring { width: 160px; height: 160px; }
 }
@@ -920,21 +920,21 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
     </div>
     <div class="hub-canvas">
       <svg viewBox="0 0 680 480" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-        <line x1="340" y1="240" x2="238" y2="240" stroke="#00c088" stroke-width="1.5"/>
-        <line x1="340" y1="240" x2="258" y2="135" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-dasharray="4 6"/>
-        <line x1="340" y1="240" x2="432" y2="142" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-dasharray="4 6"/>
-        <line x1="340" y1="240" x2="500" y2="251" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-dasharray="4 6"/>
-        <line x1="340" y1="240" x2="428" y2="352" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-dasharray="4 6"/>
-        <line x1="340" y1="240" x2="252" y2="356" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-dasharray="4 6"/>
+        <line x1="340" y1="240" x2="212" y2="240" stroke="#00c088" stroke-width="1.5"/>
+        <line x1="340" y1="240" x2="235" y2="129" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-dasharray="4 6"/>
+        <line x1="340" y1="240" x2="448" y2="138" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-dasharray="4 6"/>
+        <line x1="340" y1="240" x2="486" y2="249" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-dasharray="4 6"/>
+        <line x1="340" y1="240" x2="438" y2="362" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-dasharray="4 6"/>
+        <line x1="340" y1="240" x2="232" y2="367" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-dasharray="4 6"/>
       </svg>
       <span class="hub-ring"></span>
       <div class="hub-center">empentIA</div>
-      <a class="hub-node live" href="/agentes-ia-atencion-cliente/" style="left: 16%; top: 50%;"><img src="/images/icons-pilares/pilar-atencion-verde.svg" alt="" aria-hidden="true">Atención al cliente</a>
-      <a class="hub-node" href="#soluciones" style="left: 30%; top: 20%;"><img src="/images/icons-pilares/pilar-documental-verde.svg" alt="" aria-hidden="true">Documentos</a>
-      <a class="hub-node" href="#soluciones" style="left: 71%; top: 22%;"><img src="/images/icons-pilares/pilar-procesos-verde.svg" alt="" aria-hidden="true">Procesos</a>
-      <a class="hub-node" href="#soluciones" style="left: 83%; top: 53%;"><img src="/images/icons-pilares/pilar-marketing-verde.svg" alt="" aria-hidden="true">Campañas</a>
-      <a class="hub-node" href="#soluciones" style="left: 68.4%; top: 82.3%;"><img src="/images/icons-pilares/pilar-datos-verde.svg" alt="" aria-hidden="true">Datos</a>
-      <a class="hub-node" href="#cta" style="left: 30%; top: 83.3%;"><img src="/images/icons-pilares/pilar-ia-verde.svg" alt="" aria-hidden="true">IA a medida</a>
+      <a class="hub-node live" href="/agentes-ia-atencion-cliente/" style="left: 16%; top: 50%;"><img src="/images/icons-pilares/pilar-atencion-mark.svg" alt="" aria-hidden="true">Atención al cliente</a>
+      <a class="hub-node" href="#soluciones" style="left: 30%; top: 20%;"><img src="/images/icons-pilares/pilar-documental-mark.svg" alt="" aria-hidden="true">Documentos</a>
+      <a class="hub-node" href="#soluciones" style="left: 71%; top: 22%;"><img src="/images/icons-pilares/pilar-procesos-mark.svg" alt="" aria-hidden="true">Procesos</a>
+      <a class="hub-node" href="#soluciones" style="left: 83%; top: 53%;"><img src="/images/icons-pilares/pilar-marketing-mark.svg" alt="" aria-hidden="true">Campañas</a>
+      <a class="hub-node" href="#soluciones" style="left: 68.4%; top: 82.3%;"><img src="/images/icons-pilares/pilar-datos-mark.svg" alt="" aria-hidden="true">Datos</a>
+      <a class="hub-node" href="#cta" style="left: 30%; top: 83.3%;"><img src="/images/icons-pilares/pilar-ia-mark.svg" alt="" aria-hidden="true">IA a medida</a>
     </div>
   </div>
 </section>
