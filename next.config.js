@@ -9,9 +9,14 @@ const nextConfig = {
     domains: ['localhost'],
   },
   async rewrites() {
-    return [
-      { source: '/landing-webchat/', destination: '/landing-webchat/index.html' },
-    ];
+    return {
+      // La home (/) y la versión catalana (/ca/) se sirven como HTML estático
+      // desde public/. El root necesita un rewrite explícito porque Next no mapea
+      // public/index.html a '/' automáticamente. /ca/ se sirve solo (public/ca/index.html).
+      beforeFiles: [
+        { source: '/', destination: '/index.html' },
+      ],
+    };
   },
 };
 

@@ -1,31 +1,37 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="ca">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agentes de IA para empresas | empentIA</title>
-<meta name="description" content="Diseñamos y operamos agentes de inteligencia artificial para empresas de cualquier tamaño: atención al cliente, gestión documental y más. Tú pones el criterio; ellos, las horas.">
+<title>Agents d'IA per a empreses | empentIA</title>
+<meta name="description" content="Dissenyem i operem agents d'intel·ligència artificial per a empreses de qualsevol mida: atenció al client, gestió documental i més. Tu poses el criteri; ells, les hores.">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-brand-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/favicons/favicon-brand-180.png">
 <link rel="icon" type="image/png" href="/favicons/favicon-brand.png">
 <link rel="shortcut icon" href="/favicons/favicon-brand-32.png">
 <meta name="author" content="empentIA">
-<!-- PREVIEW: quitar noindex al pasar a producción -->
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="googlebot" content="index, follow">
+
+<link rel="canonical" href="https://empentia.com/ca/">
+<link rel="alternate" hreflang="ca" href="https://empentia.com/ca/">
+<link rel="alternate" hreflang="es" href="https://empentia.com/">
+<link rel="alternate" hreflang="x-default" href="https://empentia.com/">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="empentIA">
-<meta property="og:locale" content="es_ES">
-<meta property="og:title" content="Agentes de IA para empresas | empentIA">
-<meta property="og:description" content="Diseñamos y operamos agentes de inteligencia artificial para empresas de cualquier tamaño: atención al cliente, gestión documental y más.">
-<meta property="og:image" content="https://empentia.com/images/social/og-atencion-cliente-es.jpg">
+<meta property="og:locale" content="ca_ES">
+<meta property="og:url" content="https://empentia.com/ca/">
+<meta property="og:title" content="Agents d'IA per a empreses | empentIA">
+<meta property="og:description" content="Dissenyem i operem agents d'intel·ligència artificial per a empreses de qualsevol mida: atenció al client, gestió documental i més.">
+<meta property="og:image" content="https://empentia.com/images/social/og-atencion-cliente-ca.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Agentes de IA para empresas | empentIA">
-<meta name="twitter:description" content="Diseñamos y operamos agentes de inteligencia artificial para empresas de cualquier tamaño.">
-<meta name="twitter:image" content="https://empentia.com/images/social/og-atencion-cliente-es.jpg">
+<meta name="twitter:title" content="Agents d'IA per a empreses | empentIA">
+<meta name="twitter:description" content="Dissenyem i operem agents d'intel·ligència artificial per a empreses de qualsevol mida.">
+<meta name="twitter:image" content="https://empentia.com/images/social/og-atencion-cliente-ca.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -92,6 +98,10 @@ nav {
 .nav-client { font-size: 14px !important; color: var(--ink-soft) !important; }
 .nav-cta { background: var(--ink); color: var(--bg) !important; padding: 10px 20px; border-radius: 100px; font-size: 14px !important; font-weight: 500; transition: background 0.2s; }
 .nav-cta:hover { background: var(--accent-hover) !important; }
+.lang-switch { display: flex; align-items: center; gap: 2px; border: 1px solid var(--line); border-radius: 100px; padding: 3px; }
+.lang-switch a { font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 100px; text-decoration: none; color: var(--ink-mute); transition: all 0.2s; }
+.lang-switch a.active { background: var(--ink); color: var(--bg); }
+.lang-switch a:not(.active):hover { color: var(--ink); }
 .lang-switch { display: flex; align-items: center; gap: 2px; border: 1px solid var(--line); border-radius: 100px; padding: 3px; }
 .lang-switch a { font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 100px; text-decoration: none; color: var(--ink-mute); transition: all 0.2s; }
 .lang-switch a.active { background: var(--ink); color: var(--bg); }
@@ -642,12 +652,16 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
       <img src="/images/logo/logo-horizontal-green.png" alt="empentIA">
     </a>
     <div class="nav-links">
-      <a href="#soluciones">Soluciones</a>
-      <a href="#panel">Tu CRM</a>
-      <a href="#como-trabajamos">Cómo trabajamos</a>
+      <a href="#soluciones">Solucions</a>
+      <a href="#panel">El teu CRM</a>
+      <a href="#como-trabajamos">Com treballem</a>
       <a href="#faq">FAQ</a>
-      <a href="https://app.empentia.com/login" class="nav-client">Acceso clientes →</a>
-      <a href="#" class="nav-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'home_global',form_id:'home_nav'}}}); return false;">Agenda una llamada</a>
+      <div class="lang-switch">
+        <a href="/">ES</a>
+        <a href="/ca/" class="active">CA</a>
+      </div>
+      <a href="https://app.empentia.com/login" class="nav-client">Accés clients →</a>
+      <a href="#" class="nav-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'home_global',form_id:'home_nav'}}}); return false;">Demana una trucada</a>
     </div>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú">
       <span></span><span></span><span></span>
@@ -657,11 +671,11 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
 
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-inner">
-    <a href="#soluciones" onclick="closeMenu()">Soluciones</a>
-    <a href="#panel" onclick="closeMenu()">Tu CRM</a>
-    <a href="#como-trabajamos" onclick="closeMenu()">Cómo trabajamos</a>
+    <a href="#soluciones" onclick="closeMenu()">Solucions</a>
+    <a href="#panel" onclick="closeMenu()">El teu CRM</a>
+    <a href="#como-trabajamos" onclick="closeMenu()">Com treballem</a>
     <a href="#faq" onclick="closeMenu()">FAQ</a>
-    <a href="https://app.empentia.com/login" class="mobile-cta-btn" onclick="closeMenu()">Acceso clientes →</a>
+    <a href="https://app.empentia.com/login" class="mobile-cta-btn" onclick="closeMenu()">Accés clients →</a>
   </div>
 </div>
 
@@ -672,23 +686,23 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
     <div class="hero-center">
       <div class="hero-eyebrow fade-up">
         <span class="pulse-dot"></span>
-        Agentes IA en producción · para todo tipo de empresas
+        Agents IA en producció · per a tot tipus d'empreses
       </div>
       <h1 class="fade-up fade-up-1">
-        La IA que <em>empuja</em><br>tu negocio.
+        La IA que <em>empeny</em><br>el teu negoci.
       </h1>
       <p class="hero-sub fade-up fade-up-2">
-        Agentes de inteligencia artificial para cada área de tu negocio: atención
-        al cliente, documentos, procesos, marketing, datos y proyectos a medida.
-        Y todo se gestiona desde un solo sitio: tu propio CRM.
+        Agents d'intel·ligència artificial per a cada àrea del teu negoci: atenció
+        al client, documents, processos, màrqueting, dades i projectes a mida.
+        I tot es gestiona des d'un sol lloc: el teu propi CRM.
       </p>
       <div class="hero-ctas fade-up fade-up-3">
-        <a href="#" class="btn btn-primary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'home_global',form_id:'home_hero'}}}); return false;">Agenda una llamada gratuita <span class="btn-arrow">→</span></a>
-        <a href="#soluciones" class="btn btn-secondary">Ver soluciones</a>
+        <a href="#" class="btn btn-primary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'home_global',form_id:'home_hero'}}}); return false;">Demana una trucada gratuïta <span class="btn-arrow">→</span></a>
+        <a href="#soluciones" class="btn btn-secondary">Veure solucions</a>
       </div>
       <div class="hero-note fade-up fade-up-3">
         <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-        Tu primer agente operativo en <strong>72h</strong>
+        El teu primer agent operatiu en <strong>72h</strong>
       </div>
     </div>
   </div>
@@ -697,49 +711,49 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
 <!-- ====== SOLUCIONES ====== -->
 <section class="services-section" id="soluciones">
   <div class="container">
-    <div class="section-label">Soluciones</div>
-    <h2>Un agente experto para <em>cada área.</em></h2>
-    <p class="section-intro">Cada solución es un producto independiente, con sus propios planes. Empieza por donde más te duela y amplía cuando quieras.</p>
+    <div class="section-label">Solucions</div>
+    <h2>Un agent expert per a <em>cada àrea.</em></h2>
+    <p class="section-intro">Cada solució és un producte independent, amb els seus propis plans. Comença per on més et faci falta i amplia quan vulguis.</p>
 
     <div class="services-live-grid">
-      <!-- Atención al cliente — LIVE -->
+      <!-- Atenció al client — LIVE -->
       <div class="service-card live" style="--ch: #00c389; --ch-soft: #d4f5e9;">
         <img class="card-mark" src="/images/icons-pilares/pilar-atencion-mark.svg" alt="" aria-hidden="true">
         <div class="svc-head">
-          <div class="svc-title">Atención al <em>cliente</em></div>
-          <span class="svc-badge on" style="margin-left:auto;">Listo para activar</span>
+          <div class="svc-title">Atenció al <em>client</em></div>
+          <span class="svc-badge on" style="margin-left:auto;">Llest per activar</span>
         </div>
-        <div class="svc-desc">Agentes que responden a tus clientes en todos los canales. 24 horas, con el conocimiento de tu negocio y conectados a tu ERP o CRM.</div>
+        <div class="svc-desc">Agents que responen els teus clients en tots els canals. 24 hores, amb el coneixement del teu negoci i connectats al teu ERP o CRM.</div>
         <div class="vchips" style="flex:1;align-content:flex-start;">
           <span class="vchip live">Webchat</span>
           <span class="vchip live">Email</span>
           <span class="vchip">WhatsApp</span>
-          <span class="vchip">Llamadas</span>
-          <span class="vchip">Reseñas</span>
+          <span class="vchip">Trucades</span>
+          <span class="vchip">Ressenyes</span>
         </div>
         <div class="svc-foot" style="justify-content:flex-end;">
-          <a href="/agentes-ia-atencion-cliente/" class="svc-cta">Ver servicios <span class="arr">→</span></a>
+          <a href="/ca/agentes-ia-atencion-cliente/" class="svc-cta">Veure serveis <span class="arr">→</span></a>
         </div>
       </div>
 
-      <!-- Gestión documental — SOON -->
+      <!-- Gestió documental — A MIDA -->
       <div class="service-card live" style="--ch: #0061c2; --ch-soft: #d6e6f8;">
         <img class="card-mark" src="/images/icons-pilares/pilar-documental-mark.svg" alt="" aria-hidden="true">
         <div class="svc-head">
-          <div class="svc-title">Gestión <em>documental</em></div>
-          <span class="svc-badge on" style="margin-left:auto;">A medida</span>
+          <div class="svc-title">Gestió <em>documental</em></div>
+          <span class="svc-badge on" style="margin-left:auto;">A mida</span>
         </div>
-        <div class="svc-desc">Tus documentos se leen, se clasifican y se archivan solos — conectados a tu ERP y con búsqueda semántica en todo tu archivo.</div>
+        <div class="svc-desc">Els teus documents es llegeixen, es classifiquen i s'arxiven sols — connectats al teu ERP i amb cerca semàntica en tot el teu arxiu.</div>
         <div class="vchips" style="flex:1;align-content:flex-start;">
-          <span class="vchip">Facturas</span>
-          <span class="vchip">Contratos</span>
-          <span class="vchip">Albaranes</span>
-          <span class="vchip">Firma digital</span>
-          <span class="vchip">Archivo inteligente</span>
+          <span class="vchip">Factures</span>
+          <span class="vchip">Contractes</span>
+          <span class="vchip">Albarans</span>
+          <span class="vchip">Signatura digital</span>
+          <span class="vchip">Arxiu intel·ligent</span>
         </div>
         <div class="svc-foot">
-          <span style="font-size:13px;color:var(--ink-mute);">Proyecto personalizado</span>
-          <a href="#" class="svc-cta ghost" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'home_global',form_id:'home_documental'}}}); return false;">Cuéntanos tu caso <span class="arr">→</span></a>
+          <span style="font-size:13px;color:var(--ink-mute);">Projecte personalitzat</span>
+          <a href="#" class="svc-cta ghost" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'home_global',form_id:'home_documental'}}}); return false;">Explica'ns el teu cas <span class="arr">→</span></a>
         </div>
       </div>
     </div>
@@ -749,61 +763,61 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
       <div class="service-card-soon" style="--ch: #7bc200;">
         <img class="card-mark" src="/images/icons-pilares/pilar-procesos-mark.svg" alt="" aria-hidden="true">
         <div class="scs-top">
-          <span class="scs-tag" style="background:var(--positive-soft);color:var(--positive);">A medida</span>
+          <span class="scs-tag" style="background:var(--positive-soft);color:var(--positive);">A mida</span>
         </div>
-        <div class="scs-title">Automatización de <em>procesos</em></div>
-        <div class="scs-desc">Los flujos repetitivos de tu negocio, ejecutados solos de principio a fin.</div>
+        <div class="scs-title">Automatització de <em>processos</em></div>
+        <div class="scs-desc">Els fluxos repetitius del teu negoci, executats sols de principi a fi.</div>
         <div class="vchips">
           <span class="vchip">Workflows</span>
-          <span class="vchip">Integraciones ERP/CRM</span>
+          <span class="vchip">Integracions ERP/CRM</span>
           <span class="vchip">RPA + IA</span>
         </div>
       </div>
       <div class="service-card-soon" style="--ch: #c28100;">
         <img class="card-mark" src="/images/icons-pilares/pilar-marketing-mark.svg" alt="" aria-hidden="true">
         <div class="scs-top">
-          <span class="scs-tag" style="background:var(--positive-soft);color:var(--positive);">A medida</span>
+          <span class="scs-tag" style="background:var(--positive-soft);color:var(--positive);">A mida</span>
         </div>
-        <div class="scs-title">Marketing <em>IA</em></div>
-        <div class="scs-desc">Campañas inteligentes que se crean, se publican y se optimizan solas — contenido, SEO, email y anuncios.</div>
+        <div class="scs-title">Màrqueting <em>IA</em></div>
+        <div class="scs-desc">Campanyes intel·ligents que es creen, es publiquen i s'optimitzen soles — contingut, SEO, email i anuncis.</div>
         <div class="vchips">
-          <span class="vchip live">Campañas inteligentes</span>
-          <span class="vchip">Contenido</span>
+          <span class="vchip live">Campanyes intel·ligents</span>
+          <span class="vchip">Contingut</span>
           <span class="vchip">SEO</span>
           <span class="vchip">Email</span>
-          <span class="vchip">Anuncios</span>
+          <span class="vchip">Anuncis</span>
         </div>
       </div>
       <div class="service-card-soon" style="--ch: #4700c2;">
         <img class="card-mark" src="/images/icons-pilares/pilar-datos-mark.svg" alt="" aria-hidden="true">
         <div class="scs-top">
-          <span class="scs-tag" style="background:var(--positive-soft);color:var(--positive);">A medida</span>
+          <span class="scs-tag" style="background:var(--positive-soft);color:var(--positive);">A mida</span>
         </div>
-        <div class="scs-title">Datos y <em>analítica</em></div>
-        <div class="scs-desc">Pregunta a tus datos en lenguaje natural y anticípate con predicciones.</div>
+        <div class="scs-title">Dades i <em>analítica</em></div>
+        <div class="scs-desc">Pregunta a les teves dades en llenguatge natural i anticipa't amb prediccions.</div>
         <div class="vchips">
           <span class="vchip">Dashboards</span>
-          <span class="vchip">Predictivo</span>
-          <span class="vchip">Q&amp;A de datos</span>
+          <span class="vchip">Predictiu</span>
+          <span class="vchip">Q&amp;A de dades</span>
         </div>
       </div>
     </div>
 
-    <!-- V6 · IA a medida -->
+    <!-- V6 · IA a mida -->
     <div class="service-card-custom">
       <img class="card-mark" src="/images/icons-pilares/pilar-ia-mark.svg" alt="" aria-hidden="true">
       <div class="scc-left">
-        <div class="scc-label">IA a medida</div>
-        <div class="scc-title">¿Algo más específico? <em>Lo construimos.</em></div>
-        <div class="scc-desc">Consultoría, agentes a medida y modelos LLM entrenados con el conocimiento de tu empresa. Cuéntanos el reto y diseñamos la solución.</div>
+        <div class="scc-label">IA a mida</div>
+        <div class="scc-title">Alguna cosa més específica? <em>Ho construïm.</em></div>
+        <div class="scc-desc">Consultoria, agents a mida i models LLM entrenats amb el coneixement de la teva empresa. Explica'ns el repte i dissenyem la solució.</div>
         <div class="scc-perks">
-          <span class="scc-perk">Consultoría</span>
-          <span class="scc-perk">Agentes a medida</span>
-          <span class="scc-perk">LLM de empresa</span>
+          <span class="scc-perk">Consultoria</span>
+          <span class="scc-perk">Agents a mida</span>
+          <span class="scc-perk">LLM d'empresa</span>
         </div>
       </div>
       <div class="scc-right">
-        <a href="#" class="scc-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'home_global',form_id:'home_custom'}}}); return false;">Hablar con el equipo →</a>
+        <a href="#" class="scc-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'home_global',form_id:'home_custom'}}}); return false;">Parlar amb l'equip →</a>
       </div>
     </div>
   </div>
@@ -813,9 +827,9 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
 <section class="mgmt-section" id="panel">
   <div class="container">
     <div class="mgmt-head">
-      <div class="section-label">Tu gran ventaja</div>
-      <h2>Tu propio CRM, <em>todo en un solo sitio.</em></h2>
-      <p class="section-intro">Cada solución que activas se conecta al mismo panel: tu propio CRM con conversaciones, contactos, documentos, procesos y métricas. Una sola herramienta para gestionar todo tu negocio — sin cambiar entre aplicaciones.</p>
+      <div class="section-label">El teu gran avantatge</div>
+      <h2>El teu propi CRM, <em>tot en un sol lloc.</em></h2>
+      <p class="section-intro">Cada solució que actives es connecta al mateix panell: el teu propi CRM amb converses, contactes, documents, processos i mètriques. Una sola eina per gestionar tot el teu negoci — sense canviar entre aplicacions.</p>
     </div>
 
     <div class="dash">
@@ -823,70 +837,70 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
       <div class="dash-body">
         <aside class="dash-side">
           <div class="ds-brand"><img src="/images/logo/logo-horizontal-green.png" alt="empentIA"></div>
-          <div class="ds-item active"><span class="dt"></span>Inicio</div>
-          <div class="ds-sec">Módulos</div>
-          <div class="ds-item"><span class="dt" style="background:var(--positive);opacity:1"></span>Atención al cliente</div>
-          <div class="ds-item"><span class="dt" style="background:var(--positive);opacity:1"></span>Documentos</div>
-          <div class="ds-item"><span class="dt" style="background:var(--positive);opacity:1"></span>Procesos</div>
-          <div class="ds-item"><span class="dt" style="background:var(--positive);opacity:1"></span>Campañas</div>
-          <div class="ds-item"><span class="dt" style="background:var(--positive);opacity:1"></span>Datos</div>
+          <div class="ds-item active"><span class="dt"></span>Inici</div>
+          <div class="ds-sec">Mòduls</div>
+          <div class="ds-item"><span class="dt" style="background:var(--positive);opacity:1"></span>Atenció al client</div>
+          <div class="ds-item"><span class="dt" style="background:var(--positive);opacity:1"></span>Documents</div>
+          <div class="ds-item"><span class="dt" style="background:var(--positive);opacity:1"></span>Processos</div>
+          <div class="ds-item"><span class="dt" style="background:var(--positive);opacity:1"></span>Campanyes</div>
+          <div class="ds-item"><span class="dt" style="background:var(--positive);opacity:1"></span>Dades</div>
           <div class="ds-sec">CRM</div>
-          <div class="ds-item"><span class="dt"></span>Contactos</div>
-          <div class="ds-item"><span class="dt"></span>Conversaciones</div>
+          <div class="ds-item"><span class="dt"></span>Contactes</div>
+          <div class="ds-item"><span class="dt"></span>Converses</div>
           <div class="ds-item"><span class="dt"></span>Casos</div>
-          <div class="ds-sec">Inteligencia</div>
-          <div class="ds-item"><span class="dt"></span>Asistente IA</div>
-          <div class="ds-item"><span class="dt"></span>Conocimiento</div>
+          <div class="ds-sec">Intel·ligència</div>
+          <div class="ds-item"><span class="dt"></span>Assistent IA</div>
+          <div class="ds-item"><span class="dt"></span>Coneixement</div>
         </aside>
         <div class="dash-main">
           <div class="dm-cards">
             <div class="dm-card">
-              <div class="dm-lbl"><svg viewBox="0 0 24 24" fill="none" stroke="#6b7785" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>Contactos</div>
+              <div class="dm-lbl"><svg viewBox="0 0 24 24" fill="none" stroke="#6b7785" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>Contactes</div>
               <div class="dm-val">2.418</div>
-              <div class="dm-sub ok">+128 este mes</div>
+              <div class="dm-sub ok">+128 aquest mes</div>
             </div>
             <div class="dm-card">
-              <div class="dm-lbl"><svg viewBox="0 0 24 24" fill="none" stroke="#6b7785" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>Resueltos por IA</div>
+              <div class="dm-lbl"><svg viewBox="0 0 24 24" fill="none" stroke="#6b7785" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>Resolts per IA</div>
               <div class="dm-val">84<span style="font-size:18px;color:var(--ink-mute);">%</span></div>
-              <div class="dm-sub ok">263 casos hoy</div>
+              <div class="dm-sub ok">263 casos avui</div>
             </div>
             <div class="dm-card">
-              <div class="dm-lbl"><svg viewBox="0 0 24 24" fill="none" stroke="#6b7785" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg>Tareas automatizadas</div>
+              <div class="dm-lbl"><svg viewBox="0 0 24 24" fill="none" stroke="#6b7785" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg>Tasques automatitzades</div>
               <div class="dm-val">1.940</div>
-              <div class="dm-sub ok">este mes</div>
+              <div class="dm-sub ok">aquest mes</div>
             </div>
           </div>
-          <div class="dm-chart-h">Tus módulos <span class="dm-allon">Todo activo</span></div>
+          <div class="dm-chart-h">Els teus mòduls <span class="dm-allon">Tot actiu</span></div>
           <div class="dm-mods">
             <div class="dm-mod">
               <span class="dm-mod-ic"><img src="/images/icons-pilares/pilar-atencion-verde.svg" alt="" aria-hidden="true"></span>
-              <div class="dm-mod-txt"><div class="dm-mod-name">Atención al cliente</div><div class="dm-mod-metric">263 conversaciones hoy</div></div>
-              <span class="dm-mod-on">Activo</span>
+              <div class="dm-mod-txt"><div class="dm-mod-name">Atenció al client</div><div class="dm-mod-metric">263 converses avui</div></div>
+              <span class="dm-mod-on">Actiu</span>
             </div>
             <div class="dm-mod">
               <span class="dm-mod-ic"><img src="/images/icons-pilares/pilar-documental-verde.svg" alt="" aria-hidden="true"></span>
-              <div class="dm-mod-txt"><div class="dm-mod-name">Gestión documental</div><div class="dm-mod-metric">412 documentos procesados</div></div>
-              <span class="dm-mod-on">Activo</span>
+              <div class="dm-mod-txt"><div class="dm-mod-name">Gestió documental</div><div class="dm-mod-metric">412 documents processats</div></div>
+              <span class="dm-mod-on">Actiu</span>
             </div>
             <div class="dm-mod">
               <span class="dm-mod-ic"><img src="/images/icons-pilares/pilar-procesos-verde.svg" alt="" aria-hidden="true"></span>
-              <div class="dm-mod-txt"><div class="dm-mod-name">Automatización procesos</div><div class="dm-mod-metric">1.940 tareas / mes</div></div>
-              <span class="dm-mod-on">Activo</span>
+              <div class="dm-mod-txt"><div class="dm-mod-name">Automatització processos</div><div class="dm-mod-metric">1.940 tasques / mes</div></div>
+              <span class="dm-mod-on">Actiu</span>
             </div>
             <div class="dm-mod">
               <span class="dm-mod-ic"><img src="/images/icons-pilares/pilar-marketing-verde.svg" alt="" aria-hidden="true"></span>
-              <div class="dm-mod-txt"><div class="dm-mod-name">Campañas inteligentes</div><div class="dm-mod-metric">18 campañas en marcha</div></div>
-              <span class="dm-mod-on">Activo</span>
+              <div class="dm-mod-txt"><div class="dm-mod-name">Campanyes intel·ligents</div><div class="dm-mod-metric">18 campanyes en marxa</div></div>
+              <span class="dm-mod-on">Actiu</span>
             </div>
             <div class="dm-mod">
               <span class="dm-mod-ic"><img src="/images/icons-pilares/pilar-datos-verde.svg" alt="" aria-hidden="true"></span>
-              <div class="dm-mod-txt"><div class="dm-mod-name">Datos y analítica</div><div class="dm-mod-metric">12 dashboards en vivo</div></div>
-              <span class="dm-mod-on">Activo</span>
+              <div class="dm-mod-txt"><div class="dm-mod-name">Dades i analítica</div><div class="dm-mod-metric">12 dashboards en viu</div></div>
+              <span class="dm-mod-on">Actiu</span>
             </div>
             <div class="dm-mod">
               <span class="dm-mod-ic"><img src="/images/icons-pilares/pilar-ia-verde.svg" alt="" aria-hidden="true"></span>
-              <div class="dm-mod-txt"><div class="dm-mod-name">IA a medida</div><div class="dm-mod-metric">3 agentes propios</div></div>
-              <span class="dm-mod-on">Activo</span>
+              <div class="dm-mod-txt"><div class="dm-mod-name">IA a mida</div><div class="dm-mod-metric">3 agents propis</div></div>
+              <span class="dm-mod-on">Actiu</span>
             </div>
           </div>
         </div>
@@ -895,16 +909,16 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
 
     <div class="mgmt-crm">
       <div class="mgmt-crm-txt">
-        <strong>Todo tu negocio, en una sola plataforma.</strong>
-        <span>Empieza con un módulo y activa el resto cuando quieras — todos sobre la misma base.</span>
+        <strong>Tot el teu negoci, en una sola plataforma.</strong>
+        <span>Comença amb un mòdul i activa la resta quan vulguis — tots sobre la mateixa base.</span>
       </div>
       <div class="mgmt-crm-mods">
-        <span class="crm-mod on">Atención al cliente</span>
-        <span class="crm-mod on">Documentos</span>
-        <span class="crm-mod on">Procesos</span>
-        <span class="crm-mod on">Campañas</span>
-        <span class="crm-mod on">Datos</span>
-        <span class="crm-mod on">IA a medida</span>
+        <span class="crm-mod on">Atenció al client</span>
+        <span class="crm-mod on">Documents</span>
+        <span class="crm-mod on">Processos</span>
+        <span class="crm-mod on">Campanyes</span>
+        <span class="crm-mod on">Dades</span>
+        <span class="crm-mod on">IA a mida</span>
       </div>
     </div>
   </div>
@@ -914,9 +928,9 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
 <section class="hub-section" id="vision">
   <div class="container">
     <div class="hub-head">
-      <div class="section-label">La visión</div>
-      <h2>Del «gana tiempo» al <em>«decide mejor».</em></h2>
-      <p class="section-intro">Cada proceso que automatizas alimenta tu CRM con datos reales. Con el tiempo, no solo haces menos trabajo manual: tienes una visión de tu negocio que antes no existía.</p>
+      <div class="section-label">La visió</div>
+      <h2>Del «guanya temps» al <em>«decideix millor».</em></h2>
+      <p class="section-intro">Cada procés que automatitzes alimenta el teu CRM amb dades reals. Amb el temps, no només fas menys feina manual: tens una visió del teu negoci que abans no existia.</p>
     </div>
     <div class="hub-canvas">
       <svg viewBox="0 0 680 480" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
@@ -929,12 +943,12 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
       </svg>
       <span class="hub-ring"></span>
       <div class="hub-center">empentIA</div>
-      <a class="hub-node live" href="/agentes-ia-atencion-cliente/" style="left: 16%; top: 50%;"><img src="/images/icons-pilares/pilar-atencion-mark.svg" alt="" aria-hidden="true">Atención al cliente</a>
-      <a class="hub-node" href="#soluciones" style="left: 30%; top: 20%;"><img src="/images/icons-pilares/pilar-documental-mark.svg" alt="" aria-hidden="true">Documentos</a>
-      <a class="hub-node" href="#soluciones" style="left: 71%; top: 22%;"><img src="/images/icons-pilares/pilar-procesos-mark.svg" alt="" aria-hidden="true">Procesos</a>
-      <a class="hub-node" href="#soluciones" style="left: 83%; top: 53%;"><img src="/images/icons-pilares/pilar-marketing-mark.svg" alt="" aria-hidden="true">Campañas</a>
-      <a class="hub-node" href="#soluciones" style="left: 68.4%; top: 82.3%;"><img src="/images/icons-pilares/pilar-datos-mark.svg" alt="" aria-hidden="true">Datos</a>
-      <a class="hub-node" href="#cta" style="left: 30%; top: 83.3%;"><img src="/images/icons-pilares/pilar-ia-mark.svg" alt="" aria-hidden="true">IA a medida</a>
+      <a class="hub-node live" href="/ca/agentes-ia-atencion-cliente/" style="left: 16%; top: 50%;"><img src="/images/icons-pilares/pilar-atencion-mark.svg" alt="" aria-hidden="true">Atenció al client</a>
+      <a class="hub-node" href="#soluciones" style="left: 30%; top: 20%;"><img src="/images/icons-pilares/pilar-documental-mark.svg" alt="" aria-hidden="true">Documents</a>
+      <a class="hub-node" href="#soluciones" style="left: 71%; top: 22%;"><img src="/images/icons-pilares/pilar-procesos-mark.svg" alt="" aria-hidden="true">Processos</a>
+      <a class="hub-node" href="#soluciones" style="left: 83%; top: 53%;"><img src="/images/icons-pilares/pilar-marketing-mark.svg" alt="" aria-hidden="true">Campanyes</a>
+      <a class="hub-node" href="#soluciones" style="left: 68.4%; top: 82.3%;"><img src="/images/icons-pilares/pilar-datos-mark.svg" alt="" aria-hidden="true">Dades</a>
+      <a class="hub-node" href="#cta" style="left: 30%; top: 83.3%;"><img src="/images/icons-pilares/pilar-ia-mark.svg" alt="" aria-hidden="true">IA a mida</a>
     </div>
   </div>
 </section>
@@ -942,34 +956,34 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
 <!-- ====== CÓMO TRABAJAMOS ====== -->
 <section id="como-trabajamos">
   <div class="container">
-    <div class="section-label">Cómo trabajamos</div>
-    <h2>De la idea a real, <em>en cuatro pasos.</em></h2>
-    <p class="section-intro">No te vendemos una licencia y te dejamos solo. Auditamos, proponemos, construimos — y tú lo ves funcionar desde tu plataforma.</p>
+    <div class="section-label">Com treballem</div>
+    <h2>De la idea a real, <em>en quatre passos.</em></h2>
+    <p class="section-intro">No et venem una llicència i et deixem sol. Auditem, proposem, construïm — i tu ho veus funcionar des de la teva plataforma.</p>
 
     <div class="process-steps four">
       <div class="step">
         <div class="step-num">1</div>
-        <span class="step-time">Paso 1</span>
-        <div class="step-title">Auditoría</div>
-        <div class="step-desc">Analizamos tu negocio y detectamos las oportunidades de automatización con más impacto.</div>
+        <span class="step-time">Pas 1</span>
+        <div class="step-title">Auditoria</div>
+        <div class="step-desc">Analitzem el teu negoci i detectem les oportunitats d'automatització amb més impacte.</div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
-        <span class="step-time">Paso 2</span>
-        <div class="step-title">Propuesta</div>
-        <div class="step-desc">Te presentamos soluciones a medida, con precio claro. Sin sorpresas ni letra pequeña.</div>
+        <span class="step-time">Pas 2</span>
+        <div class="step-title">Proposta</div>
+        <div class="step-desc">Et presentem solucions a mida, amb preu clar. Sense sorpreses ni lletra petita.</div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
-        <span class="step-time">Paso 3</span>
-        <div class="step-title">Implementación</div>
-        <div class="step-desc">Lo construimos y configuramos nosotros. Tú sigues a lo tuyo mientras tanto.</div>
+        <span class="step-time">Pas 3</span>
+        <div class="step-title">Implementació</div>
+        <div class="step-desc">Ho construïm i configurem nosaltres. Tu continues amb el teu mentrestant.</div>
       </div>
       <div class="step">
         <div class="step-num" style="background:var(--positive);border-color:var(--positive);color:#fff;">4</div>
-        <span class="step-time">Paso 4</span>
-        <div class="step-title" style="color:var(--positive);">¡Funciona!</div>
-        <div class="step-desc">Supervisas resultados desde tu plataforma: tu CRM con métricas, conversaciones y todo lo que tus agentes hacen.</div>
+        <span class="step-time">Pas 4</span>
+        <div class="step-title" style="color:var(--positive);">Funciona!</div>
+        <div class="step-desc">Supervises resultats des de la teva plataforma: el teu CRM amb mètriques, converses i tot el que fan els teus agents.</div>
       </div>
     </div>
   </div>
@@ -979,15 +993,15 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
 <section class="audit-section" id="auditoria">
   <div class="container">
     <div class="audit-inner">
-      <div class="section-label">Empieza gratis</div>
-      <h2>¿No sabes por dónde empezar? <em>Audita tu web.</em></h2>
-      <p class="section-intro">Introduce tu web y nuestra IA te dirá en minutos dónde puedes ganar tiempo y ventas con agentes. Gratis y sin registro.</p>
+      <div class="section-label">Comença gratis</div>
+      <h2>No saps per on començar? <em>Audita el teu web.</em></h2>
+      <p class="section-intro">Introdueix el teu web i la nostra IA et dirà en minuts on pots guanyar temps i vendes amb agents. Gratis i sense registre.</p>
       <form class="audit-form" id="auditForm">
-        <input type="text" class="audit-input" id="auditUrl" placeholder="Tu web (ej: empresa.com)" required>
-        <button type="submit" class="audit-btn">Auditar mi web →</button>
+        <input type="text" class="audit-input" id="auditUrl" placeholder="El teu web (ex: empresa.com)" required>
+        <button type="submit" class="audit-btn">Auditar el meu web →</button>
       </form>
       <div class="audit-error" id="auditError"></div>
-      <div class="audit-note">Sin tarjeta · resultados en menos de 3 minutos</div>
+      <div class="audit-note">Sense targeta · resultats en menys de 3 minuts</div>
     </div>
   </div>
 </section>
@@ -998,42 +1012,42 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
     <div class="faq-grid">
       <div class="faq-header">
         <div class="section-label">FAQ</div>
-        <h2>Preguntas <em>frecuentes.</em></h2>
-        <p class="section-intro" style="margin-top: 16px;">Si tienes una duda que no ves aquí, escríbenos. Te respondemos el mismo día.</p>
+        <h2>Preguntes <em>freqüents.</em></h2>
+        <p class="section-intro" style="margin-top: 16px;">Si tens un dubte que no veus aquí, escriu-nos. Et responem el mateix dia.</p>
       </div>
 
       <div class="faq-items">
         <div class="faq-item">
-          <div class="faq-q">¿Qué es exactamente empentIA?</div>
-          <div class="faq-a">Diseñamos, montamos y operamos agentes de inteligencia artificial para todo tipo de empresas: pequeñas, medianas, grandes, franquicias y multinacionales. No vendemos software genérico: cada agente se configura con el conocimiento, el tono y los sistemas de tu negocio, y nosotros nos encargamos de que funcione bien.</div>
+          <div class="faq-q">Què és exactament empentIA?</div>
+          <div class="faq-a">Dissenyem, muntem i operem agents d'intel·ligència artificial per a tot tipus d'empreses: petites, mitjanes, grans, franquícies i multinacionals. No venem programari genèric: cada agent es configura amb el coneixement, el to i els sistemes del teu negoci, i nosaltres ens encarreguem que funcioni bé.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">¿Qué soluciones puedo contratar hoy?</div>
-          <div class="faq-a">Todas. Los agentes de Webchat y Email son producto listo para activar en días. Las demás áreas — gestión documental, automatización de procesos, marketing IA, datos y analítica — las construimos a medida sobre tu CRM: nos cuentas el caso, te damos una propuesta con precio claro y lo implementamos nosotros.</div>
+          <div class="faq-q">Quines solucions puc contractar avui?</div>
+          <div class="faq-a">Totes. Els agents de Webchat i Email són producte llest per activar en dies. Les altres àrees — gestió documental, automatització de processos, màrqueting IA, dades i analítica — les construïm a mida sobre el teu CRM: ens expliques el cas, et donem una proposta amb preu clar i ho implementem nosaltres.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">¿Qué es el CRM de empentIA?</div>
-          <div class="faq-a">Cada cliente tiene su propio espacio en app.empentia.com: un CRM donde se gestiona todo lo que actives — conversaciones, contactos, casos, documentos y métricas. Empiezas con un módulo y creces sobre la misma base, sin cambiar de herramienta.</div>
+          <div class="faq-q">Què és el CRM d'empentIA?</div>
+          <div class="faq-a">Cada client té el seu propi espai a app.empentia.com: un CRM on es gestiona tot el que actives — converses, contactes, casos, documents i mètriques. Comences amb un mòdul i creixes sobre la mateixa base, sense canviar d'eina.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">¿Necesito conocimientos técnicos?</div>
-          <div class="faq-a">No. Nos encargamos de la configuración, la integración con tus herramientas y el mantenimiento. Tú solo defines cómo quieres que se comporte el agente y revisas resultados desde tu panel.</div>
+          <div class="faq-q">Necessito coneixements tècnics?</div>
+          <div class="faq-a">No. Ens encarreguem de la configuració, la integració amb les teves eines i el manteniment. Tu només defineixes com vols que es comporti l'agent i revises resultats des del teu panell.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">¿Se integra con mis herramientas?</div>
-          <div class="faq-a">Sí. Trabajamos con WooCommerce, PrestaShop, Shopify, Holded, Odoo, SAP Business One, HubSpot, Pipedrive y más. Si usas otra herramienta, cuéntanoslo y estudiamos la integración.</div>
+          <div class="faq-q">S'integra amb les meves eines?</div>
+          <div class="faq-a">Sí. Treballem amb WooCommerce, PrestaShop, Shopify, Holded, Odoo, SAP Business One, HubSpot, Pipedrive i més. Si fas servir una altra eina, explica'ns-ho i estudiem la integració.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">¿Cuánto cuesta?</div>
-          <div class="faq-a">Cada servicio tiene su propia membresía, sin permanencia, y los proyectos a medida van siempre con propuesta y precio claro antes de empezar. Activa solo lo que necesitas y cancela cuando quieras desde tu panel de cliente.</div>
+          <div class="faq-q">Quant costa?</div>
+          <div class="faq-a">Cada servei té la seva pròpia membresia, sense permanència, i els projectes a mida van sempre amb proposta i preu clar abans de començar. Activa només el que necessites i cancel·la quan vulguis des del teu panell de client.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">¿Mis datos están seguros?</div>
-          <div class="faq-a">Todos los datos se procesan en servidores dentro de la Unión Europea, cifrados en tránsito (TLS) y en reposo (AES-256), cumpliendo el RGPD. Nunca usamos tus datos para entrenar modelos de terceros.</div>
+          <div class="faq-q">Les meves dades estan segures?</div>
+          <div class="faq-a">Totes les dades es processen en servidors dins de la Unió Europea, xifrades en trànsit (TLS) i en repòs (AES-256), complint el RGPD. Mai fem servir les teves dades per entrenar models de tercers.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">¿Sirve para empresas grandes o con varias sedes?</div>
-          <div class="faq-a">Sí. Trabajamos con empresas de cualquier tamaño: desde negocios pequeños hasta franquicias y multinacionales con varias sedes, equipos y marcas. El CRM se adapta a tu estructura — puedes separar por sede, departamento o marca, con permisos por usuario, y todo bajo una misma plataforma.</div>
+          <div class="faq-q">Serveix per a empreses grans o amb diverses seus?</div>
+          <div class="faq-a">Sí. Treballem amb empreses de qualsevol mida: des de negocis petits fins a franquícies i multinacionals amb diverses seus, equips i marques. El CRM s'adapta a la teva estructura — pots separar per seu, departament o marca, amb permisos per usuari, i tot sota una mateixa plataforma.</div>
         </div>
       </div>
     </div>
@@ -1043,11 +1057,11 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
 <!-- ====== FINAL CTA ====== -->
 <section class="final-cta" id="cta">
   <div class="container">
-    <div class="section-label">Empieza hoy</div>
-    <h2>Tu primer agente, <em>listo en 72 horas.</em></h2>
-    <p>Cuéntanos tu caso y te preparamos una propuesta a medida. Sin compromiso.</p>
+    <div class="section-label">Comença avui</div>
+    <h2>El teu primer agent, <em>llest en 72 hores.</em></h2>
+    <p>Explica'ns el teu cas i et preparem una proposta a mida. Sense compromís.</p>
     <div class="final-ctas">
-      <a href="#" class="btn btn-primary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'home_global',form_id:'home_cta_bottom'}}}); return false;">Hablar con el equipo <span class="btn-arrow">→</span></a>
+      <a href="#" class="btn btn-primary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'home_global',form_id:'home_cta_bottom'}}}); return false;">Parlar amb l'equip <span class="btn-arrow">→</span></a>
     </div>
   </div>
 </section>
@@ -1060,8 +1074,8 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
         <a href="https://empentia.com/" class="footer-logo">
           <img src="/images/logo/logo-horizontal-green.png" alt="empentIA">
         </a>
-        <p class="footer-tag">Agentes de inteligencia artificial que trabajan para tu negocio: atención al cliente, gestión documental y más.</p>
-        <div class="footer-social" aria-label="Redes sociales">
+        <p class="footer-tag">Agents d'intel·ligència artificial que treballen per al teu negoci: atenció al client, gestió documental i més.</p>
+        <div class="footer-social" aria-label="Xarxes socials">
           <a href="mailto:hola@empentia.com" aria-label="Enviar email a hola@empentia.com" class="footer-social-link">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
             <span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Email</span>
@@ -1077,34 +1091,34 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
         </div>
       </div>
       <div class="footer-col">
-        <h4>Soluciones</h4>
-        <a href="https://empentia.com/agentes-ia-atencion-cliente/">Atención al cliente</a>
-        <a href="#soluciones">Gestión documental</a>
-        <a href="#soluciones">Automatización de procesos</a>
-        <a href="#soluciones">Marketing IA</a>
-        <a href="#soluciones">Datos y analítica</a>
-        <a href="#cta">IA a medida</a>
+        <h4>Solucions</h4>
+        <a href="https://empentia.com/ca/agentes-ia-atencion-cliente/">Atenció al client</a>
+        <a href="#soluciones">Gestió documental</a>
+        <a href="#soluciones">Automatització de processos</a>
+        <a href="#soluciones">Màrqueting IA</a>
+        <a href="#soluciones">Dades i analítica</a>
+        <a href="#cta">IA a mida</a>
       </div>
       <div class="footer-col">
         <h4>Recursos</h4>
-        <a href="#panel">Tu CRM</a>
-        <a href="#como-trabajamos">Cómo trabajamos</a>
-        <a href="#auditoria">Auditoría gratuita</a>
-        <a href="#faq">Preguntas frecuentes</a>
-        <a href="https://app.empentia.com/login">Acceso clientes</a>
+        <a href="#panel">El teu CRM</a>
+        <a href="#como-trabajamos">Com treballem</a>
+        <a href="#auditoria">Auditoria gratuïta</a>
+        <a href="#faq">Preguntes freqüents</a>
+        <a href="https://app.empentia.com/login">Accés clients</a>
       </div>
       <div class="footer-col">
-        <h4>Contacto</h4>
-        <a href="mailto:hola@empentia.com">Enviar correo</a>
+        <h4>Contacte</h4>
+        <a href="mailto:hola@empentia.com">Enviar correu</a>
         <a href="https://www.linkedin.com/company/empentia">LinkedIn</a>
         <a href="https://www.instagram.com/empent_ia/">Instagram</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <div>© <span id="footer-year">2026</span> empentIA. Todos los derechos reservados.</div>
+      <div>© <span id="footer-year">2026</span> empentIA. Tots els drets reservats.</div>
       <div>
-        <a href="https://empentia.com/legal">Aviso legal</a>
-        <a href="https://empentia.com/privacy">Privacidad</a>
+        <a href="https://empentia.com/legal">Avís legal</a>
+        <a href="https://empentia.com/privacy">Privacitat</a>
         <a href="https://empentia.com/cookies">Cookies</a>
       </div>
     </div>
@@ -1133,7 +1147,7 @@ function closeMenu() {
 
 document.getElementById('footer-year').textContent = new Date().getFullYear();
 
-// Auditoría: redirige al flujo /audit
+// Auditoria: redirigeix al flux /audit
 document.getElementById('auditForm').addEventListener('submit', function (e) {
   e.preventDefault();
   var err = document.getElementById('auditError');
@@ -1143,7 +1157,7 @@ document.getElementById('auditForm').addEventListener('submit', function (e) {
   var valid = v.indexOf('.') !== -1;
   if (valid) { try { new URL(v); } catch (_) { valid = false; } }
   if (!valid) {
-    err.textContent = 'Introduce una URL válida (ejemplo: empresa.com)';
+    err.textContent = "Introdueix un URL vàlid (exemple: empresa.com)";
     err.classList.add('show');
     return;
   }
@@ -1169,18 +1183,18 @@ document.getElementById('auditForm').addEventListener('submit', function (e) {
     },
     {
       "@type": "WebPage",
-      "@id": "https://empentia.com/#webpage",
-      "url": "https://empentia.com/",
-      "name": "Agentes de IA para empresas | empentIA",
-      "description": "Diseñamos y operamos agentes de inteligencia artificial para empresas de cualquier tamaño: atención al cliente, gestión documental y más.",
-      "inLanguage": "es-ES",
+      "@id": "https://empentia.com/ca/#webpage",
+      "url": "https://empentia.com/ca/",
+      "name": "Agents d'IA per a empreses | empentIA",
+      "description": "Dissenyem i operem agents d'intel·ligència artificial per a empreses de qualsevol mida: atenció al client, gestió documental i més.",
+      "inLanguage": "ca-ES",
       "isPartOf": { "@id": "https://empentia.com/#org" }
     }
   ]
 }
 </script>
 
-<script src="/home-preview/cookie-consent.js" defer></script>
+<script src="/ca/cookie-consent.js" defer></script>
 
 <script type="text/javascript">
 (function (C, A, L) {
