@@ -598,6 +598,16 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
   .hub-center { width: 96px; height: 96px; font-size: 13px; }
   .hub-ring { width: 160px; height: 160px; }
 }
+/* ===== Iconos de pilar (crema sobre caja oscura) — más grandes ===== */
+.svc-icwrap { width: 72px !important; height: 72px !important; }
+.svc-icwrap img { width: 58px !important; height: 58px !important; }
+.scs-icwrap { width: 58px !important; height: 58px !important; }
+.scs-icwrap img { width: 46px !important; height: 46px !important; }
+.scc-icwrap { width: 64px; height: 64px; border-radius: 15px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(155deg, #1c2420 0%, #101512 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 14px rgba(16,21,18,0.18); }
+.scc-icwrap img { width: 50px; height: 50px; display: block; }
+.hub-node { display: inline-flex; align-items: center; gap: 8px; }
+.hub-node img { width: 26px; height: 26px; display: block; }
+@media (max-width: 560px) { .hub-node img { width: 18px; height: 18px; } }
 </style>
 
 <!-- Google tag (gtag.js) -->
@@ -682,7 +692,7 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
       <div class="service-card live" style="--ch: #00c389; --ch-soft: #d4f5e9;">
         <div class="svc-head">
           <span class="svc-icwrap">
-            <img src="/images/icons/agente-webchat.svg" alt="" aria-hidden="true">
+            <img src="/images/icons-pilares/pilar-atencion-crema.svg" alt="" aria-hidden="true">
           </span>
           <div class="svc-title">Atención al <em>cliente</em></div>
           <span class="svc-badge on" style="margin-left:auto;">Listo para activar</span>
@@ -709,7 +719,7 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
       <div class="service-card live" style="--ch: #0061c2; --ch-soft: #d6e6f8;">
         <div class="svc-head">
           <span class="svc-icwrap">
-            <svg class="ic" viewBox="0 0 24 24" style="stroke:#00c389;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6"/><path d="M9 17h6"/></svg>
+            <img src="/images/icons-pilares/pilar-documental-crema.svg" alt="" aria-hidden="true">
           </span>
           <div class="svc-title">Gestión <em>documental</em></div>
           <span class="svc-badge on" style="margin-left:auto;">A medida</span>
@@ -733,7 +743,7 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
     <div class="verticals-3">
       <div class="service-card-soon" style="--ch: #7bc200;">
         <div class="scs-top">
-          <span class="scs-icwrap"><svg class="ic" viewBox="0 0 24 24" style="stroke:#00c389;"><path d="M16 3h5v5"/><path d="M21 3 13.5 10.5"/><path d="M8 21H3v-5"/><path d="M3 21l7.5-7.5"/><path d="M21 16v5h-5"/><path d="M3 8V3h5"/></svg></span>
+          <span class="scs-icwrap"><img src="/images/icons-pilares/pilar-procesos-crema.svg" alt="" aria-hidden="true"></span>
           <span class="scs-tag" style="background:var(--positive-soft);color:var(--positive);">A medida</span>
         </div>
         <div class="scs-title">Automatización de <em>procesos</em></div>
@@ -746,7 +756,7 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
       </div>
       <div class="service-card-soon" style="--ch: #c28100;">
         <div class="scs-top">
-          <span class="scs-icwrap"><svg class="ic" viewBox="0 0 24 24" style="stroke:#00c389;"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M15 8.5a5 5 0 0 1 0 7"/><path d="M18 5.5a9 9 0 0 1 0 13"/></svg></span>
+          <span class="scs-icwrap"><img src="/images/icons-pilares/pilar-marketing-crema.svg" alt="" aria-hidden="true"></span>
           <span class="scs-tag" style="background:var(--positive-soft);color:var(--positive);">A medida</span>
         </div>
         <div class="scs-title">Marketing <em>IA</em></div>
@@ -761,7 +771,7 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
       </div>
       <div class="service-card-soon" style="--ch: #4700c2;">
         <div class="scs-top">
-          <span class="scs-icwrap"><svg class="ic" viewBox="0 0 24 24" style="stroke:#00c389;"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 3 5-6"/></svg></span>
+          <span class="scs-icwrap"><img src="/images/icons-pilares/pilar-datos-crema.svg" alt="" aria-hidden="true"></span>
           <span class="scs-tag" style="background:var(--positive-soft);color:var(--positive);">A medida</span>
         </div>
         <div class="scs-title">Datos y <em>analítica</em></div>
@@ -777,7 +787,10 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
     <!-- V6 · IA a medida -->
     <div class="service-card-custom">
       <div class="scc-left">
-        <div class="scc-label">IA a medida</div>
+        <div style="display:flex;align-items:center;gap:18px;margin-bottom:14px;">
+          <span class="scc-icwrap"><img src="/images/icons-pilares/pilar-ia-crema.svg" alt="" aria-hidden="true"></span>
+          <div class="scc-label" style="margin-bottom:0;">IA a medida</div>
+        </div>
         <div class="scc-title">¿Algo más específico? <em>Lo construimos.</em></div>
         <div class="scc-desc">Consultoría, agentes a medida y modelos LLM entrenados con el conocimiento de tu empresa. Cuéntanos el reto y diseñamos la solución.</div>
         <div class="scc-perks">
@@ -899,12 +912,12 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
       </svg>
       <span class="hub-ring"></span>
       <div class="hub-center">empentIA</div>
-      <a class="hub-node live" href="/agentes-ia-atencion-cliente/" style="left: 19%; top: 50%;">Atención al cliente</a>
-      <a class="hub-node" href="#soluciones" style="left: 30%; top: 20%;">Documentos</a>
-      <a class="hub-node" href="#soluciones" style="left: 70.5%; top: 22%;">Procesos</a>
-      <a class="hub-node" href="#soluciones" style="left: 82%; top: 53%;">Campañas</a>
-      <a class="hub-node" href="#soluciones" style="left: 68.4%; top: 82.3%;">Datos</a>
-      <a class="hub-node" href="#cta" style="left: 30%; top: 83.3%;">IA a medida</a>
+      <a class="hub-node live" href="/agentes-ia-atencion-cliente/" style="left: 19%; top: 50%;"><img src="/images/icons-pilares/pilar-atencion-crema.svg" alt="" aria-hidden="true">Atención al cliente</a>
+      <a class="hub-node" href="#soluciones" style="left: 30%; top: 20%;"><img src="/images/icons-pilares/pilar-documental-crema.svg" alt="" aria-hidden="true">Documentos</a>
+      <a class="hub-node" href="#soluciones" style="left: 70.5%; top: 22%;"><img src="/images/icons-pilares/pilar-procesos-crema.svg" alt="" aria-hidden="true">Procesos</a>
+      <a class="hub-node" href="#soluciones" style="left: 82%; top: 53%;"><img src="/images/icons-pilares/pilar-marketing-crema.svg" alt="" aria-hidden="true">Campañas</a>
+      <a class="hub-node" href="#soluciones" style="left: 68.4%; top: 82.3%;"><img src="/images/icons-pilares/pilar-datos-crema.svg" alt="" aria-hidden="true">Datos</a>
+      <a class="hub-node" href="#cta" style="left: 30%; top: 83.3%;"><img src="/images/icons-pilares/pilar-ia-crema.svg" alt="" aria-hidden="true">IA a medida</a>
     </div>
   </div>
 </section>
