@@ -574,6 +574,30 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
 .process-steps.four { grid-template-columns: repeat(4, 1fr); gap: 32px; }
 @media (max-width: 1024px) { .process-steps.four { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 640px) { .process-steps.four { grid-template-columns: 1fr; gap: 30px; } }
+/* ===== Hub: pilares orbitando empentIA ===== */
+.hub-section { background: var(--dark); color: var(--bg); border-top: 1px solid var(--line); position: relative; overflow: hidden; }
+.hub-section::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 720px; height: 720px; background: radial-gradient(circle, rgba(0,192,136,0.07) 0%, transparent 62%); pointer-events: none; }
+.hub-section .container { position: relative; z-index: 1; }
+.hub-head { text-align: center; max-width: 760px; margin: 0 auto; }
+.hub-head .section-label { color: rgba(255,255,255,0.6); justify-content: center; }
+.hub-head .section-label::before { background: transparent; border-color: rgba(255,255,255,0.5); }
+.hub-head .section-label::after { background: rgba(255,255,255,0.4); }
+.hub-head h2 { color: var(--bg); margin-left: auto; margin-right: auto; }
+.hub-head h2 em { color: var(--green-light); }
+.hub-head .section-intro { color: rgba(255,255,255,0.62); margin: 0 auto 0; }
+.hub-canvas { position: relative; width: min(680px, 100%); aspect-ratio: 680 / 480; margin: 44px auto 0; }
+.hub-canvas svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hub-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 140px; height: 140px; border-radius: 50%; border: 1.5px solid var(--green); display: flex; align-items: center; justify-content: center; background: rgba(0,192,136,0.06); box-shadow: 0 0 60px rgba(0,192,136,0.18); font-weight: 600; color: var(--green); font-size: 17px; letter-spacing: -0.01em; }
+.hub-ring { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 230px; height: 230px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.07); }
+.hub-node { position: absolute; transform: translate(-50%,-50%); padding: 8px 16px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.75); font-size: 13.5px; font-weight: 500; text-decoration: none; background: rgba(255,255,255,0.03); white-space: nowrap; transition: all .2s; }
+.hub-node:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+.hub-node.live { background: rgba(0,192,136,0.12); border-color: var(--green); color: var(--green); font-weight: 600; }
+.hub-node.live:hover { background: rgba(0,192,136,0.2); color: var(--green); border-color: var(--green); }
+@media (max-width: 560px) {
+  .hub-node { font-size: 11px; padding: 5px 10px; }
+  .hub-center { width: 96px; height: 96px; font-size: 13px; }
+  .hub-ring { width: 160px; height: 160px; }
+}
 </style>
 
 <!-- Google tag (gtag.js) -->
@@ -852,6 +876,35 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
         <span class="crm-mod off">Campañas inteligentes</span>
         <span class="crm-mod off">Datos</span>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== HUB: PILARES ====== -->
+<section class="hub-section" id="vision">
+  <div class="container">
+    <div class="hub-head">
+      <div class="section-label">La visión</div>
+      <h2>Del «gana tiempo» al <em>«decide mejor».</em></h2>
+      <p class="section-intro">Cada proceso que automatizas alimenta tu CRM con datos reales. Con el tiempo, no solo haces menos trabajo manual: tienes una visión de tu negocio que antes no existía.</p>
+    </div>
+    <div class="hub-canvas">
+      <svg viewBox="0 0 680 480" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <line x1="340" y1="240" x2="130" y2="240" stroke="#00c088" stroke-width="1.5"/>
+        <line x1="340" y1="240" x2="205" y2="95" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-dasharray="4 6"/>
+        <line x1="340" y1="240" x2="480" y2="105" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-dasharray="4 6"/>
+        <line x1="340" y1="240" x2="558" y2="255" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-dasharray="4 6"/>
+        <line x1="340" y1="240" x2="465" y2="395" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-dasharray="4 6"/>
+        <line x1="340" y1="240" x2="205" y2="400" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-dasharray="4 6"/>
+      </svg>
+      <span class="hub-ring"></span>
+      <div class="hub-center">empentIA</div>
+      <a class="hub-node live" href="/agentes-ia-atencion-cliente/" style="left: 19%; top: 50%;">Atención al cliente</a>
+      <a class="hub-node" href="#soluciones" style="left: 30%; top: 20%;">Documentos</a>
+      <a class="hub-node" href="#soluciones" style="left: 70.5%; top: 22%;">Procesos</a>
+      <a class="hub-node" href="#soluciones" style="left: 82%; top: 53%;">Campañas</a>
+      <a class="hub-node" href="#soluciones" style="left: 68.4%; top: 82.3%;">Datos</a>
+      <a class="hub-node" href="#cta" style="left: 30%; top: 83.3%;">IA a medida</a>
     </div>
   </div>
 </section>
