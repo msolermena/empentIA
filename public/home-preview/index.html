@@ -570,6 +570,10 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
 @media (max-width: 860px) { .verticals-3 { grid-template-columns: 1fr; } }
 .service-card-soon .vchips { margin-bottom: 0; gap: 6px; }
 .service-card-soon .vchip { font-size: 11.5px; padding: 5px 11px; }
+/* Proceso en 4 pasos */
+.process-steps.four { grid-template-columns: repeat(4, 1fr); gap: 32px; }
+@media (max-width: 1024px) { .process-steps.four { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .process-steps.four { grid-template-columns: 1fr; gap: 30px; } }
 </style>
 
 <!-- Google tag (gtag.js) -->
@@ -657,7 +661,7 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
             <img src="/images/icons/agente-webchat.svg" alt="" aria-hidden="true">
           </span>
           <div class="svc-title">Atención al <em>cliente</em></div>
-          <span class="svc-badge on" style="margin-left:auto;">Operativo</span>
+          <span class="svc-badge on" style="margin-left:auto;">Listo para activar</span>
         </div>
         <div class="svc-desc">Agentes que responden a tus clientes en todos los canales. 24 horas, con el conocimiento de tu negocio y conectados a tu ERP o CRM.</div>
         <div class="vchips" style="flex:1;align-content:flex-start;">
@@ -684,7 +688,7 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
             <svg class="ic" viewBox="0 0 24 24" style="stroke:#00c389;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6"/><path d="M9 17h6"/></svg>
           </span>
           <div class="svc-title">Gestión <em>documental</em></div>
-          <span class="svc-badge off" style="margin-left:auto;">En desarrollo</span>
+          <span class="svc-badge on" style="margin-left:auto;">A medida</span>
         </div>
         <div class="svc-desc">Tus documentos se leen, se clasifican y se archivan solos — conectados a tu ERP y con búsqueda semántica en todo tu archivo.</div>
         <div class="vchips" style="flex:1;align-content:flex-start;">
@@ -695,8 +699,8 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
           <span class="vchip">Archivo inteligente</span>
         </div>
         <div class="svc-foot">
-          <span style="font-size:13px;color:var(--ink-mute);">Disponible próximamente</span>
-          <a href="mailto:hola@empentia.com?subject=Avisadme%20cuando%20Gesti%C3%B3n%20Documental%20est%C3%A9%20disponible" class="svc-cta ghost">Avísame <span class="arr">→</span></a>
+          <span style="font-size:13px;color:var(--ink-mute);">Proyecto personalizado</span>
+          <a href="#" class="svc-cta ghost" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'home_global',form_id:'home_documental'}}}); return false;">Cuéntanos tu caso <span class="arr">→</span></a>
         </div>
       </div>
     </div>
@@ -706,7 +710,7 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
       <div class="service-card-soon" style="--ch: #7bc200;">
         <div class="scs-top">
           <span class="scs-icwrap"><svg class="ic" viewBox="0 0 24 24" style="stroke:#00c389;"><path d="M16 3h5v5"/><path d="M21 3 13.5 10.5"/><path d="M8 21H3v-5"/><path d="M3 21l7.5-7.5"/><path d="M21 16v5h-5"/><path d="M3 8V3h5"/></svg></span>
-          <span class="scs-tag">Próximamente</span>
+          <span class="scs-tag" style="background:var(--positive-soft);color:var(--positive);">A medida</span>
         </div>
         <div class="scs-title">Automatización de <em>procesos</em></div>
         <div class="scs-desc">Los flujos repetitivos de tu negocio, ejecutados solos de principio a fin.</div>
@@ -719,11 +723,12 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
       <div class="service-card-soon" style="--ch: #c28100;">
         <div class="scs-top">
           <span class="scs-icwrap"><svg class="ic" viewBox="0 0 24 24" style="stroke:#00c389;"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M15 8.5a5 5 0 0 1 0 7"/><path d="M18 5.5a9 9 0 0 1 0 13"/></svg></span>
-          <span class="scs-tag">Próximamente</span>
+          <span class="scs-tag" style="background:var(--positive-soft);color:var(--positive);">A medida</span>
         </div>
         <div class="scs-title">Marketing <em>IA</em></div>
-        <div class="scs-desc">Contenido y campañas que se crean, se publican y se optimizan con IA.</div>
+        <div class="scs-desc">Campañas inteligentes que se crean, se publican y se optimizan solas — contenido, SEO, email y anuncios.</div>
         <div class="vchips">
+          <span class="vchip live">Campañas inteligentes</span>
           <span class="vchip">Contenido</span>
           <span class="vchip">SEO</span>
           <span class="vchip">Email</span>
@@ -733,7 +738,7 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
       <div class="service-card-soon" style="--ch: #4700c2;">
         <div class="scs-top">
           <span class="scs-icwrap"><svg class="ic" viewBox="0 0 24 24" style="stroke:#00c389;"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 3 5-6"/></svg></span>
-          <span class="scs-tag">Próximamente</span>
+          <span class="scs-tag" style="background:var(--positive-soft);color:var(--positive);">A medida</span>
         </div>
         <div class="scs-title">Datos y <em>analítica</em></div>
         <div class="scs-desc">Pregunta a tus datos en lenguaje natural y anticípate con predicciones.</div>
@@ -783,7 +788,7 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
           <div class="ds-item"><span class="dt"></span>Atención al cliente</div>
           <div class="ds-item"><span class="dt"></span>Documentos</div>
           <div class="ds-item"><span class="dt"></span>Procesos</div>
-          <div class="ds-item"><span class="dt"></span>Marketing</div>
+          <div class="ds-item"><span class="dt"></span>Campañas</div>
           <div class="ds-item"><span class="dt"></span>Datos</div>
           <div class="ds-sec">CRM</div>
           <div class="ds-item"><span class="dt"></span>Contactos</div>
@@ -844,7 +849,7 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
         <span class="crm-mod on">Conocimiento</span>
         <span class="crm-mod off">Documentos</span>
         <span class="crm-mod off">Procesos</span>
-        <span class="crm-mod off">Marketing</span>
+        <span class="crm-mod off">Campañas inteligentes</span>
         <span class="crm-mod off">Datos</span>
       </div>
     </div>
@@ -855,27 +860,33 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
 <section id="como-trabajamos">
   <div class="container">
     <div class="section-label">Cómo trabajamos</div>
-    <h2>De la primera llamada a producción, <em>sin fricción.</em></h2>
-    <p class="section-intro">No te vendemos una licencia y te dejamos solo. Montamos el agente contigo, lo ponemos a trabajar y lo seguimos mejorando.</p>
+    <h2>De la idea a real, <em>en cuatro pasos.</em></h2>
+    <p class="section-intro">No te vendemos una licencia y te dejamos solo. Auditamos, proponemos, construimos — y tú lo ves funcionar desde tu plataforma.</p>
 
-    <div class="process-steps">
+    <div class="process-steps four">
       <div class="step">
         <div class="step-num">1</div>
-        <span class="step-time">30 minutos</span>
-        <div class="step-title">Llamada de descubrimiento</div>
-        <div class="step-desc">Entendemos tu negocio, tus canales y tus herramientas. Detectamos dónde un agente IA aporta más valor desde el primer día.</div>
+        <span class="step-time">Paso 1</span>
+        <div class="step-title">Auditoría</div>
+        <div class="step-desc">Analizamos tu negocio y detectamos las oportunidades de automatización con más impacto.</div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
-        <span class="step-time">48–72 horas</span>
-        <div class="step-title">Demo con tus datos</div>
-        <div class="step-desc">Montamos un agente real con tu catálogo, tus FAQs y tu tono. Lo pruebas como si fueras un cliente. Sin compromiso de compra.</div>
+        <span class="step-time">Paso 2</span>
+        <div class="step-title">Propuesta</div>
+        <div class="step-desc">Te presentamos soluciones a medida, con precio claro. Sin sorpresas ni letra pequeña.</div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
-        <span class="step-time">Continuo</span>
-        <div class="step-title">En producción</div>
-        <div class="step-desc">El agente trabaja y tú lo ves todo desde tu panel: conversaciones, leads, métricas. Nosotros lo operamos, medimos y mejoramos.</div>
+        <span class="step-time">Paso 3</span>
+        <div class="step-title">Implementación</div>
+        <div class="step-desc">Lo construimos y configuramos nosotros. Tú sigues a lo tuyo mientras tanto.</div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--positive);border-color:var(--positive);color:#fff;">4</div>
+        <span class="step-time">Paso 4</span>
+        <div class="step-title" style="color:var(--positive);">¡Funciona!</div>
+        <div class="step-desc">Supervisas resultados desde tu plataforma: tu CRM con métricas, conversaciones y todo lo que tus agentes hacen.</div>
       </div>
     </div>
   </div>
@@ -915,7 +926,7 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
         </div>
         <div class="faq-item">
           <div class="faq-q">¿Qué soluciones puedo contratar hoy?</div>
-          <div class="faq-a">Atención al cliente: los agentes de Webchat y Email ya están en producción y puedes activarlos esta semana. Las demás áreas — gestión documental, automatización de procesos, marketing IA, datos y analítica — están en desarrollo, y la IA a medida está siempre disponible vía consultoría.</div>
+          <div class="faq-a">Todas. Los agentes de Webchat y Email son producto listo para activar en días. Las demás áreas — gestión documental, automatización de procesos, marketing IA, datos y analítica — las construimos a medida sobre tu CRM: nos cuentas el caso, te damos una propuesta con precio claro y lo implementamos nosotros.</div>
         </div>
         <div class="faq-item">
           <div class="faq-q">¿Qué es el CRM de empentIA?</div>
@@ -985,10 +996,10 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
       <div class="footer-col">
         <h4>Soluciones</h4>
         <a href="https://empentia.com/agentes-ia-atencion-cliente/">Atención al cliente</a>
-        <span class="soon">Gestión documental <small>(próximamente)</small></span>
-        <span class="soon">Automatización de procesos <small>(próximamente)</small></span>
-        <span class="soon">Marketing IA <small>(próximamente)</small></span>
-        <span class="soon">Datos y analítica <small>(próximamente)</small></span>
+        <a href="#soluciones">Gestión documental</a>
+        <a href="#soluciones">Automatización de procesos</a>
+        <a href="#soluciones">Marketing IA</a>
+        <a href="#soluciones">Datos y analítica</a>
         <a href="#cta">IA a medida</a>
       </div>
       <div class="footer-col">
