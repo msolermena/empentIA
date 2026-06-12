@@ -8,8 +8,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://empentia.com'),
-  title: "empentIA - Automatització i IA per pimes",
-  description: "Automatitzacions i agents IA a mida per impulsar l'eficiència i el creixement del teu negoci. Sense complicacions tècniques.",
+  title: "Agentes de IA para pymes | empentIA",
+  description: "Diseñamos y operamos agentes de inteligencia artificial para pymes: atención al cliente, gestión documental y más. Tú pones el criterio; ellos, las horas.",
   alternates: { canonical: '/' },
   robots: {
     index: true,
@@ -18,31 +18,32 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicons/favicon-brand-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicons/favicon-brand.png', type: 'image/png' },
     ],
     apple: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicons/favicon-brand-180.png', sizes: '180x180', type: 'image/png' },
     ],
   },
   openGraph: {
-    title: 'empentIA - Automatització i IA per pimes',
-    description: 'Automatitzacions i agents IA a mida per impulsar l\'eficiència i el creixement del teu negoci.',
+    title: 'Agentes de IA para pymes | empentIA',
+    description: 'Diseñamos y operamos agentes de inteligencia artificial para pymes: atención al cliente, gestión documental y más.',
     images: [
       {
-        url: 'https://empentia.com/images/social/og-image.png',
+        url: 'https://empentia.com/images/social/og-atencion-cliente-es.jpg',
         width: 1200,
         height: 630,
         alt: 'empentIA',
       },
     ],
-    locale: 'ca_ES',
+    locale: 'es_ES',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'empentIA - Automatització i IA per pimes',
-    description: 'Automatitzacions i agents IA a mida per impulsar l\'eficiència del teu negoci.',
-    images: ['https://empentia.com/images/social/og-image.png'],
+    title: 'Agentes de IA para pymes | empentIA',
+    description: 'Diseñamos y operamos agentes de inteligencia artificial para pymes.',
+    images: ['https://empentia.com/images/social/og-atencion-cliente-es.jpg'],
   },
 };
 
@@ -52,7 +53,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ca" className="dark">
+    <html lang="es" className="dark">
       <head>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-3HNWY32B0D"
