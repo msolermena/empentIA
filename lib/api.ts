@@ -601,7 +601,10 @@ export type LandingLeadOrigen =
   | 'landing-home-contacte'
   // Audit
   | 'landing-auditoria-email'
-  | 'landing-auditoria-contacte';
+  | 'landing-auditoria-contacte'
+  // Auditoria atenció al client (calculadora de cost)
+  | 'landing-atencio-auditoria-contacte'
+  | 'landing-atencio-auditoria-reunio';
 
 export interface LandingLeadData {
   email: string;
