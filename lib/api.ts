@@ -607,6 +607,50 @@ export type LandingLeadOrigen =
   | 'landing-atencio-auditoria-reunio'
   | 'landing-atencio-auditoria-preacord';
 
+/**
+ * Detall complet de l'auditoria d'atenció al client (calculadora de cost).
+ * S'envia al lead perquè el portal rebi TOTA la informació: respostes,
+ * cost/estalvi calculat i la proposta completa. Etiquetes en castellà
+ * (canòniques) independentment de l'idioma de la UI.
+ */
+export interface AuditoriaDetalleLinea {
+  canal: string;
+  servicio: string;
+  plan: string;
+  precio_mes: number;
+  setup: number;
+  personalizado: boolean;
+}
+
+export interface AuditoriaDetalle {
+  idioma: 'es' | 'ca';
+  // Respostes del qüestionari
+  canales_activos: string[];
+  canales_nuevos: string[];
+  consultas_semana: number;
+  consultas_mes: number;
+  tipo_principal: string;
+  horas_semana: number;
+  coste_hora: number;
+  tiempo_respuesta: string;
+  notas?: string;
+  // Cost actual i estalvi calculat
+  coste_mes: number;
+  coste_anio: number;
+  ahorro_mes: number;
+  ahorro_anio: number;
+  horas_liberadas: number;
+  // Proposta
+  propuesta: {
+    lineas: AuditoriaDetalleLinea[];
+    addons: { nombre: string; precio_mes: number }[];
+    setup_total: number;
+    cuota_mensual: number;
+    tramo_dominante: string | null;
+    hay_personalizado: boolean;
+  };
+}
+
 export interface LandingLeadData {
   email: string;
   origen: LandingLeadOrigen;
@@ -618,6 +662,8 @@ export interface LandingLeadData {
   plataforma?: 'WooCommerce' | 'PrestaShop' | 'Shopify' | 'Web custom' | 'Altra';
   pla?: 'Starter' | 'Pro' | 'Business';
   consentiment_rgpd?: boolean;
+  consentiment_comercial?: boolean;       // opt-in de novetats/ofertes
+  detalle_auditoria?: AuditoriaDetalle;   // detall complet de la calculadora
 }
 
 /**
@@ -638,6 +684,32 @@ export async function createLandingLead(
     throw new Error(result.error || 'Error enviant formulari');
   }
   return result;
+}
+
+/**
+ * Envia un resum de l'auditoria per email (a hola@empentia.com) via la
+ * nostra API route /api/auditoria-notify. TEMPORAL: stopgap mentre el
+ * portal no recull les dades. Fire-and-forget.
+ */
+export interface AuditoriaEmailParams {
+  estado: string;
+  nombre?: string;
+  email: string;
+  empresa?: string;
+  web?: string;
+  marketing?: boolean;
+  detalle: AuditoriaDetalle;
+}
+
+export async function sendAuditoriaEmail(
+  params: AuditoriaEmailParams
+): Promise<void> {
+  // Barra final: el projecte usa trailingSlash:true (evita el redirect 308).
+  await fetch('/api/auditoria-notify/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(params),
+  });
 }
 
 /**

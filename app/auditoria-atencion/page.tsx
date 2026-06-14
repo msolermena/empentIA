@@ -24,9 +24,14 @@ import {
   BadgeCheck,
   Clock3,
 } from "lucide-react";
-import { scrapeCompany, createLandingLead } from "@/lib/api";
+import {
+  scrapeCompany,
+  createLandingLead,
+  sendAuditoriaEmail,
+  type AuditoriaDetalle,
+} from "@/lib/api";
 import { buildProposal, type Propuesta } from "@/lib/pricing";
-import { STR, getLang, type Dict } from "./i18n";
+import { STR, getLang, type Dict, type Lang } from "./i18n";
 
 // ============================================================
 // i18n CONTEXT
@@ -50,9 +55,16 @@ interface Contact {
   email: string;
   empresa: string;
   consent: boolean;
+  comercial: boolean;
 }
 
-const EMPTY_CONTACT: Contact = { nom: "", email: "", empresa: "", consent: false };
+const EMPTY_CONTACT: Contact = {
+  nom: "",
+  email: "",
+  empresa: "",
+  consent: false,
+  comercial: false,
+};
 
 // Orden de canales (las etiquetas viven en i18n: t.canales[id])
 const CANAL_IDS = [
@@ -187,6 +199,54 @@ function computeReport(a: Answers): Report {
   };
 }
 
+// Construye el detalle COMPLETO de la auditoría para enviarlo al lead del
+// portal. Etiquetas canónicas en castellano (STR.es) sea cual sea el idioma.
+function buildAuditoriaDetalle(a: Answers, lang: Lang): AuditoriaDetalle {
+  const r = computeReport(a);
+  const propuesta = buildProposal({
+    canales: [...a.canalesActivos, ...a.canalesNuevos],
+    consultasMes: r.consultasMes,
+  });
+  const es = STR.es;
+  const canal = (id: string) => es.canales[id] ?? id;
+
+  return {
+    idioma: lang,
+    canales_activos: a.canalesActivos.map(canal),
+    canales_nuevos: a.canalesNuevos.map(canal),
+    consultas_semana: parseFloat(a.consultasSemana) || 0,
+    consultas_mes: Math.round(r.consultasMes),
+    tipo_principal: a.tipoPrincipal,
+    horas_semana: r.horasSemana,
+    coste_hora: r.costeHora,
+    tiempo_respuesta: es.tiempos[a.tiempoRespuesta] ?? a.tiempoRespuesta,
+    notas: a.notas || undefined,
+    coste_mes: Math.round(r.costeMes),
+    coste_anio: Math.round(r.costeAnio),
+    ahorro_mes: Math.round(r.ahorroMes),
+    ahorro_anio: Math.round(r.ahorroAnio),
+    horas_liberadas: Math.round(r.horasLiberadas),
+    propuesta: {
+      lineas: propuesta.lineas.map((l) => ({
+        canal: canal(l.channelId),
+        servicio: es.serviceName[l.channelId] ?? l.label,
+        plan: l.esPersonalizado ? "Personalizado" : l.tier.label,
+        precio_mes: l.precioMes,
+        setup: l.setup,
+        personalizado: l.esPersonalizado,
+      })),
+      addons: propuesta.addons.map((ad) => ({
+        nombre: ad.label,
+        precio_mes: ad.precioMes,
+      })),
+      setup_total: propuesta.setupTotal,
+      cuota_mensual: propuesta.cuotaMensual,
+      tramo_dominante: propuesta.tramoDominante,
+      hay_personalizado: propuesta.hayPersonalizado,
+    },
+  };
+}
+
 // ============================================================
 // SHARED UI
 // ============================================================
@@ -310,6 +370,8 @@ export default function AuditoriaAtencionPage() {
       {step === "contacto" && (
         <ContactoStep
           url={url}
+          answers={answers}
+          lang={lang}
           onBack={() => setStep("cuestionario")}
           onDone={(c) => {
             setContact(c);
@@ -319,7 +381,12 @@ export default function AuditoriaAtencionPage() {
       )}
 
       {step === "informe" && (
-        <InformeStep answers={answers} contact={contact} url={url} />
+        <InformeStep
+          answers={answers}
+          contact={contact}
+          url={url}
+          lang={lang}
+        />
       )}
     </LangContext.Provider>
   );
@@ -813,10 +880,14 @@ function CuestionarioStep({
 
 function ContactoStep({
   url,
+  answers,
+  lang,
   onBack,
   onDone,
 }: {
   url: string;
+  answers: Answers;
+  lang: Lang;
   onBack: () => void;
   onDone: (contact: Contact) => void;
 }) {
@@ -841,7 +912,9 @@ function ContactoStep({
 
     setIsSubmitting(true);
 
-    // Lead fire-and-forget: no bloqueja veure l'informe
+    // Lead fire-and-forget: no bloqueja veure l'informe.
+    // Enviem el detall COMPLET de l'auditoria (respostes + proposta).
+    const detalle = buildAuditoriaDetalle(answers, lang);
     createLandingLead({
       email,
       origen: "landing-atencio-auditoria-contacte",
@@ -849,6 +922,19 @@ function ContactoStep({
       nom_empresa: empresa.trim() || undefined,
       url_web: url || undefined,
       consentiment_rgpd: consent,
+      consentiment_comercial: comercial,
+      detalle_auditoria: detalle,
+    }).catch(() => {});
+
+    // Stopgap: avís per email a hola@empentia.com mentre el portal no recull
+    sendAuditoriaEmail({
+      estado: "Auditoría completada",
+      nombre: nom.trim(),
+      email: email.trim(),
+      empresa: empresa.trim() || undefined,
+      web: url || undefined,
+      marketing: comercial,
+      detalle,
     }).catch(() => {});
 
     const data: Contact = {
@@ -856,6 +942,7 @@ function ContactoStep({
       email: email.trim(),
       empresa: empresa.trim(),
       consent,
+      comercial,
     };
     setTimeout(() => onDone(data), 300);
   };
@@ -988,10 +1075,12 @@ function InformeStep({
   answers,
   contact,
   url,
+  lang,
 }: {
   answers: Answers;
   contact: Contact;
   url: string;
+  lang: Lang;
 }) {
   const t = useT();
   const r = computeReport(answers);
@@ -1022,6 +1111,7 @@ function InformeStep({
     if (accepting || accepted) return;
     setAccepting(true);
 
+    const detalle = buildAuditoriaDetalle(answers, lang);
     createLandingLead({
       email: contact.email,
       origen: "landing-atencio-auditoria-preacord",
@@ -1029,7 +1119,20 @@ function InformeStep({
       nom_empresa: contact.empresa || undefined,
       url_web: url || undefined,
       consentiment_rgpd: contact.consent,
+      consentiment_comercial: contact.comercial,
       pla: propuesta.tramoDominante ?? undefined,
+      detalle_auditoria: detalle,
+    }).catch(() => {});
+
+    // Stopgap: avís per email a hola@empentia.com (lead calent)
+    sendAuditoriaEmail({
+      estado: "PROPUESTA PRE-ACEPTADA",
+      nombre: contact.nom || undefined,
+      email: contact.email,
+      empresa: contact.empresa || undefined,
+      web: url || undefined,
+      marketing: contact.comercial,
+      detalle,
     }).catch(() => {});
 
     // Mostrem confirmació encara que el lead trigui / falli
