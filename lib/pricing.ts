@@ -105,9 +105,6 @@ export const CANALES_PLAN: Record<string, ChannelPlan> = {
   },
 };
 
-// Canales del cuestionario sin producto vendible (no automatizables como tal).
-export const CANALES_SIN_PRODUCTO = ["presencial"];
-
 const PERSONALIZADO: Tier = {
   id: "personalizado",
   label: "Personalizado",

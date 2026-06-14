@@ -45,7 +45,6 @@ const es = {
     whatsapp: "WhatsApp",
     redes: "Redes sociales (DMs)",
     resenas: "Reseñas (Google)",
-    presencial: "Presencial / tienda",
   } as Record<string, string>,
   tipos: [
     "Dudas sobre productos o servicios",
@@ -264,7 +263,6 @@ const ca: Dict = {
     whatsapp: "WhatsApp",
     redes: "Xarxes socials (MD)",
     resenas: "Ressenyes (Google)",
-    presencial: "Presencial / botiga",
   },
   tipos: [
     "Dubtes sobre productes o serveis",

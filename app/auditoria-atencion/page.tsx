@@ -74,7 +74,6 @@ const CANAL_IDS = [
   "whatsapp",
   "redes",
   "resenas",
-  "presencial",
 ] as const;
 
 // Identidad de marca por servicio — manual "04 Color por servicio".
@@ -102,7 +101,6 @@ const CHIP_ICON: Record<string, BrandIconName> = {
   whatsapp: "whatsapp",
   redes: "red",
   resenas: "star",
-  presencial: "store",
 };
 
 interface ServiceBrand {
@@ -1565,7 +1563,7 @@ function PropuestaCard({ propuesta, r }: { propuesta: Propuesta; r: Report }) {
   const t = useT();
   const p = t.propuesta;
 
-  // Cap fallback: cliente sin ningún canal con producto (p. ej. solo presencial)
+  // Cap fallback: cliente sin ningún canal con producto vendible
   if (propuesta.sinCanalesVendibles) {
     return (
       <div className="a-card mb-8 border-2 bd-green p-8 text-center">
