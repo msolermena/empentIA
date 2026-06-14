@@ -105,13 +105,6 @@ export const CANALES_PLAN: Record<string, ChannelPlan> = {
   },
 };
 
-// Add-on transversal. El "formulario web" se cubre con este módulo (sin setup).
-export const ADDON_FORMULARIOS = {
-  id: "formulario",
-  label: "Formularios inteligentes",
-  precio: 19, // €/mes
-};
-
 // Canales del cuestionario sin producto vendible (no automatizables como tal).
 export const CANALES_SIN_PRODUCTO = ["presencial"];
 
@@ -189,10 +182,6 @@ export function buildProposal(opts: {
     (c) => CANALES_PLAN[c] && !opts.canalesActivos.includes(c)
   );
   const conProducto = [...activos, ...nuevos];
-  const tieneFormulario = [
-    ...opts.canalesActivos,
-    ...opts.canalesNuevos,
-  ].includes(ADDON_FORMULARIOS.id);
 
   const lineas: LineaPropuesta[] = conProducto.map((id) => {
     const plan = CANALES_PLAN[id];
@@ -216,9 +205,7 @@ export function buildProposal(opts: {
     };
   });
 
-  const addons: AddonPropuesta[] = tieneFormulario
-    ? [{ label: ADDON_FORMULARIOS.label, precioMes: ADDON_FORMULARIOS.precio }]
-    : [];
+  const addons: AddonPropuesta[] = [];
 
   const setupTotal = lineas.reduce((s, l) => s + l.setup, 0);
   const cuotaMensual =

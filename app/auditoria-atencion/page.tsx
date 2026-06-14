@@ -70,7 +70,6 @@ const EMPTY_CONTACT: Contact = {
 const CANAL_IDS = [
   "telefono",
   "email",
-  "formulario",
   "webchat",
   "whatsapp",
   "redes",
@@ -99,7 +98,6 @@ type BrandIconName =
 const CHIP_ICON: Record<string, BrandIconName> = {
   telefono: "voz",
   email: "email",
-  formulario: "formulario",
   webchat: "chat",
   whatsapp: "whatsapp",
   redes: "red",
@@ -120,7 +118,6 @@ const SERVICE: Record<string, ServiceBrand> = {
   telefono: { color: "#8a6a1a", icon: "voz", official: true },
   resenas: { color: "#4a6a5a", icon: "star", official: false },
   redes: { color: "#4a3a6f", icon: "red", official: false },
-  formulario: { color: "#1e3a5f", icon: "formulario", official: true },
 };
 
 // Canales con tarifa por volumen (se pregunta su volumen; el resto no).
@@ -576,7 +573,6 @@ function AnalyzingStep({
         const insights = res.pre_research?.insights;
         const detected: string[] = [];
         if (insights?.te_chat) detected.push("webchat");
-        if (insights?.te_formulari_contacte) detected.push("formulario");
         if (insights?.xarxes_socials && insights.xarxes_socials.length > 0)
           detected.push("redes");
         await minDelay;
@@ -1664,46 +1660,6 @@ function PropuestaCard({ propuesta, r }: { propuesta: Propuesta; r: Report }) {
                   <p className="mt-0.5 text-xs t-mute">
                     {l.esPersonalizado ? p.setupMedida : p.setup(eur(l.setup))}
                   </p>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-
-        {/* Add-ons */}
-        {propuesta.addons.map((a) => {
-          const svc = SERVICE.formulario;
-          return (
-            <div
-              key={a.label}
-              className="flex items-stretch overflow-hidden rounded-xl border bd bg-soft"
-            >
-              <span
-                className="w-1 flex-shrink-0"
-                style={{ background: svc.color }}
-                aria-hidden="true"
-              />
-              <div className="flex flex-1 items-start justify-between gap-3 p-4">
-                <div className="flex items-start gap-3">
-                  <div
-                    className="mt-0.5 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg"
-                    style={{ background: `${svc.color}1f` }}
-                  >
-                    <BrandIcon name={svc.icon} color={svc.color} className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <span className="font-semibold t-ink">
-                      {t.serviceName.formulario}
-                    </span>
-                    <p className="mt-1 text-xs t-mute">{p.complemento}</p>
-                  </div>
-                </div>
-                <div className="flex-shrink-0 text-right">
-                  <p className="font-bold t-ink">
-                    {eur(a.precioMes)}€
-                    <span className="text-sm font-normal t-mute">/mes</span>
-                  </p>
-                  <p className="mt-0.5 text-xs t-mute">{p.sinSetup}</p>
                 </div>
               </div>
             </div>

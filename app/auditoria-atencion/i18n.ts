@@ -41,7 +41,6 @@ const es = {
   canales: {
     telefono: "Teléfono",
     email: "Email",
-    formulario: "Formulario web",
     webchat: "Chat / Webchat",
     whatsapp: "WhatsApp",
     redes: "Redes sociales (DMs)",
@@ -199,7 +198,6 @@ const es = {
     telefono: "Agente de voz",
     resenas: "Reseñas Google",
     redes: "Redes sociales",
-    formulario: "Formularios inteligentes",
   } as Record<string, string>,
   resumen: {
     title: "Resumen de lo que nos has contado",
@@ -262,7 +260,6 @@ const ca: Dict = {
   canales: {
     telefono: "Telèfon",
     email: "Email",
-    formulario: "Formulari web",
     webchat: "Xat / Webchat",
     whatsapp: "WhatsApp",
     redes: "Xarxes socials (MD)",
@@ -419,7 +416,6 @@ const ca: Dict = {
     telefono: "Agent de veu",
     resenas: "Ressenyes Google",
     redes: "Xarxes socials",
-    formulario: "Formularis intel·ligents",
   },
   resumen: {
     title: "Resum del que ens has explicat",
