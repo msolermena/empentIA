@@ -5,13 +5,7 @@ import { useSearchParams } from "next/navigation";
 import {
   Globe,
   Loader2,
-  Phone,
-  Mail,
-  MessageCircle,
-  MessageSquare,
-  Star,
   Users,
-  Store,
   Clock,
   Euro,
   TrendingDown,
@@ -55,18 +49,17 @@ const EMPTY_CONTACT: Contact = { nom: "", email: "", empresa: "", consent: false
 interface Canal {
   id: string;
   label: string;
-  icon: typeof Phone;
 }
 
 const CANALES: Canal[] = [
-  { id: "telefono", label: "Teléfono", icon: Phone },
-  { id: "email", label: "Email", icon: Mail },
-  { id: "formulario", label: "Formulario web", icon: MessageSquare },
-  { id: "webchat", label: "Chat / Webchat", icon: MessageCircle },
-  { id: "whatsapp", label: "WhatsApp", icon: MessageCircle },
-  { id: "redes", label: "Redes sociales (DMs)", icon: Users },
-  { id: "resenas", label: "Reseñas (Google)", icon: Star },
-  { id: "presencial", label: "Presencial / tienda", icon: Store },
+  { id: "telefono", label: "Teléfono" },
+  { id: "email", label: "Email" },
+  { id: "formulario", label: "Formulario web" },
+  { id: "webchat", label: "Chat / Webchat" },
+  { id: "whatsapp", label: "WhatsApp" },
+  { id: "redes", label: "Redes sociales (DMs)" },
+  { id: "resenas", label: "Reseñas (Google)" },
+  { id: "presencial", label: "Presencial / tienda" },
 ];
 
 // Identidad de marca por servicio — manual "04 Color por servicio".
@@ -81,7 +74,21 @@ type BrandIconName =
   | "star"
   | "red"
   | "formulario"
+  | "store"
+  | "check"
   | "bolt";
+
+// Icono de marca por canal del cuestionario (mismo estilo línea + nodos).
+const CHIP_ICON: Record<string, BrandIconName> = {
+  telefono: "voz",
+  email: "email",
+  formulario: "formulario",
+  webchat: "chat",
+  whatsapp: "whatsapp",
+  redes: "red",
+  resenas: "star",
+  presencial: "store",
+};
 
 interface ServiceBrand {
   name: string;
@@ -574,7 +581,6 @@ function ChipGroup({
     <div className="flex flex-wrap gap-2.5">
       {options.map((opt) => {
         const isSel = selected.includes(opt.id);
-        const Icon = opt.icon;
         return (
           <button
             key={opt.id}
@@ -582,11 +588,10 @@ function ChipGroup({
             onClick={() => onToggle(opt.id)}
             className={`a-chip ${isSel ? "a-chip-on" : ""}`}
           >
-            {isSel ? (
-              <CheckCircle2 className="h-4 w-4" />
-            ) : (
-              <Icon className="h-4 w-4" />
-            )}
+            <BrandIcon
+              name={isSel ? "check" : CHIP_ICON[opt.id] ?? "bolt"}
+              className="h-4 w-4"
+            />
             {opt.label}
           </button>
         );
@@ -1385,6 +1390,20 @@ function BrandIcon({
         <path d="M14 3v4h4" />
         <path d="M9.5 12h5M9.5 15.5h5" />
         <circle cx="10" cy="8.5" r="1" fill={node} stroke="none" />
+      </>
+    ),
+    store: (
+      <>
+        <path d="M4 4h16l1 5H3z" />
+        <path d="M5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9" />
+        <path d="M9.5 20v-5h5v5" />
+        <circle cx="12" cy="6.5" r="1" fill={node} stroke="none" />
+      </>
+    ),
+    check: (
+      <>
+        <circle cx="12" cy="12" r="8.5" />
+        <path d="M8.5 12.2l2.3 2.3 4.7-4.9" />
       </>
     ),
     bolt: <path d="M13 3 L6 13 h5 l-1 8 L18 10 h-5 z" />,
