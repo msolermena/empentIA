@@ -17,6 +17,9 @@
 .DS_Store
 *.pem
 
+# fuente interna de precios (hoja de control, no se versiona)
+/data/
+
 # debug
 npm-debug.log*
 yarn-debug.log*

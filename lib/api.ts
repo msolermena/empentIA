@@ -604,7 +604,8 @@ export type LandingLeadOrigen =
   | 'landing-auditoria-contacte'
   // Auditoria atenció al client (calculadora de cost)
   | 'landing-atencio-auditoria-contacte'
-  | 'landing-atencio-auditoria-reunio';
+  | 'landing-atencio-auditoria-reunio'
+  | 'landing-atencio-auditoria-preacord';
 
 export interface LandingLeadData {
   email: string;

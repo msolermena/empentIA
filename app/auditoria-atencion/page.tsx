@@ -29,8 +29,12 @@ import {
   Headphones,
   Zap,
   Lock,
+  Wallet,
+  Receipt,
+  BadgeCheck,
 } from "lucide-react";
 import { scrapeCompany, createLandingLead } from "@/lib/api";
+import { buildProposal, type Propuesta } from "@/lib/pricing";
 
 // ============================================================
 // CONSTANTS
@@ -41,6 +45,15 @@ const HORAS_MES = 4.33; // setmanes per mes
 const FACTOR_AUTOMATITZABLE = 0.6; // % de temps de tasques repetitives automatitzable
 
 type StepId = "intro" | "analyzing" | "cuestionario" | "contacto" | "informe";
+
+interface Contact {
+  nom: string;
+  email: string;
+  empresa: string;
+  consent: boolean;
+}
+
+const EMPTY_CONTACT: Contact = { nom: "", email: "", empresa: "", consent: false };
 
 interface Canal {
   id: string;
@@ -58,6 +71,10 @@ const CANALES: Canal[] = [
   { id: "resenas", label: "Reseñas (Google)", icon: Star },
   { id: "presencial", label: "Presencial / tienda", icon: Store },
 ];
+
+const CANAL_ICON: Record<string, typeof Phone> = Object.fromEntries(
+  CANALES.map((c) => [c.id, c.icon])
+);
 
 const TIPOS_CONSULTA = [
   "Dudas sobre productos o servicios",
@@ -160,6 +177,7 @@ export default function AuditoriaAtencionPage() {
   const [step, setStep] = useState<StepId>("intro");
   const [url, setUrl] = useState("");
   const [answers, setAnswers] = useState<Answers>(EMPTY_ANSWERS);
+  const [contact, setContact] = useState<Contact>(EMPTY_CONTACT);
 
   // Deep-link: si arriba ?url=... saltem directament a l'anàlisi
   useEffect(() => {
@@ -213,11 +231,16 @@ export default function AuditoriaAtencionPage() {
         <ContactoStep
           url={url}
           onBack={() => setStep("cuestionario")}
-          onDone={() => setStep("informe")}
+          onDone={(c) => {
+            setContact(c);
+            setStep("informe");
+          }}
         />
       )}
 
-      {step === "informe" && <InformeStep answers={answers} />}
+      {step === "informe" && (
+        <InformeStep answers={answers} contact={contact} url={url} />
+      )}
     </div>
   );
 }
@@ -723,7 +746,7 @@ function ContactoStep({
 }: {
   url: string;
   onBack: () => void;
-  onDone: () => void;
+  onDone: (contact: Contact) => void;
 }) {
   const [nom, setNom] = useState("");
   const [email, setEmail] = useState("");
@@ -756,7 +779,13 @@ function ContactoStep({
       consentiment_rgpd: consent,
     }).catch(() => {});
 
-    setTimeout(() => onDone(), 300);
+    const c: Contact = {
+      nom: nom.trim(),
+      email: email.trim(),
+      empresa: empresa.trim(),
+      consent,
+    };
+    setTimeout(() => onDone(c), 300);
   };
 
   return (
@@ -898,8 +927,21 @@ function ContactoStep({
 // STEP 5 — INFORME
 // ============================================================
 
-function InformeStep({ answers }: { answers: Answers }) {
+function InformeStep({
+  answers,
+  contact,
+  url,
+}: {
+  answers: Answers;
+  contact: Contact;
+  url: string;
+}) {
   const r = computeReport(answers);
+
+  const propuesta = buildProposal({
+    canales: [...answers.canalesActivos, ...answers.canalesNuevos],
+    consultasMes: r.consultasMes,
+  });
 
   const tiempoLabel =
     TIEMPOS_RESPUESTA.find((t) => t.id === answers.tiempoRespuesta)?.label ||
@@ -916,6 +958,30 @@ function InformeStep({ answers }: { answers: Answers }) {
     r.costeMes > 0
       ? Math.max(12, Math.round(((r.costeMes - r.ahorroMes) / r.costeMes) * 100))
       : 100;
+
+  const [accepted, setAccepted] = useState(false);
+  const [accepting, setAccepting] = useState(false);
+
+  const handlePreaccept = () => {
+    if (accepting || accepted) return;
+    setAccepting(true);
+
+    createLandingLead({
+      email: contact.email,
+      origen: "landing-atencio-auditoria-preacord",
+      nom_contacte: contact.nom || undefined,
+      nom_empresa: contact.empresa || undefined,
+      url_web: url || undefined,
+      consentiment_rgpd: contact.consent,
+      pla: propuesta.tramoDominante ?? undefined,
+    }).catch(() => {});
+
+    // Mostrem confirmació encara que el lead trigui / falli
+    setTimeout(() => {
+      setAccepting(false);
+      setAccepted(true);
+    }, 600);
+  };
 
   return (
     <div className="container mx-auto max-w-3xl px-6 pt-24 pb-16">
@@ -1041,11 +1107,13 @@ function InformeStep({ answers }: { answers: Answers }) {
             </strong>
           </p>
           <p className="mt-2 text-sm text-slate-400">
-            El plan exacto y su precio te los preparamos a medida en la reunión,
-            según tus canales y volumen.
+            Y esto es lo que costaría automatizarlo en tu caso 👇
           </p>
         </CardContent>
       </Card>
+
+      {/* Propuesta a medida */}
+      <PropuestaCard propuesta={propuesta} r={r} />
 
       {/* Resumen de tu situación */}
       <Card className="mb-10 border border-slate-700/50">
@@ -1086,35 +1154,286 @@ function InformeStep({ answers }: { answers: Answers }) {
       </Card>
 
       {/* CTA final */}
-      <Card className="border-2 border-emerald-500/30">
-        <CardContent className="p-8 text-center">
-          <h3 className="mb-3 text-2xl font-bold text-slate-100">
-            Validemos juntos esta propuesta
-          </h3>
-          <p className="mx-auto mb-6 max-w-md text-slate-400">
-            En 20 minutos repasamos estos números contigo y te enseñamos cómo lo
-            automatizaríamos en tu caso, sin compromiso.
-          </p>
-          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a href={CAL_LINK} target="_blank" rel="noopener noreferrer">
-              <Button size="lg" className="gap-2">
-                <Calendar className="h-5 w-5" />
-                Concertar reunión
+      {accepted ? (
+        <Card className="border-2 border-emerald-500/40 bg-emerald-500/5">
+          <CardContent className="p-8 text-center">
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/20">
+              <BadgeCheck className="h-8 w-8 text-emerald-400" />
+            </div>
+            <h3 className="mb-2 text-2xl font-bold text-slate-50">
+              ¡Propuesta pre-aceptada! 🎉
+            </h3>
+            <p className="mx-auto mb-6 max-w-md text-slate-300">
+              Hemos guardado tu propuesta{contact.nom ? `, ${contact.nom}` : ""}.
+              Reserva ahora el kickoff y la dejamos cerrada en 20 minutos. Sin
+              pago ni permanencia hasta confirmarla juntos.
+            </p>
+            <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <a href={CAL_LINK} target="_blank" rel="noopener noreferrer">
+                <Button size="lg" className="gap-2">
+                  <Calendar className="h-5 w-5" />
+                  Reservar kickoff
+                </Button>
+              </a>
+              <Button
+                variant="outline"
+                size="lg"
+                className="gap-2"
+                onClick={() => window.print()}
+              >
+                <Download className="h-5 w-5" />
+                Descargar propuesta
               </Button>
-            </a>
-            <Button
-              variant="outline"
-              size="lg"
-              className="gap-2"
+            </div>
+          </CardContent>
+        </Card>
+      ) : (
+        <Card className="border-2 border-emerald-500/30">
+          <CardContent className="p-8 text-center">
+            <h3 className="mb-3 text-2xl font-bold text-slate-100">
+              ¿Empezamos?
+            </h3>
+            <p className="mx-auto mb-6 max-w-md text-slate-400">
+              Acepta la propuesta y reservamos el kickoff para ponerla en marcha.
+              Queda pre-acordada: sin pago ni permanencia, lo confirmamos todo
+              juntos en la reunión.
+            </p>
+            <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <Button
+                size="lg"
+                className="gap-2"
+                onClick={handlePreaccept}
+                disabled={accepting}
+              >
+                {accepting ? (
+                  <>
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                    Guardando...
+                  </>
+                ) : (
+                  <>
+                    <CheckCircle2 className="h-5 w-5" />
+                    Aceptar propuesta y reservar
+                  </>
+                )}
+              </Button>
+              <a href={CAL_LINK} target="_blank" rel="noopener noreferrer">
+                <Button variant="outline" size="lg" className="gap-2">
+                  <Calendar className="h-5 w-5" />
+                  Hablarlo primero
+                </Button>
+              </a>
+            </div>
+            <button
               onClick={() => window.print()}
+              className="mx-auto mt-5 flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-300"
             >
-              <Download className="h-5 w-5" />
-              Descargar propuesta
-            </Button>
+              <Download className="h-4 w-4" />
+              Descargar propuesta en PDF
+            </button>
+          </CardContent>
+        </Card>
+      )}
+    </div>
+  );
+}
+
+function PropuestaCard({
+  propuesta,
+  r,
+}: {
+  propuesta: Propuesta;
+  r: Report;
+}) {
+  // Cap fallback: cliente sin ningún canal con producto (p. ej. solo presencial)
+  if (propuesta.sinCanalesVendibles) {
+    return (
+      <Card className="mb-8 border-2 border-emerald-500/30">
+        <CardContent className="p-8 text-center">
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500/15">
+            <Sparkles className="h-7 w-7 text-emerald-400" />
           </div>
+          <h3 className="mb-2 text-xl font-bold text-slate-100">
+            Te preparamos una propuesta a medida
+          </h3>
+          <p className="mx-auto max-w-md text-sm text-slate-400">
+            Por tus canales, lo mejor es diseñarla contigo en una llamada corta.
+            En el kickoff te damos números cerrados.
+          </p>
         </CardContent>
       </Card>
-    </div>
+    );
+  }
+
+  const inversionMes = propuesta.cuotaMensual;
+  const ahorroNeto = r.ahorroMes - inversionMes;
+  const meses =
+    ahorroNeto > 0 && propuesta.setupTotal > 0
+      ? Math.ceil(propuesta.setupTotal / ahorroNeto)
+      : null;
+
+  return (
+    <Card className="mb-8 border-2 border-emerald-500/30">
+      <CardContent className="p-6 md:p-8">
+        <div className="mb-1 flex items-center gap-2">
+          <Receipt className="h-6 w-6 text-emerald-400" />
+          <h2 className="text-2xl font-bold text-slate-100">Tu propuesta</h2>
+        </div>
+        <p className="mb-6 text-sm text-slate-400">
+          Plan recomendado según tus canales y tu volumen estimado. Precios sin
+          IVA.
+        </p>
+
+        {/* Líneas por canal */}
+        <div className="space-y-3">
+          {propuesta.lineas.map((l) => {
+            const Icon = CANAL_ICON[l.channelId] ?? Sparkles;
+            return (
+              <div
+                key={l.channelId}
+                className="flex items-start justify-between gap-3 rounded-xl border border-slate-700/60 bg-slate-800/30 p-4"
+              >
+                <div className="flex items-start gap-3">
+                  <div className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-emerald-500/15">
+                    <Icon className="h-5 w-5 text-emerald-400" />
+                  </div>
+                  <div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="font-semibold text-slate-100">
+                        {l.label}
+                      </span>
+                      <span className="rounded-md bg-emerald-500/15 px-2 py-0.5 text-xs font-medium text-emerald-300">
+                        {l.esPersonalizado ? "Personalizado" : l.tier.label}
+                      </span>
+                      {l.estado !== "publicado" && (
+                        <span className="rounded-md bg-slate-700/60 px-2 py-0.5 text-xs text-slate-400">
+                          {l.estado === "nuevo" ? "Nuevo" : "Disponible pronto"}
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-1 text-xs text-slate-500">
+                      {l.esPersonalizado
+                        ? `Por encima de ${l.unidad} estándar · lo dimensionamos contigo`
+                        : `~${eur(l.volumenEstimado)} ${l.unidad}/mes incluidas`}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex-shrink-0 text-right">
+                  {l.esPersonalizado ? (
+                    <p className="font-bold text-slate-200">A medida</p>
+                  ) : (
+                    <p className="font-bold text-slate-100">
+                      {eur(l.precioMes)}€
+                      <span className="text-sm font-normal text-slate-500">
+                        /mes
+                      </span>
+                    </p>
+                  )}
+                  <p className="mt-0.5 text-xs text-slate-500">
+                    {l.esPersonalizado
+                      ? "Setup a medida"
+                      : `Setup ${eur(l.setup)}€`}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+
+          {/* Add-ons */}
+          {propuesta.addons.map((a) => (
+            <div
+              key={a.label}
+              className="flex items-start justify-between gap-3 rounded-xl border border-slate-700/60 bg-slate-800/30 p-4"
+            >
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-emerald-500/15">
+                  <Zap className="h-5 w-5 text-emerald-400" />
+                </div>
+                <div>
+                  <span className="font-semibold text-slate-100">{a.label}</span>
+                  <p className="mt-1 text-xs text-slate-500">Complemento</p>
+                </div>
+              </div>
+              <div className="flex-shrink-0 text-right">
+                <p className="font-bold text-slate-100">
+                  {eur(a.precioMes)}€
+                  <span className="text-sm font-normal text-slate-500">/mes</span>
+                </p>
+                <p className="mt-0.5 text-xs text-slate-500">Sin setup</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Totales */}
+        <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="rounded-xl border border-slate-700/60 bg-slate-800/40 p-4">
+            <div className="flex items-center gap-2 text-sm text-slate-400">
+              <Receipt className="h-4 w-4" />
+              Setup (pago único)
+            </div>
+            <p className="mt-1 text-2xl font-extrabold text-slate-100">
+              {eur(propuesta.setupTotal)}€
+              {propuesta.hayPersonalizado && (
+                <span className="text-sm font-normal text-slate-500">
+                  {" "}
+                  + a medida
+                </span>
+              )}
+            </p>
+            <p className="mt-0.5 text-xs text-slate-500">
+              {propuesta.numCanales} canal
+              {propuesta.numCanales === 1 ? "" : "es"} a configurar
+            </p>
+          </div>
+          <div className="rounded-xl border-2 border-emerald-500/40 bg-emerald-500/10 p-4">
+            <div className="flex items-center gap-2 text-sm text-emerald-300">
+              <Wallet className="h-4 w-4" />
+              Cuota mensual
+            </div>
+            <p className="mt-1 text-2xl font-extrabold text-emerald-400">
+              {eur(propuesta.cuotaMensual)}€
+              <span className="text-sm font-normal text-emerald-300/70">
+                /mes
+              </span>
+              {propuesta.hayPersonalizado && (
+                <span className="text-sm font-normal text-slate-500">
+                  {" "}
+                  + a medida
+                </span>
+              )}
+            </p>
+            <p className="mt-0.5 text-xs text-emerald-300/60">
+              Sin permanencia · cancelas cuando quieras
+            </p>
+          </div>
+        </div>
+
+        {/* ROI */}
+        {ahorroNeto > 0 && (
+          <div className="mt-4 flex items-start gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-4">
+            <TrendingDown className="mt-0.5 h-5 w-5 flex-shrink-0 text-emerald-400" />
+            <p className="text-sm text-slate-300">
+              Ahorras ~<strong className="text-emerald-400">{eur(r.ahorroMes)}€/mes</strong>{" "}
+              y la cuota es {eur(propuesta.cuotaMensual)}€/mes → ahorro neto de ~
+              <strong className="text-emerald-400">{eur(ahorroNeto)}€/mes</strong>.
+              {meses !== null && (
+                <>
+                  {" "}
+                  El setup se amortiza en ~{meses}{" "}
+                  {meses === 1 ? "mes" : "meses"}.
+                </>
+              )}
+            </p>
+          </div>
+        )}
+
+        <p className="mt-4 text-center text-xs text-slate-500">
+          Estimación a partir de tu volumen. El plan exacto de cada canal lo
+          afinamos contigo en el kickoff.
+        </p>
+      </CardContent>
+    </Card>
   );
 }
 
