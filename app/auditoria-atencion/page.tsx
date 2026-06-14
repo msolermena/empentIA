@@ -69,19 +69,60 @@ const CANALES: Canal[] = [
   { id: "presencial", label: "Presencial / tienda", icon: Store },
 ];
 
-const CANAL_ICON: Record<string, typeof Phone> = Object.fromEntries(
-  CANALES.map((c) => [c.id, c.icon])
-);
+// Identidad de marca por servicio — manual "04 Color por servicio".
+// name: nombre de producto · color: acento del manual · icon: icono de marca.
+// official=false → color prestado de la paleta documentada (pendiente de que
+// la marca asigne uno propio a email/reseñas/redes).
+type BrandIconName =
+  | "chat"
+  | "email"
+  | "whatsapp"
+  | "voz"
+  | "star"
+  | "red"
+  | "formulario"
+  | "bolt";
 
-// Color de marca por servicio (acentos del manual) para las líneas de propuesta.
-const CANAL_ACCENT: Record<string, string> = {
-  webchat: "#009a6e",
-  whatsapp: "#1f7a3e",
-  email: "#3a5a6f",
-  telefono: "#8a6a1a",
-  resenas: "#4a6a5a",
-  redes: "#4a3a6f",
-  formulario: "#1e3a5f",
+interface ServiceBrand {
+  name: string;
+  color: string;
+  icon: BrandIconName;
+  official: boolean;
+}
+
+const SERVICE: Record<string, ServiceBrand> = {
+  webchat: { name: "chatwebIA", color: "#1a1a1a", icon: "chat", official: true },
+  email: { name: "emailIA", color: "#3a5a6f", icon: "email", official: false },
+  whatsapp: {
+    name: "WhatsApp Business",
+    color: "#1f7a3e",
+    icon: "whatsapp",
+    official: true,
+  },
+  telefono: {
+    name: "Agente de voz",
+    color: "#8a6a1a",
+    icon: "voz",
+    official: true,
+  },
+  resenas: {
+    name: "Reseñas Google",
+    color: "#4a6a5a",
+    icon: "star",
+    official: false,
+  },
+  redes: {
+    name: "Redes sociales",
+    color: "#4a3a6f",
+    icon: "red",
+    official: false,
+  },
+  formulario: {
+    name: "Formularios inteligentes",
+    color: "#1e3a5f",
+    icon: "formulario",
+    official: true,
+  },
 };
 
 const TIPOS_CONSULTA = [
@@ -1280,6 +1321,92 @@ function InformeStep({
   );
 }
 
+// Iconos de marca: línea (stroke = color del servicio) con nodos verdes,
+// heredados del símbolo empentIA. Stroke 1.8, esquinas redondeadas.
+function BrandIcon({
+  name,
+  color,
+  className,
+}: {
+  name: BrandIconName;
+  color?: string;
+  className?: string;
+}) {
+  const node = "#00C088";
+  const inner: Record<BrandIconName, React.ReactNode> = {
+    chat: (
+      <>
+        <path d="M4 7.5A3.5 3.5 0 0 1 7.5 4h9A3.5 3.5 0 0 1 20 7.5v5A3.5 3.5 0 0 1 16.5 16H10l-4.5 3.2V16H7.5A3.5 3.5 0 0 1 4 12.5z" />
+        <circle cx="9" cy="10" r="1" fill={node} stroke="none" />
+        <circle cx="12" cy="10" r="1" fill={node} stroke="none" />
+        <circle cx="15" cy="10" r="1" fill={node} stroke="none" />
+      </>
+    ),
+    email: (
+      <>
+        <path d="M3 7A2.5 2.5 0 0 1 5.5 4.5h13A2.5 2.5 0 0 1 21 7v10a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17z" />
+        <path d="M4 7.5l8 5.5 8-5.5" />
+        <circle cx="12" cy="13.2" r="1.1" fill={node} stroke="none" />
+      </>
+    ),
+    whatsapp: (
+      <>
+        <path d="M12 3.6a8.4 8.4 0 0 0-7.2 12.8L3.6 20.4l4.4-1.1A8.4 8.4 0 1 0 12 3.6z" />
+        <circle cx="9" cy="12" r="1" fill={node} stroke="none" />
+        <circle cx="12" cy="12" r="1" fill={node} stroke="none" />
+        <circle cx="15" cy="12" r="1" fill={node} stroke="none" />
+      </>
+    ),
+    voz: (
+      <>
+        <rect x="9" y="3" width="6" height="11" rx="3" />
+        <path d="M5 11a7 7 0 0 0 14 0" />
+        <path d="M12 18v3M9 21h6" />
+        <circle cx="12" cy="8" r="1" fill={node} stroke="none" />
+      </>
+    ),
+    star: (
+      <>
+        <path d="M12 3.6l2.5 5.1 5.6.8-4.05 3.95.96 5.6L12 16.4l-5.01 2.65.96-5.6L3.9 9.5l5.6-.8z" />
+        <circle cx="12" cy="11.6" r="1" fill={node} stroke="none" />
+      </>
+    ),
+    red: (
+      <>
+        <path d="M7 7 L17 12 M7 17 L17 12" />
+        <circle cx="6" cy="6" r="2.2" fill={node} stroke="none" />
+        <circle cx="6" cy="18" r="2.2" fill={node} stroke="none" />
+        <circle cx="18" cy="12" r="2.2" fill={node} stroke="none" />
+      </>
+    ),
+    formulario: (
+      <>
+        <path d="M7 3h7l4 4v14H7z" />
+        <path d="M14 3v4h4" />
+        <path d="M9.5 12h5M9.5 15.5h5" />
+        <circle cx="10" cy="8.5" r="1" fill={node} stroke="none" />
+      </>
+    ),
+    bolt: <path d="M13 3 L6 13 h5 l-1 8 L18 10 h-5 z" />,
+  };
+
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      style={color ? { color } : undefined}
+      aria-hidden="true"
+    >
+      {inner[name]}
+    </svg>
+  );
+}
+
 function PropuestaCard({ propuesta, r }: { propuesta: Propuesta; r: Report }) {
   // Cap fallback: cliente sin ningún canal con producto (p. ej. solo presencial)
   if (propuesta.sinCanalesVendibles) {
@@ -1320,83 +1447,111 @@ function PropuestaCard({ propuesta, r }: { propuesta: Propuesta; r: Report }) {
       {/* Líneas por canal */}
       <div className="space-y-3">
         {propuesta.lineas.map((l) => {
-          const Icon = CANAL_ICON[l.channelId] ?? Sparkles;
-          const accent = CANAL_ACCENT[l.channelId] ?? "#009a6e";
+          const svc = SERVICE[l.channelId];
+          const accent = svc?.color ?? "#009a6e";
+          const nombre = svc?.name ?? l.label;
           return (
             <div
               key={l.channelId}
-              className="flex items-start justify-between gap-3 rounded-xl border bd bg-soft p-4"
+              className="flex items-stretch overflow-hidden rounded-xl border bd bg-soft"
             >
-              <div className="flex items-start gap-3">
-                <div
-                  className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg"
-                  style={{ background: `${accent}18`, color: accent }}
-                >
-                  <Icon className="h-5 w-5" />
-                </div>
-                <div>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="font-semibold t-ink">{l.label}</span>
-                    <span className="a-tag a-tag-green">
-                      {l.esPersonalizado ? "Personalizado" : l.tier.label}
-                    </span>
-                    {l.estado !== "publicado" && (
-                      <span className="a-tag a-tag-line">
-                        {l.estado === "nuevo" ? "Nuevo" : "Disponible pronto"}
-                      </span>
-                    )}
+              <span
+                className="w-1 flex-shrink-0"
+                style={{ background: accent }}
+                aria-hidden="true"
+              />
+              <div className="flex flex-1 items-start justify-between gap-3 p-4">
+                <div className="flex items-start gap-3">
+                  <div
+                    className="mt-0.5 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg"
+                    style={{ background: `${accent}1f` }}
+                  >
+                    <BrandIcon
+                      name={svc?.icon ?? "bolt"}
+                      color={accent}
+                      className="h-5 w-5"
+                    />
                   </div>
-                  <p className="mt-1 text-xs t-mute">
+                  <div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="font-semibold t-ink">{nombre}</span>
+                      <span className="a-tag a-tag-green">
+                        {l.esPersonalizado ? "Personalizado" : l.tier.label}
+                      </span>
+                      {l.estado !== "publicado" && (
+                        <span className="a-tag a-tag-line">
+                          {l.estado === "nuevo" ? "Nuevo" : "Disponible pronto"}
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-1 text-xs t-mute">
+                      {l.esPersonalizado
+                        ? `${l.label} · por encima del tramo estándar, lo dimensionamos contigo`
+                        : `${l.label} · ~${eur(l.volumenEstimado)} ${l.unidad}/mes`}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex-shrink-0 text-right">
+                  {l.esPersonalizado ? (
+                    <p className="font-bold t-ink">A medida</p>
+                  ) : (
+                    <p className="font-bold t-ink">
+                      {eur(l.precioMes)}€
+                      <span className="text-sm font-normal t-mute">/mes</span>
+                    </p>
+                  )}
+                  <p className="mt-0.5 text-xs t-mute">
                     {l.esPersonalizado
-                      ? `Por encima del tramo estándar · lo dimensionamos contigo`
-                      : `~${eur(l.volumenEstimado)} ${l.unidad}/mes incluidas`}
+                      ? "Setup a medida"
+                      : `Setup ${eur(l.setup)}€`}
                   </p>
                 </div>
-              </div>
-              <div className="flex-shrink-0 text-right">
-                {l.esPersonalizado ? (
-                  <p className="font-bold t-ink">A medida</p>
-                ) : (
-                  <p className="font-bold t-ink">
-                    {eur(l.precioMes)}€
-                    <span className="text-sm font-normal t-mute">/mes</span>
-                  </p>
-                )}
-                <p className="mt-0.5 text-xs t-mute">
-                  {l.esPersonalizado ? "Setup a medida" : `Setup ${eur(l.setup)}€`}
-                </p>
               </div>
             </div>
           );
         })}
 
         {/* Add-ons */}
-        {propuesta.addons.map((a) => (
-          <div
-            key={a.label}
-            className="flex items-start justify-between gap-3 rounded-xl border bd bg-soft p-4"
-          >
-            <div className="flex items-start gap-3">
-              <div
-                className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg"
-                style={{ background: "rgba(0,192,136,0.12)", color: "#009a6e" }}
-              >
-                <Zap className="h-5 w-5" />
-              </div>
-              <div>
-                <span className="font-semibold t-ink">{a.label}</span>
-                <p className="mt-1 text-xs t-mute">Complemento</p>
+        {propuesta.addons.map((a) => {
+          const svc = SERVICE.formulario;
+          return (
+            <div
+              key={a.label}
+              className="flex items-stretch overflow-hidden rounded-xl border bd bg-soft"
+            >
+              <span
+                className="w-1 flex-shrink-0"
+                style={{ background: svc.color }}
+                aria-hidden="true"
+              />
+              <div className="flex flex-1 items-start justify-between gap-3 p-4">
+                <div className="flex items-start gap-3">
+                  <div
+                    className="mt-0.5 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg"
+                    style={{ background: `${svc.color}1f` }}
+                  >
+                    <BrandIcon
+                      name={svc.icon}
+                      color={svc.color}
+                      className="h-5 w-5"
+                    />
+                  </div>
+                  <div>
+                    <span className="font-semibold t-ink">{a.label}</span>
+                    <p className="mt-1 text-xs t-mute">Complemento</p>
+                  </div>
+                </div>
+                <div className="flex-shrink-0 text-right">
+                  <p className="font-bold t-ink">
+                    {eur(a.precioMes)}€
+                    <span className="text-sm font-normal t-mute">/mes</span>
+                  </p>
+                  <p className="mt-0.5 text-xs t-mute">Sin setup</p>
+                </div>
               </div>
             </div>
-            <div className="flex-shrink-0 text-right">
-              <p className="font-bold t-ink">
-                {eur(a.precioMes)}€
-                <span className="text-sm font-normal t-mute">/mes</span>
-              </p>
-              <p className="mt-0.5 text-xs t-mute">Sin setup</p>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Totales */}
