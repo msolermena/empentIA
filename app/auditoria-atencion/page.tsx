@@ -2,10 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Logo } from "@/components/Logo";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import {
   Globe,
   Loader2,
@@ -32,6 +28,7 @@ import {
   Wallet,
   Receipt,
   BadgeCheck,
+  Clock3,
 } from "lucide-react";
 import { scrapeCompany, createLandingLead } from "@/lib/api";
 import { buildProposal, type Propuesta } from "@/lib/pricing";
@@ -75,6 +72,17 @@ const CANALES: Canal[] = [
 const CANAL_ICON: Record<string, typeof Phone> = Object.fromEntries(
   CANALES.map((c) => [c.id, c.icon])
 );
+
+// Color de marca por servicio (acentos del manual) para las líneas de propuesta.
+const CANAL_ACCENT: Record<string, string> = {
+  webchat: "#009a6e",
+  whatsapp: "#1f7a3e",
+  email: "#3a5a6f",
+  telefono: "#8a6a1a",
+  resenas: "#4a6a5a",
+  redes: "#4a3a6f",
+  formulario: "#1e3a5f",
+};
 
 const TIPOS_CONSULTA = [
   "Dudas sobre productos o servicios",
@@ -168,6 +176,70 @@ function computeReport(a: Answers): Report {
 }
 
 // ============================================================
+// SHARED UI
+// ============================================================
+
+function Header({ step }: { step: StepId }) {
+  const activeMap: Partial<Record<StepId, number>> = {
+    cuestionario: 0,
+    contacto: 1,
+    informe: 2,
+  };
+  const active = activeMap[step];
+
+  return (
+    <header className="no-print fixed top-0 z-50 w-full border-b bd bg-[var(--bg)]/85 backdrop-blur-md">
+      <nav className="container mx-auto flex h-16 items-center justify-between px-6">
+        <a href="/" className="flex items-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/logo/empentia-horizontal-color.svg"
+            alt="empentIA"
+            className="h-7 w-auto"
+          />
+        </a>
+        {active === undefined ? (
+          <span className="kicker hidden sm:inline">
+            Auditoría · atención al cliente
+          </span>
+        ) : (
+          <Stepper active={active} />
+        )}
+      </nav>
+    </header>
+  );
+}
+
+function Stepper({ active }: { active: number }) {
+  const steps = ["Preguntas", "Tus datos", "Propuesta"];
+  return (
+    <div className="flex items-center gap-1.5 sm:gap-2.5">
+      {steps.map((s, i) => (
+        <div key={s} className="flex items-center gap-1.5 sm:gap-2.5">
+          <span
+            className={`flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-semibold ${
+              i <= active ? "a-step-on" : "a-step-off"
+            }`}
+          >
+            {i + 1}
+          </span>
+          <span
+            className={`hidden text-xs font-medium sm:inline ${
+              i <= active ? "t-green" : "t-mute"
+            }`}
+          >
+            {s}
+          </span>
+          {i < steps.length - 1 && (
+            <span className="mx-0.5 h-px w-4 bg-line sm:w-6" />
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ============================================================
 // PAGE
 // ============================================================
 
@@ -189,15 +261,8 @@ export default function AuditoriaAtencionPage() {
   }, [searchParams]);
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="fixed top-0 z-50 w-full border-b border-emerald-500/10 bg-background/80 backdrop-blur-md">
-        <nav className="container mx-auto flex h-16 items-center px-6">
-          <Logo size="sm" variant="image" />
-          <span className="ml-4 hidden text-sm text-muted-foreground sm:inline">
-            Auditoría de atención al cliente
-          </span>
-        </nav>
-      </header>
+    <>
+      <Header step={step} />
 
       {step === "intro" && (
         <IntroStep
@@ -241,7 +306,7 @@ export default function AuditoriaAtencionPage() {
       {step === "informe" && (
         <InformeStep answers={answers} contact={contact} url={url} />
       )}
-    </div>
+    </>
   );
 }
 
@@ -272,30 +337,32 @@ function IntroStep({
   };
 
   return (
-    <div className="container mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center px-6 pt-16 pb-12">
-      <div className="mb-6 flex justify-center">
-        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500/15">
-          <Headphones className="h-8 w-8 text-emerald-400" />
+    <div className="a-glow">
+      <div className="container mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center px-6 pt-24 pb-16">
+        <div className="a-in flex flex-col items-center">
+          <span className="kicker mb-5 inline-flex items-center gap-2">
+            <Sparkles className="h-3.5 w-3.5" />
+            Auditoría gratuita · 2 min
+          </span>
+
+          <h1 className="serif mb-5 text-center text-4xl leading-[1.05] t-ink md:text-5xl">
+            ¿Cuánto te cuesta tu <em>atención al cliente</em>?
+          </h1>
+          <p className="mb-9 max-w-xl text-center text-lg leading-relaxed t-soft">
+            Responde unas preguntas y te calculamos, con tus propios números, lo
+            que dedicas hoy y lo que podrías ahorrar. Te llevas una propuesta
+            clara.
+          </p>
         </div>
-      </div>
 
-      <h1 className="mb-4 text-center text-3xl font-extrabold text-slate-50 md:text-4xl">
-        ¿Cuánto te cuesta tu atención al cliente?
-      </h1>
-      <p className="mb-8 max-w-xl text-center text-lg leading-relaxed text-slate-300">
-        Responde unas preguntas y te calculamos, con tus propios números, lo que
-        dedicas hoy y lo que podrías ahorrar. Te llevas una propuesta clara.
-      </p>
-
-      <Card className="w-full border-2 border-emerald-500/20">
-        <CardContent className="p-6 md:p-8">
+        <div className="a-card a-in w-full p-6 md:p-8">
           <form onSubmit={handleSubmit} className="space-y-4">
-            <label className="block text-sm font-medium text-slate-300">
+            <label className="block text-sm font-medium t-soft">
               Tu página web
             </label>
             <div className="flex flex-col gap-3 sm:flex-row">
               <div className="relative flex-1">
-                <Globe className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" />
+                <Globe className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 t-mute" />
                 <input
                   type="text"
                   value={url}
@@ -304,26 +371,39 @@ function IntroStep({
                     setError(null);
                   }}
                   placeholder="tuempresa.com"
-                  className="w-full rounded-xl border-2 border-slate-700 bg-slate-800/50 py-3 pl-12 pr-4 text-slate-100 placeholder-slate-500 transition-colors focus:border-emerald-500 focus:outline-none"
+                  className="a-input pl-12"
                 />
               </div>
-              <Button type="submit" size="lg" className="gap-2 whitespace-nowrap">
+              <button type="submit" className="a-btn a-btn-primary a-btn-lg">
                 Empezar
                 <ArrowRight className="h-5 w-5" />
-              </Button>
+              </button>
             </div>
             {error && (
-              <p className="flex items-center gap-2 text-sm text-red-400">
+              <p className="flex items-center gap-2 text-sm t-terra">
                 <AlertCircle className="h-4 w-4" />
                 {error}
               </p>
             )}
-            <p className="text-xs text-slate-500">
-              Tarda menos de 2 minutos · Sin compromiso
-            </p>
           </form>
-        </CardContent>
-      </Card>
+        </div>
+
+        <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+          {[
+            { icon: CheckCircle2, t: "Con tus propios números" },
+            { icon: Lock, t: "Sin compromiso" },
+            { icon: Zap, t: "Propuesta al instante" },
+          ].map((f) => (
+            <span
+              key={f.t}
+              className="inline-flex items-center gap-2 text-sm t-mute"
+            >
+              <f.icon className="h-4 w-4 t-green" />
+              {f.t}
+            </span>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
@@ -394,38 +474,39 @@ function AnalyzingStep({
   const CurrentIcon = ANALYZING_STEPS[currentStep].icon;
 
   return (
-    <div className="flex min-h-screen items-center justify-center px-6 pt-16">
+    <div className="a-glow flex min-h-screen items-center justify-center px-6 pt-16">
       <div className="w-full max-w-xl">
-        <div className="glass-card relative z-10 rounded-2xl border-2 border-emerald-500/20 p-8 md:p-12">
+        <div className="a-card p-8 text-center md:p-12">
           <div className="mb-8 flex justify-center">
-            <div className="relative">
-              <div className="absolute inset-0 animate-spin rounded-full border-4 border-transparent border-t-emerald-400 opacity-50" />
-              <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-emerald-500/15">
-                <CurrentIcon className="h-12 w-12 text-emerald-400 transition-all duration-300" />
+            <div className="relative h-24 w-24">
+              <div className="a-ring absolute inset-0 h-24 w-24" />
+              <div className="absolute inset-2 flex items-center justify-center rounded-full bg-[rgba(0,192,136,0.1)]">
+                <CurrentIcon className="h-11 w-11 t-green transition-all duration-300" />
               </div>
             </div>
           </div>
 
-          <h2 className="mb-3 text-center text-2xl font-bold text-slate-50 md:text-3xl">
+          <h2 className="serif mb-3 text-2xl t-ink md:text-3xl">
             {ANALYZING_STEPS[currentStep].message}
           </h2>
-          <p className="mb-8 text-center text-muted-foreground">
+          <p className="mb-8 t-soft">
             Estamos analizando{" "}
-            <strong className="text-slate-300">{url}</strong>
+            <strong className="mono text-[13px] t-ink">{url}</strong>
           </p>
 
-          <Progress value={progress} className="mb-2 h-3" />
-          <p className="text-center text-sm text-muted-foreground">
-            {Math.round(progress)}% completado
-          </p>
+          <div className="a-track mb-2">
+            <div className="a-fill" style={{ width: `${progress}%` }} />
+          </div>
+          <p className="mono text-sm t-mute">{Math.round(progress)}% completado</p>
 
           <div className="mt-8 flex items-center justify-center gap-2">
             {ANALYZING_STEPS.map((_, i) => (
               <div
                 key={i}
                 className={`h-2 rounded-full transition-all duration-300 ${
-                  i <= currentStep ? "w-8 bg-emerald-400" : "w-2 bg-slate-700"
+                  i <= currentStep ? "w-8" : "w-2 bg-line"
                 }`}
+                style={i <= currentStep ? { background: "var(--green)" } : {}}
               />
             ))}
           </div>
@@ -449,7 +530,7 @@ function ChipGroup({
   onToggle: (id: string) => void;
 }) {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-2.5">
       {options.map((opt) => {
         const isSel = selected.includes(opt.id);
         const Icon = opt.icon;
@@ -458,11 +539,7 @@ function ChipGroup({
             key={opt.id}
             type="button"
             onClick={() => onToggle(opt.id)}
-            className={`flex items-center gap-2 rounded-xl border px-3 py-2 text-sm transition-all ${
-              isSel
-                ? "border-emerald-500 bg-emerald-500/20 text-emerald-300"
-                : "border-slate-700 bg-slate-800/50 text-slate-400 hover:border-slate-600 hover:text-slate-300"
-            }`}
+            className={`a-chip ${isSel ? "a-chip-on" : ""}`}
           >
             {isSel ? (
               <CheckCircle2 className="h-4 w-4" />
@@ -475,6 +552,40 @@ function ChipGroup({
       })}
     </div>
   );
+}
+
+function QCard({
+  n,
+  title,
+  hint,
+  optional,
+  children,
+}: {
+  n: number;
+  title: string;
+  hint?: string;
+  optional?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="a-card p-6">
+      <div className="mb-1 flex items-baseline gap-2.5">
+        <span className="kicker">{String(n).padStart(2, "0")}</span>
+        <h2 className="serif text-lg t-ink">
+          {title}
+          {optional && (
+            <span className="ml-2 text-sm not-italic t-mute">(opcional)</span>
+          )}
+        </h2>
+      </div>
+      {hint && <p className="mb-4 text-sm t-mute">{hint}</p>}
+      <div className={hint ? "" : "mt-4"}>{children}</div>
+    </div>
+  );
+}
+
+function FieldLabel({ children }: { children: React.ReactNode }) {
+  return <label className="mb-2 block text-sm font-medium t-soft">{children}</label>;
 }
 
 function CuestionarioStep({
@@ -530,206 +641,154 @@ function CuestionarioStep({
 
   return (
     <div className="container mx-auto max-w-2xl px-6 pt-24 pb-12">
-      <h1 className="mb-2 text-2xl font-bold text-slate-100">
-        Cuéntanos cómo gestionáis la atención
-      </h1>
-      <p className="mb-8 text-slate-400">
-        Con tus respuestas calculamos el coste real y el ahorro potencial.
-      </p>
+      <div className="a-in mb-8">
+        <span className="kicker">Paso 1 de 3</span>
+        <h1 className="serif mt-2 text-3xl t-ink">
+          Cuéntanos cómo gestionáis la atención
+        </h1>
+        <p className="mt-2 t-soft">
+          Con tus respuestas calculamos el coste real y el ahorro potencial.
+        </p>
+      </div>
 
       <div className="space-y-5">
-        {/* Q1 — Canales activos */}
-        <Card className="border border-slate-700/50">
-          <CardContent className="p-6">
-            <h2 className="mb-1 font-semibold text-slate-200">
-              1. ¿Por qué canales atendéis hoy?
-            </h2>
-            <p className="mb-4 text-sm text-slate-500">
-              Marca todos los que uséis actualmente.
-            </p>
+        <QCard
+          n={1}
+          title="¿Por qué canales atendéis hoy?"
+          hint="Marca todos los que uséis actualmente."
+        >
+          <ChipGroup
+            options={CANALES}
+            selected={answers.canalesActivos}
+            onToggle={(id) => toggle("canalesActivos", id)}
+          />
+        </QCard>
+
+        <QCard
+          n={2}
+          title="¿Pensáis abrir algún canal nuevo?"
+          optional
+          hint="Canales que aún no usáis pero os gustaría ofrecer."
+        >
+          {nuevosDisponibles.length > 0 ? (
             <ChipGroup
-              options={CANALES}
-              selected={answers.canalesActivos}
-              onToggle={(id) => toggle("canalesActivos", id)}
+              options={nuevosDisponibles}
+              selected={answers.canalesNuevos}
+              onToggle={(id) => toggle("canalesNuevos", id)}
             />
-          </CardContent>
-        </Card>
+          ) : (
+            <p className="text-sm t-mute">Ya tenéis todos los canales activos 👌</p>
+          )}
+        </QCard>
 
-        {/* Q2 — Nuevos canales */}
-        <Card className="border border-slate-700/50">
-          <CardContent className="p-6">
-            <h2 className="mb-1 font-semibold text-slate-200">
-              2. ¿Pensáis abrir algún canal nuevo?{" "}
-              <span className="text-sm font-normal text-slate-500">
-                (opcional)
-              </span>
-            </h2>
-            <p className="mb-4 text-sm text-slate-500">
-              Canales que aún no usáis pero os gustaría ofrecer.
-            </p>
-            {nuevosDisponibles.length > 0 ? (
-              <ChipGroup
-                options={nuevosDisponibles}
-                selected={answers.canalesNuevos}
-                onToggle={(id) => toggle("canalesNuevos", id)}
+        <QCard n={3} title="Volumen de consultas">
+          <div className="space-y-4">
+            <div>
+              <FieldLabel>
+                ¿Cuántas consultas recibís a la semana? (aprox.)
+              </FieldLabel>
+              <input
+                type="number"
+                min={0}
+                value={answers.consultasSemana}
+                onChange={(e) => set("consultasSemana", e.target.value)}
+                placeholder="Ej: 80"
+                className="a-input"
               />
-            ) : (
-              <p className="text-sm text-slate-500">
-                Ya tenéis todos los canales activos 👌
+            </div>
+            <div>
+              <FieldLabel>¿Cuál es el tipo de consulta más habitual?</FieldLabel>
+              <select
+                value={answers.tipoPrincipal}
+                onChange={(e) => set("tipoPrincipal", e.target.value)}
+                className="a-input"
+              >
+                <option value="">Selecciona una opción</option>
+                {TIPOS_CONSULTA.map((t) => (
+                  <option key={t} value={t}>
+                    {t}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </QCard>
+
+        <QCard n={4} title="Tiempo y coste del equipo">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div>
+              <FieldLabel>Horas/semana dedicadas a atención</FieldLabel>
+              <input
+                type="number"
+                min={0}
+                value={answers.horasSemana}
+                onChange={(e) => set("horasSemana", e.target.value)}
+                placeholder="Ej: 15"
+                className="a-input"
+              />
+            </div>
+            <div>
+              <FieldLabel>Coste por hora del personal (€)</FieldLabel>
+              <input
+                type="number"
+                min={0}
+                value={answers.costeHora}
+                onChange={(e) => set("costeHora", e.target.value)}
+                placeholder="22"
+                className="a-input"
+              />
+              <p className="mt-1.5 text-xs t-mute">
+                Ajústalo a tu realidad. Por defecto, 22 €/h.
               </p>
-            )}
-          </CardContent>
-        </Card>
+            </div>
+          </div>
+        </QCard>
 
-        {/* Q3 — Volumen */}
-        <Card className="border border-slate-700/50">
-          <CardContent className="p-6">
-            <h2 className="mb-4 font-semibold text-slate-200">
-              3. Volumen de consultas
-            </h2>
-            <div className="space-y-4">
-              <div>
-                <label className="mb-2 block text-sm text-slate-400">
-                  ¿Cuántas consultas recibís a la semana? (aprox.)
-                </label>
-                <input
-                  type="number"
-                  min={0}
-                  value={answers.consultasSemana}
-                  onChange={(e) => set("consultasSemana", e.target.value)}
-                  placeholder="Ej: 80"
-                  className="w-full rounded-xl border-2 border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder-slate-500 focus:border-emerald-500 focus:outline-none"
-                />
-              </div>
-              <div>
-                <label className="mb-2 block text-sm text-slate-400">
-                  ¿Cuál es el tipo de consulta más habitual?
-                </label>
-                <select
-                  value={answers.tipoPrincipal}
-                  onChange={(e) => set("tipoPrincipal", e.target.value)}
-                  className="w-full rounded-xl border-2 border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-200 focus:border-emerald-500 focus:outline-none"
+        <QCard n={5} title="¿Cuánto tardáis en responder de media?">
+          <div className="flex flex-wrap gap-2.5">
+            {TIEMPOS_RESPUESTA.map((t) => {
+              const isSel = answers.tiempoRespuesta === t.id;
+              return (
+                <button
+                  key={t.id}
+                  type="button"
+                  onClick={() => set("tiempoRespuesta", t.id)}
+                  className={`a-chip ${isSel ? "a-chip-on" : ""}`}
                 >
-                  <option value="">Selecciona una opción</option>
-                  {TIPOS_CONSULTA.map((t) => (
-                    <option key={t} value={t}>
-                      {t}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+                  {t.label}
+                </button>
+              );
+            })}
+          </div>
+        </QCard>
 
-        {/* Q4 + Q5 — Tiempo y coste */}
-        <Card className="border border-slate-700/50">
-          <CardContent className="p-6">
-            <h2 className="mb-4 font-semibold text-slate-200">
-              4. Tiempo y coste del equipo
-            </h2>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div>
-                <label className="mb-2 block text-sm text-slate-400">
-                  Horas/semana dedicadas a atención
-                </label>
-                <input
-                  type="number"
-                  min={0}
-                  value={answers.horasSemana}
-                  onChange={(e) => set("horasSemana", e.target.value)}
-                  placeholder="Ej: 15"
-                  className="w-full rounded-xl border-2 border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder-slate-500 focus:border-emerald-500 focus:outline-none"
-                />
-              </div>
-              <div>
-                <label className="mb-2 block text-sm text-slate-400">
-                  Coste por hora del personal (€)
-                </label>
-                <input
-                  type="number"
-                  min={0}
-                  value={answers.costeHora}
-                  onChange={(e) => set("costeHora", e.target.value)}
-                  placeholder="22"
-                  className="w-full rounded-xl border-2 border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder-slate-500 focus:border-emerald-500 focus:outline-none"
-                />
-                <p className="mt-1.5 text-xs text-slate-500">
-                  Ajústalo a tu realidad. Por defecto, 22 €/h.
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Q6 — Tiempo de respuesta */}
-        <Card className="border border-slate-700/50">
-          <CardContent className="p-6">
-            <h2 className="mb-4 font-semibold text-slate-200">
-              5. ¿Cuánto tardáis en responder de media?
-            </h2>
-            <div className="flex flex-wrap gap-2">
-              {TIEMPOS_RESPUESTA.map((t) => {
-                const isSel = answers.tiempoRespuesta === t.id;
-                return (
-                  <button
-                    key={t.id}
-                    type="button"
-                    onClick={() => set("tiempoRespuesta", t.id)}
-                    className={`rounded-xl border px-4 py-2 text-sm transition-all ${
-                      isSel
-                        ? "border-emerald-500 bg-emerald-500/20 text-emerald-300"
-                        : "border-slate-700 bg-slate-800/50 text-slate-400 hover:border-slate-600"
-                    }`}
-                  >
-                    {t.label}
-                  </button>
-                );
-              })}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Q7 — Notas */}
-        <Card className="border border-slate-700/50">
-          <CardContent className="p-6">
-            <h2 className="mb-2 font-semibold text-slate-200">
-              6. ¿Algo más que deberíamos saber?{" "}
-              <span className="text-sm font-normal text-slate-500">
-                (opcional)
-              </span>
-            </h2>
-            <textarea
-              value={answers.notas}
-              onChange={(e) => set("notas", e.target.value)}
-              rows={3}
-              placeholder="Picos de temporada, idiomas, herramientas que usáis..."
-              className="w-full resize-none rounded-xl border-2 border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder-slate-500 focus:border-emerald-500 focus:outline-none"
-            />
-          </CardContent>
-        </Card>
+        <QCard n={6} title="¿Algo más que deberíamos saber?" optional>
+          <textarea
+            value={answers.notas}
+            onChange={(e) => set("notas", e.target.value)}
+            rows={3}
+            placeholder="Picos de temporada, idiomas, herramientas que usáis..."
+            className="a-input resize-none"
+          />
+        </QCard>
       </div>
 
       {error && (
-        <div className="mt-5 flex items-center gap-2 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+        <div className="mt-5 flex items-center gap-2 rounded-xl border bd-terra bg-[rgba(154,90,26,0.07)] px-4 py-3 text-sm t-terra">
           <AlertCircle className="h-4 w-4 flex-shrink-0" />
           {error}
         </div>
       )}
 
       <div className="mt-6 flex items-center justify-between gap-4">
-        <Button
-          variant="ghost"
-          onClick={onBack}
-          className="gap-2 text-slate-400 hover:text-slate-200"
-        >
+        <button onClick={onBack} className="a-btn a-btn-ghost">
           <ArrowLeft className="h-4 w-4" />
           Atrás
-        </Button>
-        <Button onClick={handleNext} size="lg" className="gap-2 px-6">
+        </button>
+        <button onClick={handleNext} className="a-btn a-btn-primary a-btn-lg">
           Ver mi informe
           <ArrowRight className="h-4 w-4" />
-        </Button>
+        </button>
       </div>
     </div>
   );
@@ -762,8 +821,7 @@ function ContactoStep({
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!nom.trim()) return setError("Introduce tu nombre");
-    if (!emailRegex.test(email))
-      return setError("Introduce un email válido");
+    if (!emailRegex.test(email)) return setError("Introduce un email válido");
     if (!consent)
       return setError("Debes aceptar la política de privacidad para continuar");
 
@@ -789,77 +847,69 @@ function ContactoStep({
   };
 
   return (
-    <div className="container mx-auto max-w-md px-6 pt-28 pb-16">
-      <Card className="border-2 border-emerald-500/20">
-        <CardContent className="p-8">
+    <div className="a-glow min-h-screen">
+      <div className="container mx-auto max-w-md px-6 pt-28 pb-16">
+        <div className="a-card a-in p-8">
           <div className="mb-6 text-center">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/15">
-              <CheckCircle2 className="h-8 w-8 text-emerald-400" />
+            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[rgba(0,192,136,0.12)]">
+              <CheckCircle2 className="h-7 w-7 t-green" />
             </div>
-            <h2 className="text-2xl font-bold text-slate-50">
-              Tu informe está listo
-            </h2>
-            <p className="mt-2 text-slate-400">
-              ¿A dónde te enviamos la propuesta?
-            </p>
+            <span className="kicker">Paso 2 de 3</span>
+            <h2 className="serif mt-2 text-2xl t-ink">Tu informe está listo</h2>
+            <p className="mt-2 t-soft">¿A dónde te enviamos la propuesta?</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="mb-1.5 block text-sm font-medium text-slate-300">
-                Nombre *
-              </label>
+              <FieldLabel>Nombre *</FieldLabel>
               <input
                 type="text"
                 value={nom}
                 onChange={(e) => setNom(e.target.value)}
                 placeholder="Tu nombre"
-                className="w-full rounded-xl border-2 border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder-slate-500 focus:border-emerald-500 focus:outline-none"
+                className="a-input"
                 disabled={isSubmitting}
               />
             </div>
             <div>
-              <label className="mb-1.5 block text-sm font-medium text-slate-300">
-                Email *
-              </label>
+              <FieldLabel>Email *</FieldLabel>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="nombre@empresa.com"
-                className="w-full rounded-xl border-2 border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder-slate-500 focus:border-emerald-500 focus:outline-none"
+                className="a-input"
                 disabled={isSubmitting}
               />
             </div>
             <div>
-              <label className="mb-1.5 block text-sm font-medium text-slate-300">
-                Empresa{" "}
-                <span className="text-slate-500">(opcional)</span>
-              </label>
+              <FieldLabel>
+                Empresa <span className="t-mute">(opcional)</span>
+              </FieldLabel>
               <input
                 type="text"
                 value={empresa}
                 onChange={(e) => setEmpresa(e.target.value)}
                 placeholder="Nombre de tu empresa"
-                className="w-full rounded-xl border-2 border-slate-700 bg-slate-800/50 px-4 py-3 text-slate-100 placeholder-slate-500 focus:border-emerald-500 focus:outline-none"
+                className="a-input"
                 disabled={isSubmitting}
               />
             </div>
 
-            <label className="flex cursor-pointer items-start gap-3 rounded-xl border-2 border-slate-700 bg-slate-800/30 p-4 transition-all hover:border-emerald-500/50">
+            <label className="flex cursor-pointer items-start gap-3 rounded-xl border bd bg-soft p-4 transition-colors hover:border-[var(--ink-mute)]">
               <input
                 type="checkbox"
                 checked={consent}
                 onChange={(e) => setConsent(e.target.checked)}
-                className="mt-0.5 h-5 w-5 rounded border-slate-600 bg-slate-800 text-emerald-500 focus:ring-2 focus:ring-emerald-500"
+                className="mt-0.5 h-5 w-5"
                 disabled={isSubmitting}
               />
-              <span className="text-sm text-slate-300">
+              <span className="text-sm t-soft">
                 Acepto la{" "}
                 <a
                   href="/privacy"
                   target="_blank"
-                  className="text-emerald-400 underline hover:text-emerald-300"
+                  className="t-green underline"
                 >
                   política de privacidad
                 </a>{" "}
@@ -867,29 +917,28 @@ function ContactoStep({
               </span>
             </label>
 
-            <label className="flex cursor-pointer items-start gap-3 rounded-xl border-2 border-slate-700 bg-slate-800/30 p-4 transition-all hover:border-emerald-500/50">
+            <label className="flex cursor-pointer items-start gap-3 rounded-xl border bd bg-soft p-4 transition-colors hover:border-[var(--ink-mute)]">
               <input
                 type="checkbox"
                 checked={comercial}
                 onChange={(e) => setComercial(e.target.checked)}
-                className="mt-0.5 h-5 w-5 rounded border-slate-600 bg-slate-800 text-emerald-500 focus:ring-2 focus:ring-emerald-500"
+                className="mt-0.5 h-5 w-5"
                 disabled={isSubmitting}
               />
-              <span className="text-sm text-slate-300">
+              <span className="text-sm t-soft">
                 Quiero recibir información sobre novedades y ofertas
               </span>
             </label>
 
             {error && (
-              <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-400">
+              <div className="rounded-xl border bd-terra bg-[rgba(154,90,26,0.07)] p-3 text-sm t-terra">
                 {error}
               </div>
             )}
 
-            <Button
+            <button
               type="submit"
-              size="lg"
-              className="h-14 w-full gap-2 text-base"
+              className="a-btn a-btn-primary a-btn-lg w-full"
               disabled={isSubmitting}
             >
               {isSubmitting ? (
@@ -903,22 +952,22 @@ function ContactoStep({
                   <ArrowRight className="h-5 w-5" />
                 </>
               )}
-            </Button>
+            </button>
           </form>
 
           <button
             onClick={onBack}
-            className="mt-4 flex w-full items-center justify-center gap-1 text-sm text-slate-500 hover:text-slate-300"
+            className="mt-4 flex w-full items-center justify-center gap-1 text-sm t-mute transition-colors hover:t-ink"
           >
             <ArrowLeft className="h-3 w-3" /> Volver a las preguntas
           </button>
 
-          <div className="mt-4 flex items-center justify-center gap-2 text-sm text-slate-500">
+          <div className="mt-4 flex items-center justify-center gap-2 text-sm t-mute">
             <Lock className="h-4 w-4" />
             <span>100% confidencial</span>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }
@@ -986,282 +1035,267 @@ function InformeStep({
   return (
     <div className="container mx-auto max-w-3xl px-6 pt-24 pb-16">
       {/* Hero */}
-      <div className="mb-10 text-center">
-        <div className="mb-4 flex justify-center">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/15">
-            <TrendingDown className="h-8 w-8 text-emerald-400" />
-          </div>
-        </div>
-        <h1 className="mb-3 text-3xl font-extrabold text-slate-50 md:text-4xl">
+      <div className="a-in mb-10 text-center">
+        <span className="kicker inline-flex items-center gap-2">
+          <TrendingDown className="h-3.5 w-3.5" />
+          Tu informe
+        </span>
+        <h1 className="serif mt-3 text-3xl t-ink md:text-4xl">
           Esto te cuesta tu atención al cliente
         </h1>
-        <p className="mx-auto max-w-xl text-slate-300">
+        <p className="mx-auto mt-3 max-w-xl t-soft">
           Calculado con tus propios datos: {eur(r.consultasMes)} consultas/mes y{" "}
           {r.horasSemana} h/semana de equipo.
         </p>
       </div>
 
       {/* Coste actual */}
-      <Card className="mb-8 border-2 border-amber-500/30">
-        <CardContent className="p-8">
-          <p className="mb-1 text-center text-sm uppercase tracking-wide text-amber-400">
-            Coste actual de gestión
-          </p>
-          <div className="grid grid-cols-1 gap-6 text-center md:grid-cols-2">
-            <div>
-              <p className="text-4xl font-extrabold text-amber-400">
-                {eur(r.costeMes)}€
-              </p>
-              <p className="text-sm text-slate-500">al mes</p>
-            </div>
-            <div className="md:border-l md:border-slate-700/50 md:pl-6">
-              <p className="text-4xl font-extrabold text-amber-400">
-                {eur(r.costeAnio)}€
-              </p>
-              <p className="text-sm text-slate-500">al año</p>
-            </div>
+      <div
+        className="a-card mb-8 overflow-hidden p-8"
+        style={{ borderTop: "3px solid var(--terra)" }}
+      >
+        <p className="kicker mb-4 text-center" style={{ color: "var(--terra)" }}>
+          Coste actual de gestión
+        </p>
+        <div className="grid grid-cols-1 gap-6 text-center md:grid-cols-2">
+          <div>
+            <p className="serif text-5xl t-terra">{eur(r.costeMes)}€</p>
+            <p className="mt-1 text-sm t-mute">al mes</p>
           </div>
-          <p className="mt-4 text-center text-sm text-slate-400">
-            {r.horasSemana} h/semana × {eur(r.costeHora)} €/h, hoy 100% manual.
-          </p>
-        </CardContent>
-      </Card>
-
-      {/* Comparativa */}
-      <h2 className="mb-4 flex items-center gap-2 text-2xl font-bold text-slate-200">
-        <Sparkles className="h-6 w-6 text-emerald-400" />
-        Comparativa: hoy vs con empentIA
-      </h2>
-
-      <div className="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-        {/* Hoy */}
-        <Card className="border border-slate-700/50">
-          <CardContent className="p-6">
-            <h3 className="mb-4 font-semibold text-slate-300">
-              Hoy (gestión interna)
-            </h3>
-            <ul className="space-y-3 text-sm text-slate-400">
-              <li className="flex items-start gap-2">
-                <Euro className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-400" />
-                {eur(r.costeMes)}€/mes en horas de tu equipo
-              </li>
-              <li className="flex items-start gap-2">
-                <Clock className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-400" />
-                Tiempo de respuesta: {tiempoLabel.toLowerCase()}
-              </li>
-              <li className="flex items-start gap-2">
-                <Users className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-400" />
-                Cobertura limitada al horario del equipo
-              </li>
-            </ul>
-            <div className="mt-5">
-              <div className="h-3 w-full overflow-hidden rounded-full bg-slate-800">
-                <div className="h-full w-full rounded-full bg-amber-500/70" />
-              </div>
-              <p className="mt-1 text-xs text-slate-500">Coste 100%</p>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Con empentIA */}
-        <Card className="border-2 border-emerald-500/40">
-          <CardContent className="p-6">
-            <h3 className="mb-4 font-semibold text-emerald-300">
-              Con empentIA
-            </h3>
-            <ul className="space-y-3 text-sm text-slate-300">
-              <li className="flex items-start gap-2">
-                <TrendingDown className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-400" />
-                Recuperas hasta {r.horasLiberadas.toFixed(0)} h/semana
-              </li>
-              <li className="flex items-start gap-2">
-                <Euro className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-400" />
-                Ahorro de hasta {eur(r.ahorroMes)}€/mes
-              </li>
-              <li className="flex items-start gap-2">
-                <Zap className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-400" />
-                Respuesta inmediata, 24/7, en todos los canales
-              </li>
-            </ul>
-            <div className="mt-5">
-              <div className="h-3 w-full overflow-hidden rounded-full bg-slate-800">
-                <div
-                  className="h-full rounded-full bg-emerald-500"
-                  style={{ width: `${restoPct}%` }}
-                />
-              </div>
-              <p className="mt-1 text-xs text-slate-500">
-                Coste estimado tras automatizar
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+          <div className="md:border-l md:bd md:pl-6">
+            <p className="serif text-5xl t-terra">{eur(r.costeAnio)}€</p>
+            <p className="mt-1 text-sm t-mute">al año</p>
+          </div>
+        </div>
+        <p className="mt-5 text-center text-sm t-soft">
+          {r.horasSemana} h/semana × {eur(r.costeHora)} €/h, hoy 100% manual.
+        </p>
       </div>
 
-      <Card className="mb-8 border border-emerald-500/20 bg-emerald-500/5">
-        <CardContent className="p-6 text-center">
-          <p className="text-lg text-slate-200">
-            Ahorro potencial estimado:{" "}
-            <strong className="text-emerald-400">
-              {eur(r.ahorroAnio)}€/año
-            </strong>
-          </p>
-          <p className="mt-2 text-sm text-slate-400">
-            Y esto es lo que costaría automatizarlo en tu caso 👇
-          </p>
-        </CardContent>
-      </Card>
+      {/* Comparativa */}
+      <div className="mb-4">
+        <span className="kicker">Comparativa</span>
+        <h2 className="serif mt-2 text-2xl t-ink">Hoy vs con empentIA</h2>
+      </div>
+
+      <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2">
+        {/* Hoy */}
+        <div className="a-card p-6">
+          <h3 className="serif mb-4 text-lg t-ink">Hoy (gestión interna)</h3>
+          <ul className="space-y-3 text-sm t-soft">
+            <li className="flex items-start gap-2">
+              <Euro className="mt-0.5 h-4 w-4 flex-shrink-0 t-terra" />
+              {eur(r.costeMes)}€/mes en horas de tu equipo
+            </li>
+            <li className="flex items-start gap-2">
+              <Clock className="mt-0.5 h-4 w-4 flex-shrink-0 t-terra" />
+              Tiempo de respuesta: {tiempoLabel.toLowerCase()}
+            </li>
+            <li className="flex items-start gap-2">
+              <Users className="mt-0.5 h-4 w-4 flex-shrink-0 t-terra" />
+              Cobertura limitada al horario del equipo
+            </li>
+          </ul>
+          <div className="mt-5">
+            <div className="a-track">
+              <div
+                className="h-full w-full rounded-full"
+                style={{ background: "rgba(154,90,26,0.55)" }}
+              />
+            </div>
+            <p className="mt-1.5 text-xs t-mute">Coste 100%</p>
+          </div>
+        </div>
+
+        {/* Con empentIA */}
+        <div className="a-card border-2 bd-green p-6">
+          <h3 className="serif mb-4 text-lg t-green">Con empentIA</h3>
+          <ul className="space-y-3 text-sm t-soft">
+            <li className="flex items-start gap-2">
+              <TrendingDown className="mt-0.5 h-4 w-4 flex-shrink-0 t-green" />
+              Recuperas hasta {r.horasLiberadas.toFixed(0)} h/semana
+            </li>
+            <li className="flex items-start gap-2">
+              <Euro className="mt-0.5 h-4 w-4 flex-shrink-0 t-green" />
+              Ahorro de hasta {eur(r.ahorroMes)}€/mes
+            </li>
+            <li className="flex items-start gap-2">
+              <Zap className="mt-0.5 h-4 w-4 flex-shrink-0 t-green" />
+              Respuesta inmediata, 24/7, en todos los canales
+            </li>
+          </ul>
+          <div className="mt-5">
+            <div className="a-track">
+              <div className="a-fill" style={{ width: `${restoPct}%` }} />
+            </div>
+            <p className="mt-1.5 text-xs t-mute">Coste estimado tras automatizar</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="mb-8 rounded-2xl border bd-green bg-[rgba(0,192,136,0.06)] p-6 text-center">
+        <p className="text-lg t-ink">
+          Ahorro potencial estimado:{" "}
+          <strong className="serif t-green">{eur(r.ahorroAnio)}€/año</strong>
+        </p>
+        <p className="mt-2 text-sm t-soft">
+          Y esto es lo que costaría automatizarlo en tu caso 👇
+        </p>
+      </div>
 
       {/* Propuesta a medida */}
       <PropuestaCard propuesta={propuesta} r={r} />
 
       {/* Resumen de tu situación */}
-      <Card className="mb-10 border border-slate-700/50">
-        <CardContent className="p-6">
-          <h3 className="mb-4 font-semibold text-slate-200">
-            Resumen de lo que nos has contado
-          </h3>
-          <div className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">
-            <ResumenItem label="Canales activos" value={canalesActivosLabels.join(", ") || "—"} />
-            <ResumenItem
-              label="Canales a abrir"
-              value={canalesNuevosLabels.join(", ") || "Ninguno indicado"}
-            />
-            <ResumenItem
-              label="Consultas / mes"
-              value={`${eur(r.consultasMes)} aprox.`}
-            />
-            <ResumenItem
-              label="Tipo más habitual"
-              value={answers.tipoPrincipal || "—"}
-            />
-            <ResumenItem
-              label="Dedicación"
-              value={`${r.horasSemana} h/semana`}
-            />
-            <ResumenItem
-              label="Tiempo de respuesta"
-              value={tiempoLabel}
-            />
-          </div>
-          {answers.notas && (
-            <p className="mt-4 border-t border-slate-800 pt-4 text-sm text-slate-400">
-              <span className="text-slate-500">Notas: </span>
-              {answers.notas}
-            </p>
-          )}
-        </CardContent>
-      </Card>
+      <div className="a-card mb-10 p-6">
+        <h3 className="serif mb-4 text-lg t-ink">
+          Resumen de lo que nos has contado
+        </h3>
+        <div className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">
+          <ResumenItem
+            label="Canales activos"
+            value={canalesActivosLabels.join(", ") || "—"}
+          />
+          <ResumenItem
+            label="Canales a abrir"
+            value={canalesNuevosLabels.join(", ") || "Ninguno indicado"}
+          />
+          <ResumenItem
+            label="Consultas / mes"
+            value={`${eur(r.consultasMes)} aprox.`}
+          />
+          <ResumenItem
+            label="Tipo más habitual"
+            value={answers.tipoPrincipal || "—"}
+          />
+          <ResumenItem label="Dedicación" value={`${r.horasSemana} h/semana`} />
+          <ResumenItem label="Tiempo de respuesta" value={tiempoLabel} />
+        </div>
+        {answers.notas && (
+          <p className="mt-4 border-t bd pt-4 text-sm t-soft">
+            <span className="t-mute">Notas: </span>
+            {answers.notas}
+          </p>
+        )}
+      </div>
 
       {/* CTA final */}
       {accepted ? (
-        <Card className="border-2 border-emerald-500/40 bg-emerald-500/5">
-          <CardContent className="p-8 text-center">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/20">
-              <BadgeCheck className="h-8 w-8 text-emerald-400" />
-            </div>
-            <h3 className="mb-2 text-2xl font-bold text-slate-50">
-              ¡Propuesta pre-aceptada! 🎉
-            </h3>
-            <p className="mx-auto mb-6 max-w-md text-slate-300">
-              Hemos guardado tu propuesta{contact.nom ? `, ${contact.nom}` : ""}.
-              Reserva ahora el kickoff y la dejamos cerrada en 20 minutos. Sin
-              pago ni permanencia hasta confirmarla juntos.
-            </p>
-            <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <a href={CAL_LINK} target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="gap-2">
-                  <Calendar className="h-5 w-5" />
-                  Reservar kickoff
-                </Button>
-              </a>
-              <Button
-                variant="outline"
-                size="lg"
-                className="gap-2"
-                onClick={() => window.print()}
-              >
-                <Download className="h-5 w-5" />
-                Descargar propuesta
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      ) : (
-        <Card className="border-2 border-emerald-500/30">
-          <CardContent className="p-8 text-center">
-            <h3 className="mb-3 text-2xl font-bold text-slate-100">
-              ¿Empezamos?
-            </h3>
-            <p className="mx-auto mb-6 max-w-md text-slate-400">
-              Acepta la propuesta y reservamos el kickoff para ponerla en marcha.
-              Queda pre-acordada: sin pago ni permanencia, lo confirmamos todo
-              juntos en la reunión.
-            </p>
-            <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button
-                size="lg"
-                className="gap-2"
-                onClick={handlePreaccept}
-                disabled={accepting}
-              >
-                {accepting ? (
-                  <>
-                    <Loader2 className="h-5 w-5 animate-spin" />
-                    Guardando...
-                  </>
-                ) : (
-                  <>
-                    <CheckCircle2 className="h-5 w-5" />
-                    Aceptar propuesta y reservar
-                  </>
-                )}
-              </Button>
-              <a href={CAL_LINK} target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" size="lg" className="gap-2">
-                  <Calendar className="h-5 w-5" />
-                  Hablarlo primero
-                </Button>
-              </a>
-            </div>
+        <div className="a-cta a-in p-8 text-center md:p-10">
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[rgba(6,36,26,0.12)]">
+            <BadgeCheck className="h-8 w-8" style={{ color: "var(--green-ink)" }} />
+          </div>
+          <h3 className="serif mb-2 text-3xl" style={{ color: "var(--green-ink)" }}>
+            ¡Propuesta pre-aceptada! 🎉
+          </h3>
+          <p
+            className="mx-auto mb-6 max-w-md"
+            style={{ color: "rgba(6,36,26,0.8)" }}
+          >
+            Hemos guardado tu propuesta{contact.nom ? `, ${contact.nom}` : ""}.
+            Reserva ahora el kickoff y la dejamos cerrada en 20 minutos. Sin pago
+            ni permanencia hasta confirmarla juntos.
+          </p>
+          <div className="no-print flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a
+              href={CAL_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="a-btn a-btn-on-grad a-btn-lg"
+            >
+              <Calendar className="h-5 w-5" />
+              Reservar kickoff
+            </a>
             <button
               onClick={() => window.print()}
-              className="mx-auto mt-5 flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-300"
+              className="a-btn a-btn-lg"
+              style={{
+                background: "transparent",
+                color: "var(--green-ink)",
+                borderColor: "rgba(6,36,26,0.35)",
+              }}
             >
-              <Download className="h-4 w-4" />
-              Descargar propuesta en PDF
+              <Download className="h-5 w-5" />
+              Descargar propuesta
             </button>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
+      ) : (
+        <div className="a-cta p-8 text-center md:p-10">
+          <h3 className="serif mb-3 text-3xl" style={{ color: "var(--green-ink)" }}>
+            ¿Empezamos?
+          </h3>
+          <p
+            className="mx-auto mb-6 max-w-md"
+            style={{ color: "rgba(6,36,26,0.8)" }}
+          >
+            Acepta la propuesta y reservamos el kickoff para ponerla en marcha.
+            Queda pre-acordada: sin pago ni permanencia, lo confirmamos todo
+            juntos en la reunión.
+          </p>
+          <div className="no-print flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <button
+              className="a-btn a-btn-on-grad a-btn-lg"
+              onClick={handlePreaccept}
+              disabled={accepting}
+            >
+              {accepting ? (
+                <>
+                  <Loader2 className="h-5 w-5 animate-spin" />
+                  Guardando...
+                </>
+              ) : (
+                <>
+                  <CheckCircle2 className="h-5 w-5" />
+                  Aceptar propuesta y reservar
+                </>
+              )}
+            </button>
+            <a
+              href={CAL_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="a-btn a-btn-lg"
+              style={{
+                background: "transparent",
+                color: "var(--green-ink)",
+                borderColor: "rgba(6,36,26,0.35)",
+              }}
+            >
+              <Calendar className="h-5 w-5" />
+              Hablarlo primero
+            </a>
+          </div>
+          <button
+            onClick={() => window.print()}
+            className="no-print mx-auto mt-5 flex items-center gap-1.5 text-sm"
+            style={{ color: "rgba(6,36,26,0.7)" }}
+          >
+            <Download className="h-4 w-4" />
+            Descargar propuesta en PDF
+          </button>
+        </div>
       )}
     </div>
   );
 }
 
-function PropuestaCard({
-  propuesta,
-  r,
-}: {
-  propuesta: Propuesta;
-  r: Report;
-}) {
+function PropuestaCard({ propuesta, r }: { propuesta: Propuesta; r: Report }) {
   // Cap fallback: cliente sin ningún canal con producto (p. ej. solo presencial)
   if (propuesta.sinCanalesVendibles) {
     return (
-      <Card className="mb-8 border-2 border-emerald-500/30">
-        <CardContent className="p-8 text-center">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500/15">
-            <Sparkles className="h-7 w-7 text-emerald-400" />
-          </div>
-          <h3 className="mb-2 text-xl font-bold text-slate-100">
-            Te preparamos una propuesta a medida
-          </h3>
-          <p className="mx-auto max-w-md text-sm text-slate-400">
-            Por tus canales, lo mejor es diseñarla contigo en una llamada corta.
-            En el kickoff te damos números cerrados.
-          </p>
-        </CardContent>
-      </Card>
+      <div className="a-card mb-8 border-2 bd-green p-8 text-center">
+        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[rgba(0,192,136,0.12)]">
+          <Sparkles className="h-7 w-7 t-green" />
+        </div>
+        <h3 className="serif mb-2 text-xl t-ink">
+          Te preparamos una propuesta a medida
+        </h3>
+        <p className="mx-auto max-w-md text-sm t-soft">
+          Por tus canales, lo mejor es diseñarla contigo en una llamada corta. En
+          el kickoff te damos números cerrados.
+        </p>
+      </div>
     );
   }
 
@@ -1273,175 +1307,168 @@ function PropuestaCard({
       : null;
 
   return (
-    <Card className="mb-8 border-2 border-emerald-500/30">
-      <CardContent className="p-6 md:p-8">
-        <div className="mb-1 flex items-center gap-2">
-          <Receipt className="h-6 w-6 text-emerald-400" />
-          <h2 className="text-2xl font-bold text-slate-100">Tu propuesta</h2>
-        </div>
-        <p className="mb-6 text-sm text-slate-400">
-          Plan recomendado según tus canales y tu volumen estimado. Precios sin
-          IVA.
-        </p>
+    <div className="a-card mb-8 border-2 bd-green p-6 md:p-8">
+      <div className="mb-1 flex items-center gap-2.5">
+        <Receipt className="h-5 w-5 t-green" />
+        <span className="kicker">Tu propuesta</span>
+      </div>
+      <h2 className="serif mb-1 text-2xl t-ink">Plan recomendado</h2>
+      <p className="mb-6 text-sm t-mute">
+        Según tus canales y tu volumen estimado. Precios sin IVA.
+      </p>
 
-        {/* Líneas por canal */}
-        <div className="space-y-3">
-          {propuesta.lineas.map((l) => {
-            const Icon = CANAL_ICON[l.channelId] ?? Sparkles;
-            return (
-              <div
-                key={l.channelId}
-                className="flex items-start justify-between gap-3 rounded-xl border border-slate-700/60 bg-slate-800/30 p-4"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-emerald-500/15">
-                    <Icon className="h-5 w-5 text-emerald-400" />
-                  </div>
-                  <div>
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="font-semibold text-slate-100">
-                        {l.label}
-                      </span>
-                      <span className="rounded-md bg-emerald-500/15 px-2 py-0.5 text-xs font-medium text-emerald-300">
-                        {l.esPersonalizado ? "Personalizado" : l.tier.label}
-                      </span>
-                      {l.estado !== "publicado" && (
-                        <span className="rounded-md bg-slate-700/60 px-2 py-0.5 text-xs text-slate-400">
-                          {l.estado === "nuevo" ? "Nuevo" : "Disponible pronto"}
-                        </span>
-                      )}
-                    </div>
-                    <p className="mt-1 text-xs text-slate-500">
-                      {l.esPersonalizado
-                        ? `Por encima de ${l.unidad} estándar · lo dimensionamos contigo`
-                        : `~${eur(l.volumenEstimado)} ${l.unidad}/mes incluidas`}
-                    </p>
-                  </div>
+      {/* Líneas por canal */}
+      <div className="space-y-3">
+        {propuesta.lineas.map((l) => {
+          const Icon = CANAL_ICON[l.channelId] ?? Sparkles;
+          const accent = CANAL_ACCENT[l.channelId] ?? "#009a6e";
+          return (
+            <div
+              key={l.channelId}
+              className="flex items-start justify-between gap-3 rounded-xl border bd bg-soft p-4"
+            >
+              <div className="flex items-start gap-3">
+                <div
+                  className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg"
+                  style={{ background: `${accent}18`, color: accent }}
+                >
+                  <Icon className="h-5 w-5" />
                 </div>
-                <div className="flex-shrink-0 text-right">
-                  {l.esPersonalizado ? (
-                    <p className="font-bold text-slate-200">A medida</p>
-                  ) : (
-                    <p className="font-bold text-slate-100">
-                      {eur(l.precioMes)}€
-                      <span className="text-sm font-normal text-slate-500">
-                        /mes
+                <div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="font-semibold t-ink">{l.label}</span>
+                    <span className="a-tag a-tag-green">
+                      {l.esPersonalizado ? "Personalizado" : l.tier.label}
+                    </span>
+                    {l.estado !== "publicado" && (
+                      <span className="a-tag a-tag-line">
+                        {l.estado === "nuevo" ? "Nuevo" : "Disponible pronto"}
                       </span>
-                    </p>
-                  )}
-                  <p className="mt-0.5 text-xs text-slate-500">
+                    )}
+                  </div>
+                  <p className="mt-1 text-xs t-mute">
                     {l.esPersonalizado
-                      ? "Setup a medida"
-                      : `Setup ${eur(l.setup)}€`}
+                      ? `Por encima del tramo estándar · lo dimensionamos contigo`
+                      : `~${eur(l.volumenEstimado)} ${l.unidad}/mes incluidas`}
                   </p>
                 </div>
               </div>
-            );
-          })}
-
-          {/* Add-ons */}
-          {propuesta.addons.map((a) => (
-            <div
-              key={a.label}
-              className="flex items-start justify-between gap-3 rounded-xl border border-slate-700/60 bg-slate-800/30 p-4"
-            >
-              <div className="flex items-start gap-3">
-                <div className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-emerald-500/15">
-                  <Zap className="h-5 w-5 text-emerald-400" />
-                </div>
-                <div>
-                  <span className="font-semibold text-slate-100">{a.label}</span>
-                  <p className="mt-1 text-xs text-slate-500">Complemento</p>
-                </div>
-              </div>
               <div className="flex-shrink-0 text-right">
-                <p className="font-bold text-slate-100">
-                  {eur(a.precioMes)}€
-                  <span className="text-sm font-normal text-slate-500">/mes</span>
+                {l.esPersonalizado ? (
+                  <p className="font-bold t-ink">A medida</p>
+                ) : (
+                  <p className="font-bold t-ink">
+                    {eur(l.precioMes)}€
+                    <span className="text-sm font-normal t-mute">/mes</span>
+                  </p>
+                )}
+                <p className="mt-0.5 text-xs t-mute">
+                  {l.esPersonalizado ? "Setup a medida" : `Setup ${eur(l.setup)}€`}
                 </p>
-                <p className="mt-0.5 text-xs text-slate-500">Sin setup</p>
               </div>
             </div>
-          ))}
-        </div>
+          );
+        })}
 
-        {/* Totales */}
-        <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
-          <div className="rounded-xl border border-slate-700/60 bg-slate-800/40 p-4">
-            <div className="flex items-center gap-2 text-sm text-slate-400">
-              <Receipt className="h-4 w-4" />
-              Setup (pago único)
+        {/* Add-ons */}
+        {propuesta.addons.map((a) => (
+          <div
+            key={a.label}
+            className="flex items-start justify-between gap-3 rounded-xl border bd bg-soft p-4"
+          >
+            <div className="flex items-start gap-3">
+              <div
+                className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg"
+                style={{ background: "rgba(0,192,136,0.12)", color: "#009a6e" }}
+              >
+                <Zap className="h-5 w-5" />
+              </div>
+              <div>
+                <span className="font-semibold t-ink">{a.label}</span>
+                <p className="mt-1 text-xs t-mute">Complemento</p>
+              </div>
             </div>
-            <p className="mt-1 text-2xl font-extrabold text-slate-100">
-              {eur(propuesta.setupTotal)}€
-              {propuesta.hayPersonalizado && (
-                <span className="text-sm font-normal text-slate-500">
-                  {" "}
-                  + a medida
-                </span>
-              )}
-            </p>
-            <p className="mt-0.5 text-xs text-slate-500">
-              {propuesta.numCanales} canal
-              {propuesta.numCanales === 1 ? "" : "es"} a configurar
-            </p>
-          </div>
-          <div className="rounded-xl border-2 border-emerald-500/40 bg-emerald-500/10 p-4">
-            <div className="flex items-center gap-2 text-sm text-emerald-300">
-              <Wallet className="h-4 w-4" />
-              Cuota mensual
+            <div className="flex-shrink-0 text-right">
+              <p className="font-bold t-ink">
+                {eur(a.precioMes)}€
+                <span className="text-sm font-normal t-mute">/mes</span>
+              </p>
+              <p className="mt-0.5 text-xs t-mute">Sin setup</p>
             </div>
-            <p className="mt-1 text-2xl font-extrabold text-emerald-400">
-              {eur(propuesta.cuotaMensual)}€
-              <span className="text-sm font-normal text-emerald-300/70">
-                /mes
-              </span>
-              {propuesta.hayPersonalizado && (
-                <span className="text-sm font-normal text-slate-500">
-                  {" "}
-                  + a medida
-                </span>
-              )}
-            </p>
-            <p className="mt-0.5 text-xs text-emerald-300/60">
-              Sin permanencia · cancelas cuando quieras
-            </p>
           </div>
+        ))}
+      </div>
+
+      {/* Totales */}
+      <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div className="rounded-xl border bd bg-soft p-4">
+          <div className="flex items-center gap-2 text-sm t-soft">
+            <Receipt className="h-4 w-4" />
+            Setup (pago único)
+          </div>
+          <p className="serif mt-1 text-3xl t-ink">
+            {eur(propuesta.setupTotal)}€
+            {propuesta.hayPersonalizado && (
+              <span className="text-sm t-mute"> + a medida</span>
+            )}
+          </p>
+          <p className="mt-0.5 text-xs t-mute">
+            {propuesta.numCanales} canal
+            {propuesta.numCanales === 1 ? "" : "es"} a configurar
+          </p>
         </div>
-
-        {/* ROI */}
-        {ahorroNeto > 0 && (
-          <div className="mt-4 flex items-start gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-4">
-            <TrendingDown className="mt-0.5 h-5 w-5 flex-shrink-0 text-emerald-400" />
-            <p className="text-sm text-slate-300">
-              Ahorras ~<strong className="text-emerald-400">{eur(r.ahorroMes)}€/mes</strong>{" "}
-              y la cuota es {eur(propuesta.cuotaMensual)}€/mes → ahorro neto de ~
-              <strong className="text-emerald-400">{eur(ahorroNeto)}€/mes</strong>.
-              {meses !== null && (
-                <>
-                  {" "}
-                  El setup se amortiza en ~{meses}{" "}
-                  {meses === 1 ? "mes" : "meses"}.
-                </>
-              )}
-            </p>
+        <div className="rounded-xl border-2 bd-green bg-[rgba(0,192,136,0.08)] p-4">
+          <div className="flex items-center gap-2 text-sm t-green">
+            <Wallet className="h-4 w-4" />
+            Cuota mensual
           </div>
-        )}
+          <p className="serif mt-1 text-3xl t-green">
+            {eur(propuesta.cuotaMensual)}€
+            <span className="text-sm font-normal">/mes</span>
+            {propuesta.hayPersonalizado && (
+              <span className="text-sm t-mute"> + a medida</span>
+            )}
+          </p>
+          <p className="mt-0.5 text-xs t-mute">
+            Sin permanencia · cancelas cuando quieras
+          </p>
+        </div>
+      </div>
 
-        <p className="mt-4 text-center text-xs text-slate-500">
-          Estimación a partir de tu volumen. El plan exacto de cada canal lo
-          afinamos contigo en el kickoff.
-        </p>
-      </CardContent>
-    </Card>
+      {/* ROI */}
+      {ahorroNeto > 0 && (
+        <div className="mt-4 flex items-start gap-3 rounded-xl border bd-green bg-[rgba(0,192,136,0.06)] p-4">
+          <TrendingDown className="mt-0.5 h-5 w-5 flex-shrink-0 t-green" />
+          <p className="text-sm t-soft">
+            Ahorras ~<strong className="t-green">{eur(r.ahorroMes)}€/mes</strong> y
+            la cuota es {eur(propuesta.cuotaMensual)}€/mes → ahorro neto de ~
+            <strong className="t-green">{eur(ahorroNeto)}€/mes</strong>.
+            {meses !== null && (
+              <>
+                {" "}
+                El setup se amortiza en ~{meses} {meses === 1 ? "mes" : "meses"}.
+              </>
+            )}
+          </p>
+        </div>
+      )}
+
+      <p className="mt-4 flex items-center justify-center gap-1.5 text-center text-xs t-mute">
+        <Clock3 className="h-3.5 w-3.5" />
+        Estimación a partir de tu volumen. El plan exacto de cada canal lo
+        afinamos contigo en el kickoff.
+      </p>
+    </div>
   );
 }
 
 function ResumenItem({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg border border-slate-800 bg-slate-800/30 p-3">
-      <p className="text-xs uppercase tracking-wide text-slate-500">{label}</p>
-      <p className="mt-0.5 text-slate-200">{value}</p>
+    <div className="rounded-lg border bd bg-soft p-3">
+      <p className="kicker" style={{ color: "var(--ink-mute)" }}>
+        {label}
+      </p>
+      <p className="mt-1 t-ink">{value}</p>
     </div>
   );
 }

@@ -1,0 +1,326 @@
+/* ============================================================
+   empentIA — tema de marca (claro/editorial) SCOPED al flujo
+   /auditoria-atencion. Fuente: brand/guidelines.md +
+   brand/05-componentes. No afecta al resto de la app (todo
+   está bajo .atencion).
+   ============================================================ */
+
+.atencion {
+  /* Paleta */
+  --bg: #fafaf7;
+  --bg-alt: #f4f3ee;
+  --card: #ffffff;
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --ink-mute: #8a8a85;
+  --line: #e8e6df;
+  --green: #00c088;
+  --green-deep: #009a6e;
+  --green-dark: #047857;
+  --green-ink: #06241a;
+  --terra: #9a5a1a;
+  --terra-soft: #7a460f;
+  --dark: #101512;
+  --r: 14px;
+
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-instrument), system-ui, -apple-system, sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.atencion ::selection {
+  background: rgba(0, 192, 136, 0.22);
+  color: var(--green-ink);
+}
+
+/* Tipografía */
+.atencion .serif {
+  font-family: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+.atencion .serif em {
+  font-style: italic;
+  color: var(--green-deep);
+}
+.atencion .mono {
+  font-family: var(--font-jetbrains), ui-monospace, "SFMono-Regular", monospace;
+}
+.atencion .kicker {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green-deep);
+}
+
+/* Superficies */
+.atencion .a-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+}
+.atencion .a-card-soft {
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+}
+
+/* Botones (pill) */
+.atencion .a-btn {
+  font-family: var(--font-instrument), sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: 100px;
+  padding: 13px 24px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  line-height: 1;
+  text-decoration: none;
+  transition: background 0.18s, color 0.18s, transform 0.18s, box-shadow 0.18s;
+  white-space: nowrap;
+}
+.atencion .a-btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.atencion .a-btn-lg {
+  font-size: 16px;
+  padding: 16px 30px;
+}
+.atencion .a-btn-primary {
+  background: var(--green);
+  color: var(--green-ink);
+  box-shadow: 0 12px 26px -14px rgba(0, 192, 136, 0.8);
+}
+.atencion .a-btn-primary:hover:not(:disabled) {
+  background: var(--green-deep);
+  color: #fff;
+  transform: translateY(-1px);
+}
+.atencion .a-btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.atencion .a-btn-outline:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--bg);
+}
+.atencion .a-btn-ghost {
+  background: transparent;
+  color: var(--green-deep);
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.atencion .a-btn-ghost:hover:not(:disabled) {
+  color: var(--green-dark);
+}
+/* Botón primario sobre fondo verde (CTA gradiente) */
+.atencion .a-btn-on-grad {
+  background: var(--green-ink);
+  color: #fff;
+}
+.atencion .a-btn-on-grad:hover:not(:disabled) {
+  background: #0a3326;
+  transform: translateY(-1px);
+}
+
+/* Inputs */
+.atencion .a-input {
+  width: 100%;
+  font-family: var(--font-instrument), sans-serif;
+  font-size: 15px;
+  padding: 13px 15px;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--ink);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.atencion .a-input::placeholder {
+  color: var(--ink-mute);
+}
+.atencion .a-input:focus {
+  outline: none;
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(0, 192, 136, 0.16);
+}
+
+/* Chips seleccionables */
+.atencion .a-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1.5px solid var(--line);
+  background: var(--card);
+  color: var(--ink-soft);
+  border-radius: 100px;
+  padding: 9px 15px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+.atencion .a-chip:hover {
+  border-color: var(--ink-mute);
+}
+.atencion .a-chip-on {
+  border-color: var(--green);
+  background: rgba(0, 192, 136, 0.1);
+  color: var(--green-dark);
+}
+
+/* Tags */
+.atencion .a-tag {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 100px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+.atencion .a-tag-green {
+  background: rgba(0, 192, 136, 0.13);
+  color: var(--green-deep);
+}
+.atencion .a-tag-line {
+  border: 1px solid var(--line);
+  color: var(--ink-mute);
+}
+
+/* Barra de progreso */
+.atencion .a-track {
+  height: 8px;
+  width: 100%;
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.atencion .a-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green), var(--green-deep));
+  border-radius: 100px;
+  transition: width 0.4s ease;
+}
+
+/* Bloque CTA con gradiente verde */
+.atencion .a-cta {
+  background: linear-gradient(150deg, var(--green), var(--green-deep));
+  color: var(--green-ink);
+  border-radius: 20px;
+}
+
+/* Glow sutil del hero */
+.atencion .a-glow {
+  background: radial-gradient(
+      720px 360px at 80% -5%,
+      rgba(0, 192, 136, 0.12),
+      transparent 60%
+    ),
+    var(--bg);
+}
+
+/* Spinner ring */
+.atencion .a-ring {
+  border: 3px solid rgba(0, 192, 136, 0.18);
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: a-spin 0.9s linear infinite;
+}
+@keyframes a-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animación de entrada */
+.atencion .a-in {
+  animation: a-in 0.5s ease-out both;
+}
+@keyframes a-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Utilidades de color de marca */
+.atencion .t-ink {
+  color: var(--ink);
+}
+.atencion .t-soft {
+  color: var(--ink-soft);
+}
+.atencion .t-mute {
+  color: var(--ink-mute);
+}
+.atencion .t-green {
+  color: var(--green-deep);
+}
+.atencion .t-terra {
+  color: var(--terra);
+}
+.atencion .bg-soft {
+  background: var(--bg-alt);
+}
+.atencion .bg-card {
+  background: var(--card);
+}
+.atencion .bd {
+  border-color: var(--line);
+}
+.atencion .bd-green {
+  border-color: var(--green);
+}
+.atencion .bd-terra {
+  border-color: rgba(154, 90, 26, 0.4);
+}
+
+.atencion .bg-line {
+  background: var(--line);
+}
+
+/* Stepper de cabecera */
+.atencion .a-step-on {
+  background: var(--green);
+  color: var(--green-ink);
+}
+.atencion .a-step-off {
+  background: var(--bg-alt);
+  color: var(--ink-mute);
+  border: 1px solid var(--line);
+}
+
+/* Checkbox con acento verde */
+.atencion input[type="checkbox"] {
+  accent-color: var(--green);
+}
+
+/* Impresión */
+@media print {
+  .atencion .no-print {
+    display: none !important;
+  }
+  .atencion {
+    background: #fff;
+  }
+}
