@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import {
   Globe,
@@ -26,6 +26,14 @@ import {
 } from "lucide-react";
 import { scrapeCompany, createLandingLead } from "@/lib/api";
 import { buildProposal, type Propuesta } from "@/lib/pricing";
+import { STR, getLang, type Dict } from "./i18n";
+
+// ============================================================
+// i18n CONTEXT
+// ============================================================
+
+const LangContext = createContext<Dict>(STR.es);
+const useT = () => useContext(LangContext);
 
 // ============================================================
 // CONSTANTS
@@ -46,24 +54,21 @@ interface Contact {
 
 const EMPTY_CONTACT: Contact = { nom: "", email: "", empresa: "", consent: false };
 
-interface Canal {
-  id: string;
-  label: string;
-}
-
-const CANALES: Canal[] = [
-  { id: "telefono", label: "Teléfono" },
-  { id: "email", label: "Email" },
-  { id: "formulario", label: "Formulario web" },
-  { id: "webchat", label: "Chat / Webchat" },
-  { id: "whatsapp", label: "WhatsApp" },
-  { id: "redes", label: "Redes sociales (DMs)" },
-  { id: "resenas", label: "Reseñas (Google)" },
-  { id: "presencial", label: "Presencial / tienda" },
-];
+// Orden de canales (las etiquetas viven en i18n: t.canales[id])
+const CANAL_IDS = [
+  "telefono",
+  "email",
+  "formulario",
+  "webchat",
+  "whatsapp",
+  "redes",
+  "resenas",
+  "presencial",
+] as const;
 
 // Identidad de marca por servicio — manual "04 Color por servicio".
-// name: nombre de producto · color: acento del manual · icon: icono de marca.
+// color: acento del manual · icon: icono de marca. (El nombre de producto
+// vive en i18n: t.serviceName[id], para poder traducirlo.)
 // official=false → color prestado de la paleta documentada (pendiente de que
 // la marca asigne uno propio a email/reseñas/redes).
 type BrandIconName =
@@ -91,69 +96,28 @@ const CHIP_ICON: Record<string, BrandIconName> = {
 };
 
 interface ServiceBrand {
-  name: string;
   color: string;
   icon: BrandIconName;
   official: boolean;
 }
 
 const SERVICE: Record<string, ServiceBrand> = {
-  webchat: { name: "chatwebIA", color: "#1a1a1a", icon: "chat", official: true },
-  email: { name: "emailIA", color: "#3a5a6f", icon: "email", official: false },
-  whatsapp: {
-    name: "WhatsApp Business",
-    color: "#1f7a3e",
-    icon: "whatsapp",
-    official: true,
-  },
-  telefono: {
-    name: "Agente de voz",
-    color: "#8a6a1a",
-    icon: "voz",
-    official: true,
-  },
-  resenas: {
-    name: "Reseñas Google",
-    color: "#4a6a5a",
-    icon: "star",
-    official: false,
-  },
-  redes: {
-    name: "Redes sociales",
-    color: "#4a3a6f",
-    icon: "red",
-    official: false,
-  },
-  formulario: {
-    name: "Formularios inteligentes",
-    color: "#1e3a5f",
-    icon: "formulario",
-    official: true,
-  },
+  webchat: { color: "#1a1a1a", icon: "chat", official: true },
+  email: { color: "#3a5a6f", icon: "email", official: false },
+  whatsapp: { color: "#1f7a3e", icon: "whatsapp", official: true },
+  telefono: { color: "#8a6a1a", icon: "voz", official: true },
+  resenas: { color: "#4a6a5a", icon: "star", official: false },
+  redes: { color: "#4a3a6f", icon: "red", official: false },
+  formulario: { color: "#1e3a5f", icon: "formulario", official: true },
 };
 
-const TIPOS_CONSULTA = [
-  "Dudas sobre productos o servicios",
-  "Pedidos, envíos y seguimiento",
-  "Incidencias y postventa",
-  "Citas y reservas",
-  "Información general",
-  "Otros",
-];
-
-const TIEMPOS_RESPUESTA = [
-  { id: "menos_1h", label: "Menos de 1 hora" },
-  { id: "pocas_horas", label: "Pocas horas" },
-  { id: "mismo_dia", label: "El mismo día" },
-  { id: "1_2_dias", label: "1-2 días" },
-  { id: "mas_2_dias", label: "Más de 2 días" },
-];
-
-const ANALYZING_STEPS = [
-  { icon: Globe, message: "Analizando tu web..." },
-  { icon: Headphones, message: "Detectando canales de atención..." },
-  { icon: Zap, message: "Estimando volumen de consultas..." },
-  { icon: CheckCircle2, message: "Preparando tus preguntas..." },
+const ANALYZING_ICONS = [Globe, Headphones, Zap, CheckCircle2];
+const TIEMPO_IDS = [
+  "menos_1h",
+  "pocas_horas",
+  "mismo_dia",
+  "1_2_dias",
+  "mas_2_dias",
 ];
 
 // ============================================================
@@ -228,6 +192,7 @@ function computeReport(a: Answers): Report {
 // ============================================================
 
 function Header({ step }: { step: StepId }) {
+  const t = useT();
   const activeMap: Partial<Record<StepId, number>> = {
     cuestionario: 0,
     contacto: 1,
@@ -247,9 +212,7 @@ function Header({ step }: { step: StepId }) {
           />
         </a>
         {active === undefined ? (
-          <span className="kicker hidden sm:inline">
-            Auditoría · atención al cliente
-          </span>
+          <span className="kicker hidden sm:inline">{t.header.label}</span>
         ) : (
           <Stepper active={active} />
         )}
@@ -259,7 +222,8 @@ function Header({ step }: { step: StepId }) {
 }
 
 function Stepper({ active }: { active: number }) {
-  const steps = ["Preguntas", "Tus datos", "Propuesta"];
+  const t = useT();
+  const steps = t.header.steps;
   return (
     <div className="flex items-center gap-1.5 sm:gap-2.5">
       {steps.map((s, i) => (
@@ -294,6 +258,9 @@ function Stepper({ active }: { active: number }) {
 export default function AuditoriaAtencionPage() {
   const searchParams = useSearchParams();
 
+  const lang = getLang(searchParams.get("lang"));
+  const t = STR[lang];
+
   const [step, setStep] = useState<StepId>("intro");
   const [url, setUrl] = useState("");
   const [answers, setAnswers] = useState<Answers>(EMPTY_ANSWERS);
@@ -309,7 +276,7 @@ export default function AuditoriaAtencionPage() {
   }, [searchParams]);
 
   return (
-    <>
+    <LangContext.Provider value={t}>
       <Header step={step} />
 
       {step === "intro" && (
@@ -354,7 +321,7 @@ export default function AuditoriaAtencionPage() {
       {step === "informe" && (
         <InformeStep answers={answers} contact={contact} url={url} />
       )}
-    </>
+    </LangContext.Provider>
   );
 }
 
@@ -371,18 +338,21 @@ function IntroStep({
   setUrl: (v: string) => void;
   onStart: () => void;
 }) {
+  const t = useT();
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const v = normalizeUrl(url);
     if (!v || !/\.[a-z]{2,}/i.test(v)) {
-      setError("Introduce una web válida (ej: tuempresa.com)");
+      setError(t.intro.errInvalid);
       return;
     }
     setUrl(v);
     onStart();
   };
+
+  const bulletIcons = [CheckCircle2, Lock, Zap];
 
   return (
     <div className="a-glow">
@@ -390,23 +360,23 @@ function IntroStep({
         <div className="a-in flex flex-col items-center">
           <span className="kicker mb-5 inline-flex items-center gap-2">
             <Sparkles className="h-3.5 w-3.5" />
-            Auditoría gratuita · 2 min
+            {t.intro.kicker}
           </span>
 
           <h1 className="serif mb-5 text-center text-4xl leading-[1.05] t-ink md:text-5xl">
-            ¿Cuánto te cuesta tu <em>atención al cliente</em>?
+            {t.intro.h1a}
+            <em>{t.intro.h1em}</em>
+            {t.intro.h1b}
           </h1>
           <p className="mb-9 max-w-xl text-center text-lg leading-relaxed t-soft">
-            Responde unas preguntas y te calculamos, con tus propios números, lo
-            que dedicas hoy y lo que podrías ahorrar. Te llevas una propuesta
-            clara.
+            {t.intro.sub}
           </p>
         </div>
 
         <div className="a-card a-in w-full p-6 md:p-8">
           <form onSubmit={handleSubmit} className="space-y-4">
             <label className="block text-sm font-medium t-soft">
-              Tu página web
+              {t.intro.urlLabel}
             </label>
             <div className="flex flex-col gap-3 sm:flex-row">
               <div className="relative flex-1">
@@ -418,12 +388,12 @@ function IntroStep({
                     setUrl(e.target.value);
                     setError(null);
                   }}
-                  placeholder="tuempresa.com"
+                  placeholder={t.intro.urlPlaceholder}
                   className="a-input pl-12"
                 />
               </div>
               <button type="submit" className="a-btn a-btn-primary a-btn-lg">
-                Empezar
+                {t.intro.start}
                 <ArrowRight className="h-5 w-5" />
               </button>
             </div>
@@ -437,19 +407,18 @@ function IntroStep({
         </div>
 
         <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-          {[
-            { icon: CheckCircle2, t: "Con tus propios números" },
-            { icon: Lock, t: "Sin compromiso" },
-            { icon: Zap, t: "Propuesta al instante" },
-          ].map((f) => (
-            <span
-              key={f.t}
-              className="inline-flex items-center gap-2 text-sm t-mute"
-            >
-              <f.icon className="h-4 w-4 t-green" />
-              {f.t}
-            </span>
-          ))}
+          {t.intro.bullets.map((b, i) => {
+            const Icon = bulletIcons[i] ?? CheckCircle2;
+            return (
+              <span
+                key={b}
+                className="inline-flex items-center gap-2 text-sm t-mute"
+              >
+                <Icon className="h-4 w-4 t-green" />
+                {b}
+              </span>
+            );
+          })}
         </div>
       </div>
     </div>
@@ -469,6 +438,7 @@ function AnalyzingStep({
   onDone: (detected: string[]) => void;
   onError: () => void;
 }) {
+  const t = useT();
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
 
@@ -480,7 +450,7 @@ function AnalyzingStep({
     }, 200);
 
     const stepInterval = setInterval(() => {
-      setCurrentStep((s) => (s < ANALYZING_STEPS.length - 1 ? s + 1 : s));
+      setCurrentStep((s) => (s < ANALYZING_ICONS.length - 1 ? s + 1 : s));
     }, 2200);
 
     let finished = false;
@@ -519,7 +489,7 @@ function AnalyzingStep({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url]);
 
-  const CurrentIcon = ANALYZING_STEPS[currentStep].icon;
+  const CurrentIcon = ANALYZING_ICONS[currentStep];
 
   return (
     <div className="a-glow flex min-h-screen items-center justify-center px-6 pt-16">
@@ -535,20 +505,23 @@ function AnalyzingStep({
           </div>
 
           <h2 className="serif mb-3 text-2xl t-ink md:text-3xl">
-            {ANALYZING_STEPS[currentStep].message}
+            {t.analyzing.steps[currentStep]}
           </h2>
           <p className="mb-8 t-soft">
-            Estamos analizando{" "}
+            {t.analyzing.analyzing}{" "}
             <strong className="mono text-[13px] t-ink">{url}</strong>
           </p>
 
           <div className="a-track mb-2">
             <div className="a-fill" style={{ width: `${progress}%` }} />
           </div>
-          <p className="mono text-sm t-mute">{Math.round(progress)}% completado</p>
+          <p className="mono text-sm t-mute">
+            {Math.round(progress)}
+            {t.analyzing.completed}
+          </p>
 
           <div className="mt-8 flex items-center justify-center gap-2">
-            {ANALYZING_STEPS.map((_, i) => (
+            {ANALYZING_ICONS.map((_, i) => (
               <div
                 key={i}
                 className={`h-2 rounded-full transition-all duration-300 ${
@@ -569,30 +542,31 @@ function AnalyzingStep({
 // ============================================================
 
 function ChipGroup({
-  options,
+  ids,
   selected,
   onToggle,
 }: {
-  options: Canal[];
+  ids: string[];
   selected: string[];
   onToggle: (id: string) => void;
 }) {
+  const t = useT();
   return (
     <div className="flex flex-wrap gap-2.5">
-      {options.map((opt) => {
-        const isSel = selected.includes(opt.id);
+      {ids.map((id) => {
+        const isSel = selected.includes(id);
         return (
           <button
-            key={opt.id}
+            key={id}
             type="button"
-            onClick={() => onToggle(opt.id)}
+            onClick={() => onToggle(id)}
             className={`a-chip ${isSel ? "a-chip-on" : ""}`}
           >
             <BrandIcon
-              name={isSel ? "check" : CHIP_ICON[opt.id] ?? "bolt"}
+              name={isSel ? "check" : CHIP_ICON[id] ?? "bolt"}
               className="h-4 w-4"
             />
-            {opt.label}
+            {t.canales[id]}
           </button>
         );
       })}
@@ -605,12 +579,14 @@ function QCard({
   title,
   hint,
   optional,
+  optionalLabel,
   children,
 }: {
   n: number;
   title: string;
   hint?: string;
   optional?: boolean;
+  optionalLabel?: string;
   children: React.ReactNode;
 }) {
   return (
@@ -620,7 +596,9 @@ function QCard({
         <h2 className="serif text-lg t-ink">
           {title}
           {optional && (
-            <span className="ml-2 text-sm not-italic t-mute">(opcional)</span>
+            <span className="ml-2 text-sm not-italic t-mute">
+              {optionalLabel}
+            </span>
           )}
         </h2>
       </div>
@@ -645,6 +623,7 @@ function CuestionarioStep({
   onBack: () => void;
   onNext: () => void;
 }) {
+  const t = useT();
   const [error, setError] = useState<string | null>(null);
 
   const toggle = (key: "canalesActivos" | "canalesNuevos", id: string) => {
@@ -666,45 +645,36 @@ function CuestionarioStep({
   };
 
   const handleNext = () => {
-    if (answers.canalesActivos.length === 0)
-      return setError("Selecciona al menos un canal de atención activo");
+    const q = t.cuestionario;
+    if (answers.canalesActivos.length === 0) return setError(q.errCanal);
     if (!answers.consultasSemana || parseFloat(answers.consultasSemana) <= 0)
-      return setError("Indica cuántas consultas recibís a la semana");
-    if (!answers.tipoPrincipal)
-      return setError("Selecciona el tipo de consulta más habitual");
+      return setError(q.errConsultas);
+    if (!answers.tipoPrincipal) return setError(q.errTipo);
     if (!answers.horasSemana || parseFloat(answers.horasSemana) <= 0)
-      return setError("Indica cuántas horas dedicáis a la semana");
+      return setError(q.errHoras);
     if (!answers.costeHora || parseFloat(answers.costeHora) <= 0)
-      return setError("Indica el coste por hora del personal");
-    if (!answers.tiempoRespuesta)
-      return setError("Selecciona vuestro tiempo de respuesta actual");
+      return setError(q.errCoste);
+    if (!answers.tiempoRespuesta) return setError(q.errTiempo);
     onNext();
   };
 
-  const nuevosDisponibles = CANALES.filter(
-    (c) => !answers.canalesActivos.includes(c.id)
+  const q = t.cuestionario;
+  const nuevosDisponibles = CANAL_IDS.filter(
+    (id) => !answers.canalesActivos.includes(id)
   );
 
   return (
     <div className="container mx-auto max-w-2xl px-6 pt-24 pb-12">
       <div className="a-in mb-8">
-        <span className="kicker">Paso 1 de 3</span>
-        <h1 className="serif mt-2 text-3xl t-ink">
-          Cuéntanos cómo gestionáis la atención
-        </h1>
-        <p className="mt-2 t-soft">
-          Con tus respuestas calculamos el coste real y el ahorro potencial.
-        </p>
+        <span className="kicker">{q.step}</span>
+        <h1 className="serif mt-2 text-3xl t-ink">{q.h1}</h1>
+        <p className="mt-2 t-soft">{q.sub}</p>
       </div>
 
       <div className="space-y-5">
-        <QCard
-          n={1}
-          title="¿Por qué canales atendéis hoy?"
-          hint="Marca todos los que uséis actualmente."
-        >
+        <QCard n={1} title={q.q1t} hint={q.q1h}>
           <ChipGroup
-            options={CANALES}
+            ids={[...CANAL_IDS]}
             selected={answers.canalesActivos}
             onToggle={(id) => toggle("canalesActivos", id)}
           />
@@ -712,47 +682,46 @@ function CuestionarioStep({
 
         <QCard
           n={2}
-          title="¿Pensáis abrir algún canal nuevo?"
+          title={q.q2t}
           optional
-          hint="Canales que aún no usáis pero os gustaría ofrecer."
+          optionalLabel={q.optional}
+          hint={q.q2h}
         >
           {nuevosDisponibles.length > 0 ? (
             <ChipGroup
-              options={nuevosDisponibles}
+              ids={nuevosDisponibles}
               selected={answers.canalesNuevos}
               onToggle={(id) => toggle("canalesNuevos", id)}
             />
           ) : (
-            <p className="text-sm t-mute">Ya tenéis todos los canales activos 👌</p>
+            <p className="text-sm t-mute">{q.allActive}</p>
           )}
         </QCard>
 
-        <QCard n={3} title="Volumen de consultas">
+        <QCard n={3} title={q.q3t}>
           <div className="space-y-4">
             <div>
-              <FieldLabel>
-                ¿Cuántas consultas recibís a la semana? (aprox.)
-              </FieldLabel>
+              <FieldLabel>{q.qVol}</FieldLabel>
               <input
                 type="number"
                 min={0}
                 value={answers.consultasSemana}
                 onChange={(e) => set("consultasSemana", e.target.value)}
-                placeholder="Ej: 80"
+                placeholder={q.qVolPh}
                 className="a-input"
               />
             </div>
             <div>
-              <FieldLabel>¿Cuál es el tipo de consulta más habitual?</FieldLabel>
+              <FieldLabel>{q.qTipo}</FieldLabel>
               <select
                 value={answers.tipoPrincipal}
                 onChange={(e) => set("tipoPrincipal", e.target.value)}
                 className="a-input"
               >
-                <option value="">Selecciona una opción</option>
-                {TIPOS_CONSULTA.map((t) => (
-                  <option key={t} value={t}>
-                    {t}
+                <option value="">{q.selectOpt}</option>
+                {t.tipos.map((tipo) => (
+                  <option key={tipo} value={tipo}>
+                    {tipo}
                   </option>
                 ))}
               </select>
@@ -760,21 +729,21 @@ function CuestionarioStep({
           </div>
         </QCard>
 
-        <QCard n={4} title="Tiempo y coste del equipo">
+        <QCard n={4} title={q.q4t}>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <FieldLabel>Horas/semana dedicadas a atención</FieldLabel>
+              <FieldLabel>{q.qHoras}</FieldLabel>
               <input
                 type="number"
                 min={0}
                 value={answers.horasSemana}
                 onChange={(e) => set("horasSemana", e.target.value)}
-                placeholder="Ej: 15"
+                placeholder={q.qHorasPh}
                 className="a-input"
               />
             </div>
             <div>
-              <FieldLabel>Coste por hora del personal (€)</FieldLabel>
+              <FieldLabel>{q.qCoste}</FieldLabel>
               <input
                 type="number"
                 min={0}
@@ -783,37 +752,35 @@ function CuestionarioStep({
                 placeholder="22"
                 className="a-input"
               />
-              <p className="mt-1.5 text-xs t-mute">
-                Ajústalo a tu realidad. Por defecto, 22 €/h.
-              </p>
+              <p className="mt-1.5 text-xs t-mute">{q.qCosteHint}</p>
             </div>
           </div>
         </QCard>
 
-        <QCard n={5} title="¿Cuánto tardáis en responder de media?">
+        <QCard n={5} title={q.q5t}>
           <div className="flex flex-wrap gap-2.5">
-            {TIEMPOS_RESPUESTA.map((t) => {
-              const isSel = answers.tiempoRespuesta === t.id;
+            {TIEMPO_IDS.map((id) => {
+              const isSel = answers.tiempoRespuesta === id;
               return (
                 <button
-                  key={t.id}
+                  key={id}
                   type="button"
-                  onClick={() => set("tiempoRespuesta", t.id)}
+                  onClick={() => set("tiempoRespuesta", id)}
                   className={`a-chip ${isSel ? "a-chip-on" : ""}`}
                 >
-                  {t.label}
+                  {t.tiempos[id]}
                 </button>
               );
             })}
           </div>
         </QCard>
 
-        <QCard n={6} title="¿Algo más que deberíamos saber?" optional>
+        <QCard n={6} title={q.q6t} optional optionalLabel={q.optional}>
           <textarea
             value={answers.notas}
             onChange={(e) => set("notas", e.target.value)}
             rows={3}
-            placeholder="Picos de temporada, idiomas, herramientas que usáis..."
+            placeholder={q.notasPh}
             className="a-input resize-none"
           />
         </QCard>
@@ -829,10 +796,10 @@ function CuestionarioStep({
       <div className="mt-6 flex items-center justify-between gap-4">
         <button onClick={onBack} className="a-btn a-btn-ghost">
           <ArrowLeft className="h-4 w-4" />
-          Atrás
+          {q.back}
         </button>
         <button onClick={handleNext} className="a-btn a-btn-primary a-btn-lg">
-          Ver mi informe
+          {q.next}
           <ArrowRight className="h-4 w-4" />
         </button>
       </div>
@@ -853,6 +820,8 @@ function ContactoStep({
   onBack: () => void;
   onDone: (contact: Contact) => void;
 }) {
+  const t = useT();
+  const c = t.contacto;
   const [nom, setNom] = useState("");
   const [email, setEmail] = useState("");
   const [empresa, setEmpresa] = useState("");
@@ -866,10 +835,9 @@ function ContactoStep({
     setError(null);
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!nom.trim()) return setError("Introduce tu nombre");
-    if (!emailRegex.test(email)) return setError("Introduce un email válido");
-    if (!consent)
-      return setError("Debes aceptar la política de privacidad para continuar");
+    if (!nom.trim()) return setError(c.errNombre);
+    if (!emailRegex.test(email)) return setError(c.errEmail);
+    if (!consent) return setError(c.errConsent);
 
     setIsSubmitting(true);
 
@@ -883,13 +851,13 @@ function ContactoStep({
       consentiment_rgpd: consent,
     }).catch(() => {});
 
-    const c: Contact = {
+    const data: Contact = {
       nom: nom.trim(),
       email: email.trim(),
       empresa: empresa.trim(),
       consent,
     };
-    setTimeout(() => onDone(c), 300);
+    setTimeout(() => onDone(data), 300);
   };
 
   return (
@@ -900,43 +868,43 @@ function ContactoStep({
             <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[rgba(0,192,136,0.12)]">
               <CheckCircle2 className="h-7 w-7 t-green" />
             </div>
-            <span className="kicker">Paso 2 de 3</span>
-            <h2 className="serif mt-2 text-2xl t-ink">Tu informe está listo</h2>
-            <p className="mt-2 t-soft">¿A dónde te enviamos la propuesta?</p>
+            <span className="kicker">{c.step}</span>
+            <h2 className="serif mt-2 text-2xl t-ink">{c.ready}</h2>
+            <p className="mt-2 t-soft">{c.where}</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <FieldLabel>Nombre *</FieldLabel>
+              <FieldLabel>{c.nombre}</FieldLabel>
               <input
                 type="text"
                 value={nom}
                 onChange={(e) => setNom(e.target.value)}
-                placeholder="Tu nombre"
+                placeholder={c.nombrePh}
                 className="a-input"
                 disabled={isSubmitting}
               />
             </div>
             <div>
-              <FieldLabel>Email *</FieldLabel>
+              <FieldLabel>{c.email}</FieldLabel>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="nombre@empresa.com"
+                placeholder={c.emailPh}
                 className="a-input"
                 disabled={isSubmitting}
               />
             </div>
             <div>
               <FieldLabel>
-                Empresa <span className="t-mute">(opcional)</span>
+                {c.empresa} <span className="t-mute">{t.cuestionario.optional}</span>
               </FieldLabel>
               <input
                 type="text"
                 value={empresa}
                 onChange={(e) => setEmpresa(e.target.value)}
-                placeholder="Nombre de tu empresa"
+                placeholder={c.empresaPh}
                 className="a-input"
                 disabled={isSubmitting}
               />
@@ -951,15 +919,11 @@ function ContactoStep({
                 disabled={isSubmitting}
               />
               <span className="text-sm t-soft">
-                Acepto la{" "}
-                <a
-                  href="/privacy"
-                  target="_blank"
-                  className="t-green underline"
-                >
-                  política de privacidad
-                </a>{" "}
-                *
+                {c.consentPre}
+                <a href="/privacy" target="_blank" className="t-green underline">
+                  {c.consentLink}
+                </a>
+                {c.consentPost}
               </span>
             </label>
 
@@ -971,9 +935,7 @@ function ContactoStep({
                 className="mt-0.5 h-5 w-5"
                 disabled={isSubmitting}
               />
-              <span className="text-sm t-soft">
-                Quiero recibir información sobre novedades y ofertas
-              </span>
+              <span className="text-sm t-soft">{c.comercial}</span>
             </label>
 
             {error && (
@@ -990,11 +952,11 @@ function ContactoStep({
               {isSubmitting ? (
                 <>
                   <Loader2 className="h-5 w-5 animate-spin" />
-                  Preparando...
+                  {c.submitting}
                 </>
               ) : (
                 <>
-                  Ver mi informe
+                  {c.submit}
                   <ArrowRight className="h-5 w-5" />
                 </>
               )}
@@ -1005,12 +967,12 @@ function ContactoStep({
             onClick={onBack}
             className="mt-4 flex w-full items-center justify-center gap-1 text-sm t-mute transition-colors hover:t-ink"
           >
-            <ArrowLeft className="h-3 w-3" /> Volver a las preguntas
+            <ArrowLeft className="h-3 w-3" /> {c.backQ}
           </button>
 
           <div className="mt-4 flex items-center justify-center gap-2 text-sm t-mute">
             <Lock className="h-4 w-4" />
-            <span>100% confidencial</span>
+            <span>{c.confidential}</span>
           </div>
         </div>
       </div>
@@ -1031,6 +993,7 @@ function InformeStep({
   contact: Contact;
   url: string;
 }) {
+  const t = useT();
   const r = computeReport(answers);
 
   const propuesta = buildProposal({
@@ -1038,15 +1001,13 @@ function InformeStep({
     consultasMes: r.consultasMes,
   });
 
-  const tiempoLabel =
-    TIEMPOS_RESPUESTA.find((t) => t.id === answers.tiempoRespuesta)?.label ||
-    "—";
-  const canalesActivosLabels = CANALES.filter((c) =>
-    answers.canalesActivos.includes(c.id)
-  ).map((c) => c.label);
-  const canalesNuevosLabels = CANALES.filter((c) =>
-    answers.canalesNuevos.includes(c.id)
-  ).map((c) => c.label);
+  const tiempoLabel = t.tiempos[answers.tiempoRespuesta] || "—";
+  const canalesActivosLabels = answers.canalesActivos.map(
+    (id) => t.canales[id] ?? id
+  );
+  const canalesNuevosLabels = answers.canalesNuevos.map(
+    (id) => t.canales[id] ?? id
+  );
 
   // % de la barra "con empentIA" respecto al coste actual
   const restoPct =
@@ -1078,20 +1039,19 @@ function InformeStep({
     }, 600);
   };
 
+  const inf = t.informe;
+
   return (
     <div className="container mx-auto max-w-3xl px-6 pt-24 pb-16">
       {/* Hero */}
       <div className="a-in mb-10 text-center">
         <span className="kicker inline-flex items-center gap-2">
           <TrendingDown className="h-3.5 w-3.5" />
-          Tu informe
+          {inf.kicker}
         </span>
-        <h1 className="serif mt-3 text-3xl t-ink md:text-4xl">
-          Esto te cuesta tu atención al cliente
-        </h1>
+        <h1 className="serif mt-3 text-3xl t-ink md:text-4xl">{inf.h1}</h1>
         <p className="mx-auto mt-3 max-w-xl t-soft">
-          Calculado con tus propios datos: {eur(r.consultasMes)} consultas/mes y{" "}
-          {r.horasSemana} h/semana de equipo.
+          {inf.sub(eur(r.consultasMes), String(r.horasSemana))}
         </p>
       </div>
 
@@ -1101,45 +1061,45 @@ function InformeStep({
         style={{ borderTop: "3px solid var(--terra)" }}
       >
         <p className="kicker mb-4 text-center" style={{ color: "var(--terra)" }}>
-          Coste actual de gestión
+          {inf.costeActual}
         </p>
         <div className="grid grid-cols-1 gap-6 text-center md:grid-cols-2">
           <div>
             <p className="serif text-5xl t-terra">{eur(r.costeMes)}€</p>
-            <p className="mt-1 text-sm t-mute">al mes</p>
+            <p className="mt-1 text-sm t-mute">{inf.alMes}</p>
           </div>
           <div className="md:border-l md:bd md:pl-6">
             <p className="serif text-5xl t-terra">{eur(r.costeAnio)}€</p>
-            <p className="mt-1 text-sm t-mute">al año</p>
+            <p className="mt-1 text-sm t-mute">{inf.alAnio}</p>
           </div>
         </div>
         <p className="mt-5 text-center text-sm t-soft">
-          {r.horasSemana} h/semana × {eur(r.costeHora)} €/h, hoy 100% manual.
+          {inf.costeFormula(String(r.horasSemana), eur(r.costeHora))}
         </p>
       </div>
 
       {/* Comparativa */}
       <div className="mb-4">
-        <span className="kicker">Comparativa</span>
-        <h2 className="serif mt-2 text-2xl t-ink">Hoy vs con empentIA</h2>
+        <span className="kicker">{inf.comparativa}</span>
+        <h2 className="serif mt-2 text-2xl t-ink">{inf.hoyVs}</h2>
       </div>
 
       <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2">
         {/* Hoy */}
         <div className="a-card p-6">
-          <h3 className="serif mb-4 text-lg t-ink">Hoy (gestión interna)</h3>
+          <h3 className="serif mb-4 text-lg t-ink">{inf.hoyTitle}</h3>
           <ul className="space-y-3 text-sm t-soft">
             <li className="flex items-start gap-2">
               <Euro className="mt-0.5 h-4 w-4 flex-shrink-0 t-terra" />
-              {eur(r.costeMes)}€/mes en horas de tu equipo
+              {inf.hoyCoste(eur(r.costeMes))}
             </li>
             <li className="flex items-start gap-2">
               <Clock className="mt-0.5 h-4 w-4 flex-shrink-0 t-terra" />
-              Tiempo de respuesta: {tiempoLabel.toLowerCase()}
+              {inf.hoyTiempo(tiempoLabel.toLowerCase())}
             </li>
             <li className="flex items-start gap-2">
               <Users className="mt-0.5 h-4 w-4 flex-shrink-0 t-terra" />
-              Cobertura limitada al horario del equipo
+              {inf.hoyCobertura}
             </li>
           </ul>
           <div className="mt-5">
@@ -1149,44 +1109,39 @@ function InformeStep({
                 style={{ background: "rgba(154,90,26,0.55)" }}
               />
             </div>
-            <p className="mt-1.5 text-xs t-mute">Coste 100%</p>
+            <p className="mt-1.5 text-xs t-mute">{inf.coste100}</p>
           </div>
         </div>
 
         {/* Con empentIA */}
         <div className="a-card border-2 bd-green p-6">
-          <h3 className="serif mb-4 text-lg t-green">Con empentIA</h3>
+          <h3 className="serif mb-4 text-lg t-green">{inf.conEmpentia}</h3>
           <ul className="space-y-3 text-sm t-soft">
             <li className="flex items-start gap-2">
               <TrendingDown className="mt-0.5 h-4 w-4 flex-shrink-0 t-green" />
-              Recuperas hasta {r.horasLiberadas.toFixed(0)} h/semana
+              {inf.recuperas(r.horasLiberadas.toFixed(0))}
             </li>
             <li className="flex items-start gap-2">
               <Euro className="mt-0.5 h-4 w-4 flex-shrink-0 t-green" />
-              Ahorro de hasta {eur(r.ahorroMes)}€/mes
+              {inf.ahorroHasta(eur(r.ahorroMes))}
             </li>
             <li className="flex items-start gap-2">
               <Zap className="mt-0.5 h-4 w-4 flex-shrink-0 t-green" />
-              Respuesta inmediata, 24/7, en todos los canales
+              {inf.respuesta247}
             </li>
           </ul>
           <div className="mt-5">
             <div className="a-track">
               <div className="a-fill" style={{ width: `${restoPct}%` }} />
             </div>
-            <p className="mt-1.5 text-xs t-mute">Coste estimado tras automatizar</p>
+            <p className="mt-1.5 text-xs t-mute">{inf.costeTras}</p>
           </div>
         </div>
       </div>
 
       <div className="mb-8 rounded-2xl border bd-green bg-[rgba(0,192,136,0.06)] p-6 text-center">
-        <p className="text-lg t-ink">
-          Ahorro potencial estimado:{" "}
-          <strong className="serif t-green">{eur(r.ahorroAnio)}€/año</strong>
-        </p>
-        <p className="mt-2 text-sm t-soft">
-          Y esto es lo que costaría automatizarlo en tu caso 👇
-        </p>
+        <p className="text-lg t-ink">{inf.ahorroAnual(eur(r.ahorroAnio))}</p>
+        <p className="mt-2 text-sm t-soft">{inf.yEsto}</p>
       </div>
 
       {/* Propuesta a medida */}
@@ -1194,32 +1149,33 @@ function InformeStep({
 
       {/* Resumen de tu situación */}
       <div className="a-card mb-10 p-6">
-        <h3 className="serif mb-4 text-lg t-ink">
-          Resumen de lo que nos has contado
-        </h3>
+        <h3 className="serif mb-4 text-lg t-ink">{t.resumen.title}</h3>
         <div className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">
           <ResumenItem
-            label="Canales activos"
+            label={t.resumen.canalesActivos}
             value={canalesActivosLabels.join(", ") || "—"}
           />
           <ResumenItem
-            label="Canales a abrir"
-            value={canalesNuevosLabels.join(", ") || "Ninguno indicado"}
+            label={t.resumen.canalesAbrir}
+            value={canalesNuevosLabels.join(", ") || t.resumen.ninguno}
           />
           <ResumenItem
-            label="Consultas / mes"
-            value={`${eur(r.consultasMes)} aprox.`}
+            label={t.resumen.consultasMes}
+            value={t.resumen.aprox(eur(r.consultasMes))}
           />
           <ResumenItem
-            label="Tipo más habitual"
+            label={t.resumen.tipoHab}
             value={answers.tipoPrincipal || "—"}
           />
-          <ResumenItem label="Dedicación" value={`${r.horasSemana} h/semana`} />
-          <ResumenItem label="Tiempo de respuesta" value={tiempoLabel} />
+          <ResumenItem
+            label={t.resumen.dedicacion}
+            value={t.resumen.hSemana(String(r.horasSemana))}
+          />
+          <ResumenItem label={t.resumen.tiempoResp} value={tiempoLabel} />
         </div>
         {answers.notas && (
           <p className="mt-4 border-t bd pt-4 text-sm t-soft">
-            <span className="t-mute">Notas: </span>
+            <span className="t-mute">{t.resumen.notas}</span>
             {answers.notas}
           </p>
         )}
@@ -1232,15 +1188,13 @@ function InformeStep({
             <BadgeCheck className="h-8 w-8" style={{ color: "var(--green-ink)" }} />
           </div>
           <h3 className="serif mb-2 text-3xl" style={{ color: "var(--green-ink)" }}>
-            ¡Propuesta pre-aceptada! 🎉
+            {t.cta.acceptedTitle}
           </h3>
           <p
             className="mx-auto mb-6 max-w-md"
             style={{ color: "rgba(6,36,26,0.8)" }}
           >
-            Hemos guardado tu propuesta{contact.nom ? `, ${contact.nom}` : ""}.
-            Reserva ahora el kickoff y la dejamos cerrada en 20 minutos. Sin pago
-            ni permanencia hasta confirmarla juntos.
+            {t.cta.acceptedText(contact.nom)}
           </p>
           <div className="no-print flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
@@ -1250,7 +1204,7 @@ function InformeStep({
               className="a-btn a-btn-on-grad a-btn-lg"
             >
               <Calendar className="h-5 w-5" />
-              Reservar kickoff
+              {t.cta.reservarKickoff}
             </a>
             <button
               onClick={() => window.print()}
@@ -1262,22 +1216,20 @@ function InformeStep({
               }}
             >
               <Download className="h-5 w-5" />
-              Descargar propuesta
+              {t.cta.descargar}
             </button>
           </div>
         </div>
       ) : (
         <div className="a-cta p-8 text-center md:p-10">
           <h3 className="serif mb-3 text-3xl" style={{ color: "var(--green-ink)" }}>
-            ¿Empezamos?
+            {t.cta.empezarTitle}
           </h3>
           <p
             className="mx-auto mb-6 max-w-md"
             style={{ color: "rgba(6,36,26,0.8)" }}
           >
-            Acepta la propuesta y reservamos el kickoff para ponerla en marcha.
-            Queda pre-acordada: sin pago ni permanencia, lo confirmamos todo
-            juntos en la reunión.
+            {t.cta.empezarText}
           </p>
           <div className="no-print flex flex-col items-center justify-center gap-3 sm:flex-row">
             <button
@@ -1288,12 +1240,12 @@ function InformeStep({
               {accepting ? (
                 <>
                   <Loader2 className="h-5 w-5 animate-spin" />
-                  Guardando...
+                  {t.cta.guardando}
                 </>
               ) : (
                 <>
                   <CheckCircle2 className="h-5 w-5" />
-                  Aceptar propuesta y reservar
+                  {t.cta.aceptar}
                 </>
               )}
             </button>
@@ -1309,7 +1261,7 @@ function InformeStep({
               }}
             >
               <Calendar className="h-5 w-5" />
-              Hablarlo primero
+              {t.cta.hablar}
             </a>
           </div>
           <button
@@ -1318,7 +1270,7 @@ function InformeStep({
             style={{ color: "rgba(6,36,26,0.7)" }}
           >
             <Download className="h-4 w-4" />
-            Descargar propuesta en PDF
+            {t.cta.descargarPdf}
           </button>
         </div>
       )}
@@ -1427,6 +1379,9 @@ function BrandIcon({
 }
 
 function PropuestaCard({ propuesta, r }: { propuesta: Propuesta; r: Report }) {
+  const t = useT();
+  const p = t.propuesta;
+
   // Cap fallback: cliente sin ningún canal con producto (p. ej. solo presencial)
   if (propuesta.sinCanalesVendibles) {
     return (
@@ -1434,13 +1389,8 @@ function PropuestaCard({ propuesta, r }: { propuesta: Propuesta; r: Report }) {
         <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[rgba(0,192,136,0.12)]">
           <Sparkles className="h-7 w-7 t-green" />
         </div>
-        <h3 className="serif mb-2 text-xl t-ink">
-          Te preparamos una propuesta a medida
-        </h3>
-        <p className="mx-auto max-w-md text-sm t-soft">
-          Por tus canales, lo mejor es diseñarla contigo en una llamada corta. En
-          el kickoff te damos números cerrados.
-        </p>
+        <h3 className="serif mb-2 text-xl t-ink">{p.fallbackTitle}</h3>
+        <p className="mx-auto max-w-md text-sm t-soft">{p.fallbackText}</p>
       </div>
     );
   }
@@ -1452,23 +1402,26 @@ function PropuestaCard({ propuesta, r }: { propuesta: Propuesta; r: Report }) {
       ? Math.ceil(propuesta.setupTotal / ahorroNeto)
       : null;
 
+  const estadoLabel = (estado: string) =>
+    estado === "nuevo" ? p.nuevo : p.pronto;
+
   return (
     <div className="a-card mb-8 border-2 bd-green p-6 md:p-8">
       <div className="mb-1 flex items-center gap-2.5">
         <Receipt className="h-5 w-5 t-green" />
-        <span className="kicker">Tu propuesta</span>
+        <span className="kicker">{p.kicker}</span>
       </div>
-      <h2 className="serif mb-1 text-2xl t-ink">Plan recomendado</h2>
-      <p className="mb-6 text-sm t-mute">
-        Según tus canales y tu volumen estimado. Precios sin IVA.
-      </p>
+      <h2 className="serif mb-1 text-2xl t-ink">{p.h2}</h2>
+      <p className="mb-6 text-sm t-mute">{p.sub}</p>
 
       {/* Líneas por canal */}
       <div className="space-y-3">
         {propuesta.lineas.map((l) => {
           const svc = SERVICE[l.channelId];
           const accent = svc?.color ?? "#009a6e";
-          const nombre = svc?.name ?? l.label;
+          const nombre = t.serviceName[l.channelId] ?? l.label;
+          const canal = t.canales[l.channelId] ?? l.label;
+          const unidad = t.unidad[l.unidad] ?? l.unidad;
           return (
             <div
               key={l.channelId}
@@ -1495,24 +1448,24 @@ function PropuestaCard({ propuesta, r }: { propuesta: Propuesta; r: Report }) {
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="font-semibold t-ink">{nombre}</span>
                       <span className="a-tag a-tag-green">
-                        {l.esPersonalizado ? "Personalizado" : l.tier.label}
+                        {l.esPersonalizado ? p.personalizado : l.tier.label}
                       </span>
                       {l.estado !== "publicado" && (
                         <span className="a-tag a-tag-line">
-                          {l.estado === "nuevo" ? "Nuevo" : "Disponible pronto"}
+                          {estadoLabel(l.estado)}
                         </span>
                       )}
                     </div>
                     <p className="mt-1 text-xs t-mute">
                       {l.esPersonalizado
-                        ? `${l.label} · por encima del tramo estándar, lo dimensionamos contigo`
-                        : `${l.label} · ~${eur(l.volumenEstimado)} ${l.unidad}/mes`}
+                        ? p.lineaPerso(canal)
+                        : p.lineaVol(canal, eur(l.volumenEstimado), unidad)}
                     </p>
                   </div>
                 </div>
                 <div className="flex-shrink-0 text-right">
                   {l.esPersonalizado ? (
-                    <p className="font-bold t-ink">A medida</p>
+                    <p className="font-bold t-ink">{p.aMedida}</p>
                   ) : (
                     <p className="font-bold t-ink">
                       {eur(l.precioMes)}€
@@ -1520,9 +1473,7 @@ function PropuestaCard({ propuesta, r }: { propuesta: Propuesta; r: Report }) {
                     </p>
                   )}
                   <p className="mt-0.5 text-xs t-mute">
-                    {l.esPersonalizado
-                      ? "Setup a medida"
-                      : `Setup ${eur(l.setup)}€`}
+                    {l.esPersonalizado ? p.setupMedida : p.setup(eur(l.setup))}
                   </p>
                 </div>
               </div>
@@ -1549,15 +1500,13 @@ function PropuestaCard({ propuesta, r }: { propuesta: Propuesta; r: Report }) {
                     className="mt-0.5 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg"
                     style={{ background: `${svc.color}1f` }}
                   >
-                    <BrandIcon
-                      name={svc.icon}
-                      color={svc.color}
-                      className="h-5 w-5"
-                    />
+                    <BrandIcon name={svc.icon} color={svc.color} className="h-5 w-5" />
                   </div>
                   <div>
-                    <span className="font-semibold t-ink">{a.label}</span>
-                    <p className="mt-1 text-xs t-mute">Complemento</p>
+                    <span className="font-semibold t-ink">
+                      {t.serviceName.formulario}
+                    </span>
+                    <p className="mt-1 text-xs t-mute">{p.complemento}</p>
                   </div>
                 </div>
                 <div className="flex-shrink-0 text-right">
@@ -1565,7 +1514,7 @@ function PropuestaCard({ propuesta, r }: { propuesta: Propuesta; r: Report }) {
                     {eur(a.precioMes)}€
                     <span className="text-sm font-normal t-mute">/mes</span>
                   </p>
-                  <p className="mt-0.5 text-xs t-mute">Sin setup</p>
+                  <p className="mt-0.5 text-xs t-mute">{p.sinSetup}</p>
                 </div>
               </div>
             </div>
@@ -1578,34 +1527,31 @@ function PropuestaCard({ propuesta, r }: { propuesta: Propuesta; r: Report }) {
         <div className="rounded-xl border bd bg-soft p-4">
           <div className="flex items-center gap-2 text-sm t-soft">
             <Receipt className="h-4 w-4" />
-            Setup (pago único)
+            {p.setupTitle}
           </div>
           <p className="serif mt-1 text-3xl t-ink">
             {eur(propuesta.setupTotal)}€
             {propuesta.hayPersonalizado && (
-              <span className="text-sm t-mute"> + a medida</span>
+              <span className="text-sm t-mute">{p.masMedida}</span>
             )}
           </p>
           <p className="mt-0.5 text-xs t-mute">
-            {propuesta.numCanales} canal
-            {propuesta.numCanales === 1 ? "" : "es"} a configurar
+            {p.canalesConfig(propuesta.numCanales)}
           </p>
         </div>
         <div className="rounded-xl border-2 bd-green bg-[rgba(0,192,136,0.08)] p-4">
           <div className="flex items-center gap-2 text-sm t-green">
             <Wallet className="h-4 w-4" />
-            Cuota mensual
+            {p.cuota}
           </div>
           <p className="serif mt-1 text-3xl t-green">
             {eur(propuesta.cuotaMensual)}€
             <span className="text-sm font-normal">/mes</span>
             {propuesta.hayPersonalizado && (
-              <span className="text-sm t-mute"> + a medida</span>
+              <span className="text-sm t-mute">{p.masMedida}</span>
             )}
           </p>
-          <p className="mt-0.5 text-xs t-mute">
-            Sin permanencia · cancelas cuando quieras
-          </p>
+          <p className="mt-0.5 text-xs t-mute">{p.sinPermanencia}</p>
         </div>
       </div>
 
@@ -1614,23 +1560,19 @@ function PropuestaCard({ propuesta, r }: { propuesta: Propuesta; r: Report }) {
         <div className="mt-4 flex items-start gap-3 rounded-xl border bd-green bg-[rgba(0,192,136,0.06)] p-4">
           <TrendingDown className="mt-0.5 h-5 w-5 flex-shrink-0 t-green" />
           <p className="text-sm t-soft">
-            Ahorras ~<strong className="t-green">{eur(r.ahorroMes)}€/mes</strong> y
-            la cuota es {eur(propuesta.cuotaMensual)}€/mes → ahorro neto de ~
-            <strong className="t-green">{eur(ahorroNeto)}€/mes</strong>.
-            {meses !== null && (
-              <>
-                {" "}
-                El setup se amortiza en ~{meses} {meses === 1 ? "mes" : "meses"}.
-              </>
+            {p.roi(
+              eur(r.ahorroMes),
+              eur(propuesta.cuotaMensual),
+              eur(ahorroNeto)
             )}
+            {meses !== null && p.roiAmort(meses)}
           </p>
         </div>
       )}
 
       <p className="mt-4 flex items-center justify-center gap-1.5 text-center text-xs t-mute">
         <Clock3 className="h-3.5 w-3.5" />
-        Estimación a partir de tu volumen. El plan exacto de cada canal lo
-        afinamos contigo en el kickoff.
+        {p.footnote}
       </p>
     </div>
   );
