@@ -144,9 +144,10 @@ export interface LineaPropuesta {
   estado: ChannelPlan["estado"];
   tier: Tier;
   esPersonalizado: boolean;
+  esNuevo: boolean; // canal que aún no usan (sin volumen) → tramo de entrada
   precioMes: number; // 0 si personalizado
   setup: number; // € una vez (0 si personalizado → a medida)
-  volumenEstimado: number;
+  volumenEstimado: number; // en unidad de tarifa/mes
 }
 
 export interface AddonPropuesta {
@@ -173,26 +174,33 @@ const ORDEN_TRAMO: Record<string, number> = {
 };
 
 /**
- * Construye la propuesta a partir de los canales elegidos (activos + nuevos)
- * y el volumen mensual total estimado. El volumen se reparte por igual entre
- * los canales con producto vendible (estimación, se afina en el kickoff).
+ * Construye la propuesta a partir de los canales elegidos y el volumen mensual
+ * REAL de cada canal activo (en su unidad de tarifa). Los canales nuevos (que
+ * aún no usan) no tienen volumen → se proponen en el tramo de entrada.
  */
 export function buildProposal(opts: {
-  canales: string[]; // ids: activos ∪ nuevos (sin duplicados)
-  consultasMes: number;
+  canalesActivos: string[];
+  canalesNuevos: string[];
+  // volumen mensual por canal en unidad de tarifa (solo canales activos)
+  volumenPorCanal: Record<string, number>;
 }): Propuesta {
-  const canales = Array.from(new Set(opts.canales));
-
-  const conProducto = canales.filter((c) => CANALES_PLAN[c]);
-  const tieneFormulario = canales.includes(ADDON_FORMULARIOS.id);
-
-  const n = conProducto.length;
-  const volumenPorCanal =
-    n > 0 ? Math.round((opts.consultasMes || 0) / n) : 0;
+  const activos = opts.canalesActivos.filter((c) => CANALES_PLAN[c]);
+  const nuevos = opts.canalesNuevos.filter(
+    (c) => CANALES_PLAN[c] && !opts.canalesActivos.includes(c)
+  );
+  const conProducto = [...activos, ...nuevos];
+  const tieneFormulario = [
+    ...opts.canalesActivos,
+    ...opts.canalesNuevos,
+  ].includes(ADDON_FORMULARIOS.id);
 
   const lineas: LineaPropuesta[] = conProducto.map((id) => {
     const plan = CANALES_PLAN[id];
-    const tier = pickTier(plan, volumenPorCanal);
+    const esNuevo = !opts.canalesActivos.includes(id);
+    const vol = esNuevo
+      ? 0
+      : Math.max(0, Math.round(opts.volumenPorCanal[id] || 0));
+    const tier = pickTier(plan, vol);
     const esPersonalizado = tier.id === "personalizado";
     return {
       channelId: id,
@@ -201,9 +209,10 @@ export function buildProposal(opts: {
       estado: plan.estado,
       tier,
       esPersonalizado,
+      esNuevo,
       precioMes: tier.precio ?? 0,
       setup: esPersonalizado ? 0 : SETUP_POR_TRAMO[tier.id],
-      volumenEstimado: volumenPorCanal,
+      volumenEstimado: vol,
     };
   });
 
@@ -231,7 +240,7 @@ export function buildProposal(opts: {
   return {
     lineas,
     addons,
-    numCanales: n,
+    numCanales: conProducto.length,
     setupTotal,
     cuotaMensual,
     hayPersonalizado,

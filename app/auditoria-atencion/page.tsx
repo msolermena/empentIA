@@ -123,6 +123,22 @@ const SERVICE: Record<string, ServiceBrand> = {
   formulario: { color: "#1e3a5f", icon: "formulario", official: true },
 };
 
+// Canales con tarifa por volumen (se pregunta su volumen; el resto no).
+const CANALES_VENDIBLES = [
+  "webchat",
+  "email",
+  "whatsapp",
+  "telefono",
+  "resenas",
+  "redes",
+];
+// Conversión de la unidad amigable de la pregunta → unidad de tarifa.
+// Solo "telefono" difiere: el cliente indica llamadas, la tarifa va por minutos.
+const MIN_POR_LLAMADA = 5;
+function volPricing(id: string, friendlyMonthly: number): number {
+  return id === "telefono" ? friendlyMonthly * MIN_POR_LLAMADA : friendlyMonthly;
+}
+
 const ANALYZING_ICONS = [Globe, Headphones, Zap, CheckCircle2];
 const TIEMPO_IDS = [
   "menos_1h",
@@ -150,7 +166,7 @@ function eur(n: number): string {
 interface Answers {
   canalesActivos: string[];
   canalesNuevos: string[];
-  consultasSemana: string;
+  volumenes: Record<string, string>; // por canal activo: volumen mensual (unidad amigable)
   tipoPrincipal: string;
   horasSemana: string;
   costeHora: string;
@@ -161,7 +177,7 @@ interface Answers {
 const EMPTY_ANSWERS: Answers = {
   canalesActivos: [],
   canalesNuevos: [],
-  consultasSemana: "",
+  volumenes: {},
   tipoPrincipal: "",
   horasSemana: "",
   costeHora: "22",
@@ -180,10 +196,31 @@ interface Report {
   ahorroAnio: number;
 }
 
+// Canales activos que tienen tarifa por volumen (se les pregunta el volumen).
+function activosVendibles(a: Answers): string[] {
+  return a.canalesActivos.filter((id) => CANALES_VENDIBLES.includes(id));
+}
+
+// Volumen mensual por canal en unidad de tarifa (solo canales activos vendibles).
+function volumenPorCanalPricing(a: Answers): Record<string, number> {
+  const out: Record<string, number> = {};
+  for (const id of activosVendibles(a)) {
+    out[id] = volPricing(id, parseFloat(a.volumenes[id] || "") || 0);
+  }
+  return out;
+}
+
+// Total de interacciones/mes (suma de los volúmenes amigables introducidos).
+function totalConsultasMes(a: Answers): number {
+  return activosVendibles(a).reduce(
+    (s, id) => s + (parseFloat(a.volumenes[id] || "") || 0),
+    0
+  );
+}
+
 function computeReport(a: Answers): Report {
   const horasSemana = parseFloat(a.horasSemana) || 0;
   const costeHora = parseFloat(a.costeHora) || 0;
-  const consultasSemana = parseFloat(a.consultasSemana) || 0;
   const costeMes = horasSemana * costeHora * HORAS_MES;
   const horasLiberadas = horasSemana * FACTOR_AUTOMATITZABLE;
   const ahorroMes = horasLiberadas * costeHora * HORAS_MES;
@@ -192,7 +229,7 @@ function computeReport(a: Answers): Report {
     costeHora,
     costeMes,
     costeAnio: costeMes * 12,
-    consultasMes: consultasSemana * HORAS_MES,
+    consultasMes: totalConsultasMes(a),
     horasLiberadas,
     ahorroMes,
     ahorroAnio: ahorroMes * 12,
@@ -204,8 +241,9 @@ function computeReport(a: Answers): Report {
 function buildAuditoriaDetalle(a: Answers, lang: Lang): AuditoriaDetalle {
   const r = computeReport(a);
   const propuesta = buildProposal({
-    canales: [...a.canalesActivos, ...a.canalesNuevos],
-    consultasMes: r.consultasMes,
+    canalesActivos: a.canalesActivos,
+    canalesNuevos: a.canalesNuevos,
+    volumenPorCanal: volumenPorCanalPricing(a),
   });
   const es = STR.es;
   const canal = (id: string) => es.canales[id] ?? id;
@@ -214,7 +252,7 @@ function buildAuditoriaDetalle(a: Answers, lang: Lang): AuditoriaDetalle {
     idioma: lang,
     canales_activos: a.canalesActivos.map(canal),
     canales_nuevos: a.canalesNuevos.map(canal),
-    consultas_semana: parseFloat(a.consultasSemana) || 0,
+    consultas_semana: Math.round(r.consultasMes / HORAS_MES),
     consultas_mes: Math.round(r.consultasMes),
     tipo_principal: a.tipoPrincipal,
     horas_semana: r.horasSemana,
@@ -711,11 +749,25 @@ function CuestionarioStep({
     setAnswers((prev) => ({ ...prev, [key]: value }));
   };
 
+  const setVolumen = (id: string, value: string) => {
+    setError(null);
+    setAnswers((prev) => ({
+      ...prev,
+      volumenes: { ...prev.volumenes, [id]: value },
+    }));
+  };
+
+  const activosVend = answers.canalesActivos.filter((id) =>
+    CANALES_VENDIBLES.includes(id)
+  );
+
   const handleNext = () => {
     const q = t.cuestionario;
     if (answers.canalesActivos.length === 0) return setError(q.errCanal);
-    if (!answers.consultasSemana || parseFloat(answers.consultasSemana) <= 0)
-      return setError(q.errConsultas);
+    for (const id of activosVend) {
+      if (!answers.volumenes[id] || parseFloat(answers.volumenes[id]) <= 0)
+        return setError(q.errVolumen(t.canales[id] ?? id));
+    }
     if (!answers.tipoPrincipal) return setError(q.errTipo);
     if (!answers.horasSemana || parseFloat(answers.horasSemana) <= 0)
       return setError(q.errHoras);
@@ -765,19 +817,49 @@ function CuestionarioStep({
           )}
         </QCard>
 
-        <QCard n={3} title={q.q3t}>
+        <QCard n={3} title={q.q3t} hint={q.volIntro}>
           <div className="space-y-4">
-            <div>
-              <FieldLabel>{q.qVol}</FieldLabel>
-              <input
-                type="number"
-                min={0}
-                value={answers.consultasSemana}
-                onChange={(e) => set("consultasSemana", e.target.value)}
-                placeholder={q.qVolPh}
-                className="a-input"
-              />
-            </div>
+            {activosVend.length > 0 ? (
+              <div className="space-y-3">
+                {activosVend.map((id) => {
+                  const svc = SERVICE[id];
+                  const color = svc?.color ?? "#009a6e";
+                  return (
+                    <div key={id} className="rounded-xl border bd bg-soft p-3">
+                      <div className="mb-2 flex items-center gap-2.5">
+                        <span
+                          className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg"
+                          style={{ background: `${color}1f` }}
+                        >
+                          <BrandIcon
+                            name={svc?.icon ?? "bolt"}
+                            color={color}
+                            className="h-4 w-4"
+                          />
+                        </span>
+                        <span className="text-sm font-medium t-ink">
+                          {t.canales[id]}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2.5">
+                        <input
+                          type="number"
+                          min={0}
+                          value={answers.volumenes[id] || ""}
+                          onChange={(e) => setVolumen(id, e.target.value)}
+                          placeholder={q.qVolPh}
+                          className="a-input"
+                          style={{ maxWidth: 150 }}
+                        />
+                        <span className="text-sm t-mute">{t.volUnidad[id]}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <p className="text-sm t-mute">{q.volNinguno}</p>
+            )}
             <div>
               <FieldLabel>{q.qTipo}</FieldLabel>
               <select
@@ -1087,8 +1169,9 @@ function InformeStep({
   const r = computeReport(answers);
 
   const propuesta = buildProposal({
-    canales: [...answers.canalesActivos, ...answers.canalesNuevos],
-    consultasMes: r.consultasMes,
+    canalesActivos: answers.canalesActivos,
+    canalesNuevos: answers.canalesNuevos,
+    volumenPorCanal: volumenPorCanalPricing(answers),
   });
 
   const tiempoLabel = t.tiempos[answers.tiempoRespuesta] || "—";
@@ -1563,7 +1646,9 @@ function PropuestaCard({ propuesta, r }: { propuesta: Propuesta; r: Report }) {
                     <p className="mt-1 text-xs t-mute">
                       {l.esPersonalizado
                         ? p.lineaPerso(canal)
-                        : p.lineaVol(canal, eur(l.volumenEstimado), unidad)}
+                        : l.esNuevo
+                          ? p.lineaNuevo(canal)
+                          : p.lineaVol(canal, eur(l.volumenEstimado), unidad)}
                     </p>
                   </div>
                 </div>
