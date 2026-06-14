@@ -154,6 +154,11 @@
   border-color: var(--green);
   box-shadow: 0 0 0 3px rgba(0, 192, 136, 0.16);
 }
+/* Input con icono a la izquierda (mayor especificidad que .a-input para
+   que no lo pise el padding corto). */
+.atencion .a-input.with-icon {
+  padding-left: 2.75rem;
+}
 
 /* Chips seleccionables */
 .atencion .a-chip {

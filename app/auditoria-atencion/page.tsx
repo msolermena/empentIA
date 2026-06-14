@@ -494,7 +494,7 @@ function IntroStep({
                     setError(null);
                   }}
                   placeholder={t.intro.urlPlaceholder}
-                  className="a-input pl-12"
+                  className="a-input with-icon"
                 />
               </div>
               <button type="submit" className="a-btn a-btn-primary a-btn-lg">
