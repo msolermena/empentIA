@@ -926,7 +926,7 @@ function ContactoStep({
       detalle_auditoria: detalle,
     }).catch(() => {});
 
-    // Stopgap: avís per email a hola@empentia.com mentre el portal no recull
+    // Avís per email: intern (equip) + còpia del resum al client
     sendAuditoriaEmail({
       estado: "Auditoría completada",
       nombre: nom.trim(),
@@ -934,6 +934,7 @@ function ContactoStep({
       empresa: empresa.trim() || undefined,
       web: url || undefined,
       marketing: comercial,
+      enviarCliente: true,
       detalle,
     }).catch(() => {});
 

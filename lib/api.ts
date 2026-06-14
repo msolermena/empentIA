@@ -698,6 +698,7 @@ export interface AuditoriaEmailParams {
   empresa?: string;
   web?: string;
   marketing?: boolean;
+  enviarCliente?: boolean; // true → enviar també la còpia personalitzada al client
   detalle: AuditoriaDetalle;
 }
 
