@@ -44,7 +44,33 @@ const useT = () => useContext(LangContext);
 // CONSTANTS
 // ============================================================
 
-const CAL_LINK = "https://cal.com/empentia/descobriment-empentia";
+// Cal.com en la instancia EU (app.cal.eu), igual que las landings.
+const CAL_LINK = "https://app.cal.eu/empentia/descobriment-empentia";
+
+type CalFn = ((...args: unknown[]) => void) & {
+  ns?: Record<string, (...args: unknown[]) => void>;
+};
+declare global {
+  interface Window {
+    Cal?: CalFn;
+  }
+}
+
+// Abre el modal de Cal (mismo embed que las landings). Si aún no cargó, abre
+// la página de reserva directamente.
+function openCalModal(formId: string) {
+  if (typeof window === "undefined") return;
+  const ns = window.Cal?.ns?.descobriment;
+  if (ns) {
+    ns("modal", {
+      calLink: "empentia/descobriment-empentia",
+      config: { metadata: { source: "auditoria", form_id: formId } },
+    });
+  } else {
+    window.open(CAL_LINK, "_blank", "noopener");
+  }
+}
+
 const HORAS_MES = 4.33; // setmanes per mes
 const FACTOR_AUTOMATITZABLE = 0.6; // % de temps de tasques repetitives automatitzable
 
@@ -1378,15 +1404,14 @@ function InformeStep({
             {t.cta.acceptedText(contact.nom)}
           </p>
           <div className="no-print flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a
-              href={CAL_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() => openCalModal("auditoria_kickoff")}
               className="a-btn a-btn-on-grad a-btn-lg"
             >
               <Calendar className="h-5 w-5" />
               {t.cta.reservarKickoff}
-            </a>
+            </button>
             <button
               onClick={() => window.print()}
               className="a-btn a-btn-lg"
@@ -1430,10 +1455,9 @@ function InformeStep({
                 </>
               )}
             </button>
-            <a
-              href={CAL_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() => openCalModal("auditoria_hablar")}
               className="a-btn a-btn-lg"
               style={{
                 background: "transparent",
@@ -1443,7 +1467,7 @@ function InformeStep({
             >
               <Calendar className="h-5 w-5" />
               {t.cta.hablar}
-            </a>
+            </button>
           </div>
           <button
             onClick={() => window.print()}
