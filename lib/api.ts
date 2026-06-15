@@ -687,29 +687,17 @@ export async function createLandingLead(
 }
 
 /**
- * Envia un resum de l'auditoria per email (a hola@empentia.com) via la
- * nostra API route /api/auditoria-notify. TEMPORAL: stopgap mentre el
- * portal no recull les dades. Fire-and-forget.
+ * Envia el resum de l'auditoria per email (al client + notificació interna)
+ * via el backend (Brevo). Mateix cos que el lead del portal. Fire-and-forget;
+ * l'enviament és en background al backend.
  */
-export interface AuditoriaEmailParams {
-  estado: string;
-  nombre?: string;
-  email: string;
-  empresa?: string;
-  web?: string;
-  marketing?: boolean;
-  enviarCliente?: boolean; // true → enviar també la còpia personalitzada al client
-  detalle: AuditoriaDetalle;
-}
-
 export async function sendAuditoriaEmail(
-  params: AuditoriaEmailParams
+  data: LandingLeadData
 ): Promise<void> {
-  // Barra final: el projecte usa trailingSlash:true (evita el redirect 308).
-  await fetch('/api/auditoria-notify/', {
+  await fetch(`${API_URL}/email/auditoria-atencio`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(params),
+    body: JSON.stringify(data),
   });
 }
 

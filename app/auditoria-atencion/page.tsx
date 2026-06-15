@@ -29,6 +29,7 @@ import {
   createLandingLead,
   sendAuditoriaEmail,
   type AuditoriaDetalle,
+  type LandingLeadData,
 } from "@/lib/api";
 import { buildProposal, type Propuesta } from "@/lib/pricing";
 import { STR, getLang, type Dict, type Lang } from "./i18n";
@@ -1014,31 +1015,20 @@ function ContactoStep({
 
     setIsSubmitting(true);
 
-    // Lead fire-and-forget: no bloqueja veure l'informe.
-    // Enviem el detall COMPLET de l'auditoria (respostes + proposta).
-    const detalle = buildAuditoriaDetalle(answers, lang);
-    createLandingLead({
-      email,
+    // Mateix cos per al portal i per al backend d'email (Brevo).
+    const leadData: LandingLeadData = {
+      email: email.trim(),
       origen: "landing-atencio-auditoria-contacte",
       nom_contacte: nom.trim(),
       nom_empresa: empresa.trim() || undefined,
       url_web: url || undefined,
       consentiment_rgpd: consent,
       consentiment_comercial: comercial,
-      detalle_auditoria: detalle,
-    }).catch(() => {});
-
-    // Avís per email: intern (equip) + còpia del resum al client
-    sendAuditoriaEmail({
-      estado: "Auditoría completada",
-      nombre: nom.trim(),
-      email: email.trim(),
-      empresa: empresa.trim() || undefined,
-      web: url || undefined,
-      marketing: comercial,
-      enviarCliente: true,
-      detalle,
-    }).catch(() => {});
+      detalle_auditoria: buildAuditoriaDetalle(answers, lang),
+    };
+    // Fire-and-forget: no bloqueja veure l'informe.
+    createLandingLead(leadData).catch(() => {});
+    sendAuditoriaEmail(leadData).catch(() => {});
 
     const data: Contact = {
       nom: nom.trim(),
@@ -1215,8 +1205,8 @@ function InformeStep({
     if (accepting || accepted) return;
     setAccepting(true);
 
-    const detalle = buildAuditoriaDetalle(answers, lang);
-    createLandingLead({
+    // Mateix cos per al portal i per al backend d'email (inclou pla del preacord).
+    const leadData: LandingLeadData = {
       email: contact.email,
       origen: "landing-atencio-auditoria-preacord",
       nom_contacte: contact.nom || undefined,
@@ -1225,19 +1215,10 @@ function InformeStep({
       consentiment_rgpd: contact.consent,
       consentiment_comercial: contact.comercial,
       pla: propuesta.tramoDominante ?? undefined,
-      detalle_auditoria: detalle,
-    }).catch(() => {});
-
-    // Stopgap: avís per email a hola@empentia.com (lead calent)
-    sendAuditoriaEmail({
-      estado: "PROPUESTA PRE-ACEPTADA",
-      nombre: contact.nom || undefined,
-      email: contact.email,
-      empresa: contact.empresa || undefined,
-      web: url || undefined,
-      marketing: contact.comercial,
-      detalle,
-    }).catch(() => {});
+      detalle_auditoria: buildAuditoriaDetalle(answers, lang),
+    };
+    createLandingLead(leadData).catch(() => {});
+    sendAuditoriaEmail(leadData).catch(() => {});
 
     // Mostrem confirmació encara que el lead trigui / falli
     setTimeout(() => {
