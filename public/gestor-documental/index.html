@@ -250,17 +250,34 @@
     background: var(--green-light); border-radius: 100px; padding: 5px 12px; white-space: nowrap;
   }
 
-  /* Testimonios */
-  .testimonial-num {
-    font-family: var(--serif); font-size: 36px; font-weight: 700;
-    color: var(--green); font-style: italic;
+  /* Casos reales — tarjetas (mismo patrón que las otras landings) */
+  .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+  .case-card {
+    background: var(--bg-card); border-radius: 18px; padding: 26px 24px 22px;
+    border: 1px solid var(--border); display: flex; flex-direction: column;
+    transition: transform .25s ease, box-shadow .25s ease; position: relative; overflow: hidden;
   }
-  .testimonial-quote {
-    font-size: 14px; font-style: italic; color: var(--text-body);
-    margin: 12px 0; line-height: 1.6;
+  .case-card:hover { transform: translateY(-4px); box-shadow: 0 30px 60px -30px rgba(14,14,12,0.18); }
+  .case-card.featured { background: var(--bg-dark); color: #fff; border: none; }
+  .case-card.featured .case-quote { color: #fff; }
+  .case-card.featured .case-author { color: rgba(255,255,255,0.7); }
+  .case-card.featured .case-metric .big { color: var(--green-bright); }
+  .case-metric { margin-bottom: 18px; border-bottom: 1px solid var(--border); padding-bottom: 14px; }
+  .case-card.featured .case-metric { border-bottom-color: rgba(0,195,137,0.2); }
+  .case-metric .big { font-family: var(--serif); font-size: 46px; font-weight: 400; letter-spacing: -0.03em; line-height: 1; color: var(--green); }
+  .case-metric .lab { font-size: 13px; color: var(--text-muted); margin-top: 10px; }
+  .case-card.featured .case-metric .lab { color: rgba(255,255,255,0.6); }
+  .case-quote { font-family: var(--serif); font-size: 18px; line-height: 1.45; font-weight: 400; color: var(--text-dark); margin-bottom: 28px; flex: 1; }
+  .case-author { display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--text-body); padding-top: 22px; border-top: 1px solid var(--border); }
+  .case-card.featured .case-author { border-top-color: rgba(0,195,137,0.2); }
+  .case-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--green-light); color: var(--green-dark);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-weight: 500; font-size: 16px; flex-shrink: 0;
   }
-  .testimonial-author { font-size: 13px; color: var(--text-muted); }
-  .testimonial-author strong { color: var(--text-dark); }
+  .case-card.featured .case-avatar { background: rgba(0,195,137,0.15); color: var(--green-bright); }
+  .case-name { font-weight: 600; color: inherit; }
 
   /* Plans */
   .plan-card {
@@ -473,6 +490,7 @@
     .cta-final-primary, .cta-final-secondary { justify-content: center; width: 100%; }
     .faqs-items { grid-template-columns: 1fr; }
     .usecases-grid { grid-template-columns: 1fr; }
+    .cases-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -887,24 +905,50 @@
     <p class="eyebrow">Casos reales</p>
     <h2>Negocios como el tuyo <span class="italic">ya lo usan.</span></h2>
 
-    <div class="cards-3" style="margin-top: 32px;">
-      <div class="card">
-        <div class="testimonial-num">−85%</div>
-        <p class="body" style="margin-top: 12px;">Horas dedicadas a clasificar y archivar documentación de clientes.</p>
-        <p class="testimonial-quote">"Lo que antes era el trabajo de medio día ahora es revisar las excepciones. El bloque grande lo lleva el sistema."</p>
-        <p class="testimonial-author"><strong>Gestoría · 12 personas</strong> · Manresa</p>
+    <div class="cases-grid">
+      <div class="case-card">
+        <div class="case-metric">
+          <div class="big">−85%</div>
+          <div class="lab">Horas dedicadas a clasificar y archivar documentación de clientes</div>
+        </div>
+        <p class="case-quote">"Lo que antes era el trabajo de medio día ahora es revisar las excepciones. El bloque grande lo lleva el sistema."</p>
+        <div class="case-author">
+          <div class="case-avatar">G</div>
+          <div>
+            <div class="case-name">Gestoría</div>
+            <div>12 personas · Manresa</div>
+          </div>
+        </div>
       </div>
-      <div class="card">
-        <div class="testimonial-num">Minutos</div>
-        <p class="body" style="margin-top: 12px;">Para procesar una remesa entera de justificantes bancarios.</p>
-        <p class="testimonial-quote">"El gestor procesa la remesa en minutos. Solo revisamos las pocas excepciones que el sistema marca, y un clic las envía a Gesfincas."</p>
-        <p class="testimonial-author"><strong>Administración de fincas · 8 personas</strong> · Barcelona</p>
+
+      <div class="case-card featured">
+        <div class="case-metric">
+          <div class="big">Minutos</div>
+          <div class="lab">Para procesar una remesa entera de justificantes bancarios</div>
+        </div>
+        <p class="case-quote">"El gestor procesa la remesa en minutos. Solo revisamos las pocas excepciones que el sistema marca, y un clic las envía a Gesfincas."</p>
+        <div class="case-author">
+          <div class="case-avatar">A</div>
+          <div>
+            <div class="case-name">Administración de fincas</div>
+            <div>8 personas · Barcelona</div>
+          </div>
+        </div>
       </div>
-      <div class="card">
-        <div class="testimonial-num">2 días</div>
-        <p class="body" style="margin-top: 12px;">Por semana ganados gracias al portal de documentos.</p>
-        <p class="testimonial-quote">"Pedimos a los clientes que suban contratos y documentación desde el móvil. Llegan al portal clasificados y organizados por operación."</p>
-        <p class="testimonial-author"><strong>Inmobiliaria · 5 personas</strong> · Vallès</p>
+
+      <div class="case-card">
+        <div class="case-metric">
+          <div class="big">2 días</div>
+          <div class="lab">Por semana ganados gracias al portal de documentos</div>
+        </div>
+        <p class="case-quote">"Pedimos a los clientes que suban contratos y documentación desde el móvil. Llegan al portal clasificados y organizados por operación."</p>
+        <div class="case-author">
+          <div class="case-avatar">I</div>
+          <div>
+            <div class="case-name">Inmobiliaria</div>
+            <div>5 personas · Vallès</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
