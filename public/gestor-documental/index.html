@@ -265,22 +265,57 @@
     font-weight: 600; letter-spacing: 1px;
   }
 
-  /* FAQs */
-  .faq-category {
-    font-size: 11px; font-weight: 700; color: var(--green);
-    letter-spacing: 2px; text-transform: uppercase; margin-top: 32px; margin-bottom: 8px;
+  /* FAQs — misma estructura que las otras landings (acordeón a 2 columnas) */
+  section.faqs {
+    padding: 64px 0; background: var(--bg-hover);
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    position: relative;
   }
-  .faq-item { padding: 16px 0; border-top: 1px solid var(--border); }
-  .faq-q { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
-  .faq-a { font-size: 14px; color: var(--text-body); }
+  .section-label {
+    font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--green); margin-bottom: 20px; font-weight: 400;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .section-label::before { content: ''; width: 24px; height: 1px; background: var(--green); flex-shrink: 0; }
+  .faqs-grid { display: flex; flex-direction: column; gap: 48px; position: relative; z-index: 1; }
+  .faqs-head { max-width: 640px; }
+  .faqs-head h2 { margin: 0; }
+  .faqs-head h2 em { font-style: italic; font-weight: 300; color: var(--green); }
+  .faqs-head p { font-size: 18px; color: var(--text-body); line-height: 1.6; margin-top: 16px; }
+  .faqs-items { display: grid; grid-template-columns: 1fr 1fr; gap: 0 48px; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  .faq-q {
+    display: flex; justify-content: space-between; align-items: center; cursor: pointer;
+    font-size: 17px; font-weight: 500; color: var(--text-dark); gap: 20px; user-select: none;
+  }
+  .faq-q::after {
+    content: '+'; font-family: var(--serif); font-size: 24px; font-weight: 300;
+    transition: transform 0.3s; color: var(--text-muted); flex-shrink: 0;
+  }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease;
+    font-size: 15px; color: var(--text-body); line-height: 1.6;
+  }
+  .faq-item.open .faq-a { max-height: 360px; padding-top: 10px; }
 
   /* Hero specific */
-  .hero { padding: 80px 0 64px; position: relative; overflow: hidden; }
+  .hero {
+    padding: 80px 0 64px; position: relative; overflow: hidden;
+    background-image: url('/images/patterns/patron-crema-sutil.png');
+    background-size: cover; background-position: center;
+  }
   .hero::before {
     content: ""; position: absolute; top: -10%; left: 50%; transform: translateX(-50%);
     width: 1200px; height: 760px; max-width: 130%;
     background: radial-gradient(ellipse at center, var(--brand-glow), transparent 65%);
     pointer-events: none; z-index: 0;
+  }
+  /* Logotipo difuminado de fondo */
+  .hero-logo {
+    position: absolute; right: -60px; top: 50%; transform: translateY(-50%);
+    width: 520px; max-width: 58%; opacity: 0.05;
+    pointer-events: none; z-index: 0; user-select: none;
   }
   .hero .container { position: relative; z-index: 1; }
   .hero h1 { max-width: 900px; }
@@ -418,6 +453,7 @@
     section.cta-final { padding: 80px 0 96px; }
     .cta-final-actions { flex-direction: column; align-items: stretch; }
     .cta-final-primary, .cta-final-secondary { justify-content: center; width: 100%; }
+    .faqs-items { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -460,12 +496,13 @@
 <!-- 1. HERO -->
 <!-- ============================================ -->
 <section class="hero">
+  <img class="hero-logo" src="/images/logo/simbolo-tinta.png" alt="" aria-hidden="true">
   <div class="container">
     <div class="badge-live"><span class="pulse"></span><span>Horas de papeleo. Convertidas en minutos.</span></div>
     <h1>Documentos que se gestionan <span class="italic">solos.</span></h1>
     <p class="lead">Procesados, clasificados y entregados automáticamente. Tú revisas lo que importa.</p>
     <div class="cta-row">
-      <a href="#" class="btn-primary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_gestor_documental_hero'}}}); return false;">Pide una demo <span class="arr">→</span></a>
+      <a href="#" class="btn-primary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_gestor_documental_hero'}}}); return false;">Agenda una reunión <span class="arr">→</span></a>
       <a href="#planes" class="btn-secondary">Ver planes y precios</a>
     </div>
 
@@ -962,42 +999,39 @@
 <!-- ============================================ -->
 <!-- 11. FAQs -->
 <!-- ============================================ -->
-<section class="section" id="faqs">
+<section class="faqs" id="faqs">
   <div class="container">
-    <p class="eyebrow">Preguntas frecuentes</p>
-    <h2>Lo que <span class="italic">quieres saber</span> antes de empezar.</h2>
-
-    <div style="max-width: 720px;">
-      <p class="faq-category">01 · Setup e implementación</p>
-      <div class="faq-item">
-        <div class="faq-q">¿Cuánto tarda en estar operativo?</div>
-        <div class="faq-a">Entre 1 y 3 semanas según la complejidad del flujo. La primera semana es auditoría y diseño; el resto, implementación y pruebas con documentos reales.</div>
+    <div class="faqs-grid">
+      <div class="faqs-head">
+        <div class="section-label">FAQ</div>
+        <h2>Preguntas <em>frecuentes.</em></h2>
+        <p>Si tienes una duda que no ves aquí, escríbenos. Te respondemos el mismo día.</p>
       </div>
-      <div class="faq-item">
-        <div class="faq-q">¿Se integra con mi ERP / sistema actual?</div>
-        <div class="faq-a">Sí. Trabajamos con A3, Gesfincas, Holded, SAP, Sage y otros. Si el sistema tiene API o base de datos accesible, podemos conectarnos. Si no, podemos trabajar contra carpetas del servidor o sincronización por archivos.</div>
-      </div>
-
-      <p class="faq-category">02 · Producto y funcionamiento</p>
-      <div class="faq-item">
-        <div class="faq-q">¿Qué pasa cuando la IA no está segura?</div>
-        <div class="faq-a">El documento queda marcado como alerta y aparece en la pestaña correspondiente. Un humano revisa, corrige si hace falta, y el sistema aprende para casos futuros similares.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">¿Modifica datos en mi sistema actual?</div>
-        <div class="faq-a">Por defecto solo lee. Si quieres que escriba (insertar apuntes en Gesfincas, por ejemplo), se configura explícitamente y siempre con tu validación. Tu sistema sigue siendo la fuente única de verdad.</div>
-      </div>
-
-      <p class="faq-category">03 · Precios y permanencia</p>
-      <div class="faq-item">
-        <div class="faq-q">¿Hay permanencia?</div>
-        <div class="faq-a">No. Cancelas cuando quieras desde el portal. El servicio sigue activo hasta el final del período facturado.</div>
-      </div>
-
-      <p class="faq-category">04 · Datos y seguridad</p>
-      <div class="faq-item">
-        <div class="faq-q">¿Dónde se almacenan los documentos?</div>
-        <div class="faq-a">En servidores en la UE, cifrados en tránsito y en reposo. Los documentos son propiedad tuya y puedes descargarlos o eliminarlos en cualquier momento. No se usan para entrenar modelos.</div>
+      <div class="faqs-items">
+        <div class="faq-item">
+          <div class="faq-q">¿Cuánto tarda en estar operativo?</div>
+          <div class="faq-a">Entre 1 y 3 semanas según la complejidad del flujo. La primera semana es auditoría y diseño; el resto, implementación y pruebas con documentos reales.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Se integra con mi ERP / sistema actual?</div>
+          <div class="faq-a">Sí. Trabajamos con A3, Gesfincas, Holded, SAP, Sage y otros. Si el sistema tiene API o base de datos accesible, podemos conectarnos. Si no, podemos trabajar contra carpetas del servidor o sincronización por archivos.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Qué pasa cuando la IA no está segura?</div>
+          <div class="faq-a">El documento queda marcado como alerta y aparece en la pestaña correspondiente. Un humano revisa, corrige si hace falta, y el sistema aprende para casos futuros similares.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Modifica datos en mi sistema actual?</div>
+          <div class="faq-a">Por defecto solo lee. Si quieres que escriba (insertar apuntes en Gesfincas, por ejemplo), se configura explícitamente y siempre con tu validación. Tu sistema sigue siendo la fuente única de verdad.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Hay permanencia?</div>
+          <div class="faq-a">No. Cancelas cuando quieras desde el portal. El servicio sigue activo hasta el final del período facturado.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Dónde se almacenan los documentos?</div>
+          <div class="faq-a">En servidores en la UE, cifrados en tránsito y en reposo. Los documentos son propiedad tuya y puedes descargarlos o eliminarlos en cualquier momento. No se usan para entrenar modelos.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1116,6 +1150,12 @@ Cal.ns["descobriment"]("ui", { hideEventTypeDetails: false });
 </script>
 
 <script>
+  // Acordeón de FAQs
+  document.querySelectorAll('.faq-item').forEach(function(item) {
+    var q = item.querySelector('.faq-q');
+    if (q) q.addEventListener('click', function() { item.classList.toggle('open'); });
+  });
+
   // Año dinámico en footer
   (function() {
     var y = document.getElementById('footer-year');
