@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-brand-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/favicon-brand-180.png">
+<link rel="icon" type="image/png" href="/favicons/favicon-brand.png">
+<link rel="shortcut icon" href="/favicons/favicon-brand-32.png">
+<title>Gestor Documental IA · empentIA — Documentos que se gestionan solos</title>
+<meta name="description" content="Gestor Documental IA de empentIA: tus documentos llegan, se procesan, se clasifican y se entregan a tu sistema automáticamente. Tú revisas solo lo que importa. Integrado con A3, Gesfincas, Holded y más." />
+<meta name="author" content="empentIA" />
+<!-- Servicio aún no operativo: noindex hasta validar copy, precios y sección de logos -->
+<meta name="robots" content="noindex, nofollow" />
+<meta name="googlebot" content="noindex, nofollow" />
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://empentia.com/gestor-documental/" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_ES" />
+<meta property="og:url" content="https://empentia.com/gestor-documental/" />
+<meta property="og:title" content="Gestor Documental IA · empentIA" />
+<meta property="og:description" content="Documentos que se gestionan solos. Procesados, clasificados y entregados automáticamente. Tú revisas lo que importa." />
+<meta property="og:site_name" content="empentIA" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Gestor Documental IA · empentIA" />
+<meta name="twitter:description" content="Documentos que se gestionan solos. Procesados, clasificados y entregados automáticamente. Tú revisas lo que importa." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Instrument+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Instrument+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<style>
+  :root {
+    /* Sistema de marca empentIA (crema + verde oficial) */
+    --bg: #f6f5f0;
+    --bg-card: #ffffff;
+    --bg-hover: #efede5;
+    --border: rgba(14,14,12,0.10);
+    --text-dark: #0e0e0c;
+    --text-body: #4a4a47;
+    --text-muted: #8a8a85;
+    --green: #008159;          /* acento/texto — contraste correcto sobre crema */
+    --green-bright: #00c389;   /* verde de marca para botones/fills */
+    --green-dark: #005a3e;
+    --green-light: #d4f5e9;
+    --amber: #b8893f;
+    --red: #b85450;
+    --bg-dark: #0a1410;
+
+    --serif: "Fraunces", "Times New Roman", serif;
+    --sans: "Instrument Sans", system-ui, sans-serif;
+    --mono: "JetBrains Mono", monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text-dark);
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  .section { padding: 64px 0; border-bottom: 1px solid var(--border); }
+  .section-dark { background: var(--bg-dark); color: #fff; border-bottom: none; }
+  .section-dark h1, .section-dark h2, .section-dark h3 { color: #fff; }
+  .section-dark .lead { color: #B5B6B0; }
+
+  /* Tipografia */
+  h1, h2, h3 { font-family: var(--serif); font-weight: 700; line-height: 1.15; color: var(--text-dark); letter-spacing: -0.01em; }
+  h1 { font-size: 52px; margin-bottom: 24px; }
+  h2 { font-size: 38px; margin-bottom: 16px; }
+  h3 { font-size: 18px; margin-bottom: 8px; }
+  .italic { font-style: italic; color: var(--green); }
+  .lead { font-size: 18px; color: var(--text-muted); margin-bottom: 32px; max-width: 720px; }
+  .body { font-size: 15px; color: var(--text-body); }
+  .fine { font-size: 12px; color: var(--text-muted); }
+
+  /* Eyebrow */
+  .eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--green); margin-bottom: 16px; font-family: var(--sans);
+  }
+
+  /* Pills */
+  .pill {
+    display: inline-block; font-size: 12px; padding: 4px 12px; border-radius: 999px;
+    background: var(--bg-hover); color: var(--text-body); margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .pill-green { background: var(--green); color: #fff; }
+  .pill-green-light { background: var(--green-light); color: var(--green-dark); }
+  .pill-amber { background: rgba(184, 137, 63, 0.15); color: var(--amber); }
+  .pill-red { background: rgba(184, 84, 80, 0.15); color: var(--red); }
+
+  /* Buttons */
+  .btn-primary {
+    display: inline-block; background: var(--green-bright); color: #fff; padding: 14px 28px;
+    border-radius: 10px; font-size: 15px; font-weight: 600; border: none;
+    cursor: pointer; font-family: inherit; transition: background 0.2s; text-decoration: none;
+  }
+  .btn-primary:hover { background: var(--green-dark); }
+  .btn-secondary {
+    display: inline-block; background: transparent; color: var(--text-dark); padding: 14px 28px;
+    border-radius: 10px; font-size: 15px; font-weight: 600;
+    border: 1px solid var(--border); cursor: pointer; font-family: inherit; text-decoration: none;
+  }
+  .btn-secondary:hover { background: var(--bg-hover); }
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 32px 0; }
+
+  /* KPIs */
+  .kpi-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border);
+  }
+  .kpi-num { font-family: var(--serif); font-size: 36px; font-weight: 700; color: var(--text-dark); }
+  .kpi-lbl { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
+  /* Cards */
+  .card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 24px;
+  }
+  .card-numbered { border-left: 4px solid var(--green); }
+  .numbered {
+    font-family: var(--serif); font-size: 32px; font-style: italic;
+    font-weight: 700; color: var(--green); margin-bottom: 12px;
+  }
+  .cards-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .cards-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .cards-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+  /* Logos */
+  .logos {
+    display: flex; gap: 48px; flex-wrap: wrap; opacity: 0.6;
+    font-size: 14px; color: var(--text-muted); padding: 24px 0;
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    justify-content: center; align-items: center;
+  }
+  .logos span { font-weight: 600; }
+
+  /* Mockup browser */
+  .mockup-browser {
+    background: var(--bg-hover); border-radius: 12px; padding: 12px;
+    margin-top: 32px; border: 1px solid var(--border);
+  }
+  .mockup-bar {
+    display: flex; gap: 6px; align-items: center; margin-bottom: 12px;
+    padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  }
+  .mockup-dot { width: 12px; height: 12px; border-radius: 50%; background: #C5C6C0; }
+  .mockup-url { font-size: 12px; color: var(--text-muted); margin-left: 8px; font-family: var(--mono); }
+  .mockup-body { background: var(--bg-card); border-radius: 8px; padding: 16px; }
+
+  /* Tabla */
+  .table-row {
+    display: flex; padding: 10px 12px; border-bottom: 1px solid var(--border);
+    gap: 12px; align-items: center; font-size: 13px;
+  }
+  .table-row-header { background: var(--bg-hover); font-weight: 600; font-size: 12px; color: var(--text-muted); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .dot-green { background: var(--green); }
+  .dot-amber { background: var(--amber); }
+  .dot-red { background: var(--red); }
+
+  /* Flow diagram */
+  .flow-diagram {
+    display: flex; align-items: center; gap: 12px; margin: 32px 0;
+    padding: 24px; background: var(--bg-card); border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+  .flow-step {
+    flex: 1; text-align: center; padding: 16px;
+    background: var(--bg); border-radius: 8px; border: 1px solid var(--border);
+  }
+  .flow-step-active { background: var(--green); color: #fff; }
+  .flow-step-active .flow-label, .flow-step-active .flow-sub { color: #fff; }
+  .flow-label { font-weight: 700; font-size: 14px; }
+  .flow-sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+  .flow-arrow { color: var(--green); font-size: 24px; }
+
+  /* Cases */
+  .case-row {
+    display: flex; gap: 24px; padding: 24px 0;
+    border-top: 1px solid var(--border); align-items: flex-start;
+  }
+  .case-icon {
+    width: 48px; height: 48px; border-radius: 50%; background: var(--green);
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-size: 24px; flex-shrink: 0;
+  }
+  .case-content h3 { margin-bottom: 8px; }
+  .case-tech { font-size: 12px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
+
+  /* Testimonios */
+  .testimonial-num {
+    font-family: var(--serif); font-size: 36px; font-weight: 700;
+    color: var(--green); font-style: italic;
+  }
+  .testimonial-quote {
+    font-size: 14px; font-style: italic; color: var(--text-body);
+    margin: 12px 0; line-height: 1.6;
+  }
+  .testimonial-author { font-size: 13px; color: var(--text-muted); }
+  .testimonial-author strong { color: var(--text-dark); }
+
+  /* Plans */
+  .plan-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 24px; position: relative;
+  }
+  .plan-featured { border: 2px solid var(--green-bright); }
+  .plan-name { font-size: 14px; font-weight: 600; color: var(--text-muted); }
+  .plan-price {
+    font-family: var(--serif); font-size: 36px; font-weight: 700;
+    margin: 12px 0; color: var(--text-dark);
+  }
+  .plan-price span { font-size: 14px; color: var(--text-muted); font-weight: 400; font-family: var(--sans); }
+  .plan-list { list-style: none; font-size: 13px; color: var(--text-body); }
+  .plan-list li { padding: 6px 0; border-bottom: 1px solid var(--border); }
+  .plan-list li:last-child { border-bottom: none; }
+  .plan-badge {
+    position: absolute; top: -12px; right: 16px; background: var(--green-bright);
+    color: #fff; padding: 4px 12px; border-radius: 999px; font-size: 11px;
+    font-weight: 600; letter-spacing: 1px;
+  }
+
+  /* FAQs */
+  .faq-category {
+    font-size: 11px; font-weight: 700; color: var(--green);
+    letter-spacing: 2px; text-transform: uppercase; margin-top: 32px; margin-bottom: 8px;
+  }
+  .faq-item { padding: 16px 0; border-top: 1px solid var(--border); }
+  .faq-q { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+  .faq-a { font-size: 14px; color: var(--text-body); }
+
+  /* Hero specific */
+  .hero { padding: 88px 0 64px; }
+  .hero h1 { max-width: 900px; }
+
+  /* CTA final */
+  .cta-final { text-align: center; }
+  .cta-final h2 { max-width: 720px; margin: 0 auto 16px; }
+  .cta-final .lead { margin: 0 auto 32px; }
+  .cta-final .cta-row { justify-content: center; }
+
+  /* Mini-cards secció "En acción" */
+  .moments-row {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px;
+  }
+  .moment-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;
+  }
+  .moment-num { font-family: var(--serif); font-size: 24px; font-style: italic; font-weight: 700; color: var(--green); padding: 16px 16px 0; }
+  .moment-title { font-family: var(--serif); font-weight: 700; font-size: 18px; padding: 4px 16px 8px; color: var(--text-dark); }
+  .moment-desc { font-size: 13px; color: var(--text-body); padding: 0 16px 12px; }
+  .moment-mockup { background: var(--bg-hover); border-top: 1px solid var(--border); padding: 12px; flex-grow: 1; font-size: 11px; }
+
+  /* Mockup mòbil */
+  .phone-mockup { background: #fff; border-radius: 16px; border: 2px solid var(--text-dark); padding: 8px; max-width: 220px; margin: 0 auto; }
+  .phone-notch { width: 60px; height: 4px; background: var(--text-dark); border-radius: 2px; margin: 0 auto 8px; }
+  .phone-screen { background: var(--bg-hover); border-radius: 8px; padding: 8px; font-size: 10px; }
+
+  /* ============ NAV ============ */
+  nav.top {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(246,245,240,0.85); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; max-width: 1080px; margin: 0 auto; }
+  .logo-mark { display: flex; align-items: center; gap: 12px; }
+  .logo-mark img { height: 30px; width: auto; display: block; }
+  .product-label { font-size: 12px; color: var(--text-body); padding-left: 12px; border-left: 1px solid var(--border); line-height: 1.3; white-space: nowrap; }
+  .product-label .label-prefix { color: var(--text-muted); }
+  .product-label strong { color: var(--text-dark); font-weight: 600; }
+  .nav-links { display: flex; align-items: center; gap: 24px; }
+  .nav-links a { color: var(--text-body); text-decoration: none; font-size: 14px; font-weight: 500; }
+  .nav-links a:hover { color: var(--green); }
+  .btn-cta { background: var(--green-bright); color: #fff !important; padding: 9px 18px; border-radius: 8px; font-weight: 600; }
+  .btn-cta:hover { background: var(--green-dark); }
+  .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+  .nav-toggle span { width: 24px; height: 2px; background: var(--text-dark); border-radius: 2px; transition: 0.2s; }
+  .nav-mobile { display: none; position: fixed; inset: 0; top: 60px; background: var(--bg); z-index: 49; padding: 24px; }
+  .nav-mobile.open { display: block; }
+  .nav-mobile-inner { display: flex; flex-direction: column; gap: 4px; }
+  .nav-mobile a { color: var(--text-dark); text-decoration: none; font-size: 18px; font-weight: 500; padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .nav-mobile-cta { background: var(--green-bright); color: #fff !important; text-align: center; border-radius: 8px; margin-top: 16px; border-bottom: none !important; }
+
+  /* ============ FOOTER ============ */
+  .site-footer { background: var(--bg-dark); color: #B5B6B0; }
+  .footer-inner { max-width: 1080px; margin: 0 auto; padding: 56px 24px 32px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; }
+  .footer-brand .footer-logo img { height: 30px; filter: brightness(0) invert(1); opacity: 0.95; }
+  .footer-tagline { font-size: 13px; color: #9a9b95; margin: 16px 0; max-width: 320px; line-height: 1.6; }
+  .footer-social { display: flex; gap: 12px; }
+  .footer-social-link { color: #B5B6B0; display: inline-flex; }
+  .footer-social-link svg { width: 18px; height: 18px; }
+  .footer-social-link:hover { color: var(--green-bright); }
+  .footer-heading { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #fff; margin-bottom: 14px; font-family: var(--sans); font-weight: 700; }
+  .footer-list { list-style: none; }
+  .footer-list li { padding: 5px 0; }
+  .footer-list a { color: #9a9b95; text-decoration: none; font-size: 13px; }
+  .footer-list a:hover { color: var(--green-bright); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); }
+  .footer-bottom-inner { max-width: 1080px; margin: 0 auto; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-copy { font-size: 12px; color: #7a7b76; }
+  .footer-legal { display: flex; gap: 20px; }
+  .footer-legal a { color: #9a9b95; text-decoration: none; font-size: 12px; }
+  .footer-legal a:hover { color: var(--green-bright); }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+  /* Responsive */
+  @media (max-width: 880px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: flex; }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    h1 { font-size: 36px; }
+    h2 { font-size: 28px; }
+    .cards-2, .cards-3, .cards-4 { grid-template-columns: 1fr; }
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .flow-diagram { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); }
+    .moments-row { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="top">
+  <div class="nav-inner">
+    <div class="logo-mark">
+      <img src="/images/logo/logo-horizontal-green.png" alt="empentIA" />
+      <span class="product-label"><span class="label-prefix">Gestión administrativa <span>·</span> </span><strong>Gestor Documental IA</strong></span>
+    </div>
+    <div class="nav-links">
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#casos">Casos</a>
+      <a href="#portal">El portal</a>
+      <a href="#planes">Planes</a>
+      <a href="#faqs">FAQs</a>
+      <a href="https://app.empentia.com/login" target="_blank" rel="noopener noreferrer" class="btn-cta">Acceso clientes →</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" onclick="toggleNav()" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ============ MOBILE MENU ============ -->
+<div class="nav-mobile" id="navMobile">
+  <div class="nav-mobile-inner">
+    <a href="#como-funciona" onclick="closeNav()">Cómo funciona</a>
+    <a href="#casos" onclick="closeNav()">Casos</a>
+    <a href="#portal" onclick="closeNav()">El portal</a>
+    <a href="#planes" onclick="closeNav()">Planes</a>
+    <a href="#faqs" onclick="closeNav()">FAQs</a>
+    <a href="https://app.empentia.com/login" target="_blank" rel="noopener noreferrer" class="nav-mobile-cta" onclick="closeNav()">Acceso clientes →</a>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- 1. HERO -->
+<!-- ============================================ -->
+<section class="hero">
+  <div class="container">
+    <div class="pill pill-green-light">Horas de papeleo. Convertidas en minutos.</div>
+    <h1>Documentos que se gestionan <span class="italic">solos.</span></h1>
+    <p class="lead">Procesados, clasificados y entregados automáticamente. Tú revisas lo que importa.</p>
+    <div class="cta-row">
+      <a href="#" class="btn-primary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_gestor_documental_hero'}}}); return false;">Pide una demo →</a>
+      <a href="#planes" class="btn-secondary">Ver planes y precios</a>
+    </div>
+
+    <!-- Mockup del portal -->
+    <div class="mockup-browser">
+      <div class="mockup-bar">
+        <div class="mockup-dot"></div>
+        <div class="mockup-dot"></div>
+        <div class="mockup-dot"></div>
+        <span class="mockup-url">app.empentia.com/gestor-documental</span>
+      </div>
+      <div class="mockup-body">
+        <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+          <span class="pill pill-red">Alertas · 12</span>
+          <span class="pill pill-green">Validados · 1.155</span>
+          <span class="pill">Histórico · 80</span>
+        </div>
+        <div class="table-row table-row-header">
+          <span style="width: 16px;"></span>
+          <span style="flex: 1;">Documento</span>
+          <span style="width: 120px;">Cliente</span>
+          <span style="width: 80px;">Importe</span>
+        </div>
+        <div class="table-row">
+          <span class="dot dot-green"></span>
+          <span style="flex: 1;">Factura · Endesa 2024-11</span>
+          <span style="width: 120px; color: var(--text-muted);">CB Major 12</span>
+          <span style="width: 80px;">145,20€</span>
+        </div>
+        <div class="table-row">
+          <span class="dot dot-green"></span>
+          <span style="flex: 1;">Justificante · Transferencia</span>
+          <span style="width: 120px; color: var(--text-muted);">CB Vallés 7</span>
+          <span style="width: 80px;">580,00€</span>
+        </div>
+        <div class="table-row">
+          <span class="dot dot-amber"></span>
+          <span style="flex: 1;">Factura · Proveedor nuevo</span>
+          <span style="width: 120px; color: var(--text-muted);">—</span>
+          <span style="width: 80px;">320,15€</span>
+        </div>
+        <div class="table-row">
+          <span class="dot dot-green"></span>
+          <span style="flex: 1;">Notificación AEAT · IVA Q3</span>
+          <span style="width: 120px; color: var(--text-muted);">García SL</span>
+          <span style="width: 80px;">—</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="kpi-row">
+      <div>
+        <div class="kpi-num">24/7</div>
+        <div class="kpi-lbl">Siempre procesando</div>
+      </div>
+      <div>
+        <div class="kpi-num">&lt;2s</div>
+        <div class="kpi-lbl">Por documento</div>
+      </div>
+      <div>
+        <div class="kpi-num">95%+</div>
+        <div class="kpi-lbl">Asociación automática</div>
+      </div>
+      <div>
+        <div class="kpi-num">0h</div>
+        <div class="kpi-lbl">De picar datos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 2. LOGOS -->
+<!-- ============================================ -->
+<section style="padding: 32px 0;">
+  <div class="container">
+    <p class="fine" style="text-align: center; margin-bottom: 12px;">Ya procesan documentos con empentIA</p>
+    <div class="logos">
+      <span>ACED Asesores</span>
+      <span>ACBAR Finques</span>
+      <span>F.F. Bofill</span>
+      <span>VB Sports</span>
+      <span>INTECAT</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 3. CÓMO FUNCIONA -->
+<!-- ============================================ -->
+<section class="section" id="como-funciona">
+  <div class="container">
+    <p class="eyebrow">Cómo funciona</p>
+    <h2>Se adapta a tus flujos. <span class="italic">No al revés.</span></h2>
+    <p class="lead">Tres piezas configurables que se combinan según tu negocio: canales, flujos y destinos.</p>
+
+    <div class="cards-3">
+      <div class="card card-numbered">
+        <div class="numbered">01</div>
+        <h3>Canales</h3>
+        <p class="body">Buzón de email dedicado, carpeta vigilada en el servidor, subida manual al portal. Los documentos entran como quieras.</p>
+      </div>
+      <div class="card card-numbered">
+        <div class="numbered">02</div>
+        <h3>Flujos</h3>
+        <p class="body">Un flujo documental por cada tipo de documento. Cada flujo tiene su extractor IA, sus reglas de asociación y sus destinos.</p>
+      </div>
+      <div class="card card-numbered">
+        <div class="numbered">03</div>
+        <h3>Destinos</h3>
+        <p class="body">Portal, carpetas locales del servidor, sistema externo (A3, Gesfincas, Holded…), campañas masivas a tus clientes, o bandeja de validación humana cuando hace falta.</p>
+      </div>
+    </div>
+
+    <div class="flow-diagram">
+      <div class="flow-step">
+        <div class="flow-label">Entrada</div>
+        <div class="flow-sub">PDF · email · zip</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step flow-step-active">
+        <div class="flow-label">IA</div>
+        <div class="flow-sub">extrae · clasifica · asocia</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-label">Destinos</div>
+        <div class="flow-sub">portal · servidor · sistema</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 4. EN ACCIÓN — Sistema completo en 3 momentos -->
+<!-- ============================================ -->
+<section class="section">
+  <div class="container">
+    <p class="eyebrow">En acción</p>
+    <h2>Un sistema completo. <span class="italic">De principio a fin.</span></h2>
+    <p class="lead">Ejemplo real: cierre trimestral de una gestoría fiscal. Tres momentos, tres piezas trabajando juntas.</p>
+
+    <div class="moments-row">
+
+      <!-- Moment 1: Captació -->
+      <div class="moment-card">
+        <span class="moment-num">01</span>
+        <div class="moment-title">Captación</div>
+        <p class="moment-desc">El cliente sube sus facturas desde el móvil, a través del Portal de documentos. Llegan ordenadas, sin perder nada por el camino.</p>
+        <div class="moment-mockup">
+          <div class="phone-mockup">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div style="background: var(--green); color: #fff; padding: 6px 8px; border-radius: 4px; margin-bottom: 6px; font-weight: 600;">Portal · García SL</div>
+              <div style="background: #fff; padding: 6px; border-radius: 4px; margin-bottom: 4px;">
+                <div style="font-weight: 600; margin-bottom: 2px;">Q3 2026</div>
+                <div style="color: var(--text-muted); font-size: 9px;">Facturas pendientes de subir</div>
+              </div>
+              <div style="background: #fff; padding: 6px; border-radius: 4px; margin-bottom: 4px; border: 1px dashed var(--green);">
+                <div style="text-align: center; color: var(--green); font-weight: 600;">📤 Subir factura</div>
+                <div style="text-align: center; color: var(--text-muted); font-size: 9px; margin-top: 2px;">Foto o PDF</div>
+              </div>
+              <div style="background: #fff; padding: 6px; border-radius: 4px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="color: var(--green);">✓</span>
+                  <span style="font-size: 9px;">endesa-09-26.pdf</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 3px;">
+                  <span style="color: var(--green);">✓</span>
+                  <span style="font-size: 9px;">mapfre-q3.pdf</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Moment 2: Procés -->
+      <div class="moment-card">
+        <span class="moment-num">02</span>
+        <div class="moment-title">Proceso</div>
+        <p class="moment-desc">La IA lee cada documento, extrae todos los datos clave, identifica al cliente en A3 y replica el PDF al servidor. El asesor solo revisa las pocas alertas.</p>
+        <div class="moment-mockup">
+          <div style="background: #fff; padding: 8px; border-radius: 6px; margin-top: 4px;">
+            <div style="display: flex; gap: 4px; margin-bottom: 8px; font-size: 10px;">
+              <span style="background: rgba(184,84,80,0.15); color: var(--red); padding: 2px 6px; border-radius: 999px;">Alertas · 3</span>
+              <span style="background: rgba(0,129,89,0.15); color: var(--green); padding: 2px 6px; border-radius: 999px;">Validados · 87</span>
+            </div>
+            <div style="display: flex; gap: 4px; padding: 3px 0; font-size: 9px; color: var(--text-muted); border-bottom: 1px solid var(--border); font-weight: 600;">
+              <span style="width: 8px;"></span>
+              <span style="flex: 1;">Proveedor</span>
+              <span style="width: 48px;">Cliente</span>
+              <span style="width: 36px; text-align: right;">Importe</span>
+              <span style="width: 32px; text-align: right;">Estado</span>
+            </div>
+            <div style="font-size: 10px;">
+              <div style="display: flex; gap: 4px; padding: 4px 0; border-bottom: 1px solid var(--border); align-items: center;">
+                <span style="width: 6px; height: 6px; background: var(--green); border-radius: 50%; flex-shrink: 0;"></span>
+                <span style="flex: 1;">Endesa</span>
+                <span style="width: 48px; color: var(--text-muted); font-size: 9px;">García SL</span>
+                <span style="width: 36px; text-align: right;">145€</span>
+                <span style="width: 32px; text-align: right; color: var(--green); font-size: 9px;">Pagado</span>
+              </div>
+              <div style="display: flex; gap: 4px; padding: 4px 0; border-bottom: 1px solid var(--border); align-items: center;">
+                <span style="width: 6px; height: 6px; background: var(--green); border-radius: 50%; flex-shrink: 0;"></span>
+                <span style="flex: 1;">Mapfre</span>
+                <span style="width: 48px; color: var(--text-muted); font-size: 9px;">García SL</span>
+                <span style="width: 36px; text-align: right;">320€</span>
+                <span style="width: 32px; text-align: right; color: var(--amber); font-size: 9px;">Pdte.</span>
+              </div>
+              <div style="display: flex; gap: 4px; padding: 4px 0; border-bottom: 1px solid var(--border); align-items: center;">
+                <span style="width: 6px; height: 6px; background: var(--amber); border-radius: 50%; flex-shrink: 0;"></span>
+                <span style="flex: 1;">Proveedor nuevo</span>
+                <span style="width: 48px; color: var(--text-muted); font-size: 9px;">—</span>
+                <span style="width: 36px; text-align: right;">85€</span>
+                <span style="width: 32px; text-align: right; color: var(--text-muted); font-size: 9px;">—</span>
+              </div>
+              <div style="display: flex; gap: 4px; padding: 4px 0; align-items: center;">
+                <span style="width: 6px; height: 6px; background: var(--green); border-radius: 50%; flex-shrink: 0;"></span>
+                <span style="flex: 1;">Movistar</span>
+                <span style="width: 48px; color: var(--text-muted); font-size: 9px;">Pérez SCP</span>
+                <span style="width: 36px; text-align: right;">42€</span>
+                <span style="width: 32px; text-align: right; color: var(--green); font-size: 9px;">Pagado</span>
+              </div>
+            </div>
+            <div style="margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--border); font-size: 9px; color: var(--text-muted); font-style: italic;">+ fecha, IVA, CIF, nº factura, concepto…</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Moment 3: Sortida -->
+      <div class="moment-card">
+        <span class="moment-num">03</span>
+        <div class="moment-title">Salida</div>
+        <p class="moment-desc">El asesor lanza la campaña de liquidaciones IVA. La IA personaliza cada email, los envía y prepara la remesa SEPA.</p>
+        <div class="moment-mockup">
+          <div style="background: #fff; padding: 8px; border-radius: 6px; margin-top: 4px;">
+            <div style="font-size: 11px; font-weight: 600; margin-bottom: 6px;">Campaña · IVA Q3 2026</div>
+            <div style="background: var(--green-light); padding: 6px; border-radius: 4px; margin-bottom: 6px;">
+              <div style="display: flex; justify-content: space-between; font-size: 10px;">
+                <span style="color: var(--green-dark);">Enviados</span>
+                <span style="color: var(--green-dark); font-weight: 600;">142 / 142</span>
+              </div>
+              <div style="background: rgba(255,255,255,0.5); height: 4px; border-radius: 2px; margin-top: 4px;">
+                <div style="background: var(--green); height: 100%; width: 100%; border-radius: 2px;"></div>
+              </div>
+            </div>
+            <div style="font-size: 10px;">
+              <div style="display: flex; justify-content: space-between; padding: 3px 0;">
+                <span>📬 Abiertos</span>
+                <span style="color: var(--green); font-weight: 600;">128 (90%)</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; padding: 3px 0;">
+                <span>↩️ Respuestas</span>
+                <span style="font-weight: 600;">23</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; padding: 3px 0;">
+                <span>💶 Remesa SEPA</span>
+                <span style="color: var(--green); font-weight: 600;">Lista</span>
+              </div>
+            </div>
+            <div style="background: var(--green); color: #fff; text-align: center; padding: 6px; border-radius: 4px; margin-top: 8px; font-size: 10px; font-weight: 600;">Descargar XML SEPA</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="fine" style="text-align: center; margin-top: 24px;">Portal de documentos · Gestor Documental IA · Campañas documentales — toda la suite de Gestión administrativa con IA, trabajando junta.</p>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 5. CASOS DE USO -->
+<!-- ============================================ -->
+<section class="section" id="casos">
+  <div class="container">
+    <p class="eyebrow">Casos de uso</p>
+    <h2>Sea cual sea tu negocio, <span class="italic">procesas documentos.</span></h2>
+    <p class="lead">Una misma mecánica, casos muy distintos. Estos son los más comunes.</p>
+
+    <div class="case-row" style="border-top: none;">
+      <div class="case-icon">⚖</div>
+      <div class="case-content">
+        <h3>Gestoría fiscal</h3>
+        <p class="body">Toda la documentación de los clientes —facturas, notificaciones AEAT, liquidaciones, requerimientos— se procesa automáticamente. La IA identifica cliente, tipo y datos clave, replica los PDFs en las carpetas correspondientes y prepara las campañas de comunicación (Renta, IVA, requerimientos…) listas para enviar. Todo integrado con A3.</p>
+        <div class="case-tech">Buzón email · A3 (lectura) · Carpetas servidor · Campañas</div>
+      </div>
+    </div>
+
+    <div class="case-row">
+      <div class="case-icon">🏢</div>
+      <div class="case-content">
+        <h3>Administración de fincas</h3>
+        <p class="body">Toda la documentación de las comunidades —facturas de proveedores, justificantes bancarios, contratos, comunicaciones a propietarios— circula de forma integrada con Gesfincas. La IA asocia cada documento a su comunidad y propietario, y prepara la información lista para vuestro sistema sin duplicar datos ni picar nada.</p>
+        <div class="case-tech">Buzón email · Subida masiva · Gesfincas (lectura+escritura) · Portal</div>
+      </div>
+    </div>
+
+    <div class="case-row">
+      <div class="case-icon">🏠</div>
+      <div class="case-content">
+        <h3>Inmobiliaria</h3>
+        <p class="body">Los contratos de alquiler y compraventa, junto a la documentación de propietarios e inquilinos, se centralizan automáticamente. Cada operación tiene su carpeta completa, sin perseguir documentos por email.</p>
+        <div class="case-tech">Buzón email · Upload manual · Portal</div>
+      </div>
+    </div>
+
+    <div class="case-row">
+      <div class="case-icon">📦</div>
+      <div class="case-content">
+        <h3>Pyme con proveedores</h3>
+        <p class="body">Cada factura de proveedor que llega por email se lee automáticamente, se contrasta con el pedido asociado y se deja lista en el portal para aprobación y pago. Sin tickets manuales, sin Excel paralelos.</p>
+        <div class="case-tech">Buzón email · ERP/Holded (lectura) · Portal</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 6. EL PORTAL -->
+<!-- ============================================ -->
+<section class="section" id="portal">
+  <div class="container">
+    <p class="eyebrow">El portal</p>
+    <h2>Todo lo que necesitas, <span class="italic">en un solo sitio.</span></h2>
+    <p class="lead">El portal de empentIA centraliza el control. Tu equipo accede desde cualquier dispositivo, con permisos por usuario.</p>
+
+    <div class="cards-4">
+      <div class="card">
+        <h3 style="color: var(--red);">⚠ Alertas</h3>
+        <p class="body">Solo lo que necesita revisión humana: errores de extracción y documentos sin asociación clara. Si todo va bien, esta pestaña está vacía.</p>
+      </div>
+      <div class="card">
+        <h3 style="color: var(--green);">✓ Validados</h3>
+        <p class="body">Documentos correctos listos para enviar al sistema externo. Botón único para hacerlo todo o selección múltiple.</p>
+      </div>
+      <div class="card">
+        <h3>📁 Histórico</h3>
+        <p class="body">Trazabilidad completa: cada documento con su recorrido y enlaces directos a los apuntes en el sistema externo.</p>
+      </div>
+      <div class="card">
+        <h3>⚙ Configuración</h3>
+        <p class="body">Reglas de asociación aprendidas, plantillas, conexión con sistemas externos, usuarios y permisos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 7. CASOS REALES -->
+<!-- ============================================ -->
+<section class="section" style="background: var(--bg-hover);">
+  <div class="container">
+    <p class="eyebrow">Casos reales</p>
+    <h2>Negocios como el tuyo <span class="italic">ya lo usan.</span></h2>
+
+    <div class="cards-3" style="margin-top: 32px;">
+      <div class="card">
+        <div class="testimonial-num">−85%</div>
+        <p class="body" style="margin-top: 12px;">Horas dedicadas a clasificar y archivar documentación de clientes.</p>
+        <p class="testimonial-quote">"Lo que antes era el trabajo de medio día ahora es revisar las excepciones. El bloque grande lo lleva el sistema."</p>
+        <p class="testimonial-author"><strong>Gestoría · 12 personas</strong> · Manresa</p>
+      </div>
+      <div class="card">
+        <div class="testimonial-num">Minutos</div>
+        <p class="body" style="margin-top: 12px;">Para procesar una remesa entera de justificantes bancarios.</p>
+        <p class="testimonial-quote">"El gestor procesa la remesa en minutos. Solo revisamos las pocas excepciones que el sistema marca, y un clic las envía a Gesfincas."</p>
+        <p class="testimonial-author"><strong>Administración de fincas · 8 personas</strong> · Barcelona</p>
+      </div>
+      <div class="card">
+        <div class="testimonial-num">2 días</div>
+        <p class="body" style="margin-top: 12px;">Por semana ganados gracias al portal de documentos.</p>
+        <p class="testimonial-quote">"Pedimos a los clientes que suban contratos y documentación desde el móvil. Llegan al portal clasificados y organizados por operación."</p>
+        <p class="testimonial-author"><strong>Inmobiliaria · 5 personas</strong> · Vallès</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 8. PLANES -->
+<!-- ============================================ -->
+<section class="section" id="planes">
+  <div class="container">
+    <p class="eyebrow">Planes</p>
+    <h2>Transparente desde el <span class="italic">primer día.</span></h2>
+    <p class="lead">Todos los planes incluyen flujo configurado, soporte y mantenimiento. Sin permanencia.</p>
+
+    <div class="cards-4" style="margin-top: 32px;">
+      <div class="plan-card">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">— €<span>/mes</span></div>
+        <ul class="plan-list">
+          <li>1 flujo activo</li>
+          <li>Hasta 500 documentos/mes</li>
+          <li>1 canal de entrada</li>
+          <li>1 destino externo</li>
+          <li>Soporte por ticket</li>
+        </ul>
+      </div>
+      <div class="plan-card plan-featured">
+        <span class="plan-badge">Más popular</span>
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">— €<span>/mes</span></div>
+        <ul class="plan-list">
+          <li>3 flujos activos</li>
+          <li>Hasta 2.000 documentos/mes</li>
+          <li>Canales ilimitados</li>
+          <li>2 destinos externos</li>
+          <li>Soporte prioritario</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Business</div>
+        <div class="plan-price">— €<span>/mes</span></div>
+        <ul class="plan-list">
+          <li>Flujos ilimitados</li>
+          <li>Hasta 10.000 documentos/mes</li>
+          <li>Canales ilimitados</li>
+          <li>Destinos ilimitados</li>
+          <li>Implementación dedicada</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Personalizado</div>
+        <div class="plan-price" style="font-size: 24px;">A medida</div>
+        <ul class="plan-list">
+          <li>Volumen alto</li>
+          <li>Integraciones específicas</li>
+          <li>SLA dedicado</li>
+          <li>Multi-empresa</li>
+          <li>Hablemos</li>
+        </ul>
+      </div>
+    </div>
+    <p class="fine" style="margin-top: 32px; text-align: center;">Sin permanencia · Cancelación inmediata · RGPD · Servidores UE · Precios por definir según volumen</p>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 9. ACOMPAÑAMIENTO -->
+<!-- ============================================ -->
+<section class="section">
+  <div class="container">
+    <p class="eyebrow">Acompañamiento</p>
+    <h2>No te dejamos solo.</h2>
+    <p class="lead">Configurar un flujo no es trivial. Te acompañamos hasta que está funcionando.</p>
+
+    <div class="cards-3" style="margin-top: 32px;">
+      <div class="card">
+        <h3>Auditoría inicial</h3>
+        <p class="body">Analizamos tus documentos actuales, tus sistemas y tus flujos. Sin coste, sin compromiso.</p>
+        <div class="pill pill-green-light" style="margin-top: 16px;">Incluido</div>
+      </div>
+      <div class="card">
+        <h3>Flujo a medida</h3>
+        <p class="body">Diseñamos el flujo para tu caso concreto: extracción, reglas, asociación, destinos. Documentado y revisable.</p>
+        <div class="pill" style="margin-top: 16px;">Implementación</div>
+      </div>
+      <div class="card">
+        <h3>Optimización continua</h3>
+        <p class="body">Mejoramos las reglas con el uso real. Cuantas más correcciones manuales hagas, más aprende.</p>
+        <div class="pill pill-green-light" style="margin-top: 16px;">Incluido en plan</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 10. SUITE EMPENTIA -->
+<!-- ============================================ -->
+<section class="section section-dark">
+  <div class="container">
+    <p class="eyebrow" style="color: var(--green-bright);">Suite empentIA</p>
+    <h2>Dos grandes áreas, <span class="italic" style="color: var(--green-bright);">un solo portal.</span></h2>
+    <p class="lead">El Gestor Documental IA forma parte de la suite empentIA. Mismo portal, mismos usuarios, mismos datos. Crece según necesites.</p>
+
+    <div class="cards-2" style="margin-top: 32px; gap: 16px;">
+
+      <!-- Paraigua: Atención al cliente -->
+      <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 24px;">
+        <p class="eyebrow" style="color: var(--green-bright); margin-bottom: 12px;">Atención al cliente con IA</p>
+        <p style="color: #B5B6B0; font-size: 14px; margin-bottom: 16px;">Para hablar con tus clientes, 24/7, sin perder ninguna oportunidad.</p>
+        <ul style="list-style: none; padding: 0; color: #fff; font-size: 13px;">
+          <li style="padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">💬 <strong>chatwebIA</strong> · agente comercial en tu web</li>
+          <li style="padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">📞 <strong>Agentes de voz</strong> · atención telefónica con IA</li>
+          <li style="padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">✉️ <strong>Email IA</strong> · respuestas automáticas y derivación</li>
+          <li style="padding: 6px 0;">⭐ <strong>Reseñas Google</strong> · respuesta y monitorización</li>
+        </ul>
+      </div>
+
+      <!-- Paraigua: Gestión administrativa (aquí estamos) -->
+      <div style="background: rgba(0,195,137,0.12); border: 2px solid var(--green-bright); border-radius: 12px; padding: 24px;">
+        <p class="eyebrow" style="color: var(--green-bright); margin-bottom: 12px;">Gestión administrativa con IA · estás aquí</p>
+        <p style="color: #B5B6B0; font-size: 14px; margin-bottom: 16px;">Para que la documentación de tu negocio circule sola, de principio a fin.</p>
+        <ul style="list-style: none; padding: 0; color: #fff; font-size: 13px;">
+          <li style="padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">📂 <strong>Gestor Documental IA</strong> · procesamiento de entradas</li>
+          <li style="padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">📧 <strong>Campañas documentales</strong> · comunicaciones masivas</li>
+          <li style="padding: 6px 0;">📱 <strong>Portal de documentos</strong> · captura y consulta para clientes</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 11. FAQs -->
+<!-- ============================================ -->
+<section class="section" id="faqs">
+  <div class="container">
+    <p class="eyebrow">Preguntas frecuentes</p>
+    <h2>Lo que <span class="italic">quieres saber</span> antes de empezar.</h2>
+
+    <div style="max-width: 720px;">
+      <p class="faq-category">01 · Setup e implementación</p>
+      <div class="faq-item">
+        <div class="faq-q">¿Cuánto tarda en estar operativo?</div>
+        <div class="faq-a">Entre 1 y 3 semanas según la complejidad del flujo. La primera semana es auditoría y diseño; el resto, implementación y pruebas con documentos reales.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Se integra con mi ERP / sistema actual?</div>
+        <div class="faq-a">Sí. Trabajamos con A3, Gesfincas, Holded, SAP, Sage y otros. Si el sistema tiene API o base de datos accesible, podemos conectarnos. Si no, podemos trabajar contra carpetas del servidor o sincronización por archivos.</div>
+      </div>
+
+      <p class="faq-category">02 · Producto y funcionamiento</p>
+      <div class="faq-item">
+        <div class="faq-q">¿Qué pasa cuando la IA no está segura?</div>
+        <div class="faq-a">El documento queda marcado como alerta y aparece en la pestaña correspondiente. Un humano revisa, corrige si hace falta, y el sistema aprende para casos futuros similares.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Modifica datos en mi sistema actual?</div>
+        <div class="faq-a">Por defecto solo lee. Si quieres que escriba (insertar apuntes en Gesfincas, por ejemplo), se configura explícitamente y siempre con tu validación. Tu sistema sigue siendo la fuente única de verdad.</div>
+      </div>
+
+      <p class="faq-category">03 · Precios y permanencia</p>
+      <div class="faq-item">
+        <div class="faq-q">¿Hay permanencia?</div>
+        <div class="faq-a">No. Cancelas cuando quieras desde el portal. El servicio sigue activo hasta el final del período facturado.</div>
+      </div>
+
+      <p class="faq-category">04 · Datos y seguridad</p>
+      <div class="faq-item">
+        <div class="faq-q">¿Dónde se almacenan los documentos?</div>
+        <div class="faq-a">En servidores en la UE, cifrados en tránsito y en reposo. Los documentos son propiedad tuya y puedes descargarlos o eliminarlos en cualquier momento. No se usan para entrenar modelos.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 12. CTA FINAL -->
+<!-- ============================================ -->
+<section class="section cta-final" id="cta-final" style="border-bottom: none;">
+  <div class="container">
+    <p class="eyebrow">Empieza hoy</p>
+    <h2>Tu gestor documental, <span class="italic">listo en semanas.</span></h2>
+    <p class="lead">Empezamos con una auditoría gratuita de tus flujos documentales actuales. Sin compromiso.</p>
+    <div class="cta-row">
+      <a href="#" class="btn-primary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_gestor_documental_cta_bottom'}}}); return false;">Pide auditoría gratuita →</a>
+      <a href="#" class="btn-secondary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_gestor_documental_cta_call'}}}); return false;">Reservar llamada de 15 min</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="/images/logo/logo-horizontal-green.png" alt="empentIA" />
+      </div>
+      <p class="footer-tagline">
+        Gestor Documental IA: tus documentos llegan, se procesan, se clasifican y se entregan a tu sistema. Tú revisas lo que importa.
+      </p>
+      <div class="footer-social" aria-label="Redes sociales y contacto">
+        <a href="mailto:hola@empentia.com" aria-label="Enviar email a hola@empentia.com" class="footer-social-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
+          <span class="visually-hidden">Email</span>
+        </a>
+        <a href="https://www.linkedin.com/company/empentia" target="_blank" rel="noopener noreferrer" aria-label="empentIA en LinkedIn" class="footer-social-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+          <span class="visually-hidden">LinkedIn</span>
+        </a>
+        <a href="https://www.instagram.com/empent_ia/" target="_blank" rel="noopener noreferrer" aria-label="empentIA en Instagram" class="footer-social-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63a5.9 5.9 0 0 0-2.13 1.38A5.9 5.9 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.8.73 1.48 1.38 2.13a5.9 5.9 0 0 0 2.13 1.38c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.9 5.9 0 0 0 2.13-1.38 5.9 5.9 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.86.63C19.1.33 18.22.13 16.95.07 15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zm0 10.16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
+          <span class="visually-hidden">Instagram</span>
+        </a>
+      </div>
+    </div>
+
+    <nav class="footer-col" aria-label="Gestión administrativa">
+      <h3 class="footer-heading">Gestión administrativa</h3>
+      <ul class="footer-list">
+        <li><a href="#como-funciona">Gestor Documental IA</a></li>
+        <li><a href="#como-funciona">Campañas documentales</a></li>
+        <li><a href="#como-funciona">Portal de documentos</a></li>
+      </ul>
+    </nav>
+
+    <nav class="footer-col" aria-label="Recursos">
+      <h3 class="footer-heading">Recursos</h3>
+      <ul class="footer-list">
+        <li><a href="#como-funciona">Cómo funciona</a></li>
+        <li><a href="#casos">Casos de uso</a></li>
+        <li><a href="#faqs">Preguntas frecuentes</a></li>
+        <li><a href="https://app.empentia.com/login">Acceso clientes</a></li>
+      </ul>
+    </nav>
+
+    <nav class="footer-col" aria-label="Contacto">
+      <h3 class="footer-heading">Contacto</h3>
+      <ul class="footer-list">
+        <li><a href="mailto:hola@empentia.com">Enviar correo</a></li>
+        <li><a href="https://www.linkedin.com/company/empentia" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="https://www.instagram.com/empent_ia/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <p class="footer-copy">© <span id="footer-year">2026</span> empentIA. Todos los derechos reservados.</p>
+      <div class="footer-legal">
+        <a href="https://empentia.com/privacy/">Privacidad</a>
+        <a href="https://empentia.com/legal/">Aviso legal</a>
+        <a href="#" data-cookie-open aria-label="Gestionar cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Cookie consent banner (compartit amb empentia.com) -->
+<script src="/gestor-documental/cookie-consent.js" defer></script>
+
+<!-- Cal.eu — reserva de trucada comercial -->
+<script type="text/javascript">
+(function (C, A, L) {
+  let p = function (a, ar) { a.q.push(ar); };
+  let d = C.document;
+  C.Cal = C.Cal || function () {
+    let cal = C.Cal; let ar = arguments;
+    if (!cal.loaded) {
+      cal.ns = {}; cal.q = cal.q || [];
+      d.head.appendChild(d.createElement("script")).src = A;
+      cal.loaded = true;
+    }
+    if (ar[0] === L) {
+      const api = function () { p(api, arguments); };
+      const namespace = ar[1];
+      api.q = api.q || [];
+      typeof namespace === "string" ? (cal.ns[namespace] = api) && p(api, ar) : p(cal, ar);
+      return;
+    }
+    p(cal, ar);
+  };
+})(window, "https://app.cal.eu/embed/embed.js", "init");
+
+Cal("init", "descobriment", { origin: "https://app.cal.eu" });
+Cal.ns["descobriment"]("ui", { hideEventTypeDetails: false });
+</script>
+
+<script>
+  // Año dinámico en footer
+  (function() {
+    var y = document.getElementById('footer-year');
+    if (y) y.textContent = new Date().getFullYear();
+  })();
+
+  function toggleNav() {
+    var btn = document.getElementById('navToggle');
+    var menu = document.getElementById('navMobile');
+    btn.classList.toggle('open');
+    menu.classList.toggle('open');
+    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+  }
+  function closeNav() {
+    document.getElementById('navToggle').classList.remove('open');
+    document.getElementById('navMobile').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+</script>
+</body>
+</html>
