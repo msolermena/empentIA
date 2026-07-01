@@ -1,0 +1,23 @@
+VARIABLES DE ENTORNO A AÑADIR EN VERCEL
+========================================
+Proyecto en Vercel → Settings → Environment Variables
+Entorno: Production (y Preview si se quiere probar antes)
+
+Tras añadirlas, hacer "Redeploy" del proyecto.
+
+--------------------------------------------------------
+RESEND_API_KEY = re_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    (la clave que da Resend en Account → API Keys)
+
+MAIL_FROM = empentIA <hola@empentia.com>
+    (remitente; el dominio empentia.com debe estar
+     verificado en Resend para poder enviar)
+--------------------------------------------------------
+
+Notas:
+- NO hay que tocar código: la web ya lee estas variables.
+- Sin RESEND_API_KEY, la web usa el respaldo (FormSubmit, solo aviso
+  interno a hola@empentia.com). Con la clave puesta, envía el correo
+  interno + el resumen al cliente y deja de usar FormSubmit.
+- El remitente (MAIL_FROM) puede ser hola@empentia.com o, si se
+  prefiere, noreply@empentia.com (cualquiera del dominio verificado).

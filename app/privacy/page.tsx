@@ -53,7 +53,7 @@ export default function PrivacyPage() {
             </CardHeader>
             <CardContent className="space-y-6 text-slate-300">
               <div>
-                <h4 className="mb-2 font-semibold text-slate-200">2.1. Auditoria d&apos;automatització (empentia.cat)</h4>
+                <h4 className="mb-2 font-semibold text-slate-200">2.1. Auditoria d&apos;automatització (empentia.com)</h4>
                 <ul className="list-disc space-y-2 pl-6">
                   <li>
                     <strong className="text-slate-200">Dades recollides:</strong> URL de l&apos;empresa, sector d&apos;activitat,
@@ -226,7 +226,7 @@ export default function PrivacyPage() {
             </CardHeader>
             <CardContent className="space-y-4 text-slate-300">
               <p>
-                ADVANCED ENERGY CONSULTING SL ha adoptat les mesures tècniques i organitzatives
+                empentIA Tech SL ha adoptat les mesures tècniques i organitzatives
                 necessàries per garantir la seguretat de les dades personals:
               </p>
               <ul className="list-disc space-y-2 pl-6">

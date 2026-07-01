@@ -1,7 +1,7 @@
 /*
  * Mecanisme oficial de consentiment de cookies — landing estàtica.
  * Comparteix la mateixa clau d'emmagatzematge i cookie que el site principal,
- * de manera que una decisió presa aquí es respecta també a empentia.cat (i viceversa).
+ * de manera que una decisió presa aquí es respecta també a empentia.com (i viceversa).
  */
 (function () {
   "use strict";

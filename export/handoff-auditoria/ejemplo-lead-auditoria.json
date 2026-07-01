@@ -1,0 +1,55 @@
+// EJEMPLO del JSON que la web envía al portal en cada auditoría.
+// Endpoint:  POST https://app.empentia.com/api/leads/landing
+// Cabecera:  Content-Type: application/json
+//
+// Hay DOS envíos por auditoría:
+//   - Al rellenar el contacto  → origen "landing-atencio-auditoria-contacte"
+//   - Al pre-aceptar la propuesta → origen "landing-atencio-auditoria-preacord"
+//     (este AÑADE el campo "pla" con el plan dominante)
+//
+// El backend debe ACEPTAR (no rechazar) estos campos y guardarlos.
+// Campos nuevos respecto a leads anteriores:
+//   consentiment_comercial  (boolean)
+//   detalle_auditoria       (objeto, ver esquema adjunto)
+// ----------------------------------------------------------------
+
+{
+  "email": "cliente@empresa.com",
+  "origen": "landing-atencio-auditoria-preacord",
+  "nom_contacte": "Nombre del Cliente",
+  "nom_empresa": "Empresa S.L.",
+  "url_web": "https://www.empresacliente.com",
+  "consentiment_rgpd": true,
+  "consentiment_comercial": true,
+  "pla": "Pro",
+  "detalle_auditoria": {
+    "idioma": "es",
+    "canales_activos": ["Email", "WhatsApp", "Teléfono"],
+    "canales_nuevos": ["Reseñas (Google)"],
+    "consultas_semana": 80,
+    "consultas_mes": 346,
+    "tipo_principal": "Dudas sobre productos o servicios",
+    "horas_semana": 15,
+    "coste_hora": 22,
+    "tiempo_respuesta": "El mismo día",
+    "notas": "Picos durante campañas",
+    "coste_mes": 1429,
+    "coste_anio": 17147,
+    "ahorro_mes": 857,
+    "ahorro_anio": 10286,
+    "horas_liberadas": 9,
+    "propuesta": {
+      "lineas": [
+        { "canal": "Email", "servicio": "emailIA", "plan": "Starter", "precio_mes": 59, "setup": 390, "personalizado": false },
+        { "canal": "WhatsApp", "servicio": "WhatsApp Business", "plan": "Pro", "precio_mes": 99, "setup": 495, "personalizado": false },
+        { "canal": "Teléfono (voz)", "servicio": "Agente de voz", "plan": "Starter", "precio_mes": 79, "setup": 390, "personalizado": false },
+        { "canal": "Reseñas (Google)", "servicio": "Reseñas Google", "plan": "Starter", "precio_mes": 29, "setup": 390, "personalizado": false }
+      ],
+      "addons": [],
+      "setup_total": 1665,
+      "cuota_mensual": 266,
+      "tramo_dominante": "Pro",
+      "hay_personalizado": false
+    }
+  }
+}

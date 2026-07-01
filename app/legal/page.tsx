@@ -44,7 +44,7 @@ export default function LegalPage() {
                     hola@empentia.com
                   </a><br />
                   <strong className="text-slate-200">Telèfon:</strong> 685 615 150<br />
-                  <strong className="text-slate-200">Dominis web:</strong> empentia.cat / app.empentia.com
+                  <strong className="text-slate-200">Dominis web:</strong> empentia.com / app.empentia.com
                 </p>
               </div>
             </CardContent>
@@ -57,8 +57,8 @@ export default function LegalPage() {
             <CardContent className="space-y-4 text-slate-300">
               <p>
                 El present avís legal regula l&apos;ús i les condicions d&apos;accés als llocs web
-                empentia.cat i app.empentia.com (d&apos;ara endavant, conjuntament, &quot;el Lloc
-                Web&quot;), propietat d&apos;ADVANCED ENERGY CONSULTING SL (d&apos;ara endavant,
+                empentia.com i app.empentia.com (d&apos;ara endavant, conjuntament, &quot;el Lloc
+                Web&quot;), propietat d&apos;empentIA Tech SL (d&apos;ara endavant,
                 &quot;empentIA&quot; o &quot;el Titular&quot;).
               </p>
               <p>
@@ -105,7 +105,7 @@ export default function LegalPage() {
                 Tots els continguts del Lloc Web, incloent-hi de manera enunciativa però no
                 limitativa: textos, fotografies, gràfics, imatges, icones, tecnologia, programari,
                 dissenys, logotips, marca empentIA i qualsevol altre element susceptible de
-                protecció, són propietat d&apos;ADVANCED ENERGY CONSULTING SL o dels seus
+                protecció, són propietat d&apos;empentIA Tech SL o dels seus
                 llicenciants, i estan protegits per les lleis de propietat intel·lectual i industrial.
               </p>
               <p>

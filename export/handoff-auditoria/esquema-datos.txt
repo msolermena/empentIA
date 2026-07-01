@@ -1,0 +1,66 @@
+ESQUEMA DE DATOS — Lead de la auditoría de atención al cliente
+================================================================
+Endpoint: POST https://app.empentia.com/api/leads/landing
+Formato:  JSON (Content-Type: application/json)
+
+El backend debe aceptar y persistir estos campos. Los marcados como
+[NUEVO] no existían en los leads anteriores y son los que hay que añadir.
+
+
+CAMPOS DE PRIMER NIVEL
+----------------------
+email                   string    (obligatorio)
+origen                  string    "landing-atencio-auditoria-contacte"
+                                  o "landing-atencio-auditoria-preacord"
+nom_contacte            string    nombre del cliente
+nom_empresa             string?   opcional
+url_web                 string?   web del cliente
+consentiment_rgpd       boolean   aceptación política de privacidad
+consentiment_comercial  boolean   [NUEVO] opt-in de novedades/ofertas
+pla                     string?   "Starter" | "Pro" | "Business"
+                                  (solo en el lead de pre-acuerdo)
+detalle_auditoria       objeto    [NUEVO] ver abajo
+
+
+OBJETO detalle_auditoria
+------------------------
+idioma            "es" | "ca"
+canales_activos   string[]   etiquetas en castellano
+canales_nuevos    string[]
+consultas_semana  number
+consultas_mes     number
+tipo_principal    string
+horas_semana      number
+coste_hora        number
+tiempo_respuesta  string
+notas             string?
+coste_mes         number     coste actual estimado (mes)
+coste_anio        number
+ahorro_mes        number     ahorro estimado automatizando (mes)
+ahorro_anio       number
+horas_liberadas   number
+propuesta         objeto:
+    lineas         array de:
+        canal          string
+        servicio       string   (nombre de producto: emailIA, etc.)
+        plan           string   "Starter" | "Pro" | "Business" | "Personalizado"
+        precio_mes     number   (0 si personalizado)
+        setup          number   (0 si personalizado)
+        personalizado  boolean
+    addons         array de:
+        nombre         string
+        precio_mes     number
+    setup_total       number
+    cuota_mensual     number
+    tramo_dominante   string | null
+    hay_personalizado boolean
+
+
+IMPORTANTE
+----------
+- Si la validación del endpoint es estricta y RECHAZA campos
+  desconocidos, hay que añadir explícitamente "consentiment_comercial"
+  y "detalle_auditoria" (y los dos valores de "origen" de arriba), o el
+  lead se descartará — incluido el de contacto.
+- Mientras esto no esté listo, la web envía además un email de respaldo
+  con el mismo resumen (ver documento de instrucciones).

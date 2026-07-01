@@ -120,7 +120,7 @@ export const metadata: Metadata = {
     description: 'Descobreix com automatitzar processos...',
     images: [
       {
-        url: 'https://empentia.cat/images/social/og-image.png',
+        url: 'https://empentia.com/images/social/og-image.png',
         width: 1200,
         height: 630,
         alt: 'empentIA',

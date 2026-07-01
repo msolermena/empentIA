@@ -228,10 +228,10 @@ export default function ThanksPage() {
           {/* Enllaç a la landing */}
           <div className="mt-8">
             <a 
-              href="https://empentia.cat"
+              href="https://empentia.com"
               className="inline-flex items-center gap-2 text-sm text-slate-500 transition-colors hover:text-emerald-400"
             >
-              Tornar a empentia.cat
+              Tornar a empentia.com
               <ExternalLink className="h-4 w-4" />
             </a>
           </div>
