@@ -35,8 +35,8 @@ export default function PrivacyPage() {
               <div className="rounded-lg bg-slate-800/30 p-4">
                 <p className="text-sm">
                   <strong className="text-slate-200">Denominació social:</strong> ADVANCED ENERGY CONSULTING SL<br />
-                  <strong className="text-slate-200">CIF:</strong> B65598641<br />
-                  <strong className="text-slate-200">Domicili:</strong> c/ Martí i Julià 9, 08242 Manresa (Barcelona)<br />
+                  <strong className="text-slate-200">CIF:</strong> B88914098<br />
+                  <strong className="text-slate-200">Domicili:</strong> c/ Cortina 16, 08720 Vilafranca del Penedès (Barcelona)<br />
                   <strong className="text-slate-200">Contacte:</strong>{" "}
                   <a href="mailto:hola@empentia.cat" className="text-emerald-400 underline">
                     hola@empentia.cat
