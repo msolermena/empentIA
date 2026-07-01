@@ -34,12 +34,12 @@ export default function PrivacyPage() {
               </p>
               <div className="rounded-lg bg-slate-800/30 p-4">
                 <p className="text-sm">
-                  <strong className="text-slate-200">Denominació social:</strong> ADVANCED ENERGY CONSULTING SL<br />
+                  <strong className="text-slate-200">Denominació social:</strong> empentIA Tech SL<br />
                   <strong className="text-slate-200">CIF:</strong> B88914098<br />
                   <strong className="text-slate-200">Domicili:</strong> c/ Cortina 16, 08720 Vilafranca del Penedès (Barcelona)<br />
                   <strong className="text-slate-200">Contacte:</strong>{" "}
-                  <a href="mailto:hola@empentia.cat" className="text-emerald-400 underline">
-                    hola@empentia.cat
+                  <a href="mailto:hola@empentia.com" className="text-emerald-400 underline">
+                    hola@empentia.com
                   </a><br />
                   <strong className="text-slate-200">Telèfon:</strong> 685 615 150
                 </p>
@@ -203,8 +203,8 @@ export default function PrivacyPage() {
                 <p className="text-sm">
                   <strong className="text-emerald-400">Per exercir aquests drets:</strong><br />
                   Envia un email a{" "}
-                  <a href="mailto:hola@empentia.cat" className="text-emerald-400 underline">
-                    hola@empentia.cat
+                  <a href="mailto:hola@empentia.com" className="text-emerald-400 underline">
+                    hola@empentia.com
                   </a>{" "}
                   indicant el dret que vols exercir i adjuntant una còpia del document d&apos;identitat.
                   Respondrem en un termini màxim de 30 dies.
