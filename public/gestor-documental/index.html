@@ -87,6 +87,8 @@
   h2 { font-size: clamp(32px, 4.4vw, 50px); margin-bottom: 16px; }
   h3 { font-size: 18px; margin-bottom: 8px; }
   .italic { font-style: italic; font-weight: 300; color: var(--green); }
+  /* Titulares de dos frases: el salto cae en el punto/coma, nunca a media frase */
+  .h-split .italic, .h-split em { display: block; }
   .lead { font-size: 18px; color: var(--text-muted); margin-bottom: 32px; max-width: 720px; }
   .body { font-size: 15px; color: var(--text-body); }
   .fine { font-size: 12px; color: var(--text-muted); }
@@ -331,7 +333,7 @@
 
   /* FAQs — misma estructura que las otras landings (acordeón a 2 columnas) */
   section.faqs {
-    padding: 80px 0; background: var(--bg-alt);
+    padding: 80px 0; background: var(--bg);
     border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
     position: relative;
   }
@@ -614,7 +616,7 @@
 <section class="section" id="como-funciona">
   <div class="container">
     <p class="eyebrow">Cómo funciona</p>
-    <h2>Se adapta a tus flujos. <span class="italic">No al revés.</span></h2>
+    <h2 class="h-split">Se adapta a tus flujos. <span class="italic">No al revés.</span></h2>
     <p class="lead">Tres piezas configurables que se combinan según tu negocio: canales, flujos y destinos.</p>
 
     <div class="cards-3">
@@ -666,7 +668,7 @@
 <section class="section section-alt">
   <div class="container">
     <p class="eyebrow">En acción</p>
-    <h2>Un sistema completo. <span class="italic">De principio a fin.</span></h2>
+    <h2 class="h-split">Un sistema completo. <span class="italic">De principio a fin.</span></h2>
     <p class="lead">Ejemplo real: cierre trimestral de una gestoría fiscal. Tres momentos, tres piezas trabajando juntas.</p>
 
     <div class="moments-row">
@@ -809,7 +811,7 @@
 <section class="section" id="casos">
   <div class="container">
     <p class="eyebrow">Casos de uso</p>
-    <h2>Sea cual sea tu negocio, <span class="italic">procesas documentos.</span></h2>
+    <h2 class="h-split">Sea cual sea tu negocio, <span class="italic">procesas documentos.</span></h2>
     <p class="lead">Una misma mecánica, casos muy distintos. Estos son los más comunes.</p>
 
     <div class="usecases-grid">
@@ -878,7 +880,7 @@
 <section class="section section-dark" id="portal">
   <div class="container">
     <p class="eyebrow">El portal</p>
-    <h2>No solo procesa documentos. <span class="italic">Gestiona tu operativa.</span></h2>
+    <h2 class="h-split">No solo procesa documentos. <span class="italic">Gestiona tu operativa.</span></h2>
     <p class="lead">Un solo sitio para todo: el estado de cada expediente, los documentos que esperan revisión y el histórico completo. Cada despacho trabaja distinto, as&iacute; que no viene con un flujo enlatado: montamos tu CRM con tus estados, tus campa&ntilde;as y los indicadores que miras cada ma&ntilde;ana.</p>
 
     <!-- Mockup: CRM de campaña + cola documental -->
@@ -1000,7 +1002,7 @@
 <section class="section">
   <div class="container">
     <p class="eyebrow">Casos reales</p>
-    <h2>Negocios como el tuyo <span class="italic">ya lo usan.</span></h2>
+    <h2 class="h-split">Negocios como el tuyo <span class="italic">ya lo usan.</span></h2>
 
     <div class="cases-grid">
       <div class="case-card">
@@ -1057,7 +1059,7 @@
 <section class="section section-alt" id="precios">
   <div class="container">
     <p class="eyebrow">Precios</p>
-    <h2>Pagas por automatización, <span class="italic">no por usuario.</span></h2>
+    <h2 class="h-split">Pagas por automatización, <span class="italic">no por usuario.</span></h2>
     <p class="lead">Aquí no hay membresías ni licencias por asiento. Eliges qué proceso quieres automatizar, lo montamos a tu medida y pagas una cuota mensual por cada automatización que tengas activa.</p>
 
     <div class="cards-2" style="margin-top: 32px;">
@@ -1108,35 +1110,6 @@
 </section>
 
 <!-- ============================================ -->
-<!-- 9. ACOMPAÑAMIENTO -->
-<!-- ============================================ -->
-<section class="section">
-  <div class="container">
-    <p class="eyebrow">Acompañamiento</p>
-    <h2>No te dejamos solo.</h2>
-    <p class="lead">Configurar un flujo no es trivial. Te acompañamos hasta que está funcionando.</p>
-
-    <div class="cards-3" style="margin-top: 32px;">
-      <div class="card">
-        <h3>Auditoría inicial</h3>
-        <p class="body">Analizamos tus documentos actuales, tus sistemas y tus flujos. Sin coste, sin compromiso.</p>
-        <div class="pill pill-green-light" style="margin-top: 16px;">Incluido</div>
-      </div>
-      <div class="card">
-        <h3>Flujo a medida</h3>
-        <p class="body">Diseñamos el flujo para tu caso concreto: extracción, reglas, asociación, destinos. Documentado y revisable.</p>
-        <div class="pill" style="margin-top: 16px;">Setup inicial</div>
-      </div>
-      <div class="card">
-        <h3>Optimización continua</h3>
-        <p class="body">Mejoramos las reglas con el uso real. Cuantas más correcciones manuales hagas, más aprende.</p>
-        <div class="pill pill-green-light" style="margin-top: 16px;">Incluido en la cuota</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
 <!-- 11. FAQs -->
 <!-- ============================================ -->
 <section class="faqs" id="faqs">
@@ -1183,7 +1156,7 @@
 <section class="cta-final" id="cta-final">
   <div class="cta-final-inner">
     <div class="cta-final-eyebrow">Empieza hoy</div>
-    <h2 class="cta-final-title">Tu gestor documental, <em>listo en semanas.</em></h2>
+    <h2 class="cta-final-title h-split">Tu gestor documental, <em>listo en semanas.</em></h2>
     <p class="cta-final-sub">Cuéntanos tu caso en una reunión y te preparamos una propuesta a medida para automatizar tus flujos documentales. Sin compromiso.</p>
     <div class="cta-final-actions">
       <a href="#" class="cta-final-primary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_gestor_documental_cta_bottom'}}}); return false;">Agenda una reunión <span class="cta-final-arrow">→</span></a>
