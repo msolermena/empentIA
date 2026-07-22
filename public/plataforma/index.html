@@ -221,24 +221,11 @@
   .modulo-l { font-size: 13.5px; color: var(--text-body); line-height: 1.6; }
   .modulo-nota { font-size: 12px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
 
-  /* Fases de activación */
-  .fases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
-  .fase {
-    background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: 12px; padding: 22px; position: relative;
-  }
-  .fase.first { border-left: 4px solid var(--green); }
-  .fase-n { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--green); text-transform: uppercase; }
-  .fase h3 { margin: 8px 0 6px; }
-  .fase-when { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; }
-  .fase-list { list-style: none; font-size: 13px; color: var(--text-body); }
-  .fase-list li { padding: 5px 0; }
-
   @media (max-width: 900px) {
-    .nucleo, .fases { grid-template-columns: repeat(2, 1fr); }
+    .nucleo { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 640px) {
-    .nucleo, .fases { grid-template-columns: 1fr; }
+    .nucleo { grid-template-columns: 1fr; }
   }
 
   /* Sección oscura — variantes de tarjeta y acento */
@@ -560,8 +547,8 @@
     .cards-4 { grid-template-columns: repeat(2, 1fr); }
   }
 
-  /* El nav completo (logo + etiqueta + 5 enlaces + CTA) necesita ~1078px */
-  @media (max-width: 1090px) {
+  /* El nav completo (logo + etiqueta + 4 enlaces + CTA) necesita ~996px */
+  @media (max-width: 1010px) {
     .nav-links { display: none; }
     .nav-toggle { display: flex; }
   }
@@ -624,7 +611,6 @@
       <a href="#automatizaciones">Plataforma</a>
       <a href="#como-funciona">Cómo funciona</a>
       <a href="#portal">El portal</a>
-      <a href="#empezar">Empezar</a>
       <a href="#precios">Precios</a>
       <a href="#" class="btn-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_plataforma_nav'}}}); return false;">Agenda una llamada →</a>
     </div>
@@ -640,7 +626,6 @@
     <a href="#automatizaciones" onclick="closeNav()">Automatizaciones</a>
     <a href="#como-funciona" onclick="closeNav()">Cómo funciona</a>
     <a href="#portal" onclick="closeNav()">El portal</a>
-    <a href="#empezar" onclick="closeNav()">Cómo empezar</a>
     <a href="#precios" onclick="closeNav()">Precios</a>
     <a href="#faqs" onclick="closeNav()">FAQs</a>
     <a href="#" class="nav-mobile-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_plataforma_nav_movil'}}}); closeNav(); return false;">Agenda una llamada →</a>
@@ -1100,55 +1085,6 @@
         <p class="body">Empiezas por un proceso y vas sumando: otra campa&ntilde;a, otro modelo, otro departamento. Cada bloque nuevo entra en el mismo sitio, con sus usuarios y permisos, sin montar un sistema paralelo.</p>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- 6b. POR DÓNDE SE EMPIEZA -->
-<!-- ============================================ -->
-<section class="section" id="empezar">
-  <div class="container">
-    <p class="eyebrow">Por d&oacute;nde se empieza</p>
-    <h2 class="h-oneline">No activamos las once <span class="italic">a la vez.</span></h2>
-    <p class="lead">Encender once procesos de golpe es la forma m&aacute;s r&aacute;pida de que ninguno acabe funcionando bien. Empezamos por un bloque acotado, que entra en producci&oacute;n en semanas y te da valor mientras montamos el siguiente.</p>
-
-    <div class="fases">
-      <div class="fase first">
-        <span class="fase-n">Fase 1 &middot; Meses 1-2</span>
-        <h3>Lo que no depende de nadie m&aacute;s</h3>
-        <p class="fase-when">En producci&oacute;n en 2 meses desde la firma</p>
-        <ul class="fase-list">
-          <li>&middot; Buz&oacute;n inteligente</li>
-          <li>&middot; Lectura y extracci&oacute;n de documentos</li>
-          <li>&middot; Copia autom&aacute;tica de adjuntos</li>
-          <li>&middot; Tickets internos</li>
-          <li>&middot; Borradores de contratos</li>
-        </ul>
-      </div>
-      <div class="fase">
-        <span class="fase-n">Fase 2 &middot; Meses 3-4</span>
-        <h3>Los organismos oficiales</h3>
-        <p class="fase-when">Sobre la base ya montada en la fase 1</p>
-        <ul class="fase-list">
-          <li>&middot; Seguros sociales y SILTRA</li>
-          <li>&middot; DEH&uacute;</li>
-          <li>&middot; eNotum</li>
-          <li>&middot; Seguimiento de tareas</li>
-        </ul>
-      </div>
-      <div class="fase">
-        <span class="fase-n">Fase 3 &middot; Mes 5+</span>
-        <h3>Lo que pide diagn&oacute;stico</h3>
-        <p class="fase-when">Estimado despu&eacute;s de ver tu instalaci&oacute;n</p>
-        <ul class="fase-list">
-          <li>&middot; Modelos tributarios</li>
-          <li>&middot; Validaci&oacute;n previa al SII</li>
-          <li>&middot; Lexnet</li>
-        </ul>
-      </div>
-    </div>
-
-    <p class="fine" style="margin-top: 28px;">Preferimos decirte qu&eacute; hay que mirar antes que comprometernos con una fecha que no podemos sostener. Depende de tu ERP contable, de tus certificados y de tus vol&uacute;menes.</p>
   </div>
 </section>
 
