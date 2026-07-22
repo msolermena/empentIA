@@ -16,12 +16,12 @@
 <meta name="googlebot" content="noindex, nofollow" />
 
 <!-- Canonical URL -->
-<link rel="canonical" href="https://empentia.com/gestor-documental/" />
+<link rel="canonical" href="https://empentia.com/plataforma/" />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="es_ES" />
-<meta property="og:url" content="https://empentia.com/gestor-documental/" />
+<meta property="og:url" content="https://empentia.com/plataforma/" />
 <meta property="og:title" content="Gestor Documental IA · empentIA" />
 <meta property="og:description" content="Documentos que se gestionan solos. Procesados, clasificados y entregados automáticamente. Tú revisas lo que importa." />
 <meta property="og:site_name" content="empentIA" />
@@ -201,36 +201,25 @@
   .mockup-url { font-size: 12px; color: var(--text-muted); margin-left: 8px; font-family: var(--mono); }
   .mockup-body { background: var(--bg-card); border-radius: 8px; padding: 16px; }
 
-  /* Catálogo de automatizaciones por área */
-  .areas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
-  .area {
+  /* Núcleo común de automatizaciones */
+  .nucleo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px; }
+  .nucleo-item {
     background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: 12px; padding: 22px 22px 18px; display: flex; flex-direction: column;
+    border-radius: 12px; padding: 18px 20px;
   }
-  .area-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 4px; }
-  .area-head h3 { margin: 0; }
-  .area-count { font-family: var(--mono); font-size: 11px; color: var(--text-muted); }
-  .area-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 14px; }
-  .area-list { list-style: none; font-size: 14px; color: var(--text-body); }
-  .area-list li {
-    padding: 9px 0 9px 20px; border-bottom: 1px solid var(--border); position: relative;
+  .nucleo-item h3 { font-size: 16px; margin-bottom: 4px; }
+  .nucleo-item p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+  .bloque { margin-top: 44px; }
+  .bloque:first-of-type { margin-top: 28px; }
+
+  /* Módulo específico dentro de cada tarjeta de sector */
+  .modulo { margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--border); }
+  .modulo-t {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 8px;
   }
-  .area-list li:last-child { border-bottom: none; }
-  .area-list li::before {
-    content: ""; position: absolute; left: 0; top: 16px;
-    width: 7px; height: 7px; border-radius: 50%; background: var(--green);
-  }
-  .area-list li.pend::before { background: var(--amber); }
-  .area-list .det { display: block; font-size: 12px; color: var(--text-muted); margin-top: 1px; }
-  .area.current { border: 2px solid var(--green-bright); }
-  .area-badge {
-    align-self: flex-start; font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
-    text-transform: uppercase; background: var(--green-light); color: var(--green-dark);
-    padding: 3px 10px; border-radius: 999px; margin-bottom: 12px;
-  }
-  .leyenda { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 24px; font-size: 12px; color: var(--text-muted); }
-  .leyenda span { display: inline-flex; align-items: center; gap: 7px; }
-  .leyenda i { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+  .modulo-l { font-size: 13.5px; color: var(--text-body); line-height: 1.6; }
+  .modulo-nota { font-size: 12px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
 
   /* Fases de activación */
   .fases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
@@ -246,10 +235,10 @@
   .fase-list li { padding: 5px 0; }
 
   @media (max-width: 900px) {
-    .areas, .fases { grid-template-columns: repeat(2, 1fr); }
+    .nucleo, .fases { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 640px) {
-    .areas, .fases { grid-template-columns: 1fr; }
+    .nucleo, .fases { grid-template-columns: 1fr; }
   }
 
   /* Sección oscura — variantes de tarjeta y acento */
@@ -650,7 +639,6 @@
   <div class="nav-mobile-inner">
     <a href="#automatizaciones" onclick="closeNav()">Automatizaciones</a>
     <a href="#como-funciona" onclick="closeNav()">Cómo funciona</a>
-    <a href="#casos" onclick="closeNav()">Casos</a>
     <a href="#portal" onclick="closeNav()">El portal</a>
     <a href="#empezar" onclick="closeNav()">Cómo empezar</a>
     <a href="#precios" onclick="closeNav()">Precios</a>
@@ -669,7 +657,7 @@
     <h1 class="h-split">El trabajo administrativo <span class="italic">que se hace solo.</span></h1>
     <p class="lead">Correo, documentos, notificaciones oficiales, modelos tributarios, seguros sociales y tareas internas. La IA recoge, clasifica y prepara; la decisión y la firma siguen siendo tuyas.</p>
     <div class="cta-row">
-      <a href="#" class="btn-primary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_gestor_documental_hero'}}}); return false;">Agenda una reunión <span class="arr">→</span></a>
+      <a href="#" class="btn-primary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_plataforma_hero'}}}); return false;">Agenda una reunión <span class="arr">→</span></a>
       <a href="#precios" class="btn-secondary">Ver precios</a>
     </div>
 
@@ -697,73 +685,103 @@
 <!-- 2. LOGOS — retirada de momento (pendiente de decisión sobre clientes a mostrar) -->
 
 <!-- ============================================ -->
-<!-- 2. LAS AUTOMATIZACIONES -->
+<!-- 2. LA PLATAFORMA — núcleo común + módulo de sector -->
 <!-- ============================================ -->
 <section class="section" id="automatizaciones">
   <div class="container">
     <p class="eyebrow">La plataforma</p>
-    <h2 class="h-oneline">Once automatizaciones. <span class="italic">Una sola plataforma.</span></h2>
-    <p class="lead">No es una herramienta suelta que te obliga a saltar entre programas. Es una plataforma que se conecta a tu correo, a tus documentos, a los organismos oficiales y a tu programa de gesti&oacute;n, y que va absorbiendo procesos a medida que los necesitas.</p>
+    <h2 class="h-oneline">Un n&uacute;cleo com&uacute;n. <span class="italic">Un m&oacute;dulo para lo tuyo.</span></h2>
+    <p class="lead">Seis automatizaciones funcionan igual en una gestor&iacute;a, en un administrador de fincas o en una pyme: el correo entra clasificado, los documentos se leen solos y el trabajo interno deja de vivir en cadenas de email. Encima de esa base, cada sector suma lo suyo.</p>
 
-    <div class="areas">
-      <div class="area">
-        <div class="area-head"><h3>Comunicaciones</h3><span class="area-count">4</span></div>
-        <p class="area-desc">Todo lo que entra, clasificado y en manos de quien toca.</p>
-        <ul class="area-list">
-          <li>Buz&oacute;n inteligente<span class="det">Clasifica los emails por &aacute;rea y los enruta al responsable</span></li>
-          <li>DEH&uacute;<span class="det">Notificaciones de AEAT y Seguridad Social por API oficial</span></li>
-          <li>eNotum<span class="det">Notificaciones administrativas de la Generalitat</span></li>
-          <li class="pend">Lexnet y Noticat<span class="det">Notificaciones judiciales. Requiere homologaci&oacute;n</span></li>
-        </ul>
-      </div>
-
-      <div class="area current">
-        <span class="area-badge">En detalle m&aacute;s abajo</span>
-        <div class="area-head"><h3>Documental</h3><span class="area-count">3</span></div>
-        <p class="area-desc">Los documentos se leen, se clasifican y se archivan solos.</p>
-        <ul class="area-list">
-          <li>Lectura y extracci&oacute;n (OCR)<span class="det">Datos clave de facturas, justificantes y contratos</span></li>
-          <li>Copia autom&aacute;tica de adjuntos<span class="det">Cada adjunto archivado en su sitio, sin tocarlo</span></li>
-          <li>Borradores de contratos<span class="det">Plantillas inteligentes con refinamiento por IA</span></li>
-        </ul>
-      </div>
-
-      <div class="area">
-        <div class="area-head"><h3>Fiscal</h3><span class="area-count">2</span></div>
-        <p class="area-desc">Borradores preparados; el env&iacute;o sigue siendo tuyo.</p>
-        <ul class="area-list">
-          <li class="pend">Modelos tributarios<span class="det">Borradores de 303, 130 y dem&aacute;s, desde tu contabilidad</span></li>
-          <li class="pend">Validaci&oacute;n previa al SII<span class="det">Revisa los datos con IA antes de que salgan</span></li>
-        </ul>
-      </div>
-
-      <div class="area">
-        <div class="area-head"><h3>Laboral</h3><span class="area-count">1</span></div>
-        <p class="area-desc">El ciclo mensual, sin recorrer cuatro programas.</p>
-        <ul class="area-list">
-          <li>Seguros sociales<span class="det">RLC, RNT, CRA y SILTRA en el mismo circuito</span></li>
-        </ul>
-      </div>
-
-      <div class="area">
-        <div class="area-head"><h3>Trabajo interno</h3><span class="area-count">2</span></div>
-        <p class="area-desc">Lo que hoy vive en post-its y cadenas de correo.</p>
-        <ul class="area-list">
-          <li>Tickets internos<span class="det">Incidencias con prioridad, responsable y estado</span></li>
-          <li>Seguimiento de tareas<span class="det">Alertas de lo que lleva demasiado tiempo parado</span></li>
-        </ul>
-      </div>
-
-      <div class="area" style="background: var(--bg-dark); border: none;">
-        <div class="area-head"><h3 style="color: #fff;">Y lo que te falte</h3></div>
-        <p class="area-desc" style="color: rgba(255,255,255,0.6);">El cat&aacute;logo no es un men&uacute; cerrado.</p>
-        <p class="body" style="color: rgba(255,255,255,0.75);">Si tu proceso no est&aacute; en la lista, se estudia y se construye. La plataforma es nuestra, as&iacute; que qui&eacute;n te escucha en la reuni&oacute;n es quien decide c&oacute;mo evoluciona el producto.</p>
+    <div class="bloque">
+      <p class="section-label">El n&uacute;cleo &middot; para cualquier negocio</p>
+      <div class="nucleo">
+        <div class="nucleo-item"><h3>Buz&oacute;n inteligente</h3><p>Clasifica el correo que entra por &aacute;rea y lo enruta a quien le toca.</p></div>
+        <div class="nucleo-item"><h3>Lectura de documentos</h3><p>Extrae los datos clave de facturas, justificantes y contratos.</p></div>
+        <div class="nucleo-item"><h3>Copia de adjuntos</h3><p>Cada adjunto archivado en su sitio, sin que nadie lo mueva.</p></div>
+        <div class="nucleo-item"><h3>Tickets internos</h3><p>Incidencias con prioridad, responsable y estado.</p></div>
+        <div class="nucleo-item"><h3>Seguimiento de tareas</h3><p>Avisa de lo que lleva demasiado tiempo parado.</p></div>
+        <div class="nucleo-item"><h3>Borradores de contratos</h3><p>Plantillas inteligentes que se refinan con IA.</p></div>
       </div>
     </div>
 
-    <div class="leyenda">
-      <span><i style="background: var(--green);"></i> Disponible hoy, en producci&oacute;n con clientes reales</span>
-      <span><i style="background: var(--amber);"></i> Requiere un diagn&oacute;stico t&eacute;cnico previo</span>
+    <div class="bloque">
+      <p class="section-label">Tu sector &middot; lo que se suma encima</p>
+      <div class="usecases-grid" style="margin-top: 20px;">
+
+
+      <article class="usecase-card">
+        <div class="usecase-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 12.5h6M9 16h6"/></svg>
+        </div>
+        <h3>Gestoría laboral &amp; fiscal</h3>
+        <p class="body">Toda la documentación de los clientes —facturas, nóminas, notificaciones de AEAT y Seguridad Social, liquidaciones, requerimientos— se procesa automáticamente. La IA identifica cliente, tipo y datos clave, replica los PDFs en las carpetas correspondientes y prepara las campañas de comunicación (Renta, IVA, requerimientos…) listas para enviar. Todo integrado con A3.</p>
+        <div class="modulo">
+          <div class="modulo-t">Su m&oacute;dulo</div>
+          <div class="modulo-l">DEH&uacute; &middot; eNotum &middot; Lexnet &middot; Validaci&oacute;n previa al SII &middot; Borradores de modelos 303 y 130 &middot; Seguros sociales con SILTRA</div>
+          <p class="modulo-nota">Lexnet, el SII y los modelos tributarios requieren un diagn&oacute;stico t&eacute;cnico previo.</p>
+        </div>
+        <div class="usecase-tags">
+          <span class="usecase-tag">Buzón email</span>
+          <span class="usecase-tag">A3 (lectura)</span>
+          <span class="usecase-tag">Carpetas servidor</span>
+          <span class="usecase-tag">Campañas</span>
+        </div>
+      </article>
+
+      <article class="usecase-card">
+        <div class="usecase-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v16"/><path d="M15 21V9h4a1 1 0 0 1 1 1v11"/><path d="M8 8h3M8 12h3M8 16h3"/><path d="M2.5 21h19"/></svg>
+        </div>
+        <h3>Administración de fincas</h3>
+        <p class="body">Toda la documentación de las comunidades —facturas de proveedores, justificantes bancarios, contratos, comunicaciones a propietarios— circula de forma integrada con Gesfincas. La IA asocia cada documento a su comunidad y propietario, y prepara la información lista para vuestro sistema sin duplicar datos ni picar nada.</p>
+        <div class="modulo">
+          <div class="modulo-t">Su m&oacute;dulo</div>
+          <div class="modulo-l">Asociaci&oacute;n autom&aacute;tica de cada documento a su comunidad y propietario &middot; Comunicaciones a propietarios &middot; Gesfincas en lectura y escritura</div>
+        </div>
+        <div class="usecase-tags">
+          <span class="usecase-tag">Buzón email</span>
+          <span class="usecase-tag">Subida masiva</span>
+          <span class="usecase-tag">Gesfincas (lectura+escritura)</span>
+          <span class="usecase-tag">Portal</span>
+        </div>
+      </article>
+
+      <article class="usecase-card">
+        <div class="usecase-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11.5 12 4.5l8.5 7"/><path d="M5.5 10.2V20h13v-9.8"/><circle cx="12" cy="13.5" r="1.7"/><path d="M12 15.2V18"/></svg>
+        </div>
+        <h3>Inmobiliaria</h3>
+        <p class="body">Los contratos de alquiler y compraventa, junto a la documentación de propietarios e inquilinos, se centralizan automáticamente. Cada operación tiene su carpeta completa, sin perseguir documentos por email.</p>
+        <div class="modulo">
+          <div class="modulo-t">Su m&oacute;dulo</div>
+          <div class="modulo-l">Carpeta completa por operaci&oacute;n &middot; Contratos de alquiler y compraventa &middot; Documentaci&oacute;n de propietarios e inquilinos</div>
+        </div>
+        <div class="usecase-tags">
+          <span class="usecase-tag">Buzón email</span>
+          <span class="usecase-tag">Upload manual</span>
+          <span class="usecase-tag">Portal</span>
+        </div>
+      </article>
+
+      <article class="usecase-card">
+        <div class="usecase-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4"/><path d="M12 11.2V21"/></svg>
+        </div>
+        <h3>Pyme con proveedores</h3>
+        <p class="body">Cada factura de proveedor que llega por email se lee automáticamente, se contrasta con el pedido asociado y se deja lista en el portal para aprobación y pago. Sin tickets manuales, sin Excel paralelos.</p>
+        <div class="modulo">
+          <div class="modulo-t">Su m&oacute;dulo</div>
+          <div class="modulo-l">Contraste autom&aacute;tico de cada factura con su pedido &middot; Circuito de aprobaci&oacute;n y pago en el portal</div>
+        </div>
+        <div class="usecase-tags">
+          <span class="usecase-tag">Buzón email</span>
+          <span class="usecase-tag">ERP/Holded (lectura)</span>
+          <span class="usecase-tag">Portal</span>
+        </div>
+      </article>
+
+    </div>
     </div>
   </div>
 </section>
@@ -960,75 +978,6 @@
     </div>
 
     <p class="fine" style="text-align: center; margin-top: 24px;">Portal de documentos · Gestor Documental IA · Campañas documentales — toda la suite de Gestión administrativa con IA, trabajando junta.</p>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- 5. CASOS DE USO -->
-<!-- ============================================ -->
-<section class="section section-alt" id="casos">
-  <div class="container">
-    <p class="eyebrow">Casos de uso</p>
-    <h2 class="h-oneline">Sea cual sea tu negocio, <span class="italic">procesas documentos.</span></h2>
-    <p class="lead">Una misma mecánica, casos muy distintos. Estos son los más comunes.</p>
-
-    <div class="usecases-grid">
-
-      <article class="usecase-card">
-        <div class="usecase-icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 12.5h6M9 16h6"/></svg>
-        </div>
-        <h3>Gestoría laboral &amp; fiscal</h3>
-        <p class="body">Toda la documentación de los clientes —facturas, nóminas, notificaciones de AEAT y Seguridad Social, liquidaciones, requerimientos— se procesa automáticamente. La IA identifica cliente, tipo y datos clave, replica los PDFs en las carpetas correspondientes y prepara las campañas de comunicación (Renta, IVA, requerimientos…) listas para enviar. Todo integrado con A3.</p>
-        <div class="usecase-tags">
-          <span class="usecase-tag">Buzón email</span>
-          <span class="usecase-tag">A3 (lectura)</span>
-          <span class="usecase-tag">Carpetas servidor</span>
-          <span class="usecase-tag">Campañas</span>
-        </div>
-      </article>
-
-      <article class="usecase-card">
-        <div class="usecase-icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v16"/><path d="M15 21V9h4a1 1 0 0 1 1 1v11"/><path d="M8 8h3M8 12h3M8 16h3"/><path d="M2.5 21h19"/></svg>
-        </div>
-        <h3>Administración de fincas</h3>
-        <p class="body">Toda la documentación de las comunidades —facturas de proveedores, justificantes bancarios, contratos, comunicaciones a propietarios— circula de forma integrada con Gesfincas. La IA asocia cada documento a su comunidad y propietario, y prepara la información lista para vuestro sistema sin duplicar datos ni picar nada.</p>
-        <div class="usecase-tags">
-          <span class="usecase-tag">Buzón email</span>
-          <span class="usecase-tag">Subida masiva</span>
-          <span class="usecase-tag">Gesfincas (lectura+escritura)</span>
-          <span class="usecase-tag">Portal</span>
-        </div>
-      </article>
-
-      <article class="usecase-card">
-        <div class="usecase-icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11.5 12 4.5l8.5 7"/><path d="M5.5 10.2V20h13v-9.8"/><circle cx="12" cy="13.5" r="1.7"/><path d="M12 15.2V18"/></svg>
-        </div>
-        <h3>Inmobiliaria</h3>
-        <p class="body">Los contratos de alquiler y compraventa, junto a la documentación de propietarios e inquilinos, se centralizan automáticamente. Cada operación tiene su carpeta completa, sin perseguir documentos por email.</p>
-        <div class="usecase-tags">
-          <span class="usecase-tag">Buzón email</span>
-          <span class="usecase-tag">Upload manual</span>
-          <span class="usecase-tag">Portal</span>
-        </div>
-      </article>
-
-      <article class="usecase-card">
-        <div class="usecase-icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4"/><path d="M12 11.2V21"/></svg>
-        </div>
-        <h3>Pyme con proveedores</h3>
-        <p class="body">Cada factura de proveedor que llega por email se lee automáticamente, se contrasta con el pedido asociado y se deja lista en el portal para aprobación y pago. Sin tickets manuales, sin Excel paralelos.</p>
-        <div class="usecase-tags">
-          <span class="usecase-tag">Buzón email</span>
-          <span class="usecase-tag">ERP/Holded (lectura)</span>
-          <span class="usecase-tag">Portal</span>
-        </div>
-      </article>
-
-    </div>
   </div>
 </section>
 
@@ -1366,7 +1315,7 @@
     <h2 class="cta-final-title h-split">Tu gestor documental, <em>listo en semanas.</em></h2>
     <p class="cta-final-sub">Cuéntanos tu caso en una reunión y te preparamos una propuesta a medida para automatizar tus flujos documentales. Sin compromiso.</p>
     <div class="cta-final-actions">
-      <a href="#" class="cta-final-primary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_gestor_documental_cta_bottom'}}}); return false;">Agenda una reunión <span class="cta-final-arrow">→</span></a>
+      <a href="#" class="cta-final-primary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_plataforma_cta_bottom'}}}); return false;">Agenda una reunión <span class="cta-final-arrow">→</span></a>
     </div>
   </div>
 </section>
@@ -1400,7 +1349,7 @@
     <nav class="footer-col" aria-label="Gestión administrativa">
       <h3 class="footer-heading">Gestión administrativa</h3>
       <ul class="footer-list">
-        <li><a href="#como-funciona">Gestor Documental IA</a></li>
+        <li><a href="#automatizaciones">Automatizaciones con IA</a></li>
         <li><a href="#como-funciona">Campañas documentales</a></li>
         <li><a href="#como-funciona">Portal de documentos</a></li>
       </ul>
@@ -1410,7 +1359,7 @@
       <h3 class="footer-heading">Recursos</h3>
       <ul class="footer-list">
         <li><a href="#como-funciona">Cómo funciona</a></li>
-        <li><a href="#casos">Casos de uso</a></li>
+        <li><a href="#automatizaciones">Casos de uso</a></li>
         <li><a href="#faqs">Preguntas frecuentes</a></li>
         <li><a href="https://app.empentia.com/login">Acceso clientes</a></li>
       </ul>
@@ -1439,7 +1388,7 @@
 </footer>
 
 <!-- Cookie consent banner (compartit amb empentia.com) -->
-<script src="/gestor-documental/cookie-consent.js" defer></script>
+<script src="/plataforma/cookie-consent.js" defer></script>
 
 <!-- Cal.eu — reserva de trucada comercial -->
 <script type="text/javascript">

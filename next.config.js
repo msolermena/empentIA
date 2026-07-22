@@ -8,6 +8,22 @@ const nextConfig = {
   images: {
     domains: ['localhost'],
   },
+  async redirects() {
+    return [
+      // La landing pasó de ser solo el gestor documental a ser la de plataforma.
+      // Se mantiene la redirección porque el enlace antiguo ya se había compartido.
+      {
+        source: '/gestor-documental',
+        destination: '/plataforma/',
+        permanent: true,
+      },
+      {
+        source: '/gestor-documental/:path*',
+        destination: '/plataforma/:path*',
+        permanent: true,
+      },
+    ];
+  },
   async rewrites() {
     return {
       // La home (/) y la versión catalana (/ca/) se sirven como HTML estático
