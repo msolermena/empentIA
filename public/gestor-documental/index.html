@@ -40,6 +40,7 @@
     --bg: #f6f5f0;
     --bg-card: #ffffff;
     --bg-hover: #efede5;
+    --bg-alt: #eae7db;         /* fondo de sección alterna — contraste visible sobre --bg */
     --border: rgba(14,14,12,0.10);
     --text-dark: #0e0e0c;
     --text-body: #4a4a47;
@@ -51,7 +52,6 @@
     --amber: #b8893f;
     --red: #b85450;
     --bg-dark: #0a1410;
-    --brand-glow: rgba(0,195,137,0.18);
     --line-mid: rgba(14,14,12,0.14);
 
     --serif: "Fraunces", "Times New Roman", serif;
@@ -72,7 +72,9 @@
   }
 
   .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
-  .section { padding: 64px 0; border-bottom: 1px solid var(--border); }
+  .section { padding: 80px 0; border-bottom: 1px solid var(--border); }
+  /* Ritmo de fondo: las secciones alternan crema base / crema profunda */
+  .section-alt { background: var(--bg-alt); }
   .section-dark { background: var(--bg-dark); color: #fff; border-bottom: none; }
   .section-dark h1, .section-dark h2, .section-dark h3 { color: #fff; }
   .section-dark .lead { color: #B5B6B0; }
@@ -302,7 +304,7 @@
 
   /* FAQs — misma estructura que las otras landings (acordeón a 2 columnas) */
   section.faqs {
-    padding: 64px 0; background: var(--bg-hover);
+    padding: 80px 0; background: var(--bg-alt);
     border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
     position: relative;
   }
@@ -339,12 +341,6 @@
     padding: 80px 0 64px; position: relative; overflow: hidden;
     background-image: url('/images/patterns/patron-crema-sutil.png');
     background-size: cover; background-position: center;
-  }
-  .hero::before {
-    content: ""; position: absolute; top: -10%; left: 50%; transform: translateX(-50%);
-    width: 1200px; height: 760px; max-width: 130%;
-    background: radial-gradient(ellipse at center, var(--brand-glow), transparent 65%);
-    pointer-events: none; z-index: 0;
   }
   /* Logotipo difuminado de fondo */
   .hero-logo {
@@ -637,7 +633,7 @@
 <!-- ============================================ -->
 <!-- 4. EN ACCIÓN — Sistema completo en 3 momentos -->
 <!-- ============================================ -->
-<section class="section">
+<section class="section section-alt">
   <div class="container">
     <p class="eyebrow">En acción</p>
     <h2>Un sistema completo. <span class="italic">De principio a fin.</span></h2>
@@ -849,7 +845,7 @@
 <!-- ============================================ -->
 <!-- 6. EL PORTAL -->
 <!-- ============================================ -->
-<section class="section" id="portal">
+<section class="section section-alt" id="portal">
   <div class="container">
     <p class="eyebrow">El portal</p>
     <h2>Todo lo que necesitas, <span class="italic">en un solo sitio.</span></h2>
@@ -926,7 +922,7 @@
 <!-- ============================================ -->
 <!-- 7. CASOS REALES -->
 <!-- ============================================ -->
-<section class="section" style="background: var(--bg-hover);">
+<section class="section">
   <div class="container">
     <p class="eyebrow">Casos reales</p>
     <h2>Negocios como el tuyo <span class="italic">ya lo usan.</span></h2>
@@ -983,7 +979,7 @@
 <!-- ============================================ -->
 <!-- 8. PLANES -->
 <!-- ============================================ -->
-<section class="section" id="precios">
+<section class="section section-alt" id="precios">
   <div class="container">
     <p class="eyebrow">Precios</p>
     <h2>Pagas por automatización, <span class="italic">no por usuario.</span></h2>
