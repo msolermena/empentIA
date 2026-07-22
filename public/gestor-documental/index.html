@@ -86,11 +86,13 @@
   /* Escala alineada con el resto de landings (home 58px, webchat 64px) */
   /* 73px es el máximo al que el titular del hero cabe en una sola línea */
   h1 { font-size: clamp(44px, 5.8vw, 73px); margin-bottom: 24px; }
-  h2 { font-size: clamp(32px, 4.8vw, 58px); margin-bottom: 16px; }
+  /* 56px: el titular más largo ("Sea cual sea tu negocio…") cabe en una línea con holgura */
+  h2 { font-size: clamp(32px, 4.8vw, 56px); margin-bottom: 16px; }
   h3 { font-size: 18px; margin-bottom: 8px; }
   .italic { font-style: italic; font-weight: 300; color: var(--green); }
   /* Titulares de dos frases: el salto cae en el punto/coma, nunca a media frase */
   .h-split .italic, .h-split em { display: block; }
+  /* .h-oneline: una sola línea en escritorio; en móvil no cabe y parte por la frase */
   .lead { font-size: 18px; color: var(--text-muted); margin-bottom: 32px; }
   .body { font-size: 15px; color: var(--text-body); }
   .fine { font-size: 12px; color: var(--text-muted); }
@@ -523,6 +525,7 @@
     h1 { font-size: 36px; }
     h2 { font-size: 28px; }
     .cards-2, .cards-3, .cards-4 { grid-template-columns: 1fr; }
+    .h-oneline .italic, .h-oneline em { display: block; }
     /* El nav no cabe en móvil: se cae el prefijo y el nombre de producto puede partir */
     .product-label .label-prefix { display: none; }
     .product-label { white-space: normal; font-size: 11px; }
@@ -618,7 +621,7 @@
 <section class="section" id="como-funciona">
   <div class="container">
     <p class="eyebrow">Cómo funciona</p>
-    <h2 class="h-split">Se adapta a tus flujos. <span class="italic">No al revés.</span></h2>
+    <h2 class="h-oneline">Se adapta a tus flujos. <span class="italic">No al revés.</span></h2>
     <p class="lead">Tres piezas configurables que se combinan según tu negocio: canales, flujos y destinos.</p>
 
     <div class="cards-3">
@@ -670,7 +673,7 @@
 <section class="section section-alt">
   <div class="container">
     <p class="eyebrow">En acción</p>
-    <h2 class="h-split">Un sistema completo. <span class="italic">De principio a fin.</span></h2>
+    <h2 class="h-oneline">Un sistema completo. <span class="italic">De principio a fin.</span></h2>
     <p class="lead">Ejemplo real: cierre trimestral de una gestoría fiscal. Tres momentos, tres piezas trabajando juntas.</p>
 
     <div class="moments-row">
@@ -813,7 +816,7 @@
 <section class="section" id="casos">
   <div class="container">
     <p class="eyebrow">Casos de uso</p>
-    <h2 class="h-split">Sea cual sea tu negocio, <span class="italic">procesas documentos.</span></h2>
+    <h2 class="h-oneline">Sea cual sea tu negocio, <span class="italic">procesas documentos.</span></h2>
     <p class="lead">Una misma mecánica, casos muy distintos. Estos son los más comunes.</p>
 
     <div class="usecases-grid">
@@ -1004,7 +1007,7 @@
 <section class="section">
   <div class="container">
     <p class="eyebrow">Casos reales</p>
-    <h2 class="h-split">Negocios como el tuyo <span class="italic">ya lo usan.</span></h2>
+    <h2 class="h-oneline">Negocios como el tuyo <span class="italic">ya lo usan.</span></h2>
 
     <div class="cases-grid">
       <div class="case-card">
@@ -1061,7 +1064,7 @@
 <section class="section section-alt" id="precios">
   <div class="container">
     <p class="eyebrow">Precios</p>
-    <h2 class="h-split">Pagas por automatización, <span class="italic">no por usuario.</span></h2>
+    <h2 class="h-oneline">Pagas por automatización, <span class="italic">no por usuario.</span></h2>
     <p class="lead">Aquí no hay membresías ni licencias por asiento. Eliges qué proceso quieres automatizar, lo montamos a tu medida y pagas una cuota mensual por cada automatización que tengas activa.</p>
 
     <div class="cards-2" style="margin-top: 32px;">
