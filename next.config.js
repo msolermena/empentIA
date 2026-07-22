@@ -10,16 +10,26 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      // La landing pasó de ser solo el gestor documental a ser la de plataforma.
-      // Se mantiene la redirección porque el enlace antiguo ya se había compartido.
+      // La landing vive en /gestion-documental/. Las dos URLs anteriores apuntan
+      // directamente ahí (sin encadenar redirecciones entre ellas).
       {
         source: '/gestor-documental',
-        destination: '/plataforma/',
+        destination: '/gestion-documental/',
         permanent: true,
       },
       {
         source: '/gestor-documental/:path*',
-        destination: '/plataforma/:path*',
+        destination: '/gestion-documental/:path*',
+        permanent: true,
+      },
+      {
+        source: '/plataforma',
+        destination: '/gestion-documental/',
+        permanent: true,
+      },
+      {
+        source: '/plataforma/:path*',
+        destination: '/gestion-documental/:path*',
         permanent: true,
       },
     ];

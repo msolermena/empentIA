@@ -43,7 +43,11 @@
       "Bash(cd ~/proyectos/blog-sldi/wp-content/themes/independent *)",
       "Bash(cd ~/proyectos/blog-sldi/wp-content *)",
       "Bash(cd ~/proyectos/blog-sldi *)",
-      "Bash(sips -g pixelWidth -g pixelHeight public/images/patterns/patron-crema-sutil.png public/images/patterns/patron-oscuro-sutil.png)"
+      "Bash(sips -g pixelWidth -g pixelHeight public/images/patterns/patron-crema-sutil.png public/images/patterns/patron-oscuro-sutil.png)",
+      "mcp__claude-in-chrome__browser_batch",
+      "mcp__claude-in-chrome__get_page_text",
+      "mcp__claude-in-chrome__navigate",
+      "mcp__claude-in-chrome__computer"
     ]
   }
 }
