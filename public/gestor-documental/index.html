@@ -519,6 +519,9 @@
     h1 { font-size: 36px; }
     h2 { font-size: 28px; }
     .cards-2, .cards-3, .cards-4 { grid-template-columns: 1fr; }
+    /* El nav no cabe en móvil: se cae el prefijo y el nombre de producto puede partir */
+    .product-label .label-prefix { display: none; }
+    .product-label { white-space: normal; font-size: 11px; }
     .kpi-row { grid-template-columns: repeat(2, 1fr); }
     .flow-diagram { flex-direction: column; }
     .flow-arrow { transform: rotate(90deg); }
@@ -546,7 +549,6 @@
       <a href="#como-funciona">Cómo funciona</a>
       <a href="#casos">Casos</a>
       <a href="#portal">El portal</a>
-      <a href="#crm">El CRM</a>
       <a href="#precios">Precios</a>
       <a href="#faqs">FAQs</a>
       <a href="https://app.empentia.com/login" target="_blank" rel="noopener noreferrer" class="btn-cta">Acceso clientes →</a>
@@ -563,7 +565,6 @@
     <a href="#como-funciona" onclick="closeNav()">Cómo funciona</a>
     <a href="#casos" onclick="closeNav()">Casos</a>
     <a href="#portal" onclick="closeNav()">El portal</a>
-    <a href="#crm" onclick="closeNav()">El CRM</a>
     <a href="#precios" onclick="closeNav()">Precios</a>
     <a href="#faqs" onclick="closeNav()">FAQs</a>
     <a href="https://app.empentia.com/login" target="_blank" rel="noopener noreferrer" class="nav-mobile-cta" onclick="closeNav()">Acceso clientes →</a>
@@ -679,7 +680,7 @@
           <div class="phone-mockup">
             <div class="phone-notch"></div>
             <div class="phone-screen">
-              <div style="background: var(--green); color: #fff; padding: 6px 8px; border-radius: 4px; margin-bottom: 6px; font-weight: 600;">Portal · García SL</div>
+              <div style="background: var(--green); color: #fff; padding: 6px 8px; border-radius: 4px; margin-bottom: 6px; font-weight: 600;">Portal · Montseny SL</div>
               <div style="background: #fff; padding: 6px; border-radius: 4px; margin-bottom: 4px;">
                 <div style="font-weight: 600; margin-bottom: 2px;">Q3 2026</div>
                 <div style="color: var(--text-muted); font-size: 9px;">Facturas pendientes de subir</div>
@@ -691,11 +692,11 @@
               <div style="background: #fff; padding: 6px; border-radius: 4px;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                   <span style="color: var(--green);">✓</span>
-                  <span style="font-size: 9px;">endesa-09-26.pdf</span>
+                  <span style="font-size: 9px;">electra-09-26.pdf</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 3px;">
                   <span style="color: var(--green);">✓</span>
-                  <span style="font-size: 9px;">mapfre-q3.pdf</span>
+                  <span style="font-size: 9px;">seguro-q3.pdf</span>
                 </div>
               </div>
             </div>
@@ -711,8 +712,8 @@
         <div class="moment-mockup">
           <div style="background: #fff; padding: 8px; border-radius: 6px; margin-top: 4px;">
             <div style="display: flex; gap: 4px; margin-bottom: 8px; font-size: 10px;">
-              <span style="background: rgba(184,84,80,0.15); color: var(--red); padding: 2px 6px; border-radius: 999px;">Alertas · 3</span>
-              <span style="background: rgba(0,129,89,0.15); color: var(--green); padding: 2px 6px; border-radius: 999px;">Validados · 87</span>
+              <span style="background: rgba(184,84,80,0.15); color: var(--red); padding: 2px 6px; border-radius: 999px;">Alertas · 2</span>
+              <span style="background: rgba(0,129,89,0.15); color: var(--green); padding: 2px 6px; border-radius: 999px;">Validados · 94</span>
             </div>
             <div style="display: flex; gap: 4px; padding: 3px 0; font-size: 9px; color: var(--text-muted); border-bottom: 1px solid var(--border); font-weight: 600;">
               <span style="width: 8px;"></span>
@@ -724,30 +725,30 @@
             <div style="font-size: 10px;">
               <div style="display: flex; gap: 4px; padding: 4px 0; border-bottom: 1px solid var(--border); align-items: center;">
                 <span style="width: 6px; height: 6px; background: var(--green); border-radius: 50%; flex-shrink: 0;"></span>
-                <span style="flex: 1;">Endesa</span>
-                <span style="width: 48px; color: var(--text-muted); font-size: 9px;">García SL</span>
-                <span style="width: 36px; text-align: right;">145€</span>
+                <span style="flex: 1;">Electra Ponent</span>
+                <span style="width: 48px; color: var(--text-muted); font-size: 9px;">Montseny SL</span>
+                <span style="width: 36px; text-align: right;">168€</span>
                 <span style="width: 32px; text-align: right; color: var(--green); font-size: 9px;">Pagado</span>
               </div>
               <div style="display: flex; gap: 4px; padding: 4px 0; border-bottom: 1px solid var(--border); align-items: center;">
                 <span style="width: 6px; height: 6px; background: var(--green); border-radius: 50%; flex-shrink: 0;"></span>
-                <span style="flex: 1;">Mapfre</span>
-                <span style="width: 48px; color: var(--text-muted); font-size: 9px;">García SL</span>
-                <span style="width: 36px; text-align: right;">320€</span>
+                <span style="flex: 1;">Aseguradora Cad&iacute;</span>
+                <span style="width: 48px; color: var(--text-muted); font-size: 9px;">Montseny SL</span>
+                <span style="width: 36px; text-align: right;">295€</span>
                 <span style="width: 32px; text-align: right; color: var(--amber); font-size: 9px;">Pdte.</span>
               </div>
               <div style="display: flex; gap: 4px; padding: 4px 0; border-bottom: 1px solid var(--border); align-items: center;">
                 <span style="width: 6px; height: 6px; background: var(--amber); border-radius: 50%; flex-shrink: 0;"></span>
                 <span style="flex: 1;">Proveedor nuevo</span>
                 <span style="width: 48px; color: var(--text-muted); font-size: 9px;">—</span>
-                <span style="width: 36px; text-align: right;">85€</span>
+                <span style="width: 36px; text-align: right;">74€</span>
                 <span style="width: 32px; text-align: right; color: var(--text-muted); font-size: 9px;">—</span>
               </div>
               <div style="display: flex; gap: 4px; padding: 4px 0; align-items: center;">
                 <span style="width: 6px; height: 6px; background: var(--green); border-radius: 50%; flex-shrink: 0;"></span>
-                <span style="flex: 1;">Movistar</span>
-                <span style="width: 48px; color: var(--text-muted); font-size: 9px;">Pérez SCP</span>
-                <span style="width: 36px; text-align: right;">42€</span>
+                <span style="flex: 1;">Telecom Segre</span>
+                <span style="width: 48px; color: var(--text-muted); font-size: 9px;">Ribalta SCP</span>
+                <span style="width: 36px; text-align: right;">58€</span>
                 <span style="width: 32px; text-align: right; color: var(--green); font-size: 9px;">Pagado</span>
               </div>
             </div>
@@ -872,92 +873,15 @@
 </section>
 
 <!-- ============================================ -->
-<!-- 6. EL PORTAL -->
+<!-- 6. EL PORTAL / CRM -->
 <!-- ============================================ -->
-<section class="section section-alt" id="portal">
+<section class="section section-dark" id="portal">
   <div class="container">
     <p class="eyebrow">El portal</p>
-    <h2>Todo lo que necesitas, <span class="italic">en un solo sitio.</span></h2>
-    <p class="lead">El portal de empentIA centraliza el control. Tu equipo accede desde cualquier dispositivo, con permisos por usuario.</p>
-
-    <!-- Mockup del portal -->
-    <div class="mockup-browser">
-      <div class="mockup-bar">
-        <div class="mockup-dot"></div>
-        <div class="mockup-dot"></div>
-        <div class="mockup-dot"></div>
-        <span class="mockup-url">app.empentia.com/gestor-documental</span>
-      </div>
-      <div class="mockup-body">
-        <div style="display: flex; gap: 8px; margin-bottom: 12px;">
-          <span class="pill pill-red">Alertas · 12</span>
-          <span class="pill pill-green">Validados · 1.155</span>
-          <span class="pill">Histórico · 80</span>
-        </div>
-        <div class="table-row table-row-header">
-          <span style="width: 16px;"></span>
-          <span style="flex: 1;">Documento</span>
-          <span style="width: 120px;">Cliente</span>
-          <span style="width: 80px;">Importe</span>
-        </div>
-        <div class="table-row">
-          <span class="dot dot-green"></span>
-          <span style="flex: 1;">Factura · Endesa 2024-11</span>
-          <span style="width: 120px; color: var(--text-muted);">CB Major 12</span>
-          <span style="width: 80px;">145,20€</span>
-        </div>
-        <div class="table-row">
-          <span class="dot dot-green"></span>
-          <span style="flex: 1;">Justificante · Transferencia</span>
-          <span style="width: 120px; color: var(--text-muted);">CB Vallés 7</span>
-          <span style="width: 80px;">580,00€</span>
-        </div>
-        <div class="table-row">
-          <span class="dot dot-amber"></span>
-          <span style="flex: 1;">Factura · Proveedor nuevo</span>
-          <span style="width: 120px; color: var(--text-muted);">—</span>
-          <span style="width: 80px;">320,15€</span>
-        </div>
-        <div class="table-row">
-          <span class="dot dot-green"></span>
-          <span style="flex: 1;">Notificación AEAT · IVA Q3</span>
-          <span style="width: 120px; color: var(--text-muted);">García SL</span>
-          <span style="width: 80px;">—</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="cards-4" style="margin-top: 28px;">
-      <div class="card">
-        <h3 style="color: var(--red);">⚠ Alertas</h3>
-        <p class="body">Solo lo que necesita revisión humana: errores de extracción y documentos sin asociación clara. Si todo va bien, esta pestaña está vacía.</p>
-      </div>
-      <div class="card">
-        <h3 style="color: var(--green);">✓ Validados</h3>
-        <p class="body">Documentos correctos listos para enviar al sistema externo. Botón único para hacerlo todo o selección múltiple.</p>
-      </div>
-      <div class="card">
-        <h3>📁 Histórico</h3>
-        <p class="body">Trazabilidad completa: cada documento con su recorrido y enlaces directos a los apuntes en el sistema externo.</p>
-      </div>
-      <div class="card">
-        <h3>⚙ Configuración</h3>
-        <p class="body">Reglas de asociación aprendidas, plantillas, conexión con sistemas externos, usuarios y permisos.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- 6b. EL CRM -->
-<!-- ============================================ -->
-<section class="section section-dark" id="crm">
-  <div class="container">
-    <p class="eyebrow">El CRM</p>
     <h2>No solo procesa documentos. <span class="italic">Gestiona tu operativa.</span></h2>
-    <p class="lead">Cada despacho trabaja distinto, así que el portal no viene con un flujo enlatado. Montamos tu CRM con tus estados, tus campañas y los indicadores que miras cada mañana. Y cuando el negocio cambia, el CRM cambia contigo.</p>
+    <p class="lead">Un solo sitio para todo: el estado de cada expediente, los documentos que esperan revisión y el histórico completo. Cada despacho trabaja distinto, as&iacute; que no viene con un flujo enlatado: montamos tu CRM con tus estados, tus campa&ntilde;as y los indicadores que miras cada ma&ntilde;ana.</p>
 
-    <!-- Mockup: CRM de campaña -->
+    <!-- Mockup: CRM de campaña + cola documental -->
     <div class="mockup-browser" style="margin-top: 8px;">
       <div class="mockup-bar">
         <div class="mockup-dot"></div>
@@ -968,61 +892,103 @@
       <div class="mockup-body">
         <div class="crm-tabs">
           <span class="on">Dashboard</span>
-          <span>Control (177)</span>
-          <span>Base de datos (2.224)</span>
+          <span>Control (210)</span>
+          <span>Base de datos (2.680)</span>
           <span>Confirmaciones</span>
           <span>Remesas SEPA</span>
-          <span>Configuración</span>
+          <span>Configuraci&oacute;n</span>
         </div>
-        <p class="fine" style="color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px;">Pipeline campaña · 177 clientes</p>
+
+        <p class="fine" style="color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px;">Pipeline campa&ntilde;a &middot; 210 clientes</p>
         <div class="crm-pipeline">
           <div class="crm-stage">
-            <div class="n">7</div>
+            <div class="n">12</div>
             <div class="l">Pendiente</div>
             <div class="s">En espera doc.</div>
           </div>
           <div class="crm-stage">
-            <div class="n muted">0</div>
-            <div class="l">En confección</div>
+            <div class="n">4</div>
+            <div class="l">En confecci&oacute;n</div>
             <div class="s">&nbsp;</div>
           </div>
           <div class="crm-stage">
-            <div class="n muted">0</div>
+            <div class="n">9</div>
             <div class="l">Borrador listo</div>
             <div class="s">Pendiente conf.</div>
           </div>
           <div class="crm-stage">
-            <div class="n muted">0</div>
+            <div class="n">6</div>
             <div class="l">Enviado</div>
             <div class="s">Pendiente conf.</div>
           </div>
           <div class="crm-sep"></div>
           <div class="crm-stage closed">
-            <div class="n green">137</div>
+            <div class="n green">158</div>
             <div class="l">Presentada</div>
             <div class="s">Cerradas</div>
           </div>
           <div class="crm-stage closed">
-            <div class="n muted">30</div>
+            <div class="n muted">21</div>
             <div class="l">Baja cliente</div>
             <div class="s">Cerradas</div>
           </div>
         </div>
+
+        <!-- Cola documental -->
+        <div style="display: flex; gap: 8px; margin: 20px 0 12px;">
+          <span class="pill pill-red">Alertas &middot; 4</span>
+          <span class="pill pill-green">Validados &middot; 1.482</span>
+          <span class="pill">Hist&oacute;rico &middot; 96</span>
+        </div>
+        <div class="table-row table-row-header">
+          <span style="width: 16px;"></span>
+          <span style="flex: 1;">Documento</span>
+          <span style="width: 120px;">Cliente</span>
+          <span style="width: 80px;">Importe</span>
+        </div>
+        <div class="table-row">
+          <span class="dot dot-green"></span>
+          <span style="flex: 1;">Factura &middot; Electra Ponent 2025-03</span>
+          <span style="width: 120px; color: var(--text-muted);">CP Ronda Nord 24</span>
+          <span style="width: 80px;">218,40&euro;</span>
+        </div>
+        <div class="table-row">
+          <span class="dot dot-green"></span>
+          <span style="flex: 1;">Justificante &middot; Transferencia</span>
+          <span style="width: 120px; color: var(--text-muted);">CP Mestral 8</span>
+          <span style="width: 80px;">1.340,00&euro;</span>
+        </div>
+        <div class="table-row">
+          <span class="dot dot-amber"></span>
+          <span style="flex: 1;">Factura &middot; Proveedor nuevo</span>
+          <span style="width: 120px; color: var(--text-muted);">&mdash;</span>
+          <span style="width: 80px;">476,25&euro;</span>
+        </div>
+        <div class="table-row">
+          <span class="dot dot-green"></span>
+          <span style="flex: 1;">Notificaci&oacute;n AEAT &middot; IVA Q1</span>
+          <span style="width: 120px; color: var(--text-muted);">Montseny Serveis SL</span>
+          <span style="width: 80px;">&mdash;</span>
+        </div>
       </div>
     </div>
 
-    <div class="cards-3" style="margin-top: 28px;">
+    <div class="cards-4" style="margin-top: 28px;">
       <div class="card">
         <h3>Hecho a tu medida</h3>
-        <p class="body">Tus estados, no los nuestros. Si tu campaña va de "pendiente de documentación" a "presentada", el pipeline es ese. Los campos, las alertas y los umbrales también los defines tú.</p>
+        <p class="body">Tus estados, no los nuestros. Si tu campa&ntilde;a va de "pendiente de documentaci&oacute;n" a "presentada", el pipeline es ese. Los campos, las alertas y los umbrales tambi&eacute;n los defines t&uacute;.</p>
       </div>
       <div class="card">
-        <h3>Visión 360 del cliente</h3>
-        <p class="body">Documentos, comunicaciones, confirmaciones, remesas e histórico en una sola ficha. Cualquiera del equipo sabe en diez segundos por dónde va cada expediente.</p>
+        <h3>Solo lo que necesita revisi&oacute;n</h3>
+        <p class="body">Las alertas re&uacute;nen los errores de extracci&oacute;n y los documentos sin asociaci&oacute;n clara. El resto queda validado y listo para enviar al sistema externo con un bot&oacute;n. Si todo va bien, no tienes nada que hacer.</p>
+      </div>
+      <div class="card">
+        <h3>Visi&oacute;n 360 del cliente</h3>
+        <p class="body">Documentos, comunicaciones, confirmaciones, remesas e hist&oacute;rico en una sola ficha, con enlaces directos a los apuntes en tu sistema. Cualquiera del equipo sabe en diez segundos por d&oacute;nde va cada expediente.</p>
       </div>
       <div class="card">
         <h3>Crece contigo</h3>
-        <p class="body">Empiezas por un proceso y vas sumando: otra campaña, otro modelo, otro departamento. Cada bloque nuevo entra en el mismo sitio, sin montar un sistema paralelo.</p>
+        <p class="body">Empiezas por un proceso y vas sumando: otra campa&ntilde;a, otro modelo, otro departamento. Cada bloque nuevo entra en el mismo sitio, con sus usuarios y permisos, sin montar un sistema paralelo.</p>
       </div>
     </div>
   </div>
