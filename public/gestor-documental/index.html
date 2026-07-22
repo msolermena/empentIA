@@ -78,6 +78,7 @@
   .section-dark { background: var(--bg-dark); color: #fff; border-bottom: none; }
   .section-dark h1, .section-dark h2, .section-dark h3 { color: #fff; }
   .section-dark .lead { color: #B5B6B0; }
+  .section-dark .italic { color: var(--green-bright); }
 
   /* Tipografia */
   h1, h2 { font-family: var(--serif); font-weight: 400; line-height: 1.02; color: var(--text-dark); letter-spacing: -0.03em; text-wrap: balance; }
@@ -193,6 +194,32 @@
   .mockup-dot { width: 12px; height: 12px; border-radius: 50%; background: #C5C6C0; }
   .mockup-url { font-size: 12px; color: var(--text-muted); margin-left: 8px; font-family: var(--mono); }
   .mockup-body { background: var(--bg-card); border-radius: 8px; padding: 16px; }
+
+  /* Sección oscura — variantes de tarjeta y acento */
+  .section-dark .eyebrow { color: var(--green-bright); }
+  .section-dark .card { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.12); }
+  .section-dark .card .body { color: rgba(255,255,255,0.72); }
+  .section-dark .fine { color: rgba(255,255,255,0.5); }
+
+  /* Mockup CRM — pestañas y pipeline por estados */
+  .crm-tabs {
+    display: flex; gap: 20px; overflow-x: auto; font-size: 12px;
+    color: var(--text-muted); border-bottom: 1px solid var(--border); margin-bottom: 16px;
+  }
+  .crm-tabs span { padding-bottom: 9px; white-space: nowrap; }
+  .crm-tabs .on { color: var(--text-dark); font-weight: 600; border-bottom: 2px solid var(--green); }
+  .crm-pipeline { display: flex; gap: 8px; align-items: stretch; flex-wrap: wrap; }
+  .crm-stage {
+    flex: 1 1 92px; background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 10px 12px;
+  }
+  .crm-stage.closed { background: var(--bg-hover); }
+  .crm-stage .n { font-family: var(--serif); font-size: 26px; line-height: 1; color: var(--text-dark); }
+  .crm-stage .n.muted { color: var(--text-muted); }
+  .crm-stage .n.green { color: var(--green); }
+  .crm-stage .l { font-size: 11px; font-weight: 600; margin-top: 7px; }
+  .crm-stage .s { font-size: 10px; color: var(--text-muted); }
+  .crm-sep { width: 1px; background: var(--border); margin: 4px 6px; flex: 0 0 1px; }
 
   /* Tabla */
   .table-row {
@@ -519,6 +546,7 @@
       <a href="#como-funciona">Cómo funciona</a>
       <a href="#casos">Casos</a>
       <a href="#portal">El portal</a>
+      <a href="#crm">El CRM</a>
       <a href="#precios">Precios</a>
       <a href="#faqs">FAQs</a>
       <a href="https://app.empentia.com/login" target="_blank" rel="noopener noreferrer" class="btn-cta">Acceso clientes →</a>
@@ -535,6 +563,7 @@
     <a href="#como-funciona" onclick="closeNav()">Cómo funciona</a>
     <a href="#casos" onclick="closeNav()">Casos</a>
     <a href="#portal" onclick="closeNav()">El portal</a>
+    <a href="#crm" onclick="closeNav()">El CRM</a>
     <a href="#precios" onclick="closeNav()">Precios</a>
     <a href="#faqs" onclick="closeNav()">FAQs</a>
     <a href="https://app.empentia.com/login" target="_blank" rel="noopener noreferrer" class="nav-mobile-cta" onclick="closeNav()">Acceso clientes →</a>
@@ -914,6 +943,86 @@
       <div class="card">
         <h3>⚙ Configuración</h3>
         <p class="body">Reglas de asociación aprendidas, plantillas, conexión con sistemas externos, usuarios y permisos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 6b. EL CRM -->
+<!-- ============================================ -->
+<section class="section section-dark" id="crm">
+  <div class="container">
+    <p class="eyebrow">El CRM</p>
+    <h2>No solo procesa documentos. <span class="italic">Gestiona tu operativa.</span></h2>
+    <p class="lead">Cada despacho trabaja distinto, así que el portal no viene con un flujo enlatado. Montamos tu CRM con tus estados, tus campañas y los indicadores que miras cada mañana. Y cuando el negocio cambia, el CRM cambia contigo.</p>
+
+    <!-- Mockup: CRM de campaña -->
+    <div class="mockup-browser" style="margin-top: 8px;">
+      <div class="mockup-bar">
+        <div class="mockup-dot"></div>
+        <div class="mockup-dot"></div>
+        <div class="mockup-dot"></div>
+        <span class="mockup-url">app.empentia.com/campana-renta</span>
+      </div>
+      <div class="mockup-body">
+        <div class="crm-tabs">
+          <span class="on">Dashboard</span>
+          <span>Control (177)</span>
+          <span>Base de datos (2.224)</span>
+          <span>Confirmaciones</span>
+          <span>Remesas SEPA</span>
+          <span>Configuración</span>
+        </div>
+        <p class="fine" style="color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px;">Pipeline campaña · 177 clientes</p>
+        <div class="crm-pipeline">
+          <div class="crm-stage">
+            <div class="n">7</div>
+            <div class="l">Pendiente</div>
+            <div class="s">En espera doc.</div>
+          </div>
+          <div class="crm-stage">
+            <div class="n muted">0</div>
+            <div class="l">En confección</div>
+            <div class="s">&nbsp;</div>
+          </div>
+          <div class="crm-stage">
+            <div class="n muted">0</div>
+            <div class="l">Borrador listo</div>
+            <div class="s">Pendiente conf.</div>
+          </div>
+          <div class="crm-stage">
+            <div class="n muted">0</div>
+            <div class="l">Enviado</div>
+            <div class="s">Pendiente conf.</div>
+          </div>
+          <div class="crm-sep"></div>
+          <div class="crm-stage closed">
+            <div class="n green">137</div>
+            <div class="l">Presentada</div>
+            <div class="s">Cerradas</div>
+          </div>
+          <div class="crm-stage closed">
+            <div class="n muted">30</div>
+            <div class="l">Baja cliente</div>
+            <div class="s">Cerradas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cards-3" style="margin-top: 28px;">
+      <div class="card">
+        <h3>Hecho a tu medida</h3>
+        <p class="body">Tus estados, no los nuestros. Si tu campaña va de "pendiente de documentación" a "presentada", el pipeline es ese. Los campos, las alertas y los umbrales también los defines tú.</p>
+      </div>
+      <div class="card">
+        <h3>Visión 360 del cliente</h3>
+        <p class="body">Documentos, comunicaciones, confirmaciones, remesas e histórico en una sola ficha. Cualquiera del equipo sabe en diez segundos por dónde va cada expediente.</p>
+      </div>
+      <div class="card">
+        <h3>Crece contigo</h3>
+        <p class="body">Empiezas por un proceso y vas sumando: otra campaña, otro modelo, otro departamento. Cada bloque nuevo entra en el mismo sitio, sin montar un sistema paralelo.</p>
       </div>
     </div>
   </div>
