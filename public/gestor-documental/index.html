@@ -515,15 +515,25 @@
   .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 
   /* Responsive */
-  @media (max-width: 880px) {
+  /* Tablet ancha: las tarjetas de 4 columnas se quedan sin sitio antes que el resto */
+  @media (max-width: 1023px) {
+    .cards-4 { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* El nav completo (logo + etiqueta + 5 enlaces + CTA) necesita ~982px */
+  @media (max-width: 1000px) {
     .nav-links { display: none; }
     .nav-toggle { display: flex; }
+  }
+
+  @media (max-width: 880px) {
     .footer-inner { grid-template-columns: 1fr 1fr; gap: 48px 32px; }
     .footer-brand { grid-column: 1 / -1; max-width: 100%; }
   }
   @media (max-width: 768px) {
-    h1 { font-size: 36px; }
-    h2 { font-size: 28px; }
+    /* Escalado continuo: un tamaño fijo daba un salto brusco justo en el breakpoint */
+    h1 { font-size: clamp(32px, 8.5vw, 44px); }
+    h2 { font-size: clamp(26px, 6.5vw, 34px); }
     .cards-2, .cards-3, .cards-4 { grid-template-columns: 1fr; }
     .h-oneline .italic, .h-oneline em { display: block; }
     /* El nav no cabe en móvil: se cae el prefijo y el nombre de producto puede partir */
@@ -540,6 +550,24 @@
     .faqs-items { grid-template-columns: 1fr; }
     .usecases-grid { grid-template-columns: 1fr; }
     .cases-grid { grid-template-columns: 1fr; }
+    /* El pipeline pasa a rejilla: en flex, el separador quedaba suelto al envolver */
+    .crm-sep { display: none; }
+    .crm-pipeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .crm-stage { padding: 8px 10px; }
+    .crm-stage .n { font-size: 22px; }
+  }
+
+  /* Móvil: la tabla del mockup no da para cuatro columnas */
+  @media (max-width: 600px) {
+    .table-row { gap: 8px; padding: 8px 6px; font-size: 12px; }
+    .table-row > span:nth-child(3) { display: none; }
+    .table-row > span:nth-child(4) { width: 72px !important; text-align: right; }
+  }
+
+  @media (max-width: 480px) {
+    .crm-pipeline { grid-template-columns: repeat(2, 1fr); }
+    .mockup-browser { padding: 8px; }
+    .mockup-body { padding: 12px 10px; }
   }
 </style>
 </head>
