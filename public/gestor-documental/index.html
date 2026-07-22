@@ -8,8 +8,8 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/favicons/favicon-brand-180.png">
 <link rel="icon" type="image/png" href="/favicons/favicon-brand.png">
 <link rel="shortcut icon" href="/favicons/favicon-brand-32.png">
-<title>Gestor Documental IA · empentIA — Documentos que se gestionan solos</title>
-<meta name="description" content="Gestor Documental IA de empentIA: tus documentos llegan, se procesan, se clasifican y se entregan a tu sistema automáticamente. Tú revisas solo lo que importa. Integrado con A3, Gesfincas, Holded y más." />
+<title>Automatizaciones con IA · empentIA — El trabajo administrativo que se hace solo</title>
+<meta name="description" content="Plataforma de automatizaciones con IA de empentIA: correo, documentos, notificaciones oficiales, modelos tributarios, seguros sociales y tareas internas. La IA recoge, clasifica y prepara; la decisión y la firma siguen siendo tuyas." />
 <meta name="author" content="empentIA" />
 <!-- Servicio aún no operativo: noindex hasta validar copy, precios y sección de logos -->
 <meta name="robots" content="noindex, nofollow" />
@@ -201,6 +201,57 @@
   .mockup-url { font-size: 12px; color: var(--text-muted); margin-left: 8px; font-family: var(--mono); }
   .mockup-body { background: var(--bg-card); border-radius: 8px; padding: 16px; }
 
+  /* Catálogo de automatizaciones por área */
+  .areas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+  .area {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 22px 22px 18px; display: flex; flex-direction: column;
+  }
+  .area-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 4px; }
+  .area-head h3 { margin: 0; }
+  .area-count { font-family: var(--mono); font-size: 11px; color: var(--text-muted); }
+  .area-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 14px; }
+  .area-list { list-style: none; font-size: 14px; color: var(--text-body); }
+  .area-list li {
+    padding: 9px 0 9px 20px; border-bottom: 1px solid var(--border); position: relative;
+  }
+  .area-list li:last-child { border-bottom: none; }
+  .area-list li::before {
+    content: ""; position: absolute; left: 0; top: 16px;
+    width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+  }
+  .area-list li.pend::before { background: var(--amber); }
+  .area-list .det { display: block; font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+  .area.current { border: 2px solid var(--green-bright); }
+  .area-badge {
+    align-self: flex-start; font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; background: var(--green-light); color: var(--green-dark);
+    padding: 3px 10px; border-radius: 999px; margin-bottom: 12px;
+  }
+  .leyenda { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 24px; font-size: 12px; color: var(--text-muted); }
+  .leyenda span { display: inline-flex; align-items: center; gap: 7px; }
+  .leyenda i { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+
+  /* Fases de activación */
+  .fases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+  .fase {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 22px; position: relative;
+  }
+  .fase.first { border-left: 4px solid var(--green); }
+  .fase-n { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--green); text-transform: uppercase; }
+  .fase h3 { margin: 8px 0 6px; }
+  .fase-when { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; }
+  .fase-list { list-style: none; font-size: 13px; color: var(--text-body); }
+  .fase-list li { padding: 5px 0; }
+
+  @media (max-width: 900px) {
+    .areas, .fases { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .areas, .fases { grid-template-columns: 1fr; }
+  }
+
   /* Sección oscura — variantes de tarjeta y acento */
   .section-dark .eyebrow { color: var(--green-bright); }
   .section-dark .card { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.12); }
@@ -339,7 +390,7 @@
 
   /* FAQs — misma estructura que las otras landings (acordeón a 2 columnas) */
   section.faqs {
-    padding: 80px 0; background: var(--bg);
+    padding: 80px 0; background: var(--bg-alt);
     border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
     position: relative;
   }
@@ -520,8 +571,8 @@
     .cards-4 { grid-template-columns: repeat(2, 1fr); }
   }
 
-  /* El nav completo (logo + etiqueta + 5 enlaces + CTA) necesita ~982px */
-  @media (max-width: 1000px) {
+  /* El nav completo (logo + etiqueta + 5 enlaces + CTA) necesita ~1047px */
+  @media (max-width: 1060px) {
     .nav-links { display: none; }
     .nav-toggle { display: flex; }
   }
@@ -578,14 +629,14 @@
   <div class="nav-inner">
     <div class="logo-mark">
       <img src="/images/logo/logo-horizontal-green.png" alt="empentIA" />
-      <span class="product-label"><span class="label-prefix">Gestión administrativa <span>·</span> </span><strong>Gestor Documental IA</strong></span>
+      <span class="product-label"><span class="label-prefix">Plataforma <span>·</span> </span><strong>Automatizaciones con IA</strong></span>
     </div>
     <div class="nav-links">
+      <a href="#automatizaciones">Plataforma</a>
       <a href="#como-funciona">Cómo funciona</a>
-      <a href="#casos">Casos</a>
       <a href="#portal">El portal</a>
+      <a href="#empezar">Empezar</a>
       <a href="#precios">Precios</a>
-      <a href="#faqs">FAQs</a>
       <a href="https://app.empentia.com/login" target="_blank" rel="noopener noreferrer" class="btn-cta">Acceso clientes →</a>
     </div>
     <button class="nav-toggle" id="navToggle" onclick="toggleNav()" aria-label="Menú">
@@ -597,9 +648,11 @@
 <!-- ============ MOBILE MENU ============ -->
 <div class="nav-mobile" id="navMobile">
   <div class="nav-mobile-inner">
+    <a href="#automatizaciones" onclick="closeNav()">Automatizaciones</a>
     <a href="#como-funciona" onclick="closeNav()">Cómo funciona</a>
     <a href="#casos" onclick="closeNav()">Casos</a>
     <a href="#portal" onclick="closeNav()">El portal</a>
+    <a href="#empezar" onclick="closeNav()">Cómo empezar</a>
     <a href="#precios" onclick="closeNav()">Precios</a>
     <a href="#faqs" onclick="closeNav()">FAQs</a>
     <a href="https://app.empentia.com/login" target="_blank" rel="noopener noreferrer" class="nav-mobile-cta" onclick="closeNav()">Acceso clientes →</a>
@@ -612,9 +665,9 @@
 <section class="hero">
   <img class="hero-logo" src="/images/logo/simbolo-tinta.png" alt="" aria-hidden="true">
   <div class="container">
-    <div class="badge-live"><span class="pulse"></span><span>Horas de papeleo. Convertidas en minutos.</span></div>
-    <h1>Documentos que se gestionan <span class="italic">solos.</span></h1>
-    <p class="lead">Procesados, clasificados y entregados automáticamente. Tú revisas lo que importa.</p>
+    <div class="badge-live"><span class="pulse"></span><span>Horas de trabajo administrativo. Convertidas en minutos.</span></div>
+    <h1 class="h-split">El trabajo administrativo <span class="italic">que se hace solo.</span></h1>
+    <p class="lead">Correo, documentos, notificaciones oficiales, modelos tributarios, seguros sociales y tareas internas. La IA recoge, clasifica y prepara; la decisión y la firma siguen siendo tuyas.</p>
     <div class="cta-row">
       <a href="#" class="btn-primary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_gestor_documental_hero'}}}); return false;">Agenda una reunión <span class="arr">→</span></a>
       <a href="#precios" class="btn-secondary">Ver precios</a>
@@ -626,8 +679,8 @@
         <div class="kpi-lbl">Siempre procesando</div>
       </div>
       <div>
-        <div class="kpi-num">&lt;2s</div>
-        <div class="kpi-lbl">Por documento</div>
+        <div class="kpi-num">11</div>
+        <div class="kpi-lbl">Automatizaciones</div>
       </div>
       <div>
         <div class="kpi-num">95%+</div>
@@ -644,9 +697,81 @@
 <!-- 2. LOGOS — retirada de momento (pendiente de decisión sobre clientes a mostrar) -->
 
 <!-- ============================================ -->
+<!-- 2. LAS AUTOMATIZACIONES -->
+<!-- ============================================ -->
+<section class="section" id="automatizaciones">
+  <div class="container">
+    <p class="eyebrow">La plataforma</p>
+    <h2 class="h-oneline">Once automatizaciones. <span class="italic">Una sola plataforma.</span></h2>
+    <p class="lead">No es una herramienta suelta que te obliga a saltar entre programas. Es una plataforma que se conecta a tu correo, a tus documentos, a los organismos oficiales y a tu programa de gesti&oacute;n, y que va absorbiendo procesos a medida que los necesitas.</p>
+
+    <div class="areas">
+      <div class="area">
+        <div class="area-head"><h3>Comunicaciones</h3><span class="area-count">4</span></div>
+        <p class="area-desc">Todo lo que entra, clasificado y en manos de quien toca.</p>
+        <ul class="area-list">
+          <li>Buz&oacute;n inteligente<span class="det">Clasifica los emails por &aacute;rea y los enruta al responsable</span></li>
+          <li>DEH&uacute;<span class="det">Notificaciones de AEAT y Seguridad Social por API oficial</span></li>
+          <li>eNotum<span class="det">Notificaciones administrativas de la Generalitat</span></li>
+          <li class="pend">Lexnet y Noticat<span class="det">Notificaciones judiciales. Requiere homologaci&oacute;n</span></li>
+        </ul>
+      </div>
+
+      <div class="area current">
+        <span class="area-badge">En detalle m&aacute;s abajo</span>
+        <div class="area-head"><h3>Documental</h3><span class="area-count">3</span></div>
+        <p class="area-desc">Los documentos se leen, se clasifican y se archivan solos.</p>
+        <ul class="area-list">
+          <li>Lectura y extracci&oacute;n (OCR)<span class="det">Datos clave de facturas, justificantes y contratos</span></li>
+          <li>Copia autom&aacute;tica de adjuntos<span class="det">Cada adjunto archivado en su sitio, sin tocarlo</span></li>
+          <li>Borradores de contratos<span class="det">Plantillas inteligentes con refinamiento por IA</span></li>
+        </ul>
+      </div>
+
+      <div class="area">
+        <div class="area-head"><h3>Fiscal</h3><span class="area-count">2</span></div>
+        <p class="area-desc">Borradores preparados; el env&iacute;o sigue siendo tuyo.</p>
+        <ul class="area-list">
+          <li class="pend">Modelos tributarios<span class="det">Borradores de 303, 130 y dem&aacute;s, desde tu contabilidad</span></li>
+          <li class="pend">Validaci&oacute;n previa al SII<span class="det">Revisa los datos con IA antes de que salgan</span></li>
+        </ul>
+      </div>
+
+      <div class="area">
+        <div class="area-head"><h3>Laboral</h3><span class="area-count">1</span></div>
+        <p class="area-desc">El ciclo mensual, sin recorrer cuatro programas.</p>
+        <ul class="area-list">
+          <li>Seguros sociales<span class="det">RLC, RNT, CRA y SILTRA en el mismo circuito</span></li>
+        </ul>
+      </div>
+
+      <div class="area">
+        <div class="area-head"><h3>Trabajo interno</h3><span class="area-count">2</span></div>
+        <p class="area-desc">Lo que hoy vive en post-its y cadenas de correo.</p>
+        <ul class="area-list">
+          <li>Tickets internos<span class="det">Incidencias con prioridad, responsable y estado</span></li>
+          <li>Seguimiento de tareas<span class="det">Alertas de lo que lleva demasiado tiempo parado</span></li>
+        </ul>
+      </div>
+
+      <div class="area" style="background: var(--bg-dark); border: none;">
+        <div class="area-head"><h3 style="color: #fff;">Y lo que te falte</h3></div>
+        <p class="area-desc" style="color: rgba(255,255,255,0.6);">El cat&aacute;logo no es un men&uacute; cerrado.</p>
+        <p class="body" style="color: rgba(255,255,255,0.75);">Si tu proceso no est&aacute; en la lista, se estudia y se construye. La plataforma es nuestra, as&iacute; que qui&eacute;n te escucha en la reuni&oacute;n es quien decide c&oacute;mo evoluciona el producto.</p>
+      </div>
+    </div>
+
+    <div class="leyenda">
+      <span><i style="background: var(--green);"></i> Disponible hoy, en producci&oacute;n con clientes reales</span>
+      <span><i style="background: var(--amber);"></i> Requiere un diagn&oacute;stico t&eacute;cnico previo</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
 <!-- 3. CÓMO FUNCIONA -->
 <!-- ============================================ -->
-<section class="section" id="como-funciona">
+<section class="section section-alt" id="como-funciona">
   <div class="container">
     <p class="eyebrow">Cómo funciona</p>
     <h2 class="h-oneline">Se adapta a tus flujos. <span class="italic">No al revés.</span></h2>
@@ -698,7 +823,7 @@
 <!-- ============================================ -->
 <!-- 4. EN ACCIÓN — Sistema completo en 3 momentos -->
 <!-- ============================================ -->
-<section class="section section-alt">
+<section class="section">
   <div class="container">
     <p class="eyebrow">En acción</p>
     <h2 class="h-oneline">Un sistema completo. <span class="italic">De principio a fin.</span></h2>
@@ -841,7 +966,7 @@
 <!-- ============================================ -->
 <!-- 5. CASOS DE USO -->
 <!-- ============================================ -->
-<section class="section" id="casos">
+<section class="section section-alt" id="casos">
   <div class="container">
     <p class="eyebrow">Casos de uso</p>
     <h2 class="h-oneline">Sea cual sea tu negocio, <span class="italic">procesas documentos.</span></h2>
@@ -1030,9 +1155,58 @@
 </section>
 
 <!-- ============================================ -->
+<!-- 6b. POR DÓNDE SE EMPIEZA -->
+<!-- ============================================ -->
+<section class="section" id="empezar">
+  <div class="container">
+    <p class="eyebrow">Por d&oacute;nde se empieza</p>
+    <h2 class="h-oneline">No activamos las once <span class="italic">a la vez.</span></h2>
+    <p class="lead">Encender once procesos de golpe es la forma m&aacute;s r&aacute;pida de que ninguno acabe funcionando bien. Empezamos por un bloque acotado, que entra en producci&oacute;n en semanas y te da valor mientras montamos el siguiente.</p>
+
+    <div class="fases">
+      <div class="fase first">
+        <span class="fase-n">Fase 1 &middot; Meses 1-2</span>
+        <h3>Lo que no depende de nadie m&aacute;s</h3>
+        <p class="fase-when">En producci&oacute;n en 2 meses desde la firma</p>
+        <ul class="fase-list">
+          <li>&middot; Buz&oacute;n inteligente</li>
+          <li>&middot; Lectura y extracci&oacute;n de documentos</li>
+          <li>&middot; Copia autom&aacute;tica de adjuntos</li>
+          <li>&middot; Tickets internos</li>
+          <li>&middot; Borradores de contratos</li>
+        </ul>
+      </div>
+      <div class="fase">
+        <span class="fase-n">Fase 2 &middot; Meses 3-4</span>
+        <h3>Los organismos oficiales</h3>
+        <p class="fase-when">Sobre la base ya montada en la fase 1</p>
+        <ul class="fase-list">
+          <li>&middot; Seguros sociales y SILTRA</li>
+          <li>&middot; DEH&uacute;</li>
+          <li>&middot; eNotum</li>
+          <li>&middot; Seguimiento de tareas</li>
+        </ul>
+      </div>
+      <div class="fase">
+        <span class="fase-n">Fase 3 &middot; Mes 5+</span>
+        <h3>Lo que pide diagn&oacute;stico</h3>
+        <p class="fase-when">Estimado despu&eacute;s de ver tu instalaci&oacute;n</p>
+        <ul class="fase-list">
+          <li>&middot; Modelos tributarios</li>
+          <li>&middot; Validaci&oacute;n previa al SII</li>
+          <li>&middot; Lexnet</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="fine" style="margin-top: 28px;">Preferimos decirte qu&eacute; hay que mirar antes que comprometernos con una fecha que no podemos sostener. Depende de tu ERP contable, de tus certificados y de tus vol&uacute;menes.</p>
+  </div>
+</section>
+
+<!-- ============================================ -->
 <!-- 7. CASOS REALES -->
 <!-- ============================================ -->
-<section class="section">
+<section class="section section-alt">
   <div class="container">
     <p class="eyebrow">Casos reales</p>
     <h2 class="h-oneline">Negocios como el tuyo <span class="italic">ya lo usan.</span></h2>
@@ -1089,7 +1263,7 @@
 <!-- ============================================ -->
 <!-- 8. PLANES -->
 <!-- ============================================ -->
-<section class="section section-alt" id="precios">
+<section class="section" id="precios">
   <div class="container">
     <p class="eyebrow">Precios</p>
     <h2 class="h-oneline">Pagas por automatización, <span class="italic">no por usuario.</span></h2>
