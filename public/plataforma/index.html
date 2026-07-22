@@ -503,12 +503,12 @@
   .nav-links a { color: var(--text-body); text-decoration: none; font-size: 14px; font-weight: 500; }
   .nav-links a:hover { color: var(--green); }
   .btn-cta {
-    background: transparent; color: var(--text-dark) !important; padding: 9px 18px;
+    background: var(--text-dark); color: #fff !important; padding: 9px 18px;
     border-radius: 100px; font-size: 13.5px; font-weight: 500;
-    border: 1px solid rgba(14,14,12,0.18); transition: all .2s ease;
+    border: 1px solid var(--text-dark); transition: all .2s ease;
     display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
   }
-  .btn-cta:hover { background: var(--text-dark); color: #fff !important; border-color: var(--text-dark); }
+  .btn-cta:hover { background: #1f1f1c; border-color: #1f1f1c; }
   .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
   .nav-toggle span { width: 24px; height: 2px; background: var(--text-dark); border-radius: 2px; transition: 0.2s; }
   .nav-mobile { display: none; position: fixed; inset: 0; top: 60px; background: var(--bg); z-index: 49; padding: 24px; }
@@ -560,8 +560,8 @@
     .cards-4 { grid-template-columns: repeat(2, 1fr); }
   }
 
-  /* El nav completo (logo + etiqueta + 5 enlaces + CTA) necesita ~1047px */
-  @media (max-width: 1060px) {
+  /* El nav completo (logo + etiqueta + 5 enlaces + CTA) necesita ~1078px */
+  @media (max-width: 1090px) {
     .nav-links { display: none; }
     .nav-toggle { display: flex; }
   }
@@ -626,7 +626,7 @@
       <a href="#portal">El portal</a>
       <a href="#empezar">Empezar</a>
       <a href="#precios">Precios</a>
-      <a href="https://app.empentia.com/login" target="_blank" rel="noopener noreferrer" class="btn-cta">Acceso clientes →</a>
+      <a href="#" class="btn-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_plataforma_nav'}}}); return false;">Agenda una llamada →</a>
     </div>
     <button class="nav-toggle" id="navToggle" onclick="toggleNav()" aria-label="Menú">
       <span></span><span></span><span></span>
@@ -643,7 +643,7 @@
     <a href="#empezar" onclick="closeNav()">Cómo empezar</a>
     <a href="#precios" onclick="closeNav()">Precios</a>
     <a href="#faqs" onclick="closeNav()">FAQs</a>
-    <a href="https://app.empentia.com/login" target="_blank" rel="noopener noreferrer" class="nav-mobile-cta" onclick="closeNav()">Acceso clientes →</a>
+    <a href="#" class="nav-mobile-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_plataforma_nav_movil'}}}); closeNav(); return false;">Agenda una llamada →</a>
   </div>
 </div>
 
