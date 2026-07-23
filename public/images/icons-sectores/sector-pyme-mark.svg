@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96" role="img" aria-label="empentIA sector · Pymes con proveedores"><style>
+  .nv-halo,.fl{transform-box:fill-box;transform-origin:center}
+  .nv-halo{animation:halo 2.4s infinite ease-out}
+  @keyframes halo{0%{transform:scale(.7);opacity:.75}80%,100%{transform:scale(2.3);opacity:0}}
+  .ln{stroke-dasharray:13;animation:draw 2.4s infinite}.ln.l2{animation-delay:.3s}.ln.l3{animation-delay:.6s}
+  @keyframes draw{0%{stroke-dashoffset:13;opacity:.3}30%{stroke-dashoffset:0;opacity:1}80%{opacity:1}100%{stroke-dashoffset:0;opacity:.3}}
+  .bl{animation:blink 1.8s infinite}.bl.k2{animation-delay:.45s}.bl.k3{animation-delay:.9s}
+  @keyframes blink{0%,100%{opacity:.32}50%{opacity:1}}
+  @media (prefers-reduced-motion: reduce){*{animation:none!important}.ln{stroke-dashoffset:0}}
+</style><g transform="translate(48,48) scale(2.3) translate(-12,-12)" fill="none" stroke="#00A876" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.4L4.2 7.2v9.6L12 20.6l7.8-3.8V7.2z" stroke-width="1.9"/><path d="M4.2 7.2L12 11l7.8-3.8" stroke-width="1.9"/><line class="ln l1" x1="12" y1="11.2" x2="12" y2="20.4" stroke-width="1.6"/><line class="ln l2" x1="7.9" y1="5.3" x2="15.7" y2="9.1" stroke-width="1.6"/><circle class="bl k1" cx="8.1" cy="14.4" r="1" fill="#00A876" stroke="none"/></g></svg>
