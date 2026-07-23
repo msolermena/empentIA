@@ -482,6 +482,10 @@
   .phone-notch { width: 60px; height: 4px; background: var(--text-dark); border-radius: 2px; margin: 0 auto 8px; }
   .phone-screen { background: var(--bg-hover); border-radius: 8px; padding: 8px; font-size: 10px; }
 
+  /* El aviso de cookies usa el z-index máximo: sin esto le tapa la mitad
+     inferior al modal de Cal —justo las horas y el botón de confirmar—. */
+  cal-modal-box { z-index: 2147483647; }
+
   /* ============ NAV — mismo sistema que empentia.com ============ */
   nav.top {
     position: sticky; top: 0; z-index: 100;
