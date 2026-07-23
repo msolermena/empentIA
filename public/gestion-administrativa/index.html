@@ -301,13 +301,20 @@
     box-shadow: 0 24px 48px -24px rgba(14,14,12,0.16);
     border-color: rgba(0,195,137,0.4);
   }
-  .usecase-icon {
-    width: 54px; height: 54px; border-radius: 14px;
-    background: linear-gradient(155deg, #1c2420 0%, #0a1410 100%);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 14px rgba(16,21,18,0.18);
-    display: flex; align-items: center; justify-content: center; margin-bottom: 22px;
+  /* Inicial en filigrana — mismo mecanismo que las tarjetas de servicio de empentia.com */
+  .usecase-mark {
+    position: absolute; right: -14px; top: -46px;
+    font-family: var(--serif); font-size: 120px; font-weight: 400;
+    line-height: 1; color: var(--green); opacity: 0.12;
+    pointer-events: none; user-select: none; z-index: 0;
   }
-  .usecase-icon svg { width: 25px; height: 25px; stroke: var(--green-bright); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .usecase-card > *:not(.usecase-mark) { position: relative; z-index: 1; }
+  .usecase-kicker {
+    font-family: var(--mono); font-size: 10.5px; text-transform: uppercase;
+    letter-spacing: 0.11em; font-weight: 500; color: var(--green-dark);
+    background: var(--green-light); border-radius: 100px; padding: 5px 12px;
+    display: inline-block; margin-bottom: 18px;
+  }
   .usecase-card h3 { font-size: 21px; margin-bottom: 10px; }
   .usecase-card .body { margin-bottom: 20px; }
   .usecase-tags { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -717,9 +724,8 @@
 
 
       <article class="usecase-card">
-        <div class="usecase-icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 12.5h6M9 16h6"/></svg>
-        </div>
+                <span class="usecase-mark" aria-hidden="true">G</span>
+        <span class="usecase-kicker">Gestorías y asesorías</span>
         <h3>Gestoría laboral &amp; fiscal</h3>
         <p class="body">Toda la documentación de los clientes —facturas, nóminas, notificaciones de AEAT y Seguridad Social, liquidaciones, requerimientos— se procesa automáticamente. La IA identifica cliente, tipo y datos clave, replica los PDFs en las carpetas correspondientes y prepara las campañas de comunicación (Renta, IVA, requerimientos…) listas para enviar. Todo integrado con A3.</p>
         <div class="modulo">
@@ -736,9 +742,8 @@
       </article>
 
       <article class="usecase-card">
-        <div class="usecase-icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v16"/><path d="M15 21V9h4a1 1 0 0 1 1 1v11"/><path d="M8 8h3M8 12h3M8 16h3"/><path d="M2.5 21h19"/></svg>
-        </div>
+                <span class="usecase-mark" aria-hidden="true">F</span>
+        <span class="usecase-kicker">Administración de fincas</span>
         <h3>Administración de fincas</h3>
         <p class="body">Toda la documentación de las comunidades —facturas de proveedores, justificantes bancarios, contratos, comunicaciones a propietarios— circula de forma integrada con Gesfincas. La IA asocia cada documento a su comunidad y propietario, y prepara la información lista para vuestro sistema sin duplicar datos ni picar nada.</p>
         <div class="modulo">
@@ -754,9 +759,8 @@
       </article>
 
       <article class="usecase-card">
-        <div class="usecase-icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11.5 12 4.5l8.5 7"/><path d="M5.5 10.2V20h13v-9.8"/><circle cx="12" cy="13.5" r="1.7"/><path d="M12 15.2V18"/></svg>
-        </div>
+                <span class="usecase-mark" aria-hidden="true">I</span>
+        <span class="usecase-kicker">Inmobiliarias</span>
         <h3>Inmobiliaria</h3>
         <p class="body">Los contratos de alquiler y compraventa, junto a la documentación de propietarios e inquilinos, se centralizan automáticamente. Cada operación tiene su carpeta completa, sin perseguir documentos por email.</p>
         <div class="modulo">
@@ -771,9 +775,8 @@
       </article>
 
       <article class="usecase-card">
-        <div class="usecase-icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4"/><path d="M12 11.2V21"/></svg>
-        </div>
+                <span class="usecase-mark" aria-hidden="true">P</span>
+        <span class="usecase-kicker">Pymes con proveedores</span>
         <h3>Pyme con proveedores</h3>
         <p class="body">Cada factura de proveedor que llega por email se lee automáticamente, se contrasta con el pedido asociado y se deja lista en el CRM para aprobación y pago. Sin tickets manuales, sin Excel paralelos.</p>
         <div class="modulo">
