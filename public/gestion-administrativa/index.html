@@ -474,35 +474,56 @@
   .phone-notch { width: 60px; height: 4px; background: var(--text-dark); border-radius: 2px; margin: 0 auto 8px; }
   .phone-screen { background: var(--bg-hover); border-radius: 8px; padding: 8px; font-size: 10px; }
 
-  /* ============ NAV ============ */
+  /* ============ NAV — mismo sistema que empentia.com ============ */
   nav.top {
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(246,245,240,0.85); backdrop-filter: blur(20px);
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(246,245,240,0.88);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
   }
-  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; max-width: 1080px; margin: 0 auto; }
-  .logo-mark { display: flex; align-items: center; gap: 12px; }
-  .logo-mark img { height: 30px; width: auto; display: block; }
-  .product-label { font-size: 12px; color: var(--text-body); padding-left: 12px; border-left: 1px solid var(--border); line-height: 1.3; white-space: nowrap; }
-  .product-label .label-prefix { color: var(--text-muted); }
-  .product-label strong { color: var(--text-dark); font-weight: 600; }
-  .nav-links { display: flex; align-items: center; gap: 24px; }
-  .nav-links a { color: var(--text-body); text-decoration: none; font-size: 14px; font-weight: 500; }
-  .nav-links a:hover { color: var(--green); }
-  .btn-cta {
-    background: var(--text-dark); color: #fff !important; padding: 9px 18px;
-    border-radius: 100px; font-size: 13.5px; font-weight: 500;
-    border: 1px solid var(--text-dark); transition: all .2s ease;
-    display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 32px; max-width: 1240px; margin: 0 auto;
   }
-  .btn-cta:hover { background: #1f1f1c; border-color: #1f1f1c; }
+  .logo-mark { display: flex; align-items: center; text-decoration: none; }
+  .logo-mark img { height: 30px; width: auto; display: block; }
+  .nav-links { display: flex; align-items: center; gap: 32px; }
+  .nav-links a { color: var(--text-body); text-decoration: none; font-size: 14.5px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text-dark); }
+  .nav-client { font-size: 14px !important; color: var(--text-body) !important; }
+  .btn-cta {
+    background: var(--text-dark); color: #fff !important; padding: 10px 20px;
+    border-radius: 100px; font-size: 14px !important; font-weight: 500;
+    transition: background 0.2s; white-space: nowrap;
+  }
+  .btn-cta:hover { background: #2a2a2a !important; }
+
+  /* Hamburguesa que se convierte en aspa */
   .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
-  .nav-toggle span { width: 24px; height: 2px; background: var(--text-dark); border-radius: 2px; transition: 0.2s; }
-  .nav-mobile { display: none; position: fixed; inset: 0; top: 60px; background: var(--bg); z-index: 49; padding: 24px; }
-  .nav-mobile.open { display: block; }
-  .nav-mobile-inner { display: flex; flex-direction: column; gap: 4px; }
-  .nav-mobile a { color: var(--text-dark); text-decoration: none; font-size: 18px; font-weight: 500; padding: 14px 0; border-bottom: 1px solid var(--border); }
-  .nav-mobile-cta { background: var(--text-dark); color: #fff !important; text-align: center; border-radius: 100px; padding: 14px 24px !important; margin-top: 16px; border-bottom: none !important; }
+  .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--text-dark); border-radius: 2px; transition: all .25s; }
+  .nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  /* Menú móvil: panel deslizante a pantalla completa */
+  .nav-mobile {
+    position: fixed; inset: 0; top: 67px;
+    background: var(--bg); z-index: 90;
+    transform: translateY(-110%); transition: transform .3s cubic-bezier(.4,0,.2,1);
+    overflow-y: auto; border-top: 1px solid var(--border);
+  }
+  .nav-mobile.open { transform: translateY(0); }
+  .nav-mobile-inner { padding: 20px 28px 60px; display: flex; flex-direction: column; }
+  .nav-mobile-inner a {
+    display: block; padding: 14px 0; font-size: 17px; font-weight: 500;
+    color: var(--text-dark); text-decoration: none; border-bottom: 1px solid var(--border);
+  }
+  .nav-mobile-cta {
+    display: flex !important; justify-content: center;
+    background: var(--text-dark); color: #fff !important; padding: 15px 24px !important;
+    border-radius: 100px; font-size: 16px; font-weight: 600;
+    margin-top: 20px; border-bottom: none !important;
+  }
 
   /* ============ FOOTER (idéntico al webchat) ============ */
   .site-footer {
@@ -547,8 +568,8 @@
     .cards-4 { grid-template-columns: repeat(2, 1fr); }
   }
 
-  /* El nav completo (logo + etiqueta + 4 enlaces + CTA) necesita ~947px */
-  @media (max-width: 1010px) {
+  /* Mismo umbral que empentia.com */
+  @media (max-width: 900px) {
     .nav-links { display: none; }
     .nav-toggle { display: flex; }
   }
@@ -563,9 +584,6 @@
     h2 { font-size: clamp(26px, 6.5vw, 34px); }
     .cards-2, .cards-3, .cards-4 { grid-template-columns: 1fr; }
     .h-oneline .italic, .h-oneline em { display: block; }
-    /* El nav no cabe en móvil: se cae el prefijo y el nombre de producto puede partir */
-    .product-label .label-prefix { display: none; }
-    .product-label { white-space: normal; font-size: 11px; }
     .kpi-row { grid-template-columns: repeat(2, 1fr); }
     .flow-diagram { flex-direction: column; }
     .flow-arrow { transform: rotate(90deg); }
@@ -603,18 +621,18 @@
 <!-- ============ NAV ============ -->
 <nav class="top">
   <div class="nav-inner">
-    <div class="logo-mark">
+    <a href="https://empentia.com/" class="logo-mark">
       <img src="/images/logo/logo-horizontal-green.png" alt="empentIA" />
-      <span class="product-label"><strong>Gestión administrativa con IA</strong></span>
-    </div>
+    </a>
     <div class="nav-links">
-      <a href="#automatizaciones">Qué incluye</a>
-      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#automatizaciones">Qu&eacute; incluye</a>
+      <a href="#como-funciona">C&oacute;mo funciona</a>
       <a href="#portal">El portal</a>
       <a href="#precios">Precios</a>
-      <a href="#" class="btn-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_gestion_administrativa_nav'}}}); return false;">Agenda una llamada →</a>
+      <a href="https://app.empentia.com/login" class="nav-client">Acceso clientes &rarr;</a>
+      <a href="#" class="btn-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_gestion_administrativa_nav'}}}); return false;">Agenda una llamada</a>
     </div>
-    <button class="nav-toggle" id="navToggle" onclick="toggleNav()" aria-label="Menú">
+    <button class="nav-toggle" id="navToggle" onclick="toggleNav()" aria-label="Men&uacute;">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -623,12 +641,13 @@
 <!-- ============ MOBILE MENU ============ -->
 <div class="nav-mobile" id="navMobile">
   <div class="nav-mobile-inner">
-    <a href="#automatizaciones" onclick="closeNav()">Qué incluye</a>
-    <a href="#como-funciona" onclick="closeNav()">Cómo funciona</a>
+    <a href="#automatizaciones" onclick="closeNav()">Qu&eacute; incluye</a>
+    <a href="#como-funciona" onclick="closeNav()">C&oacute;mo funciona</a>
     <a href="#portal" onclick="closeNav()">El portal</a>
     <a href="#precios" onclick="closeNav()">Precios</a>
     <a href="#faqs" onclick="closeNav()">FAQs</a>
-    <a href="#" class="nav-mobile-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_gestion_administrativa_nav_movil'}}}); closeNav(); return false;">Agenda una llamada →</a>
+    <a href="https://app.empentia.com/login" onclick="closeNav()">Acceso clientes &rarr;</a>
+    <a href="#" class="nav-mobile-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_gestion_administrativa_nav_movil'}}}); closeNav(); return false;">Agenda una llamada</a>
   </div>
 </div>
 
