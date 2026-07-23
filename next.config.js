@@ -10,26 +10,36 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      // La landing vive en /gestion-documental/. Las dos URLs anteriores apuntan
-      // directamente ahí (sin encadenar redirecciones entre ellas).
+      // La landing vive en /gestion-administrativa/. Todas las URLs anteriores
+      // apuntan directamente ahí, sin encadenar redirecciones entre ellas.
       {
         source: '/gestor-documental',
-        destination: '/gestion-documental/',
+        destination: '/gestion-administrativa/',
         permanent: true,
       },
       {
         source: '/gestor-documental/:path*',
-        destination: '/gestion-documental/:path*',
+        destination: '/gestion-administrativa/:path*',
         permanent: true,
       },
       {
         source: '/plataforma',
-        destination: '/gestion-documental/',
+        destination: '/gestion-administrativa/',
         permanent: true,
       },
       {
         source: '/plataforma/:path*',
-        destination: '/gestion-documental/:path*',
+        destination: '/gestion-administrativa/:path*',
+        permanent: true,
+      },
+      {
+        source: '/gestion-documental',
+        destination: '/gestion-administrativa/',
+        permanent: true,
+      },
+      {
+        source: '/gestion-documental/:path*',
+        destination: '/gestion-administrativa/:path*',
         permanent: true,
       },
     ];
