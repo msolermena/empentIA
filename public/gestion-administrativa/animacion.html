@@ -262,7 +262,7 @@
     visibles.forEach(function(v){ if(v.op<1){ v.op=Math.min(1,v.op+dt*1.9); cambia=true; } });
     tChip+=dt;
     // más tiempo de lectura, y la pila completa se mantiene un poco antes de vaciarse
-    var espera = (visibles.length>=3) ? 3.8 : 2.5;
+    var espera = (visibles.length>=3) ? 3.1 : 2.0;
     if(tChip>espera){
       tChip=0;
       if(visibles.length>=3){
