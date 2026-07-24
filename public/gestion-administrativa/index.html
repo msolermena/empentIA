@@ -616,6 +616,13 @@
   .flujo-h .italic { color: var(--green); font-style: italic; font-weight: 300; }
   .flujo-pie { font-size: 15px; color: var(--text-muted); text-align: center; margin-top: 20px; line-height: 1.55; }
   .flujo-sub { font-size: 16px; color: var(--text-muted); max-width: 640px; margin: 0 auto; line-height: 1.55; }
+  /* Dos cifras con fuente verificable, bajo los CTA del hero */
+  .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; max-width: 780px; }
+  .stat-num { font-family: var(--serif); font-size: clamp(38px, 4.6vw, 52px); font-weight: 400; letter-spacing: -0.03em; line-height: 1; color: var(--green); }
+  .stat-desc { font-size: 14px; color: var(--text-body); line-height: 1.5; margin-top: 10px; }
+  .stat-src { font-family: var(--mono); font-size: 10.5px; color: var(--text-muted); margin-top: 10px; line-height: 1.4; }
+  .stat-src span { opacity: 0.75; }
+  @media (max-width: 620px){ .stat-row { grid-template-columns: 1fr; gap: 28px; margin-top: 32px; } }
 </style>
 </head>
 <body>
@@ -659,10 +666,23 @@
   <div class="container">
     <div class="badge-live"><span class="pulse"></span><span>Horas de trabajo administrativo. Convertidas en minutos.</span></div>
     <h1>Gestión administrativa <span class="italic">automatizada con IA.</span></h1>
-    <p class="lead">En el despacho entra mucha documentación cada día. Correos, facturas, notificaciones oficiales, comunicaciones de los clientes. El trabajo de clasificarlo, asociarlo y mantenerlo ordenado consume horas que podríais dedicar a lo que aporta valor.</p>
+    <p class="lead">La gestión administrativa de un despacho moderno implica procesar cada día mucha información entrante. Correos, documentos, notificaciones. La clasificación y el seguimiento son críticos, pero son una parte del trabajo que se puede automatizar.</p>
     <div class="cta-row">
       <a href="#" class="btn-primary" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_gestion_administrativa_hero'}}}); return false;">Agenda una reunión <span class="arr">→</span></a>
       <a href="#precios" class="btn-secondary">Ver precios</a>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-num">61%</div>
+        <div class="stat-desc">de las actividades financieras son automatizables con la tecnolog&iacute;a actual</div>
+        <div class="stat-src">McKinsey Global Institute · <span>Bots, algorithms, and the future of the finance function</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">43%</div>
+        <div class="stat-desc">es el nivel medio de digitalizaci&oacute;n de las asesor&iacute;as en Espa&ntilde;a</div>
+        <div class="stat-src">Estudio Sage Conecta · <span>307 despachos profesionales</span></div>
+      </div>
     </div>
 
 </div>
