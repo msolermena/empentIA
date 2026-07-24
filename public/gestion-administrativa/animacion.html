@@ -38,12 +38,12 @@
     {t:'Bandeja de revisión',   lbl:'EXCEPCIONES', exc:true}
   ];
   var CHIPS=[
-    {b:'Clasificando…', s:''},
-    {b:'Cliente',   s:'verifica un dato'},
-    {b:'Proveedor', s:'contrasta la factura'},
-    {b:'Histórico', s:'busca antecedentes'},
-    {b:'Contrato',  s:'consulta las condiciones'},
-    {b:'Anomalía',  s:'a revisión', exc:true}
+    {b:'Clasificando…', s:'',                        ic:'filtro'},
+    {b:'Cliente',   s:'verifica un dato',            ic:'persona'},
+    {b:'Proveedor', s:'contrasta la factura',        ic:'caja'},
+    {b:'Histórico', s:'busca antecedentes',          ic:'reloj'},
+    {b:'Contrato',  s:'consulta las condiciones',    ic:'doc'},
+    {b:'Anomalía',  s:'a revisión', exc:true,        ic:'aviso'}
   ];
   var NARR=[
     'Cada día entran cientos de documentos.',
@@ -77,6 +77,21 @@
     g.appendChild(el('path',{d:'M12.8 2.6V8.2h5.5',fill:'none'}));
     g.appendChild(el('path',{d:'M7.6 12.6h7.6M7.6 16h7.6',fill:'none','stroke-width':1.5}));return g;
   }
+  function chipIcon(tipo,x,y,sz,col){
+    var g=el('g',{transform:'translate('+(x-sz/2)+','+(y-sz/2)+') scale('+(sz/24)+')',
+      fill:'none',stroke:col,'stroke-width':1.9,'stroke-linecap':'round','stroke-linejoin':'round'});
+    var d={
+      filtro:['M4 6.5h16','M7.5 12h9','M10.5 17.5h3'],
+      persona:['M12 4.2a3.6 3.6 0 1 1 0 7.2 3.6 3.6 0 0 1 0-7.2','M5.4 20a6.6 6.6 0 0 1 13.2 0'],
+      caja:['M12 3.2 4 7.4v9.2l8 4.2 8-4.2V7.4z','M4 7.4l8 4.2 8-4.2','M12 11.6V21'],
+      reloj:['M12 3.6a8.4 8.4 0 1 1 0 16.8 8.4 8.4 0 0 1 0-16.8','M12 7.4v5l3.4 2.1'],
+      doc:['M7 2.8h6.6L18 7.4V21H7z','M13.4 2.9v4.6H18','M9.6 12.4h5.6M9.6 16h5.6'],
+      aviso:['M12 3.8 21 20H3z','M12 10v4','M12 16.6v.1']
+    }[tipo]||['M12 4a8 8 0 1 1 0 16 8 8 0 0 1 0-16'];
+    d.forEach(function(p){ g.appendChild(el('path',{d:p})); });
+    return g;
+  }
+
   function gearPath(rOut,rIn){
     var d='',teeth=8,w=0.30;
     for(var i=0;i<teeth;i++){
@@ -207,8 +222,7 @@
       rect.setAttribute('x',x);rect.setAttribute('width',w);
       b.setAttribute('x',x+32);sub.setAttribute('x',x+32+bw+7);
       // izquierda: punto de estado · derecha: check, aviso o girando
-      g.appendChild(el('circle',{cx:x+18,cy:top+H/2,r:6,fill:'none',
-        stroke:c.exc?C.amber:C.green,'stroke-width':1.8}));
+      g.appendChild(chipIcon(c.ic, x+19, top+H/2, 16, c.exc?C.amber:C.green));
       var rx=x+w-19, ry=top+H/2;
       if(v.st==='done'){
         g.appendChild(el('path',{d:'M'+(rx-4.5)+' '+ry+'l3.2 3.4 6-6.8',fill:'none',
