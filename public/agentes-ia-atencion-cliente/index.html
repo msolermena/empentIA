@@ -381,17 +381,8 @@ h2 em { font-style: italic; font-weight: 300; color: var(--positive); }
 @media (max-width: 860px) { .results-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 460px) { .results-grid { grid-template-columns: 1fr; } }
 
-/* ===== FOUNDER ===== */
-.founder-section { background: var(--bg-alt); border-bottom: 1px solid var(--line); }
-.founder-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 60px; align-items: center; max-width: 1000px; margin: 0 auto; }
-.founder-photo { aspect-ratio: 1; border-radius: 50%; overflow: hidden; border: 1px solid var(--line); }
-.founder-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
-.founder-quote { font-family: 'Fraunces', serif; font-size: 27px; line-height: 1.34; font-weight: 300; font-style: italic; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 24px; }
-.founder-name { font-weight: 600; font-size: 15px; }
-.founder-role { font-size: 14px; color: var(--ink-mute); margin-top: 2px; }
-@media (max-width: 860px) { .founder-inner { grid-template-columns: 1fr; gap: 32px; text-align: center; } .founder-photo { max-width: 200px; margin: 0 auto; } }
-
 /* ===== FAQ ===== */
+#faq { background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .faq-grid { display: flex; flex-direction: column; gap: 48px; }
 .faq-header { max-width: 640px; }
 .faq-header .section-intro { margin-bottom: 0; }
@@ -998,22 +989,6 @@ footer { padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); bac
 </section>
 
 <!-- ====== FOUNDER ====== -->
-<section class="founder-section">
-  <div class="container">
-    <div class="founder-inner">
-      <div class="founder-photo"><img src="/images/team/marc-soler.jpeg" alt="Marc Soler"></div>
-      <div>
-        <div class="section-label">Quiénes somos</div>
-        <div class="founder-quote">
-          "Creamos empentIA porque ningún negocio debería resignarse a perder oportunidades por no poder responder a tiempo. La IA puede atender, asesorar y vender. Y nosotros nos encargamos de que funcione bien."
-        </div>
-        <div class="founder-name">Marc Soler</div>
-        <div class="founder-role">Product &amp; Marketing Partner · empentIA</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ====== FAQ ====== -->
 <section id="faq">
   <div class="container">
