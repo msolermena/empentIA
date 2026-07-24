@@ -14,11 +14,12 @@
   var LS_KEY = "empentia:cookie-consent";
   var COOKIE_NAME = "empentia_cc";
   var MAX_AGE_DAYS = 365;
-  var POLICY_URL = "/cookies/";
 
   // ---------- i18n ----------
   var LANG = (document.documentElement.lang || "es").toLowerCase().slice(0, 2);
   if (LANG !== "ca") LANG = "es"; // por defecto castellano
+  // la política de cookies, en el idioma de la página
+  var POLICY_URL = LANG === "ca" ? "/ca/cookies/" : "/cookies/";
 
   var I18N = {
     es: {

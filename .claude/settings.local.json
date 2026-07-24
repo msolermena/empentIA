@@ -47,7 +47,12 @@
       "mcp__claude-in-chrome__browser_batch",
       "mcp__claude-in-chrome__get_page_text",
       "mcp__claude-in-chrome__navigate",
-      "mcp__claude-in-chrome__computer"
+      "mcp__claude-in-chrome__computer",
+      "Bash(rm -f public/_anim-tmp.html && mkdir -p public/_preview-anim && cp public/gestion-administrativa/index.html public/_preview-anim/index.html && cp public/gestion-administrativa/cookie-consent.js public/_preview-anim/ && cp /Users/marcsolermena/Downloads/empentIA-animacio.html public/_preview-anim/animacion.html && ls public/_preview-anim/)",
+      "mcp__claude-in-chrome__tabs_create_mcp",
+      "mcp__claude-in-chrome__tabs_context_mcp",
+      "mcp__claude-in-chrome__read_console_messages",
+      "Bash(npm run *)"
     ]
   }
 }

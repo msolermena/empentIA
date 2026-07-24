@@ -8,7 +8,15 @@ import Link from "next/link";
 
 export const metadata = {
   title: "Política de Cookies - empentIA",
-  description: "Política de cookies d'empentIA",
+  description: "Política de cookies de empentIA",
+  alternates: {
+    canonical: "https://empentia.com/cookies/",
+    languages: {
+      es: "https://empentia.com/cookies/",
+      ca: "https://empentia.com/ca/cookies/",
+      "x-default": "https://empentia.com/cookies/",
+    },
+  },
 };
 
 export default function CookiesPage() {
@@ -24,60 +32,60 @@ export default function CookiesPage() {
       {/* Content */}
       <div className="container mx-auto max-w-4xl px-8 py-16">
         <h1 className="mb-2 text-4xl font-extrabold">Política de Cookies</h1>
-        <p className="mb-8 text-sm text-slate-400">Darrera actualització: 11 de febrer de 2026</p>
+        <p className="mb-8 text-sm text-slate-400">Última actualización: 11 de febrero de 2026</p>
 
         <div className="prose prose-invert max-w-none space-y-8">
           <Card className="glass-card border-emerald-500/10">
             <CardHeader>
-              <CardTitle>1. Què són les cookies?</CardTitle>
+              <CardTitle>1. ¿Qué son las cookies?</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-slate-300">
               <p>
-                Les cookies són petits fitxers de text que es guarden al dispositiu de l&apos;usuari
-                quan visita un lloc web. Serveixen per recordar informació sobre la visita, com
-                les preferències d&apos;idioma, dades de sessió o informació estadística.
+                Las cookies son pequeños archivos de texto que se guardan en el dispositivo del
+                usuario cuando visita un sitio web. Sirven para recordar información sobre la visita,
+                como las preferencias de idioma, datos de sesión o información estadística.
               </p>
             </CardContent>
           </Card>
 
           <Card className="glass-card border-emerald-500/10">
             <CardHeader>
-              <CardTitle>2. Quines cookies utilitzem?</CardTitle>
+              <CardTitle>2. ¿Qué cookies utilizamos?</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6 text-slate-300">
               <div>
-                <h4 className="mb-2 font-semibold text-slate-200">2.1. Cookies tècniques (necessàries)</h4>
+                <h4 className="mb-2 font-semibold text-slate-200">2.1. Cookies técnicas (necesarias)</h4>
                 <p className="mb-3">
-                  Són essencials per al funcionament del Lloc Web. Permeten la navegació i l&apos;ús
-                  de funcionalitats bàsiques com l&apos;autenticació al portal de client. No requereixen
-                  consentiment.
+                  Son esenciales para el funcionamiento del Sitio Web. Permiten la navegación y el uso
+                  de funcionalidades básicas como la autenticación en el portal de cliente. No requieren
+                  consentimiento.
                 </p>
                 <div className="rounded-lg bg-slate-800/30 p-4">
                   <ul className="list-disc space-y-2 pl-6 text-sm">
                     <li>
-                      <strong className="text-slate-200">Sessió d&apos;autenticació:</strong> Mantenir la sessió
-                      de l&apos;usuari al portal (app.empentia.com). Proveïdor: Supabase. Durada: sessió.
+                      <strong className="text-slate-200">Sesión de autenticación:</strong> Mantener la sesión
+                      del usuario en el portal (app.empentia.com). Proveedor: Supabase. Duración: sesión.
                     </li>
                     <li>
-                      <strong className="text-slate-200">Preferències:</strong> Recordar les preferències
-                      bàsiques de l&apos;usuari. Durada: 1 any.
+                      <strong className="text-slate-200">Preferencias:</strong> Recordar las preferencias
+                      básicas del usuario. Duración: 1 año.
                     </li>
                   </ul>
                 </div>
               </div>
 
               <div>
-                <h4 className="mb-2 font-semibold text-slate-200">2.2. Cookies analítiques (opcionals)</h4>
+                <h4 className="mb-2 font-semibold text-slate-200">2.2. Cookies analíticas (opcionales)</h4>
                 <p>
-                  Permeten obtenir informació estadística sobre l&apos;ús del Lloc Web de forma
-                  agregada i anònima. En cas d&apos;activar-se serveis d&apos;analítica (com Vercel
-                  Analytics, Google Analytics o similars), l&apos;usuari serà informat i se li
-                  demanarà consentiment previ.
+                  Permiten obtener información estadística sobre el uso del Sitio Web de forma
+                  agregada y anónima. En caso de activarse servicios de analítica (como Vercel
+                  Analytics, Google Analytics o similares), el usuario será informado y se le
+                  solicitará consentimiento previo.
                 </p>
                 <div className="mt-3 rounded-lg bg-emerald-500/5 p-4 text-sm">
-                  <strong className="text-slate-200">Estat actual:</strong> El Lloc Web no utilitza
-                  cookies analítiques de tercers de manera activa. Si s&apos;incorporen en el futur,
-                  aquesta política s&apos;actualitzarà en conseqüència.
+                  <strong className="text-slate-200">Estado actual:</strong> El Sitio Web no utiliza
+                  cookies analíticas de terceros de manera activa. Si se incorporan en el futuro,
+                  esta política se actualizará en consecuencia.
                 </div>
               </div>
             </CardContent>
@@ -85,27 +93,27 @@ export default function CookiesPage() {
 
           <Card className="glass-card border-emerald-500/10">
             <CardHeader>
-              <CardTitle>3. Mecanisme de consentiment</CardTitle>
+              <CardTitle>3. Mecanismo de consentimiento</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-slate-300">
               <p>
-                En la primera visita al Lloc Web es mostra un avís de cookies amb tres
-                opcions amb la mateixa rellevància visual: <strong className="text-slate-200">Acceptar
-                totes</strong>, <strong className="text-slate-200">Rebutjar totes</strong> i{" "}
-                <strong className="text-slate-200">Configurar</strong>. Les cookies no tècniques
-                no s&apos;activen fins que l&apos;usuari n&apos;atorga consentiment explícit.
+                En la primera visita al Sitio Web se muestra un aviso de cookies con tres
+                opciones con la misma relevancia visual: <strong className="text-slate-200">Aceptar
+                todas</strong>, <strong className="text-slate-200">Rechazar todas</strong> y{" "}
+                <strong className="text-slate-200">Configurar</strong>. Las cookies no técnicas
+                no se activan hasta que el usuario otorga su consentimiento explícito.
               </p>
               <p>
-                El consentiment es desa al dispositiu de l&apos;usuari (localStorage i una
-                cookie pròpia anomenada <code className="rounded bg-slate-800 px-1.5 py-0.5 text-sm text-emerald-400">empentia_cc</code>{" "}
-                de durada 12 mesos) i inclou la versió de la política acceptada, la
-                marca de temps i les categories activades. Transcorreguts 12 mesos, o
-                si la versió de la política canvia, es torna a sol·licitar consentiment.
+                El consentimiento se guarda en el dispositivo del usuario (localStorage y una
+                cookie propia llamada <code className="rounded bg-slate-800 px-1.5 py-0.5 text-sm text-emerald-400">empentia_cc</code>{" "}
+                de 12 meses de duración) e incluye la versión de la política aceptada, la
+                marca de tiempo y las categorías activadas. Transcurridos 12 meses, o
+                si la versión de la política cambia, se vuelve a solicitar el consentimiento.
               </p>
               <p>
-                L&apos;usuari pot <strong className="text-slate-200">modificar o revocar</strong>{" "}
-                el seu consentiment en qualsevol moment des d&apos;aquesta mateixa pàgina,
-                sense que això afecti la licitud del tractament anterior.
+                El usuario puede <strong className="text-slate-200">modificar o revocar</strong>{" "}
+                su consentimiento en cualquier momento desde esta misma página,
+                sin que ello afecte a la licitud del tratamiento anterior.
               </p>
               <div className="flex flex-wrap gap-3 rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-4">
                 <CookiePreferencesButton />
@@ -116,13 +124,13 @@ export default function CookiesPage() {
 
           <Card className="glass-card border-emerald-500/10">
             <CardHeader>
-              <CardTitle>4. Configuració del navegador</CardTitle>
+              <CardTitle>4. Configuración del navegador</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-slate-300">
               <p>
-                Addicionalment, l&apos;usuari pot configurar el seu navegador per bloquejar o
-                eliminar les cookies. A continuació, s&apos;indiquen els enllaços de
-                configuració dels navegadors més habituals:
+                Adicionalmente, el usuario puede configurar su navegador para bloquear o
+                eliminar las cookies. A continuación, se indican los enlaces de
+                configuración de los navegadores más habituales:
               </p>
               <ul className="list-disc space-y-2 pl-6">
                 <li>
@@ -134,7 +142,7 @@ export default function CookiesPage() {
                   <code className="rounded bg-slate-800 px-1.5 py-0.5 text-sm text-emerald-400">about:preferences#privacy</code>
                 </li>
                 <li>
-                  <strong className="text-slate-200">Safari:</strong> Preferències → Privacitat
+                  <strong className="text-slate-200">Safari:</strong> Preferencias → Privacidad
                 </li>
                 <li>
                   <strong className="text-slate-200">Microsoft Edge:</strong>{" "}
@@ -142,21 +150,21 @@ export default function CookiesPage() {
                 </li>
               </ul>
               <p className="rounded-lg bg-emerald-500/5 p-4 text-sm">
-                <strong className="text-slate-200">Nota:</strong> Si es bloquegen les cookies
-                tècniques, algunes funcionalitats del Lloc Web (com l&apos;accés al portal de
-                client) podrien no funcionar correctament.
+                <strong className="text-slate-200">Nota:</strong> Si se bloquean las cookies
+                técnicas, algunas funcionalidades del Sitio Web (como el acceso al portal de
+                cliente) podrían no funcionar correctamente.
               </p>
             </CardContent>
           </Card>
 
           <Card className="glass-card border-emerald-500/10">
             <CardHeader>
-              <CardTitle>5. Actualització</CardTitle>
+              <CardTitle>5. Actualización</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-slate-300">
               <p>
-                Aquesta Política de Cookies pot ser modificada en qualsevol moment. Qualsevol
-                canvi serà publicat en aquesta pàgina. Recomanem revisar-la periòdicament.
+                Esta Política de Cookies puede ser modificada en cualquier momento. Cualquier
+                cambio será publicado en esta página. Recomendamos revisarla periódicamente.
               </p>
             </CardContent>
           </Card>
@@ -166,14 +174,14 @@ export default function CookiesPage() {
         <div className="mt-12 flex flex-col items-center gap-3 text-sm">
           <div className="flex items-center gap-6">
             <Link href="/privacy" className="text-emerald-400 underline hover:text-emerald-300">
-              Política de privacitat
+              Política de privacidad
             </Link>
             <Link href="/legal" className="text-emerald-400 underline hover:text-emerald-300">
-              Avís legal
+              Aviso legal
             </Link>
           </div>
           <Link href="/" className="text-slate-500 hover:text-slate-300">
-            ← Tornar a l&apos;inici
+            ← Volver al inicio
           </Link>
         </div>
       </div>

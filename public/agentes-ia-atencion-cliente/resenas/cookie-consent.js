@@ -13,7 +13,7 @@
   var LS_KEY = "empentia:cookie-consent";
   var COOKIE_NAME = "empentia_cc";
   var MAX_AGE_DAYS = 365;
-  var POLICY_URL = "/cookies/";
+  var POLICY_URL = LANG === "ca" ? "/ca/cookies/" : "/cookies/";
   var POLICY_UPDATED = "11 de febrer de 2026";
 
   var CATEGORIES = [
