@@ -634,6 +634,49 @@
   .nav-mobile-lang a { flex: 1; text-align: center; border: 1px solid var(--border); border-radius: 100px; padding: 11px 0 !important; font-weight: 600; }
   .nav-mobile-lang a.active { background: var(--text-dark); color: #fff !important; border-color: var(--text-dark); }
 </style>
+
+<!-- Google tag (gtag.js) — la analítica queda sujeta al consentimiento de cookies -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+
+  // Consent Mode v2. Mientras no haya consentimiento GA4 no escribe cookies,
+  // pero sigue contando la visita de forma anónima.
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied'
+  });
+
+  // cookie-consent.js guarda la decisión en localStorage y en la cookie
+  // empentia_cc, y avisa con el evento empentia:cookies:change. Aquí se relee
+  // para no volver a pedir permiso a quien ya lo dio en una visita anterior.
+  (function () {
+    function aceptada() {
+      try {
+        var raw = window.localStorage.getItem('empentia:cookie-consent');
+        if (!raw) {
+          var m = document.cookie.match(/(?:^|;\s*)empentia_cc=([^;]*)/);
+          raw = m ? decodeURIComponent(m[1]) : null;
+        }
+        var c = raw ? JSON.parse(raw) : null;
+        return !!(c && c.categories && c.categories.analytics);
+      } catch (_) { return false; }
+    }
+    function aplicar(ok) {
+      gtag('consent', 'update', { analytics_storage: ok ? 'granted' : 'denied' });
+    }
+    if (aceptada()) aplicar(true);
+    window.addEventListener('empentia:cookies:change', function (e) {
+      aplicar(!!(e.detail && e.detail.categories && e.detail.categories.analytics));
+    });
+  })();
+
+  gtag('js', new Date());
+  gtag('config', 'G-3HNWY32B0D');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3HNWY32B0D"></script>
 </head>
 <body>
 
