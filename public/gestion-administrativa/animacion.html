@@ -38,12 +38,14 @@
     {t:'Bandeja de revisión',   lbl:'EXCEPCIONES', exc:true}
   ];
   var CHIPS=[
-    {b:'Clasificando…', s:'',                        ic:'filtro'},
-    {b:'Cliente',   s:'verifica un dato',            ic:'persona'},
-    {b:'Proveedor', s:'contrasta la factura',        ic:'caja'},
-    {b:'Histórico', s:'busca antecedentes',          ic:'reloj'},
-    {b:'Contrato',  s:'consulta las condiciones',    ic:'doc'},
-    {b:'Anomalía',  s:'a revisión', exc:true,        ic:'aviso'}
+    {b:'Cliente',   s:'verifica un dato',         ic:'persona'},
+    {b:'Proveedor', s:'contrasta la factura',     ic:'caja'},
+    {b:'Histórico', s:'busca antecedentes',       ic:'reloj'},
+    {b:'ERP',       s:'localiza al cliente',      ic:'rejilla'},
+    {b:'Cuadre',    s:'comprueba los importes',   ic:'euro'},
+    {b:'Fecha',     s:'comprueba el período',     ic:'calendario'},
+    {b:'Contrato',  s:'consulta las condiciones', ic:'doc'},
+    {b:'Anomalía',  s:'a revisión', exc:true,     ic:'aviso'}
   ];
   var NARR=[
     'Cada día entran cientos de documentos.',
@@ -52,7 +54,22 @@
     'Tu equipo solo revisa las excepciones.'
   ];
 
-  var state={counts:[0,0,0,0],chip:0,narr:0,docs:[],gear:0};
+  // ── tiempos del original ──────────────────────────────────────────
+  var LOOP=10.9, HOLD=1.0;            // ciclo y congelado antes de repetir
+  var DUR=1.05;                       // viaje de cada documento
+  var R0=3.9, RS=0.65, RLIFE=2.1;     // validaciones: inicio, separación y vida
+  var OUT0=3.9, OUTDUR=6.4;           // salidas y subida de contadores
+  var TARGETS=[47,32,12,3];           // adonde llegan los contadores
+  var DCOUNTS=[13,9,6,2];             // documentos por destino
+  var GEAR_A=55, GEAR_B=-74;          // grados por segundo
+  var RAILS=[
+    [0.15,0.75,1.35,1.95,2.55,3.15,3.75,4.35,4.95,5.55,6.15,6.75,7.35,7.95,8.55,9.15,9.75,10.35],
+    [0.4,1.4,2.1,3.3,4.2,5.0,6.3,7.1,8.4,9.3,10.2],
+    [0.05,0.5,1.1,1.6,2.3,2.9,3.4,4.1,4.8,5.3,6.0,6.6,7.2,7.8,8.5,9.0,9.6,10.3]
+  ];
+  var CAPS=[0,2.5,3.9,8.5];           // cuándo cambia la frase de abajo
+
+  var state={counts:[0,0,0,0],narr:0,gear:0};
 
   function el(n,a){var e=document.createElementNS(NS,n);for(var k in a){if(a[k]!=null)e.setAttribute(k,a[k]);}return e;}
   function txt(s,a){var t=el('text',a);t.textContent=s;return t;}
@@ -85,6 +102,9 @@
       persona:['M12 4.2a3.6 3.6 0 1 1 0 7.2 3.6 3.6 0 0 1 0-7.2','M5.4 20a6.6 6.6 0 0 1 13.2 0'],
       caja:['M12 3.2 4 7.4v9.2l8 4.2 8-4.2V7.4z','M4 7.4l8 4.2 8-4.2','M12 11.6V21'],
       reloj:['M12 3.6a8.4 8.4 0 1 1 0 16.8 8.4 8.4 0 0 1 0-16.8','M12 7.4v5l3.4 2.1'],
+      rejilla:['M4.2 4.2h6.4v6.4H4.2z','M13.4 4.2h6.4v6.4h-6.4z','M4.2 13.4h6.4v6.4H4.2z','M13.4 13.4h6.4v6.4h-6.4z'],
+      euro:['M17.4 6.6a7.2 7.2 0 1 0 0 10.8','M4.6 10.4h8.2','M4.6 13.8h8.2'],
+      calendario:['M4.4 6.2h15.2v14H4.4z','M4.4 10.4h15.2','M8.6 3.6v4','M15.4 3.6v4'],
       doc:['M7 2.8h6.6L18 7.4V21H7z','M13.4 2.9v4.6H18','M9.6 12.4h5.6M9.6 16h5.6'],
       aviso:['M12 3.8 21 20H3z','M12 10v4','M12 16.6v.1']
     }[tipo]||['M12 4a8 8 0 1 1 0 16 8 8 0 0 1 0-16'];
@@ -200,7 +220,7 @@
     svg.appendChild(narrEl);
 
     wrap.appendChild(svg);
-    state.docs=[];
+    ultimoSet='';
     paintChips();paintNarr();
   }
 
@@ -246,81 +266,71 @@
   }
   function paintNarr(){narrEl.textContent=NARR[state.narr];}
 
-  var last=null,tChip=0,tNarr=0,tSpawn=0,chipOp=0,narrOp=0;
+  // ── motor de tiempo: el mismo guion de 10,9 s del original ──────────
+  var last=null, e=0, T=0, ultimoSet='';
+  function suave(v){ return v*v*(3-2*v); }
+  function clamp(v){ return Math.max(0,Math.min(1,v)); }
+
   function step(){
-    var now=Date.now();if(last==null)last=now;
-    var dt=Math.min((now-last)/1000,.12);last=now;
-    if(reduce){ narrEl.setAttribute('opacity',1); if(!visibles.length){ visibles=[{idx:0,st:'done',op:1},{idx:1,st:'done',op:1},{idx:2,st:'run',op:1}]; paintChips(); } return; }
+    var now=Date.now(); if(last==null) last=now;
+    var dt=Math.min((now-last)/1000,.12); last=now;
+    e+=dt;
+    T = Math.min(e % (LOOP+HOLD), LOOP-0.02);
 
-    state.gear=(state.gear+42*dt)%360;
-    gearA.setAttribute('transform','rotate('+state.gear.toFixed(2)+','+gearA._cx+','+gearA._cy+')');
-    // el pequeño gira al revés y más rápido, como un engranaje real
-    gearB.setAttribute('transform','rotate('+(-state.gear*1.48).toFixed(2)+','+gearB._cx+','+gearB._cy+')');
+    if(reduce){ narrEl.setAttribute('opacity',1); }
 
-    // pila de píldoras: entra una nueva, la anterior queda marcada como hecha
-    state.spin=((state.spin||0)+250*dt)%360;
+    // engranajes, a las velocidades del original
+    gearA.setAttribute('transform','rotate('+(e*GEAR_A).toFixed(2)+','+gearA._cx+','+gearA._cy+')');
+    gearB.setAttribute('transform','rotate('+(e*GEAR_B).toFixed(2)+','+gearB._cx+','+gearB._cy+')');
+
+    // frase de abajo: cambia en 0 · 2,5 · 3,9 · 8,5
+    var ni=0; for(var q=0;q<CAPS.length;q++){ if(T>=CAPS[q]) ni=q; }
+    if(ni!==state.narr){ state.narr=ni; paintNarr(); }
+    var desde = T-CAPS[ni];
+    narrEl.setAttribute('opacity', reduce?1:suave(clamp(desde/0.45)).toFixed(3));
+
+    // validaciones: aparecen cada 0,65 s, viven 2,1 s, tres a la vez
+    var act=[];
+    for(var i=0;i<CHIPS.length;i++){
+      var local=T-(R0+i*RS);
+      if(local>=0 && local<RLIFE) act.push({idx:i, st:(local>RLIFE-0.9)?'done':'run', op:reduce?1:suave(clamp(local/0.35))});
+    }
+    act=act.slice(-3);
+    var firma=act.map(function(a){return a.idx+a.st+a.op.toFixed(2);}).join('|');
+    if(firma!==ultimoSet){ ultimoSet=firma; visibles=act; paintChips(); }
+    state.spin=(e*250)%360;
     chipLayer.querySelectorAll('path[data-spin]').forEach(function(sp){
       sp.setAttribute('transform','rotate('+state.spin.toFixed(1)+','+sp.getAttribute('data-cx')+','+sp.getAttribute('data-cy')+')');
     });
-    var cambia=false;
-    visibles.forEach(function(v){ if(v.op<1){ v.op=Math.min(1,v.op+dt*1.9); cambia=true; } });
-    tChip+=dt;
-    // más tiempo de lectura, y la pila completa se mantiene un poco antes de vaciarse
-    var espera = (visibles.length>=3) ? 3.1 : 2.0;
-    if(tChip>espera){
-      tChip=0;
-      if(visibles.length>=3){
-        visibles=[];                                   // se vacía y arranca otra tanda
-      } else {
-        visibles.forEach(function(v){ v.st='done'; }); // las previas quedan resueltas
-      }
-      visibles.push({idx:state.chip, st:'run', op:0});
-      state.chip=(state.chip+1)%CHIPS.length;
-      cambia=true;
-    }
-    if(cambia) paintChips();
 
-    // la frase entra subiendo, se mantiene y se va: sin cortes secos
-    tNarr+=dt;
-    var IN=0.6, HOLD=3.1, OUT=0.55, TOT=IN+HOLD+OUT, op, dy, k;
-    var suave=function(v){return v*v*(3-2*v);};
-    if(tNarr<IN){ k=suave(tNarr/IN); op=k; dy=(1-k)*9; }
-    else if(tNarr<IN+HOLD){ op=1; dy=0; }
-    else if(tNarr<TOT){ k=suave((tNarr-IN-HOLD)/OUT); op=1-k; dy=-k*7; }
-    else { tNarr=0; state.narr=(state.narr+1)%NARR.length; paintNarr(); op=0; dy=9; }
-    narrEl.setAttribute('opacity',op.toFixed(3));
-    narrEl.setAttribute('transform','translate(0,'+dy.toFixed(2)+')');
-
-    tSpawn+=dt;
-    if(tSpawn>0.4){
-      tSpawn=0;
-      var ins=paths.filter(function(p){return p.dir==='in';});
-      var outs=paths.filter(function(p){return p.dir==='out';});
-      var pick;
-      if(Math.random()<0.5){
-        pick=ins[Math.floor(Math.random()*ins.length)];
-      } else {
-        // a la bandeja de revisión va una parte mínima: es el mensaje de la pieza
-        var peso=outs.map(function(o){return o.exc?1:9;});
-        var suma=peso.reduce(function(a,b){return a+b;},0), r=Math.random()*suma, acc=0;
-        for(var i=0;i<outs.length;i++){ acc+=peso[i]; if(r<=acc){ pick=outs[i]; break; } }
-      }
-      if(pick)state.docs.push({p:pick,t:0,sp:0.72+Math.random()*0.33});
-    }
-    var keep=[];
-    while(docLayer.firstChild)docLayer.removeChild(docLayer.firstChild);
-    state.docs.forEach(function(d){
-      d.t+=d.sp*dt;
-      if(d.t>=1){
-        if(d.p.dir==='out'){state.counts[d.p.idx]++;counters[d.p.idx].textContent=state.counts[d.p.idx];}
-        return;
-      }
-      keep.push(d);
-      var len=d.p.el.getTotalLength();
-      var pt=d.p.el.getPointAtLength(d.t*len);
-      docLayer.appendChild(iconDoc(pt.x,pt.y,17,d.p.exc?C.amber:C.green));
+    // contadores: suben desde 3,9 s durante 6,4 s hasta 47 · 32 · 12 · 3
+    var cp=clamp((T-OUT0)/OUTDUR), ease=1-Math.pow(1-cp,2);
+    TARGETS.forEach(function(t,i){
+      var v=Math.round(t*ease);
+      if(v!==state.counts[i]){ state.counts[i]=v; counters[i].textContent=v; }
     });
-    state.docs=keep;
+
+    // documentos: entradas por raíl y salidas por destino, 1,05 s de viaje
+    while(docLayer.firstChild) docLayer.removeChild(docLayer.firstChild);
+    var ins=paths.filter(function(p){return p.dir==='in';});
+    var outs=paths.filter(function(p){return p.dir==='out';});
+    RAILS.forEach(function(spawns,ri){
+      var via=ins[ri]; if(!via) return;
+      spawns.forEach(function(sp){
+        var local=T-sp; if(local<0||local>=DUR) return;
+        var len=via.el.getTotalLength(), pt=via.el.getPointAtLength((local/DUR)*len);
+        docLayer.appendChild(iconDoc(pt.x,pt.y,17,C.green));
+      });
+    });
+    DCOUNTS.forEach(function(n,d){
+      var via=outs[d]; if(!via) return;
+      for(var k=0;k<n;k++){
+        var sp=OUT0+(k/n)*OUTDUR, local=T-sp;
+        if(local<0||local>=DUR) continue;
+        var len=via.el.getTotalLength(), pt=via.el.getPointAtLength((local/DUR)*len);
+        docLayer.appendChild(iconDoc(pt.x,pt.y,17, via.exc?C.amber:C.green));
+      }
+    });
   }
 
   var curMode=null;
