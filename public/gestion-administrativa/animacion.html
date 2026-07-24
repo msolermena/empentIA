@@ -274,7 +274,7 @@
     narrEl.setAttribute('transform','translate(0,'+dy.toFixed(2)+')');
 
     tSpawn+=dt;
-    if(tSpawn>0.6){
+    if(tSpawn>0.4){
       tSpawn=0;
       var ins=paths.filter(function(p){return p.dir==='in';});
       var outs=paths.filter(function(p){return p.dir==='out';});
@@ -287,7 +287,7 @@
         var suma=peso.reduce(function(a,b){return a+b;},0), r=Math.random()*suma, acc=0;
         for(var i=0;i<outs.length;i++){ acc+=peso[i]; if(r<=acc){ pick=outs[i]; break; } }
       }
-      if(pick)state.docs.push({p:pick,t:0,sp:0.5+Math.random()*0.3});
+      if(pick)state.docs.push({p:pick,t:0,sp:0.72+Math.random()*0.33});
     }
     var keep=[];
     while(docLayer.firstChild)docLayer.removeChild(docLayer.firstChild);
