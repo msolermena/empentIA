@@ -225,7 +225,7 @@
   /* El mockup es una UI clara: dentro no debe heredar el blanco de la sección */
   .section-dark .mockup-browser { color: var(--text-dark); }
 
-  /* Mockup CRM — pestañas y pipeline por estados */
+  /* Mockup de la plataforma — pestañas y pipeline por estados */
   .crm-tabs {
     display: flex; gap: 20px; overflow-x: auto; font-size: 12px;
     color: var(--text-muted); border-bottom: 1px solid var(--border); margin-bottom: 16px;
@@ -614,6 +614,7 @@
   .flujo-intro .section-label { justify-content: center; }
   .flujo-h { font-family: var(--serif); font-weight: 400; font-size: clamp(26px, 3.4vw, 38px); letter-spacing: -0.02em; margin: 14px 0 10px; color: var(--text-dark); }
   .flujo-h .italic { color: var(--green); font-style: italic; font-weight: 300; }
+  .flujo-pie { font-size: 15px; color: var(--text-muted); text-align: center; margin-top: 20px; line-height: 1.55; }
   .flujo-sub { font-size: 16px; color: var(--text-muted); max-width: 640px; margin: 0 auto; line-height: 1.55; }
 </style>
 </head>
@@ -627,7 +628,7 @@
     </a>
     <div class="nav-links">
       <a href="#automatizaciones">Qu&eacute; incluye</a>
-      <a href="#portal">Tu CRM</a>
+      <a href="#portal">La plataforma</a>
       <a href="#precios">Precios</a>
       <a href="https://app.empentia.com/login" class="nav-client">Acceso clientes &rarr;</a>
       <a href="#" class="btn-cta" onclick="Cal.ns['descobriment']('modal',{calLink:'empentia/descobriment-empentia',config:{metadata:{source:'landing_web',form_id:'landing_gestion_administrativa_nav'}}}); return false;">Agenda una llamada</a>
@@ -642,7 +643,7 @@
 <div class="nav-mobile" id="navMobile">
   <div class="nav-mobile-inner">
     <a href="#automatizaciones" onclick="closeNav()">Qu&eacute; incluye</a>
-    <a href="#portal" onclick="closeNav()">Tu CRM</a>
+    <a href="#portal" onclick="closeNav()">La plataforma</a>
     <a href="#precios" onclick="closeNav()">Precios</a>
     <a href="#faqs" onclick="closeNav()">FAQs</a>
     <a href="https://app.empentia.com/login" onclick="closeNav()">Acceso clientes &rarr;</a>
@@ -704,7 +705,7 @@
 <div class="anim-wrap">
       <iframe class="anim-frame" src="/gestion-administrativa/animacion.html" title="Flujo de gestión documental de empentIA" loading="lazy" scrolling="no"></iframe>
     </div>
-    <p class="fine" style="text-align:center; margin-top: 18px;">Este es el flujo de gestión documental, transversal e integrable con los sistemas que ya usas.</p>
+    <p class="flujo-pie">Este es el flujo de gestión documental, transversal e integrable con los sistemas que ya usas.</p>
 
     <p class="fine ambito-pie">Trabajamos con gestor&iacute;as fiscales y laborales, administradores de fincas, inmobiliarias, despachos jur&iacute;dicos, notar&iacute;as, asesor&iacute;as, consultoras, arquitectura, ingenier&iacute;a, auditor&iacute;a y consultores independientes. Si tu despacho procesa documentos, empentIA se adapta.</p>
   </div>
@@ -858,15 +859,15 @@
 </section>
 
 <!-- ============================================ -->
-<!-- 6. EL PORTAL / CRM -->
+<!-- 6. LA PLATAFORMA -->
 <!-- ============================================ -->
 <section class="section section-dark" id="portal">
   <div class="container">
     <p class="eyebrow">Tu gran ventaja</p>
-    <h2 class="h-oneline">Tu propio CRM, <span class="italic">todo en un solo sitio.</span></h2>
+    <h2 class="h-oneline">Tu propia plataforma, <span class="italic">todo en un solo sitio.</span></h2>
     <p class="lead">Un solo sitio para todo: el estado de cada expediente, los documentos que esperan revisión y el histórico completo. No es un archivo de documentos: es donde tu equipo trabaja. Cada despacho trabaja distinto, as&iacute; que no viene con un flujo enlatado: lo montamos con tus estados, tus campa&ntilde;as y los indicadores que miras cada ma&ntilde;ana.</p>
 
-    <!-- Mockup: CRM de campaña + cola documental -->
+    <!-- Mockup: la plataforma con una campaña + cola documental -->
     <div class="mockup-browser" style="margin-top: 8px;">
       <div class="mockup-bar">
         <div class="mockup-dot"></div>
@@ -1141,7 +1142,7 @@
         </div>
         <div class="faq-item">
           <div class="faq-q">¿Hay permanencia?</div>
-          <div class="faq-a">No en la cuota mensual: cancelas cuando quieras desde el CRM y el servicio sigue activo hasta el final del período facturado. El setup inicial es un pago único y no se devuelve, porque el flujo queda construido y documentado.</div>
+          <div class="faq-a">No en la cuota mensual: cancelas cuando quieras desde la plataforma y el servicio sigue activo hasta el final del período facturado. El setup inicial es un pago único y no se devuelve, porque el flujo queda construido y documentado.</div>
         </div>
         <div class="faq-item">
           <div class="faq-q">¿Dónde se almacenan los documentos?</div>
