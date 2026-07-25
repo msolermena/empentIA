@@ -1,5 +1,6 @@
 import { Logo } from "@/components/Logo";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { LegalLangSwitch } from "@/components/LegalLangSwitch";
 import Link from "next/link";
 
 export const metadata = {
@@ -10,6 +11,7 @@ export const metadata = {
     languages: {
       es: "https://empentia.com/privacy/",
       ca: "https://empentia.com/ca/privacy/",
+      en: "https://empentia.com/en/privacy/",
       "x-default": "https://empentia.com/privacy/",
     },
   },
@@ -17,29 +19,46 @@ export const metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background" lang="es">
       {/* Header */}
       <header className="border-b border-emerald-500/10 bg-background/80 backdrop-blur-md">
-        <nav className="container mx-auto flex h-20 items-center px-8">
+        <nav className="container mx-auto flex h-20 items-center justify-between px-8">
           <Logo size="md" variant="image" />
+          <LegalLangSwitch es="/privacy/" ca="/ca/privacy/" en="/en/privacy/" active="es" />
         </nav>
       </header>
 
       {/* Content */}
       <div className="container mx-auto max-w-4xl px-8 py-16">
         <h1 className="mb-2 text-4xl font-extrabold">Política de Privacidad</h1>
-        <p className="mb-8 text-sm text-slate-400">Última actualización: 11 de febrero de 2026</p>
-        
+        <p className="mb-8 text-sm text-slate-400">Última actualización: 25 de julio de 2026</p>
+
         <div className="prose prose-invert max-w-none space-y-8">
           <Card className="glass-card border-emerald-500/10">
             <CardHeader>
-              <CardTitle>1. Responsable del tratamiento</CardTitle>
+              <CardTitle>1. Responsable y encargado del tratamiento</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-slate-300">
               <p>
-                El responsable del tratamiento de los datos personales recogidos a través
-                de este sitio web es:
+                empentIA actúa bajo dos roles distintos según el tratamiento de datos de que se trate:
               </p>
+              <ul className="list-disc space-y-2 pl-6">
+                <li>
+                  <strong className="text-slate-200">Como responsable del tratamiento:</strong> respecto de
+                  los datos que recogemos directamente a través de este sitio web (auditoría de automatización,
+                  portal de cliente y comunicaciones comerciales), empentIA Tech SL decide las finalidades y
+                  los medios del tratamiento.
+                </li>
+                <li>
+                  <strong className="text-slate-200">Como encargado del tratamiento:</strong> cuando operamos
+                  un canal de mensajería (por ejemplo, WhatsApp Business) por cuenta de una empresa cliente,
+                  esa empresa cliente es el responsable del tratamiento y empentIA actúa únicamente como
+                  encargado, tratando los datos siguiendo sus instrucciones. En estos casos existe un
+                  contrato de encargo del tratamiento (art. 28 RGPD) entre el cliente y empentIA, disponible
+                  a petición del responsable.
+                </li>
+              </ul>
+              <p>Datos identificativos del responsable respecto de los tratamientos propios de este sitio:</p>
               <div className="rounded-lg bg-slate-800/30 p-4">
                 <p className="text-sm">
                   <strong className="text-slate-200">Denominación social:</strong> empentIA Tech SL<br />
@@ -125,7 +144,56 @@ export default function PrivacyPage() {
 
           <Card className="glass-card border-emerald-500/10">
             <CardHeader>
-              <CardTitle>3. Destinatarios de los datos</CardTitle>
+              <CardTitle>3. Canal de mensajería — WhatsApp Business</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4 text-slate-300">
+              <p>
+                empentIA opera canales de mensajería instantánea, incluida la Plataforma de WhatsApp Business,
+                por cuenta de sus empresas cliente. En estos tratamientos la empresa cliente es el responsable
+                del tratamiento y empentIA actúa como encargado, conforme a lo indicado en el apartado 1.
+              </p>
+              <ul className="list-disc space-y-2 pl-6">
+                <li>
+                  <strong className="text-slate-200">Datos tratados:</strong> número de teléfono, nombre de perfil
+                  de WhatsApp, contenido de los mensajes intercambiados y metadatos técnicos asociados
+                  (marcas de tiempo, estado de entrega, identificadores de conversación).
+                </li>
+                <li>
+                  <strong className="text-slate-200">Finalidad:</strong> atender, responder y dar seguimiento a las
+                  conversaciones que la persona inicia con la empresa cliente a través del canal, incluida la
+                  generación de respuestas mediante sistemas automatizados de inteligencia artificial.
+                </li>
+                <li>
+                  <strong className="text-slate-200">Base legal:</strong> la que corresponda al responsable
+                  (la empresa cliente), habitualmente el consentimiento de la persona usuaria al iniciar la
+                  conversación o el interés legítimo en atender su solicitud. empentIA trata estos datos
+                  siguiendo las instrucciones del responsable.
+                </li>
+                <li>
+                  <strong className="text-slate-200">Proveedor del canal:</strong> los mensajes se transmiten a
+                  través de <strong className="text-slate-200">Meta Platforms Ireland Ltd.</strong>, proveedor
+                  de la Plataforma de WhatsApp Business, que trata los datos conforme a sus propias condiciones
+                  y política de privacidad.
+                </li>
+                <li>
+                  <strong className="text-slate-200">Subencargado de IA:</strong> las respuestas automatizadas
+                  se generan mediante un modelo de inteligencia artificial de un proveedor tercero, que actúa
+                  como subencargado del tratamiento y trata los datos únicamente para prestar dicho servicio.
+                </li>
+                <li>
+                  <strong className="text-slate-200">Respuestas automatizadas:</strong> parte de las respuestas
+                  del canal pueden estar generadas por un sistema automatizado. La persona usuaria puede solicitar
+                  en cualquier momento la atención de una persona, así como dejar de recibir mensajes escribiendo
+                  <strong className="text-slate-200"> «STOP»</strong> (u opción equivalente indicada en la
+                  conversación).
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <Card className="glass-card border-emerald-500/10">
+            <CardHeader>
+              <CardTitle>4. Destinatarios de los datos</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-slate-300">
               <p>
@@ -134,32 +202,39 @@ export default function PrivacyPage() {
               </p>
               <ul className="list-disc space-y-2 pl-6">
                 <li>
-                  <strong className="text-slate-200">Supabase Inc.</strong> — Proveedor de base de datos y autenticación (servidores en la UE).
+                  <strong className="text-slate-200">Meta Platforms Ireland Ltd.</strong> — Proveedor de la
+                  Plataforma de WhatsApp Business a través de la cual se transmiten los mensajes.
                 </li>
                 <li>
-                  <strong className="text-slate-200">Vercel Inc.</strong> — Proveedor de alojamiento web del frontend.
+                  <strong className="text-slate-200">Proveedor de inteligencia artificial</strong> — Genera, como
+                  subencargado del tratamiento, las respuestas automatizadas del canal y el análisis y la
+                  generación de contenido de los servicios contratados.
                 </li>
                 <li>
-                  <strong className="text-slate-200">Railway Corp.</strong> — Proveedor de alojamiento del backend.
+                  <strong className="text-slate-200">Proveedor de base de datos y autenticación</strong> — Almacenamiento
+                  de datos con servidores en la Unión Europea.
                 </li>
                 <li>
-                  <strong className="text-slate-200">Anthropic PBC</strong> — Proveedor de inteligencia artificial para análisis y generación de contenido.
+                  <strong className="text-slate-200">Proveedores de alojamiento</strong> — Alojamiento del sitio web y
+                  del backend de la aplicación.
                 </li>
                 <li>
-                  <strong className="text-slate-200">Brevo (Sendinblue)</strong> — Proveedor de envío de correos electrónicos.
+                  <strong className="text-slate-200">Proveedor de envío de correo electrónico</strong> — Envío de
+                  comunicaciones por correo electrónico.
                 </li>
               </ul>
               <p className="text-sm">
                 No se realizarán transferencias internacionales de datos fuera del Espacio Económico
-                Europeo sin las garantías adecuadas. En el caso de proveedores con sede en EE. UU.,
-                nos aseguramos de que cuenten con las certificaciones o mecanismos de transferencia adecuados.
+                Europeo sin las garantías adecuadas. En el caso de proveedores con sede fuera del EEE,
+                nos aseguramos de que cuenten con las certificaciones o mecanismos de transferencia adecuados
+                (cláusulas contractuales tipo u otras garantías previstas en el RGPD).
               </p>
             </CardContent>
           </Card>
 
           <Card className="glass-card border-emerald-500/10">
             <CardHeader>
-              <CardTitle>4. Plazo de conservación</CardTitle>
+              <CardTitle>5. Plazo de conservación</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-slate-300">
               <ul className="list-disc space-y-2 pl-6">
@@ -174,6 +249,12 @@ export default function PrivacyPage() {
                   para atender posibles responsabilidades (5 años).
                 </li>
                 <li>
+                  <strong className="text-slate-200">Datos del canal de mensajería:</strong> El contenido de las
+                  conversaciones se conserva durante el tiempo necesario para prestar el servicio y según las
+                  instrucciones de la empresa cliente responsable. Finalizada la relación, se suprimen o se
+                  devuelven al responsable conforme al contrato de encargo del tratamiento.
+                </li>
+                <li>
                   <strong className="text-slate-200">Comunicaciones comerciales:</strong> Hasta que el interesado revoque
                   su consentimiento.
                 </li>
@@ -183,7 +264,7 @@ export default function PrivacyPage() {
 
           <Card className="glass-card border-emerald-500/10">
             <CardHeader>
-              <CardTitle>5. Derechos de los interesados</CardTitle>
+              <CardTitle>6. Derechos de los interesados</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-slate-300">
               <p>Toda persona tiene derecho a obtener confirmación sobre si estamos tratando sus datos personales. En particular, puede ejercer los siguientes derechos:</p>
@@ -210,12 +291,14 @@ export default function PrivacyPage() {
               <div className="rounded-lg bg-emerald-500/10 p-4">
                 <p className="text-sm">
                   <strong className="text-emerald-400">Para ejercer estos derechos:</strong><br />
-                  Envía un email a{" "}
+                  Si el tratamiento corresponde a este sitio web, envía un email a{" "}
                   <a href="mailto:hola@empentia.com" className="text-emerald-400 underline">
                     hola@empentia.com
                   </a>{" "}
                   indicando el derecho que quieres ejercer y adjuntando una copia del documento de identidad.
-                  Responderemos en un plazo máximo de 30 días.
+                  Responderemos en un plazo máximo de 30 días. Si tus datos se tratan a través de un canal de
+                  mensajería operado por una empresa cliente, dirige tu solicitud a dicha empresa como
+                  responsable del tratamiento; empentIA le trasladará la petición si la recibe.
                 </p>
               </div>
               <p className="text-sm">
@@ -230,7 +313,7 @@ export default function PrivacyPage() {
 
           <Card className="glass-card border-emerald-500/10">
             <CardHeader>
-              <CardTitle>6. Medidas de seguridad</CardTitle>
+              <CardTitle>7. Medidas de seguridad</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-slate-300">
               <p>
@@ -249,7 +332,7 @@ export default function PrivacyPage() {
 
           <Card className="glass-card border-emerald-500/10">
             <CardHeader>
-              <CardTitle>7. Actualización</CardTitle>
+              <CardTitle>8. Actualización</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-slate-300">
               <p>
@@ -264,10 +347,13 @@ export default function PrivacyPage() {
         {/* Navigation */}
         <div className="mt-12 flex flex-col items-center gap-3 text-sm">
           <div className="flex items-center gap-6">
-            <Link href="/legal" className="text-emerald-400 underline hover:text-emerald-300">
+            <Link href="/terms/" className="text-emerald-400 underline hover:text-emerald-300">
+              Términos de servicio
+            </Link>
+            <Link href="/legal/" className="text-emerald-400 underline hover:text-emerald-300">
               Aviso legal
             </Link>
-            <Link href="/cookies" className="text-emerald-400 underline hover:text-emerald-300">
+            <Link href="/cookies/" className="text-emerald-400 underline hover:text-emerald-300">
               Política de cookies
             </Link>
           </div>
