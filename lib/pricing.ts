@@ -59,7 +59,9 @@ export const CANALES_PLAN: Record<string, ChannelPlan> = {
     tiers: [
       { id: "starter", label: "Starter", precio: 59, incluidas: 100, usuarios: 1 },
       { id: "pro", label: "Pro", precio: 115, incluidas: 250, usuarios: 3 },
-      { id: "business", label: "Business", precio: 260, incluidas: 650, usuarios: 8 },
+      // usuarios = asientos de panel (1/3/5). Los buzones conectados (1/3/8)
+      // son una dimensión aparte del canal email (no se modela aquí).
+      { id: "business", label: "Business", precio: 260, incluidas: 650, usuarios: 5 },
     ],
   },
   whatsapp: {
