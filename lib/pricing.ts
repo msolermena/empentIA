@@ -144,6 +144,27 @@ export const USUARIO_ADICIONAL: {
 // Precio del primer usuario adicional (el de entrada) — para mostrar "desde".
 export const USUARIO_ADICIONAL_DESDE = USUARIO_ADICIONAL.tramos[0].precio;
 
+/**
+ * Coste mensual de N usuarios ADICIONALES (por encima de los incluidos en el
+ * plan), escalado por tramos acumulados: usuarios 1–10 @15 €, 11–25 @12 €,
+ * 26+ @9 € (por usuario/mes). Devuelve solo el coste "por asiento"; el bolt-on
+ * ilimitado se compara aparte en buildProposal.
+ */
+export function costeUsuariosAdicionales(n: number): number {
+  let restantes = Math.max(0, Math.floor(n));
+  let prevCap = 0;
+  let total = 0;
+  for (const t of USUARIO_ADICIONAL.tramos) {
+    if (restantes <= 0) break;
+    const cap = t.hasta ?? Infinity;
+    const enTramo = Math.min(restantes, cap - prevCap);
+    total += enTramo * t.precio;
+    restantes -= enTramo;
+    prevCap = cap;
+  }
+  return total;
+}
+
 // ------------------------------------------------------------
 // Selección de tramo según volumen estimado del canal.
 // ------------------------------------------------------------
@@ -186,6 +207,12 @@ export interface Propuesta {
   hayPersonalizado: boolean;
   tramoDominante: "Starter" | "Pro" | "Business" | null; // para el campo `pla` del lead
   sinCanalesVendibles: boolean;
+  // Usuarios del panel (dimensión transversal a la cuenta)
+  asientosIncluidos: number; // asientos incluidos por la cuenta (máx entre planes)
+  usuariosTotales: number; // nº total de usuarios indicado por el cliente
+  usuariosAdicionales: number; // por encima de los incluidos
+  costeUsuarios: number; // €/mes por usuarios adicionales (el menor: por asiento vs bolt-on)
+  usuariosBoltOn: boolean; // true si lo recomendado es el bolt-on ilimitado
 }
 
 const ORDEN_TRAMO: Record<string, number> = {
@@ -205,6 +232,8 @@ export function buildProposal(opts: {
   canalesNuevos: string[];
   // volumen mensual por canal en unidad de tarifa (solo canales activos)
   volumenPorCanal: Record<string, number>;
+  // nº total de usuarios de la cuenta que usarán el panel (0/undefined = sin extra)
+  numUsuarios?: number;
 }): Propuesta {
   const activos = opts.canalesActivos.filter((c) => CANALES_PLAN[c]);
   const nuevos = opts.canalesNuevos.filter(
@@ -236,15 +265,36 @@ export function buildProposal(opts: {
 
   const addons: AddonPropuesta[] = [];
 
+  const hayPersonalizado = lineas.some((l) => l.esPersonalizado);
+  const noPersonalizados = lineas.filter((l) => !l.esPersonalizado);
+
+  // Usuarios del panel: dimensión transversal a la cuenta (no por canal). Los
+  // asientos incluidos = el máximo que ofrece cualquiera de los planes
+  // contratados (no personalizados). Por encima → coste por usuario adicional,
+  // eligiendo lo más barato entre tarifa por asiento y bolt-on ilimitado.
+  const asientosIncluidos = noPersonalizados.reduce(
+    (m, l) => Math.max(m, l.tier.usuarios ?? 0),
+    0
+  );
+  const usuariosTotales = Math.max(0, Math.round(opts.numUsuarios || 0));
+  const usuariosAdicionales =
+    usuariosTotales > asientosIncluidos ? usuariosTotales - asientosIncluidos : 0;
+  let costeUsuarios = 0;
+  let usuariosBoltOn = false;
+  if (usuariosAdicionales > 0) {
+    const porAsiento = costeUsuariosAdicionales(usuariosAdicionales);
+    const boltOn = USUARIO_ADICIONAL.boltOnIlimitado;
+    costeUsuarios = Math.min(porAsiento, boltOn);
+    usuariosBoltOn = boltOn < porAsiento;
+  }
+
   const setupTotal = lineas.reduce((s, l) => s + l.setup, 0);
   const cuotaMensual =
     lineas.reduce((s, l) => s + l.precioMes, 0) +
-    addons.reduce((s, a) => s + a.precioMes, 0);
-
-  const hayPersonalizado = lineas.some((l) => l.esPersonalizado);
+    addons.reduce((s, a) => s + a.precioMes, 0) +
+    costeUsuarios;
 
   // Tramo dominante (el más alto entre los no personalizados) para el lead.
-  const noPersonalizados = lineas.filter((l) => !l.esPersonalizado);
   let tramoDominante: "Starter" | "Pro" | "Business" | null = null;
   if (noPersonalizados.length > 0) {
     const top = noPersonalizados.reduce((a, b) =>
@@ -262,5 +312,10 @@ export function buildProposal(opts: {
     hayPersonalizado,
     tramoDominante,
     sinCanalesVendibles: lineas.length === 0 && addons.length === 0,
+    asientosIncluidos,
+    usuariosTotales,
+    usuariosAdicionales,
+    costeUsuarios,
+    usuariosBoltOn,
   };
 }

@@ -197,6 +197,7 @@ interface Answers {
   tipoPrincipal: string;
   horasSemana: string;
   costeHora: string;
+  numUsuarios: string; // nº de personas del equipo que usarán el panel
   tiempoRespuesta: string;
   notas: string;
 }
@@ -208,6 +209,7 @@ const EMPTY_ANSWERS: Answers = {
   tipoPrincipal: "",
   horasSemana: "",
   costeHora: "22",
+  numUsuarios: "",
   tiempoRespuesta: "",
   notas: "",
 };
@@ -271,6 +273,7 @@ function buildAuditoriaDetalle(a: Answers, lang: Lang): AuditoriaDetalle {
     canalesActivos: a.canalesActivos,
     canalesNuevos: a.canalesNuevos,
     volumenPorCanal: volumenPorCanalPricing(a),
+    numUsuarios: parseInt(a.numUsuarios, 10) || 0,
   });
   const es = STR.es;
   const canal = (id: string) => es.canales[id] ?? id;
@@ -929,6 +932,18 @@ function CuestionarioStep({
               />
               <p className="mt-1.5 text-xs t-mute">{q.qCosteHint}</p>
             </div>
+            <div className="sm:col-span-2">
+              <FieldLabel>{q.qUsuarios}</FieldLabel>
+              <input
+                type="number"
+                min={0}
+                value={answers.numUsuarios}
+                onChange={(e) => set("numUsuarios", e.target.value)}
+                placeholder={q.qUsuariosPh}
+                className="a-input"
+              />
+              <p className="mt-1.5 text-xs t-mute">{q.qUsuariosHint}</p>
+            </div>
           </div>
         </QCard>
 
@@ -1187,6 +1202,7 @@ function InformeStep({
     canalesActivos: answers.canalesActivos,
     canalesNuevos: answers.canalesNuevos,
     volumenPorCanal: volumenPorCanalPricing(answers),
+    numUsuarios: parseInt(answers.numUsuarios, 10) || 0,
   });
 
   const tiempoLabel = t.tiempos[answers.tiempoRespuesta] || "—";
@@ -1681,6 +1697,48 @@ function PropuestaCard({ propuesta, r }: { propuesta: Propuesta; r: Report }) {
         })}
       </div>
 
+      {/* Línea: usuarios adicionales del panel (coste calculado) */}
+      {propuesta.usuariosAdicionales > 0 && (
+        <div className="mt-3 flex items-stretch overflow-hidden rounded-xl border bd bg-soft">
+          <span
+            className="w-1 flex-shrink-0"
+            style={{ background: "#009a6e" }}
+            aria-hidden="true"
+          />
+          <div className="flex flex-1 items-start justify-between gap-3 p-4">
+            <div className="flex items-start gap-3">
+              <div
+                className="mt-0.5 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg"
+                style={{ background: "rgba(0,192,136,0.12)" }}
+              >
+                <Users className="h-5 w-5 t-green" />
+              </div>
+              <div>
+                <span className="font-semibold t-ink">
+                  {p.usuariosLineaTitle}
+                </span>
+                <p className="mt-1 text-xs t-mute">
+                  {p.usuariosLineaDesc(
+                    propuesta.usuariosTotales,
+                    propuesta.asientosIncluidos,
+                    propuesta.usuariosAdicionales
+                  )}
+                </p>
+                {propuesta.usuariosBoltOn && (
+                  <p className="mt-0.5 text-xs t-mute">{p.usuariosBoltOnNota}</p>
+                )}
+              </div>
+            </div>
+            <div className="flex-shrink-0 text-right">
+              <p className="font-bold t-ink">
+                {eur(propuesta.costeUsuarios)}€
+                <span className="text-sm font-normal t-mute">/mes</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Totales */}
       <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div className="rounded-xl border bd bg-soft p-4">
@@ -1714,24 +1772,36 @@ function PropuestaCard({ propuesta, r }: { propuesta: Propuesta; r: Report }) {
         </div>
       </div>
 
-      {/* Aviso: usuarios adicionales */}
-      <div className="mt-4 flex items-start gap-3 rounded-xl border bd bg-soft p-4">
-        <div
-          className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg"
-          style={{ background: "rgba(0,192,136,0.12)" }}
-        >
-          <Users className="h-4 w-4 t-green" />
+      {/* Aviso / confirmación de usuarios (solo si no hay coste extra que ya se
+          muestra en su propia línea) */}
+      {propuesta.usuariosAdicionales === 0 && (
+        <div className="mt-4 flex items-start gap-3 rounded-xl border bd bg-soft p-4">
+          <div
+            className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg"
+            style={{ background: "rgba(0,192,136,0.12)" }}
+          >
+            <Users className="h-4 w-4 t-green" />
+          </div>
+          <div>
+            <p className="text-sm font-semibold t-ink">
+              {propuesta.usuariosTotales > 0
+                ? p.usuariosOkTitle
+                : p.usuariosAvisoTitle}
+            </p>
+            <p className="mt-0.5 text-sm t-soft">
+              {propuesta.usuariosTotales > 0
+                ? p.usuariosOk(
+                    propuesta.usuariosTotales,
+                    propuesta.asientosIncluidos
+                  )
+                : p.usuariosAviso(
+                    eur(USUARIO_ADICIONAL_DESDE),
+                    eur(USUARIO_ADICIONAL.boltOnIlimitado)
+                  )}
+            </p>
+          </div>
         </div>
-        <div>
-          <p className="text-sm font-semibold t-ink">{p.usuariosAvisoTitle}</p>
-          <p className="mt-0.5 text-sm t-soft">
-            {p.usuariosAviso(
-              eur(USUARIO_ADICIONAL_DESDE),
-              eur(USUARIO_ADICIONAL.boltOnIlimitado)
-            )}
-          </p>
-        </div>
-      </div>
+      )}
 
       {/* ROI */}
       {ahorroNeto > 0 && (

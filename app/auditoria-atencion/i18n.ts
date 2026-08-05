@@ -83,6 +83,10 @@ const es = {
     qHorasPh: "Ej: 15",
     qCoste: "Coste por hora del personal (€)",
     qCosteHint: "Ajústalo a tu realidad. Por defecto, 22 €/h.",
+    qUsuarios: "¿Cuántas personas de tu equipo usarán la plataforma?",
+    qUsuariosPh: "Ej: 8",
+    qUsuariosHint:
+      "Con acceso al panel. Cada plan incluye varios; si necesitáis más, calculamos el coste del usuario adicional.",
     q5t: "¿Cuánto tardáis en responder de media?",
     q6t: "¿Algo más que deberíamos saber?",
     notasPh: "Picos de temporada, idiomas, herramientas que usáis...",
@@ -162,6 +166,14 @@ const es = {
     usuariosAvisoTitle: "¿Necesitas más usuarios?",
     usuariosAviso: (desde: string, boltOn: string) =>
       `Cada plan incluye un nº de usuarios del panel (indicado arriba en cada servicio). Si tu equipo necesita más, los usuarios adicionales se añaden desde ${desde} €/usuario/mes, o usuarios ilimitados por ${boltOn} €/mes.`,
+    usuariosLineaTitle: "Usuarios adicionales del panel",
+    usuariosLineaDesc: (total: number, incl: number, extra: number) =>
+      `${total} usuarios en total · ${incl} incluidos + ${extra} adicional${extra === 1 ? "" : "es"}`,
+    usuariosBoltOnNota:
+      "Aplicamos la tarifa plana de usuarios ilimitados, más económica en tu caso que el precio por usuario.",
+    usuariosOkTitle: "Usuarios del panel incluidos",
+    usuariosOk: (total: number, incl: number) =>
+      `Tus ${total} usuario${total === 1 ? "" : "s"} entran en los ${incl} incluidos del plan. Sin coste adicional.`,
     aMedida: "A medida",
     setup: (x: string) => `Setup ${x}€`,
     setupMedida: "Setup a medida",
@@ -306,6 +318,10 @@ const ca: Dict = {
     qHorasPh: "Ex: 15",
     qCoste: "Cost per hora del personal (€)",
     qCosteHint: "Ajusta'l a la teva realitat. Per defecte, 22 €/h.",
+    qUsuarios: "Quantes persones del teu equip faran servir la plataforma?",
+    qUsuariosPh: "Ex: 8",
+    qUsuariosHint:
+      "Amb accés al panell. Cada pla n'inclou uns quants; si en necessiteu més, calculem el cost de l'usuari addicional.",
     q5t: "Quant trigueu a respondre de mitjana?",
     q6t: "Alguna cosa més que hauríem de saber?",
     notasPh: "Pics de temporada, idiomes, eines que feu servir...",
@@ -385,6 +401,14 @@ const ca: Dict = {
     usuariosAvisoTitle: "Necessites més usuaris?",
     usuariosAviso: (desde: string, boltOn: string) =>
       `Cada pla inclou un nombre d'usuaris del panell (indicat a dalt a cada servei). Si el teu equip necessita més, els usuaris addicionals s'afegeixen des de ${desde} €/usuari/mes, o usuaris il·limitats per ${boltOn} €/mes.`,
+    usuariosLineaTitle: "Usuaris addicionals del panell",
+    usuariosLineaDesc: (total: number, incl: number, extra: number) =>
+      `${total} usuaris en total · ${incl} inclosos + ${extra} addicional${extra === 1 ? "" : "s"}`,
+    usuariosBoltOnNota:
+      "Apliquem la tarifa plana d'usuaris il·limitats, més econòmica en el teu cas que el preu per usuari.",
+    usuariosOkTitle: "Usuaris del panell inclosos",
+    usuariosOk: (total: number, incl: number) =>
+      `Els teus ${total} usuari${total === 1 ? "" : "s"} entren en els ${incl} inclosos del pla. Sense cost addicional.`,
     aMedida: "A mida",
     setup: (x: string) => `Setup ${x}€`,
     setupMedida: "Setup a mida",
