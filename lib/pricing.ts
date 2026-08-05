@@ -1,5 +1,5 @@
 // ============================================================
-// MOTOR DE PRECIOS — espejo de data/empentia-precios_2 (1).xlsx
+// MOTOR DE PRECIOS — espejo de empentia-precios_3.xlsx
 // (v. 8 jun 2026) · todos los precios SIN IVA.
 //
 // Reglas de negocio:
@@ -8,6 +8,8 @@
 //    Por encima del volumen de Business → "Plan personalizado" (a medida).
 //  - Setup (pago único, por canal) escalado por tramo: 390 / 495 / 600 €.
 //    Los 800 € se reservan a planes personalizados (no se muestran aquí).
+//  - Cada tramo incluye un nº de usuarios del panel. Por encima de lo
+//    incluido se factura por USUARIO ADICIONAL (ver USUARIO_ADICIONAL).
 // ============================================================
 
 export type TierId = "starter" | "pro" | "business" | "personalizado";
@@ -17,6 +19,7 @@ export interface Tier {
   label: string;
   precio: number | null; // €/mes sin IVA (null = a medida)
   incluidas: number | null; // unidades/mes incluidas (null = a medida)
+  usuarios: number | null; // usuarios del panel incluidos (null = ilimitado / a medida)
 }
 
 export interface ChannelPlan {
@@ -43,9 +46,9 @@ export const CANALES_PLAN: Record<string, ChannelPlan> = {
     unidad: "conversaciones",
     estado: "publicado",
     tiers: [
-      { id: "starter", label: "Starter", precio: 49, incluidas: 50 },
-      { id: "pro", label: "Pro", precio: 79, incluidas: 100 },
-      { id: "business", label: "Business", precio: 149, incluidas: 200 },
+      { id: "starter", label: "Starter", precio: 49, incluidas: 50, usuarios: 1 },
+      { id: "pro", label: "Pro", precio: 79, incluidas: 100, usuarios: 3 },
+      { id: "business", label: "Business", precio: 149, incluidas: 200, usuarios: 5 },
     ],
   },
   email: {
@@ -54,9 +57,9 @@ export const CANALES_PLAN: Record<string, ChannelPlan> = {
     unidad: "emails",
     estado: "publicado",
     tiers: [
-      { id: "starter", label: "Starter", precio: 59, incluidas: 100 },
-      { id: "pro", label: "Pro", precio: 115, incluidas: 250 },
-      { id: "business", label: "Business", precio: 260, incluidas: 650 },
+      { id: "starter", label: "Starter", precio: 59, incluidas: 100, usuarios: 1 },
+      { id: "pro", label: "Pro", precio: 115, incluidas: 250, usuarios: 3 },
+      { id: "business", label: "Business", precio: 260, incluidas: 650, usuarios: 8 },
     ],
   },
   whatsapp: {
@@ -65,9 +68,9 @@ export const CANALES_PLAN: Record<string, ChannelPlan> = {
     unidad: "conversaciones",
     estado: "proximamente",
     tiers: [
-      { id: "starter", label: "Starter", precio: 59, incluidas: 50 },
-      { id: "pro", label: "Pro", precio: 99, incluidas: 100 },
-      { id: "business", label: "Business", precio: 189, incluidas: 200 },
+      { id: "starter", label: "Starter", precio: 59, incluidas: 50, usuarios: 1 },
+      { id: "pro", label: "Pro", precio: 99, incluidas: 100, usuarios: 3 },
+      { id: "business", label: "Business", precio: 189, incluidas: 200, usuarios: 5 },
     ],
   },
   telefono: {
@@ -76,9 +79,9 @@ export const CANALES_PLAN: Record<string, ChannelPlan> = {
     unidad: "minutos",
     estado: "proximamente",
     tiers: [
-      { id: "starter", label: "Starter", precio: 79, incluidas: 150 },
-      { id: "pro", label: "Pro", precio: 159, incluidas: 350 },
-      { id: "business", label: "Business", precio: 299, incluidas: 750 },
+      { id: "starter", label: "Starter", precio: 79, incluidas: 150, usuarios: 1 },
+      { id: "pro", label: "Pro", precio: 159, incluidas: 350, usuarios: 3 },
+      { id: "business", label: "Business", precio: 299, incluidas: 750, usuarios: 5 },
     ],
   },
   resenas: {
@@ -87,9 +90,9 @@ export const CANALES_PLAN: Record<string, ChannelPlan> = {
     unidad: "reseñas",
     estado: "proximamente",
     tiers: [
-      { id: "starter", label: "Starter", precio: 29, incluidas: 50 },
-      { id: "pro", label: "Pro", precio: 59, incluidas: 150 },
-      { id: "business", label: "Business", precio: 119, incluidas: 350 },
+      { id: "starter", label: "Starter", precio: 29, incluidas: 50, usuarios: 1 },
+      { id: "pro", label: "Pro", precio: 59, incluidas: 150, usuarios: 3 },
+      { id: "business", label: "Business", precio: 119, incluidas: 350, usuarios: 5 },
     ],
   },
   redes: {
@@ -98,9 +101,9 @@ export const CANALES_PLAN: Record<string, ChannelPlan> = {
     unidad: "conversaciones",
     estado: "nuevo",
     tiers: [
-      { id: "starter", label: "Starter", precio: 59, incluidas: 50 },
-      { id: "pro", label: "Pro", precio: 99, incluidas: 100 },
-      { id: "business", label: "Business", precio: 179, incluidas: 200 },
+      { id: "starter", label: "Starter", precio: 59, incluidas: 50, usuarios: 1 },
+      { id: "pro", label: "Pro", precio: 99, incluidas: 100, usuarios: 3 },
+      { id: "business", label: "Business", precio: 179, incluidas: 200, usuarios: 5 },
     ],
   },
 };
@@ -110,7 +113,34 @@ const PERSONALIZADO: Tier = {
   label: "Personalizado",
   precio: null,
   incluidas: null,
+  usuarios: null,
 };
+
+// ------------------------------------------------------------
+// USUARIO ADICIONAL — por encima de los usuarios incluidos en el plan.
+// Precio por usuario/mes escalado por volumen de usuarios (sin IVA).
+// Alternativa: bolt-on plano de usuarios ilimitados.
+// Fuente: Excel de precios · pestaña "Usuarios".
+// ------------------------------------------------------------
+export interface UsuarioAdicionalTramo {
+  hasta: number | null; // nº de usuario máximo del tramo (null = sin tope)
+  precio: number; // €/usuario/mes
+}
+
+export const USUARIO_ADICIONAL: {
+  tramos: UsuarioAdicionalTramo[];
+  boltOnIlimitado: number; // €/mes plano
+} = {
+  tramos: [
+    { hasta: 10, precio: 15 },
+    { hasta: 25, precio: 12 },
+    { hasta: null, precio: 9 },
+  ],
+  boltOnIlimitado: 390,
+};
+
+// Precio del primer usuario adicional (el de entrada) — para mostrar "desde".
+export const USUARIO_ADICIONAL_DESDE = USUARIO_ADICIONAL.tramos[0].precio;
 
 // ------------------------------------------------------------
 // Selección de tramo según volumen estimado del canal.

@@ -157,6 +157,9 @@ const es = {
     lineaVol: (label: string, x: string, unidad: string) =>
       `${label} · ~${x} ${unidad}/mes`,
     lineaNuevo: (label: string) => `${label} · canal nuevo, tramo de entrada`,
+    usuariosInc: (n: number) =>
+      `${n} usuario${n === 1 ? "" : "s"} del panel incluido${n === 1 ? "" : "s"}`,
+    usuarioAdicional: (x: string) => `Usuario adicional desde ${x}€/mes`,
     aMedida: "A medida",
     setup: (x: string) => `Setup ${x}€`,
     setupMedida: "Setup a medida",
@@ -375,6 +378,9 @@ const ca: Dict = {
     lineaVol: (label: string, x: string, unidad: string) =>
       `${label} · ~${x} ${unidad}/mes`,
     lineaNuevo: (label: string) => `${label} · canal nou, tram d'entrada`,
+    usuariosInc: (n: number) =>
+      `${n} usuari${n === 1 ? "" : "s"} del panell inclò${n === 1 ? "s" : "sos"}`,
+    usuarioAdicional: (x: string) => `Usuari addicional des de ${x}€/mes`,
     aMedida: "A mida",
     setup: (x: string) => `Setup ${x}€`,
     setupMedida: "Setup a mida",

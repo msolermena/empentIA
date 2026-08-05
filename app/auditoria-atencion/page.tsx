@@ -31,7 +31,11 @@ import {
   type AuditoriaDetalle,
   type LandingLeadData,
 } from "@/lib/api";
-import { buildProposal, type Propuesta } from "@/lib/pricing";
+import {
+  buildProposal,
+  type Propuesta,
+  USUARIO_ADICIONAL_DESDE,
+} from "@/lib/pricing";
 import { STR, getLang, type Dict, type Lang } from "./i18n";
 
 // ============================================================
@@ -1649,6 +1653,11 @@ function PropuestaCard({ propuesta, r }: { propuesta: Propuesta; r: Report }) {
                           ? p.lineaNuevo(canal)
                           : p.lineaVol(canal, eur(l.volumenEstimado), unidad)}
                     </p>
+                    {!l.esPersonalizado && l.tier.usuarios != null && (
+                      <p className="mt-0.5 text-xs t-mute">
+                        {p.usuariosInc(l.tier.usuarios)}
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div className="flex-shrink-0 text-right">
@@ -1700,6 +1709,9 @@ function PropuestaCard({ propuesta, r }: { propuesta: Propuesta; r: Report }) {
             )}
           </p>
           <p className="mt-0.5 text-xs t-mute">{p.sinPermanencia}</p>
+          <p className="mt-0.5 text-xs t-mute">
+            {p.usuarioAdicional(eur(USUARIO_ADICIONAL_DESDE))}
+          </p>
         </div>
       </div>
 
