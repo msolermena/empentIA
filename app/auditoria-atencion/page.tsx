@@ -186,6 +186,15 @@ function normalizeUrl(raw: string): string {
   return `https://${v}`;
 }
 
+// Evita el submit NATIVO del formulario antes de que React hidrate: hasta que
+// el componente monta en cliente, el botón de envío va deshabilitado, así que
+// ni el clic ni Enter recargan la página perdiendo lo escrito.
+function useMounted(): boolean {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  return mounted;
+}
+
 function eur(n: number): string {
   return Math.round(n).toLocaleString("es-ES");
 }
@@ -475,6 +484,7 @@ function IntroStep({
 }) {
   const t = useT();
   const [error, setError] = useState<string | null>(null);
+  const mounted = useMounted();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -527,7 +537,11 @@ function IntroStep({
                   className="a-input with-icon"
                 />
               </div>
-              <button type="submit" className="a-btn a-btn-primary a-btn-lg">
+              <button
+                type="submit"
+                className="a-btn a-btn-primary a-btn-lg"
+                disabled={!mounted}
+              >
                 {t.intro.start}
                 <ArrowRight className="h-5 w-5" />
               </button>
@@ -1023,6 +1037,7 @@ function ContactoStep({
   const [comercial, setComercial] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const mounted = useMounted();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -1147,7 +1162,7 @@ function ContactoStep({
             <button
               type="submit"
               className="a-btn a-btn-primary a-btn-lg w-full"
-              disabled={isSubmitting}
+              disabled={isSubmitting || !mounted}
             >
               {isSubmitting ? (
                 <>
