@@ -159,7 +159,9 @@ const es = {
     lineaNuevo: (label: string) => `${label} · canal nuevo, tramo de entrada`,
     usuariosInc: (n: number) =>
       `${n} usuario${n === 1 ? "" : "s"} del panel incluido${n === 1 ? "" : "s"}`,
-    usuarioAdicional: (x: string) => `Usuario adicional desde ${x}€/mes`,
+    usuariosAvisoTitle: "¿Necesitas más usuarios?",
+    usuariosAviso: (desde: string, boltOn: string) =>
+      `Cada plan incluye un nº de usuarios del panel (indicado arriba en cada servicio). Si tu equipo necesita más, los usuarios adicionales se añaden desde ${desde} €/usuario/mes, o usuarios ilimitados por ${boltOn} €/mes.`,
     aMedida: "A medida",
     setup: (x: string) => `Setup ${x}€`,
     setupMedida: "Setup a medida",
@@ -380,7 +382,9 @@ const ca: Dict = {
     lineaNuevo: (label: string) => `${label} · canal nou, tram d'entrada`,
     usuariosInc: (n: number) =>
       `${n} usuari${n === 1 ? "" : "s"} del panell inclò${n === 1 ? "s" : "sos"}`,
-    usuarioAdicional: (x: string) => `Usuari addicional des de ${x}€/mes`,
+    usuariosAvisoTitle: "Necessites més usuaris?",
+    usuariosAviso: (desde: string, boltOn: string) =>
+      `Cada pla inclou un nombre d'usuaris del panell (indicat a dalt a cada servei). Si el teu equip necessita més, els usuaris addicionals s'afegeixen des de ${desde} €/usuari/mes, o usuaris il·limitats per ${boltOn} €/mes.`,
     aMedida: "A mida",
     setup: (x: string) => `Setup ${x}€`,
     setupMedida: "Setup a mida",

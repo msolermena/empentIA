@@ -34,6 +34,7 @@ import {
 import {
   buildProposal,
   type Propuesta,
+  USUARIO_ADICIONAL,
   USUARIO_ADICIONAL_DESDE,
 } from "@/lib/pricing";
 import { STR, getLang, type Dict, type Lang } from "./i18n";
@@ -1654,7 +1655,8 @@ function PropuestaCard({ propuesta, r }: { propuesta: Propuesta; r: Report }) {
                           : p.lineaVol(canal, eur(l.volumenEstimado), unidad)}
                     </p>
                     {!l.esPersonalizado && l.tier.usuarios != null && (
-                      <p className="mt-0.5 text-xs t-mute">
+                      <p className="mt-1 flex items-center gap-1.5 text-xs font-medium t-green">
+                        <Users className="h-3.5 w-3.5 flex-shrink-0" />
                         {p.usuariosInc(l.tier.usuarios)}
                       </p>
                     )}
@@ -1709,8 +1711,24 @@ function PropuestaCard({ propuesta, r }: { propuesta: Propuesta; r: Report }) {
             )}
           </p>
           <p className="mt-0.5 text-xs t-mute">{p.sinPermanencia}</p>
-          <p className="mt-0.5 text-xs t-mute">
-            {p.usuarioAdicional(eur(USUARIO_ADICIONAL_DESDE))}
+        </div>
+      </div>
+
+      {/* Aviso: usuarios adicionales */}
+      <div className="mt-4 flex items-start gap-3 rounded-xl border bd bg-soft p-4">
+        <div
+          className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg"
+          style={{ background: "rgba(0,192,136,0.12)" }}
+        >
+          <Users className="h-4 w-4 t-green" />
+        </div>
+        <div>
+          <p className="text-sm font-semibold t-ink">{p.usuariosAvisoTitle}</p>
+          <p className="mt-0.5 text-sm t-soft">
+            {p.usuariosAviso(
+              eur(USUARIO_ADICIONAL_DESDE),
+              eur(USUARIO_ADICIONAL.boltOnIlimitado)
+            )}
           </p>
         </div>
       </div>
