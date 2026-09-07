@@ -70,7 +70,12 @@ function openCalModal(formId: string) {
   if (ns) {
     ns("modal", {
       calLink: "empentia/descobriment-empentia",
-      config: { metadata: { source: "auditoria", form_id: formId } },
+      // El embed serialitza `config` com a query params: la metadata s'ha
+      // d'aplanar (un objecte imbricat arriba com a "[object Object]").
+      config: {
+        "metadata[source]": "auditoria",
+        "metadata[form_id]": formId,
+      },
     });
   } else {
     window.open(CAL_LINK, "_blank", "noopener");
@@ -1256,10 +1261,12 @@ function InformeStep({
     createLandingLead(leadData).catch(() => {});
     sendAuditoriaEmail(leadData).catch(() => {});
 
-    // Mostrem confirmació encara que el lead trigui / falli
+    // Mostrem confirmació encara que el lead trigui / falli. El botó promet
+    // "acceptar i reservar": obrim el calendari tot seguit, sense clic extra.
     setTimeout(() => {
       setAccepting(false);
       setAccepted(true);
+      openCalModal("auditoria_preacord");
     }, 600);
   };
 
