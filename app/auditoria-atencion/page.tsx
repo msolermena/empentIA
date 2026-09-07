@@ -59,6 +59,7 @@ type CalFn = ((...args: unknown[]) => void) & {
 declare global {
   interface Window {
     Cal?: CalFn;
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
@@ -80,6 +81,35 @@ function openCalModal(formId: string) {
   } else {
     window.open(CAL_LINK, "_blank", "noopener");
   }
+}
+
+// El portal (app.empentia.com) és la font de veritat del lead: si el POST falla,
+// la informació de l'auditoria es perd. Abans s'empassava l'error en silenci —
+// ara reintentem un cop, avisem l'usuari i deixem rastre a GA per poder-ho veure.
+function trackLeadError(origen: string) {
+  if (typeof window === "undefined") return;
+  window.gtag?.("event", "lead_error", {
+    origen,
+    form_id: "auditoria_atencion",
+  });
+}
+
+async function enviarLead(data: LandingLeadData): Promise<boolean> {
+  // L'email és una notificació secundària: si falla no bloqueja res.
+  sendAuditoriaEmail(data).catch(() => {});
+
+  for (let intent = 0; intent < 2; intent++) {
+    try {
+      await createLandingLead(data);
+      return true;
+    } catch {
+      if (intent === 0) {
+        await new Promise((r) => setTimeout(r, 1500));
+      }
+    }
+  }
+  trackLeadError(data.origen);
+  return false;
 }
 
 const HORAS_MES = 4.33; // setmanes per mes
@@ -407,6 +437,8 @@ export default function AuditoriaAtencionPage() {
   const [url, setUrl] = useState("");
   const [answers, setAnswers] = useState<Answers>(EMPTY_ANSWERS);
   const [contact, setContact] = useState<Contact>(EMPTY_CONTACT);
+  // null = encara en vol; false = el portal no ha rebut l'auditoria.
+  const [leadOk, setLeadOk] = useState<boolean | null>(null);
 
   // Deep-link: si arriba ?url=... saltem directament a l'anàlisi
   useEffect(() => {
@@ -455,6 +487,7 @@ export default function AuditoriaAtencionPage() {
           answers={answers}
           lang={lang}
           onBack={() => setStep("cuestionario")}
+          onLeadResult={setLeadOk}
           onDone={(c) => {
             setContact(c);
             setStep("informe");
@@ -468,6 +501,8 @@ export default function AuditoriaAtencionPage() {
           contact={contact}
           url={url}
           lang={lang}
+          leadOk={leadOk}
+          onRetryLead={setLeadOk}
         />
       )}
     </LangContext.Provider>
@@ -1026,12 +1061,14 @@ function ContactoStep({
   lang,
   onBack,
   onDone,
+  onLeadResult,
 }: {
   url: string;
   answers: Answers;
   lang: Lang;
   onBack: () => void;
   onDone: (contact: Contact) => void;
+  onLeadResult: (ok: boolean) => void;
 }) {
   const t = useT();
   const c = t.contacto;
@@ -1066,9 +1103,9 @@ function ContactoStep({
       consentiment_comercial: comercial,
       detalle_auditoria: buildAuditoriaDetalle(answers, lang),
     };
-    // Fire-and-forget: no bloqueja veure l'informe.
-    createLandingLead(leadData).catch(() => {});
-    sendAuditoriaEmail(leadData).catch(() => {});
+    // No bloqueja veure l'informe, però el resultat puja fins a l'informe
+    // perquè l'usuari sàpiga si les dades han arribat de debò.
+    enviarLead(leadData).then(onLeadResult);
 
     const data: Contact = {
       nom: nom.trim(),
@@ -1209,11 +1246,15 @@ function InformeStep({
   contact,
   url,
   lang,
+  leadOk,
+  onRetryLead,
 }: {
   answers: Answers;
   contact: Contact;
   url: string;
   lang: Lang;
+  leadOk: boolean | null;
+  onRetryLead: (ok: boolean) => void;
 }) {
   const t = useT();
   const r = computeReport(answers);
@@ -1242,6 +1283,30 @@ function InformeStep({
   const [accepted, setAccepted] = useState(false);
   const [accepting, setAccepting] = useState(false);
 
+  const [preacceptOk, setPreacceptOk] = useState<boolean | null>(null);
+  const [reintentando, setReintentando] = useState(false);
+
+  // Cos del lead de contacte, per poder reintentar-lo des de l'informe.
+  const contactLeadData = (): LandingLeadData => ({
+    email: contact.email,
+    origen: "landing-atencio-auditoria-contacte",
+    nom_contacte: contact.nom || undefined,
+    nom_empresa: contact.empresa || undefined,
+    url_web: url || undefined,
+    consentiment_rgpd: contact.consent,
+    consentiment_comercial: contact.comercial,
+    detalle_auditoria: buildAuditoriaDetalle(answers, lang),
+  });
+
+  const handleRetryLead = async () => {
+    if (reintentando) return;
+    setReintentando(true);
+    const ok = await enviarLead(contactLeadData());
+    onRetryLead(ok);
+    if (ok) setPreacceptOk(null);
+    setReintentando(false);
+  };
+
   const handlePreaccept = () => {
     if (accepting || accepted) return;
     setAccepting(true);
@@ -1258,8 +1323,7 @@ function InformeStep({
       pla: propuesta.tramoDominante ?? undefined,
       detalle_auditoria: buildAuditoriaDetalle(answers, lang),
     };
-    createLandingLead(leadData).catch(() => {});
-    sendAuditoriaEmail(leadData).catch(() => {});
+    enviarLead(leadData).then(setPreacceptOk);
 
     // Mostrem confirmació encara que el lead trigui / falli. El botó promet
     // "acceptar i reservar": obrim el calendari tot seguit, sense clic extra.
@@ -1411,6 +1475,42 @@ function InformeStep({
           </p>
         )}
       </div>
+
+      {/* Avís: el portal no ha rebut l'auditoria */}
+      {(leadOk === false || preacceptOk === false) && (
+        <div className="no-print mb-8 flex items-start gap-3 rounded-xl border-2 border-[#e0a800] bg-[rgba(224,168,0,0.08)] p-5">
+          <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#a37600]" />
+          <div className="flex-1">
+            <p className="font-semibold t-ink">{t.cta.leadErrorTitle}</p>
+            <p className="mt-1 text-sm t-soft">{t.cta.leadErrorText}</p>
+            <div className="mt-3 flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={handleRetryLead}
+                disabled={reintentando}
+                className="a-btn a-btn-primary"
+              >
+                {reintentando ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    {t.cta.leadErrorReintentando}
+                  </>
+                ) : (
+                  t.cta.leadErrorReintentar
+                )}
+              </button>
+              <a
+                href={`mailto:hola@empentia.com?subject=${encodeURIComponent(
+                  t.cta.leadErrorMailSubject
+                )}`}
+                className="text-sm font-medium t-green underline"
+              >
+                hola@empentia.com
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* CTA final */}
       {accepted ? (

@@ -241,6 +241,12 @@ const es = {
     guardando: "Guardando...",
     hablar: "Hablarlo primero",
     descargarPdf: "Descargar propuesta en PDF",
+    leadErrorTitle: "No hemos podido guardar tus datos",
+    leadErrorText:
+      "Tu informe es correcto y puedes descargarlo, pero no ha llegado a nuestro sistema. Vuelve a intentarlo o escríbenos y lo recuperamos al momento.",
+    leadErrorReintentar: "Reintentar el envío",
+    leadErrorReintentando: "Enviando...",
+    leadErrorMailSubject: "No se ha guardado mi auditoría de atención al cliente",
   },
 };
 
@@ -475,6 +481,12 @@ const ca: Dict = {
     guardando: "Desant...",
     hablar: "Parlar-ne abans",
     descargarPdf: "Descarregar proposta en PDF",
+    leadErrorTitle: "No hem pogut desar les teves dades",
+    leadErrorText:
+      "El teu informe és correcte i el pots descarregar, però no ha arribat al nostre sistema. Torna-ho a provar o escriu-nos i el recuperem a l'instant.",
+    leadErrorReintentar: "Reintentar l'enviament",
+    leadErrorReintentando: "Enviant...",
+    leadErrorMailSubject: "No s'ha desat la meva auditoria d'atenció al client",
   },
 };
 
