@@ -6,8 +6,9 @@
 //  - Cada canal es un servicio con su propia escalera por volumen.
 //  - Solo se ofrecen los 3 primeros tramos (Starter / Pro / Business).
 //    Por encima del volumen de Business → "Plan personalizado" (a medida).
-//  - Setup (pago único, por canal) escalado por tramo: 390 / 495 / 600 €.
-//    Los 800 € se reservan a planes personalizados (no se muestran aquí).
+//  - Setup (pago único): tarifa plana orientativa de 200 € por canal. El
+//    alcance real depende de las integraciones de cada cliente (software de
+//    gestión, catálogo, flujos), así que la cifra se cierra en el kickoff.
 //  - Cada tramo incluye un nº de usuarios del panel. Por encima de lo
 //    incluido se factura por USUARIO ADICIONAL (ver USUARIO_ADICIONAL).
 // ============================================================
@@ -30,13 +31,10 @@ export interface ChannelPlan {
   tiers: Tier[]; // [starter, pro, business]
 }
 
-// Setup (pago único) por tramo. 800 € reservado a personalizado.
-export const SETUP_POR_TRAMO: Record<TierId, number> = {
-  starter: 390,
-  pro: 495,
-  business: 600,
-  personalizado: 800,
-};
+// Setup (pago único) por canal. Cifra plana y orientativa: no escala por
+// tramo porque el trabajo de puesta en marcha depende del caso, no del
+// volumen. Los planes personalizados van siempre a medida (setup 0 aquí).
+export const SETUP_POR_CANAL = 200;
 
 // Tramos por canal (solo los 3 publicables). Fuente: Excel de precios.
 export const CANALES_PLAN: Record<string, ChannelPlan> = {
@@ -258,7 +256,7 @@ export function buildProposal(opts: {
       esPersonalizado,
       esNuevo,
       precioMes: tier.precio ?? 0,
-      setup: esPersonalizado ? 0 : SETUP_POR_TRAMO[tier.id],
+      setup: esPersonalizado ? 0 : SETUP_POR_CANAL,
       volumenEstimado: vol,
     };
   });

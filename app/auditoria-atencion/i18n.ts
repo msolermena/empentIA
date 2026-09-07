@@ -183,6 +183,8 @@ const es = {
     masMedida: " + a medida",
     canalesConfig: (n: number) =>
       `${n} canal${n === 1 ? "" : "es"} a configurar`,
+    setupNota:
+      "* Estimación orientativa. El setup final puede subir o bajar según tu caso: integración con tu software de gestión o catálogo de productos, número de flujos, casuísticas propias… Lo cerramos contigo en el kickoff, antes de que pagues nada.",
     cuota: "Cuota mensual",
     sinPermanencia: "Sin permanencia · cancelas cuando quieras",
     roi: (ahorro: string, cuota: string, neto: string) =>
@@ -424,6 +426,8 @@ const ca: Dict = {
     masMedida: " + a mida",
     canalesConfig: (n: number) =>
       `${n} canal${n === 1 ? "" : "s"} a configurar`,
+    setupNota:
+      "* Estimació orientativa. El setup final pot pujar o baixar segons el teu cas: integració amb el teu programari de gestió o catàleg de productes, nombre de fluxos, casuístiques pròpies… El tanquem amb tu al kickoff, abans de pagar res.",
     cuota: "Quota mensual",
     sinPermanencia: "Sense permanència · canceles quan vulguis",
     roi: (ahorro: string, cuota: string, neto: string) =>

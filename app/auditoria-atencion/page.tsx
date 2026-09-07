@@ -1869,7 +1869,7 @@ function PropuestaCard({ propuesta, r }: { propuesta: Propuesta; r: Report }) {
             {p.setupTitle}
           </div>
           <p className="serif mt-1 text-3xl t-ink">
-            {eur(propuesta.setupTotal)}€
+            {eur(propuesta.setupTotal)}€<span className="t-mute">*</span>
             {propuesta.hayPersonalizado && (
               <span className="text-sm t-mute">{p.masMedida}</span>
             )}
@@ -1893,6 +1893,8 @@ function PropuestaCard({ propuesta, r }: { propuesta: Propuesta; r: Report }) {
           <p className="mt-0.5 text-xs t-mute">{p.sinPermanencia}</p>
         </div>
       </div>
+
+      <p className="mt-3 text-xs leading-relaxed t-mute">{p.setupNota}</p>
 
       {/* Aviso / confirmación de usuarios (solo si no hay coste extra que ya se
           muestra en su propia línea) */}
