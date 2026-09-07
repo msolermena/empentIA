@@ -68,7 +68,7 @@ export const CANALES_PLAN: Record<string, ChannelPlan> = {
     id: "whatsapp",
     label: "WhatsApp",
     unidad: "conversaciones",
-    estado: "proximamente",
+    estado: "publicado",
     tiers: [
       { id: "starter", label: "Starter", precio: 59, incluidas: 50, usuarios: 1 },
       { id: "pro", label: "Pro", precio: 99, incluidas: 100, usuarios: 3 },
