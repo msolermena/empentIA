@@ -25,7 +25,7 @@ export default function PrivacyPage() {
       {/* Content */}
       <div className="container mx-auto max-w-4xl px-8 py-16">
         <h1 className="mb-2 text-4xl font-extrabold">Privacy Policy</h1>
-        <p className="mb-8 text-sm text-slate-400">Last updated: 25 July 2026</p>
+        <p className="mb-8 text-sm text-slate-400">Last updated: 10 September 2026</p>
 
         <div className="prose prose-invert max-w-none space-y-8">
           <Card className="glass-card border-emerald-500/10">
@@ -143,6 +143,40 @@ export default function PrivacyPage() {
                   </li>
                 </ul>
               </div>
+
+              <div>
+                <h4 className="mb-2 font-semibold text-slate-200">2.6. Social media messaging channels (service operated on behalf of clients)</h4>
+                <p>
+                  When empentIA provides customer service through the social media channels (Instagram and Facebook)
+                  of one of its clients &mdash; responding to direct messages and to comments on the client&apos;s
+                  posts &mdash; the contracting client is the{" "}
+                  <strong className="text-slate-200">data controller</strong> of the end users who interact with those
+                  channels, and empentIA acts as the <strong className="text-slate-200">data processor</strong> on its
+                  behalf, under a data processing agreement signed between both parties (Art. 28 GDPR).
+                </p>
+                <ul className="list-disc space-y-2 pl-6">
+                  <li>
+                    <strong className="text-slate-200">Data processed:</strong> the user&apos;s Instagram/Facebook
+                    identifier and public username or profile name, the content of direct messages, the content of
+                    public comments on the client&apos;s posts, and associated metadata (timestamps, message status).
+                  </li>
+                  <li>
+                    <strong className="text-slate-200">Purpose:</strong> handling of enquiries and customer service
+                    through the client&apos;s Instagram and Facebook channels, including responses generated or
+                    assisted by artificial intelligence systems.
+                  </li>
+                  <li>
+                    <strong className="text-slate-200">Legal basis:</strong> as determined by the controlling client,
+                    typically the performance of a contract or the service relationship with the end user
+                    (Art. 6.1.b GDPR) or legitimate interest (Art. 6.1.f GDPR).
+                  </li>
+                  <li>
+                    <strong className="text-slate-200">Automated systems:</strong> responses may be generated or
+                    assisted by an AI assistant. The user is informed they are interacting with an automated assistant
+                    and may request human attention at any time.
+                  </li>
+                </ul>
+              </div>
             </CardContent>
           </Card>
 
@@ -163,9 +197,9 @@ export default function PrivacyPage() {
                 <li><strong className="text-slate-200">Brevo (Sendinblue)</strong> — Email delivery provider.</li>
                 <li>
                   <strong className="text-slate-200">Meta Platforms Ireland Ltd.</strong> — Provider of the WhatsApp
-                  Business Platform messaging infrastructure. In the processing of WhatsApp channel data, Meta acts
-                  as an independent controller with respect to its own purposes as determined by its terms of service.
-                  Data is processed through Meta&apos;s Cloud API.
+                  Business Platform and of the Instagram and Facebook messaging platforms. In the processing of
+                  channel data, Meta acts as an independent controller with respect to its own purposes as determined
+                  by its terms of service. Data is processed through Meta&apos;s official APIs.
                 </li>
               </ul>
               <p className="text-sm">
@@ -194,9 +228,9 @@ export default function PrivacyPage() {
                   <strong className="text-slate-200">Commercial communications:</strong> until the data subject withdraws consent.
                 </li>
                 <li>
-                  <strong className="text-slate-200">WhatsApp channel data:</strong> retained according to the
-                  instructions of the controlling client, and in any case no longer than necessary for the purpose of
-                  the service or as established by the processing agreement.
+                  <strong className="text-slate-200">Messaging channel data (WhatsApp, Instagram, Facebook):</strong>{" "}
+                  retained according to the instructions of the controlling client, and in any case no longer than
+                  necessary for the purpose of the service or as established by the processing agreement.
                 </li>
               </ul>
             </CardContent>
@@ -246,7 +280,7 @@ export default function PrivacyPage() {
               </p>
               <ul className="list-disc space-y-2 pl-6">
                 <li>Encryption of communications (HTTPS/TLS)</li>
-                <li>Secure authentication via magic link (no password storage)</li>
+                <li>Secure authentication (magic link and/or password-based login)</li>
                 <li>Per-client data isolation (multi-tenant architecture)</li>
                 <li>Access restricted to authorized personnel only</li>
                 <li>Periodic backups</li>

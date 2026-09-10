@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const metadata = {
   title: "Terms of Service - empentIA",
-  description: "empentIA terms of service for the WhatsApp Business messaging channel",
+  description: "empentIA terms of service for the WhatsApp Business and social media messaging channels",
   // Página huérfana para la App Review de Meta: carga con 200 pero no se indexa.
   robots: { index: false, follow: false },
   alternates: {
@@ -24,7 +24,7 @@ export default function TermsPage() {
       <div className="container mx-auto max-w-4xl px-8 py-16">
         <h1 className="mb-2 text-4xl font-extrabold">Terms of Service</h1>
         <p className="mb-1 text-lg text-slate-300">empentIA Messaging Channel</p>
-        <p className="mb-8 text-sm text-slate-400">Last updated: 25 July 2026</p>
+        <p className="mb-8 text-sm text-slate-400">Last updated: 10 September 2026</p>
 
         <div className="prose prose-invert max-w-none space-y-8">
           <Card className="glass-card border-emerald-500/10">
@@ -64,7 +64,8 @@ export default function TermsPage() {
                   <strong className="text-slate-200">End user:</strong> the person who writes to the contracting client&apos;s messaging channel.
                 </li>
                 <li>
-                  <strong className="text-slate-200">Channel:</strong> the WhatsApp Business number and account (or equivalent channel) through which the service is provided.
+                  <strong className="text-slate-200">Channel:</strong> the WhatsApp Business number and account, or
+                  the client&apos;s Instagram/Facebook accounts, or equivalent channel through which the service is provided.
                 </li>
                 <li>
                   <strong className="text-slate-200">AI assistant:</strong> the automated system that may generate responses within the channel.
@@ -80,11 +81,12 @@ export default function TermsPage() {
             <CardContent className="space-y-4 text-slate-300">
               <p>
                 empentIA provides a platform that allows the contracting client to manage customer service through
-                WhatsApp, including the reception of messages, the generation of automated responses via artificial
-                intelligence, escalation to human agents, and incident tracking.
+                WhatsApp and through its Instagram and Facebook channels (direct messages and comments on the
+                client&apos;s posts), including the reception of messages, the generation of automated responses via
+                artificial intelligence, escalation to human agents, and incident tracking.
               </p>
               <p>
-                The service is provided over Meta&apos;s official Cloud API. empentIA acts as an authorized technology
+                The service is provided over Meta&apos;s official APIs. empentIA acts as an authorized technology
                 provider (Tech Provider).
               </p>
             </CardContent>
@@ -99,6 +101,11 @@ export default function TermsPage() {
                 The WhatsApp Business Account (WABA) and the phone number associated with the channel are the{" "}
                 <strong className="text-slate-200">property of the contracting client</strong>, not of empentIA.
                 empentIA accesses them solely as a technology provider authorized by the client.
+              </p>
+              <p>
+                Likewise, the client&apos;s Instagram and Facebook accounts and their content remain the property of
+                the contracting client; empentIA accesses them solely as an authorized technology provider and can be
+                disconnected without loss of these assets.
               </p>
               <p>
                 Upon termination of the contractual relationship, the client retains ownership of its number, its WABA
@@ -136,6 +143,10 @@ export default function TermsPage() {
               <p>
                 empentIA respects WhatsApp&apos;s 24-hour service window: outside this window, messages are only sent using
                 templates previously approved by Meta, in accordance with its policies.
+              </p>
+              <p>
+                For social media channels (Instagram, Facebook), the messaging windows and re-engagement rules defined
+                by Meta for each platform apply. Users may stop the interaction at any time and request human attention.
               </p>
             </CardContent>
           </Card>

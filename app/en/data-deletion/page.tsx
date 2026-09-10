@@ -25,12 +25,13 @@ export default function DataDeletionPage() {
       {/* Content */}
       <div className="container mx-auto max-w-4xl px-8 py-16">
         <h1 className="mb-2 text-4xl font-extrabold">Data Deletion Instructions</h1>
-        <p className="mb-8 text-sm text-slate-400">Last updated: 6 August 2026</p>
+        <p className="mb-8 text-sm text-slate-400">Last updated: 10 September 2026</p>
 
         <div className="prose prose-invert max-w-none space-y-8">
           <p className="text-slate-300">
             empentIA Tech SL provides customer service messaging solutions on behalf of its
-            business clients through the WhatsApp Business Platform and other channels.
+            business clients through the WhatsApp Business Platform, the Instagram and Facebook
+            messaging channels, and other channels.
           </p>
 
           <Card className="glass-card border-emerald-500/10">
@@ -70,8 +71,8 @@ export default function DataDeletionPage() {
                   >
                     hola@empentia.com
                   </a>{" "}
-                  with the subject &quot;Data deletion request&quot;, indicating the phone number or
-                  identifier used and the business you contacted.
+                  with the subject &quot;Data deletion request&quot;, indicating the phone number, social
+                  media username, or identifier used and the business you contacted.
                 </li>
               </ol>
               <div className="rounded-lg bg-emerald-500/10 p-4">
