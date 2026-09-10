@@ -30,7 +30,7 @@ export default function PrivacyPage() {
       {/* Content */}
       <div className="container mx-auto max-w-4xl px-8 py-16">
         <h1 className="mb-2 text-4xl font-extrabold">Política de Privacitat</h1>
-        <p className="mb-8 text-sm text-slate-400">Darrera actualització: 25 de juliol de 2026</p>
+        <p className="mb-8 text-sm text-slate-400">Darrera actualització: 10 de setembre de 2026</p>
 
         <div className="prose prose-invert max-w-none space-y-8">
           <Card className="glass-card border-emerald-500/10">
@@ -156,6 +156,42 @@ export default function PrivacyPage() {
                   </li>
                 </ul>
               </div>
+
+              <div>
+                <h4 className="mb-2 font-semibold text-slate-200">2.6. Canals de missatgeria de xarxes socials (servei operat per compte de clients)</h4>
+                <p>
+                  Quan empentIA presta el servei d&apos;atenció al client a través dels canals de xarxes socials
+                  (Instagram i Facebook) d&apos;un client seu &mdash; responent a missatges directes i a comentaris a
+                  les publicacions del client &mdash;, el client contractant és el{" "}
+                  <strong className="text-slate-200">responsable del tractament</strong> de les dades dels usuaris
+                  finals que interactuen amb aquells canals, i empentIA actua com a{" "}
+                  <strong className="text-slate-200">encarregat del tractament</strong> en nom seu, en virtut d&apos;un
+                  contracte d&apos;encàrrec de tractament signat entre ambdues parts (art. 28 RGPD).
+                </p>
+                <ul className="list-disc space-y-2 pl-6">
+                  <li>
+                    <strong className="text-slate-200">Dades tractades:</strong> l&apos;identificador d&apos;Instagram/Facebook
+                    de l&apos;usuari i el seu nom d&apos;usuari o de perfil públic, el contingut dels missatges directes, el
+                    contingut dels comentaris públics a les publicacions del client i les metadades associades
+                    (marques temporals, estat del missatge).
+                  </li>
+                  <li>
+                    <strong className="text-slate-200">Finalitat:</strong> gestió de consultes i atenció al client a
+                    través dels canals d&apos;Instagram i Facebook del client, incloent-hi respostes generades o
+                    assistides mitjançant sistemes d&apos;intel&middot;ligència artificial.
+                  </li>
+                  <li>
+                    <strong className="text-slate-200">Base legal:</strong> la que determini el client responsable,
+                    habitualment l&apos;execució d&apos;un contracte o la relació de servei amb l&apos;usuari final
+                    (art. 6.1.b RGPD) o l&apos;interès legítim (art. 6.1.f RGPD).
+                  </li>
+                  <li>
+                    <strong className="text-slate-200">Sistemes automatitzats:</strong> les respostes poden ser
+                    generades o assistides per un assistent d&apos;IA. S&apos;informa l&apos;usuari que està interactuant amb un
+                    assistent automatitzat i pot sol&middot;licitar en qualsevol moment l&apos;atenció d&apos;una persona.
+                  </li>
+                </ul>
+              </div>
             </CardContent>
           </Card>
 
@@ -186,9 +222,10 @@ export default function PrivacyPage() {
                 </li>
                 <li>
                   <strong className="text-slate-200">Meta Platforms Ireland Ltd.</strong> — Proveïdor de la
-                  infraestructura de missatgeria de WhatsApp Business Platform. En el tractament de les dades del
-                  canal de WhatsApp, Meta actua com a responsable independent respecte de les finalitats pròpies
-                  determinades per les seves condicions de servei. Les dades es processen a través de la Cloud API de Meta.
+                  WhatsApp Business Platform i de les plataformes de missatgeria d&apos;Instagram i Facebook. En el
+                  tractament de les dades del canal, Meta actua com a responsable independent respecte de les
+                  finalitats pròpies determinades per les seves condicions de servei. Les dades es processen a través
+                  de les API oficials de Meta.
                 </li>
               </ul>
               <p className="text-sm">
@@ -220,7 +257,8 @@ export default function PrivacyPage() {
                   el seu consentiment.
                 </li>
                 <li>
-                  <strong className="text-slate-200">Dades del canal WhatsApp:</strong> es conservaran segons les
+                  <strong className="text-slate-200">Dades dels canals de missatgeria (WhatsApp, Instagram, Facebook):</strong>{" "}
+                  es conservaran segons les
                   instruccions del client responsable del tractament, i en tot cas no més enllà del que sigui
                   necessari per a la finalitat del servei o del que estableixi el contracte d&apos;encàrrec.
                 </li>
@@ -286,7 +324,7 @@ export default function PrivacyPage() {
               </p>
               <ul className="list-disc space-y-2 pl-6">
                 <li>Xifratge de les comunicacions (HTTPS/TLS)</li>
-                <li>Autenticació segura mitjançant magic link (sense emmagatzematge de contrasenyes)</li>
+                <li>Autenticació segura (magic link i/o accés amb contrasenya)</li>
                 <li>Aïllament de dades per client (arquitectura multi-tenant)</li>
                 <li>Accés restringit a les dades només al personal autoritzat</li>
                 <li>Còpies de seguretat periòdiques</li>

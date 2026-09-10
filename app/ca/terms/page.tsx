@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export const metadata = {
   title: "Termes de Servei - empentIA",
-  description: "Termes de servei d'empentIA per al canal de missatgeria WhatsApp Business",
+  description: "Termes de servei d'empentIA per als canals de missatgeria de WhatsApp Business i xarxes socials",
   alternates: {
     canonical: "https://empentia.com/ca/terms/",
     languages: {
@@ -29,7 +29,7 @@ export default function TermsPage() {
       <div className="container mx-auto max-w-4xl px-8 py-16">
         <h1 className="mb-2 text-4xl font-extrabold">Termes de Servei</h1>
         <p className="mb-1 text-lg text-slate-300">Canal de missatgeria d&apos;empentIA</p>
-        <p className="mb-8 text-sm text-slate-400">Darrera actualització: 25 de juliol de 2026</p>
+        <p className="mb-8 text-sm text-slate-400">Darrera actualització: 10 de setembre de 2026</p>
 
         <div className="prose prose-invert max-w-none space-y-8">
           <Card className="glass-card border-emerald-500/10">
@@ -70,7 +70,8 @@ export default function TermsPage() {
                   <strong className="text-slate-200">Usuari final:</strong> la persona que escriu al canal de missatgeria del client contractant.
                 </li>
                 <li>
-                  <strong className="text-slate-200">Canal:</strong> el número i el compte de WhatsApp Business (o canal equivalent) a través del qual es presta el servei.
+                  <strong className="text-slate-200">Canal:</strong> el número i el compte de WhatsApp Business, o
+                  els comptes d&apos;Instagram/Facebook del client, o el canal equivalent a través del qual es presta el servei.
                 </li>
                 <li>
                   <strong className="text-slate-200">Assistent d&apos;IA:</strong> el sistema automatitzat que pot generar respostes dins del canal.
@@ -86,11 +87,13 @@ export default function TermsPage() {
             <CardContent className="space-y-4 text-slate-300">
               <p>
                 empentIA proporciona una plataforma que permet al client contractant gestionar l&apos;atenció al client a
-                través de WhatsApp, incloent-hi la recepció de missatges, la generació de respostes automatitzades
-                mitjançant intel·ligència artificial, l&apos;escalat a agents humans i el seguiment d&apos;incidències.
+                través de WhatsApp i dels seus canals d&apos;Instagram i Facebook (missatges directes i comentaris a les
+                publicacions del client), incloent-hi la recepció de missatges, la generació de respostes
+                automatitzades mitjançant intel·ligència artificial, l&apos;escalat a agents humans i el seguiment
+                d&apos;incidències.
               </p>
               <p>
-                El servei es presta sobre la Cloud API oficial de Meta. empentIA actua com a proveïdor tecnològic
+                El servei es presta sobre les API oficials de Meta. empentIA actua com a proveïdor tecnològic
                 autoritzat (Tech Provider).
               </p>
             </CardContent>
@@ -105,6 +108,11 @@ export default function TermsPage() {
                 El compte de WhatsApp Business (WABA) i el número de telèfon associat al canal són{" "}
                 <strong className="text-slate-200">propietat del client contractant</strong>, no d&apos;empentIA.
                 empentIA hi accedeix únicament com a proveïdor tecnològic autoritzat pel client.
+              </p>
+              <p>
+                Igualment, els comptes d&apos;Instagram i Facebook del client i el seu contingut són{" "}
+                <strong className="text-slate-200">propietat del client contractant</strong>; empentIA hi accedeix
+                únicament com a proveïdor tecnològic autoritzat i pot ser desconnectada sense pèrdua d&apos;aquests actius.
               </p>
               <p>
                 En finalitzar la relació contractual, el client conserva la titularitat del seu número, el seu WABA i
@@ -142,6 +150,11 @@ export default function TermsPage() {
               <p>
                 empentIA respecta la finestra de servei de 24 hores de WhatsApp: fora d&apos;aquesta finestra, els missatges
                 només s&apos;envien mitjançant plantilles prèviament aprovades per Meta, conforme a les seves polítiques.
+              </p>
+              <p>
+                En els canals de xarxes socials (Instagram, Facebook) s&apos;apliquen les finestres de missatgeria i les
+                regles de reinteracció definides per Meta per a cada plataforma. L&apos;usuari pot aturar la interacció en
+                qualsevol moment i sol&middot;licitar l&apos;atenció d&apos;una persona.
               </p>
             </CardContent>
           </Card>

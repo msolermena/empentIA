@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export const metadata = {
   title: "Términos de Servicio - empentIA",
-  description: "Términos de servicio de empentIA para el canal de mensajería WhatsApp Business",
+  description: "Términos de servicio de empentIA para los canales de mensajería de WhatsApp Business y redes sociales",
   alternates: {
     canonical: "https://empentia.com/terms/",
     languages: {
@@ -29,7 +29,7 @@ export default function TermsPage() {
       <div className="container mx-auto max-w-4xl px-8 py-16">
         <h1 className="mb-2 text-4xl font-extrabold">Términos de Servicio</h1>
         <p className="mb-1 text-lg text-slate-300">Canal de mensajería de empentIA</p>
-        <p className="mb-8 text-sm text-slate-400">Última actualización: 25 de julio de 2026</p>
+        <p className="mb-8 text-sm text-slate-400">Última actualización: 10 de septiembre de 2026</p>
 
         <div className="prose prose-invert max-w-none space-y-8">
           <Card className="glass-card border-emerald-500/10">
@@ -70,7 +70,8 @@ export default function TermsPage() {
                   <strong className="text-slate-200">Usuario final:</strong> la persona que escribe al canal de mensajería del cliente contratante.
                 </li>
                 <li>
-                  <strong className="text-slate-200">Canal:</strong> el número y la cuenta de WhatsApp Business (o canal equivalente) a través del cual se presta el servicio.
+                  <strong className="text-slate-200">Canal:</strong> el número y la cuenta de WhatsApp Business, o
+                  las cuentas de Instagram/Facebook del cliente, o el canal equivalente a través del cual se presta el servicio.
                 </li>
                 <li>
                   <strong className="text-slate-200">Asistente de IA:</strong> el sistema automatizado que puede generar respuestas dentro del canal.
@@ -86,11 +87,12 @@ export default function TermsPage() {
             <CardContent className="space-y-4 text-slate-300">
               <p>
                 empentIA proporciona una plataforma que permite al cliente contratante gestionar la atención al
-                cliente a través de WhatsApp, incluyendo la recepción de mensajes, la generación de respuestas
+                cliente a través de WhatsApp y de sus canales de Instagram y Facebook (mensajes directos y comentarios
+                en las publicaciones del cliente), incluyendo la recepción de mensajes, la generación de respuestas
                 automatizadas mediante inteligencia artificial, la escalada a agentes humanos y el seguimiento de incidencias.
               </p>
               <p>
-                El servicio se presta sobre la Cloud API oficial de Meta. empentIA actúa como proveedor tecnológico
+                El servicio se presta sobre las API oficiales de Meta. empentIA actúa como proveedor tecnológico
                 autorizado (Tech Provider).
               </p>
             </CardContent>
@@ -105,6 +107,11 @@ export default function TermsPage() {
                 La cuenta de WhatsApp Business (WABA) y el número de teléfono asociado al canal son{" "}
                 <strong className="text-slate-200">propiedad del cliente contratante</strong>, no de empentIA.
                 empentIA accede a ellos únicamente como proveedor tecnológico autorizado por el cliente.
+              </p>
+              <p>
+                Igualmente, las cuentas de Instagram y Facebook del cliente y su contenido son{" "}
+                <strong className="text-slate-200">propiedad del cliente contratante</strong>; empentIA accede a ellas
+                únicamente como proveedor tecnológico autorizado y puede ser desconectada sin pérdida de estos activos.
               </p>
               <p>
                 A la terminación de la relación contractual, el cliente conserva la titularidad de su número, su WABA
@@ -142,6 +149,11 @@ export default function TermsPage() {
               <p>
                 empentIA respeta la ventana de servicio de 24 horas de WhatsApp: fuera de esta ventana, los mensajes
                 solo se envían mediante plantillas previamente aprobadas por Meta, conforme a sus políticas.
+              </p>
+              <p>
+                En los canales de redes sociales (Instagram, Facebook) se aplican las ventanas de mensajería y las
+                reglas de reinteracción definidas por Meta para cada plataforma. El usuario puede detener la
+                interacción en cualquier momento y solicitar la atención de una persona.
               </p>
             </CardContent>
           </Card>

@@ -30,13 +30,13 @@ export default function DataDeletionPageCA() {
       {/* Content */}
       <div className="container mx-auto max-w-4xl px-8 py-16">
         <h1 className="mb-2 text-4xl font-extrabold">Supressió de dades</h1>
-        <p className="mb-8 text-sm text-slate-400">Darrera actualització: 6 d&apos;agost de 2026</p>
+        <p className="mb-8 text-sm text-slate-400">Darrera actualització: 10 de setembre de 2026</p>
 
         <div className="prose prose-invert max-w-none space-y-8">
           <p className="text-slate-300">
             empentIA Tech SL ofereix solucions de missatgeria d&apos;atenció al client en nom dels
-            seus clients empresarials a través de la Plataforma de WhatsApp Business i altres
-            canals.
+            seus clients empresarials a través de la Plataforma de WhatsApp Business, els canals de
+            missatgeria d&apos;Instagram i Facebook, i altres canals.
           </p>
 
           <Card className="glass-card border-emerald-500/10">
@@ -78,7 +78,8 @@ export default function DataDeletionPageCA() {
                     hola@empentia.com
                   </a>{" "}
                   amb l&apos;assumpte «Sol·licitud de supressió de dades», indicant el número de
-                  telèfon o identificador utilitzat i l&apos;empresa amb qui vas contactar.
+                  telèfon, el nom d&apos;usuari a la xarxa social o l&apos;identificador utilitzat, i
+                  l&apos;empresa amb qui vas contactar.
                 </li>
               </ol>
               <div className="rounded-lg bg-emerald-500/10 p-4">
