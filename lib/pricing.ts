@@ -68,9 +68,11 @@ export const CANALES_PLAN: Record<string, ChannelPlan> = {
     unidad: "conversaciones",
     estado: "publicado",
     tiers: [
-      { id: "starter", label: "Starter", precio: 59, incluidas: 50, usuarios: 1 },
-      { id: "pro", label: "Pro", precio: 99, incluidas: 100, usuarios: 3 },
-      { id: "business", label: "Business", precio: 189, incluidas: 200, usuarios: 5 },
+      // Tarifas_empentIA_WhatsApp.xlsx (28 sep 2026). Los costes de Meta NO
+      // están incluidos: Meta los factura directamente al cliente.
+      { id: "starter", label: "Starter", precio: 59, incluidas: 100, usuarios: 1 },
+      { id: "pro", label: "Pro", precio: 119, incluidas: 250, usuarios: 3 },
+      { id: "business", label: "Business", precio: 249, incluidas: 600, usuarios: 5 },
     ],
   },
   telefono: {
